@@ -4,10 +4,10 @@
 %
 \documentclass[
 ]{book}
+\usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -81,7 +81,8 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{longtable,booktabs}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
 \makeatletter
@@ -90,7 +91,7 @@
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -115,12 +116,15 @@
   \thm@postskip=\thm@preskip
 }
 \makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
 
 \title{A GitBook Example for Teaching}
 \author{\href{https://www.uu.nl/staff/CJvanLissa}{dr. Caspar J. van Lissa}}
-\date{2020-04-21}
+\date{2022-07-01}
 
 \begin{document}
 \maketitle
@@ -244,10 +248,10 @@ Run the following code to install the required packages:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"tinytex"}\NormalTok{)}
-\NormalTok{tinytex}\OperatorTok{::}\KeywordTok{install_tinytex}\NormalTok{()}
-\NormalTok{git2r}\OperatorTok{::}\KeywordTok{config}\NormalTok{(}\DataTypeTok{global =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{user.name =} \StringTok{"your.name"}\NormalTok{, }\DataTypeTok{user.email =} \StringTok{"your.email"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tinytex"}\NormalTok{)}
+\NormalTok{tinytex}\SpecialCharTok{::}\FunctionTok{install\_tinytex}\NormalTok{()}
+\NormalTok{git2r}\SpecialCharTok{::}\FunctionTok{config}\NormalTok{(}\AttributeTok{global =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{user.name =} \StringTok{"your.name"}\NormalTok{, }\AttributeTok{user.email =} \StringTok{"your.email"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -326,8 +330,8 @@ Second, to include it in the list of chapters, open the file \texttt{\_bookdown.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{tmp <-}\StringTok{ }\KeywordTok{readLines}\NormalTok{(}\StringTok{"_bookdown.yml"}\NormalTok{)}
-\KeywordTok{cat}\NormalTok{(tmp[}\KeywordTok{grep}\NormalTok{(}\StringTok{"^rmd_files"}\NormalTok{, tmp)}\OperatorTok{:}\KeywordTok{grep}\NormalTok{(}\StringTok{"references}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{.Rmd"}\NormalTok{, tmp)], }\DataTypeTok{sep =} \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{tmp }\OtherTok{\textless{}{-}} \FunctionTok{readLines}\NormalTok{(}\StringTok{"\_bookdown.yml"}\NormalTok{)}
+\FunctionTok{cat}\NormalTok{(tmp[}\FunctionTok{grep}\NormalTok{(}\StringTok{"\^{}rmd\_files"}\NormalTok{, tmp)}\SpecialCharTok{:}\FunctionTok{grep}\NormalTok{(}\StringTok{"references}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.Rmd"}\NormalTok{, tmp)], }\AttributeTok{sep =} \StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -361,8 +365,8 @@ Figures and tables with captions will be placed in \texttt{figure} and \texttt{t
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mar =} \KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\FloatTok{.1}\NormalTok{, }\FloatTok{.1}\NormalTok{))}
-\KeywordTok{plot}\NormalTok{(pressure, }\DataTypeTok{type =} \StringTok{'b'}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{19}\NormalTok{)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -379,9 +383,9 @@ Reference a figure by its code chunk label with the \texttt{fig:} prefix, e.g., 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(}
-  \KeywordTok{head}\NormalTok{(iris, }\DecValTok{20}\NormalTok{), }\DataTypeTok{caption =} \StringTok{'Here is a nice table!'}\NormalTok{,}
-  \DataTypeTok{booktabs =} \OtherTok{TRUE}
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
+  \FunctionTok{head}\NormalTok{(iris, }\DecValTok{20}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
+  \AttributeTok{booktabs =} \ConstantTok{TRUE}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
