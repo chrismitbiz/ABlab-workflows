@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.4)  4 JUL 2022 17:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.4)  4 JUL 2022 18:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -923,13 +923,13 @@ Package rerunfilecheck Info: File `gitbook-demo.out' has not changed.
 Here is how much of TeX's memory you used:
  12829 strings out of 479996
  202933 string characters out of 5886841
- 499064 words of memory out of 5000000
+ 500064 words of memory out of 5000000
  30694 multiletter control sequences out of 15000+600000
  525653 words of font info for 72 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,9n,77p,1491b,584s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on gitbook-demo.pdf (34 pages, 2415562 bytes).
+Output written on gitbook-demo.pdf (34 pages, 2415590 bytes).
 PDF statistics:
  348 PDF objects out of 1000 (max. 8388607)
  264 compressed objects within 3 object streams
