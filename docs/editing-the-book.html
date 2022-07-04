@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Editing the book | Workflows for processing amplicon sequences</title>
-  <meta name="description" content="This GitBook is an example of a GitBook for teaching. It can be adapted for specific courses. The output format for this example is bookdown::gitbook." />
+  <title>Chapter 4 Editing the book | Workflows for processing microbial amplicon sequences</title>
+  <meta name="description" content="This GitBook contains bioinformatic workflows for microbial amplicon sequence data using Qiime2 and R." />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Editing the book | Workflows for processing amplicon sequences" />
+  <meta property="og:title" content="Chapter 4 Editing the book | Workflows for processing microbial amplicon sequences" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This GitBook is an example of a GitBook for teaching. It can be adapted for specific courses. The output format for this example is bookdown::gitbook." />
-  <meta name="github-repo" content="cjvanlissa/gitbook-demo" />
+  <meta property="og:description" content="This GitBook contains bioinformatic workflows for microbial amplicon sequence data using Qiime2 and R." />
+  <meta name="github-repo" content="chrismitbiz/ABlab-workflows" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Editing the book | Workflows for processing amplicon sequences" />
+  <meta name="twitter:title" content="Chapter 4 Editing the book | Workflows for processing microbial amplicon sequences" />
   
-  <meta name="twitter:description" content="This GitBook is an example of a GitBook for teaching. It can be adapted for specific courses. The output format for this example is bookdown::gitbook." />
+  <meta name="twitter:description" content="This GitBook contains bioinformatic workflows for microbial amplicon sequence data using Qiime2 and R." />
   
 
 <meta name="author" content="Christian Krohn, PhD" />
@@ -160,9 +160,9 @@ div.csl-indent {
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this GitBook</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#why-use-a-gitbook-for-teaching"><i class="fa fa-check"></i><b>1.1</b> Why use a GitBook for teaching?</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#how-to-use-this-gitbook"><i class="fa fa-check"></i><b>1.1</b> How to use this GitBook</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>2</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="from-miseq-to-qiime2.html"><a href="from-miseq-to-qiime2.html"><i class="fa fa-check"></i><b>2</b> From Miseq to Qiime2</a></li>
 <li class="chapter" data-level="3" data-path="getgitbook.html"><a href="getgitbook.html"><i class="fa fa-check"></i><b>3</b> Get your GitBook</a></li>
 <li class="chapter" data-level="4" data-path="editing-the-book.html"><a href="editing-the-book.html"><i class="fa fa-check"></i><b>4</b> Editing the book</a>
 <ul>
@@ -198,7 +198,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Workflows for processing amplicon sequences</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Workflows for processing microbial amplicon sequences</a>
           </h1>
         </div>
 
@@ -224,7 +224,7 @@ print("This is an R-command!")
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="editing-the-book.html#cb3-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="st">&quot;_bookdown.yml&quot;</span>)</span>
 <span id="cb3-2"><a href="editing-the-book.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(tmp[<span class="fu">grep</span>(<span class="st">&quot;^rmd_files&quot;</span>, tmp)<span class="sc">:</span><span class="fu">grep</span>(<span class="st">&quot;references</span><span class="sc">\\</span><span class="st">.Rmd&quot;</span>, tmp)], <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <p>rmd_files: [“index.Rmd”,
-“prerequisites.Rmd”,
+“From_Miseq_to_Qiime.Rmd”,
 “get_your_gitbook.Rmd”,
 “editing_the_book.Rmd”,
 “figures_tables.Rmd”,

@@ -1,0 +1,7 @@
+Purpose,Target,Region,Forward name,Forward Sequence,Reverse name,Reverse Sequence,amplicon length
+Illumina overhang adapters,Primer for Illumina amplicon sequencing,NA,Forward overhang,TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG,Reverse overhang,GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG,NA
+Amplicon sequencing,Prokaryotes Universal,V3-V4,Pro341FB,CCTACGGGNBGCWSCAG,Pro805R,GACTACNVGGGTATCTAATCC,465
+Amplicon sequencing,Prokaryotes Universal,V4,515F,GTGYCAGCMGCCGCGGTAA,806R,GGACTACNVGGGTWTCTAAT,292
+Amplicon sequencing,Fungal Universal,ITS,FITS7,GTGARTCATCGAATCTTTG,ITS4,TCCTCCGCTTATTGATATGC,
+Amplicon sequencing,Archaea ,V3-V5,340F,CCCTAHGGGGYGCASCA,915R,GWGCYCCCCCGYCAATTC,560
+Amplicon sequencing,Bacteria,V1-V3,27F,AGAGTTTGATCCTGGCTCAG,534R,ATTACCGCGGCTGCTGG,500

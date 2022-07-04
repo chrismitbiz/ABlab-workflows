@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 From BaseSpace to Qiime2 | Workflows for processing microbial amplicon sequences</title>
+  <meta name="description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 From BaseSpace to Qiime2 | Workflows for processing microbial amplicon sequences" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
+  <meta name="github-repo" content="chrismitbiz/ABlab-workflows" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 From BaseSpace to Qiime2 | Workflows for processing microbial amplicon sequences" />
+  
+  <meta name="twitter:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
+  
+
+<meta name="author" content="Christian Krohn, PhD" />
+
+
+<meta name="date" content="2022-07-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="miseq-library-preps.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A GitBook for Teaching</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this GitBook</a></li>
+<li class="chapter" data-level="2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting started</a></li>
+<li class="chapter" data-level="3" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html"><i class="fa fa-check"></i><b>3</b> Miseq library preps</a></li>
+<li class="chapter" data-level="4" data-path="from-basespace-to-qiime2.html"><a href="from-basespace-to-qiime2.html"><i class="fa fa-check"></i><b>4</b> From BaseSpace to Qiime2</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Workflows for processing microbial amplicon sequences</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="from-basespace-to-qiime2" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> From BaseSpace to Qiime2<a href="from-basespace-to-qiime2.html#from-basespace-to-qiime2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this chapter you will learn how to process the FASTQ files that are generated from an amplicon sequencing run on a Miseq instrument. We are using Qiime2. Please also refer to the extensive documentation and tutorials available at <a href="https://qiime2.org" class="uri">https://qiime2.org</a>. You can learn almost everything there.</p>
+<p><br />
+</p>
+<p><strong>Prerequisites</strong></p>
+<ul>
+<li><p>FASTQ files available to download on BaseSpace. Two for each sample. One for read 1 (R1) and another for read 2 (R2). For example, <code>PT-01_S1_L001_R1_001.fastq.gz</code> and <code>PT-01_S1_L001_R2_001.fastq.gz</code> contains all sequences for sample PT-01.</p></li>
+<li><p>Personal computer or cloud computational resources with &gt; 4 CPUS, &gt; 16 RAM, &gt; 100 GB storage recommended. * Qiime2 installed. Always use the latest version.<br />
+</p></li>
+<li><p>A tab separated file, which we call the <code>Qiimeimportmanifest.tsv</code>. More details and an example is provided below.<br />
+</p></li>
+<li><p>A tab separated file containing your metadata, which we may call <code>samplesheet.csv</code>. More details below.</p></li>
+<li><p>The BaseSpace Downloader software (available on the BaseSpace page. You will be prompted to download once you go to your files).</p>
+<p><br />
+</p></li>
+</ul>
+<p><strong>Download FASTQ files</strong></p>
+<p>In this example, Fastq files were produced from sequencing 16SrRNA marker genes on an Illumina Miseq instrument. If you ran your own library on your own BaseSpace account, the files should be available to download from that BaseSpace account. If the run was created by another user, that person can invite you to the run, which gives you access to download the files too.</p>
+<p>Log in to BaseSpace and into your project. Go to files, run and download FastQ. You will be asked to install a downloader software. Follow instructions accordingly.<br />
+<img src="img/basespacedownload.png" /></p>
+<p><img src="img/basespacedownload2.png" /><br />
+<br />
+</p>
+<p>The FASTQ files will come in separate folders for each sample. It is necessary to move all files into just ONE folder. That folder will then be used to import the sequences into a qiime object (described below).</p>
+<p><br />
+</p>
+<p><strong>Required Files</strong></p>
+<p><code>Qiimeimportmanifest.tsv</code> - A tab separated file with three columns where the first column is the sample ID (The exact same ID that was used in the manifest file for loading the Miseq). The second and third columns are the absolute paths to the forward and reverse FASTQ files, respectively. If FASTQ files are located on a cloud computer then the files should be uploaded to that, and the path needs to contain the full path to the relevant folder, including the full name of the file itself. If you process those files on your local drive then the paths need to change to your local folder containing the FASTQ files. In the below example table, the files are located on a Linux cloud computer (Nectar Research Cloud).</p>
+<p>It might take some time to compile the import manifest. Each file path has to exact. However, in case you made a mistake in the file names etc, Qiime is generally pretty good at reporting where the error occured.</p>
+<table class="table table-condensed" style="font-size: 10px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:qiimeimport">Table 4.1: </span>Example of a qiime import manifest.tsv file
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+sample-id
+</th>
+<th style="text-align:left;">
+forward-absolute-filepath
+</th>
+<th style="text-align:left;">
+reverse-absolute-filepath
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+PT-01
+</td>
+<td style="text-align:left;">
+/pvol/Sequences/20220622_PrimerTrial_RMIT/PT-01_S1_L001_R1_001.fastq.gz
+</td>
+<td style="text-align:left;">
+/pvol/Sequences/20220622_PrimerTrial_RMIT/PT-01_S1_L001_R2_001.fastq.gz
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PT-02
+</td>
+<td style="text-align:left;">
+/pvol/Sequences/20220622_PrimerTrial_RMIT/PT-02_S2_L001_R1_001.fastq.gz
+</td>
+<td style="text-align:left;">
+/pvol/Sequences/20220622_PrimerTrial_RMIT/PT-02_S2_L001_R2_001.fastq.gz
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PT-03
+</td>
+<td style="text-align:left;">
+/pvol/Sequences/20220622_PrimerTrial_RMIT/PT-03_S3_L001_R1_001.fastq.gz
+</td>
+<td style="text-align:left;">
+/pvol/Sequences/20220622_PrimerTrial_RMIT/PT-03_S3_L001_R2_001.fastq.gz
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PT-04
+</td>
+<td style="text-align:left;">
+/pvol/Sequences/20220622_PrimerTrial_RMIT/PT-04_S4_L001_R1_001.fastq.gz
+</td>
+<td style="text-align:left;">
+/pvol/Sequences/20220622_PrimerTrial_RMIT/PT-04_S4_L001_R2_001.fastq.gz
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PT-05
+</td>
+<td style="text-align:left;">
+/pvol/Sequences/20220622_PrimerTrial_RMIT/PT-05_S5_L001_R1_001.fastq.gz
+</td>
+<td style="text-align:left;">
+/pvol/Sequences/20220622_PrimerTrial_RMIT/PT-05_S5_L001_R2_001.fastq.gz
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PT-06
+</td>
+<td style="text-align:left;">
+/pvol/Sequences/20220622_PrimerTrial_RMIT/PT-06_S6_L001_R1_001.fastq.gz
+</td>
+<td style="text-align:left;">
+/pvol/Sequences/20220622_PrimerTrial_RMIT/PT-06_S6_L001_R2_001.fastq.gz
+</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+<p><code>samplesheet.tsv</code> - file containing sample metadata. This file should contain all other environmental measurements you may have done on each sample (pH, EC…), which you want to relate to microbial taxonomy and composition. The same file and format will be used to import metadata into the R package Phyloseq later too.</p>
+<table class="table table-condensed" style="font-size: 10px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:metadata">Table 4.2: </span>Example of a samplesheet.tsv file
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+#SampleID
+</th>
+<th style="text-align:left;">
+#Sludge
+</th>
+<th style="text-align:left;">
+WWTP
+</th>
+<th style="text-align:left;">
+SludgeType
+</th>
+<th style="text-align:left;">
+PMA_treat
+</th>
+<th style="text-align:left;">
+Rep_bio
+</th>
+<th style="text-align:left;">
+Sludgecollection
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+#q2:types
+</td>
+<td style="text-align:left;">
+categorical
+</td>
+<td style="text-align:left;">
+categorical
+</td>
+<td style="text-align:left;">
+categorical
+</td>
+<td style="text-align:left;">
+categorical
+</td>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+categorical
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PT-01
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+ETP5
+</td>
+<td style="text-align:left;">
+Meso
+</td>
+<td style="text-align:left;">
+NoPMA
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+9/5/2022
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PT-02
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+ETP5
+</td>
+<td style="text-align:left;">
+Meso
+</td>
+<td style="text-align:left;">
+NoPMA
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+9/5/2022
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PT-03
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+ETP5
+</td>
+<td style="text-align:left;">
+Meso
+</td>
+<td style="text-align:left;">
+NoPMA
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+9/5/2022
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PT-04
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+ETP5
+</td>
+<td style="text-align:left;">
+Meso
+</td>
+<td style="text-align:left;">
+NoPMA
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+9/5/2022
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PT-05
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+ETP5
+</td>
+<td style="text-align:left;">
+Meso
+</td>
+<td style="text-align:left;">
+NoPMA
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+9/5/2022
+</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+<p>IMPORTANT: Create the <code>.tsv</code> file as a tab separated <code>.csv</code> file in Excel first and then manually change the file name from <code>.csv</code> to <code>.tsv</code>. Not sure how else to easily build the <code>.tsv</code> file.</p>
+<p><br />
+</p>
+<p><code>scriptfile.txt</code> - A text file that contains your qiime2 scripts. Example below. Code is compiled here and then only the file itself is executed to run any commands in that text. The hash (#) in front of any line of code stops it from being executed. That means all code is normally ‘hashed’. If one wants to run the code the lines are ‘un-hashed’ and the text file is executed in the command line to run the ‘un-hashed’ code. On the Linux cloud computer the command would be: <code>sh scriptfile.txt</code>.</p>
+<p>Note that a script file is meant to make life easy and the process replicable. But you could run each of the processes directly by adding the commands into the terminal without a script file.</p>
+<div class="figure">
+<img src="img/scriptfile.png" alt="" />
+<p class="caption">“Example of a scriptfile.txt”</p>
+</div>
+<p><br />
+</p>
+<p>Briefly on script files for cloud-based high performance computers (HPC) that are using Slurm to manage multiple user runs. If the HPC at your institution is using Slurm, then the script file has to be called with <code>sbatch scriptfile.txt</code>. The script files for HPCs using slurm contains a header that determins the allocations (number of CPUs, RAM etc..) for your task. The first lines of the .txt file typically look similar to this:</p>
+<pre><code>#!/bin/bash
+#SBATCH --cpus-per-task=6
+#SBATCH --mem-per-cpu=6000
+#SBATCH --time=24:00:00
+#SBATCH --partition=compute
+#SBATCH --job-name=Q_fun</code></pre>
+<p>Commands, such as this:</p>
+<pre><code>echo &quot;Starting at: $(date)&quot;
+echo &quot;Finished at: $(date)&quot;</code></pre>
+<p>.. are less important but help to report the start and end times of the executed commands from beginning (where the <code>echo</code> command is placed at the beginning of the script) to end (<code>echo</code>… placed at the end of the script) into the Terminal Windows. They dont affect the qiime commands in any way.</p>
+<p>Slurm and <code>sbatch</code> are not needed if you manage your own computer or your ‘own’ cloud computer. In the example below we are using a Linux cloud computer, provided by the Nectar Research Cloud so we dont need Slurm.</p>
+<p><br />
+</p>
+<p><strong>Paired end manifest import (Step 1)</strong></p>
+<p>Go to the folder that contains all the FASTQ files (all files in one folder). I.e. in Unix/Linux use <code>cd path/to/folder/</code> to navigate to it. The scriptfile.txt should also be located here. The following qiime command that will look for the files and then create a qiime object using the sequences found in each FASTQ file. The <code>--output-path</code> instructs qiime where to place and how to name the output file, here demux-paired-end.qza is placed into the same directory (or create a second script file containing the remaining commands).<br />
+Remove any # in front of your code (already removed in the below example) and execute the scriptfile.txt with <code>sh scriptfile.txt</code> (or <code>sbatch scriptfile.txt</code> in case you are using Slurm).</p>
+<pre><code>qiime tools import --type &#39;SampleData[PairedEndSequencesWithQuality]&#39; \
+  --input-path Qiimeimportmanifest.tsv \
+  --output-path demux-paired-end.qza \
+  --input-format PairedEndFastqManifestPhred33V2</code></pre>
+<p><br />
+</p>
+<p><strong>Cutadapt (Step 2)</strong></p>
+<p>If all goes well you should now have a demux-paired-end.qza file in the same directory as your FASTQ files , which contains all your sequences. You could move demux-paired-end.qza to another folder and continue all other steps there if you wish. The FASTQ files are not needed anymore. Dont forget to move your script file to where it is most convenient for executing the commands. If you moved the demux-paired-end.qza to another folder it is probably easiest to also move the script file that the same directory.</p>
+<p>Go to the folder containing demux-paired-end.qza and use cutadapt to trim out the primer sequences. Unhash relevant lines in your script file, which should be located in the same folder. Run <code>sh scriptfile.txt</code>.</p>
+<p>In this example we used the V4 primers. Change primer sequence to the exact primers that you used in the amplicon PCR.</p>
+<pre><code>qiime cutadapt trim-paired \
+  --i-demultiplexed-sequences demux-paired-end.qza \
+  --p-front-f GTGARTCATCGAATCTTTG \
+  --p-front-r TCCTCCGCTTATTGATATGC \
+  --o-trimmed-sequences trimmed_demux-paired-end.qza</code></pre>
+<p><br />
+</p>
+<p><strong>Visualise the output with a .qzv file</strong></p>
+<p>The .qza files can be visualised by ‘converting’ them into .qzv files.<br />
+Here we take the trimmed_demux-paired-end.qza and create a trimmed_demux-paired-end.qzv.<br />
+<strong>NOTE:</strong> View any .qzv file on <a href="https://view.qiime2.org" class="uri">https://view.qiime2.org</a>. Drag and drop the qzv file into the browser window and inspect the results.</p>
+<pre><code>qiime demux summarize \
+  --i-data trimmed_demux-paired-end.qza \
+  --o-visualization trimmed_demux-paired-end.qzv</code></pre>
+<p>Go to <a href="https://view.qiime2.org" class="uri">https://view.qiime2.org</a> and drag and drop to visualise your .qzv file in the browser.</p>
+<p><img src="img/viewqiime.png" alt="“https://view.qiime2.org/”" /><br />
+</p>
+<p><strong>STOP HERE</strong>. Inspect the visualisation and decide on location and maximum expected error.<br />
+From the output decide where to truncate the forward and reverse reads with <code>p-trunc-len-f</code>, <code>p-trunc-len-r</code>,<code>--p-max-ee-f</code> and <code>--p-max-ee-r</code> in DADA2 below.</p>
+<p>It can take some trial and error to get these setting right. We are using a docker-based package called FIGARO to help us estimate those parameters (Not shown here). But essentially you want to capture high quality reads and be confident about the Amplicon Sequence Variants (ASV), while also capture sufficent depth of ASVs and reads without unnecessarily filtering out too much. In the below example, we have trimmed the forward reads at 272 base pairs with a maximum expected error (max-ee) of 2 (which is the default) and the reverse reads at 151 with a max-ee of 3. I think it is o.k. to relax the max-ee for the reverse reads (which are ALWAYS lower in quality) as I feel more confident about the fact that the reverse reads are paired with the forward reads. Pairing in itself provides increased confidence that the reads do in fact represent a biological relevant sequence. As always please comment on our <a href="https://github.com/chrismitbiz/ABlab-workflows/discussions/">GitHub discussion page</a> if you have any suggestions here. Thanks!</p>
+<p>A minimum overlap between the forward and reverse primer of 20 base pairs is recommended. To overlap can be calculated as following:</p>
+<p><span class="math display">\[length~of~forward~read + length~of~reverse~read - length~of~amplicon - trimmed~basepairs~in~forward~read -  trimmed~basepairs~in~reverse~reads = overlap\]</span></p>
+<p>So, for example, if we picked <code>--p-trunc-len-f 272</code> and <code>--p-trunc-len-r 151</code>, we get
+<span class="math display">\[301 + 301 - 292 - 29  - 150 = 131~bp~overlap\]</span></p>
+<p><br />
+</p>
+<p>In cases where the quality of the reverse reads is very poor, or the amplicon is too long for pairing to work, it is also acceptable to import, trim and denoise only the forward reads. The V4 primer of this example, is nice and short at 292 basepairs, so is great for pairing even at lower reverse-read qualities.</p>
+<div class="figure">
+<img src="img/demux.qza.png" alt="" />
+<p class="caption">“Example of a demux.qzv visualisation”</p>
+</div>
+<p><br />
+</p>
+<p><strong>Denoise paired end sequences with dada2 (Step 3)</strong></p>
+<p>Once the trimming and max-ee parameters are decided, it is time to run the DADA2 function. This may take a while, depending on total number of samples.</p>
+<p>The output will be a feature_table.qza and sample_rep_seqs.qza, containing the ASV abundances and their sequences respectively.</p>
+<pre><code>qiime dada2 denoise-paired \
+  --i-demultiplexed-seqs trimmed_demux-paired-end.qza \
+  --o-table feature_table.qza \
+  --o-representative-sequences sample_rep_seqs.qza \
+  --p-trim-left-f 0 --p-trim-left-r 0 \
+  --p-trunc-len-f 271 \
+  --p-trunc-len-r 151 \
+    --p-max-ee-f 2 \
+    --p-max-ee-r 3 \
+  --output-dir dada2 \
+  --verbose</code></pre>
+<p>Summarise and visualise the ASV abundances (feature_table.qza) in a .qzv file.</p>
+<pre><code>qiime feature-table summarize \
+  --i-table feature_table.qza \
+  --o-visualization feature_table.qzv \
+  --m-sample-metadata-file metadata.tsv</code></pre>
+<p><strong>Note:</strong> Look at the feature_table.qzv and record median reads per sample</p>
+<div class="figure">
+<img src="img/feature-table.qzv.png" alt="" />
+<p class="caption">“feature_table.qzv output”</p>
+</div>
+<p><br />
+</p>
+<p><strong>Taxonomic classifier and assignment (Step 4)</strong></p>
+<p>The next step is to assign taxonomies to the sequences in the denoised sample sequences. Here, we use a pre-trained classifier that is based on the Silva database. This pre-trained classifier is available on the data resource page of Qiime (Most current link at the time of writing: <a href="https://docs.qiime2.org/2022.2/data-resources" class="uri">https://docs.qiime2.org/2022.2/data-resources</a>).</p>
+<p>However, in case you used a different primer you would have to create the classifier yourself. Again there is great resource avaiable on <a href="https://docs.qiime2.org" class="uri">https://docs.qiime2.org</a>. The process is fairly straight forward but takes a computational time. Briefly, extract reference reads from a database (i.e. Silva here) based on the primers used. Then use those extracted sequences and fit or train them onto a taxonomy. Basically, predict which amplicon sequence should be what phylym/class/order/family/genus etc…. This trained file becomes a ‘classifier’ that is used to assign taxonmies on your sequences.</p>
+<p>Here we have a pre-trained classifier, silva-132-99-515-806-nb-classifier.qza:
+The output is a file called taxonomy_silva.qza and taxonomy_silva.qzv in this case.</p>
+<pre><code>qiime feature-classifier classify-sklearn \
+  --i-classifier silva-132-99-515-806-nb-classifier.qza \
+  --p-reads-per-batch 10000 \
+  --i-reads sample_rep_seqs.qza \
+  --o-classification taxonomy_silva.qza \
+  --quiet
+
+# Then summarise and visualise the output into a .qza file
+
+qiime metadata tabulate \
+--m-input-file taxonomy_silva.qza \
+--o-visualization taxonomy_silva.qzv</code></pre>
+<p><strong>IMPORTANT:</strong> The <code>taxonomy_silva.qzv</code> is loaded into <a href="https://view.qiime2.org/" class="uri">https://view.qiime2.org/</a> to dowload the <code>.tsv</code> file for later import into R.</p>
+<p><br />
+</p>
+<p><strong>Build phylogenetic tree (Step 5)</strong></p>
+<p>The next step is not essential but really good to have. Creating a phylogenetic tree from the amplicon sequences.</p>
+<p>In this case we are using the insertion tree method. See <a href="https://library.qiime2.org/plugins/q2-fragment-insertion/16/" class="uri">https://library.qiime2.org/plugins/q2-fragment-insertion/16/</a> for more information in this method.</p>
+<p>As not all ASVs will be inserted we will filter the feature_table.qza again to keep only those ASVs that are in the tree. You will need the reference file from silva or greengenes. In this case we are using <code>sepp-refs-silva-128.qza</code>.</p>
+<pre><code>qiime fragment-insertion sepp \
+  --i-representative-sequences sample_rep_seqs.qza \
+  --i-reference-database sepp-refs-silva-128.qza \
+  --o-tree insertion-tree.qza \
+  --o-placements insertion-placements.qza
+
+qiime fragment-insertion filter-features \
+  --i-table feature_table.qza \
+  --i-tree insertion-tree.qza \
+  --o-filtered-table feature_table_insertiontreefiltered.qza \
+  --o-removed-table removed_features.qza</code></pre>
+<p>Done!</p>
+<p>Everything else including further quality filtering happens with <code>phyloseq</code> in R where we will import the following files:
+<code>feature_table_insertiontreefiltered.qza</code>,
+<code>taxonomy_silva.qza</code> and
+<code>insertion-tree.qza</code>.</p>
+<p>This will be covered in the next chapter.</p>
+<p><strong>All steps combined</strong></p>
+<p>Copy and paste this into your script file if needed.</p>
+<pre><code># Manifest Import
+qiime tools import --type &#39;SampleData[PairedEndSequencesWithQuality]&#39; \
+  --input-path manifest.tsv \
+  --output-path demux-paired-end.qza \
+  --input-format PairedEndFastqManifestPhred33V2
+
+# Cutadapt
+qiime cutadapt trim-paired \
+  --i-demultiplexed-sequences demux-paired-end.qza \
+  --p-front-f GTGARTCATCGAATCTTTG \
+  --p-front-r TCCTCCGCTTATTGATATGC \
+  --o-trimmed-sequences trimmed_demux-paired-end.qza
+
+qiime demux summarize \
+  --i-data trimmed_demux-paired-end.qza \
+  --o-visualization trimmed_demux-paired-end.qzv
+
+# Denoise
+qiime dada2 denoise-paired \
+  --i-demultiplexed-seqs trimmed_demux-paired-end.qza \
+  --o-table feature_table.qza \
+  --o-representative-sequences sample_rep_seqs.qza \
+  --p-trim-left-f 0 --p-trim-left-r 0 \
+  --p-trunc-len-f 270 \
+  --p-trunc-len-r 235 \
+  --output-dir dada2 \
+  --verbose
+
+# Taxonomic assignment
+qiime feature-classifier classify-sklearn \
+  --i-classifier silva-132-99-515-806-nb-classifier.qza \
+  --p-reads-per-batch 10000 \
+  --i-reads sample_rep_seqs.qza \
+  --o-classification taxonomy_silva.qza \
+  --quiet
+
+# Phylogenetic tree
+qiime fragment-insertion sepp \
+  --i-representative-sequences sample_rep_seqs.qza \
+  --i-reference-database sepp-refs-silva-128.qza \
+  --o-tree insertion-tree.qza \
+  --o-placements insertion-placements.qza
+
+# Final filtering
+qiime fragment-insertion filter-features \
+  --i-table feature_table.qza \
+  --i-tree insertion-tree.qza \
+  --o-filtered-table feature_table_insertiontreefiltered.qza \
+  --o-removed-table removed_features.qza
+</code></pre>
+<p>Qiime2 reference:<br />
+Bolyen E, Rideout JR, Dillon MR, Bokulich NA, Abnet CC, Al-Ghalith GA, Alexander H, Alm EJ, Arumugam M, Asnicar F, Bai Y, Bisanz JE, Bittinger K, Brejnrod A, Brislawn CJ, Brown CT, Callahan BJ, Caraballo-Rodríguez AM, Chase J, Cope EK, Da Silva R, Diener C, Dorrestein PC, Douglas GM, Durall DM, Duvallet C, Edwardson CF, Ernst M, Estaki M, Fouquier J, Gauglitz JM, Gibbons SM, Gibson DL, Gonzalez A, Gorlick K, Guo J, Hillmann B, Holmes S, Holste H, Huttenhower C, Huttley GA, Janssen S, Jarmusch AK, Jiang L, Kaehler BD, Kang KB, Keefe CR, Keim P, Kelley ST, Knights D, Koester I, Kosciolek T, Kreps J, Langille MGI, Lee J, Ley R, Liu YX, Loftfield E, Lozupone C, Maher M, Marotz C, Martin BD, McDonald D, McIver LJ, Melnik AV, Metcalf JL, Morgan SC, Morton JT, Naimey AT, Navas-Molina JA, Nothias LF, Orchanian SB, Pearson T, Peoples SL, Petras D, Preuss ML, Pruesse E, Rasmussen LB, Rivers A, Robeson MS, Rosenthal P, Segata N, Shaffer M, Shiffer A, Sinha R, Song SJ, Spear JR, Swafford AD, Thompson LR, Torres PJ, Trinh P, Tripathi A, Turnbaugh PJ, Ul-Hasan S, van der Hooft JJJ, Vargas F, Vázquez-Baeza Y, Vogtmann E, von Hippel M, Walters W, Wan Y, Wang M, Warren J, Weber KC, Williamson CHD, Willis AD, Xu ZZ, Zaneveld JR, Zhang Y, Zhu Q, Knight R, and Caporaso JG. 2019. Reproducible, interactive, scalable and extensible microbiome data science using QIIME 2. Nature Biotechnology 37: 852–857. <a href="https://doi.org/10.1038/s41587-019-0209-9" class="uri">https://doi.org/10.1038/s41587-019-0209-9</a></p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="miseq-library-preps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/04_From_Miseq_to_Qiime.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["gitbook-demo.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

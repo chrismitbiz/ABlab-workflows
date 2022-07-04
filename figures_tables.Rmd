@@ -17,3 +17,38 @@ knitr::kable(
 ```
 
 You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
+
+
+**Denaturing of pool and loading of the Miseq**  
+  
+The key for the final steps are that..  
+* ..the reagent cartridge is properly thawed. Perhaps thaw in fridge 3 hours before starting the denaturing steps. Then put into icy water to ensure final and even thawing across the cartridge. Mix cartrige well at the end and ensure that no bubbles are visible before loading.  
+* .. the 0.2 N sodium hydroxide (NaOH) is made fresh with biological grade NaOH. For example use the *BioUltra, for molecular biology, 10 M NaOH in H2O* from Sigma Aldrich to make a 0.2 N solution (N = Normality but it is equal to Molarity here because there is only one OH in NaOH). I have used analytical-grade NaOH pellets as well, which worked but the RNAse free solutions are safer in terms of inhibitors etc..  
+* ..that the pool is cooled down immediately in ice or icy water right after the 2 minutes in the  96 ˚C heatblock and pretty much immediately loaded into the Miseq. The Miseq has to be prepped beforehand (I.e. maintenance wash and sample sheet loaded).  
+*  .. a sample sheet (or so-called manifest file) is created beforehand using the [Illumina Experiment Manager Software](https://sapac.support.illumina.com/sequencing/sequencing_software/experiment_manager/downloads.html).  This software assist in producing a `.csv` file that is then loaded into the Miseq instrument via a USB and ensures that the indexes you have used are linked to the relevant samples in your pool. Basically a list of sample IDs and index IDs. Example, of a sample sheet from one of our runs below.    
+* you have a Illumina BaseSpace account.   
+  
+ \
+  
+#!["Example of a manifest file"](./img/manifestfile.png)
+  
+  
+
+**Consumables**  
+  
+All consumables and equipment required for the 16S Miseq library prep protocol are available from page 21 of the  above mentioned [16S Metagenomic Sequencing Library
+Preparation](https://sapac.support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/16s/16s-metagenomic-library-prep-guide-15044223-b.pdf) Guide.  
+The **magnetic stand** for 96-well plates and the TruSeq Index **Plate Fixture Kit** are essential. 
+    
+  
+Here is what we typically include into our purchasing list. The combined total of the below list costs over AUD$ 10,000. 
+  
+```{r consumables, tidy=FALSE, echo=FALSE }
+consumables <- read.csv("Consumables.csv")
+knitr::kable(
+  consumables, caption = 'Example of a consumables list we typically include for a Miseq run',
+  booktabs = TRUE
+)
+```
+  
+  

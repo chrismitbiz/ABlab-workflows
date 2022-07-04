@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Miseq library preps | Workflows for processing microbial amplicon sequences</title>
+  <meta name="description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Miseq library preps | Workflows for processing microbial amplicon sequences" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
+  <meta name="github-repo" content="chrismitbiz/ABlab-workflows" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Miseq library preps | Workflows for processing microbial amplicon sequences" />
+  
+  <meta name="twitter:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
+  
+
+<meta name="author" content="Christian Krohn, PhD" />
+
+
+<meta name="date" content="2022-07-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="getting-started.html"/>
+<link rel="next" href="from-basespace-to-qiime2-and-dada2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A GitBook for Teaching</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this GitBook</a></li>
+<li class="chapter" data-level="2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting started</a></li>
+<li class="chapter" data-level="3" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html"><i class="fa fa-check"></i><b>3</b> Miseq library preps</a></li>
+<li class="chapter" data-level="4" data-path="from-basespace-to-qiime2-and-dada2.html"><a href="from-basespace-to-qiime2-and-dada2.html"><i class="fa fa-check"></i><b>4</b> From BaseSpace to Qiime2 and DADA2</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Workflows for processing microbial amplicon sequences</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="miseq-library-preps" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Miseq library preps<a href="miseq-library-preps.html#miseq-library-preps" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>Some info on getting your run ready</strong></p>
+<p><strong>Overview</strong></p>
+<p>In our lab we usually prepare a 6-10 pM pool of libraries following the <a href="https://sapac.support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/16s/16s-metagenomic-library-prep-guide-15044223-b.pdf">16S Metagenomic Sequencing Library
+Preparation</a> protocol from Illumina with 10% Phix. <strong>Download it, study it and refer to it throughout your labwork</strong>. This protocol is not limited to 16S amplicons. You can use it for fungal (e.g. ITS) amplicons too. In the last section there are also valuable tips for pre‐PCR and post‐PCR lab procedures. There is also some additional Illumina guidance here: <a href="https://sapac.support.illumina.com/downloads/16s_metagenomic_sequencing_library_preparation.html" class="uri">https://sapac.support.illumina.com/downloads/16s_metagenomic_sequencing_library_preparation.html</a></p>
+<p>The protocol encompasses the following steps (copied out of the protocol):
+<img src="img/16Slibraryprotocolworkflow.png" /></p>
+<p>Please note that only <strong>one amplicon target</strong> should be sequenced in each run. That means it is not recommended to sequence for example two different 16S amplicons or one 16S amplicon plus an ITS amplicon. Sequencing different amplicon lengths will result in reduced quality as the the Miseq flowcell will preferentially cluster shorter fragments. However, it is not impossible. We have tried to run four different amplicons on one flowcell before, although with mixed results.</p>
+<p>Labwork may take four weeks from DNA extraction to Miseq loading. Double that if you have not done it before. You probably realised that there is quite a bit of labwork required before you finally get FASTQ files and subsequent ASV/taxonomy tables to analyse - the ultimate goal here. The more samples are planned to be included into the pool, the more work and consumables are needed. Illumina recommends no more than 96 samples on one flowcell to get enough depths (i.e. &gt; 100,000 reads per sample). But we have sequenced around 196 samples on one flowcell before, which captured sufficient reads and diversity. This depends on how much detail and rare taxa you want to capture. The less samples you include, the more data and depth for each sample.</p>
+<p>Also note that you will require over 20 boxes of tips (mostly 200 µl) for each 96-well plate, so plan your consumables ahead of time. Most of the tips will be used for the PCR clean ups.</p>
+<p>After all steps in the above protocol are completed, the Miseq will be loaded with a 600 µl pool, followed by 56 hours of run-time for 2x301 cycles before FASTQ files are available for download from BaseSpace.</p>
+<p><img src="img/16s-library-prep-overview.png" /></p>
+<p>Throughout the 56 hours run you can check how things are tracking either on the BaseSpace website or the BaseSpace phone app. Understanding different QC metrics will help identifying potential problems with the pool or the instrument. It is important to note that this is a bit of a nerve-wrecking moment in the process, as it remains unclear until the metrics come through after around the 21st cycle, whether or not the run will be successful.<br />
+<br />
+<br />
+</p>
+<p><strong>1. DNA extraction</strong></p>
+<div class="figure">
+<img src="img/dna.jpeg" alt="" />
+<p class="caption">“DNA extracts”</p>
+</div>
+<p>We commonly extract DNA from soils or from wastewater sludges using the <em>DNeasy Powersoil Pro Kit</em> (Qiagen) for both, soil and sludge. It results in high quality DNA and includes a bead beating step to make sure the gram positive cells are sufficiently broken up. Although, I don’t have evidence for that. In fact, please let us know on the <a href="https://github.com/chrismitbiz/ABlab-workflows/discussions">GitHub Discussion Page</a> for this GitBook if you have any comments on that as we are always looking for ways to improve things.</p>
+<p>Soil</p>
+<ul>
+<li>For soils, the protocol of the extraction kit is followed, weighing in 0.25 g of soil and making sure to record the exact weights used.<br />
+</li>
+<li>Also make sure to measure the water content of the soil to be able to report DNA concentrations per dry weight of soil.</li>
+</ul>
+<p>Sludge</p>
+<ul>
+<li>For DNA extraction of sludge, 0.5 ml is added into an empty 1.7 ml extraction tube (without extraction beads), then centrifuged at 5000 rpm for 5 minutes before removing the supernatent.</li>
+<li>Extraction beads are then added and the Powersoil protocol followed.</li>
+<li>Measure Total Solids (TS) of the sludge to report DNA concentrations per gram of TS.<br />
+<br />
+</li>
+</ul>
+<p><strong>2. DNA quality and concentration</strong></p>
+<p>Once you have extracted DNA it is necessary to confirm its quality and concentration.</p>
+<ul>
+<li>Quality is assessed using a Nanodrop Spectrophotometer. You are aiming for <strong>260/280 Ratio of 1.8 and a 260/230 Ratio of 2-2.2</strong>. This is explained in the <a href="https://dna.uga.edu/wp-content/uploads/sites/51/2019/02/Note-on-the-260_280-and-260_230-Ratios.pdf">T042‐TECHNICAL BULLETIN</a>. The Nanopore also estimates DNA concentrations but it is not recommended to use these concentrations measurements to normalise DNA. It is more accurate and consistent with a Qubit Fluorometer.<br />
+</li>
+<li>DNA Concentrations are best measured using fluorescent dye-based methods such as the <strong>Qubit Fluorometer</strong>. It is easist to use the ‘<em>1X</em>’ assays such as the <em>Qubit 1X dsDNA BR Assay Kit</em> or the <em>Qubit 1X dsDNA HS Assay Kit</em>
+<ul>
+<li>Broad range (BR) Kit for quantifying extracted environmental DNA and afte the 2nd stage PCR.</li>
+<li>High Sensitivity (HS) Kit for quantifying the pool at the end.</li>
+</ul></li>
+</ul>
+<div class="figure">
+<img src="img/qubit.png" alt="" />
+<p class="caption">“The ready-mix working solution for Qubit, which includes dye and buffer. No preparation/premixing required.”</p>
+</div>
+<p><strong>3. DNA normalisation</strong></p>
+<p>The next step is to normalise all DNA extracts to 5 ng/µl.</p>
+<ul>
+<li>Dilute DNA to equal concentrations, either in a fresh batch of PCR-grade 10mM Tris buffer (pH 8.5) or in PCR-grade water<br />
+</li>
+<li>Set a pre-define DNA volume, say 2µl for all extracts, and add Tris or water as calculated with<br />
+<span class="math display">\[ C_1V_1 = V_2 C_2 \]</span><br />
+<br />
+</li>
+</ul>
+<p><strong>4. First and second PCR - Amplicon PCR and Indexing PCR</strong></p>
+<p>Follow the <a href="https://sapac.support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/16s/16s-metagenomic-library-prep-guide-15044223-b.pdf">16S Metagenomic Sequencing Library
+Preparation</a> Guide. Include a negative control and sequence that as well. This allows you to assess background and cross contamination. The whole workflow is best done in 96-well plates, using multi-channel pipettes to avoid indexing mistakes across wells.</p>
+<p>Sample list and plate layout</p>
+<p>Ensure that all sample IDs, plate-layout and each unique Illumina index carefully planned and printed out before you start your PCRs. Perhaps, stick the layout onto the Bio-safety cabinet where you do most of the pipetting and keep checking you are on the right well and sample. Label all plates even if you discard them afterwards. Labwork can be stressful and you need to trace all your steps across each well of the plate because otherwise you risk that you have indexed the wrong samples and it will become impossible to know which sample you have sequenced.</p>
+<p>Primers</p>
+<p>Any primers you order for the Miseq will have to include the <strong>Illumina overhang adapter</strong>. The sequence of the overhang adapter is added <strong>in front</strong> of the gene-specific primer sequences. There are two overhang adapters; one for the forward primers and one for the reverse primer. Check out the relevant information on primers from page 3 the 16S Metagenomic Sequencing Library
+Preparation Guide.</p>
+<p>Clean-ups</p>
+<p>It is worth doing the clean-ups in a separate deep-well plate (“MIDI” plate, see consumables below) to avoid any blow-out of dried beads at the end of the clean-up. This process is explained in the above mentioned guide too. Tip: Handle the beads extremely carefully after the ethanol has dried. They blow out easily.</p>
+<p>Index Kits</p>
+<p>The index kits are expensive. Try to handle them with care and replace lids with the provided replacement lids, after every use. Multipipettes are absolutely essential to avoid loosing track on indexes used across the differnt wells on the plate. The use of the Illumina Plate Fixture comes in handy (see consumables below).<br />
+</p>
+<p><strong>5. Normalisation of Indexed amplicons</strong></p>
+<p>After you finished all PCR work it is time to do another round of Qubitting and normalisation of all samples into a new 96-well plate. The final pool should be 4 nM but we prefer to normalise DNA to 10 nM first, then pool and then dilute the pool to 4 nM afterwards.<br />
+We are using a very handy excel sheet, which was kindly developed and provided by <a href="https://scholars.latrobe.edu.au/sknowler">Sarah Knowler</a> at La Trobe University to prepare and assist in normalisations, converting from ng/µl to nM using the formula:</p>
+<p><span class="math display">\[ concentrations~(ng/µl)  \over 660 g/mol~x~average~library~size\]</span>
+Contact us if you would like to get a copy of this very handy library preparation excel sheet.</p>
+<p>Some more information here: <a href="https://support.illumina.com/content/dam/illumina-support/documents/documentation/system_documentation/miseq/miseq-denature-dilute-libraries-guide-15039740-10.pdf" class="uri">https://support.illumina.com/content/dam/illumina-support/documents/documentation/system_documentation/miseq/miseq-denature-dilute-libraries-guide-15039740-10.pdf</a>. There’s also a pooling calculator here <a href="https://support.illumina.com/help/pooling-calculator/pooling-calculator.htm" class="uri">https://support.illumina.com/help/pooling-calculator/pooling-calculator.htm</a> which may be helpful with your calculations.<br />
+<br />
+</p>
+<p><strong>6. Pooling</strong></p>
+<p>Pipette equal volumes of the normalised DNA into one 1.5 ml tube.<br />
+Measure its concentration using the High Sensitivity (HS) Qubit 1X dsDNA HS Assay Kit.<br />
+</p>
+<p><strong>7. Denaturing of pool and loading of the Miseq</strong></p>
+<p>The key for the final steps are that..</p>
+<ul>
+<li>..the reagent cartridge is properly thawed. Perhaps thaw in fridge 3 hours before starting the denaturing steps. Then put into icy water to ensure final and even thawing across the cartridge. Mix cartrige well at the end and ensure that no bubbles are visible before loading.<br />
+</li>
+<li>.. the 0.2 N sodium hydroxide (NaOH) is made fresh with biological grade NaOH. For example use the <em>BioUltra, for molecular biology, 10 M NaOH in H2O</em> from Sigma Aldrich to make a 0.2 N solution (N = Normality but it is equal to Molarity here because there is only one OH in NaOH). I have used analytical-grade NaOH pellets as well, which worked but the RNAse free solutions are safer in terms of inhibitors etc..<br />
+</li>
+<li>..that the pool is cooled down immediately in ice or icy water right after the 2 minutes in the 96 degrees C heatblock and pretty much immediately loaded into the Miseq. The Miseq has to be prepped beforehand (I.e. maintenance wash and sample sheet loaded).<br />
+</li>
+<li>a sample sheet (or so-called manifest file) is created beforehand using the Illumina Experiment Manager Software. This software assist in producing a <code>.csv</code> file that is then loaded into the Miseq instrument via a USB and ensures that the indexes you have used are linked to the relevant samples in your pool. Basically a list of sample IDs and index IDs. Example, of a sample sheet from one of our runs below.<br />
+<strong>IMPORTANT</strong>: Make sure to specify the Workflow as <strong>GenerateFastQ</strong>.<br />
+</li>
+<li>you have a Illumina BaseSpace account.</li>
+</ul>
+<p><br />
+</p>
+<div class="figure">
+<img src="img/manifestfile.png" alt="" />
+<p class="caption">“Example of a manifest file”</p>
+</div>
+<p><strong>8. Consumables</strong></p>
+<p>All consumables and equipment required for the 16S Miseq library prep protocol are available from page 21 of the above mentioned <a href="https://sapac.support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/16s/16s-metagenomic-library-prep-guide-15044223-b.pdf">16S Metagenomic Sequencing Library
+Preparation</a> Guide.<br />
+The <strong>magnetic stand</strong> for 96-well plates and the TruSeq Index <strong>Plate Fixture Kit</strong> are essential.</p>
+<p>Here is what we typically include into our purchasing list. The combined total of the below list costs over AUD$ 10,000.</p>
+<table>
+<caption><span id="tab:consumables">Table 3.1: </span>Example of a consumables list we typically include for a Miseq run</caption>
+<colgroup>
+<col width="28%" />
+<col width="15%" />
+<col width="16%" />
+<col width="38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Equipment.consumables</th>
+<th align="left">Item.number</th>
+<th align="left">Supplier</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Qiagen Powersoil Pro test kit, 250</td>
+<td align="left">#47016</td>
+<td align="left">Qiagen</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Primers</td>
+<td align="left">Various</td>
+<td align="left">E.g. Sigma</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Magnetic beads, AMPure XP / JetSeq Clean</td>
+<td align="left">BIO-68031</td>
+<td align="left">Meridian Life Sciences</td>
+<td align="left">For clean-up</td>
+</tr>
+<tr class="even">
+<td align="left">KAPA HiFi Hotstart ready mix</td>
+<td align="left">KK2602, 6.25ml</td>
+<td align="left">Millennium Science</td>
+<td align="left">For PCR</td>
+</tr>
+<tr class="odd">
+<td align="left">MiSeq Reagent Kit v3</td>
+<td align="left">MS-102-3003</td>
+<td align="left">Illumina</td>
+<td align="left">Needs to be as fresh as possible</td>
+</tr>
+<tr class="even">
+<td align="left">Nextera XT Index Kit v2, Set A, B, C or D</td>
+<td align="left">FC-131-2003</td>
+<td align="left">Illumina</td>
+<td align="left">One set (A, B, C or D) for 96 uniquely indexed samples</td>
+</tr>
+<tr class="odd">
+<td align="left">PhiX control</td>
+<td align="left">FC-110-3001</td>
+<td align="left">Illumina</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Qubit 1X dsDNA BR Assay Kit</td>
+<td align="left">Q33266</td>
+<td align="left">Thermofisher</td>
+<td align="left">DNA quantiication</td>
+</tr>
+<tr class="odd">
+<td align="left">Qubit 1X dsDNA HS Assay Kit</td>
+<td align="left">Q33230</td>
+<td align="left">Thermofisher</td>
+<td align="left">Pool quantification</td>
+</tr>
+<tr class="even">
+<td align="left">Bioanalyzer Kit (HighSens or 1000 Kit)</td>
+<td align="left">5067-4626 or 5067-1504</td>
+<td align="left">Integrated Science Tech</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Tween 20</td>
+<td align="left">H5151</td>
+<td align="left">Promega</td>
+<td align="left">For Miseq instrument wash</td>
+</tr>
+<tr class="even">
+<td align="left">96-well, 0.2ml plates, non-skirted</td>
+<td align="left">AB0600</td>
+<td align="left">Thermofisher</td>
+<td align="left">For PCR</td>
+</tr>
+<tr class="odd">
+<td align="left">96 Well 0.8mL Polypropylene Deepwel Plate</td>
+<td align="left">AB0859</td>
+<td align="left">Thermofisher</td>
+<td align="left">For clean-up</td>
+</tr>
+<tr class="even">
+<td align="left">Optical Plate Seals</td>
+<td align="left">V7840</td>
+<td align="left">Promega</td>
+<td align="left">For PCR</td>
+</tr>
+<tr class="odd">
+<td align="left">0.5mL thin-walled PCR tubes</td>
+<td align="left">E4942</td>
+<td align="left">Promega</td>
+<td align="left">For Qubit</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="getting-started.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="from-basespace-to-qiime2-and-dada2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/03_Miseq_library_preps.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["gitbook-demo.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

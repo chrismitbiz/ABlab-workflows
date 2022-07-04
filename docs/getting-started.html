@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Getting started | Workflows for processing microbial amplicon sequences</title>
+  <meta name="description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Getting started | Workflows for processing microbial amplicon sequences" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
+  <meta name="github-repo" content="chrismitbiz/ABlab-workflows" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Getting started | Workflows for processing microbial amplicon sequences" />
+  
+  <meta name="twitter:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
+  
+
+<meta name="author" content="Christian Krohn, PhD" />
+
+
+<meta name="date" content="2022-07-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="miseq-library-preps.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A GitBook for Teaching</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this GitBook</a></li>
+<li class="chapter" data-level="2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting started</a></li>
+<li class="chapter" data-level="3" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html"><i class="fa fa-check"></i><b>3</b> Miseq library preps</a></li>
+<li class="chapter" data-level="4" data-path="from-basespace-to-qiime2-and-dada2.html"><a href="from-basespace-to-qiime2-and-dada2.html"><i class="fa fa-check"></i><b>4</b> From BaseSpace to Qiime2 and DADA2</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Workflows for processing microbial amplicon sequences</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="getting-started" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Getting started<a href="getting-started.html#getting-started" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Prerequisites will be listed in each sub chapter separately.
+Following a few general recommendations:</p>
+<p><strong>Access to computational resources</strong></p>
+<p>To process data you will need a personal computer or online computational resources with sufficient number of CPUs, working memory and storage. If you want to run most of the processing on a personal computer then I’d recommend a minimum of <strong>4 CPUs, 16 Gb RAM and 500 Gb storage</strong>. However, please note that some alignment tasks require more RAM, hence some of the steps (e.g. taxonomic classifications) may require a more powerful resource. The advantage of using a personal computer is that you can frequently update the latest packages without relying on a university administrator to do that for you. Furthermore, with a personal computer you wont need to share with others, making it easier to run the packages without a workload manager.</p>
+<p>Some university may provide their own access to a high performance computer (HPC) for staff and students and likely have certain packages pre-installed. In such cases a batch workload manger such as Slurm may be used, to manage multiple users trying to run computationally heavy jobs. This works fine too but its a bit of a hassle and I would use such an HPC only if really necessary, i.e. smaller jobs on my personal computer and bigger jobs on the HPC.</p>
+<p>I am not aware that RMIT University offers that type of service yet.</p>
+<p>In Australia there is also the <a href="https://ardc.edu.au/services/nectar-research-cloud/">ARDC Nectar Research Cloud</a>, which provides free resources to Universities. This is basically like providing access to an online Linux computer with complete freedom to install any packages as if it was your own. If you are a student you can <a href="https://dashboard.rc.nectar.org.au/">create a trial account</a> with your student email address (Using your ID only; without the student.edu.au) and check out how it all works, albeit with limited resources. The Nectar service also provides <a href="https://tutorials.rc.nectar.org.au/">tuturials for starters</a>. However, to get serious with Nectar, you have to request more resources, which is a fairly straight-forward process. Check out the <a href="https://support.ehelp.edu.au/support/solutions/articles/6000068044-managing-an-allocation">eligibilities</a> and chat to your supervisor if you are interested.</p>
+<p>There are also commercial options, which probably offer very similar type of services to Nectar.</p>
+<p>In addition, there is the awesome <a href="https://usegalaxy.org.au/">Galaxy Australia platform</a>, which is an open web-based resource that also contains many tutorials and workflows specific to bioinformatics. Definitely worth checking that out too.</p>
+<p>This workbook will be based on using the Nectar Research cloud.</p>
+<p><strong>File storage</strong></p>
+<p>Working with sequencing data may require you do handle large amounts of data. From experience, a run of a 600µl pool (6-10pM) of amplicons in 2x301 Miseq cycles may produce around 10-20 Gb of FASTQ files. <a href="https://sapac.support.illumina.com/bulletins/2018/01/approximate-sizes-of-sequencing-run-output-folders.html">Much more</a> can be expected for NextSeq runs or for long-read sequencing.</p>
+<p>Once a Miseq run has finished it is typically available to download from the <a href="https://basespace.illumina.com/dashboard">Illumina Basespace</a> account. After a few runs, the data can accumulate quickly. Hence, <strong>persistent storage space</strong> is required. As long as you have the Basespace account you can keep a copy of the FASTQ file online. However, Basespace may delete your data if the account has been inactive for more than 6 months. Alternatively, data can be upload onto a public repository for persistent storage, such as the <a href="https://www.ncbi.nlm.nih.gov/sra">Sequence Reads Archives</a>. If you have access to a research cloud or commercial computational resources then you may store data on those. Personally, I prefer a 1TB solid state harddrive.</p>
+<p><strong>R and R studio</strong></p>
+<p>R has become an essential research language. If you want to progress in research it is almost inevitable for you to learn. Just do it. :). Perhaps start here if you dont know where else to start: <a href="https://education.rstudio.com/learn/beginner/" class="uri">https://education.rstudio.com/learn/beginner/</a>. It lists some great step-by-step tutorials on how to install R and Rstudio and then explains the basics.</p>
+<p>If you are like me, then you simply copy and paste code from other sites and see what happens. This book should provide you with the required information to enable you to follow the workflows. In case you get stuck, you can either chat to me directly or write on the GitHub Discussion Page for this GitBook (<a href="(https://github.com/chrismitbiz/ABlab-workflows/discussions/)">chrismitbiz/ABlab-workflows/discussions/</a>).</p>
+<p>At the same time you will want to do short courses (eg. from edX <a href="https://www.edx.org/course/data-science-r-basics">Data Science: R Basics</a>) that delve a little deeper into different data structures such as data frames, matrices, lists and the syntax to arrange stuff. Over time you understand what different lines of code mean and can trouble shoot when things don’t work. And things often don’t work. You will get used to troubleshooting code :).</p>
+<p><strong>Environment managers</strong><br />
+Package and environment managers are extremely useful for your workflows. They help to install and run software packages such as qiime2, into individual ‘environments’ independent of your operating system. The environment manager is installed once and from there you use it to install individual packages. The most commonly used environment manager is Conda. Learn more about it here: <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html" class="uri">https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html</a></p>
+<p>Conda can be installed by either installing Anaconda or Miniconda. Boths works the same way. Anaconda requires 5 Gb of discspace and installs everything you can possibly need, while Miniconda is just the raw bones and lets you install things one by one.</p>
+<p>Most of the commands to manage environments are done in Command Line using a Terminal. There is also a graphical installer that makes handling the environments a little more visual. That would be my go to. Learn more here: www.anaconda.com</p>
+<p>There are several other environment managers. We are also using <a href="https://www.docker.com/">Docker</a> in our work but it take a little more learning to use it effectively.</p>
+<p><strong>GitHub account</strong><br />
+This GitBook, including all its files, is hosted on one of my GitHub repositories (<a href="https://github.com/chrismitbiz/ABlab-workflows" class="uri">https://github.com/chrismitbiz/ABlab-workflows</a>). If you have any comments you can ask a question on the Discussion Page of this repository. You require a GitHub account to do that. It is free.</p>
+<p><strong>Workflows from other lab groups</strong></p>
+<p>Searching for “amplicon-sequencing” under “Topics” on GitHub gave 37 results.</p>
+<ul>
+<li><p>nf-core/ampliseq<br />
+On the top of that list is the <a href="https://github.com/topics/amplicon-sequencing">nf-core/ampliseq</a> pipeline developed by the nf-core community. It is based on a software called <a href="https://www.nextflow.io/">Nextflow</a> which allows to put different processes into a pipeline. This is great for doing things a little more reproducible but it requires you to be fairly knowledgeable with Linux, container software, config files etc.. Not great to learn stuff for beginners.</p></li>
+<li><p>Tools-Microbiome-Analysis<br />
+<a href="https://microsud.github.io/Tools-Microbiome-Analysis/">Tools-Microbiome-Analysis</a> is a websites containing a comprehensive list of R packages and, more importantly, tutorials related to analysis of microbial amplicons and ecology. Really good reference to go back to every now and then. <strong>Highly recommended</strong>.</p></li>
+<li><p>grimmlab/MicrobiomeBestPracticeReview<br />
+Essential paper to read (<a href="https://academic.oup.com/bib/article/22/1/178/5678919">Current challenges and best-practice protocols for microbiome analysis, 2021</a>) and a great <a href="https://github.com/grimmlab/MicrobiomeBestPracticeReview">workflow resource</a> on GitHub. <strong>Essential read</strong>. The Grimm lab in Munich published this paper as well as developed a python and R-based workflow that assists with the recommended best practices (amplicon as well as metagenomic workflows).</p></li>
+<li><p>KasperSkytte/ampvis2<br />
+<a href="https://kasperskytte.github.io/ampvis2/articles/ampvis2.html">Ampviz2</a> is an R-package to visualise and analyse 16S rRNA amplicon data. It is always more convenient to have packages that have the details and optics worked out for you. Like phyloseq, the ampviz2 package combines different tables from data (E.g. otu table, taxonomic table, phylogenetic tree, sample data etc) and then provides different functions to apply to that combined object to visualise the data.</p></li>
+</ul>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="miseq-library-preps.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/02_getting_started.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["gitbook-demo.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -4,34 +4,34 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Prerequisites | Workflows for processing microbial amplicon sequences</title>
-  <meta name="description" content="This GitBook contains bioinformatic workflows for microbial amplicon sequence data using Qiime2 and R." />
+  <title>Chapter 4 From Miseq to Qiime2 | Workflows for processing microbial amplicon sequences</title>
+  <meta name="description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Prerequisites | Workflows for processing microbial amplicon sequences" />
+  <meta property="og:title" content="Chapter 4 From Miseq to Qiime2 | Workflows for processing microbial amplicon sequences" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This GitBook contains bioinformatic workflows for microbial amplicon sequence data using Qiime2 and R." />
+  <meta property="og:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
   <meta name="github-repo" content="chrismitbiz/ABlab-workflows" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Prerequisites | Workflows for processing microbial amplicon sequences" />
+  <meta name="twitter:title" content="Chapter 4 From Miseq to Qiime2 | Workflows for processing microbial amplicon sequences" />
   
-  <meta name="twitter:description" content="This GitBook contains bioinformatic workflows for microbial amplicon sequence data using Qiime2 and R." />
+  <meta name="twitter:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
   
 
 <meta name="author" content="Christian Krohn, PhD" />
 
 
-<meta name="date" content="2022-07-01" />
+<meta name="date" content="2022-07-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="getgitbook.html"/>
+<link rel="prev" href="miseq-library-preps.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -119,28 +119,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -158,33 +136,10 @@ div.csl-indent {
 <li><a href="./">A GitBook for Teaching</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this GitBook</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#how-to-use-this-gitbook"><i class="fa fa-check"></i><b>1.1</b> How to use this GitBook</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>2</b> Prerequisites</a></li>
-<li class="chapter" data-level="3" data-path="getgitbook.html"><a href="getgitbook.html"><i class="fa fa-check"></i><b>3</b> Get your GitBook</a></li>
-<li class="chapter" data-level="4" data-path="editing-the-book.html"><a href="editing-the-book.html"><i class="fa fa-check"></i><b>4</b> Editing the book</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="editing-the-book.html"><a href="editing-the-book.html#creating-new-chapters"><i class="fa fa-check"></i><b>4.1</b> Creating new chapters</a></li>
-<li class="chapter" data-level="4.2" data-path="editing-the-book.html"><a href="editing-the-book.html#linking-across-chapters"><i class="fa fa-check"></i><b>4.2</b> Linking across chapters</a></li>
-<li class="chapter" data-level="4.3" data-path="editing-the-book.html"><a href="editing-the-book.html#advanced-editing"><i class="fa fa-check"></i><b>4.3</b> Advanced editing</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="figtab.html"><a href="figtab.html"><i class="fa fa-check"></i><b>5</b> Figures and tables</a></li>
-<li class="chapter" data-level="6" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>6</b> Examples</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="examples.html"><a href="examples.html#statistics-with-r-h.-quene"><i class="fa fa-check"></i><b>6.1</b> Statistics with R (H. Quene)</a></li>
-<li class="chapter" data-level="6.2" data-path="examples.html"><a href="examples.html#theory-construction-and-statistical-modeling-c.-j.-van-lissa"><i class="fa fa-check"></i><b>6.2</b> Theory Construction and Statistical Modeling (C. J. van Lissa)</a></li>
-<li class="chapter" data-level="6.3" data-path="examples.html"><a href="examples.html#doing-meta-analysis-in-r-c.-j.-van-lissa"><i class="fa fa-check"></i><b>6.3</b> Doing Meta-Analysis in R (C. J. van Lissa)</a></li>
-<li class="chapter" data-level="6.4" data-path="examples.html"><a href="examples.html#métodos-quantitativos-em-psicologia-com-r-l.-anunciação"><i class="fa fa-check"></i><b>6.4</b> Métodos quantitativos em Psicologia com R (L. Anunciação)</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="open-educational-resources.html"><a href="open-educational-resources.html"><i class="fa fa-check"></i><b>7</b> Open Educational Resources</a></li>
-<li class="chapter" data-level="8" data-path="compatibility-with-existing-systems.html"><a href="compatibility-with-existing-systems.html"><i class="fa fa-check"></i><b>8</b> Compatibility with existing systems</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="compatibility-with-existing-systems.html"><a href="compatibility-with-existing-systems.html#add-a-hyperlink"><i class="fa fa-check"></i><b>8.1</b> Add a hyperlink</a></li>
-<li class="chapter" data-level="8.2" data-path="compatibility-with-existing-systems.html"><a href="compatibility-with-existing-systems.html#embed-the-whole-book"><i class="fa fa-check"></i><b>8.2</b> Embed the whole book</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="license-your-gitbook.html"><a href="license-your-gitbook.html"><i class="fa fa-check"></i><b>9</b> License your GitBook</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this GitBook</a></li>
+<li class="chapter" data-level="2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting started</a></li>
+<li class="chapter" data-level="3" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html"><i class="fa fa-check"></i><b>3</b> Miseq library preps</a></li>
+<li class="chapter" data-level="4" data-path="from-miseq-to-qiime2.html"><a href="from-miseq-to-qiime2.html"><i class="fa fa-check"></i><b>4</b> From Miseq to Qiime2</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -206,8 +161,8 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="prerequisites" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Prerequisites<a href="prerequisites.html#prerequisites" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="from-miseq-to-qiime2" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> From Miseq to Qiime2<a href="from-miseq-to-qiime2.html#from-miseq-to-qiime2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This GitBook is created in Rstudio, using the <code>bookdown</code> package. To get your system set up correctly, you have to install several software packages, and register on GitHub. You only have to perform these steps once, and the entire process should take approximately 1 hour if you start from scratch. In case some software is already installed on your system, you can skip related steps. Follow these steps in order:</p>
 <ol style="list-style-type: decimal">
 <li>Install R from <a href="https://cloud.r-project.org/">cloud.r-project.org</a></li>
@@ -254,10 +209,10 @@ div.csl-indent {
 </ul></li>
 </ol>
 <p>Run the following code to install the required packages:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="prerequisites.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span>
-<span id="cb1-2"><a href="prerequisites.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tinytex&quot;</span>)</span>
-<span id="cb1-3"><a href="prerequisites.html#cb1-3" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>()</span>
-<span id="cb1-4"><a href="prerequisites.html#cb1-4" aria-hidden="true" tabindex="-1"></a>git2r<span class="sc">::</span><span class="fu">config</span>(<span class="at">global =</span> <span class="cn">TRUE</span>, <span class="at">user.name =</span> <span class="st">&quot;your.name&quot;</span>, <span class="at">user.email =</span> <span class="st">&quot;your.email&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="from-miseq-to-qiime2.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span>
+<span id="cb1-2"><a href="from-miseq-to-qiime2.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tinytex&quot;</span>)</span>
+<span id="cb1-3"><a href="from-miseq-to-qiime2.html#cb1-3" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>()</span>
+<span id="cb1-4"><a href="from-miseq-to-qiime2.html#cb1-4" aria-hidden="true" tabindex="-1"></a>git2r<span class="sc">::</span><span class="fu">config</span>(<span class="at">global =</span> <span class="cn">TRUE</span>, <span class="at">user.name =</span> <span class="st">&quot;your.name&quot;</span>, <span class="at">user.email =</span> <span class="st">&quot;your.email&quot;</span>)</span></code></pre></div>
 <p>That’s it! Everything should be installed and connected now.</p>
 
 </div>
@@ -266,8 +221,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="getgitbook.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="miseq-library-preps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -298,7 +253,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/From_Miseq_to_Qiime.Rmd",
+"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/04_From_Miseq_to_Qiime.Rmd",
 "text": "Edit"
 },
 "history": {

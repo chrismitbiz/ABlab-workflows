@@ -1,12 +1,10 @@
 --- 
-title: "Workflows for processing amplicon sequences"
+title: "Workflows for processing microbial amplicon sequences"
 author: "[Christian Krohn, PhD](https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian)"
 date: "`r Sys.Date()`"
-description: This GitBook is an example of a GitBook for teaching. It can be 
-  adapted for specific courses. The output format for this example
-  is bookdown::gitbook.
+description: This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment.
 documentclass: book
-github-repo: cjvanlissa/gitbook-demo
+github-repo: chrismitbiz/ABlab-workflows
 link-citations: yes
 bibliography:
 - book.bib
@@ -18,30 +16,21 @@ biblio-style: apalike
 <!--"Using GitBooks to create Open course materials"-->
 # About this GitBook
 
-![](./img/using_gitbook.jpeg)
+![](./img/data.jpeg)
 
-This GitBook contains workflows for students to get started with processing their amplicon sequencing data. One of the biggest hurdles for students that embark on sequencing environmental DNA for the first time, is the effort that is required to understand the various languages, file types, tools or platforms that are involved (think Unix, Linux, Slurm, Qiime, R, RMarkdown, python, conda, docker, GitHub, data instances...)  or the different file formats that are required before they even can start looking at assessing the data itself.  
-
-For example, this GitBook is made in [Rstudio](https://rstudio.com), using the [`rmarkdown` markup language](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf), rendered using the [`bookdown` package](https://bookdown.org/yihui/bookdown/get-started.html), and hosted on [GitHub](https://github.com/).
-
-## Why use a GitBook for teaching?
-
-**To spead the workload**
-
-My challenge was that I had to translate all tutorial instructions from proprietary software to R, and there was not enough time to complete this task before the course commenced. By making the tutorial instructions available in [this GitBook](https://cjvanlissa.github.io/TCSM/), I was able to continue translating tutorial instructions *while the semester was ongoing*, and push updates to GitHub in time for each session, which were immediately available to all students. The parallel with the current situation is that some courses are now forced to start teaching in an online format, without having enough time to completely prepare. By using a GitBook, you can spread out the workload of preparing your materials across the semester. [This is the finished GitBook](https://cjvanlissa.github.io/TCSM/)
-
-**To contribute or use existing Open Educational Resources**
-
-Another key advantage of using a GitBook is, that you can easily make your course materials available for others to use under an open access license, or perhaps you can use an existing GitBook from the internet and adapt it for your own uses. GitBooks can be easily duplicated and adapted, just like any other project hosted on GitHub. Contributing Open Educational Materials can help reduce the workload on teachers around the world, and can improve the quality of the materials used thanks to online collaborating and feedback.
-
-**To benefit from formatting advantages**
-
-GitBooks also have two formatting advantages over classic PDF or Word files. First, they are Rmarkdown files, and can thus include blocks of R ([or Python](https://rstudio.github.io/reticulate/articles/r_markdown.html)) code that can be evaluated, and whose results are rendered to the file. Second, they are interactive web pages, and as such, can have dynamic features (such as answers to assignments that can be hidden, or boxes where students can fill out an answer to be checked). Additionally, other web pages or interactive apps can be embedded within the page. So whereas a traditional document is static, GitBooks can be interactive.
-
-**How do GitBooks work?**
-
-GitBooks consist of an Rstudio project, with several Rmarkdown files containing the chapters of the book. Inside Rstudio, users can press a "Build Book" button, which renders all of these chapters to a nicely formatted HTML book (and a PDF file for users to download). Users can push the finished book to a GitHub repository, and indicate on GitHub that the book should be hosted on GitHub pages. Voilà!
+This GitBook contains workflows for students who want to get started with sequencing microbial amplicons on the Miseq instrument and then process and analyse ASV-based data. It is a compilation of workflows that I have gotten accustomed to during my PhD at La Trobe University with help of other amazing students and colleagues over the years. But it is by no means comprehensive.
   
-**Getting started**
+One of the biggest hurdles for students that embark on sequencing environmental DNA for the first time, is the effort that is required to understand the various coding languages, file types and formats, packages or platforms that are involved (think Unix, Linux, Slurm, Qiime, R, RMarkdown, python, conda, ggplot, docker, GitHub, data instances...) before they even can start looking at exploring the data for biological meaning and producing publishable output. 
+
+For example, this GitBook is made in [Rstudio](https://rstudio.com), using the [`rmarkdown` markup language](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf), rendered using the [`bookdown` package](https://bookdown.org/yihui/bookdown/get-started.html), and hosted on [GitHub](https://github.com/). It took me at least five years before I was ready to create and host this content for students. And even then I needed this awesome [Bookdown template](https://cjvanlissa.github.io/gitbook-demo/index.html) from Dr. Caspar van Lissa to get started with Bookdown. So it is really helpful to have something to start with. 
+
+It was not easy to get over the initial hurdles for me too, so I thought I'd try to compile my workflows. This may help students to get a head start but also helps to scrutinise my approach in the hope that others can point me to better ways of doing things. 
+
+**Browse to your level**
+
+Everyone is at a different level in the journey to exploring microbial diversity. Some have absolutely no idea where to start and others have created their first phylogentic trees with ggtree or similar. The most important prerequisites are patience and persistence... :). Just  explore the different chapters and see where it takes you. In fact you will be amazed how much you can achieve with mininal coding knowledge. 
+
+**Get in touch**  
   
-If you are convinced that this tool might benefit your teaching, your first point of action is to prepare your system for creating GitBooks (Chapter \@ref(prerequisites)). After that, you can get a copy of this GitBook as a template (Chapter \@ref(getgitbook)). Then, you can start tweaking it for your own course!
+We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne. Email me or comment on the discussion section of the [GitHub repository](https://github.com/chrismitbiz/ABlab-workflows/discussions/) for this GitBook. You will need to get a GitHub account to join the discussion. Its free. 
+

@@ -1,0 +1,174 @@
+ 
+
+  
+It can take some trial and error to get these setting right. We are using a docker-based package called FIGARO to help us estimate those parameters (Not shown here). But essentially you want to capture high quality reads and be confident about the Amplicon Sequence Variants (ASV), while also capture sufficent depth of ASVs and reads without unnecessarily filtering out too much. In the below example, we have trimmed the forward reads at 272 base pairs with a maximum expected error (max-ee) of 2 (which is the default) and the reverse reads at 151  with a max-ee of 3.  I  think it is o.k. to relax the max-ee for the reverse reads (which are ALWAYS lower in quality) as I feel more confident about the fact that the reverse reads are paired with the forward reads. Pairing in itself provides increased confidence that the reads do in fact represent a biological relevant sequence. As always please comment on our [GitHub discussion page](https://github.com/chrismitbiz/ABlab-workflows/discussions/) if you have any suggestions here. Thanks!.      
+  
+A minimum overlap between the forward and reverse primer of 20 basepairs is recommended. To overlap can be calculated as following:   
+length of forward read + length of reverse read − length of amplicon −  trimmed basepairs in forward read −  trimmed basepairs in reverse reads = overlap  
+So, for example, if we picked --p-trunc-len-f = 272 and --p-trunc-len-r = 151, we get 301 + 301 − 292 − 29 − 150 = 131 bp overlap.  
+  
+In cases where the quality of the reverse reads is very poor, or the amplicon is too long for pairing to work, it is also acceptable to import, trim and denoise only the forward reads. The V4 primer of this example, is nice and short at 292 basepairs, so is great for pairing even at lower reverse-read qualities.  
+  
+!["Example of a demux.qzv visualisation"](./img/demux.qza.png)
+  
+  
+  \
+  
+**Denoise paired end sequences with dada2 (Step 3)**  
+  
+Once the trimming and max-ee parameters are decided, it is time to run the DADA2 function.  This may take a while, depending on total number of samples.  
+  
+The output will be a feature_table.qza and sample_rep_seqs.qza, containing the ASV abundances and their sequences respectively.  
+  
+```
+qiime dada2 denoise-paired \
+  --i-demultiplexed-seqs trimmed_demux-paired-end.qza \
+  --o-table feature_table.qza \
+  --o-representative-sequences sample_rep_seqs.qza \
+  --p-trim-left-f 0 --p-trim-left-r 0 \
+  --p-trunc-len-f 271 \
+  --p-trunc-len-r 151 \
+	--p-max-ee-f 2 \
+	--p-max-ee-r 3 \
+  --output-dir dada2 \
+  --verbose
+```
+  
+Summarise and visualise the ASV abundances (feature_table.qza) in a .qzv file.   
+  
+```
+qiime feature-table summarize \
+  --i-table feature_table.qza \
+  --o-visualization feature_table.qzv \
+  --m-sample-metadata-file metadata.tsv
+```
+**Note:** Look at the feature_table.qzv and record median reads per sample
+  
+  
+!["feature_table.qzv output"](./img/feature-table.qzv.png)
+  
+  \
+  
+**Taxonomic classifier and assignment (Step 4)**  
+  
+The next step is to assign taxonomies to the sequences in the denoised sample sequences. Here, we use a pre-trained classifier that is based on the Silva database. This pre-trained classifier is available on the data resource page of Qiime (Most current link at the time of writing: https://docs.qiime2.org/2022.2/data-resources).  
+  
+However, in case you used a different primer you would have to create the classifier yourself. Again there is great resource avaiable on https://docs.qiime2.org. The process is fairly straight forward but takes a computational time. Briefly, extract reference reads from a database (i.e. Silva here) based on the primers used. Then use those extracted sequences and fit or train them onto a taxonomy. Basically, predict which amplicon sequence should be what phylym/class/order/family/genus etc....  This trained file becomes a 'classifier' that is used to assign taxonmies on your sequences. 
+  
+Here we have a pre-trained classifier, silva-132-99-515-806-nb-classifier.qza: 
+The output is a file called taxonomy_silva.qza and taxonomy_silva.qzv in this case.  
+  
+```
+qiime feature-classifier classify-sklearn \
+  --i-classifier silva-132-99-515-806-nb-classifier.qza \
+  --p-reads-per-batch 10000 \
+  --i-reads sample_rep_seqs.qza \
+  --o-classification taxonomy_silva.qza \
+  --quiet
+
+# Then summarise and visualise the output into a .qza file
+
+qiime metadata tabulate \
+--m-input-file taxonomy_silva.qza \
+--o-visualization taxonomy_silva.qzv
+```
+  
+**IMPORTANT:** The `taxonomy_silva.qzv` is loaded into https://view.qiime2.org/ to dowload the `.tsv` file for later import into R.
+  
+  \
+  
+    
+**Build phylogenetic tree (Step 5)**  
+  
+The next step is not essential but really good to have. Creating a phylogenetic tree from the amplicon sequences.  
+  
+In this case we are using the insertion tree method. See https://library.qiime2.org/plugins/q2-fragment-insertion/16/ for more information in this method.  
+  
+As not all ASVs will be inserted we will filter the feature_table.qza again to keep only those ASVs that are in the tree. You will need the reference file from silva or greengenes. In this case we are using `sepp-refs-silva-128.qza`. 
+  
+```
+qiime fragment-insertion sepp \
+  --i-representative-sequences sample_rep_seqs.qza \
+  --i-reference-database sepp-refs-silva-128.qza \
+  --o-tree insertion-tree.qza \
+  --o-placements insertion-placements.qza
+
+qiime fragment-insertion filter-features \
+  --i-table feature_table.qza \
+  --i-tree insertion-tree.qza \
+  --o-filtered-table feature_table_insertiontreefiltered.qza \
+  --o-removed-table removed_features.qza
+```
+  
+Done!  
+  
+Everything else including further quality filtering happens with `phyloseq` in R where we will import the following files:
+`feature_table_insertiontreefiltered.qza`,
+`taxonomy_silva.qza` and
+`insertion-tree.qza`.
+  
+This will be covered in the next chapter.  
+  
+  
+   
+**All steps combined**  
+ 
+Copy and paste this into your script file if needed. 
+  
+```
+# Manifest Import
+qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' \
+  --input-path manifest.tsv \
+  --output-path demux-paired-end.qza \
+  --input-format PairedEndFastqManifestPhred33V2
+
+# Cutadapt
+qiime cutadapt trim-paired \
+  --i-demultiplexed-sequences demux-paired-end.qza \
+  --p-front-f GTGARTCATCGAATCTTTG \
+  --p-front-r TCCTCCGCTTATTGATATGC \
+  --o-trimmed-sequences trimmed_demux-paired-end.qza
+
+qiime demux summarize \
+  --i-data trimmed_demux-paired-end.qza \
+  --o-visualization trimmed_demux-paired-end.qzv
+
+# Denoise
+qiime dada2 denoise-paired \
+  --i-demultiplexed-seqs trimmed_demux-paired-end.qza \
+  --o-table feature_table.qza \
+  --o-representative-sequences sample_rep_seqs.qza \
+  --p-trim-left-f 0 --p-trim-left-r 0 \
+  --p-trunc-len-f 270 \
+  --p-trunc-len-r 235 \
+  --output-dir dada2 \
+  --verbose
+
+# Taxonomic assignment
+qiime feature-classifier classify-sklearn \
+  --i-classifier silva-132-99-515-806-nb-classifier.qza \
+  --p-reads-per-batch 10000 \
+  --i-reads sample_rep_seqs.qza \
+  --o-classification taxonomy_silva.qza \
+  --quiet
+
+# Phylogenetic tree
+qiime fragment-insertion sepp \
+  --i-representative-sequences sample_rep_seqs.qza \
+  --i-reference-database sepp-refs-silva-128.qza \
+  --o-tree insertion-tree.qza \
+  --o-placements insertion-placements.qza
+
+# Final filtering
+qiime fragment-insertion filter-features \
+  --i-table feature_table.qza \
+  --i-tree insertion-tree.qza \
+  --o-filtered-table feature_table_insertiontreefiltered.qza \
+  --o-removed-table removed_features.qza
+
+```
+
+## Qiime2 reference
+Bolyen E, Rideout JR, Dillon MR, Bokulich NA, Abnet CC, Al-Ghalith GA, Alexander H, Alm EJ, Arumugam M, Asnicar F, Bai Y, Bisanz JE, Bittinger K, Brejnrod A, Brislawn CJ, Brown CT, Callahan BJ, Caraballo-Rodríguez AM, Chase J, Cope EK, Da Silva R, Diener C, Dorrestein PC, Douglas GM, Durall DM, Duvallet C, Edwardson CF, Ernst M, Estaki M, Fouquier J, Gauglitz JM, Gibbons SM, Gibson DL, Gonzalez A, Gorlick K, Guo J, Hillmann B, Holmes S, Holste H, Huttenhower C, Huttley GA, Janssen S, Jarmusch AK, Jiang L, Kaehler BD, Kang KB, Keefe CR, Keim P, Kelley ST, Knights D, Koester I, Kosciolek T, Kreps J, Langille MGI, Lee J, Ley R, Liu YX, Loftfield E, Lozupone C, Maher M, Marotz C, Martin BD, McDonald D, McIver LJ, Melnik AV, Metcalf JL, Morgan SC, Morton JT, Naimey AT, Navas-Molina JA, Nothias LF, Orchanian SB, Pearson T, Peoples SL, Petras D, Preuss ML, Pruesse E, Rasmussen LB, Rivers A, Robeson MS, Rosenthal P, Segata N, Shaffer M, Shiffer A, Sinha R, Song SJ, Spear JR, Swafford AD, Thompson LR, Torres PJ, Trinh P, Tripathi A, Turnbaugh PJ, Ul-Hasan S, van der Hooft JJJ, Vargas F, Vázquez-Baeza Y, Vogtmann E, von Hippel M, Walters W, Wan Y, Wang M, Warren J, Weber KC, Williamson CHD, Willis AD, Xu ZZ, Zaneveld JR, Zhang Y, Zhu Q, Knight R, and Caporaso JG. 2019. Reproducible, interactive, scalable and extensible microbiome data science using QIIME 2. Nature Biotechnology 37: 852–857. https://doi.org/10.1038/s41587-019-0209-9
+
+

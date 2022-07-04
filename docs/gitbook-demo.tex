@@ -36,51 +36,11 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={Workflows for processing amplicon sequences},
+  pdftitle={Workflows for processing microbial amplicon sequences},
   pdfauthor={Christian Krohn, PhD},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -116,15 +76,29 @@
   \thm@postskip=\thm@preskip
 }
 \makeatother
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
 
-\title{Workflows for processing amplicon sequences}
+\title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD}}
-\date{2022-07-01}
+\date{2022-07-04}
 
 \begin{document}
 \maketitle
@@ -136,388 +110,659 @@
 \hypertarget{about-this-gitbook}{%
 \chapter{About this GitBook}\label{about-this-gitbook}}
 
-\includegraphics{./img/using_gitbook.jpeg}
+\includegraphics{./img/data.jpeg}
 
-This GitBook contains workflows for students to get started with processing their amplicon sequencing data. One of the biggest hurdles for students that embark on sequencing environmental DNA for the first time, is the effort that is required to understand the various languages, file types, tools or platforms that are involved (think Unix, Linux, Slurm, Qiime, R, RMarkdown, python, conda, docker, GitHub, data instances\ldots) or the different file formats that are required before they even can start looking at assessing the data itself.
+This GitBook contains workflows for students who want to get started with sequencing microbial amplicons on the Miseq instrument and then process and analyse ASV-based data. It is a compilation of workflows that I have gotten accustomed to during my PhD at La Trobe University with help of other amazing students and colleagues over the years. But it is by no means comprehensive.
 
-For example, this GitBook is made in \href{https://rstudio.com}{Rstudio}, using the \href{https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf}{\texttt{rmarkdown} markup language}, rendered using the \href{https://bookdown.org/yihui/bookdown/get-started.html}{\texttt{bookdown} package}, and hosted on \href{https://github.com/}{GitHub}.
+One of the biggest hurdles for students that embark on sequencing environmental DNA for the first time, is the effort that is required to understand the various coding languages, file types and formats, packages or platforms that are involved (think Unix, Linux, Slurm, Qiime, R, RMarkdown, python, conda, ggplot, docker, GitHub, data instances\ldots) before they even can start looking at exploring the data for biological meaning and producing publishable output.
 
-\hypertarget{why-use-a-gitbook-for-teaching}{%
-\section{Why use a GitBook for teaching?}\label{why-use-a-gitbook-for-teaching}}
+For example, this GitBook is made in \href{https://rstudio.com}{Rstudio}, using the \href{https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf}{\texttt{rmarkdown} markup language}, rendered using the \href{https://bookdown.org/yihui/bookdown/get-started.html}{\texttt{bookdown} package}, and hosted on \href{https://github.com/}{GitHub}. It took me at least five years before I was ready to create and host this content for students. And even then I needed this awesome \href{https://cjvanlissa.github.io/gitbook-demo/index.html}{Bookdown template} from Dr.~Caspar van Lissa to get started with Bookdown. So it is really helpful to have something to start with.
 
-\textbf{To spead the workload}
+It was not easy to get over the initial hurdles for me too, so I thought I'd try to compile my workflows. This may help students to get a head start but also helps to scrutinise my approach in the hope that others can point me to better ways of doing things.
 
-My challenge was that I had to translate all tutorial instructions from proprietary software to R, and there was not enough time to complete this task before the course commenced. By making the tutorial instructions available in \href{https://cjvanlissa.github.io/TCSM/}{this GitBook}, I was able to continue translating tutorial instructions \emph{while the semester was ongoing}, and push updates to GitHub in time for each session, which were immediately available to all students. The parallel with the current situation is that some courses are now forced to start teaching in an online format, without having enough time to completely prepare. By using a GitBook, you can spread out the workload of preparing your materials across the semester. \href{https://cjvanlissa.github.io/TCSM/}{This is the finished GitBook}
+\textbf{Browse to your level}
 
-\textbf{To contribute or use existing Open Educational Resources}
+Everyone is at a different level in the journey to exploring microbial diversity. Some have absolutely no idea where to start and others have created their first phylogentic trees with ggtree or similar. The most important prerequisites are patience and persistence\ldots{} :). Just explore the different chapters and see where it takes you. In fact you will be amazed how much you can achieve with mininal coding knowledge.
 
-Another key advantage of using a GitBook is, that you can easily make your course materials available for others to use under an open access license, or perhaps you can use an existing GitBook from the internet and adapt it for your own uses. GitBooks can be easily duplicated and adapted, just like any other project hosted on GitHub. Contributing Open Educational Materials can help reduce the workload on teachers around the world, and can improve the quality of the materials used thanks to online collaborating and feedback.
+\textbf{Get in touch}
 
-\textbf{To benefit from formatting advantages}
+We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne. Email me or comment on the discussion section of the \href{https://github.com/chrismitbiz/ABlab-workflows/discussions/}{GitHub repository} for this GitBook. You will need to get a GitHub account to join the discussion. Its free.
 
-GitBooks also have two formatting advantages over classic PDF or Word files. First, they are Rmarkdown files, and can thus include blocks of R (\href{https://rstudio.github.io/reticulate/articles/r_markdown.html}{or Python}) code that can be evaluated, and whose results are rendered to the file. Second, they are interactive web pages, and as such, can have dynamic features (such as answers to assignments that can be hidden, or boxes where students can fill out an answer to be checked). Additionally, other web pages or interactive apps can be embedded within the page. So whereas a traditional document is static, GitBooks can be interactive.
+\hypertarget{getting-started}{%
+\chapter{Getting started}\label{getting-started}}
 
-\textbf{How do GitBooks work?}
+Prerequisites will be listed in each sub chapter separately.
+Following a few general recommendations:
 
-GitBooks consist of an Rstudio project, with several Rmarkdown files containing the chapters of the book. Inside Rstudio, users can press a ``Build Book'' button, which renders all of these chapters to a nicely formatted HTML book (and a PDF file for users to download). Users can push the finished book to a GitHub repository, and indicate on GitHub that the book should be hosted on GitHub pages. Voilà!
+\textbf{Access to computational resources}
 
-\textbf{Getting started}
+To process data you will need a personal computer or online computational resources with sufficient number of CPUs, working memory and storage. If you want to run most of the processing on a personal computer then I'd recommend a minimum of \textbf{4 CPUs, 16 Gb RAM and 500 Gb storage}. However, please note that some alignment tasks require more RAM, hence some of the steps (e.g.~taxonomic classifications) may require a more powerful resource. The advantage of using a personal computer is that you can frequently update the latest packages without relying on a university administrator to do that for you. Furthermore, with a personal computer you wont need to share with others, making it easier to run the packages without a workload manager.
 
-If you are convinced that this tool might benefit your teaching, your first point of action is to prepare your system for creating GitBooks (Chapter \ref{prerequisites}). After that, you can get a copy of this GitBook as a template (Chapter \ref{getgitbook}). Then, you can start tweaking it for your own course!
+Some university may provide their own access to a high performance computer (HPC) for staff and students and likely have certain packages pre-installed. In such cases a batch workload manger such as Slurm may be used, to manage multiple users trying to run computationally heavy jobs. This works fine too but its a bit of a hassle and I would use such an HPC only if really necessary, i.e.~smaller jobs on my personal computer and bigger jobs on the HPC.
 
-\hypertarget{prerequisites}{%
-\chapter{Prerequisites}\label{prerequisites}}
+I am not aware that RMIT University offers that type of service yet.
 
-This GitBook is created in Rstudio, using the \texttt{bookdown} package. To get your system set up correctly, you have to install several software packages, and register on GitHub. You only have to perform these steps once, and the entire process should take approximately 1 hour if you start from scratch. In case some software is already installed on your system, you can skip related steps. Follow these steps in order:
+In Australia there is also the \href{https://ardc.edu.au/services/nectar-research-cloud/}{ARDC Nectar Research Cloud}, which provides free resources to Universities. This is basically like providing access to an online Linux computer with complete freedom to install any packages as if it was your own. If you are a student you can \href{https://dashboard.rc.nectar.org.au/}{create a trial account} with your student email address (Using your ID only; without the student.edu.au) and check out how it all works, albeit with limited resources. The Nectar service also provides \href{https://tutorials.rc.nectar.org.au/}{tuturials for starters}. However, to get serious with Nectar, you have to request more resources, which is a fairly straight-forward process. Check out the \href{https://support.ehelp.edu.au/support/solutions/articles/6000068044-managing-an-allocation}{eligibilities} and chat to your supervisor if you are interested.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
+There are also commercial options, which probably offer very similar type of services to Nectar.
+
+In addition, there is the awesome \href{https://usegalaxy.org.au/}{Galaxy Australia platform}, which is an open web-based resource that also contains many tutorials and workflows specific to bioinformatics. Definitely worth checking that out too.
+
+This workbook will be based on using the Nectar Research cloud.
+
+\textbf{File storage}
+
+Working with sequencing data may require you do handle large amounts of data. From experience, a run of a 600µl pool (6-10pM) of amplicons in 2x301 Miseq cycles may produce around 10-20 Gb of FASTQ files. \href{https://sapac.support.illumina.com/bulletins/2018/01/approximate-sizes-of-sequencing-run-output-folders.html}{Much more} can be expected for NextSeq runs or for long-read sequencing.
+
+Once a Miseq run has finished it is typically available to download from the \href{https://basespace.illumina.com/dashboard}{Illumina Basespace} account. After a few runs, the data can accumulate quickly. Hence, \textbf{persistent storage space} is required. As long as you have the Basespace account you can keep a copy of the FASTQ file online. However, Basespace may delete your data if the account has been inactive for more than 6 months. Alternatively, data can be upload onto a public repository for persistent storage, such as the \href{https://www.ncbi.nlm.nih.gov/sra}{Sequence Reads Archives}. If you have access to a research cloud or commercial computational resources then you may store data on those. Personally, I prefer a 1TB solid state harddrive.
+
+\textbf{R and R studio}
+
+R has become an essential research language. If you want to progress in research it is almost inevitable for you to learn. Just do it. :). Perhaps start here if you dont know where else to start: \url{https://education.rstudio.com/learn/beginner/}. It lists some great step-by-step tutorials on how to install R and Rstudio and then explains the basics.
+
+If you are like me, then you simply copy and paste code from other sites and see what happens. This book should provide you with the required information to enable you to follow the workflows. In case you get stuck, you can either chat to me directly or write on the GitHub Discussion Page for this GitBook (\href{(https://github.com/chrismitbiz/ABlab-workflows/discussions/)}{chrismitbiz/ABlab-workflows/discussions/}).
+
+At the same time you will want to do short courses (eg. from edX \href{https://www.edx.org/course/data-science-r-basics}{Data Science: R Basics}) that delve a little deeper into different data structures such as data frames, matrices, lists and the syntax to arrange stuff. Over time you understand what different lines of code mean and can trouble shoot when things don't work. And things often don't work. You will get used to troubleshooting code :).
+
+\textbf{Environment managers}\\
+Package and environment managers are extremely useful for your workflows. They help to install and run software packages such as qiime2, into individual `environments' independent of your operating system. The environment manager is installed once and from there you use it to install individual packages. The most commonly used environment manager is Conda. Learn more about it here: \url{https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html}
+
+Conda can be installed by either installing Anaconda or Miniconda. Boths works the same way. Anaconda requires 5 Gb of discspace and installs everything you can possibly need, while Miniconda is just the raw bones and lets you install things one by one.
+
+Most of the commands to manage environments are done in Command Line using a Terminal. There is also a graphical installer that makes handling the environments a little more visual. That would be my go to. Learn more here: www.anaconda.com
+
+There are several other environment managers. We are also using \href{https://www.docker.com/}{Docker} in our work but it take a little more learning to use it effectively.
+
+\textbf{GitHub account}\\
+This GitBook, including all its files, is hosted on one of my GitHub repositories (\url{https://github.com/chrismitbiz/ABlab-workflows}). If you have any comments you can ask a question on the Discussion Page of this repository. You require a GitHub account to do that. It is free.
+
+\textbf{Workflows from other lab groups}
+
+Searching for ``amplicon-sequencing'' under ``Topics'' on GitHub gave 37 results.
+
+\begin{itemize}
 \item
-  Install R from \href{https://cloud.r-project.org/}{cloud.r-project.org}
+  nf-core/ampliseq\\
+  On the top of that list is the \href{https://github.com/topics/amplicon-sequencing}{nf-core/ampliseq} pipeline developed by the nf-core community. It is based on a software called \href{https://www.nextflow.io/}{Nextflow} which allows to put different processes into a pipeline. This is great for doing things a little more reproducible but it requires you to be fairly knowledgeable with Linux, container software, config files etc.. Not great to learn stuff for beginners.
 \item
-  Install Rstudio Desktop (Free) from \href{https://rstudio.com/products/rstudio/download/\#download}{rstudio.com}
+  Tools-Microbiome-Analysis\\
+  \href{https://microsud.github.io/Tools-Microbiome-Analysis/}{Tools-Microbiome-Analysis} is a websites containing a comprehensive list of R packages and, more importantly, tutorials related to analysis of microbial amplicons and ecology. Really good reference to go back to every now and then. \textbf{Highly recommended}.
 \item
-  Install Git from \href{https://git-scm.com/downloads}{git-scm.com}. Use the default, recommended settings. It is especially important to leave these settings selected:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Git from the command line and also from third party software\\
-  \item
-    Use the OpenSSL library\\
-  \item
-    Checkout Windows-style, commit Unix-style line endings\\
-  \item
-    Enable Git Credential Manager\\
-  \item
-    If you run into any trouble, a more comprehensive tutorial on installing Git is available at \href{https://happygitwithr.com/install-git.html}{happygitwithr.com}.
-  \end{itemize}
+  grimmlab/MicrobiomeBestPracticeReview\\
+  Essential paper to read (\href{https://academic.oup.com/bib/article/22/1/178/5678919}{Current challenges and best-practice protocols for microbiome analysis, 2021}) and a great \href{https://github.com/grimmlab/MicrobiomeBestPracticeReview}{workflow resource} on GitHub. \textbf{Essential read}. The Grimm lab in Munich published this paper as well as developed a python and R-based workflow that assists with the recommended best practices (amplicon as well as metagenomic workflows).
 \item
-  Register on GitHub
+  KasperSkytte/ampvis2\\
+  \href{https://kasperskytte.github.io/ampvis2/articles/ampvis2.html}{Ampviz2} is an R-package to visualise and analyse 16S rRNA amplicon data. It is always more convenient to have packages that have the details and optics worked out for you. Like phyloseq, the ampviz2 package combines different tables from data (E.g. otu table, taxonomic table, phylogenetic tree, sample data etc) and then provides different functions to apply to that combined object to visualise the data.
+\end{itemize}
 
-  \begin{itemize}
-  \tightlist
-  \item
-    Go to \url{https://github.com/} and click ``Sign up''. Choose an ``Individual'', ``Free'' plan.
-  \item
-    Request a \href{https://help.github.com/en/articles/applying-for-an-educator-or-researcher-discount}{free academic upgrade}. This allows you to create \emph{private repositories}, which are only visible to you and selected collaborators, and can be made public when your work is published.
-  \end{itemize}
-\item
-  Connect Rstudio to Git and Github (for more support, see \href{https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN}{this Rstudio article}, and \href{https://www.r-bloggers.com/rstudio-and-github/}{this blog post})
+\hypertarget{miseq-library-preps}{%
+\chapter{Miseq library preps}\label{miseq-library-preps}}
 
-  \begin{enumerate}
-  \def\labelenumii{\alph{enumii}.}
-  \tightlist
-  \item
-    Open Rstudio, open the Tools menu, click \emph{Global Options}, and click \emph{Git/SVN}
-  \item
-    Verify that \emph{Enable version control interface for RStudio projects} is selected
-  \item
-    Verify that \emph{Git executable:} shows the location of git.exe. If it is missing, manually fix the location of the file.
-  \item
-    Click \emph{Create RSA Key}. Do not enter a passphrase. Press \emph{Create}. A window with some information will open, which you can close.
-  \item
-    Click \emph{View public key}, and copy the entire text to the clipboard.
-  \item
-    Close Rstudio (it might offer to restart by itself; this is fine)
-  \item
-    Go to \url{https://github.com}
-  \item
-    Click your user icon, click \emph{Settings}, and then select the \emph{SSH and GPG keys} tab.
-  \item
-    Click \emph{New SSH key}. Give it an arbitrary name (e.g., your computer ID), and paste the public key from your clipboard into the box labeled ``\emph{Key}''.
-  \item
-    Open Rstudio again (unless it restarted by itself)
-  \end{enumerate}
-\item
-  Install all required packages by running the following code in the Rstudio console. Be prepared for three contingencies:
+\textbf{Some info on getting your run ready}
 
-  \begin{itemize}
-  \tightlist
-  \item
-    If you receive any error saying \emph{There is no package called XYZ}, then run the code \texttt{install.packages("XYZ")}\\
-  \item
-    If you are prompted to update packages, just press \texttt{3:\ None}. Updating packages this way in an interactive session sometimes leads to errors, if the packages are loaded.\\
-  \item
-    If you see a pop-up dialog asking \emph{Do you want to install from sources the package which needs compilation?}, click \emph{No}. If this leads to errors, then please follow \emph{Step 3} from \href{https://cjvanlissa.github.io/worcs/articles/setup.html}{this online guide}, and run \texttt{install.packages("devtools")}. This will take a long time, but will allow you to install packages from source.
-  \end{itemize}
-\end{enumerate}
+\textbf{Overview}
 
-Run the following code to install the required packages:
+In our lab we usually prepare a 6-10 pM pool of libraries following the \href{https://sapac.support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/16s/16s-metagenomic-library-prep-guide-15044223-b.pdf}{16S Metagenomic Sequencing Library
+Preparation} protocol from Illumina with 10\% Phix. \textbf{Download it, study it and refer to it throughout your labwork}. This protocol is not limited to 16S amplicons. You can use it for fungal (e.g.~ITS) amplicons too. In the last section there are also valuable tips for pre‐PCR and post‐PCR lab procedures. There is also some additional Illumina guidance here: \url{https://sapac.support.illumina.com/downloads/16s_metagenomic_sequencing_library_preparation.html}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tinytex"}\NormalTok{)}
-\NormalTok{tinytex}\SpecialCharTok{::}\FunctionTok{install\_tinytex}\NormalTok{()}
-\NormalTok{git2r}\SpecialCharTok{::}\FunctionTok{config}\NormalTok{(}\AttributeTok{global =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{user.name =} \StringTok{"your.name"}\NormalTok{, }\AttributeTok{user.email =} \StringTok{"your.email"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+The protocol encompasses the following steps (copied out of the protocol):
+\includegraphics{./img/16Slibraryprotocolworkflow.png}
 
-That's it! Everything should be installed and connected now.
+Please note that only \textbf{one amplicon target} should be sequenced in each run. That means it is not recommended to sequence for example two different 16S amplicons or one 16S amplicon plus an ITS amplicon. Sequencing different amplicon lengths will result in reduced quality as the the Miseq flowcell will preferentially cluster shorter fragments. However, it is not impossible. We have tried to run four different amplicons on one flowcell before, although with mixed results.
 
-\hypertarget{getgitbook}{%
-\chapter{Get your GitBook}\label{getgitbook}}
+Labwork may take four weeks from DNA extraction to Miseq loading. Double that if you have not done it before. You probably realised that there is quite a bit of labwork required before you finally get FASTQ files and subsequent ASV/taxonomy tables to analyse - the ultimate goal here. The more samples are planned to be included into the pool, the more work and consumables are needed. Illumina recommends no more than 96 samples on one flowcell to get enough depths (i.e.~\textgreater{} 100,000 reads per sample). But we have sequenced around 196 samples on one flowcell before, which captured sufficient reads and diversity. This depends on how much detail and rare taxa you want to capture. The less samples you include, the more data and depth for each sample.
 
-To get your GitBook, you should follow these steps:
+Also note that you will require over 20 boxes of tips (mostly 200 µl) for each 96-well plate, so plan your consumables ahead of time. Most of the tips will be used for the PCR clean ups.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Go to \url{https://github.com/cjvanlissa/gitbook-demo}
-\item
-  In the top right of the page, click \texttt{Fork}.\\
-  This will copy my \texttt{gitbook-demo} repository to your GitHub account.\\
-  \includegraphics{./img/settings.png}
-\item
-  My repository is now copied to your account. It is a template repository, which means that you can create a \emph{new repository} based on this one.
-\item
-  Create a new repository for your own GitBook. Create one for a course you've been wanting to update. In the top-right corner of the GitHub website, click the + icon, and select ``New repository'':\\
-  \includegraphics{./img/new_repo.png}
-\item
-  In the dialog, select the \texttt{gitbook-demo} as ``Repository template'', and give the repository an appropriate name for your course. Then, press \texttt{Create\ repository}:\\
-  \includegraphics{./img/from_template.png}
-\item
-  Now, go back to Rstudio on your computer. In Rstudio, click \texttt{File\ \textgreater{}\ New\ Project}. A dialog will open. If you set up Rstudio with Git correctly, the dialog should have an option to create a new project from Version control. Click it:\\
-  \includegraphics{./img/new_project.png}
-\item
-  In the next dialog window, you should copy the URL of the GitHub repository you created in \emph{Step 5}, like so:\\
-  \includegraphics{./img/new_git_project.png}
-\item
-  Now, in Rstudio, you can open files for editing and create new files (explained in the next Chapter). Open files by clicking them in the Files editor (usually in the bottom right of Rstudio):\\
-  \includegraphics{./img/files_editor.png}
-\item
-  After you make a change, it will show up in the Git tab (usually in the top right of Rstudio). You must Commit the change locally, and then Push the change to GitHub to update your repo. To Commit, select the file and click the Commit button. Write a short message to describe the changes you made, then click the Commit button again. Now, press Push to send your commits to GitHub.\\
-  \includegraphics{./img/commit_push.png}
-\item
-  To render your book as a GitBook, you must ``Build'' it. In the top-right panel of Rstudio, you see a ``Build'' tab. In this tab, simply click the ``Build Book'' button to build your book. You should see a lot of rendering messages, until a window pops up with your brand new GitBook. If you get errors at this stage, you probably made a mistake in preparing your system (see the previous Chapter).\\
-  \includegraphics{./img/build_book.png}
-\item
-  Building the book generated a lot of new files in the \texttt{./docs} directory. This directory contains the website files for your GitBook. Open the Git tab again, verify that the \texttt{./docs} directory is listed, and Commit and Push all of these new files as described in \emph{Step 9}.
-\item
-  There is only one last remaining task: To publish your GitBook on GitHub pages. Once you do this, any change to the \texttt{./docs} folder that you push to GitHub will lead to an immediate update of your GitBook website. Go back to the GitHub page for your Repository. Click on the \texttt{Settings} tab on the top right of the page:\\
-  \includegraphics{./img/settings.png}
-\item
-  On the Settings page, scroll all the way down until you reach a section called \texttt{GitHub\ Pages}. There, under the ``Source'' heading, click the word \texttt{None}, and select \texttt{master\ branch\ /docs\ folder}. When you select it, the page will update, and if you scroll back down to the \texttt{GitHub\ Pages} section, you will see the URL where your GitBook is published. The first time, it will take a few minutes for your GitBook to come online. When you publish updates to the GitBook however (simply by following \emph{Step 11} again), the update will be near-instantaneous. The Pages section should now look like this (and that is hopefully the link where you found this book):\\
-  \includegraphics{./img/pages_published.png}
-\end{enumerate}
+After all steps in the above protocol are completed, the Miseq will be loaded with a 600 µl pool, followed by 56 hours of run-time for 2x301 cycles before FASTQ files are available for download from BaseSpace.
 
-\hypertarget{editing-the-book}{%
-\chapter{Editing the book}\label{editing-the-book}}
+\includegraphics{./img/16s-library-prep-overview.png}
 
-The contents of the book are written in \textbf{RMarkdown}. You can use any formatting code that Pandoc's Markdown supports, e.g., a math equation \(a^2 + b^2 = c^2\). Moreover, you can include chunks of R-code, like this:
+Throughout the 56 hours run you can check how things are tracking either on the BaseSpace website or the BaseSpace phone app. Understanding different QC metrics will help identifying potential problems with the pool or the instrument. It is important to note that this is a bit of a nerve-wrecking moment in the process, as it remains unclear until the metrics come through after around the 21st cycle, whether or not the run will be successful.\\
+\strut \\
+\strut \\
 
-The results of these chunks can be rendered to the GitBook:
-
-\begin{verbatim}
-## [1] "This is an R-command!"
-\end{verbatim}
-
-To edit the book, you can change the text in the \texttt{.Rmd} files. Each Rmd file should contain \textbf{one and only one} chapter. A chapter is defined by the first-level heading \texttt{\#}, e.g., \texttt{\#\ Editing\ the\ book}.
-
-Any sub-headings within the chapter are indicated with several \texttt{\#} signs, e.g., \texttt{\#\#} (level 2) and \texttt{\#\#\#} (level 3).
-
-\hypertarget{creating-new-chapters}{%
-\section{Creating new chapters}\label{creating-new-chapters}}
-
-To create a new chapter, you must follow two steps: 1) Create the file, and 2) Include it in the list of chapters.
-
-First, to create the file for a new chapter in Rstudio, click \texttt{File\ \textgreater{}\ New\ File\ \textgreater{}\ Text\ file}. At the top of the file, write your chapter heading, as explained above. Then, click \texttt{File\ \textgreater{}\ Save}. Save the file as \texttt{.Rmd}, without spaces in the file name, e.g.: \texttt{editing\_the\_book.Rmd}.
-
-Second, to include it in the list of chapters, open the file \texttt{\_bookdown.yml} (click it in the Files explorer in the bottom right of Rstudio). This file has a list of \texttt{.Rmd} files to be included in the book. In this example, the list looks like this:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{tmp }\OtherTok{\textless{}{-}} \FunctionTok{readLines}\NormalTok{(}\StringTok{"\_bookdown.yml"}\NormalTok{)}
-\FunctionTok{cat}\NormalTok{(tmp[}\FunctionTok{grep}\NormalTok{(}\StringTok{"\^{}rmd\_files"}\NormalTok{, tmp)}\SpecialCharTok{:}\FunctionTok{grep}\NormalTok{(}\StringTok{"references}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.Rmd"}\NormalTok{, tmp)], }\AttributeTok{sep =} \StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-rmd\_files: {[}``index.Rmd'',
-``prerequisites.Rmd'',
-``get\_your\_gitbook.Rmd'',
-``editing\_the\_book.Rmd'',
-``figures\_tables.Rmd'',
-``examples.Rmd'',
-``open\_educational.Rmd'',
-``use\_in\_course.Rmd'',
-``licenses.Rmd'',
-``references.Rmd''{]}
-
-Insert the file name of your new chapter in the desired position in this list.
-
-\hypertarget{linking-across-chapters}{%
-\section{Linking across chapters}\label{linking-across-chapters}}
-
-You can label chapter and section titles using \texttt{\{\#label\}} after them. The labels can be used as cross-references. For example, we can link to Chapter \ref{figtab}. If you do not manually label chapters, there will be automatic labels anyway, e.g., Chapter \ref{examples}.
-
-\hypertarget{advanced-editing}{%
-\section{Advanced editing}\label{advanced-editing}}
-
-The convenient \href{https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf}{Rmarkdown Cheat Sheet} by Rstudio covers most of the knowledge required for advanced Rmarkdown editing. You can print it out and stick it to your wall!
-
-\hypertarget{figtab}{%
-\chapter{Figures and tables}\label{figtab}}
-
-Figures and tables with captions will be placed in \texttt{figure} and \texttt{table} environments, respectively.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
-\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\textbf{1. DNA extraction}
 
 \begin{figure}
-
-{\centering \includegraphics[width=0.8\linewidth]{gitbook-demo_files/figure-latex/nice-fig-1} 
-
-}
-
-\caption{Here is a nice figure!}\label{fig:nice-fig}
+\centering
+\includegraphics{./img/dna.jpeg}
+\caption{``DNA extracts''}
 \end{figure}
 
-Reference a figure by its code chunk label with the \texttt{fig:} prefix, e.g., see Figure \ref{fig:nice-fig}. Similarly, you can reference tables generated from \texttt{knitr::kable()}, e.g., see Table \ref{tab:nice-tab}.
+We commonly extract DNA from soils or from wastewater sludges using the \emph{DNeasy Powersoil Pro Kit} (Qiagen) for both, soil and sludge. It results in high quality DNA and includes a bead beating step to make sure the gram positive cells are sufficiently broken up. Although, I don't have evidence for that. In fact, please let us know on the \href{https://github.com/chrismitbiz/ABlab-workflows/discussions}{GitHub Discussion Page} for this GitBook if you have any comments on that as we are always looking for ways to improve things.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
-  \FunctionTok{head}\NormalTok{(iris, }\DecValTok{20}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
-  \AttributeTok{booktabs =} \ConstantTok{TRUE}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+Soil
+
+\begin{itemize}
+\tightlist
+\item
+  For soils, the protocol of the extraction kit is followed, weighing in 0.25 g of soil and making sure to record the exact weights used.\\
+\item
+  Also make sure to measure the water content of the soil to be able to report DNA concentrations per dry weight of soil.
+\end{itemize}
+
+Sludge
+
+\begin{itemize}
+\tightlist
+\item
+  For DNA extraction of sludge, 0.5 ml is added into an empty 1.7 ml extraction tube (without extraction beads), then centrifuged at 5000 rpm for 5 minutes before removing the supernatent.
+\item
+  Extraction beads are then added and the Powersoil protocol followed.
+\item
+  Measure Total Solids (TS) of the sludge to report DNA concentrations per gram of TS.\\
+  \strut \\
+\end{itemize}
+
+\textbf{2. DNA quality and concentration}
+
+Once you have extracted DNA it is necessary to confirm its quality and concentration.
+
+\begin{itemize}
+\tightlist
+\item
+  Quality is assessed using a Nanodrop Spectrophotometer. You are aiming for \textbf{260/280 Ratio of 1.8 and a 260/230 Ratio of 2-2.2}. This is explained in the \href{https://dna.uga.edu/wp-content/uploads/sites/51/2019/02/Note-on-the-260_280-and-260_230-Ratios.pdf}{T042‐TECHNICAL BULLETIN}. The Nanopore also estimates DNA concentrations but it is not recommended to use these concentrations measurements to normalise DNA. It is more accurate and consistent with a Qubit Fluorometer.\\
+\item
+  DNA Concentrations are best measured using fluorescent dye-based methods such as the \textbf{Qubit Fluorometer}. It is easist to use the `\emph{1X}' assays such as the \emph{Qubit 1X dsDNA BR Assay Kit} or the \emph{Qubit 1X dsDNA HS Assay Kit}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Broad range (BR) Kit for quantifying extracted environmental DNA and afte the 2nd stage PCR.
+  \item
+    High Sensitivity (HS) Kit for quantifying the pool at the end.
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics{./img/qubit.png}
+\caption{``The ready-mix working solution for Qubit, which includes dye and buffer. No preparation/premixing required.''}
+\end{figure}
+
+\textbf{3. DNA normalisation}
+
+The next step is to normalise all DNA extracts to 5 ng/µl.
+
+\begin{itemize}
+\tightlist
+\item
+  Dilute DNA to equal concentrations, either in a fresh batch of PCR-grade 10mM Tris buffer (pH 8.5) or in PCR-grade water\\
+\item
+  Set a pre-define DNA volume, say 2µl for all extracts, and add Tris or water as calculated with\\
+  \[ C_1V_1 = V_2 C_2 \]\\
+  \strut \\
+\end{itemize}
+
+\textbf{4. First and second PCR - Amplicon PCR and Indexing PCR}
+
+Follow the \href{https://sapac.support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/16s/16s-metagenomic-library-prep-guide-15044223-b.pdf}{16S Metagenomic Sequencing Library
+Preparation} Guide. Include a negative control and sequence that as well. This allows you to assess background and cross contamination. The whole workflow is best done in 96-well plates, using multi-channel pipettes to avoid indexing mistakes across wells.
+
+Sample list and plate layout
+
+Ensure that all sample IDs, plate-layout and each unique Illumina index carefully planned and printed out before you start your PCRs. Perhaps, stick the layout onto the Bio-safety cabinet where you do most of the pipetting and keep checking you are on the right well and sample. Label all plates even if you discard them afterwards. Labwork can be stressful and you need to trace all your steps across each well of the plate because otherwise you risk that you have indexed the wrong samples and it will become impossible to know which sample you have sequenced.
+
+Primers
+
+Any primers you order for the Miseq will have to include the \textbf{Illumina overhang adapter}. The sequence of the overhang adapter is added \textbf{in front} of the gene-specific primer sequences. There are two overhang adapters; one for the forward primers and one for the reverse primer. Check out the relevant information on primers from page 3 the 16S Metagenomic Sequencing Library
+Preparation Guide.
+
+Clean-ups
+
+It is worth doing the clean-ups in a separate deep-well plate (``MIDI'' plate, see consumables below) to avoid any blow-out of dried beads at the end of the clean-up. This process is explained in the above mentioned guide too. Tip: Handle the beads extremely carefully after the ethanol has dried. They blow out easily.
+
+Index Kits
+
+The index kits are expensive. Try to handle them with care and replace lids with the provided replacement lids, after every use. Multipipettes are absolutely essential to avoid loosing track on indexes used across the differnt wells on the plate. The use of the Illumina Plate Fixture comes in handy (see consumables below).\\
+
+\textbf{5. Normalisation of Indexed amplicons}
+
+After you finished all PCR work it is time to do another round of Qubitting and normalisation of all samples into a new 96-well plate. The final pool should be 4 nM but we prefer to normalise DNA to 10 nM first, then pool and then dilute the pool to 4 nM afterwards.\\
+We are using a very handy excel sheet, which was kindly developed and provided by \href{https://scholars.latrobe.edu.au/sknowler}{Sarah Knowler} at La Trobe University to prepare and assist in normalisations, converting from ng/µl to nM using the formula:
+
+\[ concentrations~(ng/µl)  \over 660 g/mol~x~average~library~size\]
+Contact us if you would like to get a copy of this very handy library preparation excel sheet.
+
+Some more information here: \url{https://support.illumina.com/content/dam/illumina-support/documents/documentation/system_documentation/miseq/miseq-denature-dilute-libraries-guide-15039740-10.pdf}. There's also a pooling calculator here \url{https://support.illumina.com/help/pooling-calculator/pooling-calculator.htm} which may be helpful with your calculations.\\
+\strut \\
+
+\textbf{6. Pooling}
+
+Pipette equal volumes of the normalised DNA into one 1.5 ml tube.\\
+Measure its concentration using the High Sensitivity (HS) Qubit 1X dsDNA HS Assay Kit.\\
+
+\textbf{7. Denaturing of pool and loading of the Miseq}
+
+The key for the final steps are that..
+
+\begin{itemize}
+\tightlist
+\item
+  ..the reagent cartridge is properly thawed. Perhaps thaw in fridge 3 hours before starting the denaturing steps. Then put into icy water to ensure final and even thawing across the cartridge. Mix cartrige well at the end and ensure that no bubbles are visible before loading.\\
+\item
+  .. the 0.2 N sodium hydroxide (NaOH) is made fresh with biological grade NaOH. For example use the \emph{BioUltra, for molecular biology, 10 M NaOH in H2O} from Sigma Aldrich to make a 0.2 N solution (N = Normality but it is equal to Molarity here because there is only one OH in NaOH). I have used analytical-grade NaOH pellets as well, which worked but the RNAse free solutions are safer in terms of inhibitors etc..\\
+\item
+  ..that the pool is cooled down immediately in ice or icy water right after the 2 minutes in the 96 degrees C heatblock and pretty much immediately loaded into the Miseq. The Miseq has to be prepped beforehand (I.e. maintenance wash and sample sheet loaded).\\
+\item
+  a sample sheet (or so-called manifest file) is created beforehand using the Illumina Experiment Manager Software. This software assist in producing a \texttt{.csv} file that is then loaded into the Miseq instrument via a USB and ensures that the indexes you have used are linked to the relevant samples in your pool. Basically a list of sample IDs and index IDs. Example, of a sample sheet from one of our runs below.\\
+  \textbf{IMPORTANT}: Make sure to specify the Workflow as \textbf{GenerateFastQ}.\\
+\item
+  you have a Illumina BaseSpace account.
+\end{itemize}
+
+\hfill\break
+
+\begin{figure}
+\centering
+\includegraphics{./img/manifestfile.png}
+\caption{``Example of a manifest file''}
+\end{figure}
+
+\textbf{8. Consumables}
+
+All consumables and equipment required for the 16S Miseq library prep protocol are available from page 21 of the above mentioned \href{https://sapac.support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/16s/16s-metagenomic-library-prep-guide-15044223-b.pdf}{16S Metagenomic Sequencing Library
+Preparation} Guide.\\
+The \textbf{magnetic stand} for 96-well plates and the TruSeq Index \textbf{Plate Fixture Kit} are essential.
+
+Here is what we typically include into our purchasing list. The combined total of the below list costs over AUD\$ 10,000.
 
 \begin{table}
 
-\caption{\label{tab:nice-tab}Here is a nice table!}
+\caption{\label{tab:consumables}Example of a consumables list we typically include for a Miseq run}
 \centering
-\begin{tabular}[t]{rrrrl}
+\begin{tabular}[t]{llll}
 \toprule
-Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
+Equipment.consumables & Item.number & Supplier & Comment\\
 \midrule
-5.1 & 3.5 & 1.4 & 0.2 & setosa\\
-4.9 & 3.0 & 1.4 & 0.2 & setosa\\
-4.7 & 3.2 & 1.3 & 0.2 & setosa\\
-4.6 & 3.1 & 1.5 & 0.2 & setosa\\
-5.0 & 3.6 & 1.4 & 0.2 & setosa\\
+Qiagen Powersoil Pro test kit, 250 & \#47016 & Qiagen & \\
+Primers & Various & E.g. Sigma & \\
+Magnetic beads,  AMPure XP / JetSeq Clean & BIO-68031 & Meridian Life Sciences & For clean-up\\
+KAPA HiFi Hotstart ready mix & KK2602, 6.25ml & Millennium Science & For PCR\\
+MiSeq Reagent Kit v3 & MS-102-3003 & Illumina & Needs to be as fresh as possible\\
 \addlinespace
-5.4 & 3.9 & 1.7 & 0.4 & setosa\\
-4.6 & 3.4 & 1.4 & 0.3 & setosa\\
-5.0 & 3.4 & 1.5 & 0.2 & setosa\\
-4.4 & 2.9 & 1.4 & 0.2 & setosa\\
-4.9 & 3.1 & 1.5 & 0.1 & setosa\\
+Nextera XT Index Kit v2, Set A, B, C or D & FC-131-2003 & Illumina & One set (A, B, C or D) for 96 uniquely  indexed samples\\
+PhiX control & FC-110-3001 & Illumina & \\
+Qubit 1X dsDNA BR Assay Kit & Q33266 & Thermofisher & DNA quantiication\\
+Qubit 1X dsDNA HS Assay Kit & Q33230 & Thermofisher & Pool quantification\\
+Bioanalyzer Kit (HighSens or 1000 Kit) & 5067-4626 or 5067-1504 & Integrated Science Tech & \\
 \addlinespace
-5.4 & 3.7 & 1.5 & 0.2 & setosa\\
-4.8 & 3.4 & 1.6 & 0.2 & setosa\\
-4.8 & 3.0 & 1.4 & 0.1 & setosa\\
-4.3 & 3.0 & 1.1 & 0.1 & setosa\\
-5.8 & 4.0 & 1.2 & 0.2 & setosa\\
-\addlinespace
-5.7 & 4.4 & 1.5 & 0.4 & setosa\\
-5.4 & 3.9 & 1.3 & 0.4 & setosa\\
-5.1 & 3.5 & 1.4 & 0.3 & setosa\\
-5.7 & 3.8 & 1.7 & 0.3 & setosa\\
-5.1 & 3.8 & 1.5 & 0.3 & setosa\\
+Tween 20 & H5151 & Promega & For Miseq instrument wash\\
+96-well, 0.2ml plates, non-skirted & AB0600 & Thermofisher & For PCR\\
+96 Well 0.8mL Polypropylene Deepwel Plate & AB0859 & Thermofisher & For clean-up\\
+Optical Plate Seals & V7840 & Promega & For PCR\\
+0.5mL thin-walled PCR tubes & E4942 & Promega & For Qubit\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-You can write citations, too. For example, we are using the \textbf{bookdown} package \citep{R-bookdown} in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
+\hypertarget{from-basespace-to-qiime2-and-dada2}{%
+\chapter{From BaseSpace to Qiime2 and DADA2}\label{from-basespace-to-qiime2-and-dada2}}
 
-\hypertarget{examples}{%
-\chapter{Examples}\label{examples}}
+In this chapter you will learn how to process the FASTQ files that are generated from an amplicon sequencing run on a Miseq instrument. We are using Qiime2. Please also refer to the extensive documentation and tutorials available at \url{https://qiime2.org}. You can learn almost everything there.
 
-Here are some examples of other GitBooks for courses; if you want to have your GitBook added to the list, please send a \href{https://github.com/cjvanlissa/gitbook-demo/pulls}{Pull Request} (here's \href{https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request}{how to send a pull request}).
+\hfill\break
 
-\hypertarget{statistics-with-r-h.-quene}{%
-\section{Statistics with R (H. Quene)}\label{statistics-with-r-h.-quene}}
-
-\url{https://hugoquene.github.io/emlar2020}
-
-A GitBook for a tutorial on \emph{Statistics with R (Basics)}, held as part of the workshop on Experimental Methods in Language Acquisition Research (EMLAR, \url{https://emlar.wp.hum.uu.nl/}), Utrecht, on 17 April 2020. This compact introduction helps you with your first steps into R.
-
-\hypertarget{theory-construction-and-statistical-modeling-c.-j.-van-lissa}{%
-\section{Theory Construction and Statistical Modeling (C. J. van Lissa)}\label{theory-construction-and-statistical-modeling-c.-j.-van-lissa}}
-
-\url{http://cjvanlissa.github.io/TCSM}
-
-A GitBook for the course \emph{``Theory Construction and Statistical Modeling''}, with some interesting code, for example: Blocks of answers to the tutorial questions that can be collapsed and expanded.
-
-\hypertarget{doing-meta-analysis-in-r-c.-j.-van-lissa}{%
-\section{Doing Meta-Analysis in R (C. J. van Lissa)}\label{doing-meta-analysis-in-r-c.-j.-van-lissa}}
-
-\url{http://cjvanlissa.github.io/Doing-Meta-Analysis-in-R}
-
-A GitBook on doing meta-analysis in R, based on the book `Doing Meta-Analysis in R', by Mathias Harrer, Pim Cuijpers, \& David Ebert, and adapted to focus on the \href{https://cran.r-project.org/web/packages/metafor/index.html}{metafor} package, and exploring heterogeneity using \href{https://cran.r-project.org/web/packages/metaforest/index.html}{metaforest}. The original can be found here: \url{https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/}
-
-\hypertarget{muxe9todos-quantitativos-em-psicologia-com-r-l.-anunciauxe7uxe3o}{%
-\section{Métodos quantitativos em Psicologia com R (L. Anunciação)}\label{muxe9todos-quantitativos-em-psicologia-com-r-l.-anunciauxe7uxe3o}}
-
-\url{https://anovabr.github.io/mqt/}
-
-This book provides a short and to-the-point exposition on the essentials of statistics, and was written for undergraduate students at the Pontifical Catholic University of Rio de Janeiro (PUC-Rio). To a lesser degree, the mathematical modeling of statistical questions will be addressed. This book might be relevant for Portuguese-speaking students who enroll for laboratory-based statistics and anyone who wants to learn R.
-
-\hypertarget{open-educational-resources}{%
-\chapter{Open Educational Resources}\label{open-educational-resources}}
-
-UNESCO defines Open Educational Resources as \href{https://en.unesco.org/themes/building-knowledge-societies/oer}{\emph{teaching, learning and research materials in any medium -- digital or otherwise -- that reside in the public domain or have been released under an open license that permits no-cost access, use, adaptation and redistribution by others with no or limited restrictions.}}
-
-Open Educational resources can help lighten the workload on individual teachers, who can collaborate with the development of high-quality open access resources, instead of having to develop their own proprietary materials from scratch. Moreover, Open Educational resources are inclusive, lowering the barrier to knowledge acquisition for learners around the world, and enabling lifelong learning for those outside academia.
-
-Many universities support Open Educational Resources. Here are just a few (feel free to \href{https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request}{send a pull request} with other relevant resources).
+\textbf{Prerequisites}
 
 \begin{itemize}
-\tightlist
 \item
-  \href{https://www.oercommons.org/}{\textbf{OER Commons}}: A freely accessible online library of open educational resources.
+  FASTQ files available to download on BaseSpace. Two for each sample. One for read 1 (R1) and another for read 2 (R2). For example, \texttt{PT-01\_S1\_L001\_R1\_001.fastq.gz} and \texttt{PT-01\_S1\_L001\_R2\_001.fastq.gz} contains all sequences for sample PT-01.
 \item
-  \href{https://uu.figshare.com/}{\textbf{Utrecht University Figshare}}: Open learning objects from Utrecht University.
+  Personal computer or cloud computational resources with \textgreater{} 4 CPUS, \textgreater{} 16 RAM, \textgreater{} 100 GB storage recommended. * Qiime2 installed. Always use the latest version.\\
 \item
-  \href{https://ocw.jhsph.edu/}{\textbf{Johns Hopkins University OCW}}: Open public health courses and materials.
+  A tab separated file, which we call the \texttt{Qiimeimportmanifest.tsv}. More details and an example is provided below.\\
 \item
-  \href{https://pitt.libguides.com/openeducation/biglist}{\textbf{University of Pittsburgh OER}}: Big List of Open Educational Resources.
+  A tab separated file containing your metadata, which we may call \texttt{samplesheet.csv}. More details below.
 \item
-  \href{https://www.merlot.org/merlot/}{\textbf{MERLOT}}: Online learning and support materials and content creation tools, led by an international community of educators, learners and researchers.
+  The BaseSpace Downloader software (available on the BaseSpace page. You will be prompted to download once you go to your files).
+
+  \hfill\break
 \end{itemize}
 
-\hypertarget{compatibility-with-existing-systems}{%
-\chapter{Compatibility with existing systems}\label{compatibility-with-existing-systems}}
+\textbf{Download FASTQ files}
 
-Many universities offer digital platforms for learning. You might wish to embed your GitBook within these existing systems. Here are two ways in which you might do that. Currently, this section only discusses BlackBoard, but the same principles should apply to other platforms.
+In this example, Fastq files were produced from sequencing 16SrRNA marker genes on an Illumina Miseq instrument. If you ran your own library on your own BaseSpace account, the files should be available to download from that BaseSpace account. If the run was created by another user, that person can invite you to the run, which gives you access to download the files too.
 
-\hypertarget{add-a-hyperlink}{%
-\section{Add a hyperlink}\label{add-a-hyperlink}}
+Log in to BaseSpace and into your project. Go to files, run and download FastQ. You will be asked to install a downloader software. Follow instructions accordingly.\\
+\includegraphics{./img/basespacedownload.png}
 
-You can add a link to your GitBook in the BlackBoard course menu by following \href{https://help.blackboard.com/Learn/Instructor/Course_Content/Create_Content/Create_Course_Materials/Link_to_Websites}{this tutorial}.
+\includegraphics{./img/basespacedownload2.png}\\
+\strut \\
 
-\hypertarget{embed-the-whole-book}{%
-\section{Embed the whole book}\label{embed-the-whole-book}}
+The FASTQ files will come in separate folders for each sample. It is necessary to move all files into just ONE folder. That folder will then be used to import the sequences into a qiime object (described below).
 
-You can add a Blank Page to your BlackBoard course menu, and fill that page with a full-size ``iframe'' - a web page within the web page. \href{https://mycampus.maine.edu/web/uc-faculty-portal/education-technology/-/asset_publisher/vEKuFJYvDY5K/content/inserting-an-iframe-into-blackboard?inheritRedirect=false}{This tutorial} explains how to do it. It is possible that your university is blocking this feature, however.
+\hfill\break
 
-\hypertarget{license-your-gitbook}{%
-\chapter{License your GitBook}\label{license-your-gitbook}}
+\textbf{Required Files}
 
-In the spirit of Open Science, it is good to think about making your course materials Open Source. That means that other people can use them. In principle, if you publish materials online without license information, you hold the copyright to those materials. If you want them to be Open Source, you must include a license. It is not always obvious what license to choose.
+\texttt{Qiimeimportmanifest.tsv} - A tab separated file with three columns where the first column is the sample ID (The exact same ID that was used in the manifest file for loading the Miseq). The second and third columns are the absolute paths to the forward and reverse FASTQ files, respectively. If FASTQ files are located on a cloud computer then the files should be uploaded to that, and the path needs to contain the full path to the relevant folder, including the full name of the file itself. If you process those files on your local drive then the paths need to change to your local folder containing the FASTQ files. In the below example table, the files are located on a Linux cloud computer (Nectar Research Cloud).
 
-The Creative Commons licenses are typically suitable for course materials. This GitBook, for example, is licensed under CC-BY 4.0. That means you can use and remix it as you like, but you must credit the original source.
+It might take some time to compile the import manifest. Each file path has to exact. However, in case you made a mistake in the file names etc, Qiime is generally pretty good at reporting where the error occured.
 
-If your project is more focused on software or source code, consider using the \href{https://www.gnu.org/licenses/gpl-3.0.en.html}{GNU GPL v3 license} instead.
+\begin{table}
 
-You can find \href{https://creativecommons.org/share-your-work/licensing-examples}{more information about the Creative Commons Licenses here}. Specific licenses that might be useful are:
+\caption{\label{tab:qiimeimport}Example of a qiime import manifest.tsv file}
+\centering
+\fontsize{10}{12}\selectfont
+\begin{tabular}[t]{l|l|l}
+\hline
+sample-id & forward-absolute-filepath & reverse-absolute-filepath\\
+\hline
+PT-01 & /pvol/Sequences/20220622\_PrimerTrial\_RMIT/PT-01\_S1\_L001\_R1\_001.fastq.gz & /pvol/Sequences/20220622\_PrimerTrial\_RMIT/PT-01\_S1\_L001\_R2\_001.fastq.gz\\
+\hline
+PT-02 & /pvol/Sequences/20220622\_PrimerTrial\_RMIT/PT-02\_S2\_L001\_R1\_001.fastq.gz & /pvol/Sequences/20220622\_PrimerTrial\_RMIT/PT-02\_S2\_L001\_R2\_001.fastq.gz\\
+\hline
+PT-03 & /pvol/Sequences/20220622\_PrimerTrial\_RMIT/PT-03\_S3\_L001\_R1\_001.fastq.gz & /pvol/Sequences/20220622\_PrimerTrial\_RMIT/PT-03\_S3\_L001\_R2\_001.fastq.gz\\
+\hline
+PT-04 & /pvol/Sequences/20220622\_PrimerTrial\_RMIT/PT-04\_S4\_L001\_R1\_001.fastq.gz & /pvol/Sequences/20220622\_PrimerTrial\_RMIT/PT-04\_S4\_L001\_R2\_001.fastq.gz\\
+\hline
+PT-05 & /pvol/Sequences/20220622\_PrimerTrial\_RMIT/PT-05\_S5\_L001\_R1\_001.fastq.gz & /pvol/Sequences/20220622\_PrimerTrial\_RMIT/PT-05\_S5\_L001\_R2\_001.fastq.gz\\
+\hline
+PT-06 & /pvol/Sequences/20220622\_PrimerTrial\_RMIT/PT-06\_S6\_L001\_R1\_001.fastq.gz & /pvol/Sequences/20220622\_PrimerTrial\_RMIT/PT-06\_S6\_L001\_R2\_001.fastq.gz\\
+\hline
+\end{tabular}
+\end{table}
 
-\begin{itemize}
-\tightlist
-\item
-  \href{https://creativecommons.org/share-your-work/public-domain/cc0/}{CC0 (``No Rights Reserved'')}, everybody can do what they want with your work.
-\item
-  \href{https://creativecommons.org/licenses/by/4.0/}{CC-BY 4.0 (``Attribution'')}, everybody can do what they want with your work, but they must credit you. Note that this license may not be suitable for software or source code!
-\end{itemize}
+\hfill\break
 
-For compatibility between CC and GNU licenses, see \href{https://creativecommons.org/faq/\#Can_I_apply_a_Creative_Commons_license_to_software.3F}{this FAQ}.
+\texttt{samplesheet.tsv} - file containing sample metadata. This file should contain all other environmental measurements you may have done on each sample (pH, EC\ldots), which you want to relate to microbial taxonomy and composition. The same file and format will be used to import metadata into the R package Phyloseq later too.
+
+\begin{table}
+
+\caption{\label{tab:metadata}Example of a samplesheet.tsv file}
+\centering
+\fontsize{10}{12}\selectfont
+\begin{tabular}[t]{l|l|l|l|l|l|l}
+\hline
+\#SampleID & \#Sludge & WWTP & SludgeType & PMA\_treat & Rep\_bio & Sludgecollection\\
+\hline
+\#q2:types & categorical & categorical & categorical & categorical & numeric & categorical\\
+\hline
+PT-01 & 1 & ETP5 & Meso & NoPMA & 1 & 9/5/2022\\
+\hline
+PT-02 & 1 & ETP5 & Meso & NoPMA & 2 & 9/5/2022\\
+\hline
+PT-03 & 1 & ETP5 & Meso & NoPMA & 3 & 9/5/2022\\
+\hline
+PT-04 & 1 & ETP5 & Meso & NoPMA & 4 & 9/5/2022\\
+\hline
+PT-05 & 1 & ETP5 & Meso & NoPMA & 5 & 9/5/2022\\
+\hline
+\end{tabular}
+\end{table}
+
+\hfill\break
+
+IMPORTANT: Create the \texttt{.tsv} file as a tab separated \texttt{.csv} file in Excel first and then manually change the file name from \texttt{.csv} to \texttt{.tsv}. Not sure how else to easily build the \texttt{.tsv} file.
+
+\hfill\break
+
+\texttt{scriptfile.txt} - A text file that contains your qiime2 scripts. Example below. Code is compiled here and then only the file itself is executed to run any commands in that text. The hash (\#) in front of any line of code stops it from being executed. That means all code is normally `hashed'. If one wants to run the code the lines are `un-hashed' and the text file is executed in the command line to run the `un-hashed' code. On the Linux cloud computer the command would be: \texttt{sh\ scriptfile.txt}.
+
+Note that a script file is meant to make life easy and the process replicable. But you could run each of the processes directly by adding the commands into the terminal without a script file.
+
+\begin{figure}
+\centering
+\includegraphics{./img/scriptfile.png}
+\caption{``Example of a scriptfile.txt''}
+\end{figure}
+
+\hfill\break
+
+Briefly on script files for cloud-based high performance computers (HPC) that are using Slurm to manage multiple user runs. If the HPC at your institution is using Slurm, then the script file has to be called with \texttt{sbatch\ scriptfile.txt}. The script files for HPCs using slurm contains a header that determins the allocations (number of CPUs, RAM etc..) for your task. The first lines of the .txt file typically look similar to this:
+
+\begin{verbatim}
+#!/bin/bash
+#SBATCH --cpus-per-task=6
+#SBATCH --mem-per-cpu=6000
+#SBATCH --time=24:00:00
+#SBATCH --partition=compute
+#SBATCH --job-name=Q_fun
+\end{verbatim}
+
+Commands, such as this:
+
+\begin{verbatim}
+echo "Starting at: $(date)"
+echo "Finished at: $(date)"
+\end{verbatim}
+
+.. are less important but help to report the start and end times of the executed commands from beginning (where the \texttt{echo} command is placed at the beginning of the script) to end (\texttt{echo}\ldots{} placed at the end of the script) into the Terminal Windows. They dont affect the qiime commands in any way.
+
+Slurm and \texttt{sbatch} are not needed if you manage your own computer or your `own' cloud computer. In the example below we are using a Linux cloud computer, provided by the Nectar Research Cloud so we dont need Slurm.
+
+\hfill\break
+
+\textbf{Paired end manifest import (Step 1)}
+
+Go to the folder that contains all the FASTQ files (all files in one folder). I.e. in Unix/Linux use \texttt{cd\ path/to/folder/} to navigate to it. The scriptfile.txt should also be located here. The following qiime command that will look for the files and then create a qiime object using the sequences found in each FASTQ file. The \texttt{-\/-output-path} instructs qiime where to place and how to name the output file, here demux-paired-end.qza is placed into the same directory (or create a second script file containing the remaining commands).\\
+Remove any \# in front of your code (already removed in the below example) and execute the scriptfile.txt with \texttt{sh\ scriptfile.txt} (or \texttt{sbatch\ scriptfile.txt} in case you are using Slurm).
+
+\begin{verbatim}
+qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' \
+  --input-path Qiimeimportmanifest.tsv \
+  --output-path demux-paired-end.qza \
+  --input-format PairedEndFastqManifestPhred33V2
+\end{verbatim}
+
+\hfill\break
+
+\textbf{Cutadapt (Step 2)}
+
+If all goes well you should now have a demux-paired-end.qza file in the same directory as your FASTQ files , which contains all your sequences. You could move demux-paired-end.qza to another folder and continue all other steps there if you wish. The FASTQ files are not needed anymore. Dont forget to move your script file to where it is most convenient for executing the commands. If you moved the demux-paired-end.qza to another folder it is probably easiest to also move the script file that the same directory.
+
+Go to the folder containing demux-paired-end.qza and use cutadapt to trim out the primer sequences. Unhash relevant lines in your script file, which should be located in the same folder. Run \texttt{sh\ scriptfile.txt}.
+
+In this example we used the V4 primers. Change primer sequence to the exact primers that you used in the amplicon PCR.
+
+\begin{verbatim}
+qiime cutadapt trim-paired \
+  --i-demultiplexed-sequences demux-paired-end.qza \
+  --p-front-f GTGARTCATCGAATCTTTG \
+  --p-front-r TCCTCCGCTTATTGATATGC \
+  --o-trimmed-sequences trimmed_demux-paired-end.qza
+\end{verbatim}
+
+\hfill\break
+
+\textbf{Visualise the output with a .qzv file}
+
+The .qza files can be visualised by `converting' them into .qzv files.\\
+Here we take the trimmed\_demux-paired-end.qza and create a trimmed\_demux-paired-end.qzv.\\
+\textbf{NOTE:} View any .qzv file on \url{https://view.qiime2.org}. Drag and drop the qzv file into the browser window and inspect the results.
+
+\begin{verbatim}
+qiime demux summarize \
+  --i-data trimmed_demux-paired-end.qza \
+  --o-visualization trimmed_demux-paired-end.qzv
+\end{verbatim}
+
+Go to \url{https://view.qiime2.org} and drag and drop to visualise your .qzv file in the browser.
+
+\includegraphics{./img/viewqiime.png}\\
+
+\textbf{STOP HERE}. Inspect the visualisation and decide on location and maximum expected error.\\
+From the output decide where to truncate the forward and reverse reads with \texttt{p-trunc-len-f}, \texttt{p-trunc-len-r},\texttt{-\/-p-max-ee-f} and \texttt{-\/-p-max-ee-r} in DADA2 below.
+
+It can take some trial and error to get these setting right. We are using a docker-based package called FIGARO to help us estimate those parameters (Not shown here). But essentially you want to capture high quality reads and be confident about the Amplicon Sequence Variants (ASV), while also capture sufficent depth of ASVs and reads without unnecessarily filtering out too much. In the below example, we have trimmed the forward reads at 272 base pairs with a maximum expected error (max-ee) of 2 (which is the default) and the reverse reads at 151 with a max-ee of 3. I think it is o.k. to relax the max-ee for the reverse reads (which are ALWAYS lower in quality) as I feel more confident about the fact that the reverse reads are paired with the forward reads. Pairing in itself provides increased confidence that the reads do in fact represent a biological relevant sequence. As always please comment on our \href{https://github.com/chrismitbiz/ABlab-workflows/discussions/}{GitHub discussion page} if you have any suggestions here. Thanks!
+
+A minimum overlap between the forward and reverse primer of 20 base pairs is recommended. To overlap can be calculated as following:
+
+\[length~of~forward~read + length~of~reverse~read - length~of~amplicon - trimmed~basepairs~in~forward~read -  trimmed~basepairs~in~reverse~reads = overlap\]
+
+So, for example, if we picked \texttt{-\/-p-trunc-len-f\ 272} and \texttt{-\/-p-trunc-len-r\ 151}, we get
+\[301 + 301 - 292 - 29  - 150 = 131~bp~overlap\]
+
+\hfill\break
+
+In cases where the quality of the reverse reads is very poor, or the amplicon is too long for pairing to work, it is also acceptable to import, trim and denoise only the forward reads. The V4 primer of this example, is nice and short at 292 basepairs, so is great for pairing even at lower reverse-read qualities.
+
+\begin{figure}
+\centering
+\includegraphics{./img/demux.qza.png}
+\caption{``Example of a demux.qzv visualisation''}
+\end{figure}
+
+\hfill\break
+
+\textbf{Denoise paired end sequences with dada2 (Step 3)}
+
+Once the trimming and max-ee parameters are decided, it is time to run the DADA2 function. This may take a while, depending on total number of samples.
+
+The output will be a feature\_table.qza and sample\_rep\_seqs.qza, containing the ASV abundances and their sequences respectively.
+
+\begin{verbatim}
+qiime dada2 denoise-paired \
+  --i-demultiplexed-seqs trimmed_demux-paired-end.qza \
+  --o-table feature_table.qza \
+  --o-representative-sequences sample_rep_seqs.qza \
+  --p-trim-left-f 0 --p-trim-left-r 0 \
+  --p-trunc-len-f 271 \
+  --p-trunc-len-r 151 \
+    --p-max-ee-f 2 \
+    --p-max-ee-r 3 \
+  --output-dir dada2 \
+  --verbose
+\end{verbatim}
+
+Summarise and visualise the ASV abundances (feature\_table.qza) in a .qzv file.
+
+\begin{verbatim}
+qiime feature-table summarize \
+  --i-table feature_table.qza \
+  --o-visualization feature_table.qzv \
+  --m-sample-metadata-file metadata.tsv
+\end{verbatim}
+
+\textbf{Note:} Look at the feature\_table.qzv and record median reads per sample
+
+\begin{figure}
+\centering
+\includegraphics{./img/feature-table.qzv.png}
+\caption{``feature\_table.qzv output''}
+\end{figure}
+
+\hfill\break
+
+\textbf{Taxonomic classifier and assignment (Step 4)}
+
+The next step is to assign taxonomies to the sequences in the denoised sample sequences. Here, we use a pre-trained classifier that is based on the Silva database. This pre-trained classifier is available on the data resource page of Qiime (Most current link at the time of writing: \url{https://docs.qiime2.org/2022.2/data-resources}).
+
+However, in case you used a different primer you would have to create the classifier yourself. Again there is great resource avaiable on \url{https://docs.qiime2.org}. The process is fairly straight forward but takes a computational time. Briefly, extract reference reads from a database (i.e.~Silva here) based on the primers used. Then use those extracted sequences and fit or train them onto a taxonomy. Basically, predict which amplicon sequence should be what phylym/class/order/family/genus etc\ldots. This trained file becomes a `classifier' that is used to assign taxonmies on your sequences.
+
+Here we have a pre-trained classifier, silva-132-99-515-806-nb-classifier.qza:
+The output is a file called taxonomy\_silva.qza and taxonomy\_silva.qzv in this case.
+
+\begin{verbatim}
+qiime feature-classifier classify-sklearn \
+  --i-classifier silva-132-99-515-806-nb-classifier.qza \
+  --p-reads-per-batch 10000 \
+  --i-reads sample_rep_seqs.qza \
+  --o-classification taxonomy_silva.qza \
+  --quiet
+
+# Then summarise and visualise the output into a .qza file
+
+qiime metadata tabulate \
+--m-input-file taxonomy_silva.qza \
+--o-visualization taxonomy_silva.qzv
+\end{verbatim}
+
+\textbf{IMPORTANT:} The \texttt{taxonomy\_silva.qzv} is loaded into \url{https://view.qiime2.org/} to dowload the \texttt{.tsv} file for later import into R.
+
+\hfill\break
+
+\textbf{Build phylogenetic tree (Step 5)}
+
+The next step is not essential but really good to have. Creating a phylogenetic tree from the amplicon sequences.
+
+In this case we are using the insertion tree method. See \url{https://library.qiime2.org/plugins/q2-fragment-insertion/16/} for more information in this method.
+
+As not all ASVs will be inserted we will filter the feature\_table.qza again to keep only those ASVs that are in the tree. You will need the reference file from silva or greengenes. In this case we are using \texttt{sepp-refs-silva-128.qza}.
+
+\begin{verbatim}
+qiime fragment-insertion sepp \
+  --i-representative-sequences sample_rep_seqs.qza \
+  --i-reference-database sepp-refs-silva-128.qza \
+  --o-tree insertion-tree.qza \
+  --o-placements insertion-placements.qza
+
+qiime fragment-insertion filter-features \
+  --i-table feature_table.qza \
+  --i-tree insertion-tree.qza \
+  --o-filtered-table feature_table_insertiontreefiltered.qza \
+  --o-removed-table removed_features.qza
+\end{verbatim}
+
+Done!
+
+Everything else including further quality filtering happens with \texttt{phyloseq} in R where we will import the following files:
+\texttt{feature\_table\_insertiontreefiltered.qza},
+\texttt{taxonomy\_silva.qza} and
+\texttt{insertion-tree.qza}.
+
+This will be covered in the next chapter.
+
+\textbf{All steps combined}
+
+Copy and paste this into your script file if needed.
+
+\begin{verbatim}
+# Manifest Import
+qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' \
+  --input-path manifest.tsv \
+  --output-path demux-paired-end.qza \
+  --input-format PairedEndFastqManifestPhred33V2
+
+# Cutadapt
+qiime cutadapt trim-paired \
+  --i-demultiplexed-sequences demux-paired-end.qza \
+  --p-front-f GTGARTCATCGAATCTTTG \
+  --p-front-r TCCTCCGCTTATTGATATGC \
+  --o-trimmed-sequences trimmed_demux-paired-end.qza
+
+qiime demux summarize \
+  --i-data trimmed_demux-paired-end.qza \
+  --o-visualization trimmed_demux-paired-end.qzv
+
+# Denoise
+qiime dada2 denoise-paired \
+  --i-demultiplexed-seqs trimmed_demux-paired-end.qza \
+  --o-table feature_table.qza \
+  --o-representative-sequences sample_rep_seqs.qza \
+  --p-trim-left-f 0 --p-trim-left-r 0 \
+  --p-trunc-len-f 270 \
+  --p-trunc-len-r 235 \
+  --output-dir dada2 \
+  --verbose
+
+# Taxonomic assignment
+qiime feature-classifier classify-sklearn \
+  --i-classifier silva-132-99-515-806-nb-classifier.qza \
+  --p-reads-per-batch 10000 \
+  --i-reads sample_rep_seqs.qza \
+  --o-classification taxonomy_silva.qza \
+  --quiet
+
+# Phylogenetic tree
+qiime fragment-insertion sepp \
+  --i-representative-sequences sample_rep_seqs.qza \
+  --i-reference-database sepp-refs-silva-128.qza \
+  --o-tree insertion-tree.qza \
+  --o-placements insertion-placements.qza
+
+# Final filtering
+qiime fragment-insertion filter-features \
+  --i-table feature_table.qza \
+  --i-tree insertion-tree.qza \
+  --o-filtered-table feature_table_insertiontreefiltered.qza \
+  --o-removed-table removed_features.qza
+\end{verbatim}
+
+Qiime2 reference:\\
+Bolyen E, Rideout JR, Dillon MR, Bokulich NA, Abnet CC, Al-Ghalith GA, Alexander H, Alm EJ, Arumugam M, Asnicar F, Bai Y, Bisanz JE, Bittinger K, Brejnrod A, Brislawn CJ, Brown CT, Callahan BJ, Caraballo-Rodríguez AM, Chase J, Cope EK, Da Silva R, Diener C, Dorrestein PC, Douglas GM, Durall DM, Duvallet C, Edwardson CF, Ernst M, Estaki M, Fouquier J, Gauglitz JM, Gibbons SM, Gibson DL, Gonzalez A, Gorlick K, Guo J, Hillmann B, Holmes S, Holste H, Huttenhower C, Huttley GA, Janssen S, Jarmusch AK, Jiang L, Kaehler BD, Kang KB, Keefe CR, Keim P, Kelley ST, Knights D, Koester I, Kosciolek T, Kreps J, Langille MGI, Lee J, Ley R, Liu YX, Loftfield E, Lozupone C, Maher M, Marotz C, Martin BD, McDonald D, McIver LJ, Melnik AV, Metcalf JL, Morgan SC, Morton JT, Naimey AT, Navas-Molina JA, Nothias LF, Orchanian SB, Pearson T, Peoples SL, Petras D, Preuss ML, Pruesse E, Rasmussen LB, Rivers A, Robeson MS, Rosenthal P, Segata N, Shaffer M, Shiffer A, Sinha R, Song SJ, Spear JR, Swafford AD, Thompson LR, Torres PJ, Trinh P, Tripathi A, Turnbaugh PJ, Ul-Hasan S, van der Hooft JJJ, Vargas F, Vázquez-Baeza Y, Vogtmann E, von Hippel M, Walters W, Wan Y, Wang M, Warren J, Weber KC, Williamson CHD, Willis AD, Xu ZZ, Zaneveld JR, Zhang Y, Zhu Q, Knight R, and Caporaso JG. 2019. Reproducible, interactive, scalable and extensible microbiome data science using QIIME 2. Nature Biotechnology 37: 852--857. \url{https://doi.org/10.1038/s41587-019-0209-9}
 
   \bibliography{book.bib,packages.bib}
 
