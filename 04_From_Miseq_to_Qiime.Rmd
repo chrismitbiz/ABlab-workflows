@@ -7,10 +7,12 @@ In this chapter you will learn how to process the FASTQ files that are generated
 **Prerequisites**  
   
 * FASTQ files available to download on BaseSpace. Two for each sample. One for read 1 (R1) and another for read 2 (R2). For example, `PT-01_S1_L001_R1_001.fastq.gz` and `PT-01_S1_L001_R2_001.fastq.gz` contains all sequences for sample PT-01.
-* Personal computer or cloud computational resources with > 4 CPUS,  > 16 RAM, > 100 GB storage recommended.  * Qiime2 installed. Always use the latest version.  
-* A tab separated file, which we call the `Qiimeimportmanifest.tsv`. More details and an example is provided below.  
-* A tab separated file containing your metadata, which we may call `samplesheet.csv`. More details below.
+* Personal computer or cloud computational resources with > 4 CPUS,  > 16 RAM, > 100 GB storage recommended.  
+* Cloud storage browser installed (example Cyberduck or PuTTYm see Chapter \@ref(gettingstarted)).  
+* Qiime2 installed. Always use the latest version.  
+* All required files in correct format and file extension (see below).  
 * The BaseSpace Downloader software (available on the BaseSpace page. You will be prompted to download once you go to your files).   
+
   
   \
   

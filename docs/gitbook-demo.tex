@@ -98,7 +98,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD}}
-\date{2022-07-04}
+\date{2022-07-05}
 
 \begin{document}
 \maketitle
@@ -128,8 +128,8 @@ Everyone is at a different level in the journey to exploring microbial diversity
 
 We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne. Email me or comment on the discussion section of the \href{https://github.com/chrismitbiz/ABlab-workflows/discussions/}{GitHub repository} for this GitBook. You will need to get a GitHub account to join the discussion. Its free.
 
-\hypertarget{getting-started}{%
-\chapter{Getting started}\label{getting-started}}
+\hypertarget{gettingstarted}{%
+\chapter{Getting started}\label{gettingstarted}}
 
 Prerequisites will be listed in each sub chapter separately.
 Following a few general recommendations:
@@ -155,6 +155,14 @@ This workbook will be based on using the Nectar Research cloud.
 Working with sequencing data may require you do handle large amounts of data. From experience, a run of a 600µl pool (6-10pM) of amplicons in 2x301 Miseq cycles may produce around 10-20 Gb of FASTQ files. \href{https://sapac.support.illumina.com/bulletins/2018/01/approximate-sizes-of-sequencing-run-output-folders.html}{Much more} can be expected for NextSeq runs or for long-read sequencing.
 
 Once a Miseq run has finished it is typically available to download from the \href{https://basespace.illumina.com/dashboard}{Illumina Basespace} account. After a few runs, the data can accumulate quickly. Hence, \textbf{persistent storage space} is required. As long as you have the Basespace account you can keep a copy of the FASTQ file online. However, Basespace may delete your data if the account has been inactive for more than 6 months. Alternatively, data can be upload onto a public repository for persistent storage, such as the \href{https://www.ncbi.nlm.nih.gov/sra}{Sequence Reads Archives}. If you have access to a research cloud or commercial computational resources then you may store data on those. Personally, I prefer a 1TB solid state harddrive.
+
+\textbf{Command Line}
+
+Many of the tools used are managed through command line. A cloud server access is also done through command line. That means there is not graphical user interphase and all commands, including installation and running of packages is done throuhgh lines of codes on a simple window interphase. This window is called Terminal (Mac, Linux) or Command Prompt application (Windows). There is lots of online sources to help you get started with command line. One example here: \url{https://towardsdatascience.com/a-quick-guide-to-using-command-line-terminal-96815b97b955}
+
+\textbf{Data storage browser}
+
+To upload, download, move, rename files on any cloud computer or high performance computer (HPC) at your institution, you will also require a cloud storage browser, such as \href{https://docs.cyberduck.io/}{Cyberduck} (Mac) or \href{https://www.putty.org/}{PuTTY} (Windows).
 
 \textbf{R and R studio}
 
@@ -409,11 +417,13 @@ In this chapter you will learn how to process the FASTQ files that are generated
 \item
   FASTQ files available to download on BaseSpace. Two for each sample. One for read 1 (R1) and another for read 2 (R2). For example, \texttt{PT-01\_S1\_L001\_R1\_001.fastq.gz} and \texttt{PT-01\_S1\_L001\_R2\_001.fastq.gz} contains all sequences for sample PT-01.
 \item
-  Personal computer or cloud computational resources with \textgreater{} 4 CPUS, \textgreater{} 16 RAM, \textgreater{} 100 GB storage recommended. * Qiime2 installed. Always use the latest version.\\
+  Personal computer or cloud computational resources with \textgreater{} 4 CPUS, \textgreater{} 16 RAM, \textgreater{} 100 GB storage recommended.\\
 \item
-  A tab separated file, which we call the \texttt{Qiimeimportmanifest.tsv}. More details and an example is provided below.\\
+  Cloud storage browser installed (example Cyberduck or PuTTYm see Chapter \ref{gettingstarted}).\\
 \item
-  A tab separated file containing your metadata, which we may call \texttt{samplesheet.csv}. More details below.
+  Qiime2 installed. Always use the latest version.\\
+\item
+  All required files in correct format and file extension (see below).\\
 \item
   The BaseSpace Downloader software (available on the BaseSpace page. You will be prompted to download once you go to your files).
 

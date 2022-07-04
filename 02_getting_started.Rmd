@@ -1,4 +1,4 @@
-# Getting started
+# Getting started  {#gettingstarted}
 
 
 Prerequisites will be listed in each sub chapter separately. 
@@ -26,6 +26,14 @@ Working with  sequencing data may require you do handle large amounts of data. F
   
 Once a Miseq run has finished it is typically available to download from the [Illumina Basespace](https://basespace.illumina.com/dashboard) account. After a few runs, the data can accumulate quickly. Hence, **persistent storage space** is required. As long as you have the Basespace account you can keep a copy of the FASTQ file online. However, Basespace may delete your data if the account has been inactive for more than 6 months. Alternatively, data can be upload onto a public repository for persistent storage, such as the [Sequence Reads Archives](https://www.ncbi.nlm.nih.gov/sra). If you have access to a research cloud or commercial computational resources then you may store data on those. Personally, I prefer a 1TB solid state harddrive. 
   
+**Command Line**
+  
+Many of the tools used are managed through command line. A cloud server access is also done through command line. That means there is not graphical user interphase and all commands, including installation and running of packages is done throuhgh lines of codes on a simple window interphase. This window is called Terminal (Mac, Linux) or Command Prompt application (Windows). There is lots of online sources to help you get started with command line. One example here: https://towardsdatascience.com/a-quick-guide-to-using-command-line-terminal-96815b97b955  
+  
+**Data storage browser**  
+    
+To upload, download, move, rename files on any cloud computer or high performance computer (HPC) at your institution, you will also require a cloud storage browser, such as [Cyberduck](https://docs.cyberduck.io/) (Mac) or [PuTTY](https://www.putty.org/) (Windows).  
+   
 **R and R studio**
   
 R has become an essential research language. If you want to progress in research it is almost inevitable for you to learn. Just do it. :). Perhaps start here if you dont know where else to start: https://education.rstudio.com/learn/beginner/. It lists some great step-by-step tutorials on how to install R and Rstudio and then explains the basics.
