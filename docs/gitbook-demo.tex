@@ -306,8 +306,7 @@ Ensure that all sample IDs, plate-layout and each unique Illumina index carefull
 
 Primers
 
-Any primers you order for the Miseq will have to include the \textbf{Illumina overhang adapter}. The sequence of the overhang adapter is added \textbf{in front} of the gene-specific primer sequences. There are two overhang adapters; one for the forward primers and one for the reverse primer. Check out the relevant information on primers from page 3 the 16S Metagenomic Sequencing Library
-Preparation Guide.
+Any primers you order for the Miseq will have to include the \textbf{Illumina overhang adapter}. The sequence of the overhang adapter is added \textbf{in front} of the gene-specific primer sequences. There are two overhang adapters; one for the forward primers and one for the reverse primer. Check out the relevant information on primers from page 3 the 16S Metagenomic Sequencing Library Preparation Guide.
 
 Clean-ups
 
@@ -346,7 +345,7 @@ The key for the final steps are that..
 \item
   ..that the pool is cooled down immediately in ice or icy water right after the 2 minutes in the 96 degrees C heatblock and pretty much immediately loaded into the Miseq. The Miseq has to be prepped beforehand (I.e. maintenance wash and sample sheet loaded).\\
 \item
-  a sample sheet (or so-called manifest file) is created beforehand using the Illumina Experiment Manager Software. This software assist in producing a \texttt{.csv} file that is then loaded into the Miseq instrument via a USB and ensures that the indexes you have used are linked to the relevant samples in your pool. Basically a list of sample IDs and index IDs. Example, of a sample sheet from one of our runs below.\\
+  a sample sheet (or so-called manifest file) is created beforehand using the Illumina Experiment Manager Software. This software assist in producing a \texttt{.csv} file that is then loaded into the Miseq instrument via a USB and ensures that the indexes you have used are linked to the relevant samples in your pool. Basically a list of sample IDs and index IDs. An example of a sample sheet from one of our runs is shown below.\\
   \textbf{IMPORTANT}: Make sure to specify the Workflow as \textbf{GenerateFastQ}.\\
 \item
   you have a Illumina BaseSpace account.
@@ -437,7 +436,7 @@ The FASTQ files will come in separate folders for each sample. It is necessary t
 
 \textbf{Required Files}
 
-\texttt{Qiimeimportmanifest.tsv} - A tab separated file with three columns where the first column is the sample ID (The exact same ID that was used in the manifest file for loading the Miseq). The second and third columns are the absolute paths to the forward and reverse FASTQ files, respectively. If FASTQ files are located on a cloud computer then the files should be uploaded to that, and the path needs to contain the full path to the relevant folder, including the full name of the file itself. If you process those files on your local drive then the paths need to change to your local folder containing the FASTQ files. In the below example table, the files are located on a Linux cloud computer (Nectar Research Cloud).
+\texttt{Qiimeimportmanifest.tsv} - A tab separated file with three columns where the first column is the sample ID (The exact same ID that was used in the manifest file for loading the Miseq). The second and third columns are the absolute paths to the forward and reverse FASTQ files, respectively. If you are working on a cloud computer then the FASTQ files should be uploaded to that, and the path needs to contain the full path to the relevant folder, including the full name of the file itself. If you process those files on your local drive then the paths need to change to your local folder containing the FASTQ files. In the below example table, the files are located on a Linux cloud computer (Nectar Research Cloud).
 
 It might take some time to compile the import manifest. Each file path has to exact. However, in case you made a mistake in the file names etc, Qiime is generally pretty good at reporting where the error occured.
 
