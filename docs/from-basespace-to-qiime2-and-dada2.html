@@ -433,8 +433,8 @@ Remove any # in front of your code (already removed in the below example) and ex
 <p>In this example we used the V4 primers. Change primer sequence to the exact primers that you used in the amplicon PCR.</p>
 <pre><code>qiime cutadapt trim-paired \
   --i-demultiplexed-sequences demux-paired-end.qza \
-  --p-front-f GTGARTCATCGAATCTTTG \
-  --p-front-r TCCTCCGCTTATTGATATGC \
+  --p-front-f GTGYCAGCMGCCGCGGTAA \
+  --p-front-r GGACTACNVGGGTWTCTAAT \
   --o-trimmed-sequences trimmed_demux-paired-end.qza</code></pre>
 <p><br />
 </p>
@@ -492,7 +492,7 @@ From the output decide where to truncate the forward and reverse reads with <cod
 </p>
 <p><strong>Taxonomic classifier and assignment (Step 4)</strong></p>
 <p>The next step is to assign taxonomies to the sequences in the denoised sample sequences. Here, we use a pre-trained classifier that is based on the Silva database. This pre-trained classifier is available on the data resource page of Qiime (Most current link at the time of writing: <a href="https://docs.qiime2.org/2022.2/data-resources" class="uri">https://docs.qiime2.org/2022.2/data-resources</a>).</p>
-<p>However, in case you used a different primer you would have to create the classifier yourself. Again there is great resource avaiable on <a href="https://docs.qiime2.org" class="uri">https://docs.qiime2.org</a>. The process is fairly straight forward but takes a computational time. Briefly, extract reference reads from a database (i.e. Silva here) based on the primers used. Then use those extracted sequences and fit or train them onto a taxonomy. Basically, predict which amplicon sequence should be what phylym/class/order/family/genus etc…. This trained file becomes a ‘classifier’ that is used to assign taxonmies on your sequences.</p>
+<p>However, in case you used a different primer you would have to create the classifier yourself. Again there is great resource avaiable on <a href="https://docs.qiime2.org" class="uri">https://docs.qiime2.org</a>. The process is fairly straight forward but takes computational time. Briefly, extract reference reads from a database (i.e. Silva here) based on the primers used. Then use those extracted sequences and fit or train them onto a taxonomy. Basically, predict which amplicon sequence should be what phylym/class/order/family/genus etc…. This trained file becomes a ‘classifier’ that is used to assign taxonmies on your sequences.</p>
 <p>Here we have a pre-trained classifier, silva-132-99-515-806-nb-classifier.qza:
 The output is a file called taxonomy_silva.qza and taxonomy_silva.qzv in this case.</p>
 <pre><code>qiime feature-classifier classify-sklearn \

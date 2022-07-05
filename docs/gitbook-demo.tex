@@ -594,8 +594,8 @@ In this example we used the V4 primers. Change primer sequence to the exact prim
 \begin{verbatim}
 qiime cutadapt trim-paired \
   --i-demultiplexed-sequences demux-paired-end.qza \
-  --p-front-f GTGARTCATCGAATCTTTG \
-  --p-front-r TCCTCCGCTTATTGATATGC \
+  --p-front-f GTGYCAGCMGCCGCGGTAA \
+  --p-front-r GGACTACNVGGGTWTCTAAT \
   --o-trimmed-sequences trimmed_demux-paired-end.qza
 \end{verbatim}
 
@@ -684,7 +684,7 @@ qiime feature-table summarize \
 
 The next step is to assign taxonomies to the sequences in the denoised sample sequences. Here, we use a pre-trained classifier that is based on the Silva database. This pre-trained classifier is available on the data resource page of Qiime (Most current link at the time of writing: \url{https://docs.qiime2.org/2022.2/data-resources}).
 
-However, in case you used a different primer you would have to create the classifier yourself. Again there is great resource avaiable on \url{https://docs.qiime2.org}. The process is fairly straight forward but takes a computational time. Briefly, extract reference reads from a database (i.e.~Silva here) based on the primers used. Then use those extracted sequences and fit or train them onto a taxonomy. Basically, predict which amplicon sequence should be what phylym/class/order/family/genus etc\ldots. This trained file becomes a `classifier' that is used to assign taxonmies on your sequences.
+However, in case you used a different primer you would have to create the classifier yourself. Again there is great resource avaiable on \url{https://docs.qiime2.org}. The process is fairly straight forward but takes computational time. Briefly, extract reference reads from a database (i.e.~Silva here) based on the primers used. Then use those extracted sequences and fit or train them onto a taxonomy. Basically, predict which amplicon sequence should be what phylym/class/order/family/genus etc\ldots. This trained file becomes a `classifier' that is used to assign taxonmies on your sequences.
 
 Here we have a pre-trained classifier, silva-132-99-515-806-nb-classifier.qza:
 The output is a file called taxonomy\_silva.qza and taxonomy\_silva.qzv in this case.
