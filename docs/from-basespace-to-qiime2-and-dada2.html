@@ -419,7 +419,7 @@ echo &quot;Finished at: $(date)&quot;</code></pre>
 <p><br />
 </p>
 <p><strong>Paired end manifest import (Step 1)</strong></p>
-<p>Go to the folder that contains all the FASTQ files (all files in one folder). I.e. in Unix/Linux use <code>cd path/to/folder/</code> to navigate to it. The scriptfile.txt should also be located here. The following qiime command that will look for the files and then create a qiime object using the sequences found in each FASTQ file. The <code>--output-path</code> instructs qiime where to place and how to name the output file, here demux-paired-end.qza is placed into the same directory (or create a second script file containing the remaining commands).<br />
+<p>Go to the folder that contains all the FASTQ files (all files in one folder). I.e. in Unix/Linux use <code>cd path/to/folder/</code> to navigate to it. The scriptfile.txt should also be located here. The following qiime command that will look for the files and then create a qiime object using the sequences found in each FASTQ file. The <code>--output-path</code> instructs qiime where to place and how to name the output file, here demux-paired-end.qza is placed into the same directory.<br />
 Remove any # in front of your code (already removed in the below example) and execute the scriptfile.txt with <code>sh scriptfile.txt</code> (or <code>sbatch scriptfile.txt</code> in case you are using Slurm).</p>
 <pre><code>qiime tools import --type &#39;SampleData[PairedEndSequencesWithQuality]&#39; \
   --input-path Qiimeimportmanifest.tsv \
@@ -428,7 +428,7 @@ Remove any # in front of your code (already removed in the below example) and ex
 <p><br />
 </p>
 <p><strong>Cutadapt (Step 2)</strong></p>
-<p>If all goes well you should now have a demux-paired-end.qza file in the same directory as your FASTQ files , which contains all your sequences. You could move demux-paired-end.qza to another folder and continue all other steps there if you wish. The FASTQ files are not needed anymore. Dont forget to move your script file to where it is most convenient for executing the commands. If you moved the demux-paired-end.qza to another folder it is probably easiest to also move the script file that the same directory.</p>
+<p>If all goes well you should now have a demux-paired-end.qza file in the same directory as your FASTQ files , which contains all your sequences. You could move demux-paired-end.qza to another folder and continue all other steps there if you wish. The FASTQ files are not needed anymore. Dont forget to move your script file to where it is most convenient for executing the commands. If you moved the demux-paired-end.qza to another folder it is probably easiest to also move the script file that the same directory (or create a second script file containing the remaining commands).</p>
 <p>Go to the folder containing demux-paired-end.qza and use cutadapt to trim out the primer sequences. Unhash relevant lines in your script file, which should be located in the same folder. Run <code>sh scriptfile.txt</code>.</p>
 <p>In this example we used the V4 primers. Change primer sequence to the exact primers that you used in the amplicon PCR.</p>
 <pre><code>qiime cutadapt trim-paired \
