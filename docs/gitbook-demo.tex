@@ -616,6 +616,13 @@ qiime demux summarize \
 Go to \url{https://view.qiime2.org} and drag and drop to visualise your .qzv file in the browser.
 
 \includegraphics{./img/viewqiime.png}\\
+Now click on the `Interactive Quality Plot' tab. You will see exactly that: Interactive Quality plots that look like this:
+
+\begin{figure}
+\centering
+\includegraphics{./img/demux.qza.png}
+\caption{``Example of a demux.qzv visualisation''}
+\end{figure}
 
 \textbf{STOP HERE}. Inspect the visualisation and decide on location and maximum expected error.\\
 From the output decide where to truncate the forward and reverse reads with \texttt{p-trunc-len-f}, \texttt{p-trunc-len-r},\texttt{-\/-p-max-ee-f} and \texttt{-\/-p-max-ee-r} in DADA2 below.
@@ -632,12 +639,6 @@ So, for example, if we picked \texttt{-\/-p-trunc-len-f\ 272} and \texttt{-\/-p-
 \hfill\break
 
 In cases where the quality of the reverse reads is very poor, or the amplicon is too long for pairing to work, it is also acceptable to import, trim and denoise only the forward reads. The V4 primer of this example, is nice and short at 292 basepairs, so is great for pairing even at lower reverse-read qualities.
-
-\begin{figure}
-\centering
-\includegraphics{./img/demux.qza.png}
-\caption{``Example of a demux.qzv visualisation''}
-\end{figure}
 
 \hfill\break
 

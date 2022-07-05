@@ -447,7 +447,11 @@ Here we take the trimmed_demux-paired-end.qza and create a trimmed_demux-paired-
   --o-visualization trimmed_demux-paired-end.qzv</code></pre>
 <p>Go to <a href="https://view.qiime2.org" class="uri">https://view.qiime2.org</a> and drag and drop to visualise your .qzv file in the browser.</p>
 <p><img src="img/viewqiime.png" alt="“https://view.qiime2.org/”" /><br />
-</p>
+Now click on the ‘Interactive Quality Plot’ tab. You will see exactly that: Interactive Quality plots that look like this:</p>
+<div class="figure">
+<img src="img/demux.qza.png" alt="" />
+<p class="caption">“Example of a demux.qzv visualisation”</p>
+</div>
 <p><strong>STOP HERE</strong>. Inspect the visualisation and decide on location and maximum expected error.<br />
 From the output decide where to truncate the forward and reverse reads with <code>p-trunc-len-f</code>, <code>p-trunc-len-r</code>,<code>--p-max-ee-f</code> and <code>--p-max-ee-r</code> in DADA2 below.</p>
 <p>It can take some trial and error to get these setting right. We are using a docker-based package called FIGARO to help us estimate those parameters (Not shown here). But essentially you want to capture high quality reads and be confident about the Amplicon Sequence Variants (ASV), while also capture sufficent depth of ASVs and reads without unnecessarily filtering out too much. In the below example, we have trimmed the forward reads at 272 base pairs with a maximum expected error (max-ee) of 2 (which is the default) and the reverse reads at 151 with a max-ee of 3. I think it is o.k. to relax the max-ee for the reverse reads (which are ALWAYS lower in quality) as I feel more confident about the fact that the reverse reads are paired with the forward reads. Pairing in itself provides increased confidence that the reads do in fact represent a biological relevant sequence. As always please comment on our <a href="https://github.com/chrismitbiz/ABlab-workflows/discussions/">GitHub discussion page</a> if you have any suggestions here. Thanks!</p>
@@ -458,10 +462,6 @@ From the output decide where to truncate the forward and reverse reads with <cod
 <p><br />
 </p>
 <p>In cases where the quality of the reverse reads is very poor, or the amplicon is too long for pairing to work, it is also acceptable to import, trim and denoise only the forward reads. The V4 primer of this example, is nice and short at 292 basepairs, so is great for pairing even at lower reverse-read qualities.</p>
-<div class="figure">
-<img src="img/demux.qza.png" alt="" />
-<p class="caption">“Example of a demux.qzv visualisation”</p>
-</div>
 <p><br />
 </p>
 <p><strong>Denoise paired end sequences with dada2 (Step 3)</strong></p>
