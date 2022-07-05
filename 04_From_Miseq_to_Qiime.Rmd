@@ -147,7 +147,7 @@ It can take some trial and error to get these setting right. We are using a dock
 A minimum overlap between the forward and reverse primer of 20 base pairs is recommended. To overlap can be calculated as following:   
 
  
-$$length~of~forward~read + length~of~reverse~read - length~of~amplicon - trimmed~basepairs~in~forward~read -  trimmed~basepairs~in~reverse~reads = overlap$$
+length forward read + length reverse read - length amplicon - trimmed basepairs forward read -  trimmed basepairs reverse reads = overlap
   
   
 So, for example, if we picked `--p-trunc-len-f 272` and `--p-trunc-len-r 151`, we get 
