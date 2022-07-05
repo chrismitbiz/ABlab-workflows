@@ -43,6 +43,7 @@ If you are like me, then you simply copy and paste code from other sites and see
 At the same time you will want to do short courses (eg. from edX [Data Science: R Basics](https://www.edx.org/course/data-science-r-basics)) that delve a little deeper into different data structures such as data frames, matrices, lists and the syntax to arrange stuff. Over time you understand what different lines of code mean and can trouble shoot when things don't work. And things often don't work. You will get used to troubleshooting code :). 
 
 **Environment managers**  
+  
 Package and environment managers are extremely useful for your workflows. They help to install and run software packages  such as qiime2, into individual 'environments' independent of your operating system. The environment manager is installed once and from there you use it to install individual packages. The most commonly used environment manager is Conda. Learn more about it here: https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html
   
 Conda can be installed by either installing Anaconda or Miniconda. Boths works the same way. Anaconda requires 5 Gb of discspace and installs everything you can possibly need, while Miniconda is just the raw bones and lets you install things one by one. 
@@ -52,6 +53,7 @@ Most of the commands to manage environments are done in command line using a ter
 There are several other environment managers. We are also using [Docker](https://www.docker.com/) in our work but the learning curve is a bit steeper so we wont get into it here.  
   
 **GitHub account**  
+  
 This GitBook, including all its files, is hosted on one of my GitHub repositories (https://github.com/chrismitbiz/ABlab-workflows). If you have any comments you can ask a question on the Discussion Page of this repository. You require a GitHub account to do that. It is free.  
   
 **Workflows from other lab groups**  

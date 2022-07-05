@@ -88,13 +88,20 @@ It is worth doing the clean-ups in a separate deep-well plate ("MIDI" plate, see
   
 Index Kits  
   
-The index kits are expensive. Try to handle them with care and replace lids with the provided replacement lids, after every use. Multipipettes are absolutely essential to avoid loosing track on indexes used across the differnt wells on the plate. The use of the Illumina Plate Fixture comes in handy (see consumables below).
-  \
+The index kits are expensive. Try to handle them with care and replace lids with the provided replacement lids, after every use. Multipipettes are absolutely essential to avoid loosing track on indexes used across the different wells on the plate. The use of the Illumina Plate Fixture comes in handy (see consumables below).  
   
+Amplicon QC  
+  
+After the indexing PCR is cleaned it is recommended to run a gel on all samples to confirm that amplification was successful with enough DNA present and that it is the correct amplicon length. It also helps to identify any primer dimers, which may have to be cleaned out.  
+  
+If you have access to a **Tapestation or a Bioanalyzer** in your lab, perhaps run a random subset of the indexed samples on one of these instruments, just to accurately confirm the average length of the amplicon. This average basepair length of the amplicon is important, as it is the basis for  normalising your DNA to nM. In any case, after the index samples are normalised and pooled, it is highly recommended to run the pool on a Bioanalyser too. Otherwise it is too much guesswork in getting the concentrations right. This is further explained below.    
+Repeat any samples that failed, i.e. that do not show any bands, and ensure you use the same indices.  
+  
+  \
   
 **5. Normalisation of Indexed amplicons**    
   
-After you finished all PCR work it is time to do another round of Qubitting and normalisation of all samples into a new 96-well plate. The final pool should be 4 nM but we prefer to normalise DNA to 10 nM first, then pool and then dilute the pool to 4 nM afterwards.  
+After you finished all PCR work it is time to do another round of Qubitting and normalisation of all samples into a new 96-well plate. The final pool should be 4 nM but we prefer to normalise DNA to a higher concentration first, say 10 nM, then pool and then dilute the pool to 4 nM afterwards.  
 We are using a very handy excel sheet, which was kindly developed and provided by [Sarah Knowler](https://scholars.latrobe.edu.au/sknowler) at La Trobe University to prepare and assist in normalisations, converting from ng/µl to nM using the formula:  
   
 $$ concentrations~(ng/µl)  \over 660 g/mol~x~average~library~size$$
@@ -105,12 +112,17 @@ Some more information here: https://support.illumina.com/content/dam/illumina-su
   
 **6. Pooling**  
   
-Pipette equal volumes of the normalised DNA into one 1.5 ml tube.  
-Measure its concentration using the High Sensitivity (HS) Qubit 1X dsDNA HS Assay Kit. 
+* Pipette equal volumes of the normalised DNA into one 1.5 ml tube.  
+* Measure its concentration using the High Sensitivity (HS) Qubit 1X dsDNA HS Assay Kit.  
+* Assuming the pool was created wtih normalised concentration that are higher than 4 nM, then you will need to dilute the pool down to 4nM. In order to do so you will need to accurately measure the average basepair length of your pool. Do not rely on the ladder on a gel. Always get an accurate read. See next point.      
+* Measure the average base pair lengths of the pool with a **Bioanalyzer or Tapestation**. Use at least three replicates. The average basepair length is then used to calculate the final concentration required in ng/µl to get a 4 nM pool.  
+* Dilute the pool to the concentration in ng/µl that reflect 4 nM.
+  
   \
   
-  
 **7. Denaturing of pool and loading of the Miseq**  
+  
+Now you are almost ready load the Miseq. The last steps are done right before you plan to load the instrument. First the pool DNA needs to be denatured, mixed with PhiX and then diluted further to your preferred loading concentration (6 - 10 pM). The final concentrations impact on cluster densities. That means you get more data with higher concentrations but that is at the expense of potential errors during sequencing at high cluster densities. I am still not quite sure what the ideal concentration is. Please let me know if you know more.  
   
 The key for the final steps are that..  
   

@@ -171,10 +171,15 @@ Preparation</a> Guide. Include a negative control and sequence that as well. Thi
 <p>Clean-ups</p>
 <p>It is worth doing the clean-ups in a separate deep-well plate (“MIDI” plate, see consumables below) to avoid any blow-out of dried beads at the end of the clean-up. This process is explained in the above mentioned guide too. Tip: Handle the beads extremely carefully after the ethanol has dried. They blow out easily.</p>
 <p>Index Kits</p>
-<p>The index kits are expensive. Try to handle them with care and replace lids with the provided replacement lids, after every use. Multipipettes are absolutely essential to avoid loosing track on indexes used across the differnt wells on the plate. The use of the Illumina Plate Fixture comes in handy (see consumables below).<br />
+<p>The index kits are expensive. Try to handle them with care and replace lids with the provided replacement lids, after every use. Multipipettes are absolutely essential to avoid loosing track on indexes used across the different wells on the plate. The use of the Illumina Plate Fixture comes in handy (see consumables below).</p>
+<p>Amplicon QC</p>
+<p>After the indexing PCR is cleaned it is recommended to run a gel on all samples to confirm that amplification was successful with enough DNA present and that it is the correct amplicon length. It also helps to identify any primer dimers, which may have to be cleaned out.</p>
+<p>If you have access to a <strong>Tapestation or a Bioanalyzer</strong> in your lab, perhaps run a random subset of the indexed samples on one of these instruments, just to accurately confirm the average length of the amplicon. This average basepair length of the amplicon is important, as it is the basis for normalising your DNA to nM. In any case, after the index samples are normalised and pooled, it is highly recommended to run the pool on a Bioanalyser too. Otherwise it is too much guesswork in getting the concentrations right. This is further explained below.<br />
+Repeat any samples that failed, i.e. that do not show any bands, and ensure you use the same indices.</p>
+<p><br />
 </p>
 <p><strong>5. Normalisation of Indexed amplicons</strong></p>
-<p>After you finished all PCR work it is time to do another round of Qubitting and normalisation of all samples into a new 96-well plate. The final pool should be 4 nM but we prefer to normalise DNA to 10 nM first, then pool and then dilute the pool to 4 nM afterwards.<br />
+<p>After you finished all PCR work it is time to do another round of Qubitting and normalisation of all samples into a new 96-well plate. The final pool should be 4 nM but we prefer to normalise DNA to a higher concentration first, say 10 nM, then pool and then dilute the pool to 4 nM afterwards.<br />
 We are using a very handy excel sheet, which was kindly developed and provided by <a href="https://scholars.latrobe.edu.au/sknowler">Sarah Knowler</a> at La Trobe University to prepare and assist in normalisations, converting from ng/µl to nM using the formula:</p>
 <p><span class="math display">\[ concentrations~(ng/µl)  \over 660 g/mol~x~average~library~size\]</span>
 Contact us if you would like to get a copy of this very handy library preparation excel sheet.</p>
@@ -182,10 +187,21 @@ Contact us if you would like to get a copy of this very handy library preparatio
 <br />
 </p>
 <p><strong>6. Pooling</strong></p>
-<p>Pipette equal volumes of the normalised DNA into one 1.5 ml tube.<br />
-Measure its concentration using the High Sensitivity (HS) Qubit 1X dsDNA HS Assay Kit.<br />
-</p>
+<ul>
+<li><p>Pipette equal volumes of the normalised DNA into one 1.5 ml tube.<br />
+</p></li>
+<li><p>Measure its concentration using the High Sensitivity (HS) Qubit 1X dsDNA HS Assay Kit.<br />
+</p></li>
+<li><p>Assuming the pool was created wtih normalised concentration that are higher than 4 nM, then you will need to dilute the pool down to 4nM. In order to do so you will need to accurately measure the average basepair length of your pool. Do not rely on the ladder on a gel. Always get an accurate read. See next point.<br />
+</p></li>
+<li><p>Measure the average base pair lengths of the pool with a <strong>Bioanalyzer or Tapestation</strong>. Use at least three replicates. The average basepair length is then used to calculate the final concentration required in ng/µl to get a 4 nM pool.<br />
+</p></li>
+<li><p>Dilute the pool to the concentration in ng/µl that reflect 4 nM.</p>
+<p><br />
+</p></li>
+</ul>
 <p><strong>7. Denaturing of pool and loading of the Miseq</strong></p>
+<p>Now you are almost ready load the Miseq. The last steps are done right before you plan to load the instrument. First the pool DNA needs to be denatured, mixed with PhiX and then diluted further to your preferred loading concentration (6 - 10 pM). The final concentrations impact on cluster densities. That means you get more data with higher concentrations but that is at the expense of potential errors during sequencing at high cluster densities. I am still not quite sure what the ideal concentration is. Please let me know if you know more.</p>
 <p>The key for the final steps are that..</p>
 <ul>
 <li>..the reagent cartridge is properly thawed. Perhaps thaw in fridge 3 hours before starting the denaturing steps. Then put into icy water to ensure final and even thawing across the cartridge. Mix cartrige well at the end and ensure that no bubbles are visible before loading.<br />
@@ -273,7 +289,7 @@ The <strong>magnetic stand</strong> for 96-well plates and the TruSeq Index <str
 <td align="left">Qubit 1X dsDNA BR Assay Kit</td>
 <td align="left">Q33266</td>
 <td align="left">Thermofisher</td>
-<td align="left">DNA quantiication</td>
+<td align="left">DNA and PCR-product quantiication</td>
 </tr>
 <tr class="odd">
 <td align="left">Qubit 1X dsDNA HS Assay Kit</td>

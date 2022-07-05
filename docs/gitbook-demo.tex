@@ -172,7 +172,8 @@ If you are like me, then you simply copy and paste code from other sites and see
 
 At the same time you will want to do short courses (eg. from edX \href{https://www.edx.org/course/data-science-r-basics}{Data Science: R Basics}) that delve a little deeper into different data structures such as data frames, matrices, lists and the syntax to arrange stuff. Over time you understand what different lines of code mean and can trouble shoot when things don't work. And things often don't work. You will get used to troubleshooting code :).
 
-\textbf{Environment managers}\\
+\textbf{Environment managers}
+
 Package and environment managers are extremely useful for your workflows. They help to install and run software packages such as qiime2, into individual `environments' independent of your operating system. The environment manager is installed once and from there you use it to install individual packages. The most commonly used environment manager is Conda. Learn more about it here: \url{https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html}
 
 Conda can be installed by either installing Anaconda or Miniconda. Boths works the same way. Anaconda requires 5 Gb of discspace and installs everything you can possibly need, while Miniconda is just the raw bones and lets you install things one by one.
@@ -181,7 +182,8 @@ Most of the commands to manage environments are done in command line using a ter
 
 There are several other environment managers. We are also using \href{https://www.docker.com/}{Docker} in our work but the learning curve is a bit steeper so we wont get into it here.
 
-\textbf{GitHub account}\\
+\textbf{GitHub account}
+
 This GitBook, including all its files, is hosted on one of my GitHub repositories (\url{https://github.com/chrismitbiz/ABlab-workflows}). If you have any comments you can ask a question on the Discussion Page of this repository. You require a GitHub account to do that. It is free.
 
 \textbf{Workflows from other lab groups}
@@ -322,11 +324,20 @@ It is worth doing the clean-ups in a separate deep-well plate (``MIDI'' plate, s
 
 Index Kits
 
-The index kits are expensive. Try to handle them with care and replace lids with the provided replacement lids, after every use. Multipipettes are absolutely essential to avoid loosing track on indexes used across the differnt wells on the plate. The use of the Illumina Plate Fixture comes in handy (see consumables below).\\
+The index kits are expensive. Try to handle them with care and replace lids with the provided replacement lids, after every use. Multipipettes are absolutely essential to avoid loosing track on indexes used across the different wells on the plate. The use of the Illumina Plate Fixture comes in handy (see consumables below).
+
+Amplicon QC
+
+After the indexing PCR is cleaned it is recommended to run a gel on all samples to confirm that amplification was successful with enough DNA present and that it is the correct amplicon length. It also helps to identify any primer dimers, which may have to be cleaned out.
+
+If you have access to a \textbf{Tapestation or a Bioanalyzer} in your lab, perhaps run a random subset of the indexed samples on one of these instruments, just to accurately confirm the average length of the amplicon. This average basepair length of the amplicon is important, as it is the basis for normalising your DNA to nM. In any case, after the index samples are normalised and pooled, it is highly recommended to run the pool on a Bioanalyser too. Otherwise it is too much guesswork in getting the concentrations right. This is further explained below.\\
+Repeat any samples that failed, i.e.~that do not show any bands, and ensure you use the same indices.
+
+\hfill\break
 
 \textbf{5. Normalisation of Indexed amplicons}
 
-After you finished all PCR work it is time to do another round of Qubitting and normalisation of all samples into a new 96-well plate. The final pool should be 4 nM but we prefer to normalise DNA to 10 nM first, then pool and then dilute the pool to 4 nM afterwards.\\
+After you finished all PCR work it is time to do another round of Qubitting and normalisation of all samples into a new 96-well plate. The final pool should be 4 nM but we prefer to normalise DNA to a higher concentration first, say 10 nM, then pool and then dilute the pool to 4 nM afterwards.\\
 We are using a very handy excel sheet, which was kindly developed and provided by \href{https://scholars.latrobe.edu.au/sknowler}{Sarah Knowler} at La Trobe University to prepare and assist in normalisations, converting from ng/µl to nM using the formula:
 
 \[ concentrations~(ng/µl)  \over 660 g/mol~x~average~library~size\]
@@ -337,10 +348,24 @@ Some more information here: \url{https://support.illumina.com/content/dam/illumi
 
 \textbf{6. Pooling}
 
-Pipette equal volumes of the normalised DNA into one 1.5 ml tube.\\
-Measure its concentration using the High Sensitivity (HS) Qubit 1X dsDNA HS Assay Kit.\\
+\begin{itemize}
+\item
+  Pipette equal volumes of the normalised DNA into one 1.5 ml tube.\\
+\item
+  Measure its concentration using the High Sensitivity (HS) Qubit 1X dsDNA HS Assay Kit.\\
+\item
+  Assuming the pool was created wtih normalised concentration that are higher than 4 nM, then you will need to dilute the pool down to 4nM. In order to do so you will need to accurately measure the average basepair length of your pool. Do not rely on the ladder on a gel. Always get an accurate read. See next point.\\
+\item
+  Measure the average base pair lengths of the pool with a \textbf{Bioanalyzer or Tapestation}. Use at least three replicates. The average basepair length is then used to calculate the final concentration required in ng/µl to get a 4 nM pool.\\
+\item
+  Dilute the pool to the concentration in ng/µl that reflect 4 nM.
+
+  \hfill\break
+\end{itemize}
 
 \textbf{7. Denaturing of pool and loading of the Miseq}
+
+Now you are almost ready load the Miseq. The last steps are done right before you plan to load the instrument. First the pool DNA needs to be denatured, mixed with PhiX and then diluted further to your preferred loading concentration (6 - 10 pM). The final concentrations impact on cluster densities. That means you get more data with higher concentrations but that is at the expense of potential errors during sequencing at high cluster densities. I am still not quite sure what the ideal concentration is. Please let me know if you know more.
 
 The key for the final steps are that..
 
@@ -391,7 +416,7 @@ MiSeq Reagent Kit v3 & MS-102-3003 & Illumina & Needs to be as fresh as possible
 \addlinespace
 Nextera XT Index Kit v2, Set A, B, C or D & FC-131-2003 & Illumina & One set (A, B, C or D) for 96 uniquely  indexed samples\\
 PhiX control & FC-110-3001 & Illumina & \\
-Qubit 1X dsDNA BR Assay Kit & Q33266 & Thermofisher & DNA quantiication\\
+Qubit 1X dsDNA BR Assay Kit & Q33266 & Thermofisher & DNA and PCR-product quantiication\\
 Qubit 1X dsDNA HS Assay Kit & Q33230 & Thermofisher & Pool quantification\\
 Bioanalyzer Kit (HighSens or 1000 Kit) & 5067-4626 or 5067-1504 & Integrated Science Tech & \\
 \addlinespace
