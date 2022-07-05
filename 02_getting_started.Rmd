@@ -48,9 +48,29 @@ Package and environment managers are extremely useful for your workflows. They h
   
 Conda can be installed by either installing Anaconda or Miniconda. Boths works the same way. Anaconda requires 5 Gb of discspace and installs everything you can possibly need, while Miniconda is just the raw bones and lets you install things one by one. 
   
-Most of the commands to manage environments are done in command line using a terminal. There is also a graphical installer that makes handling the environments a little more visual. That would be my go to. Learn more here: www.anaconda.com
-
+Most of the commands to manage environments are done in command line using a terminal. There is also a graphical installer that makes handling the environments a little more visual. That would be my go to. Learn more here: www.anaconda.com.  
+  
+Once conda installed you can always check what environments are installed with the command `conda env list`. In my case the output looks like this:  
+![](./img/condaenvs.png)
+    \
+    
 There are several other environment managers. We are also using [Docker](https://www.docker.com/) in our work but the learning curve is a bit steeper so we wont get into it here.  
+  
+**Explore the help functions**  
+  
+Packages such as qiime2 have great resources to help you understand how to run any of the available commands.  For example if you dont know what input parameters are available for the qiime command  
+`qiime feature-classifier classify-sklearn`, you can simply enter this command into your Terminal (with the qiime environment activated, if it is installed with Conda) and add a `--help` at the end: `qiime feature-classifier classify-sklearn --help`.  
+  
+Or you just want to know what other commands qiime has in its repertoire, you can run `qiime --help`.
+  
+For example, this 
+```
+conda activate qiime2-2022.2  
+qiime --help  
+```
+Gives  
+![](./img/qiimehelp.png)
+  
   
 **GitHub account**  
   

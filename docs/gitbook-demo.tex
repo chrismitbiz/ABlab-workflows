@@ -98,7 +98,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-07-05}
+\date{2022-07-06}
 
 \begin{document}
 \maketitle
@@ -178,9 +178,29 @@ Package and environment managers are extremely useful for your workflows. They h
 
 Conda can be installed by either installing Anaconda or Miniconda. Boths works the same way. Anaconda requires 5 Gb of discspace and installs everything you can possibly need, while Miniconda is just the raw bones and lets you install things one by one.
 
-Most of the commands to manage environments are done in command line using a terminal. There is also a graphical installer that makes handling the environments a little more visual. That would be my go to. Learn more here: www.anaconda.com
+Most of the commands to manage environments are done in command line using a terminal. There is also a graphical installer that makes handling the environments a little more visual. That would be my go to. Learn more here: www.anaconda.com.
+
+Once conda installed you can always check what environments are installed with the command \texttt{conda\ env\ list}. In my case the output looks like this:\\
+\includegraphics{./img/condaenvs.png}\\
 
 There are several other environment managers. We are also using \href{https://www.docker.com/}{Docker} in our work but the learning curve is a bit steeper so we wont get into it here.
+
+\textbf{Explore the help functions}
+
+Packages such as qiime2 have great resources to help you understand how to run any of the available commands. For example if you dont know what input parameters are available for the qiime command\\
+\texttt{qiime\ feature-classifier\ classify-sklearn}, you can simply enter this command into your Terminal (with the qiime environment activated, if it is installed with Conda) and add a \texttt{-\/-help} at the end: \texttt{qiime\ feature-classifier\ classify-sklearn\ -\/-help}.
+
+Or you just want to know what other commands qiime has in its repertoire, you can run \texttt{qiime\ -\/-help}.
+
+For example, this
+
+\begin{verbatim}
+conda activate qiime2-2022.2  
+qiime --help  
+\end{verbatim}
+
+Gives\\
+\includegraphics{./img/qiimehelp.png}
 
 \textbf{GitHub account}
 
@@ -668,7 +688,7 @@ Summarise and visualise the ASV abundances (feature\_table.qza) in a .qzv file.
 qiime feature-table summarize \
   --i-table feature_table.qza \
   --o-visualization feature_table.qzv \
-  --m-sample-metadata-file metadata.tsv
+  --m-sample-metadata-file samplesheet.tsv
 \end{verbatim}
 
 \textbf{Note:} Look at the feature\_table.qzv and record median reads per sample
@@ -704,8 +724,6 @@ qiime metadata tabulate \
 --m-input-file taxonomy_silva.qza \
 --o-visualization taxonomy_silva.qzv
 \end{verbatim}
-
-\textbf{IMPORTANT:} The \texttt{taxonomy\_silva.qzv} is loaded into \url{https://view.qiime2.org/} to dowload the \texttt{.tsv} file for later import into R.
 
 \hfill\break
 
@@ -747,15 +765,15 @@ Copy and paste this into your script file if needed.
 \begin{verbatim}
 # Manifest Import
 qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' \
-  --input-path manifest.tsv \
+  --input-path Qiimeimportmanifest.tsv \
   --output-path demux-paired-end.qza \
   --input-format PairedEndFastqManifestPhred33V2
 
 # Cutadapt
 qiime cutadapt trim-paired \
   --i-demultiplexed-sequences demux-paired-end.qza \
-  --p-front-f GTGARTCATCGAATCTTTG \
-  --p-front-r TCCTCCGCTTATTGATATGC \
+  --p-front-f GTGYCAGCMGCCGCGGTAA \
+  --p-front-r GGACTACNVGGGTWTCTAAT \
   --o-trimmed-sequences trimmed_demux-paired-end.qza
 
 qiime demux summarize \
@@ -768,11 +786,18 @@ qiime dada2 denoise-paired \
   --o-table feature_table.qza \
   --o-representative-sequences sample_rep_seqs.qza \
   --p-trim-left-f 0 --p-trim-left-r 0 \
-  --p-trunc-len-f 270 \
-  --p-trunc-len-r 235 \
+  --p-trunc-len-f 271 \
+  --p-trunc-len-r 151 \
+    --p-max-ee-f 2 \
+    --p-max-ee-r 3 \
   --output-dir dada2 \
   --verbose
-
+  
+qiime feature-table summarize \
+  --i-table feature_table.qza \
+  --o-visualization feature_table.qzv \
+  --m-sample-metadata-file samplesheet.tsv
+  
 # Taxonomic assignment
 qiime feature-classifier classify-sklearn \
   --i-classifier silva-132-99-515-806-nb-classifier.qza \

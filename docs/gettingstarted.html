@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2022-07-05" />
+<meta name="date" content="2022-07-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -125,8 +125,20 @@ Following a few general recommendations:</p>
 <p><strong>Environment managers</strong></p>
 <p>Package and environment managers are extremely useful for your workflows. They help to install and run software packages such as qiime2, into individual ‘environments’ independent of your operating system. The environment manager is installed once and from there you use it to install individual packages. The most commonly used environment manager is Conda. Learn more about it here: <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html" class="uri">https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html</a></p>
 <p>Conda can be installed by either installing Anaconda or Miniconda. Boths works the same way. Anaconda requires 5 Gb of discspace and installs everything you can possibly need, while Miniconda is just the raw bones and lets you install things one by one.</p>
-<p>Most of the commands to manage environments are done in command line using a terminal. There is also a graphical installer that makes handling the environments a little more visual. That would be my go to. Learn more here: www.anaconda.com</p>
+<p>Most of the commands to manage environments are done in command line using a terminal. There is also a graphical installer that makes handling the environments a little more visual. That would be my go to. Learn more here: www.anaconda.com.</p>
+<p>Once conda installed you can always check what environments are installed with the command <code>conda env list</code>. In my case the output looks like this:<br />
+<img src="img/condaenvs.png" /><br />
+</p>
 <p>There are several other environment managers. We are also using <a href="https://www.docker.com/">Docker</a> in our work but the learning curve is a bit steeper so we wont get into it here.</p>
+<p><strong>Explore the help functions</strong></p>
+<p>Packages such as qiime2 have great resources to help you understand how to run any of the available commands. For example if you dont know what input parameters are available for the qiime command<br />
+<code>qiime feature-classifier classify-sklearn</code>, you can simply enter this command into your Terminal (with the qiime environment activated, if it is installed with Conda) and add a <code>--help</code> at the end: <code>qiime feature-classifier classify-sklearn --help</code>.</p>
+<p>Or you just want to know what other commands qiime has in its repertoire, you can run <code>qiime --help</code>.</p>
+<p>For example, this</p>
+<pre><code>conda activate qiime2-2022.2  
+qiime --help  </code></pre>
+<p>Gives<br />
+<img src="img/qiimehelp.png" /></p>
 <p><strong>GitHub account</strong></p>
 <p>This GitBook, including all its files, is hosted on one of my GitHub repositories (<a href="https://github.com/chrismitbiz/ABlab-workflows" class="uri">https://github.com/chrismitbiz/ABlab-workflows</a>). If you have any comments you can ask a question on the Discussion Page of this repository. You require a GitHub account to do that. It is free.</p>
 <p><strong>Workflows from other lab groups</strong></p>

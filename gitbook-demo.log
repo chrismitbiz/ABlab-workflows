@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.4)  5 JUL 2022 14:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.4)  6 JUL 2022 09:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -560,135 +560,134 @@ Underfull \hbox (badness 1571) in paragraph at lines 177--178
 \T1/lmr/m/n/10 it here: []$https : / / docs . conda . io / projects / conda / en / latest / user -[] guide / getting -[]
  []
 
-[9] [10]
+<./img/condaenvs.png, id=95, 567.11874pt x 159.59625pt>
+File: ./img/condaenvs.png Graphic file (type png)
+<use ./img/condaenvs.png>
+Package pdftex.def Info: ./img/condaenvs.png  used on input line 184.
+(pdftex.def)             Requested size: 345.00734pt x 97.09055pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 183--185
+
+ []
+
+[9 <./img/condaenvs.png>]
+<./img/qiimehelp.png, id=105, 552.0625pt x 904.37875pt>
+File: ./img/qiimehelp.png Graphic file (type png)
+<use ./img/qiimehelp.png>
+Package pdftex.def Info: ./img/qiimehelp.png  used on input line 203.
+(pdftex.def)             Requested size: 335.73834pt x 550.00049pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[10] [11 <./img/qiimehelp.png>] [12]
 Chapter 3.
-<./img/16Slibraryprotocolworkflow.png, id=117, 835.12pt x 569.12625pt>
+<./img/16Slibraryprotocolworkflow.png, id=130, 835.12pt x 569.12625pt>
 File: ./img/16Slibraryprotocolworkflow.png Graphic file (type png)
 <use ./img/16Slibraryprotocolworkflow.png>
-Package pdftex.def Info: ./img/16Slibraryprotocolworkflow.png  used on input line 219.
+Package pdftex.def Info: ./img/16Slibraryprotocolworkflow.png  used on input line 239.
 (pdftex.def)             Requested size: 345.00096pt x 235.11484pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[11
+[13
 
 ]
-<./img/16s-library-prep-overview.png, id=125, 963.6pt x 542.025pt>
+<./img/16s-library-prep-overview.png, id=139, 963.6pt x 542.025pt>
 File: ./img/16s-library-prep-overview.png Graphic file (type png)
 <use ./img/16s-library-prep-overview.png>
-Package pdftex.def Info: ./img/16s-library-prep-overview.png  used on input line 229.
+Package pdftex.def Info: ./img/16s-library-prep-overview.png  used on input line 249.
 (pdftex.def)             Requested size: 344.99901pt x 194.06194pt.
-[12 <./img/16Slibraryprotocolworkflow.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 231--234
+[14 <./img/16Slibraryprotocolworkflow.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 251--254
 
  []
 
-<./img/dna.jpeg, id=131, 599.23875pt x 289.08pt>
+<./img/dna.jpeg, id=145, 599.23875pt x 289.08pt>
 File: ./img/dna.jpeg Graphic file (type jpg)
 <use ./img/dna.jpeg>
-Package pdftex.def Info: ./img/dna.jpeg  used on input line 239.
+Package pdftex.def Info: ./img/dna.jpeg  used on input line 259.
 (pdftex.def)             Requested size: 345.00764pt x 166.43584pt.
-[13
+[15
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.244 
+l.264 
        <./img/16s-library-prep-overview.png> <./img/dna.jpeg>]
-Underfull \hbox (badness 10000) in paragraph at lines 250--252
+Underfull \hbox (badness 10000) in paragraph at lines 270--272
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--266
+Underfull \hbox (badness 10000) in paragraph at lines 284--286
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 275--277
+Underfull \hbox (badness 10000) in paragraph at lines 295--297
 
  []
 
-<./img/qubit.png, id=141, 283.0575pt x 537.00626pt>
+<./img/qubit.png, id=153, 283.0575pt x 537.00626pt>
 File: ./img/qubit.png Graphic file (type png)
 <use ./img/qubit.png>
-Package pdftex.def Info: ./img/qubit.png  used on input line 290.
+Package pdftex.def Info: ./img/qubit.png  used on input line 310.
 (pdftex.def)             Requested size: 283.0568pt x 537.00494pt.
 
-LaTeX Warning: Float too large for page by 23.50494pt on input line 292.
+LaTeX Warning: Float too large for page by 23.50494pt on input line 312.
 
-[14] [15
+[16] [17
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.301   D
+l.321   D
          ilute DNA to equal concentrations, either in a fresh batch of PCR-g... <./img/qubit.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 301--303
+Underfull \hbox (badness 10000) in paragraph at lines 321--323
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 303--304
+Underfull \hbox (badness 10000) in paragraph at lines 323--324
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 304--306
+Underfull \hbox (badness 10000) in paragraph at lines 324--326
 
  []
 
-[16]
-Underfull \hbox (badness 10000) in paragraph at lines 336--337
+[18]
+Underfull \hbox (badness 10000) in paragraph at lines 356--357
 
  []
 
 
-LaTeX Warning: Command \textmu invalid in math mode on input line 343.
+LaTeX Warning: Command \textmu invalid in math mode on input line 363.
 
 
-LaTeX Warning: Command \textmu invalid in math mode on input line 343.
+LaTeX Warning: Command \textmu invalid in math mode on input line 363.
 
 
 Package amsmath Warning: Foreign command \over;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 343.
+(amsmath)                 on input line 363.
 
 
-Underfull \hbox (badness 1281) in paragraph at lines 346--348
+Underfull \hbox (badness 1281) in paragraph at lines 366--368
 []\T1/lmr/m/n/10 Some more in-for-ma-tion here: []$https : / / support . illumina . com / content / dam /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 346--348
+Underfull \hbox (badness 10000) in paragraph at lines 366--368
 \T1/lmr/m/n/10 illumina -[] support / documents / documentation / system _ documentation / miseq /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 346--348
+Underfull \hbox (badness 10000) in paragraph at lines 366--368
 
  []
 
-[17]
-Underfull \hbox (badness 10000) in paragraph at lines 353--355
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 355--357
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 357--359
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 359--361
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 363--364
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 373--375
 
  []
 
@@ -702,256 +701,276 @@ Underfull \hbox (badness 10000) in paragraph at lines 377--379
 
  []
 
-[18]
+
 Underfull \hbox (badness 10000) in paragraph at lines 379--381
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 381--384
+Underfull \hbox (badness 10000) in paragraph at lines 383--384
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 387--388
+Underfull \hbox (badness 10000) in paragraph at lines 395--397
 
  []
 
-<./img/manifestfile.png, id=175, 621.32124pt x 541.02126pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 397--399
+
+ []
+
+[20]
+Underfull \hbox (badness 10000) in paragraph at lines 399--401
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 401--404
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 407--408
+
+ []
+
+<./img/manifestfile.png, id=188, 621.32124pt x 541.02126pt>
 File: ./img/manifestfile.png Graphic file (type png)
 <use ./img/manifestfile.png>
-Package pdftex.def Info: ./img/manifestfile.png  used on input line 391.
+Package pdftex.def Info: ./img/manifestfile.png  used on input line 411.
 (pdftex.def)             Requested size: 344.99855pt x 300.41069pt.
 
-Overfull \hbox (352.66774pt too wide) in paragraph at lines 407--430
+Overfull \hbox (352.66774pt too wide) in paragraph at lines 427--450
  [][] 
  []
 
-[19] [20
+[21] [22
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.433 ...abel{from-basespace-to-qiime2-and-dada2}}
-                                                   <./img/manifestfile.png>] [21
+l.453 ...abel{from-basespace-to-qiime2-and-dada2}}
+                                                   <./img/manifestfile.png>] [23
 pdfTeX warning (ext4): destination with the same identifier (name{table.3.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.433 ...abel{from-basespace-to-qiime2-and-dada2}}
-                                                  ] [22
+l.453 ...abel{from-basespace-to-qiime2-and-dada2}}
+                                                  ] [24
 
 ]
 Chapter 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 437--438
+Underfull \hbox (badness 10000) in paragraph at lines 457--458
 
  []
 
 
-Overfull \hbox (5.05457pt too wide) in paragraph at lines 443--445
+Overfull \hbox (5.05457pt too wide) in paragraph at lines 463--465
 \T1/lmtt/m/n/10 PT-01_S1_L001_R1_001.fastq.gz \T1/lmr/m/n/10 and \T1/lmtt/m/n/10 PT-01_S1_L001_R2_001.fastq.gz
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 445--447
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 447--449
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 449--451
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 451--453
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 455--456
-
- []
-
-[23]
-<./img/basespacedownload.png, id=206, 861.2175pt x 674.52pt>
-File: ./img/basespacedownload.png Graphic file (type png)
-<use ./img/basespacedownload.png>
-Package pdftex.def Info: ./img/basespacedownload.png  used on input line 463.
-(pdftex.def)             Requested size: 345.00653pt x 270.2149pt.
-<./img/basespacedownload2.png, id=207, 587.19376pt x 588.1975pt>
-File: ./img/basespacedownload2.png Graphic file (type png)
-<use ./img/basespacedownload2.png>
-Package pdftex.def Info: ./img/basespacedownload2.png  used on input line 465.
-(pdftex.def)             Requested size: 344.99878pt x 345.58852pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 465--467
 
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 467--469
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 469--471
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 471--473
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 475--476
+
+ []
+
+[25]
+<./img/basespacedownload.png, id=219, 861.2175pt x 674.52pt>
+File: ./img/basespacedownload.png Graphic file (type png)
+<use ./img/basespacedownload.png>
+Package pdftex.def Info: ./img/basespacedownload.png  used on input line 483.
+(pdftex.def)             Requested size: 345.00653pt x 270.2149pt.
+<./img/basespacedownload2.png, id=220, 587.19376pt x 588.1975pt>
+File: ./img/basespacedownload2.png Graphic file (type png)
+<use ./img/basespacedownload2.png>
+Package pdftex.def Info: ./img/basespacedownload2.png  used on input line 485.
+(pdftex.def)             Requested size: 344.99878pt x 345.58852pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 485--487
+
+ []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[24 <./img/basespacedownload.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 470--471
+[26 <./img/basespacedownload.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 490--491
 
  []
 
-[25 <./img/basespacedownload2.png>]
-Overfull \hbox (469.18752pt too wide) in paragraph at lines 483--500
+[27 <./img/basespacedownload2.png>]
+Overfull \hbox (469.18752pt too wide) in paragraph at lines 503--520
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 502--503
+Underfull \hbox (badness 10000) in paragraph at lines 522--523
 
  []
 
 
-Overfull \hbox (97.73329pt too wide) in paragraph at lines 511--528
+Overfull \hbox (97.73329pt too wide) in paragraph at lines 531--548
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 530--531
+Underfull \hbox (badness 10000) in paragraph at lines 550--551
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 534--535
+Underfull \hbox (badness 10000) in paragraph at lines 554--555
 
  []
 
-[26
+[28
 pdfTeX warning (ext4): destination with the same identifier (name{table.4.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.537 
+l.557 
       
 pdfTeX warning (ext4): destination with the same identifier (name{table.4.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.537 
+l.557 
       ]
-<./img/scriptfile.png, id=225, 761.84625pt x 730.73pt>
+<./img/scriptfile.png, id=237, 761.84625pt x 730.73pt>
 File: ./img/scriptfile.png Graphic file (type png)
 <use ./img/scriptfile.png>
-Package pdftex.def Info: ./img/scriptfile.png  used on input line 542.
+Package pdftex.def Info: ./img/scriptfile.png  used on input line 562.
 (pdftex.def)             Requested size: 344.98985pt x 330.89937pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 546--547
+Underfull \hbox (badness 10000) in paragraph at lines 566--567
 
  []
 
-[27
+[29
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.549 
+l.569 
        <./img/scriptfile.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 570--571
+Underfull \hbox (badness 10000) in paragraph at lines 590--591
 
  []
 
 
-Overfull \hbox (27.74892pt too wide) in paragraph at lines 582--582
+Overfull \hbox (27.74892pt too wide) in paragraph at lines 602--602
 []\T1/lmtt/m/n/10 qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' \[] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 584--585
+Underfull \hbox (badness 10000) in paragraph at lines 604--605
 
  []
 
-[28]
-Underfull \hbox (badness 10000) in paragraph at lines 602--603
+[30]
+Underfull \hbox (badness 10000) in paragraph at lines 622--623
 
  []
 
 
-Overfull \hbox (1.52687pt too wide) in paragraph at lines 606--609
+Overfull \hbox (1.52687pt too wide) in paragraph at lines 626--629
 \T1/lmr/m/n/10 Here we take the trimmed_demux-paired-end.qza and cre-ate a trimmed_demux-
  []
 
-<./img/viewqiime.png, id=238, 739.76375pt x 412.54124pt>
+<./img/viewqiime.png, id=250, 739.76375pt x 412.54124pt>
 File: ./img/viewqiime.png Graphic file (type png)
 <use ./img/viewqiime.png>
-Package pdftex.def Info: ./img/viewqiime.png  used on input line 618.
+Package pdftex.def Info: ./img/viewqiime.png  used on input line 638.
 (pdftex.def)             Requested size: 345.00249pt x 192.39622pt.
-[29]
-<./img/demux.qza.png, id=243, 1111.15125pt x 355.3275pt>
+[31]
+<./img/demux.qza.png, id=256, 1111.15125pt x 355.3275pt>
 File: ./img/demux.qza.png Graphic file (type png)
 <use ./img/demux.qza.png>
-Package pdftex.def Info: ./img/demux.qza.png  used on input line 623.
+Package pdftex.def Info: ./img/demux.qza.png  used on input line 643.
 (pdftex.def)             Requested size: 344.99588pt x 110.32387pt.
-[30
+[32
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.631 
+l.651 
        <./img/viewqiime.png> <./img/demux.qza.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 639--640
+Underfull \hbox (badness 10000) in paragraph at lines 659--660
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 643--644
+Underfull \hbox (badness 10000) in paragraph at lines 663--664
 
  []
 
-[31]
-<./img/feature-table.qzv.png, id=258, 561.09625pt x 694.595pt>
+[33]
+<./img/feature-table.qzv.png, id=270, 561.09625pt x 694.595pt>
 File: ./img/feature-table.qzv.png Graphic file (type png)
 <use ./img/feature-table.qzv.png>
-Package pdftex.def Info: ./img/feature-table.qzv.png  used on input line 678.
+Package pdftex.def Info: ./img/feature-table.qzv.png  used on input line 698.
 (pdftex.def)             Requested size: 344.99937pt x 427.0833pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 682--683
+Underfull \hbox (badness 10000) in paragraph at lines 702--703
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 710--711
+Underfull \hbox (badness 10000) in paragraph at lines 728--729
 
  []
 
-[32] [33
+[34] [35
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.715 
+l.735 
        <./img/feature-table.qzv.png>]
-Overfull \hbox (34.30368pt too wide) in paragraph at lines 736--740
+Overfull \hbox (34.30368pt too wide) in paragraph at lines 754--758
 \T1/lmr/m/n/10 where we will im-port the fol-low-ing files: \T1/lmtt/m/n/10 feature_table_insertiontreefiltered.qza\T1/lmr/m/n/10 ,
  []
 
 
-Overfull \hbox (27.74892pt too wide) in paragraph at lines 797--797
+Overfull \hbox (27.74892pt too wide) in paragraph at lines 822--822
 []\T1/lmtt/m/n/10 qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' \[] 
  []
 
-[34] [35]
+[36] [37]
 No file gitbook-demo.bbl.
-[36] (./gitbook-demo.aux)
+[38] (./gitbook-demo.aux)
 Package rerunfilecheck Info: File `gitbook-demo.out' has not changed.
 (rerunfilecheck)             Checksum: 739E7198BA738661B93257C22B43CCC0;632.
  ) 
 Here is how much of TeX's memory you used:
- 12831 strings out of 479996
- 202945 string characters out of 5886841
+ 12847 strings out of 479996
+ 203275 string characters out of 5886841
  500189 words of memory out of 5000000
- 30694 multiletter control sequences out of 15000+600000
+ 30706 multiletter control sequences out of 15000+600000
  525653 words of font info for 72 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,9n,77p,1491b,584s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on gitbook-demo.pdf (36 pages, 2420103 bytes).
+Output written on gitbook-demo.pdf (38 pages, 2499863 bytes).
 PDF statistics:
- 361 PDF objects out of 1000 (max. 8388607)
- 275 compressed objects within 3 object streams
- 55 named destinations out of 1000 (max. 500000)
- 93 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 374 PDF objects out of 1000 (max. 8388607)
+ 282 compressed objects within 3 object streams
+ 57 named destinations out of 1000 (max. 500000)
+ 103 words of extra memory for PDF output out of 10000 (max. 10000000)
 

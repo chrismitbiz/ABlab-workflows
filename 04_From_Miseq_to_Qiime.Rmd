@@ -187,7 +187,7 @@ Summarise and visualise the ASV abundances (feature_table.qza) in a .qzv file.
 qiime feature-table summarize \
   --i-table feature_table.qza \
   --o-visualization feature_table.qzv \
-  --m-sample-metadata-file metadata.tsv
+  --m-sample-metadata-file samplesheet.tsv
 ```
 **Note:** Look at the feature_table.qzv and record median reads per sample
   
@@ -220,11 +220,8 @@ qiime metadata tabulate \
 --o-visualization taxonomy_silva.qzv
 ```
   
-**IMPORTANT:** The `taxonomy_silva.qzv` is loaded into https://view.qiime2.org/ to dowload the `.tsv` file for later import into R.
-  
   \
   
-    
 **Build phylogenetic tree (Step 5)**  
   
 The next step is not essential but really good to have. Creating a phylogenetic tree from the amplicon sequences.  
@@ -265,15 +262,15 @@ Copy and paste this into your script file if needed.
 ```
 # Manifest Import
 qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' \
-  --input-path manifest.tsv \
+  --input-path Qiimeimportmanifest.tsv \
   --output-path demux-paired-end.qza \
   --input-format PairedEndFastqManifestPhred33V2
 
 # Cutadapt
 qiime cutadapt trim-paired \
   --i-demultiplexed-sequences demux-paired-end.qza \
-  --p-front-f GTGARTCATCGAATCTTTG \
-  --p-front-r TCCTCCGCTTATTGATATGC \
+  --p-front-f GTGYCAGCMGCCGCGGTAA \
+  --p-front-r GGACTACNVGGGTWTCTAAT \
   --o-trimmed-sequences trimmed_demux-paired-end.qza
 
 qiime demux summarize \
@@ -286,11 +283,18 @@ qiime dada2 denoise-paired \
   --o-table feature_table.qza \
   --o-representative-sequences sample_rep_seqs.qza \
   --p-trim-left-f 0 --p-trim-left-r 0 \
-  --p-trunc-len-f 270 \
-  --p-trunc-len-r 235 \
+  --p-trunc-len-f 271 \
+  --p-trunc-len-r 151 \
+    --p-max-ee-f 2 \
+    --p-max-ee-r 3 \
   --output-dir dada2 \
   --verbose
-
+  
+qiime feature-table summarize \
+  --i-table feature_table.qza \
+  --o-visualization feature_table.qzv \
+  --m-sample-metadata-file samplesheet.tsv
+  
 # Taxonomic assignment
 qiime feature-classifier classify-sklearn \
   --i-classifier silva-132-99-515-806-nb-classifier.qza \
