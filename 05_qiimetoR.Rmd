@@ -9,30 +9,40 @@ In this chapter you will learn how to import Qiime2-produced ASV tables, taxonom
 Reference: [1] C. Jiang, S.J. McIlroy, R. Qi, F. Petriglieri, E. Yashiro, Z. Kondrotaite, P.H. Nielsen, Identification of microorganisms responsible for foam formation in mesophilic anaerobic digesters treating surplus activated sludge, Water Res. 191 (2021) 116779. https://doi.org/10.1016/j.watres.2020.116779.  
   
 Sample IDs  
-You decide on the samplesIDs before you start your library prep and sequencing. In this dataset the sampleIDs are longer, e.g. "SRR12204258" and "SRR12204269", compared to the previous chapter, where the SampleIDs were short, e.g. "PT-01", "PT-02". It does not matter how you label each of your indexed samples as long as the IDs are unique.  And each unique ID in the `samplesheet.csv` needs to match the IDs of the `feature_table.qza`, which originate from the FastQ filenames and the Qiime import manifest before denoising with DADA2. If an ID does not match or if there is a different number of samples between these  two input files, then phyloseq will complain.  
-!["First three ASV IDs and Sample IDs in this dataset](./img/ASVIDs.png)  
+You decide on the samplesIDs before you start your library prep and sequencing. In this dataset the sampleIDs are longer, e.g. "SRR12204258" and "SRR12204269", compared to the previous chapter, where the SampleIDs were short, e.g. "PT-01", "PT-02". It does not matter how you label each of your indexed samples as long as the IDs are unique.  And each unique ID in the `samplesheet.csv` needs to match the IDs of the `feature_table.qza`, which originate from the FastQ filenames and the Qiime import manifest before denoising with DADA2. If an ID does not match or if there is a different number of samples between these  two input files, then phyloseq will complain.   
+  \
   
+Here the first three ASV IDs and Sample IDs in this dataset.:  
+!["First three ASV IDs and Sample IDs in this dataset"](./img/ASVIDs.png)   
+  \
   
 ASV IDs   
-The same principle applies to each individual amplicon sequence in the ASV table and the taxonomy file. The ASVs IDs have to match between the `feature_table.qza` and the `taxonomy_silva.qza`.
-!["First three ASV IDs (Feature ID) and related Taxon assignments in this dataset](./img/ASVIDs2.png) 
-    \
+The same principle applies to each individual amplicon sequence in the ASV table and the taxonomy file. The ASVs IDs have to match between the `feature_table.qza` and the `taxonomy_silva.qza`.  
+  
+Following the first three ASV IDs (Feature ID) and related taxon assignments in this dataset:  
+!["First three ASV IDs (Feature ID) and related Taxon assignments in this dataset"](./img/ASVIDs2.png) 
+    
+  \
     
 NOTE: After the denoising, taxonomic classification and tree alignments in Qiime2, I prefer to do all subsequent analysis in R. However, it is also possible to do much of the diversity analysis in Qiime2. In fact, some  interesting plug-ins and functions in Qiime2 are not available as packages in R, hence for some specific tasks you may need to keep using Qiime2. It is up to the goals and preferences of the investigator.  
+  
+Now let's work in R!  
   
   \
   
 **Required files**  
-* samplesheet.tsv - same file that was used in the visualisation steps in Qiime2  
-* feature_table.qza - if you created a phylogenetic tree from the sequences as described in the previous chapter then the ASVs in the feature table were filtered to match the ASVs in the tree. Hence the files was named featuretable-insertiontree-filtered.qza to differentiate it.    
-* taxonomy_silva.qza  
-* insertion-tree.qza  
+  
+* `samplesheet.tsv` - same file that was used in the visualisation steps in Qiime2  
+* `feature_table.qza` - if you created a phylogenetic tree from the sequences as described in the previous chapter then the ASVs in the feature table were filtered to match the ASVs in the tree. Hence the files was named `featuretable-insertiontree-filtered.qza` to differentiate it.  
+* `taxonomy_silva.qza`  
+* `insertion-tree.qza`  
   
   \
   
 **Packages**  
   
 First install the required packages. Some packages are stored on 'remote' repositories such as GitHub, hence before you can install them you need helper packages such as `remotes`. Other packages, such as phyloseq are managed by BioConductor project. They provide their own package manager package for R called BiocManager, which helps to install from the same release. Both, remotes and BiocManager are already installed in the below example.  
+Once the packages are installed, load them into your working space.   
   
 ```{r packages, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
 # install.packages("remotes")
@@ -75,11 +85,9 @@ metadata2 <- metadata[c(2:nrow(metadata)),] %>%     # remove the top row and con
 
 # str(metadata2)  # use the `str` command to inspect the data
 
-
 ## Qiime import                      
 SVs <-  qiime2R::read_qza("qiimefiles/featuretable-insertiontree-filtered.qza")
 ASVtable <- SVs$data   # extract the data table
-
 
 # Taxonomy
 taxonomy <- qiime2R::read_qza("qiimefiles/taxonomy_silva.qza") # import the qiime object
@@ -92,11 +100,9 @@ taxtable <- taxonomy %>% as_tibble() %>%
   column_to_rownames("Feature.ID") %>%
   as.matrix()
 
-
 # Tree
 tree <- read_qza("qiimefiles/insertion-tree.qza")
 tree <- tree$data  #extract data
-
 
 # Create the phyloseq object 
 ps <-phyloseq(
@@ -114,10 +120,8 @@ ps <-phyloseq(
 # tax_table()   Taxonomy Table:    [ 4218 taxa by 7 taxonomic ranks ]
 # phy_tree()    Phylogenetic Tree: [ 4218 tips and 4217 internal nodes ]
 
-
 # remove things out of the R environment you dont need. 
 rm(metadata, metadata2, SVs, taxonomy, taxtable, tree, ASVtable)
-
 
 ## Remove those annoying short codes in front of taxa names (i.e. p__ etc) as they
 ## dont look good in visualisation
@@ -128,7 +132,6 @@ tax_table(ps)[, "Order"] <- str_replace_all(tax_table(ps)[, "Order"], " o__", ""
 tax_table(ps)[, "Family"] <- str_replace_all(tax_table(ps)[, "Family"], " f__", "")
 tax_table(ps)[, "Genus"] <- str_replace_all(tax_table(ps)[, "Genus"], " g__", "")
 tax_table(ps)[, "Species"] <- str_replace_all(tax_table(ps)[, "Species"], " s__", "")
-
 
 ```
 From the output of the `ps` object we can see that there are 4281 ASVs in 51 samples and associated with 14 variables in the metadata.  
@@ -143,7 +146,6 @@ taxtable <- tax_table(ps)@.Data
 tree <- phy_tree(ps)
 
 # Inspect individual objects in your own time. 
-
 ```
   
   \
@@ -162,41 +164,49 @@ Then filter out any phyla that came up as uncharacterized and taxa that came up 
 # Although you can still filter for specific analysis if needed.
 # minimum of reads per feature
 ps.flt = prune_taxa(taxa_sums(ps) >= 5, ps) #minimum reads per feature
-ps.flt = filter_taxa(ps.flt, function(x) sum(x > 0) > (0.04*length(x)), TRUE) #minimum presence in x% of samples (51 * 0.04 = 2 samples)
- 
+
 # ps.flt (not run)
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 1695 taxa and 51 samples ]
+# otu_table()   OTU Table:         [ 3911 taxa and 51 samples ]
 # sample_data() Sample Data:       [ 51 samples by 14 sample variables ]
-# tax_table()   Taxonomy Table:    [ 1695 taxa by 7 taxonomic ranks ]
-# phy_tree()    Phylogenetic Tree: [ 1695 tips and 1694 internal nodes ]
+# tax_table()   Taxonomy Table:    [ 3911 taxa by 7 taxonomic ranks ]
+# phy_tree()    Phylogenetic Tree: [ 3911 tips and 1694 internal nodes ]
 
-
-#filter any phyla that have not been classified i.e. contain nothing in the phylum column of the taxtable
+#filter any "NA"-phyla that have not been classified i.e. 
+# contain nothing in the phylum column of the taxtable (just a <NA>)
 
 ps.flt  = subset_taxa(ps.flt , !is.na(Phylum) & !Phylum %in% c(""))
 
 # ps.flt (not run)
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 1688 taxa and 51 samples ]
+# otu_table()   OTU Table:         [ 3892 taxa and 51 samples ]
 # sample_data() Sample Data:       [ 51 samples by 14 sample variables ]
-# tax_table()   Taxonomy Table:    [ 1688 taxa by 7 taxonomic ranks ]
-# phy_tree()    Phylogenetic Tree: [ 1688 tips and 1687 internal nodes ]
+# tax_table()   Taxonomy Table:    [ 3892 taxa by 7 taxonomic ranks ]
+# phy_tree()    Phylogenetic Tree: [ 3892 tips and 1687 internal nodes ]
   
-
 # Filter out non-bacteria, mitochondia and chloroplast taxa
 ps.flt <- ps.flt %>%
   subset_taxa(Kingdom == "Bacteria" & Family  != "Mitochondria" & Class   != "Chloroplast"
  & !is.na(Phylum))
 
 # ps.flt (not run)
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 3853 taxa and 51 samples ]
+# sample_data() Sample Data:       [ 51 samples by 14 sample variables ]
+# tax_table()   Taxonomy Table:    [ 3853 taxa by 7 taxonomic ranks ]
+# phy_tree()    Phylogenetic Tree: [ 3853 tips and 1673 internal nodes ]
 
+# We can filter more for running beta diversity or differential abundance analysis later. This will be shown in later chapters
+# For example: 
+# minimum presence in x% of samples (51 * 0.04 = 2 samples)
+# ps.flt = filter_taxa(ps.flt, function(x) sum(x > 0) > (0.04*length(x)), TRUE) 
+# Would result in 
 # phyloseq-class experiment-level object
 # otu_table()   OTU Table:         [ 1674 taxa and 51 samples ]
 # sample_data() Sample Data:       [ 51 samples by 14 sample variables ]
 # tax_table()   Taxonomy Table:    [ 1674 taxa by 7 taxonomic ranks ]
 # phy_tree()    Phylogenetic Tree: [ 1674 tips and 1673 internal nodes ]
-
+  
 ```
   
   \
@@ -205,38 +215,85 @@ ps.flt <- ps.flt %>%
   
 Check if you cover enough depth for diversity analyses. Some samples may have low species richness, including a negative or samples that failed during PCR for example. The rarefaction curve will help assess which samples you may have to exclude from subsequent diversity calculations. It also provides a general view if most sample    
   
-The curve shows you the number of 'Species' (i.e. ASVs) on the y axis and the total reads on the x axis for each sample.  
-```{r rarefactions, include=TRUE, echo=TRUE,warning=FALSE, message=FALSE}
-# filter
-# `%notin%` = Negate(`%in%`)
-# physeqB.flt.norefs <-  prune_samples(sample_data(physeqB.flt)$Treatment %notin% c("Heat", "H2O2"), physeqB.flt)
+The curve shows you the number of 'Species' (i.e. ASVs) on the y axis and the total reads on the x axis for each sample. So basically, it shows how rich each sample is and indicates if the number of reads that are captured in a samples covers enough of the ASVs. If the curve flattens, it indicates that the sample would not get any richer even with more reads...  
+  
+I typically use the rarefaction curve to check if there are samples that need removing before establishing alpha diversity metrics. In this example, the vertical line helps identify the sample with lowest number of reads. We can check that by running `min(colSums(otu_table(ps.flt)))`, which tells us that they are 9690 reads in the sample with lowest reads. If this sample is kept in and we measure subsequent alpha diversity metrics, where each of the sample-reads are randomly resampled to the lowest read-number (here 9690), then we may not capture the diversity of samples with higher richness. The grey horizontal lines indicate how much richness we may lose if we include the sample with lowest number of reads (the difference between grey horizontal line and the curve of each sample at the highest number of reads on x-axis).    
+  
+   \
+```{r rarefaction, include=TRUE, echo=TRUE,warning=FALSE, message=FALSE}
 
-vegan::rarecurve(t(otu_table(ps.flt)), step=200, sample = min(colSums(otu_table(ps.flt))), label = FALSE, xlab = "Sample Size after filtering") 
+vegan::rarecurve(t(otu_table(ps.flt)), 
+                 step=200, sample = min(colSums(otu_table(ps.flt))), 
+                 label = FALSE, xlab = "Sample Size after filtering") 
 
-# show the lowest number of reads.  
+# show the lowest and highest number of sample reads.  
 max(colSums(otu_table(ps.flt)))
 min(colSums(otu_table(ps.flt)))
+
+# Filtering options
+# filter options (not run), you can filter out specific sample or treatments from the phyloseq objects. 
+# `%notin%` = Negate(`%in%`)  # create a %notin% filter operator for filtering
+
+# Filtering out treatments, e.g. any sample that was labeled "Negative" in the metadata
+# ps.flt.flt <-  prune_samples(sample_data(ps.flt)$Treatment %notin% c("Negative"), ps.flt)
+
+# Filtering out any taxa that have zero reads because they were only present in the removed samples.  
+# ps.flt.flt <- prune_taxa(taxa_sums(ps.flt.flt) != 0, ps.flt.flt)
 ```
-
-
-## Prevelance table
-Create a prevalence table to see which phyla have low prevalence
-```{r, include=TRUE, echo=TRUE,warning=FALSE, message=FALSE}
+    
+  
+Once you identified the samples you would like to remove, you can filter out specific samples or treatments from the phyloseq objects. For example, with the  `prune_samples(sample_data(ps.flt)$Treatment %notin% c("Negative"), ps.flt)` command here we would sample out any samples labeled as "Negative" in the metadata. Afterwards make sure to sample out any taxa that now contain zero reads because they were only present in the removed samples. Perhaps, create new phyloseq objects to differentiate from your different filtered object `ps.flt.flt <- prune_taxa(taxa_sums(ps.flt.flt) != 0, ps.flt.flt)`.  
+   
+In this example, we are keeping the sample with lowest reads. No further filtering required at this stage.   
+  
+  \
+  
+**Prevalence table**  
+  
+Create a prevalence table to see which phyla have low prevalence.   
+  
+The output is a dataframe showing all phyla in order of total abundance. The mean prevalence defines how often the phylum appears across all samples on average. E.g. a mean prevalence of 10.22 means that ASVs in this phylum were present on average in 10.22 samples. Higher values indicates a 'core' relevance to the sum of samples.  
+  
+This table is handy to decide if you want to remove certain phyla from some visualisations as they may not contribute to the overall analysis. It also allows for a comparison with filtered and unfiltered data for due diligence. Here it is apparent that phyla that were unclassified (i.e. <NA> ) contributed 3,522 reads to the total of 1,299,791 reads. That is `3522 / sum(phyloseq::otu_table(ps)) * 100` = 0.27%. Chances are that these NA sequences may just be noise and may not represent biological relevant amplicons. Hence, I would keep them out of any further analysis.  
+However, in environments where you get higher contributions of unknown amplicons, it may indicate that the taxonomic database does not capture your samples well. In that case it would be wise to keep the NAs in for measuring alpha and beta diversity.   
+  
+```{r prevalence, include=TRUE, echo=TRUE,warning=FALSE, message=FALSE}
 ## Create a prevalence table to see which phyla have low prevalence
-physeqB.flt.prevtab <-  prune_samples(sample_data(physeqB.flt)$Treatment != "Reference", physeqB.flt)
-physeqB.flt.prevtab <-  prune_samples(sample_data(physeqB.flt.prevtab)$Treatment != "Blank", physeqB.flt.prevtab)
-prevelancedf = apply(X = phyloseq::otu_table(physeqB.flt.prevtab),
+#ps.flt.prev <-  prune_samples(sample_data(physeqB.flt)$Treatment != "Reference", physeqB.flt)
+# ps.flt.prevtab <-  prune_samples(sample_data(physeqB.flt.prevtab)$Treatment != "Blank", physeqB.flt.prevtab)
+
+
+prevelancedf = apply(X = phyloseq::otu_table(ps.flt),
                        MARGIN = 1,
                        FUN = function(x){sum(x > 0)})
+
 prevelancedf = data.frame(Prevalence = prevelancedf,
-                            TotalAbundance = taxa_sums(physeqB.flt.prevtab),
-                            phyloseq::tax_table(physeqB.flt.prevtab))
+                            TotalAbundance = taxa_sums(ps.flt),
+                            phyloseq::tax_table(ps.flt))
 
 prevelancedf <- plyr::ddply(prevelancedf, "Phylum", function(df1){
   data.frame(mean_prevalence=mean(df1$Prevalence), total_abundance=sum(df1$TotalAbundance,na.rm = T), stringsAsFactors = F)
   })
-prevelancedf
-```
 
+prevelancedf %>% arrange(desc(total_abundance))  # print table from highest to lowest abundance 
+
+
+## Compare with the original, unfiltered ps object
+prevelancedf = apply(X = phyloseq::otu_table(ps),
+                       MARGIN = 1,
+                       FUN = function(x){sum(x > 0)})
+
+prevelancedf = data.frame(Prevalence = prevelancedf,
+                            TotalAbundance = taxa_sums(ps),
+                            phyloseq::tax_table(ps))
+
+prevelancedf <- plyr::ddply(prevelancedf, "Phylum", function(df1){
+  data.frame(mean_prevalence=mean(df1$Prevalence), total_abundance=sum(df1$TotalAbundance,na.rm = T), stringsAsFactors = F)
+  })
+
+prevelancedf %>% arrange(desc(total_abundance))  # print table from highest to lowest abundance 
+
+```
+  
 **Note:**  
-This code is an amalgamation from various sources. Apart from putting it together into a pipeline I do not take credit for it.
+This code is an amalgamation from various sources. Apart from putting it together into this workflow I do not take credit for it.
