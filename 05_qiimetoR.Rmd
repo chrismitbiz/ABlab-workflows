@@ -9,17 +9,17 @@ In this chapter you will learn how to import Qiime2-produced ASV tables, taxonom
 Reference: [1] C. Jiang, S.J. McIlroy, R. Qi, F. Petriglieri, E. Yashiro, Z. Kondrotaite, P.H. Nielsen, Identification of microorganisms responsible for foam formation in mesophilic anaerobic digesters treating surplus activated sludge, Water Res. 191 (2021) 116779. https://doi.org/10.1016/j.watres.2020.116779.  
   
 Sample IDs  
-You decide on the samplesIDs before you start your library prep and sequencing. In this dataset the sampleIDs are longer, e.g. "SRR12204258" and "SRR12204269", compared to the previous chapter, where the SampleIDs were short, e.g. "PT-01", "PT-02". It does not matter how you label each of your indexed samples as long as the IDs are unique.  And each unique ID in the `samplesheet.csv` needs to match the IDs of the `feature_table.qza`, which originate from the FastQ filenames and the Qiime import manifest before denoising with DADA2. If an ID does not match or if there is a different number of samples between these  two input files, then phyloseq will complain.   
+You decide on the samplesIDs before you start your library prep and sequencing. In this dataset the sampleIDs are longer, e.g. "SRR12204258" and "SRR12204269", compared to the previous chapter, where the SampleIDs were short, e.g. "PT-01", "PT-02". It does not matter how you label each of your indexed samples as long as the IDs are unique.  And each unique sample ID in the `samplesheet.csv` needs to match the sample IDs of the `feature_table.qza`. You may recall those IDs originate from your Miseq run and are the same sample IDs that are used on the loading manifest file to prepare the run. They subsequently are part of the FastQ filenames and flow through into any relevant Qiime2 data. If a sample ID does not match or if there is a different number of samples between these  two input files, then phyloseq will complain.   
   \
   
-Here the first three ASV IDs and Sample IDs in this dataset.:  
+Here the first three Sample IDs ("SRR12204258" and "SRR12204269" etc..) in the ASV table from this data set.:  
 !["First three ASV IDs and Sample IDs in this dataset"](./img/ASVIDs.png)   
   \
   
 ASV IDs   
-The same principle applies to each individual amplicon sequence in the ASV table and the taxonomy file. The ASVs IDs have to match between the `feature_table.qza` and the `taxonomy_silva.qza`.  
+The same principle applies to each ID of the ASVs. The ASVs IDs have to match between the `feature_table.qza` and the `taxonomy_silva.qza`.  
   
-Following the first three ASV IDs (Feature ID) and related taxon assignments in this dataset:  
+Following the first three ASV IDs (Feature ID) and related taxon assignments in taxonomy_silva.qza of this dataset:  
 !["First three ASV IDs (Feature ID) and related Taxon assignments in this dataset"](./img/ASVIDs2.png) 
     
   \
@@ -28,7 +28,6 @@ NOTE: After the denoising, taxonomic classification and tree alignments in Qiime
   
 Now let's work in R!  
   
-  \
   
 **Required files**  
   
