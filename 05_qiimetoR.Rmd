@@ -10,7 +10,7 @@ In this chapter you will learn how to import Qiime2-produced ASV tables, taxonom
 Reference: [1] C. Jiang, S.J. McIlroy, R. Qi, F. Petriglieri, E. Yashiro, Z. Kondrotaite, P.H. Nielsen, Identification of microorganisms responsible for foam formation in mesophilic anaerobic digesters treating surplus activated sludge, Water Res. 191 (2021) 116779. https://doi.org/10.1016/j.watres.2020.116779.  
   
 Sample IDs  
-You decide on the samplesIDs before you start your library prep and sequencing. In this dataset the sampleIDs are longer, e.g. "SRR12204258" and "SRR12204269", compared to the previous chapter, where the SampleIDs were short, e.g. "PT-01", "PT-02". It does not matter how you label each of your indexed samples as long as the IDs are unique.  And each unique sample ID in the `samplesheet.csv` needs to match the sample IDs of the `feature_table.qza`. You may recall those IDs originate from your Miseq run and are the same sample IDs that are used on the loading manifest file to prepare the run. They subsequently are part of the FastQ filenames and flow through into any relevant Qiime2 data. If a sample ID does not match or if there is a different number of samples between these  two input files, then phyloseq will complain.   
+You decide on the samplesIDs before you start your library prep and sequencing. For this chapter we use a different dataset to the previous chatper and its sampleIDs are longer, e.g. "SRR12204258" and "SRR12204269", compared to "PT-01", "PT-02" in the previous chapter. It does not matter how you label each of your indexed samples as long as the IDs are unique.  And each unique sample ID in the `samplesheet.csv` needs to match the sample IDs of the `feature_table.qza`. You may recall those IDs originate from your Miseq run and are the same sample IDs that are used on the loading manifest file to prepare the run. They subsequently are part of the FastQ filenames and flow through into any relevant Qiime2 data. If a sample ID does not match or if there is a different number of samples between these  two input files, then phyloseq will complain.   
   \
   
 Here the first three Sample IDs ("SRR12204258" and "SRR12204269" etc..) in the ASV table from this data set.:  
@@ -185,8 +185,7 @@ ps.flt  = subset_taxa(ps.flt , !is.na(Phylum) & !Phylum %in% c(""))
   
 # Filter out non-bacteria, mitochondia and chloroplast taxa
 ps.flt <- ps.flt %>%
-  subset_taxa(Kingdom == "Bacteria" & Family  != "Mitochondria" & Class   != "Chloroplast"
- & !is.na(Phylum))
+  subset_taxa(Kingdom == "Bacteria" & Family  != "Mitochondria" & Class   != "Chloroplast")
 
 # ps.flt (not run)
 # phyloseq-class experiment-level object
@@ -241,7 +240,7 @@ min(colSums(otu_table(ps.flt)))
 ```
     
   
-Once you identified the samples you would like to remove, you can filter out specific samples or treatments from the phyloseq objects. For example, with the  `prune_samples(sample_data(ps.flt)$Treatment %notin% c("Negative"), ps.flt)` command here we would sample out any samples labeled as "Negative" in the metadata. Afterwards make sure to sample out any taxa that now contain zero reads because they were only present in the removed samples. Perhaps, create new phyloseq objects to differentiate from your different filtered object `ps.flt.flt <- prune_taxa(taxa_sums(ps.flt.flt) != 0, ps.flt.flt)`.  
+Once you identified the samples you would like to remove, you can filter out specific samples or treatments from the phyloseq objects. For example, with the  `prune_samples(sample_data(ps.flt)$Treatment %notin% c("Negative"), ps.flt)` command here we would sample out any samples labeled as "Negative" in the metadata. Afterwards make sure to sample out any taxa that now contain zero reads because they were only present in the removed samples. Perhaps, create new phyloseq objects to differentiate from your different filtered object `ps.flt.flt <- prune_taxa(taxa_sums(ps.flt) != 0, ps.flt)`.  
    
 In this example, we are keeping the sample with lowest reads. No further filtering required at this stage.   
   

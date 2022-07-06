@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2022-07-06" />
+<meta name="date" content="2022-07-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -563,7 +563,10 @@ Here we take the trimmed_demux-paired-end.qza and create a trimmed_demux-paired-
   --o-visualization trimmed_demux-paired-end.qzv</code></pre>
 <p>Go to <a href="https://view.qiime2.org" class="uri">https://view.qiime2.org</a> and drag and drop to visualise your .qzv file in the browser.</p>
 <p><img src="img/viewqiime.png" alt="“https://view.qiime2.org/”" /><br />
-Now click on the ‘Interactive Quality Plot’ tab. You will see exactly that: Interactive Quality plots that look like this:</p>
+</p>
+<p>Now click on the ‘Interactive Quality Plot’ tab. You will see exactly that: Interactive Quality plots that look like this:<br />
+<img src="img/demux.qza1.png" /><br />
+Note the total number of sequences. You want to retain a high percentage of these after quality filtering with DADA2.</p>
 <div class="figure">
 <img src="img/demux.qza.png" alt="" />
 <p class="caption">“Example of a demux.qzv visualisation”</p>
@@ -597,7 +600,7 @@ From the output decide where to truncate the forward and reverse reads with <cod
   --i-table feature_table.qza \
   --o-visualization feature_table.qzv \
   --m-sample-metadata-file samplesheet.tsv</code></pre>
-<p><strong>Note:</strong> Look at the feature_table.qzv and record median reads per sample</p>
+<p><strong>Note:</strong> Look at the feature_table.qzv and record median reads per sample. Compare the total frequency after denoising with the total sequence count from the trimmed_demux-paired-end.qza. You hope to retain a high percentage of total sequences after denoising with DADA2. It is prudent to report that percentage in your methods.</p>
 <div class="figure">
 <img src="img/feature-table.qzv.png" alt="" />
 <p class="caption">“feature_table.qzv output”</p>

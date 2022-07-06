@@ -135,7 +135,12 @@ Go to https://view.qiime2.org and drag and drop to visualise your .qzv file in t
   
 !["https://view.qiime2.org/"](./img/viewqiime.png)
   \
+  
+
 Now click on the 'Interactive Quality Plot' tab. You will see exactly that: Interactive Quality plots that look like this:  
+![](./img/demux.qza1.png)  
+Note the total number of sequences. You want to retain a high percentage of these after quality filtering with DADA2.       
+  
   
 !["Example of a demux.qzv visualisation"](./img/demux.qza.png)  
   
@@ -185,7 +190,7 @@ qiime feature-table summarize \
   --o-visualization feature_table.qzv \
   --m-sample-metadata-file samplesheet.tsv
 ```
-**Note:** Look at the feature_table.qzv and record median reads per sample
+**Note:** Look at the feature_table.qzv and record median reads per sample. Compare the total frequency after denoising with the total sequence count from the trimmed_demux-paired-end.qza. You hope to retain a high percentage of total sequences after denoising with DADA2. It is prudent to report that percentage in your methods.    
   
   
 !["feature_table.qzv output"](./img/feature-table.qzv.png)

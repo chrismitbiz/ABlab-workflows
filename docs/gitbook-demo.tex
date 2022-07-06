@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-07-06}
+\date{2022-07-07}
 
 \begin{document}
 \maketitle
@@ -694,7 +694,10 @@ qiime demux summarize \
 Go to \url{https://view.qiime2.org} and drag and drop to visualise your .qzv file in the browser.
 
 \includegraphics{./img/viewqiime.png}\\
-Now click on the `Interactive Quality Plot' tab. You will see exactly that: Interactive Quality plots that look like this:
+
+Now click on the `Interactive Quality Plot' tab. You will see exactly that: Interactive Quality plots that look like this:\\
+\includegraphics{./img/demux.qza1.png}\\
+Note the total number of sequences. You want to retain a high percentage of these after quality filtering with DADA2.
 
 \begin{figure}
 \centering
@@ -746,7 +749,7 @@ qiime feature-table summarize \
   --m-sample-metadata-file samplesheet.tsv
 \end{verbatim}
 
-\textbf{Note:} Look at the feature\_table.qzv and record median reads per sample
+\textbf{Note:} Look at the feature\_table.qzv and record median reads per sample. Compare the total frequency after denoising with the total sequence count from the trimmed\_demux-paired-end.qza. You hope to retain a high percentage of total sequences after denoising with DADA2. It is prudent to report that percentage in your methods.
 
 \begin{figure}
 \centering
@@ -892,7 +895,7 @@ In this chapter you will learn how to import Qiime2-produced ASV tables, taxonom
 Reference: {[}1{]} C. Jiang, S.J. McIlroy, R. Qi, F. Petriglieri, E. Yashiro, Z. Kondrotaite, P.H. Nielsen, Identification of microorganisms responsible for foam formation in mesophilic anaerobic digesters treating surplus activated sludge, Water Res. 191 (2021) 116779. \url{https://doi.org/10.1016/j.watres.2020.116779}.
 
 Sample IDs\\
-You decide on the samplesIDs before you start your library prep and sequencing. In this dataset the sampleIDs are longer, e.g.~``SRR12204258'' and ``SRR12204269'', compared to the previous chapter, where the SampleIDs were short, e.g.~``PT-01'', ``PT-02''. It does not matter how you label each of your indexed samples as long as the IDs are unique. And each unique sample ID in the \texttt{samplesheet.csv} needs to match the sample IDs of the \texttt{feature\_table.qza}. You may recall those IDs originate from your Miseq run and are the same sample IDs that are used on the loading manifest file to prepare the run. They subsequently are part of the FastQ filenames and flow through into any relevant Qiime2 data. If a sample ID does not match or if there is a different number of samples between these two input files, then phyloseq will complain.\\
+You decide on the samplesIDs before you start your library prep and sequencing. For this chapter we use a different dataset to the previous chatper and its sampleIDs are longer, e.g.~``SRR12204258'' and ``SRR12204269'', compared to ``PT-01'', ``PT-02'' in the previous chapter. It does not matter how you label each of your indexed samples as long as the IDs are unique. And each unique sample ID in the \texttt{samplesheet.csv} needs to match the sample IDs of the \texttt{feature\_table.qza}. You may recall those IDs originate from your Miseq run and are the same sample IDs that are used on the loading manifest file to prepare the run. They subsequently are part of the FastQ filenames and flow through into any relevant Qiime2 data. If a sample ID does not match or if there is a different number of samples between these two input files, then phyloseq will complain.\\
 \strut \\
 
 Here the first three Sample IDs (``SRR12204258'' and ``SRR12204269'' etc..) in the ASV table from this data set.:\\
@@ -1079,8 +1082,7 @@ Then filter out any phyla that came up as uncharacterized and taxa that came up 
   
 \CommentTok{\# Filter out non{-}bacteria, mitochondia and chloroplast taxa}
 \NormalTok{ps.flt }\OtherTok{\textless{}{-}}\NormalTok{ ps.flt }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{subset\_taxa}\NormalTok{(Kingdom }\SpecialCharTok{==} \StringTok{"Bacteria"} \SpecialCharTok{\&}\NormalTok{ Family  }\SpecialCharTok{!=} \StringTok{"Mitochondria"} \SpecialCharTok{\&}\NormalTok{ Class   }\SpecialCharTok{!=} \StringTok{"Chloroplast"}
- \SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Phylum))}
+  \FunctionTok{subset\_taxa}\NormalTok{(Kingdom }\SpecialCharTok{==} \StringTok{"Bacteria"} \SpecialCharTok{\&}\NormalTok{ Family  }\SpecialCharTok{!=} \StringTok{"Mitochondria"} \SpecialCharTok{\&}\NormalTok{ Class   }\SpecialCharTok{!=} \StringTok{"Chloroplast"}\NormalTok{)}
 
 \CommentTok{\# ps.flt (not run)}
 \CommentTok{\# phyloseq{-}class experiment{-}level object}
@@ -1160,7 +1162,7 @@ I typically use the rarefaction curve to check if there are samples that need re
 \end{Highlighting}
 \end{Shaded}
 
-Once you identified the samples you would like to remove, you can filter out specific samples or treatments from the phyloseq objects. For example, with the \texttt{prune\_samples(sample\_data(ps.flt)\$Treatment\ \%notin\%\ c("Negative"),\ ps.flt)} command here we would sample out any samples labeled as ``Negative'' in the metadata. Afterwards make sure to sample out any taxa that now contain zero reads because they were only present in the removed samples. Perhaps, create new phyloseq objects to differentiate from your different filtered object \texttt{ps.flt.flt\ \textless{}-\ prune\_taxa(taxa\_sums(ps.flt.flt)\ !=\ 0,\ ps.flt.flt)}.
+Once you identified the samples you would like to remove, you can filter out specific samples or treatments from the phyloseq objects. For example, with the \texttt{prune\_samples(sample\_data(ps.flt)\$Treatment\ \%notin\%\ c("Negative"),\ ps.flt)} command here we would sample out any samples labeled as ``Negative'' in the metadata. Afterwards make sure to sample out any taxa that now contain zero reads because they were only present in the removed samples. Perhaps, create new phyloseq objects to differentiate from your different filtered object \texttt{ps.flt.flt\ \textless{}-\ prune\_taxa(taxa\_sums(ps.flt)\ !=\ 0,\ ps.flt)}.
 
 In this example, we are keeping the sample with lowest reads. No further filtering required at this stage.
 
