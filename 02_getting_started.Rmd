@@ -2,7 +2,7 @@
 
 
 Prerequisites will be listed in each sub chapter separately. 
-Following a few general recommendations:  
+Following a few general comments:  
   
 **Access to computational resources**
   

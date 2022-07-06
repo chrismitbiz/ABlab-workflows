@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.2" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-quality-and-concentration"><i class="fa fa-check"></i><b>3.2.2</b> DNA quality and concentration</a></li>
 <li class="chapter" data-level="3.2.3" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-normalisation"><i class="fa fa-check"></i><b>3.2.3</b> DNA normalisation</a></li>
 <li class="chapter" data-level="3.2.4" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#first-and-second-pcr---amplicon-pcr-and-indexing-pcr"><i class="fa fa-check"></i><b>3.2.4</b> First and second PCR - Amplicon PCR and Indexing PCR</a></li>
-<li class="chapter" data-level="3.2.5" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#normalisation-of-indexed-amplicons"><i class="fa fa-check"></i><b>3.2.5</b> Normalisation of Indexed amplicons</a></li>
+<li class="chapter" data-level="3.2.5" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#normalisation-of-indexed-amplicons"><i class="fa fa-check"></i><b>3.2.5</b> Normalisation of indexed amplicons</a></li>
 <li class="chapter" data-level="3.2.6" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#pooling"><i class="fa fa-check"></i><b>3.2.6</b> Pooling</a></li>
 <li class="chapter" data-level="3.2.7" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#denaturing-of-pool-and-loading-of-the-miseq"><i class="fa fa-check"></i><b>3.2.7</b> Denaturing of pool and loading of the Miseq</a></li>
 <li class="chapter" data-level="3.2.8" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#consumables"><i class="fa fa-check"></i><b>3.2.8</b> Consumables</a></li>
@@ -260,7 +260,7 @@ Preparation</a> protocol from Illumina with 10% Phix. <strong>Download it, study
 <ul>
 <li>Quality is assessed using a Nanodrop Spectrophotometer. You are aiming for <strong>260/280 Ratio of 1.8 and a 260/230 Ratio of 2-2.2</strong>. This is explained in the <a href="https://dna.uga.edu/wp-content/uploads/sites/51/2019/02/Note-on-the-260_280-and-260_230-Ratios.pdf">T042‐TECHNICAL BULLETIN</a>. The Nanopore also estimates DNA concentrations but it is not recommended to use these concentrations measurements to normalise DNA. It is more accurate and consistent with a Qubit Fluorometer.<br />
 </li>
-<li>DNA Concentrations are best measured using fluorescent dye-based methods such as the <strong>Qubit Fluorometer</strong>. It is easist to use the ‘<em>1X</em>’ assays such as the <em>Qubit 1X dsDNA BR Assay Kit</em> or the <em>Qubit 1X dsDNA HS Assay Kit</em>
+<li>DNA concentrations are best measured using fluorescent dye-based methods such as the <strong>Qubit Fluorometer</strong>. It is easist to use the ‘<em>1X</em>’ assays such as the <em>Qubit 1X dsDNA BR Assay Kit</em> or the <em>Qubit 1X dsDNA HS Assay Kit</em>
 <ul>
 <li>Broad range (BR) Kit for quantifying extracted environmental DNA and afte the 2nd stage PCR.</li>
 <li>High Sensitivity (HS) Kit for quantifying the pool at the end.</li>
@@ -303,7 +303,7 @@ Repeat any samples that failed, i.e. that do not show any bands, and ensure you
 </p>
 </div>
 <div id="normalisation-of-indexed-amplicons" class="section level3 hasAnchor" number="3.2.5">
-<h3><span class="header-section-number">3.2.5</span> Normalisation of Indexed amplicons<a href="miseq-library-preps.html#normalisation-of-indexed-amplicons" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">3.2.5</span> Normalisation of indexed amplicons<a href="miseq-library-preps.html#normalisation-of-indexed-amplicons" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>After you finished all PCR work it is time to do another round of Qubitting and normalisation of all samples into a new 96-well plate. The final pool should be 4 nM but we prefer to normalise DNA to a higher concentration first, say 10 nM, then pool and then dilute the pool to 4 nM afterwards.<br />
 We are using a very handy excel sheet, which was kindly developed and provided by <a href="https://scholars.latrobe.edu.au/sknowler">Sarah Knowler</a> at La Trobe University to prepare and assist in normalisations, converting from ng/µl to nM using the formula:</p>
 <p><span class="math display">\[ concentrations~(ng/µl)  \over 660 g/mol~x~average~library~size\]</span>

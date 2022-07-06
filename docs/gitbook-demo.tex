@@ -172,7 +172,7 @@ We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne. Email me or 
 \chapter{Getting started}\label{gettingstarted}}
 
 Prerequisites will be listed in each sub chapter separately.
-Following a few general recommendations:
+Following a few general comments:
 
 \textbf{Access to computational resources}
 
@@ -342,7 +342,7 @@ Once you have extracted DNA it is necessary to confirm its quality and concentra
 \item
   Quality is assessed using a Nanodrop Spectrophotometer. You are aiming for \textbf{260/280 Ratio of 1.8 and a 260/230 Ratio of 2-2.2}. This is explained in the \href{https://dna.uga.edu/wp-content/uploads/sites/51/2019/02/Note-on-the-260_280-and-260_230-Ratios.pdf}{T042‐TECHNICAL BULLETIN}. The Nanopore also estimates DNA concentrations but it is not recommended to use these concentrations measurements to normalise DNA. It is more accurate and consistent with a Qubit Fluorometer.\\
 \item
-  DNA Concentrations are best measured using fluorescent dye-based methods such as the \textbf{Qubit Fluorometer}. It is easist to use the `\emph{1X}' assays such as the \emph{Qubit 1X dsDNA BR Assay Kit} or the \emph{Qubit 1X dsDNA HS Assay Kit}
+  DNA concentrations are best measured using fluorescent dye-based methods such as the \textbf{Qubit Fluorometer}. It is easist to use the `\emph{1X}' assays such as the \emph{Qubit 1X dsDNA BR Assay Kit} or the \emph{Qubit 1X dsDNA HS Assay Kit}
 
   \begin{itemize}
   \tightlist
@@ -406,7 +406,7 @@ Repeat any samples that failed, i.e.~that do not show any bands, and ensure you 
 \hfill\break
 
 \hypertarget{normalisation-of-indexed-amplicons}{%
-\subsection{Normalisation of Indexed amplicons}\label{normalisation-of-indexed-amplicons}}
+\subsection{Normalisation of indexed amplicons}\label{normalisation-of-indexed-amplicons}}
 
 After you finished all PCR work it is time to do another round of Qubitting and normalisation of all samples into a new 96-well plate. The final pool should be 4 nM but we prefer to normalise DNA to a higher concentration first, say 10 nM, then pool and then dilute the pool to 4 nM afterwards.\\
 We are using a very handy excel sheet, which was kindly developed and provided by \href{https://scholars.latrobe.edu.au/sknowler}{Sarah Knowler} at La Trobe University to prepare and assist in normalisations, converting from ng/µl to nM using the formula:
@@ -1107,7 +1107,7 @@ Then filter out any phyla that came up as uncharacterized and taxa that came up 
 \hypertarget{rarefaction-curve}{%
 \subsection{Rarefaction curve}\label{rarefaction-curve}}
 
-Check if you cover enough depth for diversity analyses. Some samples may have low species richness, including a negative or samples that failed during PCR for example. The rarefaction curve will help assess which samples you may have to exclude from subsequent diversity calculations. It also provides a general view if most sample
+Check if you cover enough depth for diversity analyses. Some samples may have low species richness, including a negative or samples that failed during PCR for example. The rarefaction curve will help assess which samples you may have to exclude from subsequent diversity calculations. It also provides a general view if samples cover enough of the potential richness (Number of ASVs).
 
 The curve shows you the number of `Species' (i.e.~ASVs) on the y axis and the total reads on the x axis for each sample. So basically, it shows how rich each sample is and indicates if the number of reads that are captured in a samples covers enough of the ASVs. If the curve flattens, it indicates that the sample would not get any richer even with more reads\ldots{}
 
