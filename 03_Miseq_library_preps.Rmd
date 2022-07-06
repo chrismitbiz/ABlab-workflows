@@ -1,13 +1,13 @@
 # Miseq library preps 
 
+## Introduction  
+  
 **Some info on getting your run ready**
-
-**Overview**
   
 In our lab we usually prepare a 6-10 pM pool of libraries following the [16S Metagenomic Sequencing Library
 Preparation](https://sapac.support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/16s/16s-metagenomic-library-prep-guide-15044223-b.pdf) protocol from Illumina with 10% Phix. **Download it, study it and refer to it throughout your labwork**. This protocol is not limited to 16S amplicons. You can use it for fungal (e.g. ITS) amplicons too. In the last section there are also valuable tips for pre‐PCR and post‐PCR lab procedures. There is also some additional Illumina guidance here: https://sapac.support.illumina.com/downloads/16s_metagenomic_sequencing_library_preparation.html
     
-  
+### Overview    
 The protocol encompasses the following steps (copied out of the protocol):
 ![](./img/16Slibraryprotocolworkflow.png)
     
@@ -25,9 +25,9 @@ After all steps in the above protocol are completed, the Miseq will be loaded wi
   
 Throughout the 56 hours run you can check how things are tracking either on the BaseSpace website or the BaseSpace phone app. Understanding different QC metrics will help identifying potential problems with the pool or the instrument. It is important to note that this is a bit of a nerve-wrecking moment in the process, as it remains unclear until the metrics come through after around the 21st cycle, whether or not the run will be successful.  
   \
-     \
-  
-**1. DNA extraction** 
+     
+## Workflow  
+### DNA extraction
   
 !["DNA extracts"](./img/dna.jpeg)
   
@@ -46,7 +46,7 @@ Sludge
      \
      \
   
-**2. DNA quality and concentration** 
+### DNA quality and concentration 
   
 Once you have extracted DNA it is necessary to confirm its quality and concentration. 
  
@@ -58,7 +58,7 @@ Once you have extracted DNA it is necessary to confirm its quality and concentra
 !["The ready-mix working solution for Qubit, which includes dye and buffer. No preparation/premixing required."](./img/qubit.png)
     
   
-**3. DNA normalisation** 
+### DNA normalisation
   
 The next step is to normalise all DNA extracts to 5 ng/µl.  
   
@@ -68,7 +68,7 @@ $$ C_1V_1 = V_2 C_2 $$
      \
   
   
-**4. First and second PCR - Amplicon PCR and Indexing PCR** 
+### First and second PCR - Amplicon PCR and Indexing PCR 
   
 Follow the [16S Metagenomic Sequencing Library
 Preparation](https://sapac.support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/16s/16s-metagenomic-library-prep-guide-15044223-b.pdf) Guide. Include a negative control and sequence that as well. This allows you to assess background and cross contamination. The whole workflow is best done in 96-well plates, using multi-channel pipettes to avoid indexing mistakes across wells.  
@@ -99,7 +99,7 @@ Repeat any samples that failed, i.e. that do not show any bands, and ensure you 
   
   \
   
-**5. Normalisation of Indexed amplicons**    
+### Normalisation of Indexed amplicons
   
 After you finished all PCR work it is time to do another round of Qubitting and normalisation of all samples into a new 96-well plate. The final pool should be 4 nM but we prefer to normalise DNA to a higher concentration first, say 10 nM, then pool and then dilute the pool to 4 nM afterwards.  
 We are using a very handy excel sheet, which was kindly developed and provided by [Sarah Knowler](https://scholars.latrobe.edu.au/sknowler) at La Trobe University to prepare and assist in normalisations, converting from ng/µl to nM using the formula:  
@@ -110,7 +110,7 @@ Contact us if you would like to get a copy of this very handy library preparatio
 Some more information here: https://support.illumina.com/content/dam/illumina-support/documents/documentation/system_documentation/miseq/miseq-denature-dilute-libraries-guide-15039740-10.pdf. There’s also a pooling calculator here https://support.illumina.com/help/pooling-calculator/pooling-calculator.htm which may be helpful with your calculations.   
   \
   
-**6. Pooling**  
+### Pooling  
   
 * Pipette equal volumes of the normalised DNA into one 1.5 ml tube.  
 * Measure its concentration using the High Sensitivity (HS) Qubit 1X dsDNA HS Assay Kit.  
@@ -120,7 +120,7 @@ Some more information here: https://support.illumina.com/content/dam/illumina-su
   
   \
   
-**7. Denaturing of pool and loading of the Miseq**  
+### Denaturing of pool and loading of the Miseq  
   
 Now you are almost ready load the Miseq. The last steps are done right before you plan to load the instrument. First the pool DNA needs to be denatured, mixed with PhiX and then diluted further to your preferred loading concentration (6 - 10 pM). The final concentrations impact on cluster densities. That means you get more data with higher concentrations but that is at the expense of potential errors during sequencing at high cluster densities. I am still not quite sure what the ideal concentration is. Please let me know if you know more.  
   
@@ -138,7 +138,7 @@ The key for the final steps are that..
 !["Example of a manifest file"](./img/manifestfile.png)
    
   
-**8. Consumables**  
+### Consumables  
   
 All consumables and equipment required for the 16S Miseq library prep protocol are available from page 21 of the  above mentioned [16S Metagenomic Sequencing Library
 Preparation](https://sapac.support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/16s/16s-metagenomic-library-prep-guide-15044223-b.pdf) Guide.  

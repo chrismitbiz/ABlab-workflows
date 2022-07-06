@@ -4,7 +4,6 @@
 
 In this chapter you will learn how to process the FASTQ files that are generated from an amplicon sequencing run on a Miseq instrument. We are using Qiime2. Please also refer to the extensive documentation and tutorials available at https://qiime2.org. You can learn almost everything there.  
   
-  \
   
 ### Prerequisites and required files
   
@@ -155,11 +154,8 @@ length forward read + length reverse read - length amplicon - truncated basepair
 So, for example, if we picked `--p-trunc-len-f 272` and `--p-trunc-len-r 151`, we get 
 $$301 + 301 - 292 - 29  - 150 = 131~bp~overlap$$  
   
-  \
   
 In cases where the quality of the reverse reads is very poor, or the amplicon is too long for pairing to work, it is also acceptable to import, trim and denoise only the forward reads. The V4 primer of this example, is nice and short at 292 basepairs, so is great for pairing even at lower reverse-read qualities.  
-  
-  \
   
 ### Denoise paired end sequences with dada2 (Step 3)  
   
