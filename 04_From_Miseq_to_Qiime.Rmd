@@ -1,10 +1,12 @@
 # From BaseSpace to Qiime2 and DADA2
 
+## Introduction  
+
 In this chapter you will learn how to process the FASTQ files that are generated from an amplicon sequencing run on a Miseq instrument. We are using Qiime2. Please also refer to the extensive documentation and tutorials available at https://qiime2.org. You can learn almost everything there.  
   
   \
   
-**Prerequisites**  
+### Prerequisites and required files
   
 * FASTQ files available to download on BaseSpace. Two for each sample. One for read 1 (R1) and another for read 2 (R2). For example, `PT-01_S1_L001_R1_001.fastq.gz` and `PT-01_S1_L001_R2_001.fastq.gz` contains all sequences for sample PT-01.
 * Personal computer or cloud computational resources with > 4 CPUS,  > 16 RAM, > 100 GB storage recommended.  
@@ -12,25 +14,7 @@ In this chapter you will learn how to process the FASTQ files that are generated
 * Qiime2 installed. Always use the latest version.  
 * All required files in correct format and file extension (see below).  
 * The BaseSpace Downloader software (available on the BaseSpace page. You will be prompted to download once you go to your files).   
-
   
-  \
-  
-**Download FASTQ files**  
-  
-In this example, Fastq files were produced from sequencing 16SrRNA marker genes on an Illumina Miseq instrument. If you ran your own library on your own BaseSpace account, the files should be available to download from that BaseSpace account. If the run was created by another user, that person can invite you to the run, which gives you access to download the files too.   
-  
-Log in to BaseSpace and into your project. Go to files, run and download FastQ.  You will  be asked to install a downloader software. Follow instructions accordingly.  
-![](./img/basespacedownload.png)  
-  
-![](./img/basespacedownload2.png)  
-  \
-  
-The FASTQ files will come in separate folders for each sample. It is necessary to move all files into just ONE folder. That folder will then be used to import the sequences into a qiime object (described below). 
-  
-  \
-  
-**Required Files**  
   
 `Qiimeimportmanifest.tsv` - A tab separated file with three columns where the first column is the sample ID (The exact same ID that was used in the manifest file for loading the Miseq).  The second and third columns are the absolute paths to the forward and reverse FASTQ files, respectively. If you are working on a cloud computer then the FASTQ files should be uploaded to that, and the path needs to contain the full path to the relevant folder, including the full name of the file itself. If you process those files on your local drive then the paths need to change to your local folder containing the FASTQ files. In the below example table, the files are located on a Linux cloud computer (Nectar Research Cloud).  
   
@@ -86,9 +70,23 @@ echo "Finished at: $(date)"
   
 Slurm and `sbatch` are not needed if you manage your own computer or your 'own' cloud computer. In the example below we are using a Linux cloud computer, provided by the Nectar Research Cloud so we dont need Slurm. 
   
+  
+## Workflow  
+
+### Download FASTQ files
+  
+In this example, Fastq files were produced from sequencing 16SrRNA marker genes on an Illumina Miseq instrument. If you ran your own library on your own BaseSpace account, the files should be available to download from that BaseSpace account. If the run was created by another user, that person can invite you to the run, which gives you access to download the files too.   
+  
+Log in to BaseSpace and into your project. Go to files, run and download FastQ.  You will  be asked to install a downloader software. Follow instructions accordingly.  
+![](./img/basespacedownload.png)  
+  
+![](./img/basespacedownload2.png)  
   \
   
-**Paired end manifest import (Step 1)**  
+The FASTQ files will come in separate folders for each sample. It is necessary to move all files into just ONE folder. That folder will then be used to import the sequences into a qiime object (described below). 
+  
+
+### Paired end manifest import (Step 1)
    
 Go to the folder that contains all the FASTQ files (all files in one folder). I.e. in Unix/Linux use `cd path/to/folder/` to navigate to it. The scriptfile.txt should also be located here. The following qiime command that will look for the files and then create a qiime object using the sequences found in each FASTQ file. The `--output-path` instructs qiime where to place and how to name the output file, here demux-paired-end.qza is placed into the same directory.    
 Remove any # in front of your code (already removed in the below example) and execute the scriptfile.txt with `sh scriptfile.txt` (or `sbatch scriptfile.txt` in case you are using Slurm).  
@@ -102,7 +100,7 @@ qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' \
   
   \
   
-**Cutadapt (Step 2)**  
+### Cutadapt (Step 2) 
    
 If all goes well you should now have a demux-paired-end.qza file in the same directory as your FASTQ files , which contains all your sequences. You could move demux-paired-end.qza to another folder and continue all other steps there if you wish. The FASTQ files are not needed anymore.  Dont forget to move your script file to where it is most convenient for executing the commands. If you moved the demux-paired-end.qza to another folder it is probably easiest to also move the script file that the same directory (or create a second script file containing the remaining commands).  
   
@@ -120,6 +118,8 @@ qiime cutadapt trim-paired \
 ```
   \
   
+### Read quality assessment  
+
 **Visualise the output with a .qzv file**  
   
 The .qza files can be visualised by 'converting' them into .qzv files.  
@@ -161,7 +161,7 @@ In cases where the quality of the reverse reads is very poor, or the amplicon is
   
   \
   
-**Denoise paired end sequences with dada2 (Step 3)**  
+### Denoise paired end sequences with dada2 (Step 3)  
   
 Once the trimming and max-ee parameters are decided, it is time to run the DADA2 function.  This may take a while, depending on total number of samples.  
   
@@ -196,7 +196,7 @@ qiime feature-table summarize \
   
   \
   
-**Taxonomic classifier and assignment (Step 4)**  
+### Taxonomic classifier and assignment (Step 4)  
   
 The next step is to assign taxonomies to the sequences in the denoised sample sequences. Here, we use a pre-trained classifier that is based on the Silva database. This pre-trained classifier is available on the data resource page of Qiime (Most current link at the time of writing: https://docs.qiime2.org/2022.2/data-resources).  
   
@@ -222,8 +222,8 @@ qiime metadata tabulate \
   
   \
   
-**Build phylogenetic tree (Step 5)**  
-  
+### Build phylogenetic tree (Step 5)  
+
 The next step is not essential but really good to have. Creating a phylogenetic tree from the amplicon sequences.  
   
 In this case we are using the insertion tree method. See https://library.qiime2.org/plugins/q2-fragment-insertion/16/ for more information in this method.  
@@ -255,7 +255,7 @@ This will be covered in the next chapter.
   
   
    
-**All steps combined**  
+### All steps combined 
  
 Copy and paste this into your script file if needed. 
   
