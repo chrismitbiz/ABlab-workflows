@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-07-07}
+\date{2022-07-08}
 
 \begin{document}
 \maketitle
@@ -935,7 +935,11 @@ Now let's work in R!
 \hypertarget{packages}{%
 \subsection{Packages}\label{packages}}
 
-First install the required packages. Some packages are stored on `remote' repositories such as GitHub, hence before you can install them you need helper packages such as \texttt{remotes}. Other packages, such as phyloseq are managed by BioConductor project. They provide their own package manager package for R called BiocManager, which helps to install from the same release. Both, remotes and BiocManager are already installed in the below example.\\
+First install the required packages. Some packages are stored on `remote' repositories such as GitHub, hence before you can install them you need helper packages such as \texttt{remotes}. Other packages, such as \texttt{phyloseq} are managed by BioConductor project. They provide their own package manager package for R called \texttt{BiocManager}, which helps to install from the same release.
+
+Learn more about phyloseq in their very comprehensive documnetations: \url{https://joey711.github.io/phyloseq/}
+
+Both, remotes and BiocManager are already installed in the below example.\\
 Once the packages are installed, load them into your working space.
 
 \begin{Shaded}
@@ -981,7 +985,7 @@ In the previous chapter, we used a \texttt{samplesheet.tsv} to visualise and sum
 
 \CommentTok{\# Qiime import                      }
 \NormalTok{SVs }\OtherTok{\textless{}{-}}\NormalTok{  qiime2R}\SpecialCharTok{::}\FunctionTok{read\_qza}\NormalTok{(}\StringTok{"qiimefiles/featuretable{-}insertiontree{-}filtered.qza"}\NormalTok{)}
-\NormalTok{ASVtable }\OtherTok{\textless{}{-}}\NormalTok{ SVs}\SpecialCharTok{$}\NormalTok{data   }\CommentTok{\# extract the data table}
+\NormalTok{ASVtable }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(SVs}\SpecialCharTok{$}\NormalTok{data)   }\CommentTok{\# extract the data table, this has to be a dataframe}
 
 \CommentTok{\# Taxonomy}
 \NormalTok{taxonomy }\OtherTok{\textless{}{-}}\NormalTok{ qiime2R}\SpecialCharTok{::}\FunctionTok{read\_qza}\NormalTok{(}\StringTok{"qiimefiles/taxonomy\_silva.qza"}\NormalTok{) }\CommentTok{\# import the qiime object}
@@ -1044,6 +1048,21 @@ If you wish, you can access each individual data set from the ps object with fun
 \end{Shaded}
 
 \hfill\break
+
+\hypertarget{save-the-ps-object-as-an-.rds-file-into-your-working-directory}{%
+\subsection{\texorpdfstring{Save the \texttt{ps} object as an \texttt{.rds} file into your working directory}{Save the ps object as an .rds file into your working directory}}\label{save-the-ps-object-as-an-.rds-file-into-your-working-directory}}
+
+Optional\\
+This step allows you to save and store the R object as a RDS file and load it back into any future R environment, should you require it. This would be helpful if your workflow is separated into different Rscripts and you want to just load in the RDS file instead of having to import qiime files and create the phyloseq object every time.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{saveRDS}\NormalTok{(ps, }\AttributeTok{file =} \StringTok{"ps\_ProjectX\_2022July"}\NormalTok{)}
+
+\CommentTok{\# to load the file back into your R environment:}
+\CommentTok{\# ps \textless{}{-} readRDS(file = "ps\_ProjectX\_2022July")}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{initial-filtering}{%
 \subsection{Initial filtering}\label{initial-filtering}}

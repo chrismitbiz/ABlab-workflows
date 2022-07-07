@@ -42,7 +42,11 @@ Now let's work in R!
 ## Workflow  
 ### Packages
   
-First install the required packages. Some packages are stored on 'remote' repositories such as GitHub, hence before you can install them you need helper packages such as `remotes`. Other packages, such as phyloseq are managed by BioConductor project. They provide their own package manager package for R called BiocManager, which helps to install from the same release. Both, remotes and BiocManager are already installed in the below example.  
+First install the required packages. Some packages are stored on 'remote' repositories such as GitHub, hence before you can install them you need helper packages such as `remotes`. Other packages, such as `phyloseq` are managed by BioConductor project. They provide their own package manager package for R called `BiocManager`, which helps to install from the same release.  
+  
+Learn more about phyloseq in their very comprehensive documnetations: https://joey711.github.io/phyloseq/  
+  
+Both, remotes and BiocManager are already installed in the below example.  
 Once the packages are installed, load them into your working space.   
   
 ```{r packages, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
@@ -87,7 +91,7 @@ metadata2 <- metadata[c(2:nrow(metadata)),] %>%     # remove the top row and con
 
 # Qiime import                      
 SVs <-  qiime2R::read_qza("qiimefiles/featuretable-insertiontree-filtered.qza")
-ASVtable <- SVs$data   # extract the data table
+ASVtable <- as.data.frame(SVs$data)   # extract the data table, this has to be a dataframe
 
 # Taxonomy
 taxonomy <- qiime2R::read_qza("qiimefiles/taxonomy_silva.qza") # import the qiime object
@@ -148,7 +152,18 @@ tree <- phy_tree(ps)
 ```
   
   \
-   
+
+### Save the `ps` object as an `.rds` file into your working directory     
+Optional  
+This step allows you to save and store the R object as a RDS file and load it back into any future R environment, should you require it.  This would be helpful if your workflow is separated into different  Rscripts and you want to just load in the RDS file instead of having to import qiime files and create the phyloseq object every time.  
+  
+```{r saverds, include=TRUE, echo=TRUE,warning=FALSE, message=FALSE}
+saveRDS(ps, file = "ps_ProjectX_2022July")
+
+# to load the file back into your R environment:
+# ps <- readRDS(file = "ps_ProjectX_2022July")
+
+```
    
 ### Initial filtering    
   
