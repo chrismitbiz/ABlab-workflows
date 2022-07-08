@@ -6,9 +6,9 @@ Some visualisations of alpha and beta diversity.
   
 This chapter introduces you to a basic workflow for plotting alpha and beta diversity using phyloseq and ggplot. It provides examples for loading the phyloseq object from a previously saved .rds file, then how to calculate and include alpha diversity metrics into the sample_data of the phyloseq object, and finally how to plot some of these metrics, individually or combined.
   
-Furthermore, beta diversity, i.e. four different type of ordinations are plotted. The examples, include an non-metric dimensional scaling on Bray-Curtis dissimilaries, Principal Component Analysis (Aitchison distance), Redundancy Analysis ( Aitchison) and a Principal Coordinate Analysis on unweighted uniFrac distances.   
+Furthermore, beta diversity, i.e. four different type of ordinations are plotted. The examples, include non-metric dimensional scaling on Bray-Curtis dissimilaries, Principal Component Analysis (Aitchison distance), Redundancy Analysis ( Aitchison) and a Principal Coordinate Analysis on unweighted uniFrac distances.   
   
-The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: https://sites.google.com/site/mb3gustame/home, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter \@(about). 
+The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: https://sites.google.com/site/mb3gustame/home, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter \@ref(about). 
   
   \
   
@@ -42,9 +42,9 @@ ps  # get an overview of number of taxa and samples contained in the phyloseq ob
   
   \
   
-Check metadata contained in the phyloseq object. This is the original metadata from the public repository where the FastQ files were downloaded from (Sequence Read Archives).  
+Check the metadata contained in the phyloseq object. This is the original metadata from the public repository where the FastQ files were downloaded from (Sequence Read Archives).  
   
-There are 15 columns with some character (chr), factor or integer (int) variables. 
+There are 15 columns containing some character (chr), factor or integer (int) variables. 
   
 ```{r metadatacheck, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
 metadf <- data.frame(sample_data(ps))
@@ -53,7 +53,10 @@ str(metadf)
   
   \
   
-### Pre-processing of phyloseq object   
+### Pre-filter, rarefy and calculate diversity
+  
+Now the diversity indices can be calculated and added to the metadata of the phyloseq object for plotting. First, the abundances are pre-filtered (as shown in the previous chapter), then the ASV abundances are randomly resampled with `phyloseq::rarefy_even_depth`, such that all samples have the same number of ASVs.   
+The diversity indices are then calculated with `phyloseq::estimate_richness` based on these evenly resampled abundances. The dataframe that is created containing the range of indices is then added to the existing metadata of the phyloseq for plotting.  
   
 ```{r alphadiversitypre, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE, error=FALSE}
  
@@ -63,20 +66,20 @@ ps.flt = prune_taxa(taxa_sums(ps) >= 5, ps) #minimum reads per feature
 ps.flt  = subset_taxa(ps.flt , !is.na(Phylum) & !Phylum %in% c(""))
 ps.flt <- ps.flt %>%
   subset_taxa(Kingdom == "Bacteria" & Family  != "Mitochondria" & Class   != "Chloroplast")
-#ps.flt (not run)
+ps.flt 
 
-# phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 3853 taxa and 51 samples ]
-# sample_data() Sample Data:       [ 51 samples by 14 sample variables ]
-# tax_table()   Taxonomy Table:    [ 3853 taxa by 7 taxonomic ranks ]
-# phy_tree()    Phylogenetic Tree: [ 3853 tips and 3852 internal nodes ]
 
 # confirming minimum sample size
 min(colSums(otu_table(ps.flt)))
 
 # rarefy - required before measuring alpha diversity. 
-# This step is to create an abundance table, where the all samples are randomly resamples such that all samples have the same number of ASVs.  
-# It removes any bias but number of re-samples is based on the sample with smallest number of ASVs so one has to check and filter beforehand in case there are samples with very different number of ASVs. I am generally going by a 10x rule. If the lowest number of ASVs is 10x lower than the sample with highest number of ASVs, then I keep that sample in for alpha diversity assessments.  
+# This step is to create an abundance table, where the all samples are randomly 
+# resamples such that all samples have the same number of ASVs.  
+# It removes any bias but number of re-samples is based on the sample with 
+# smallest number of ASVs so one has to check and filter beforehand in case 
+# there are samples with very different number of ASVs. I am generally going 
+# by a 10x rule. If the lowest number of ASVs is 10x lower than the sample with
+# highest number of ASVs, then I keep that sample in for alpha diversity assessments.  
   
 ps_rare <- phyloseq::rarefy_even_depth(ps.flt, 
                                        sample.size = min(colSums(otu_table(ps.flt))),  
@@ -108,7 +111,8 @@ metadf$pielou_ev <- div.df$Shannon/log(div.df$Observed)
 # replace metadata with temp meta.df which includes the diversity indices
 ps.flt@sam_data <- sample_data(metadf)  
 
-# this replaced the old metadata with new metadata that includes the diversity indices for this phyloseq object 
+# this replaced the old metadata with new metadata that includes the diversity 
+# indices for this phyloseq object 
 str(data.frame(sample_data(ps.flt)))
 ```
 
@@ -212,9 +216,9 @@ NMDSplot <- phyloseq::plot_ordination(physeqNMDS,
                                       ordination , 
                                       color = "Location", 
                                       #shape = "Reactor",    
-                                      # option to add shapes to data symbols
+                                      # option to add shapes as data symbols
                                       title = "NMDS") +
-     geom_point(aes(size = pielou_ev), alpha = 0.75) +    # shape size reflective of Pielou, also make transparent 
+     geom_point(aes(size = pielou_ev), alpha = 0.75) +   # shape size in proportion to Pielou Evenness, also make transparent 
      annotate(geom = 'text', label = paste("Bray-Curtis, Stress = ", label), 
              x = -Inf, y = -Inf, hjust = -0.05, vjust = -1, size = 3)  +
      scale_color_manual(values = cols)
@@ -240,9 +244,9 @@ PCAplot <- phyloseq::plot_ordination(physeqPCA,
                                       ordination , 
                                       color = "Location", 
                                       #shape = "Reactor", 
-                                     # option to add shapes to data symbols
+                                     # option to add shapes as data symbols
                                       title = "Principle Component Analysis") +
-     geom_point(aes(size = pielou_ev)) +    # shape size reflective of Pielou 
+     geom_point(aes(size = pielou_ev)) +    # # shape size in proportion to Pielou Evenness
     annotate(geom = 'text', label = paste("Aitchison distances"), 
              x = -Inf, y = -Inf, hjust = -0.05, vjust = -1, size = 3)  + 
     scale_color_manual(values = cols)
@@ -289,7 +293,7 @@ RDAplot <- phyloseq::plot_ordination(physeqPCA, ordination ,
   geom_vline(xintercept=0, linetype="dashed", color = "gray") +    # shape size reflective of Pielou  
      annotate(geom = 'text', label = paste("Aitchison distances"), 
              x = -Inf, y = -Inf, hjust = -0.05, vjust = -1, size = 3) +
-  geom_point(aes(size = pielou_ev)) +        # shape size reflective of Pielou Evenness
+  geom_point(aes(size = pielou_ev)) +        # shape size in proportion to Pielou Evenness
   #scale_colour_gradient(low = colourlow, high = colourhigh) +
   ggtitle("RDA Abundances (clr) ~ Location") +
   scale_color_manual(values = cols)

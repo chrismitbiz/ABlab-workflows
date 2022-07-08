@@ -1357,9 +1357,9 @@ Some visualisations of alpha and beta diversity.
 
 This chapter introduces you to a basic workflow for plotting alpha and beta diversity using phyloseq and ggplot. It provides examples for loading the phyloseq object from a previously saved .rds file, then how to calculate and include alpha diversity metrics into the sample\_data of the phyloseq object, and finally how to plot some of these metrics, individually or combined.
 
-Furthermore, beta diversity, i.e.~four different type of ordinations are plotted. The examples, include an non-metric dimensional scaling on Bray-Curtis dissimilaries, Principal Component Analysis (Aitchison distance), Redundancy Analysis ( Aitchison) and a Principal Coordinate Analysis on unweighted uniFrac distances.
+Furthermore, beta diversity, i.e.~four different type of ordinations are plotted. The examples, include non-metric dimensional scaling on Bray-Curtis dissimilaries, Principal Component Analysis (Aitchison distance), Redundancy Analysis ( Aitchison) and a Principal Coordinate Analysis on unweighted uniFrac distances.
 
-The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: \url{https://sites.google.com/site/mb3gustame/home}, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter @(about).
+The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: \url{https://sites.google.com/site/mb3gustame/home}, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter \ref{about}.
 
 \hfill\break
 
@@ -1409,9 +1409,9 @@ For detail on how to create a phyloseq object please see chapter \ref{Qiime2R}.
 
 \hfill\break
 
-Check metadata contained in the phyloseq object. This is the original metadata from the public repository where the FastQ files were downloaded from (Sequence Read Archives).
+Check the metadata contained in the phyloseq object. This is the original metadata from the public repository where the FastQ files were downloaded from (Sequence Read Archives).
 
-There are 15 columns with some character (chr), factor or integer (int) variables.
+There are 15 columns containing some character (chr), factor or integer (int) variables.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1441,8 +1441,11 @@ There are 15 columns with some character (chr), factor or integer (int) variable
 
 \hfill\break
 
-\hypertarget{pre-processing-of-phyloseq-object}{%
-\subsection{Pre-processing of phyloseq object}\label{pre-processing-of-phyloseq-object}}
+\hypertarget{pre-filter-rarefy-and-calculate-diversity}{%
+\subsection{Pre-filter, rarefy and calculate diversity}\label{pre-filter-rarefy-and-calculate-diversity}}
+
+Now the diversity indices can be calculated and added to the metadata of the phyloseq object for plotting. First, the abundances are pre-filtered (as shown in the previous chapter), then the ASV abundances are randomly resampled with \texttt{phyloseq::rarefy\_even\_depth}, such that all samples have the same number of ASVs.\\
+The diversity indices are then calculated with \texttt{phyloseq::estimate\_richness} based on these evenly resampled abundances. The dataframe that is created containing the range of indices is then added to the existing metadata of the phyloseq for plotting.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1452,14 +1455,20 @@ There are 15 columns with some character (chr), factor or integer (int) variable
 \NormalTok{ps.flt  }\OtherTok{=} \FunctionTok{subset\_taxa}\NormalTok{(ps.flt , }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Phylum) }\SpecialCharTok{\&} \SpecialCharTok{!}\NormalTok{Phylum }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{""}\NormalTok{))}
 \NormalTok{ps.flt }\OtherTok{\textless{}{-}}\NormalTok{ ps.flt }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{subset\_taxa}\NormalTok{(Kingdom }\SpecialCharTok{==} \StringTok{"Bacteria"} \SpecialCharTok{\&}\NormalTok{ Family  }\SpecialCharTok{!=} \StringTok{"Mitochondria"} \SpecialCharTok{\&}\NormalTok{ Class   }\SpecialCharTok{!=} \StringTok{"Chloroplast"}\NormalTok{)}
-\CommentTok{\#ps.flt (not run)}
+\NormalTok{ps.flt }
+\end{Highlighting}
+\end{Shaded}
 
-\CommentTok{\# phyloseq{-}class experiment{-}level object}
-\CommentTok{\# otu\_table()   OTU Table:         [ 3853 taxa and 51 samples ]}
-\CommentTok{\# sample\_data() Sample Data:       [ 51 samples by 14 sample variables ]}
-\CommentTok{\# tax\_table()   Taxonomy Table:    [ 3853 taxa by 7 taxonomic ranks ]}
-\CommentTok{\# phy\_tree()    Phylogenetic Tree: [ 3853 tips and 3852 internal nodes ]}
+\begin{verbatim}
+## phyloseq-class experiment-level object
+## otu_table()   OTU Table:         [ 3853 taxa and 51 samples ]
+## sample_data() Sample Data:       [ 51 samples by 15 sample variables ]
+## tax_table()   Taxonomy Table:    [ 3853 taxa by 7 taxonomic ranks ]
+## phy_tree()    Phylogenetic Tree: [ 3853 tips and 3852 internal nodes ]
+\end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# confirming minimum sample size}
 \FunctionTok{min}\NormalTok{(}\FunctionTok{colSums}\NormalTok{(}\FunctionTok{otu\_table}\NormalTok{(ps.flt)))}
 \end{Highlighting}
@@ -1472,8 +1481,13 @@ There are 15 columns with some character (chr), factor or integer (int) variable
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# rarefy {-} required before measuring alpha diversity. }
-\CommentTok{\# This step is to create an abundance table, where the all samples are randomly resamples such that all samples have the same number of ASVs.  }
-\CommentTok{\# It removes any bias but number of re{-}samples is based on the sample with smallest number of ASVs so one has to check and filter beforehand in case there are samples with very different number of ASVs. I am generally going by a 10x rule. If the lowest number of ASVs is 10x lower than the sample with highest number of ASVs, then I keep that sample in for alpha diversity assessments.  }
+\CommentTok{\# This step is to create an abundance table, where the all samples are randomly }
+\CommentTok{\# resamples such that all samples have the same number of ASVs.  }
+\CommentTok{\# It removes any bias but number of re{-}samples is based on the sample with }
+\CommentTok{\# smallest number of ASVs so one has to check and filter beforehand in case }
+\CommentTok{\# there are samples with very different number of ASVs. I am generally going }
+\CommentTok{\# by a 10x rule. If the lowest number of ASVs is 10x lower than the sample with}
+\CommentTok{\# highest number of ASVs, then I keep that sample in for alpha diversity assessments.  }
   
 \NormalTok{ps\_rare }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{rarefy\_even\_depth}\NormalTok{(ps.flt, }
                                        \AttributeTok{sample.size =} \FunctionTok{min}\NormalTok{(}\FunctionTok{colSums}\NormalTok{(}\FunctionTok{otu\_table}\NormalTok{(ps.flt))),  }
@@ -1505,7 +1519,8 @@ There are 15 columns with some character (chr), factor or integer (int) variable
 \CommentTok{\# replace metadata with temp meta.df which includes the diversity indices}
 \NormalTok{ps.flt}\SpecialCharTok{@}\NormalTok{sam\_data }\OtherTok{\textless{}{-}} \FunctionTok{sample\_data}\NormalTok{(metadf)  }
 
-\CommentTok{\# this replaced the old metadata with new metadata that includes the diversity indices for this phyloseq object }
+\CommentTok{\# this replaced the old metadata with new metadata that includes the diversity }
+\CommentTok{\# indices for this phyloseq object }
 \FunctionTok{str}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{sample\_data}\NormalTok{(ps.flt)))}
 \end{Highlighting}
 \end{Shaded}
@@ -1675,9 +1690,9 @@ There are 15 columns with some character (chr), factor or integer (int) variable
 \NormalTok{                                      ordination , }
                                       \AttributeTok{color =} \StringTok{"Location"}\NormalTok{, }
                                       \CommentTok{\#shape = "Reactor",    }
-                                      \CommentTok{\# option to add shapes to data symbols}
+                                      \CommentTok{\# option to add shapes as data symbols}
                                       \AttributeTok{title =} \StringTok{"NMDS"}\NormalTok{) }\SpecialCharTok{+}
-     \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ pielou\_ev), }\AttributeTok{alpha =} \FloatTok{0.75}\NormalTok{) }\SpecialCharTok{+}    \CommentTok{\# shape size reflective of Pielou, also make transparent }
+     \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ pielou\_ev), }\AttributeTok{alpha =} \FloatTok{0.75}\NormalTok{) }\SpecialCharTok{+}   \CommentTok{\# shape size in proportion to Pielou Evenness, also make transparent }
      \FunctionTok{annotate}\NormalTok{(}\AttributeTok{geom =} \StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{, }\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{"Bray{-}Curtis, Stress = "}\NormalTok{, label), }
              \AttributeTok{x =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{y =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{hjust =} \SpecialCharTok{{-}}\FloatTok{0.05}\NormalTok{, }\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{)  }\SpecialCharTok{+}
      \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cols)}
@@ -1707,9 +1722,9 @@ There are 15 columns with some character (chr), factor or integer (int) variable
 \NormalTok{                                      ordination , }
                                       \AttributeTok{color =} \StringTok{"Location"}\NormalTok{, }
                                       \CommentTok{\#shape = "Reactor", }
-                                     \CommentTok{\# option to add shapes to data symbols}
+                                     \CommentTok{\# option to add shapes as data symbols}
                                       \AttributeTok{title =} \StringTok{"Principle Component Analysis"}\NormalTok{) }\SpecialCharTok{+}
-     \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ pielou\_ev)) }\SpecialCharTok{+}    \CommentTok{\# shape size reflective of Pielou }
+     \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ pielou\_ev)) }\SpecialCharTok{+}    \CommentTok{\# \# shape size in proportion to Pielou Evenness}
     \FunctionTok{annotate}\NormalTok{(}\AttributeTok{geom =} \StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{, }\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{"Aitchison distances"}\NormalTok{), }
              \AttributeTok{x =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{y =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{hjust =} \SpecialCharTok{{-}}\FloatTok{0.05}\NormalTok{, }\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{)  }\SpecialCharTok{+} 
     \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cols)}
@@ -1761,7 +1776,7 @@ There are 15 columns with some character (chr), factor or integer (int) variable
   \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept=}\DecValTok{0}\NormalTok{, }\AttributeTok{linetype=}\StringTok{"dashed"}\NormalTok{, }\AttributeTok{color =} \StringTok{"gray"}\NormalTok{) }\SpecialCharTok{+}    \CommentTok{\# shape size reflective of Pielou  }
      \FunctionTok{annotate}\NormalTok{(}\AttributeTok{geom =} \StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{, }\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{"Aitchison distances"}\NormalTok{), }
              \AttributeTok{x =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{y =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{hjust =} \SpecialCharTok{{-}}\FloatTok{0.05}\NormalTok{, }\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ pielou\_ev)) }\SpecialCharTok{+}        \CommentTok{\# shape size reflective of Pielou Evenness}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ pielou\_ev)) }\SpecialCharTok{+}        \CommentTok{\# shape size in proportion to Pielou Evenness}
   \CommentTok{\#scale\_colour\_gradient(low = colourlow, high = colourhigh) +}
   \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"RDA Abundances (clr) \textasciitilde{} Location"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cols)}
