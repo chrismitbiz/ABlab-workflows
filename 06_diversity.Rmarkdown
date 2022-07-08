@@ -1,6 +1,6 @@
 
 # Diversity analysis  
-Some visualisations of alpha and beta diversity
+Some visualisations of alpha and beta diversity.
 
 ## Introduction
 
@@ -8,62 +8,96 @@ Some visualisations of alpha and beta diversity
 ## Workflow  
   
 ### Packages  
-```{r, message=FALSE, warning=FALSE, e}
+```{r, message=FALSE, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
 library(phyloseq)
-library(ggpubr)
+library(ggpubr)       # a handy helper package for ggplots
 library(tidyverse)
-theme_set(theme_bw())
+theme_set(theme_bw())  # setting the theme for ggplots
+library(vegan)
 ```
 
-<br/>
-
-## Load phyloseq object
-For detail on how to get a phyloseq object please see chapter ['From Qiime2 into R'](https://clean-dirt-digests.netlify.app/bioinformatics/qiimeq-phyloseq-in-r/).
-
-```{r, warning=F, message=F}
+  \
+  
+### Load your phyloseq object
+For detail on how to create a phyloseq object please see chapter \@ref(Qiime2R).  
+  
+```{r loadps, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
 # reading in a previously saved phyloseq object
-physeqB.flt <- readRDS('physeqB.flt')
-physeqB.flt
+ps <- readRDS('ps_ProjectX_2022July')
+ps  # get an overview of number of taxa and samples contained in the phyloseq object
 ```
-<br/>
-
+  
+  \
+  
+Check metadata contained in the phyloseq object. This is the original metadata from the public repository where the FastQ files were downloaded from (Sequence Read Archives).  
+  
+```{r metadata,include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
+metadf <- data.frame(sample_data(ps))
+metadf
+```
+  
+  \
+  
 ## Alpha diversity
 ### Pre-processing of phyloseq object
-```{r alphadiversitypre,  message=FALSE, warning=FALSE, echo=T}
-#filter
-`%notin%` = Negate(`%in%`)
-physeqB.flt.norefs <-  prune_samples(sample_data(physeqB.flt)$Name %notin% c("41AutoclavedControlT0","42AutoclavedControlT0","43AutoclavedControlT0","44AutoclavedControlT0"), physeqB.flt)
-physeqB.flt.norefs <-  prune_samples(sample_data(physeqB.flt.norefs)$Treatment != "Reference", physeqB.flt.norefs)
-physeqB.flt.norefs <-  prune_samples(sample_data(physeqB.flt.norefs)$Treatment != "Blank", physeqB.flt.norefs)
-physeqB.flt.norefs <-  phyloseq::prune_taxa(taxa_sums(physeqB.flt.norefs) != 0, physeqB.flt.norefs)
+```{r alphadiversitypre, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
+ 
+# some additional quality filtering - repeating steps from previous chapter. 
+  
+ps.flt = prune_taxa(taxa_sums(ps) >= 5, ps) #minimum reads per feature 
+ps.flt  = subset_taxa(ps.flt , !is.na(Phylum) & !Phylum %in% c(""))
+ps.flt <- ps.flt %>%
+  subset_taxa(Kingdom == "Bacteria" & Family  != "Mitochondria" & Class   != "Chloroplast")
+#ps.flt (not run)
 
-# checking minimum sample size
-min(colSums(otu_table(physeqB.flt.norefs)))
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 3853 taxa and 51 samples ]
+# sample_data() Sample Data:       [ 51 samples by 14 sample variables ]
+# tax_table()   Taxonomy Table:    [ 3853 taxa by 7 taxonomic ranks ]
+# phy_tree()    Phylogenetic Tree: [ 3853 tips and 3852 internal nodes ]
 
-# rarefy
-rare_Bac <- phyloseq::rarefy_even_depth(physeqB.flt.norefs, sample.size = min(colSums(otu_table(physeqB.flt.norefs))),  rngseed = TRUE, replace = TRUE, trimOTUs = TRUE)
+
+# confirming minimum sample size
+min(colSums(otu_table(ps.flt)))
+
+# rarefy - required before measuring alpha diversity. 
+# This step is to create an abundance table, where the all samples are randomly resamples such that all samples have the same number of ASVs.  
+# It removes any bias but number of re-samples is based on the sample with smallest number of ASVs so one has to check and filter beforehand in case there are samples with very different number of ASVs. I am generally going by a 10x rule. If the lowest number of ASVs is 10x lower than the sample with highest number of ASVs, then I keep that sample in for alpha diversity assessments.  
+  
+ps_rare <- phyloseq::rarefy_even_depth(ps.flt, sample.size = min(colSums(otu_table(ps.flt))),  rngseed = TRUE, replace = TRUE, trimOTUs = TRUE)
 
 # check rarefied phyloseq object
-rare_Bac
+# ps_rare (not run)
 
-#create diversity indices
-ps.div <- phyloseq::estimate_richness(rare_Bac)
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 3790 taxa and 51 samples ]
+# sample_data() Sample Data:       [ 51 samples by 14 sample variables ]
+# tax_table()   Taxonomy Table:    [ 3790 taxa by 7 taxonomic ranks ]
+# phy_tree()    Phylogenetic Tree: [ 3790 tips and 3789 internal nodes ]
+
+
+# Create diversity indices
+div.df <- phyloseq::estimate_richness(ps_rare)
 # add sample names
-ps.div$`#SampleID` <- phyloseq::sample_names(physeqB.flt.norefs)
+div.df$`#SampleID` <- phyloseq::sample_names(ps.flt)
 # add diversity indices to phyloseq object
-meta.df <- data.frame(sample_data(physeqB.flt.norefs))
-meta.df <- meta.df %>% rownames_to_column("#SampleID") %>%
-  left_join(ps.div, by = "#SampleID") %>% column_to_rownames("#SampleID")
+metadf <- data.frame(sample_data(ps.flt))  # export metadata first
+metadf <- metadf %>% rownames_to_column("#SampleID") %>%
+  left_join(div.df, by = "#SampleID") %>% column_to_rownames("#SampleID") # add the diversity indices (columns) to the metadata
 # add pilou evenness (see calculation in "Numerical Ecology with R - Bocard et al")
-meta.df$pielou_ev <- ps.div$Shannon/log(ps.div$Observed)
+metadf$pielou_ev <- div.df$Shannon/log(div.df$Observed)
 # replace metadata with temp meta.df which includes the diversity indices
-physeqB.flt.norefs@sam_data <- sample_data(meta.df)
+ps.flt@sam_data <- sample_data(metadf)  
+
+# this replaced the old metadata with new metadata that includes the diversity indices for this phyloseq object 
+
 ```
 
 ### Plotting
 #### Colors
 ```{r}
 #manually created with help of https://htmlcolorcodes.com/
+
 cols <- c("#F9E79F", "#FDEBD0", "#F6DDCC",  "#E5E8E8", "#CCD1D1", "#AAB7B8", "#707B7C", "#566573","#82E0AA", "#641E16", "#8E44AD")
 cols_noheatH2O2 <- c("#F9E79F", "#E5E8E8", "#CCD1D1", "#AAB7B8", "#707B7C", "#566573","#82E0AA", "#641E16", "#8E44AD")
 cols_ref <- c("#F9E79F", "#FDEBD0", "#F6DDCC",  "#E5E8E8", "#CCD1D1", "#AAB7B8", "#707B7C", "#566573", "#82E0AA","#641E16", "#8E44AD", "#E74C3C")
@@ -71,14 +105,20 @@ cols_ref <- c("#F9E79F", "#FDEBD0", "#F6DDCC",  "#E5E8E8", "#CCD1D1", "#AAB7B8",
 
 #### Richness
 ```{r richness,  message=FALSE, warning=FALSE, echo=T}
-p1 <- data.frame(phyloseq::sample_data(physeqB.flt.norefs)) %>%
-  ggpubr::ggboxplot(., x = "Treatment", y = "Observed", facet.by = "Week", fill = "Treatment", ylab = "Richness", xlab = "Treatment", palette = cols) +
-  theme_bw() +
-  xlab("") +
-  theme( panel.grid.major = element_blank(), panel.grid.minor = element_blank() ) +
-  geom_jitter(width = 0.1) +
+p1 <- data.frame(phyloseq::sample_data(ps.flt)) %>%
+  ggpubr::ggboxplot(., x = "Reactor", 
+                    y = "Observed", 
+                    facet.by = "loc", 
+                    fill = "loc", 
+                    ylab = "Richness", 
+                    xlab = "Location", 
+                    palette = cols) +
+    theme_bw() +
+    xlab("") +
+    theme( panel.grid.major = element_blank(), panel.grid.minor = element_blank() ) +
+    geom_jitter(width = 0.1) +
  # theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  theme(axis.title.x=element_blank(),
+    theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +
   ggpubr::stat_compare_means(method = "kruskal",label.x = 2)

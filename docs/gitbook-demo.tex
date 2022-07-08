@@ -885,8 +885,8 @@ qiime fragment-insertion filter-features \
 Qiime2 reference:\\
 Bolyen E, Rideout JR, Dillon MR, Bokulich NA, Abnet CC, Al-Ghalith GA, Alexander H, Alm EJ, Arumugam M, Asnicar F, Bai Y, Bisanz JE, Bittinger K, Brejnrod A, Brislawn CJ, Brown CT, Callahan BJ, Caraballo-Rodríguez AM, Chase J, Cope EK, Da Silva R, Diener C, Dorrestein PC, Douglas GM, Durall DM, Duvallet C, Edwardson CF, Ernst M, Estaki M, Fouquier J, Gauglitz JM, Gibbons SM, Gibson DL, Gonzalez A, Gorlick K, Guo J, Hillmann B, Holmes S, Holste H, Huttenhower C, Huttley GA, Janssen S, Jarmusch AK, Jiang L, Kaehler BD, Kang KB, Keefe CR, Keim P, Kelley ST, Knights D, Koester I, Kosciolek T, Kreps J, Langille MGI, Lee J, Ley R, Liu YX, Loftfield E, Lozupone C, Maher M, Marotz C, Martin BD, McDonald D, McIver LJ, Melnik AV, Metcalf JL, Morgan SC, Morton JT, Naimey AT, Navas-Molina JA, Nothias LF, Orchanian SB, Pearson T, Peoples SL, Petras D, Preuss ML, Pruesse E, Rasmussen LB, Rivers A, Robeson MS, Rosenthal P, Segata N, Shaffer M, Shiffer A, Sinha R, Song SJ, Spear JR, Swafford AD, Thompson LR, Torres PJ, Trinh P, Tripathi A, Turnbaugh PJ, Ul-Hasan S, van der Hooft JJJ, Vargas F, Vázquez-Baeza Y, Vogtmann E, von Hippel M, Walters W, Wan Y, Wang M, Warren J, Weber KC, Williamson CHD, Willis AD, Xu ZZ, Zaneveld JR, Zhang Y, Zhu Q, Knight R, and Caporaso JG. 2019. Reproducible, interactive, scalable and extensible microbiome data science using QIIME 2. Nature Biotechnology 37: 852--857. \url{https://doi.org/10.1038/s41587-019-0209-9}
 
-\hypertarget{from-qiime2-into-r---initial-diagnostics}{%
-\chapter{From Qiime2 into R - Initial diagnostics}\label{from-qiime2-into-r---initial-diagnostics}}
+\hypertarget{Qiime2R}{%
+\chapter{From Qiime2 into R - Initial diagnostics}\label{Qiime2R}}
 
 \hypertarget{introduction-2}{%
 \section{Introduction}\label{introduction-2}}
@@ -937,7 +937,7 @@ Now let's work in R!
 
 First install the required packages. Some packages are stored on `remote' repositories such as GitHub, hence before you can install them you need helper packages such as \texttt{remotes}. Other packages, such as \texttt{phyloseq} are managed by BioConductor project. They provide their own package manager package for R called \texttt{BiocManager}, which helps to install from the same release.
 
-Learn more about phyloseq in their very comprehensive documnetations: \url{https://joey711.github.io/phyloseq/}
+Learn more about phyloseq here: \url{https://joey711.github.io/phyloseq/}
 
 Both, remotes and BiocManager are already installed in the below example.\\
 Once the packages are installed, load them into your working space.
@@ -982,6 +982,11 @@ In the previous chapter, we used a \texttt{samplesheet.tsv} to visualise and sum
   \FunctionTok{column\_to\_rownames}\NormalTok{(}\StringTok{"\#SampleID"}\NormalTok{)}
 
 \CommentTok{\# str(metadata2)  \# use the \textasciigrave{}str\textasciigrave{} command to inspect the data}
+
+\CommentTok{\# Then decide which of the columns you want to be factors and in which order these factors should go. This will determine the order in which ggplot will plot them. You can include the levels = c("level1", "level"...)  command to determine the order, which is not done here. }
+\NormalTok{metadata2  }\OtherTok{\textless{}{-}}\NormalTok{ metadata2 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Reactor =} \FunctionTok{factor}\NormalTok{(Reactor)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Location =} \FunctionTok{factor}\NormalTok{(loc))}
 
 \CommentTok{\# Qiime import                      }
 \NormalTok{SVs }\OtherTok{\textless{}{-}}\NormalTok{  qiime2R}\SpecialCharTok{::}\FunctionTok{read\_qza}\NormalTok{(}\StringTok{"qiimefiles/featuretable{-}insertiontree{-}filtered.qza"}\NormalTok{)}

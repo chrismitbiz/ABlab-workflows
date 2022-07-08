@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 From Qiime2 into R - Initial diagnostics | Workflows for processing microbial amplicon sequences</title>
+  <meta name="description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 From Qiime2 into R - Initial diagnostics | Workflows for processing microbial amplicon sequences" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
+  <meta name="github-repo" content="chrismitbiz/ABlab-workflows" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 From Qiime2 into R - Initial diagnostics | Workflows for processing microbial amplicon sequences" />
+  
+  <meta name="twitter:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
+  
+
+<meta name="author" content="Christian Krohn, PhD, RMIT University" />
+
+
+<meta name="date" content="2022-07-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="from-basespace-to-qiime2-and-dada2.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A GitBook for Teaching</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this GitBook</a></li>
+<li class="chapter" data-level="2" data-path="gettingstarted.html"><a href="gettingstarted.html"><i class="fa fa-check"></i><b>2</b> Getting started</a></li>
+<li class="chapter" data-level="3" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html"><i class="fa fa-check"></i><b>3</b> Miseq library preps</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#overview"><i class="fa fa-check"></i><b>3.1.1</b> Overview</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#workflow"><i class="fa fa-check"></i><b>3.2</b> Workflow</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-extraction"><i class="fa fa-check"></i><b>3.2.1</b> DNA extraction</a></li>
+<li class="chapter" data-level="3.2.2" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-quality-and-concentration"><i class="fa fa-check"></i><b>3.2.2</b> DNA quality and concentration</a></li>
+<li class="chapter" data-level="3.2.3" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-normalisation"><i class="fa fa-check"></i><b>3.2.3</b> DNA normalisation</a></li>
+<li class="chapter" data-level="3.2.4" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#first-and-second-pcr---amplicon-pcr-and-indexing-pcr"><i class="fa fa-check"></i><b>3.2.4</b> First and second PCR - Amplicon PCR and Indexing PCR</a></li>
+<li class="chapter" data-level="3.2.5" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#normalisation-of-indexed-amplicons"><i class="fa fa-check"></i><b>3.2.5</b> Normalisation of indexed amplicons</a></li>
+<li class="chapter" data-level="3.2.6" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#pooling"><i class="fa fa-check"></i><b>3.2.6</b> Pooling</a></li>
+<li class="chapter" data-level="3.2.7" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#denaturing-of-pool-and-loading-of-the-miseq"><i class="fa fa-check"></i><b>3.2.7</b> Denaturing of pool and loading of the Miseq</a></li>
+<li class="chapter" data-level="3.2.8" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#consumables"><i class="fa fa-check"></i><b>3.2.8</b> Consumables</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="from-basespace-to-qiime2-and-dada2.html"><a href="from-basespace-to-qiime2-and-dada2.html"><i class="fa fa-check"></i><b>4</b> From BaseSpace to Qiime2 and DADA2</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="from-basespace-to-qiime2-and-dada2.html"><a href="from-basespace-to-qiime2-and-dada2.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="from-basespace-to-qiime2-and-dada2.html"><a href="from-basespace-to-qiime2-and-dada2.html#prerequisites-and-required-files"><i class="fa fa-check"></i><b>4.1.1</b> Prerequisites and required files</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="from-basespace-to-qiime2-and-dada2.html"><a href="from-basespace-to-qiime2-and-dada2.html#workflow-1"><i class="fa fa-check"></i><b>4.2</b> Workflow</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="from-basespace-to-qiime2-and-dada2.html"><a href="from-basespace-to-qiime2-and-dada2.html#download-fastq-files"><i class="fa fa-check"></i><b>4.2.1</b> Download FASTQ files</a></li>
+<li class="chapter" data-level="4.2.2" data-path="from-basespace-to-qiime2-and-dada2.html"><a href="from-basespace-to-qiime2-and-dada2.html#paired-end-manifest-import-step-1"><i class="fa fa-check"></i><b>4.2.2</b> Paired end manifest import (Step 1)</a></li>
+<li class="chapter" data-level="4.2.3" data-path="from-basespace-to-qiime2-and-dada2.html"><a href="from-basespace-to-qiime2-and-dada2.html#cutadapt-step-2"><i class="fa fa-check"></i><b>4.2.3</b> Cutadapt (Step 2)</a></li>
+<li class="chapter" data-level="4.2.4" data-path="from-basespace-to-qiime2-and-dada2.html"><a href="from-basespace-to-qiime2-and-dada2.html#read-quality-assessment"><i class="fa fa-check"></i><b>4.2.4</b> Read quality assessment</a></li>
+<li class="chapter" data-level="4.2.5" data-path="from-basespace-to-qiime2-and-dada2.html"><a href="from-basespace-to-qiime2-and-dada2.html#denoise-paired-end-sequences-with-dada2-step-3"><i class="fa fa-check"></i><b>4.2.5</b> Denoise paired end sequences with dada2 (Step 3)</a></li>
+<li class="chapter" data-level="4.2.6" data-path="from-basespace-to-qiime2-and-dada2.html"><a href="from-basespace-to-qiime2-and-dada2.html#taxonomic-classifier-and-assignment-step-4"><i class="fa fa-check"></i><b>4.2.6</b> Taxonomic classifier and assignment (Step 4)</a></li>
+<li class="chapter" data-level="4.2.7" data-path="from-basespace-to-qiime2-and-dada2.html"><a href="from-basespace-to-qiime2-and-dada2.html#build-phylogenetic-tree-step-5"><i class="fa fa-check"></i><b>4.2.7</b> Build phylogenetic tree (Step 5)</a></li>
+<li class="chapter" data-level="4.2.8" data-path="from-basespace-to-qiime2-and-dada2.html"><a href="from-basespace-to-qiime2-and-dada2.html#all-steps-combined"><i class="fa fa-check"></i><b>4.2.8</b> All steps combined</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="Qiime2R.html"><a href="Qiime2R.html"><i class="fa fa-check"></i><b>5</b> From Qiime2 into R - Initial diagnostics</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="Qiime2R.html"><a href="Qiime2R.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="Qiime2R.html"><a href="Qiime2R.html#workflow-2"><i class="fa fa-check"></i><b>5.2</b> Workflow</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="Qiime2R.html"><a href="Qiime2R.html#packages"><i class="fa fa-check"></i><b>5.2.1</b> Packages</a></li>
+<li class="chapter" data-level="5.2.2" data-path="Qiime2R.html"><a href="Qiime2R.html#import-qiime-files-and-create-a-phyloseq-object"><i class="fa fa-check"></i><b>5.2.2</b> Import qiime-files and create a phyloseq object</a></li>
+<li class="chapter" data-level="5.2.3" data-path="Qiime2R.html"><a href="Qiime2R.html#save-the-ps-object-as-an-.rds-file-into-your-working-directory"><i class="fa fa-check"></i><b>5.2.3</b> Save the <code>ps</code> object as an <code>.rds</code> file into your working directory</a></li>
+<li class="chapter" data-level="5.2.4" data-path="Qiime2R.html"><a href="Qiime2R.html#initial-filtering"><i class="fa fa-check"></i><b>5.2.4</b> Initial filtering</a></li>
+<li class="chapter" data-level="5.2.5" data-path="Qiime2R.html"><a href="Qiime2R.html#rarefaction-curve"><i class="fa fa-check"></i><b>5.2.5</b> Rarefaction curve</a></li>
+<li class="chapter" data-level="5.2.6" data-path="Qiime2R.html"><a href="Qiime2R.html#prevalence-table"><i class="fa fa-check"></i><b>5.2.6</b> Prevalence table</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Workflows for processing microbial amplicon sequences</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="Qiime2R" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> From Qiime2 into R - Initial diagnostics<a href="Qiime2R.html#Qiime2R" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction-2" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Introduction<a href="Qiime2R.html#introduction-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this chapter you will learn how to import Qiime2-produced ASV tables, taxonomy tables and tree files into R. For this exercise we will us publicly available FastQ files that were generated by a research group in Denmark. The files are available under accession number PRJNA645373.<br />
+Reference: [1] C. Jiang, S.J. McIlroy, R. Qi, F. Petriglieri, E. Yashiro, Z. Kondrotaite, P.H. Nielsen, Identification of microorganisms responsible for foam formation in mesophilic anaerobic digesters treating surplus activated sludge, Water Res. 191 (2021) 116779. <a href="https://doi.org/10.1016/j.watres.2020.116779" class="uri">https://doi.org/10.1016/j.watres.2020.116779</a>.</p>
+<p>Sample IDs<br />
+You decide on the samplesIDs before you start your library prep and sequencing. For this chapter we use a different dataset to the previous chatper and its sampleIDs are longer, e.g. “SRR12204258” and “SRR12204269”, compared to “PT-01”, “PT-02” in the previous chapter. It does not matter how you label each of your indexed samples as long as the IDs are unique. And each unique sample ID in the <code>samplesheet.csv</code> needs to match the sample IDs of the <code>feature_table.qza</code>. You may recall those IDs originate from your Miseq run and are the same sample IDs that are used on the loading manifest file to prepare the run. They subsequently are part of the FastQ filenames and flow through into any relevant Qiime2 data. If a sample ID does not match or if there is a different number of samples between these two input files, then phyloseq will complain.<br />
+<br />
+</p>
+<p>Here the first three Sample IDs (“SRR12204258” and “SRR12204269” etc..) in the ASV table from this data set.:<br />
+<img src="img/ASVIDs.png" alt="“First three ASV IDs and Sample IDs in this dataset”" /><br />
+<br />
+</p>
+<p>ASV IDs<br />
+The same principle applies to each ID of the ASVs. The ASVs IDs have to match between the <code>feature_table.qza</code> and the <code>taxonomy_silva.qza</code>.</p>
+<p>Following the first three ASV IDs (Feature ID) and related taxon assignments in taxonomy_silva.qza of this dataset:<br />
+<img src="img/ASVIDs2.png" alt="“First three ASV IDs (Feature ID) and related Taxon assignments in this dataset”" /></p>
+<p><br />
+</p>
+<p>NOTE: After the denoising, taxonomic classification and tree alignments in Qiime2, I prefer to do all subsequent analysis in R. However, it is also possible to do much of the diversity analysis in Qiime2. In fact, some interesting plug-ins and functions in Qiime2 are not available as packages in R, hence for some specific tasks you may need to keep using Qiime2. It is up to the goals and preferences of the investigator.</p>
+<p>Now let’s work in R!</p>
+<p><strong>Required files</strong></p>
+<ul>
+<li><p><code>samplesheet.tsv</code> - same file that was used in the visualisation steps in Qiime2<br />
+</p></li>
+<li><p><code>feature_table.qza</code> - if you created a phylogenetic tree from the sequences as described in the previous chapter then the ASVs in the feature table were filtered to match the ASVs in the tree. Hence the files was named <code>featuretable-insertiontree-filtered.qza</code> to differentiate it.<br />
+</p></li>
+<li><p><code>taxonomy_silva.qza</code><br />
+</p></li>
+<li><p><code>insertion-tree.qza</code></p>
+<p><br />
+</p></li>
+</ul>
+</div>
+<div id="workflow-2" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Workflow<a href="Qiime2R.html#workflow-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="packages" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Packages<a href="Qiime2R.html#packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First install the required packages. Some packages are stored on ‘remote’ repositories such as GitHub, hence before you can install them you need helper packages such as <code>remotes</code>. Other packages, such as <code>phyloseq</code> are managed by BioConductor project. They provide their own package manager package for R called <code>BiocManager</code>, which helps to install from the same release.</p>
+<p>Learn more about phyloseq here: <a href="https://joey711.github.io/phyloseq/" class="uri">https://joey711.github.io/phyloseq/</a></p>
+<p>Both, remotes and BiocManager are already installed in the below example.<br />
+Once the packages are installed, load them into your working space.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="Qiime2R.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;remotes&quot;)</span></span>
+<span id="cb12-2"><a href="Qiime2R.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># if (!requireNamespace(&quot;BiocManager&quot;, quietly = TRUE))</span></span>
+<span id="cb12-3"><a href="Qiime2R.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  install.packages(&quot;BiocManager&quot;)</span></span>
+<span id="cb12-4"><a href="Qiime2R.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;jbisanz/qiime2R&quot;)</span></span>
+<span id="cb12-5"><a href="Qiime2R.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># BiocManager::install(&quot;phyloseq&quot;)</span></span>
+<span id="cb12-6"><a href="Qiime2R.html#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="Qiime2R.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qiime2R)  <span class="co"># to import qiime.qza into an R object</span></span>
+<span id="cb12-8"><a href="Qiime2R.html#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phyloseq) <span class="co"># To combine all relevant data objects into one object for easy data management</span></span>
+<span id="cb12-9"><a href="Qiime2R.html#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># Compilation of packages for data management </span></span>
+<span id="cb12-10"><a href="Qiime2R.html#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)  <span class="co"># to change some of the strings in taxonomic names in Silva </span></span>
+<span id="cb12-11"><a href="Qiime2R.html#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)   <span class="co"># A commonly used package in numerical ecological </span></span></code></pre></div>
+<p><br />
+</p>
+</div>
+<div id="import-qiime-files-and-create-a-phyloseq-object" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Import qiime-files and create a phyloseq object<a href="Qiime2R.html#import-qiime-files-and-create-a-phyloseq-object" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now that packages are loaded we can import the Qiime2 <code>.qza</code> and the <code>.tsv</code> files. The aim is to import everything as R objects, which are then combined into one phyloseq object. Once we have a phyloseq object, any filtering and visualisations can be run from the one object.</p>
+<p>In the previous chapter, we used a <code>samplesheet.tsv</code> to visualise and summarise the <code>feature_table.qza</code>. That exact same samplesheet.tsv is imported here and slightly changed to make it phyloseq friendly. In this example, all relevant Qiime2 outputs were copied into a folder named ‘qiimefiles’.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="Qiime2R.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample sheet</span></span>
+<span id="cb13-2"><a href="Qiime2R.html#cb13-2" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;qiimefiles/samplesheet.tsv&quot;</span>)  <span class="co"># lets call the R object &#39;metadata&#39; to reflect its purpose </span></span>
+<span id="cb13-3"><a href="Qiime2R.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the metadata object. The second row is qiime-specific information and has to be removed. </span></span>
+<span id="cb13-4"><a href="Qiime2R.html#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="Qiime2R.html#cb13-5" aria-hidden="true" tabindex="-1"></a>metadata2 <span class="ot">&lt;-</span> metadata[<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(metadata)),] <span class="sc">%&gt;%</span>     <span class="co"># remove the top row and convert characters to factors</span></span>
+<span id="cb13-6"><a href="Qiime2R.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">&quot;spl&quot;</span>)<span class="sc">%&gt;%</span> <span class="co"># this just adds the rownames to a column and calles in &quot;spl&quot;</span></span>
+<span id="cb13-7"><a href="Qiime2R.html#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_all</span>(type.convert) <span class="sc">%&gt;%</span></span>
+<span id="cb13-8"><a href="Qiime2R.html#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.factor, as.character) <span class="sc">%&gt;%</span>  <span class="co"># reformatting columns to avoid any problems with factors at this stage</span></span>
+<span id="cb13-9"><a href="Qiime2R.html#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;spl&quot;</span>) <span class="sc">%&gt;%</span>  <span class="co"># this puts the column &quot;spl&quot; back into rownames</span></span>
+<span id="cb13-10"><a href="Qiime2R.html#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb13-11"><a href="Qiime2R.html#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;#SampleID&quot;</span>)</span>
+<span id="cb13-12"><a href="Qiime2R.html#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="Qiime2R.html#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># str(metadata2)  # use the `str` command to inspect the data</span></span>
+<span id="cb13-14"><a href="Qiime2R.html#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="Qiime2R.html#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Then decide which of the columns you want to be factors and in which order these factors should go. This will determine the order in which ggplot will plot them. You can include the levels = c(&quot;level1&quot;, &quot;level&quot;...)  command to determine the order, which is not done here. </span></span>
+<span id="cb13-16"><a href="Qiime2R.html#cb13-16" aria-hidden="true" tabindex="-1"></a>metadata2  <span class="ot">&lt;-</span> metadata2 <span class="sc">%&gt;%</span> </span>
+<span id="cb13-17"><a href="Qiime2R.html#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Reactor =</span> <span class="fu">factor</span>(Reactor)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-18"><a href="Qiime2R.html#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Location =</span> <span class="fu">factor</span>(loc))</span>
+<span id="cb13-19"><a href="Qiime2R.html#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="Qiime2R.html#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Qiime import                      </span></span>
+<span id="cb13-21"><a href="Qiime2R.html#cb13-21" aria-hidden="true" tabindex="-1"></a>SVs <span class="ot">&lt;-</span>  qiime2R<span class="sc">::</span><span class="fu">read_qza</span>(<span class="st">&quot;qiimefiles/featuretable-insertiontree-filtered.qza&quot;</span>)</span>
+<span id="cb13-22"><a href="Qiime2R.html#cb13-22" aria-hidden="true" tabindex="-1"></a>ASVtable <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(SVs<span class="sc">$</span>data)   <span class="co"># extract the data table, this has to be a dataframe</span></span>
+<span id="cb13-23"><a href="Qiime2R.html#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-24"><a href="Qiime2R.html#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Taxonomy</span></span>
+<span id="cb13-25"><a href="Qiime2R.html#cb13-25" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> qiime2R<span class="sc">::</span><span class="fu">read_qza</span>(<span class="st">&quot;qiimefiles/taxonomy_silva.qza&quot;</span>) <span class="co"># import the qiime object</span></span>
+<span id="cb13-26"><a href="Qiime2R.html#cb13-26" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> taxonomy<span class="sc">$</span>data  <span class="co"># extract the taxonomy data</span></span>
+<span id="cb13-27"><a href="Qiime2R.html#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="do">## re-format the taxonomy file to split the taxonomy into columns</span></span>
+<span id="cb13-28"><a href="Qiime2R.html#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="do">## remove the confidence column</span></span>
+<span id="cb13-29"><a href="Qiime2R.html#cb13-29" aria-hidden="true" tabindex="-1"></a>taxtable <span class="ot">&lt;-</span> taxonomy <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb13-30"><a href="Qiime2R.html#cb13-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Taxon, <span class="at">sep=</span><span class="st">&quot;;&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;Kingdom&quot;</span>,<span class="st">&quot;Phylum&quot;</span>,<span class="st">&quot;Class&quot;</span>,<span class="st">&quot;Order&quot;</span>,<span class="st">&quot;Family&quot;</span>,<span class="st">&quot;Genus&quot;</span>,<span class="st">&quot;Species&quot;</span>))  <span class="sc">%&gt;%</span></span>
+<span id="cb13-31"><a href="Qiime2R.html#cb13-31" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>Confidence) <span class="sc">%&gt;%</span></span>
+<span id="cb13-32"><a href="Qiime2R.html#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;Feature.ID&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-33"><a href="Qiime2R.html#cb13-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span>
+<span id="cb13-34"><a href="Qiime2R.html#cb13-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-35"><a href="Qiime2R.html#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Tree</span></span>
+<span id="cb13-36"><a href="Qiime2R.html#cb13-36" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">read_qza</span>(<span class="st">&quot;qiimefiles/insertion-tree.qza&quot;</span>)</span>
+<span id="cb13-37"><a href="Qiime2R.html#cb13-37" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> tree<span class="sc">$</span>data  <span class="co">#extract data</span></span>
+<span id="cb13-38"><a href="Qiime2R.html#cb13-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-39"><a href="Qiime2R.html#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the phyloseq object </span></span>
+<span id="cb13-40"><a href="Qiime2R.html#cb13-40" aria-hidden="true" tabindex="-1"></a>ps <span class="ot">&lt;-</span><span class="fu">phyloseq</span>(</span>
+<span id="cb13-41"><a href="Qiime2R.html#cb13-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">otu_table</span>(ASVtable, <span class="at">taxa_are_rows =</span> T), </span>
+<span id="cb13-42"><a href="Qiime2R.html#cb13-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_data</span>(metadata2),</span>
+<span id="cb13-43"><a href="Qiime2R.html#cb13-43" aria-hidden="true" tabindex="-1"></a>  phyloseq<span class="sc">::</span><span class="fu">tax_table</span>(taxtable),</span>
+<span id="cb13-44"><a href="Qiime2R.html#cb13-44" aria-hidden="true" tabindex="-1"></a>  phyloseq<span class="sc">::</span><span class="fu">phy_tree</span>(tree)</span>
+<span id="cb13-45"><a href="Qiime2R.html#cb13-45" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-46"><a href="Qiime2R.html#cb13-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-47"><a href="Qiime2R.html#cb13-47" aria-hidden="true" tabindex="-1"></a><span class="co"># ps  (not run)</span></span>
+<span id="cb13-48"><a href="Qiime2R.html#cb13-48" aria-hidden="true" tabindex="-1"></a><span class="co"># phyloseq-class experiment-level object</span></span>
+<span id="cb13-49"><a href="Qiime2R.html#cb13-49" aria-hidden="true" tabindex="-1"></a><span class="co"># otu_table()   OTU Table:         [ 4218 taxa and 51 samples ]</span></span>
+<span id="cb13-50"><a href="Qiime2R.html#cb13-50" aria-hidden="true" tabindex="-1"></a><span class="co"># sample_data() Sample Data:       [ 51 samples by 14 sample variables ]</span></span>
+<span id="cb13-51"><a href="Qiime2R.html#cb13-51" aria-hidden="true" tabindex="-1"></a><span class="co"># tax_table()   Taxonomy Table:    [ 4218 taxa by 7 taxonomic ranks ]</span></span>
+<span id="cb13-52"><a href="Qiime2R.html#cb13-52" aria-hidden="true" tabindex="-1"></a><span class="co"># phy_tree()    Phylogenetic Tree: [ 4218 tips and 4217 internal nodes ]</span></span>
+<span id="cb13-53"><a href="Qiime2R.html#cb13-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-54"><a href="Qiime2R.html#cb13-54" aria-hidden="true" tabindex="-1"></a><span class="co"># remove things out of the R environment you dont need. </span></span>
+<span id="cb13-55"><a href="Qiime2R.html#cb13-55" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(metadata, metadata2, SVs, taxonomy, taxtable, tree, ASVtable)</span>
+<span id="cb13-56"><a href="Qiime2R.html#cb13-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-57"><a href="Qiime2R.html#cb13-57" aria-hidden="true" tabindex="-1"></a><span class="do">## Remove those annoying short codes in front of taxa names (i.e. p__ etc) as they</span></span>
+<span id="cb13-58"><a href="Qiime2R.html#cb13-58" aria-hidden="true" tabindex="-1"></a><span class="do">## dont look good in visualisation</span></span>
+<span id="cb13-59"><a href="Qiime2R.html#cb13-59" aria-hidden="true" tabindex="-1"></a><span class="fu">tax_table</span>(ps)[, <span class="st">&quot;Kingdom&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(<span class="fu">tax_table</span>(ps)[, <span class="st">&quot;Kingdom&quot;</span>], <span class="st">&quot;d__&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb13-60"><a href="Qiime2R.html#cb13-60" aria-hidden="true" tabindex="-1"></a><span class="fu">tax_table</span>(ps)[, <span class="st">&quot;Phylum&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(<span class="fu">tax_table</span>(ps)[, <span class="st">&quot;Phylum&quot;</span>], <span class="st">&quot; p__&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb13-61"><a href="Qiime2R.html#cb13-61" aria-hidden="true" tabindex="-1"></a><span class="fu">tax_table</span>(ps)[, <span class="st">&quot;Class&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(<span class="fu">tax_table</span>(ps)[, <span class="st">&quot;Class&quot;</span>], <span class="st">&quot; c__&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb13-62"><a href="Qiime2R.html#cb13-62" aria-hidden="true" tabindex="-1"></a><span class="fu">tax_table</span>(ps)[, <span class="st">&quot;Order&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(<span class="fu">tax_table</span>(ps)[, <span class="st">&quot;Order&quot;</span>], <span class="st">&quot; o__&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb13-63"><a href="Qiime2R.html#cb13-63" aria-hidden="true" tabindex="-1"></a><span class="fu">tax_table</span>(ps)[, <span class="st">&quot;Family&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(<span class="fu">tax_table</span>(ps)[, <span class="st">&quot;Family&quot;</span>], <span class="st">&quot; f__&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb13-64"><a href="Qiime2R.html#cb13-64" aria-hidden="true" tabindex="-1"></a><span class="fu">tax_table</span>(ps)[, <span class="st">&quot;Genus&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(<span class="fu">tax_table</span>(ps)[, <span class="st">&quot;Genus&quot;</span>], <span class="st">&quot; g__&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb13-65"><a href="Qiime2R.html#cb13-65" aria-hidden="true" tabindex="-1"></a><span class="fu">tax_table</span>(ps)[, <span class="st">&quot;Species&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(<span class="fu">tax_table</span>(ps)[, <span class="st">&quot;Species&quot;</span>], <span class="st">&quot; s__&quot;</span>, <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p>From the output of the <code>ps</code> object we can see that there are 4281 ASVs in 51 samples and associated with 14 variables in the metadata.</p>
+<p>If you wish, you can access each individual data set from the ps object with functions <code>otu_table(ps)@.Data</code>, <code>sample_data(ps)</code> <code>tax_table(ps)@.Data</code> or <code>phy_tree(ps)</code>. This can become handy if you want to change something, such as adding columns to the sample_data or changing them to a factor etc..</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="Qiime2R.html#cb14-1" aria-hidden="true" tabindex="-1"></a>ASVs <span class="ot">&lt;-</span> <span class="fu">otu_table</span>(ps)<span class="sc">@</span>.Data</span>
+<span id="cb14-2"><a href="Qiime2R.html#cb14-2" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(ps)</span>
+<span id="cb14-3"><a href="Qiime2R.html#cb14-3" aria-hidden="true" tabindex="-1"></a>taxtable <span class="ot">&lt;-</span> <span class="fu">tax_table</span>(ps)<span class="sc">@</span>.Data</span>
+<span id="cb14-4"><a href="Qiime2R.html#cb14-4" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">phy_tree</span>(ps)</span>
+<span id="cb14-5"><a href="Qiime2R.html#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="Qiime2R.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect individual objects in your own time. </span></span></code></pre></div>
+<p><br />
+</p>
+</div>
+<div id="save-the-ps-object-as-an-.rds-file-into-your-working-directory" class="section level3 hasAnchor" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Save the <code>ps</code> object as an <code>.rds</code> file into your working directory<a href="Qiime2R.html#save-the-ps-object-as-an-.rds-file-into-your-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Optional<br />
+This step allows you to save and store the R object as a RDS file and load it back into any future R environment, should you require it. This would be helpful if your workflow is separated into different Rscripts and you want to just load in the RDS file instead of having to import qiime files and create the phyloseq object every time.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="Qiime2R.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(ps, <span class="at">file =</span> <span class="st">&quot;ps_ProjectX_2022July&quot;</span>)</span>
+<span id="cb15-2"><a href="Qiime2R.html#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="Qiime2R.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to load the file back into your R environment:</span></span>
+<span id="cb15-4"><a href="Qiime2R.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ps &lt;- readRDS(file = &quot;ps_ProjectX_2022July&quot;)</span></span></code></pre></div>
+</div>
+<div id="initial-filtering" class="section level3 hasAnchor" number="5.2.4">
+<h3><span class="header-section-number">5.2.4</span> Initial filtering<a href="Qiime2R.html#initial-filtering" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Keep the orginal <code>ps</code> object unchanged. Create new objects for subsequent filtering steps.</p>
+<p>Often we simply filter out any ASVs that have less than x number of reads and are present in less than x number of samples. This helps to reduce noise and the overload of zeros in the dataset, which some differential abundance tests can’t deal with. Perhaps, it also helps with removing ASVs that were incorrectly denoised with DADA2 in the first place. However, it also means that rare ASVs with a low prevalence are not considered. So filtering has to be done with consideration to the intended analysis.</p>
+<p>Then filter out any phyla that came up as uncharacterized and taxa that came up as mitochondria and chloroplast.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="Qiime2R.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter as needed. This will be your final otu-table.</span></span>
+<span id="cb16-2"><a href="Qiime2R.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Although you can still filter for specific analysis if needed.</span></span>
+<span id="cb16-3"><a href="Qiime2R.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># minimum of reads per feature</span></span>
+<span id="cb16-4"><a href="Qiime2R.html#cb16-4" aria-hidden="true" tabindex="-1"></a>ps.flt <span class="ot">=</span> <span class="fu">prune_taxa</span>(<span class="fu">taxa_sums</span>(ps) <span class="sc">&gt;=</span> <span class="dv">5</span>, ps) <span class="co">#minimum reads per feature</span></span>
+<span id="cb16-5"><a href="Qiime2R.html#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="Qiime2R.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ps.flt (not run)</span></span>
+<span id="cb16-7"><a href="Qiime2R.html#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># phyloseq-class experiment-level object</span></span>
+<span id="cb16-8"><a href="Qiime2R.html#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># otu_table()   OTU Table:         [ 3911 taxa and 51 samples ]</span></span>
+<span id="cb16-9"><a href="Qiime2R.html#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># sample_data() Sample Data:       [ 51 samples by 14 sample variables ]</span></span>
+<span id="cb16-10"><a href="Qiime2R.html#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># tax_table()   Taxonomy Table:    [ 3911 taxa by 7 taxonomic ranks ]</span></span>
+<span id="cb16-11"><a href="Qiime2R.html#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># phy_tree()    Phylogenetic Tree: [ 3911 tips and 1694 internal nodes ]</span></span>
+<span id="cb16-12"><a href="Qiime2R.html#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="Qiime2R.html#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#filter any &quot;NA&quot;-phyla that have not been classified i.e. </span></span>
+<span id="cb16-14"><a href="Qiime2R.html#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co"># contain nothing in the phylum column of the taxtable (just a &lt;NA&gt;)</span></span>
+<span id="cb16-15"><a href="Qiime2R.html#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="Qiime2R.html#cb16-16" aria-hidden="true" tabindex="-1"></a>ps.flt  <span class="ot">=</span> <span class="fu">subset_taxa</span>(ps.flt , <span class="sc">!</span><span class="fu">is.na</span>(Phylum) <span class="sc">&amp;</span> <span class="sc">!</span>Phylum <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>))</span>
+<span id="cb16-17"><a href="Qiime2R.html#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="Qiime2R.html#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># ps.flt (not run)</span></span>
+<span id="cb16-19"><a href="Qiime2R.html#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co"># phyloseq-class experiment-level object</span></span>
+<span id="cb16-20"><a href="Qiime2R.html#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co"># otu_table()   OTU Table:         [ 3892 taxa and 51 samples ]</span></span>
+<span id="cb16-21"><a href="Qiime2R.html#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co"># sample_data() Sample Data:       [ 51 samples by 14 sample variables ]</span></span>
+<span id="cb16-22"><a href="Qiime2R.html#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co"># tax_table()   Taxonomy Table:    [ 3892 taxa by 7 taxonomic ranks ]</span></span>
+<span id="cb16-23"><a href="Qiime2R.html#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co"># phy_tree()    Phylogenetic Tree: [ 3892 tips and 1687 internal nodes ]</span></span>
+<span id="cb16-24"><a href="Qiime2R.html#cb16-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-25"><a href="Qiime2R.html#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out non-bacteria, mitochondia and chloroplast taxa</span></span>
+<span id="cb16-26"><a href="Qiime2R.html#cb16-26" aria-hidden="true" tabindex="-1"></a>ps.flt <span class="ot">&lt;-</span> ps.flt <span class="sc">%&gt;%</span></span>
+<span id="cb16-27"><a href="Qiime2R.html#cb16-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset_taxa</span>(Kingdom <span class="sc">==</span> <span class="st">&quot;Bacteria&quot;</span> <span class="sc">&amp;</span> Family  <span class="sc">!=</span> <span class="st">&quot;Mitochondria&quot;</span> <span class="sc">&amp;</span> Class   <span class="sc">!=</span> <span class="st">&quot;Chloroplast&quot;</span>)</span>
+<span id="cb16-28"><a href="Qiime2R.html#cb16-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-29"><a href="Qiime2R.html#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co"># ps.flt (not run)</span></span>
+<span id="cb16-30"><a href="Qiime2R.html#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="co"># phyloseq-class experiment-level object</span></span>
+<span id="cb16-31"><a href="Qiime2R.html#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="co"># otu_table()   OTU Table:         [ 3853 taxa and 51 samples ]</span></span>
+<span id="cb16-32"><a href="Qiime2R.html#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="co"># sample_data() Sample Data:       [ 51 samples by 14 sample variables ]</span></span>
+<span id="cb16-33"><a href="Qiime2R.html#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="co"># tax_table()   Taxonomy Table:    [ 3853 taxa by 7 taxonomic ranks ]</span></span>
+<span id="cb16-34"><a href="Qiime2R.html#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="co"># phy_tree()    Phylogenetic Tree: [ 3853 tips and 1673 internal nodes ]</span></span>
+<span id="cb16-35"><a href="Qiime2R.html#cb16-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-36"><a href="Qiime2R.html#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="co"># We can filter more for running beta diversity or differential abundance analysis later. This will be shown in later chapters</span></span>
+<span id="cb16-37"><a href="Qiime2R.html#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="co"># For example: </span></span>
+<span id="cb16-38"><a href="Qiime2R.html#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="co"># minimum presence in x% of samples (51 * 0.04 = 2 samples)</span></span>
+<span id="cb16-39"><a href="Qiime2R.html#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="co"># ps.flt = filter_taxa(ps.flt, function(x) sum(x &gt; 0) &gt; (0.04*length(x)), TRUE) </span></span>
+<span id="cb16-40"><a href="Qiime2R.html#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Would result in </span></span>
+<span id="cb16-41"><a href="Qiime2R.html#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="co"># phyloseq-class experiment-level object</span></span>
+<span id="cb16-42"><a href="Qiime2R.html#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="co"># otu_table()   OTU Table:         [ 1674 taxa and 51 samples ]</span></span>
+<span id="cb16-43"><a href="Qiime2R.html#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="co"># sample_data() Sample Data:       [ 51 samples by 14 sample variables ]</span></span>
+<span id="cb16-44"><a href="Qiime2R.html#cb16-44" aria-hidden="true" tabindex="-1"></a><span class="co"># tax_table()   Taxonomy Table:    [ 1674 taxa by 7 taxonomic ranks ]</span></span>
+<span id="cb16-45"><a href="Qiime2R.html#cb16-45" aria-hidden="true" tabindex="-1"></a><span class="co"># phy_tree()    Phylogenetic Tree: [ 1674 tips and 1673 internal nodes ]</span></span></code></pre></div>
+<p><br />
+</p>
+</div>
+<div id="rarefaction-curve" class="section level3 hasAnchor" number="5.2.5">
+<h3><span class="header-section-number">5.2.5</span> Rarefaction curve<a href="Qiime2R.html#rarefaction-curve" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Check if you cover enough depth for diversity analyses. Some samples may have low species richness, including a negative or samples that failed during PCR for example. The rarefaction curve will help assess which samples you may have to exclude from subsequent diversity calculations. It also provides a general view if samples cover enough of the potential richness (Number of ASVs).</p>
+<p>The curve shows you the number of ‘Species’ (i.e. ASVs) on the y axis and the total reads on the x axis for each sample. So basically, it shows how rich each sample is and indicates if the number of reads that are captured in a samples covers enough of the ASVs. If the curve flattens, it indicates that the sample would not get any richer even with more reads…</p>
+<p>I typically use the rarefaction curve to check if there are samples that need removing before establishing alpha diversity metrics. In this example, the vertical line helps identify the sample with lowest number of reads. We can check that by running <code>min(colSums(otu_table(ps.flt)))</code>, which tells us that they are 9690 reads in the sample with lowest reads. If this sample is kept in and we measure subsequent alpha diversity metrics, where each of the sample-reads are randomly resampled to the lowest read-number (here 9690), then we may not capture the diversity of samples with higher richness. The grey horizontal lines indicate how much richness we may lose if we include the sample with lowest number of reads (the difference between grey horizontal line and the curve of each sample at the highest number of reads on x-axis).</p>
+<p><br />
+</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="Qiime2R.html#cb17-1" aria-hidden="true" tabindex="-1"></a>vegan<span class="sc">::</span><span class="fu">rarecurve</span>(<span class="fu">t</span>(<span class="fu">otu_table</span>(ps.flt)), </span>
+<span id="cb17-2"><a href="Qiime2R.html#cb17-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">step=</span><span class="dv">200</span>, <span class="at">sample =</span> <span class="fu">min</span>(<span class="fu">colSums</span>(<span class="fu">otu_table</span>(ps.flt))), </span>
+<span id="cb17-3"><a href="Qiime2R.html#cb17-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">label =</span> <span class="cn">FALSE</span>, <span class="at">xlab =</span> <span class="st">&quot;Sample Size after filtering&quot;</span>) </span></code></pre></div>
+<p><img src="gitbook-demo_files/figure-html/rarefaction-1.png" width="672" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="Qiime2R.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># show the lowest and highest number of sample reads.  </span></span>
+<span id="cb18-2"><a href="Qiime2R.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">colSums</span>(<span class="fu">otu_table</span>(ps.flt)))</span></code></pre></div>
+<pre><code>## [1] 42345</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="Qiime2R.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">colSums</span>(<span class="fu">otu_table</span>(ps.flt)))</span></code></pre></div>
+<pre><code>## [1] 9770</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="Qiime2R.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering options</span></span>
+<span id="cb22-2"><a href="Qiime2R.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># filter options (not run), you can filter out specific sample or treatments from the phyloseq objects. </span></span>
+<span id="cb22-3"><a href="Qiime2R.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># `%notin%` = Negate(`%in%`)  # create a %notin% filter operator for filtering</span></span>
+<span id="cb22-4"><a href="Qiime2R.html#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="Qiime2R.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering out treatments, e.g. any sample that was labeled &quot;Negative&quot; in the metadata</span></span>
+<span id="cb22-6"><a href="Qiime2R.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ps.flt.flt &lt;-  prune_samples(sample_data(ps.flt)$Treatment %notin% c(&quot;Negative&quot;), ps.flt)</span></span>
+<span id="cb22-7"><a href="Qiime2R.html#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="Qiime2R.html#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering out any taxa that have zero reads because they were only present in the removed samples.  </span></span>
+<span id="cb22-9"><a href="Qiime2R.html#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ps.flt.flt &lt;- prune_taxa(taxa_sums(ps.flt.flt) != 0, ps.flt.flt)</span></span></code></pre></div>
+<p>Once you identified the samples you would like to remove, you can filter out specific samples or treatments from the phyloseq objects. For example, with the <code>prune_samples(sample_data(ps.flt)$Treatment %notin% c("Negative"), ps.flt)</code> command here we would sample out any samples labeled as “Negative” in the metadata. Afterwards make sure to sample out any taxa that now contain zero reads because they were only present in the removed samples. Perhaps, create new phyloseq objects to differentiate from your different filtered object <code>ps.flt.flt &lt;- prune_taxa(taxa_sums(ps.flt) != 0, ps.flt)</code>.</p>
+<p>In this example, we are keeping the sample with lowest reads. No further filtering required at this stage.</p>
+<p><br />
+</p>
+</div>
+<div id="prevalence-table" class="section level3 hasAnchor" number="5.2.6">
+<h3><span class="header-section-number">5.2.6</span> Prevalence table<a href="Qiime2R.html#prevalence-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Create a prevalence table to get an overview of phyla with low to high prevalence.</p>
+<p>The output is a dataframe showing all phyla in order of total abundance. The mean prevalence defines how often the phylum appears across all samples on average. E.g. a mean prevalence of 10.22 means that ASVs in this phylum were present on average in 10.22 samples. Higher values indicates a ‘core’ relevance to the sum of samples.</p>
+<p>This table is handy to decide if you want to remove certain phyla from some visualisations as they may not contribute to the overall analysis. It also allows for a comparison with filtered and unfiltered data for due diligence. Here it is apparent that phyla that were unclassified (i.e. <NA> ) contributed 3,522 reads to the total of 1,299,791 reads. That is <code>3522 / sum(phyloseq::otu_table(ps)) * 100</code> = 0.27%. Chances are that these NA sequences may just be noise and may not represent biological relevant amplicons. Hence, I would keep them out of any further analysis.<br />
+However, in environments where you get higher contributions of unknown amplicons, it may indicate that the taxonomic database does not capture your samples well. In that case it would be wise to keep the NAs in for measuring alpha and beta diversity.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="Qiime2R.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create a prevalence table to see which phyla have low prevalence</span></span>
+<span id="cb23-2"><a href="Qiime2R.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ps.flt.prev &lt;-  prune_samples(sample_data(physeqB.flt)$Treatment != &quot;Reference&quot;, physeqB.flt)</span></span>
+<span id="cb23-3"><a href="Qiime2R.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ps.flt.prevtab &lt;-  prune_samples(sample_data(physeqB.flt.prevtab)$Treatment != &quot;Blank&quot;, physeqB.flt.prevtab)</span></span>
+<span id="cb23-4"><a href="Qiime2R.html#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="Qiime2R.html#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="Qiime2R.html#cb23-6" aria-hidden="true" tabindex="-1"></a>prevelancedf <span class="ot">=</span> <span class="fu">apply</span>(<span class="at">X =</span> phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(ps.flt),</span>
+<span id="cb23-7"><a href="Qiime2R.html#cb23-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">MARGIN =</span> <span class="dv">1</span>,</span>
+<span id="cb23-8"><a href="Qiime2R.html#cb23-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> <span class="cf">function</span>(x){<span class="fu">sum</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)})</span>
+<span id="cb23-9"><a href="Qiime2R.html#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="Qiime2R.html#cb23-10" aria-hidden="true" tabindex="-1"></a>prevelancedf <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Prevalence =</span> prevelancedf,</span>
+<span id="cb23-11"><a href="Qiime2R.html#cb23-11" aria-hidden="true" tabindex="-1"></a>                            <span class="at">TotalAbundance =</span> <span class="fu">taxa_sums</span>(ps.flt),</span>
+<span id="cb23-12"><a href="Qiime2R.html#cb23-12" aria-hidden="true" tabindex="-1"></a>                            phyloseq<span class="sc">::</span><span class="fu">tax_table</span>(ps.flt))</span>
+<span id="cb23-13"><a href="Qiime2R.html#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="Qiime2R.html#cb23-14" aria-hidden="true" tabindex="-1"></a>prevelancedf <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ddply</span>(prevelancedf, <span class="st">&quot;Phylum&quot;</span>, <span class="cf">function</span>(df1){</span>
+<span id="cb23-15"><a href="Qiime2R.html#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">mean_prevalence=</span><span class="fu">mean</span>(df1<span class="sc">$</span>Prevalence), <span class="at">total_abundance=</span><span class="fu">sum</span>(df1<span class="sc">$</span>TotalAbundance,<span class="at">na.rm =</span> T), <span class="at">stringsAsFactors =</span> F)</span>
+<span id="cb23-16"><a href="Qiime2R.html#cb23-16" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb23-17"><a href="Qiime2R.html#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="Qiime2R.html#cb23-18" aria-hidden="true" tabindex="-1"></a>prevelancedf <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(total_abundance))  <span class="co"># print table from highest to lowest abundance </span></span></code></pre></div>
+<pre><code>##                           Phylum mean_prevalence total_abundance
+## 1                    Chloroflexi        5.124069          228197
+## 2                   Bacteroidota        4.683206          200707
+## 3                     Firmicutes        4.420402          188599
+## 4               Actinobacteriota        5.304569          165409
+## 5                 Proteobacteria        4.263459          161215
+## 6               Desulfobacterota        5.470000           57102
+## 7                   Synergistota        6.595506           51225
+## 8                 Cloacimonadota        6.717391           45260
+## 9                Acidobacteriota        3.976190           35144
+## 10                  Thermotogota       10.190476           33489
+## 11                 Spirochaetota        4.578431           25015
+## 12             Verrucomicrobiota        3.430233           16537
+## 13             Fermentibacterota       35.000000           14812
+## 14               Patescibacteria        3.681818           14380
+## 15            Caldatribacteriota        5.500000            8932
+## 16               Planctomycetota        2.518519            5138
+## 17                Armatimonadota        2.933333            4443
+## 18 Marinimicrobia_(SAR406_clade)       20.000000            3818
+## 19               Hydrogenedentes        3.950000            3411
+## 20                  Nitrospirota        8.750000            2853
+## 21              Campilobacterota        4.187500            2710
+## 22  SAR324_clade(Marine_group_B)        4.000000            2616
+## 23                           WS1        3.625000            2559
+## 24                Fibrobacterota        2.818182            1870
+## 25                   Myxococcota        3.176471            1353
+## 26              Bdellovibrionota        3.600000            1111
+## 27                 Caldisericota        3.818182            1067
+## 28                         WPS-2        2.666667             897
+## 29                   Sumerlaeota        3.888889             683
+## 30                 Cyanobacteria        9.000000             647
+## 31                Fusobacteriota        2.888889             565
+## 32          Coprothermobacterota        2.800000             511
+## 33               Gemmatimonadota        2.875000             300
+## 34               Elusimicrobiota        2.833333             225
+## 35                      CK-2C2-2        4.000000             162
+## 36             Methylomirabilota        4.000000             159
+## 37              Latescibacterota        2.333333              86
+## 38                  Dependentiae        2.500000              78
+## 39                  Zixibacteria        5.000000              74
+## 40                       Sva0485        2.333333              66
+## 41                  Acetothermia        2.000000              59
+## 42                           WS4        1.500000              39
+## 43                  Hydrothermae        1.000000              26
+## 44                  Deinococcota        1.000000              11</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="Qiime2R.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Compare with the original, unfiltered ps object</span></span>
+<span id="cb25-2"><a href="Qiime2R.html#cb25-2" aria-hidden="true" tabindex="-1"></a>prevelancedf <span class="ot">=</span> <span class="fu">apply</span>(<span class="at">X =</span> phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(ps),</span>
+<span id="cb25-3"><a href="Qiime2R.html#cb25-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">MARGIN =</span> <span class="dv">1</span>,</span>
+<span id="cb25-4"><a href="Qiime2R.html#cb25-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> <span class="cf">function</span>(x){<span class="fu">sum</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)})</span>
+<span id="cb25-5"><a href="Qiime2R.html#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="Qiime2R.html#cb25-6" aria-hidden="true" tabindex="-1"></a>prevelancedf <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Prevalence =</span> prevelancedf,</span>
+<span id="cb25-7"><a href="Qiime2R.html#cb25-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">TotalAbundance =</span> <span class="fu">taxa_sums</span>(ps),</span>
+<span id="cb25-8"><a href="Qiime2R.html#cb25-8" aria-hidden="true" tabindex="-1"></a>                            phyloseq<span class="sc">::</span><span class="fu">tax_table</span>(ps))</span>
+<span id="cb25-9"><a href="Qiime2R.html#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="Qiime2R.html#cb25-10" aria-hidden="true" tabindex="-1"></a>prevelancedf <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ddply</span>(prevelancedf, <span class="st">&quot;Phylum&quot;</span>, <span class="cf">function</span>(df1){</span>
+<span id="cb25-11"><a href="Qiime2R.html#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">mean_prevalence=</span><span class="fu">mean</span>(df1<span class="sc">$</span>Prevalence), <span class="at">total_abundance=</span><span class="fu">sum</span>(df1<span class="sc">$</span>TotalAbundance,<span class="at">na.rm =</span> T), <span class="at">stringsAsFactors =</span> F)</span>
+<span id="cb25-12"><a href="Qiime2R.html#cb25-12" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb25-13"><a href="Qiime2R.html#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="Qiime2R.html#cb25-14" aria-hidden="true" tabindex="-1"></a>prevelancedf <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(total_abundance))  <span class="co"># print table from highest to lowest abundance </span></span></code></pre></div>
+<pre><code>##                           Phylum mean_prevalence total_abundance
+## 1                    Chloroflexi        4.865429          228276
+## 2                   Bacteroidota        4.451499          202022
+## 3                     Firmicutes        4.283019          197782
+## 4               Actinobacteriota        5.045131          165791
+## 5                 Proteobacteria        4.046709          161897
+## 6               Desulfobacterota        4.829060           57187
+## 7                   Synergistota        6.533333           51227
+## 8                 Cloacimonadota        6.387755           45296
+## 9                Acidobacteriota        3.791209           35318
+## 10                  Thermotogota       10.190476           33489
+## 11                 Spirochaetota        4.443396           25028
+## 12             Verrucomicrobiota        2.981308           16649
+## 13             Fermentibacterota       35.000000           14812
+## 14               Patescibacteria        3.138554           14501
+## 15            Caldatribacteriota        5.304348            8934
+## 16               Planctomycetota        2.433333            5478
+## 17                Armatimonadota        2.611111            4462
+## 18 Marinimicrobia_(SAR406_clade)       20.000000            3818
+## 19                          &lt;NA&gt;        3.636364            3522
+## 20               Hydrogenedentes        3.950000            3411
+## 21                  Nitrospirota        8.750000            2853
+## 22              Campilobacterota        4.187500            2710
+## 23  SAR324_clade(Marine_group_B)        3.333333            2622
+## 24                           WS1        3.625000            2559
+## 25                Fibrobacterota        2.750000            1942
+## 26                   Myxococcota        2.681818            1369
+## 27              Bdellovibrionota        2.444444            1133
+## 28                 Caldisericota        3.583333            1071
+## 29                         WPS-2        2.666667             897
+## 30                   Sumerlaeota        3.600000             686
+## 31                 Cyanobacteria        9.000000             647
+## 32                Fusobacteriota        2.888889             565
+## 33          Coprothermobacterota        2.800000             511
+## 34               Gemmatimonadota        2.666667             304
+## 35               Elusimicrobiota        2.833333             225
+## 36                      CK-2C2-2        4.000000             162
+## 37             Methylomirabilota        4.000000             159
+## 38                  Dependentiae        1.750000              94
+## 39              Latescibacterota        2.000000              89
+## 40                  Zixibacteria        5.000000              74
+## 41                       Sva0485        2.000000              69
+## 42                  Acetothermia        2.000000              59
+## 43                           WS4        1.250000              46
+## 44                  Hydrothermae        1.000000              26
+## 45                  Deinococcota        1.000000              11
+## 46                       FCPU426        1.000000               3
+## 47              Margulisbacteria        1.000000               3
+## 48                        MBNT15        1.000000               2</code></pre>
+<p><strong>Note:</strong><br />
+This code is an amalgamation from various sources. Apart from putting it together into this workflow I do not take credit for it.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="from-basespace-to-qiime2-and-dada2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/05_qiimetoR.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["gitbook-demo.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
