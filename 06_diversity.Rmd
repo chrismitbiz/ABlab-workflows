@@ -291,7 +291,7 @@ RDAplot <- phyloseq::plot_ordination(physeqPCA, ordination ,
              x = -Inf, y = -Inf, hjust = -0.05, vjust = -1, size = 3) +
   geom_point(aes(size = pielou_ev)) +        # shape size reflective of Pielou Evenness
   #scale_colour_gradient(low = colourlow, high = colourhigh) +
-  ggtitle("RDA Abundances (clr) ~ Treatment ") +
+  ggtitle("RDA Abundances (clr) ~ Location") +
   scale_color_manual(values = cols)
 
 
