@@ -91,8 +91,8 @@ metadata2 <- metadata[c(2:nrow(metadata)),] %>%     # remove the top row and con
 
 # Then decide which of the columns you want to be factors and in which order these factors should go. This will determine the order in which ggplot will plot them. You can include the levels = c("level1", "level"...)  command to determine the order, which is not done here. 
 metadata2  <- metadata2 %>% 
-  mutate(Reactor = factor(Reactor)) %>% 
-  mutate(Location = factor(loc))
+  mutate(Reactor = factor(Reactor)) %>%  # replace column Reactor with the same values but made a factor. 
+  mutate(Location = factor(loc))     # create a new column 'Location', which is a factor of 'loc'
 
 # Qiime import                      
 SVs <-  qiime2R::read_qza("qiimefiles/featuretable-insertiontree-filtered.qza")
@@ -149,8 +149,8 @@ If you wish, you can access each individual data set from the ps object with fun
 ```{r, psobject2, include=TRUE, echo=TRUE,warning=FALSE, message=FALSE}
 
 ASVs <- otu_table(ps)@.Data
-metadata <- sample_data(ps)
-taxtable <- tax_table(ps)@.Data
+metadata <- data.frame(sample_data(ps))
+taxtable <- data.frame(tax_table(ps)@.Data)
 tree <- phy_tree(ps)
 
 # Inspect individual objects in your own time. 

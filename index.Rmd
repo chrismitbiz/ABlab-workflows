@@ -14,7 +14,7 @@ biblio-style: apalike
 ---
 
 <!--"Using GitBooks to create Open course materials"-->
-# About this GitBook
+# About this GitBook {#about}
 
 ![](./img/data.jpeg)
 

@@ -1,14 +1,24 @@
 
-# Diversity analysis  
+# Plotting diversity  
 Some visualisations of alpha and beta diversity.
 
 ## Introduction
-
-
+  
+This chapter introduces you to a basic workflow for plotting alpha and beta diversity using phyloseq and ggplot. It provides examples for loading the phyloseq object from a previously saved .rds file, then how to calculate and include alpha diversity metrics into the sample_data of the phyloseq object, and finally how to plot some of these metrics, individually or combined.
+  
+Furthermore, beta diversity, i.e. four different type of ordinations are plotted. The examples, include an non-metric dimensional scaling on Bray-Curtis dissimilaries, Principal Component Analysis (Aitchison distance), Redundancy Analysis ( Aitchison) and a Principal Coordinate Analysis on unweighted uniFrac distances.   
+  
+The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: https://sites.google.com/site/mb3gustame/home, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter \@(about). 
+  
+  \
+  
 ## Workflow  
   
 ### Packages  
-```{r, message=FALSE, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
+  
+Install the following packages if not already.  
+  
+```{r packagesdiversity, message=FALSE, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
 # BiocManager::install("microbiome") If needed
 
 library(phyloseq)
@@ -21,7 +31,7 @@ library(microbiome)
 
   \
   
-### Load your phyloseq object
+### Load phyloseq object
 For detail on how to create a phyloseq object please see chapter \@ref(Qiime2R).  
   
 ```{r loadps, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
@@ -34,15 +44,17 @@ ps  # get an overview of number of taxa and samples contained in the phyloseq ob
   
 Check metadata contained in the phyloseq object. This is the original metadata from the public repository where the FastQ files were downloaded from (Sequence Read Archives).  
   
-```{r metadata,include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
+There are 15 columns with some character (chr), factor or integer (int) variables. 
+  
+```{r metadatacheck, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
 metadf <- data.frame(sample_data(ps))
 str(metadf)
 ```
   
   \
-### Plotting  
-#### Alpha diversity
-##### Pre-processing of phyloseq object
+  
+### Pre-processing of phyloseq object   
+  
 ```{r alphadiversitypre, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE, error=FALSE}
  
 # some additional quality filtering - repeating steps from previous chapter. 
@@ -66,7 +78,11 @@ min(colSums(otu_table(ps.flt)))
 # This step is to create an abundance table, where the all samples are randomly resamples such that all samples have the same number of ASVs.  
 # It removes any bias but number of re-samples is based on the sample with smallest number of ASVs so one has to check and filter beforehand in case there are samples with very different number of ASVs. I am generally going by a 10x rule. If the lowest number of ASVs is 10x lower than the sample with highest number of ASVs, then I keep that sample in for alpha diversity assessments.  
   
-ps_rare <- phyloseq::rarefy_even_depth(ps.flt, sample.size = min(colSums(otu_table(ps.flt))),  rngseed = TRUE, replace = TRUE, trimOTUs = TRUE)
+ps_rare <- phyloseq::rarefy_even_depth(ps.flt, 
+                                       sample.size = min(colSums(otu_table(ps.flt))),  
+                                       rngseed = TRUE, 
+                                       replace = TRUE, 
+                                       trimOTUs = TRUE)
 
 # check rarefied phyloseq object
 # ps_rare (not run)
@@ -97,8 +113,9 @@ str(data.frame(sample_data(ps.flt)))
 ```
 
 
-##### Colors
-```{r}
+### Colors  
+  
+```{r cols}
 # You can check Hex codes with help of https://htmlcolorcodes.com/
 
 cols <- c("#F9E79F", "#FDEBD0", "#F6DDCC",  "#E5E8E8", "#CCD1D1", "#AAB7B8", "#707B7C", "#566573","#82E0AA", "#641E16", "#8E44AD", "#E74C3C")
@@ -108,7 +125,7 @@ names(cols)  <- unique((data.frame(sample_data(ps.flt)))$Location)
 cols
 ```
 
-##### Richness
+### Richness
 ```{r richness,  message=FALSE, warning=FALSE, echo=T}
 
 p1 <- data.frame(phyloseq::sample_data(ps.flt)) %>%
@@ -130,7 +147,7 @@ p1
 
 ```
 
-##### Shannon
+### Shannon
 ```{r shannon,  message=FALSE, warning=FALSE, echo=T}
 # Shannon
 p2 <- data.frame(phyloseq::sample_data(ps.flt)) %>%
@@ -151,7 +168,7 @@ p2 <- data.frame(phyloseq::sample_data(ps.flt)) %>%
 p2
 ```
 
-##### Pielou's evenness
+### Pielou's evenness
 ```{r pielou,  message=FALSE, warning=FALSE, echo=T }
 # Pielou
 p3 <- data.frame(phyloseq::sample_data(ps.flt)) %>%
@@ -172,8 +189,8 @@ p3 <- data.frame(phyloseq::sample_data(ps.flt)) %>%
 p3
 ```
 
-##### All plots together
-```{r plot, echo=T, fig.asp=1, fig.width=10, message=FALSE, warning=FALSE, include=TRUE}
+### Combined plotting 
+```{r plot, echo=T, fig.asp=0.45, fig.width=10, message=FALSE, warning=FALSE, include=TRUE}
 #pdf(NULL)
 g1 <- ggpubr::ggarrange(p1, p2, p3, common.legend = TRUE, nrow = 1, legend = 'top')
 #x = dev.off()
@@ -182,9 +199,8 @@ g1
   
   \
   
-#### Beta diversity  
-##### NMDS  
-```{r, nmds, echo=TRUE, message=FALSE, warning=FALSE, cache=FALSE,fig.asp=0.8, fig.width=6}
+### NMDS  
+```{r, nmds, echo=TRUE, message=FALSE, warning=FALSE, results=FALSE, cache=FALSE,fig.asp=0.8, fig.width=6}
 physeqNMDS <-  ps.flt  # just to keep it separate.
 
 #ordination
@@ -198,7 +214,7 @@ NMDSplot <- phyloseq::plot_ordination(physeqNMDS,
                                       #shape = "Reactor",    
                                       # option to add shapes to data symbols
                                       title = "NMDS") +
-     geom_point(aes(size = pielou_ev), alpha = 0.75) +    # shape size reflective of Pielou  
+     geom_point(aes(size = pielou_ev), alpha = 0.75) +    # shape size reflective of Pielou, also make transparent 
      annotate(geom = 'text', label = paste("Bray-Curtis, Stress = ", label), 
              x = -Inf, y = -Inf, hjust = -0.05, vjust = -1, size = 3)  +
      scale_color_manual(values = cols)
@@ -207,7 +223,7 @@ NMDSplot
 ```
 
 
-##### PCA  
+### PCA  
 ```{r PCA,  message=FALSE, warning=FALSE, echo=T, include=TRUE,fig.asp=0.8, fig.width=6}
 
 physeqPCA <-  ps.flt  # just to keep it separate.
@@ -232,12 +248,12 @@ PCAplot <- phyloseq::plot_ordination(physeqPCA,
     scale_color_manual(values = cols)
 
 PCAplot
-# ggsave("PCA.png", height=6, width=7.5, units='in', dpi=600)
+
 ```
   
   \
    
-##### RDA  
+### RDA  
 ```{r rda,  message=FALSE, warning=FALSE, echo=T, include=TRUE,fig.asp=0.8, fig.width=6 }
 # PERCENT FILTERVALUE FOR ALL RDAs
 pcnt <- 0.25
@@ -270,8 +286,10 @@ ordination <- phyloseq::ordinate(physeqPCA, "RDA", "bray", formula = form )
 RDAplot <- phyloseq::plot_ordination(physeqPCA, ordination , 
                                 color = "Location")  +
   geom_hline(yintercept=0, linetype="dashed", color = "gray") +
-  geom_vline(xintercept=0, linetype="dashed", color = "gray") +
-  geom_point(aes(size = pielou_ev)) +                # shape size reflective of Pielou Evenness
+  geom_vline(xintercept=0, linetype="dashed", color = "gray") +    # shape size reflective of Pielou  
+     annotate(geom = 'text', label = paste("Aitchison distances"), 
+             x = -Inf, y = -Inf, hjust = -0.05, vjust = -1, size = 3) +
+  geom_point(aes(size = pielou_ev)) +        # shape size reflective of Pielou Evenness
   #scale_colour_gradient(low = colourlow, high = colourhigh) +
   ggtitle("RDA Abundances (clr) ~ Treatment ") +
   scale_color_manual(values = cols)
@@ -283,6 +301,7 @@ arrowmat <- data.frame(arrowmat)
 #rownames(arrowmat) <- arrowlabel
 # Add labels, make a data.frame
 arrowdf <- data.frame(labels = rownames(arrowmat), arrowmat)
+arrowdf$labels <- arrowdf$labels %>% gsub("Location", "", .) # remove the string "Location" from the labels. 
 # Define the arrow aesthetic mapping
 arrow_map <- aes(xend = larw * RDA1,
                  yend = larw * RDA2,
@@ -319,16 +338,22 @@ RDAplot
 # save figure for publication
 # ggsave("RDA.png", height=6, width=7.5, units='in', dpi=600)
 #knitr::include_graphics("./RDA.png")
+
+
 ```
   
   \
   
-##### unweighted unifrac
+### Unweighted uniFrac  
+UniFrac distances are derived from phylogenetic distances between ASVs, which means that a phylogenetic tree needs to be included into the phyloseq object.  
+  
 ```{r, unifrac, echo=TRUE, message=FALSE, warning=FALSE, cache=FALSE,fig.asp=0.8, fig.width=6}
 physeqPcOA <-  ps.flt  # just to keep it separate.
 
 #ordination
-ordination <- phyloseq::ordinate(physeqPcOA  , "PCoA", distance = 'unifrac') # using just presence and absence (unweighted) dissimilarities here. 
+ordination <- phyloseq::ordinate(physeqPcOA  , 
+                                 "PCoA", 
+                                 distance = 'unifrac') # using just presence and absence (unweighted) dissimilarities here. 
 
 #plotting ordination
 PCOAplot <- phyloseq::plot_ordination(physeqPcOA, 
@@ -345,13 +370,27 @@ PCOAplot <- phyloseq::plot_ordination(physeqPcOA,
 PCOAplot
 ```
 
-##### Plots combined 
+### Combined plotting 
 ```{r plotbeta, echo=T, fig.asp=1, fig.width=10, message=FALSE, warning=FALSE, include=TRUE}
 #pdf(NULL)
-g1 <- ggpubr::ggarrange(NMDSplot, PCAplot, RDAplot, PCOAplot, common.legend = TRUE, nrow = 2, ncol = 2, legend = 'top')
+g2 <- ggpubr::ggarrange(NMDSplot, PCAplot, RDAplot, PCOAplot,
+                        common.legend = TRUE, nrow = 2, ncol = 2, legend = 'top')
 #x = dev.off()
-g1
+g2
 ```
+  
+  \
+  
+### Save plots to png and pdf
+```{r}
+# either as png or pdf
+ggsave("alphadiversity.png", plot = (g1), height=4, width=10, units='in', dpi=600)
+ggsave("alphadiversity.pdf", plot = (g1), height=4, width=10, units='in', dpi=600)
 
+ggsave("betadiversity.png", plot = (g2), height=10, width=10, units='in', dpi=600)
+ggsave("betadiversity.pdf", plot = (g2), height=10, width=10, units='in', dpi=600)
+```
+  
+  
 **Note:**
 This code is an amalgamation from various sources. Apart from putting it together into a pipeline I do not take credit for it.

@@ -147,8 +147,8 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\hypertarget{about-this-gitbook}{%
-\chapter{About this GitBook}\label{about-this-gitbook}}
+\hypertarget{about}{%
+\chapter{About this GitBook}\label{about}}
 
 \includegraphics{./img/data.jpeg}
 
@@ -985,8 +985,8 @@ In the previous chapter, we used a \texttt{samplesheet.tsv} to visualise and sum
 
 \CommentTok{\# Then decide which of the columns you want to be factors and in which order these factors should go. This will determine the order in which ggplot will plot them. You can include the levels = c("level1", "level"...)  command to determine the order, which is not done here. }
 \NormalTok{metadata2  }\OtherTok{\textless{}{-}}\NormalTok{ metadata2 }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Reactor =} \FunctionTok{factor}\NormalTok{(Reactor)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Location =} \FunctionTok{factor}\NormalTok{(loc))}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Reactor =} \FunctionTok{factor}\NormalTok{(Reactor)) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# replace column Reactor with the same values but made a factor. }
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Location =} \FunctionTok{factor}\NormalTok{(loc))     }\CommentTok{\# create a new column \textquotesingle{}Location\textquotesingle{}, which is a factor of \textquotesingle{}loc\textquotesingle{}}
 
 \CommentTok{\# Qiime import                      }
 \NormalTok{SVs }\OtherTok{\textless{}{-}}\NormalTok{  qiime2R}\SpecialCharTok{::}\FunctionTok{read\_qza}\NormalTok{(}\StringTok{"qiimefiles/featuretable{-}insertiontree{-}filtered.qza"}\NormalTok{)}
@@ -1044,8 +1044,8 @@ If you wish, you can access each individual data set from the ps object with fun
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{ASVs }\OtherTok{\textless{}{-}} \FunctionTok{otu\_table}\NormalTok{(ps)}\SpecialCharTok{@}\NormalTok{.Data}
-\NormalTok{metadata }\OtherTok{\textless{}{-}} \FunctionTok{sample\_data}\NormalTok{(ps)}
-\NormalTok{taxtable }\OtherTok{\textless{}{-}} \FunctionTok{tax\_table}\NormalTok{(ps)}\SpecialCharTok{@}\NormalTok{.Data}
+\NormalTok{metadata }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{sample\_data}\NormalTok{(ps))}
+\NormalTok{taxtable }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{tax\_table}\NormalTok{(ps)}\SpecialCharTok{@}\NormalTok{.Data)}
 \NormalTok{tree }\OtherTok{\textless{}{-}} \FunctionTok{phy\_tree}\NormalTok{(ps)}
 
 \CommentTok{\# Inspect individual objects in your own time. }
@@ -1346,6 +1346,546 @@ However, in environments where you get higher contributions of unknown amplicons
 
 \textbf{Note:}\\
 This code is an amalgamation from various sources. Apart from putting it together into this workflow I do not take credit for it.
+
+\hypertarget{plotting-diversity}{%
+\chapter{Plotting diversity}\label{plotting-diversity}}
+
+Some visualisations of alpha and beta diversity.
+
+\hypertarget{introduction-3}{%
+\section{Introduction}\label{introduction-3}}
+
+This chapter introduces you to a basic workflow for plotting alpha and beta diversity using phyloseq and ggplot. It provides examples for loading the phyloseq object from a previously saved .rds file, then how to calculate and include alpha diversity metrics into the sample\_data of the phyloseq object, and finally how to plot some of these metrics, individually or combined.
+
+Furthermore, beta diversity, i.e.~four different type of ordinations are plotted. The examples, include an non-metric dimensional scaling on Bray-Curtis dissimilaries, Principal Component Analysis (Aitchison distance), Redundancy Analysis ( Aitchison) and a Principal Coordinate Analysis on unweighted uniFrac distances.
+
+The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: \url{https://sites.google.com/site/mb3gustame/home}, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter @(about).
+
+\hfill\break
+
+\hypertarget{workflow-3}{%
+\section{Workflow}\label{workflow-3}}
+
+\hypertarget{packages-1}{%
+\subsection{Packages}\label{packages-1}}
+
+Install the following packages if not already.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# BiocManager::install("microbiome") If needed}
+
+\FunctionTok{library}\NormalTok{(phyloseq)}
+\FunctionTok{library}\NormalTok{(ggpubr)       }\CommentTok{\# a handy helper package for ggplots}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{theme\_set}\NormalTok{(}\FunctionTok{theme\_bw}\NormalTok{())  }\CommentTok{\# setting the theme for ggplots}
+\FunctionTok{library}\NormalTok{(vegan)}
+\FunctionTok{library}\NormalTok{(microbiome)}
+\end{Highlighting}
+\end{Shaded}
+
+\hfill\break
+
+\hypertarget{load-phyloseq-object}{%
+\subsection{Load phyloseq object}\label{load-phyloseq-object}}
+
+For detail on how to create a phyloseq object please see chapter \ref{Qiime2R}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# reading in a previously saved phyloseq object}
+\NormalTok{ps }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{\textquotesingle{}ps\_ProjectX\_2022July\textquotesingle{}}\NormalTok{)}
+\NormalTok{ps  }\CommentTok{\# get an overview of number of taxa and samples contained in the phyloseq object}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## phyloseq-class experiment-level object
+## otu_table()   OTU Table:         [ 4218 taxa and 51 samples ]
+## sample_data() Sample Data:       [ 51 samples by 15 sample variables ]
+## tax_table()   Taxonomy Table:    [ 4218 taxa by 7 taxonomic ranks ]
+## phy_tree()    Phylogenetic Tree: [ 4218 tips and 4217 internal nodes ]
+\end{verbatim}
+
+\hfill\break
+
+Check metadata contained in the phyloseq object. This is the original metadata from the public repository where the FastQ files were downloaded from (Sequence Read Archives).
+
+There are 15 columns with some character (chr), factor or integer (int) variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{metadf }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{sample\_data}\NormalTok{(ps))}
+\FunctionTok{str}\NormalTok{(metadf)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    51 obs. of  15 variables:
+##  $ Assay.Type     : chr  "AMPLICON" "AMPLICON" "AMPLICON" "AMPLICON" ...
+##  $ Bases          : int  13254234 24196788 15758554 20048406 37634632 43555904 35107436 13888140 23172184 35065898 ...
+##  $ BioProject     : chr  "PRJNA645373" "PRJNA645373" "PRJNA645373" "PRJNA645373" ...
+##  $ Bytes          : int  9235913 16404070 10758456 13009806 24207581 27963491 22585685 9388862 15125835 22520074 ...
+##  $ Organism       : chr  "anaerobic digester metagenome" "anaerobic digester metagenome" "anaerobic digester metagenome" "anaerobic digester metagenome" ...
+##  $ collection_date: chr  "30/11/16" "9/3/16" "17/3/16" "5/12/16" ...
+##  $ loc            : chr  "Ejby Moelle" "Soeholt" "Esbjerg Vest" "Viborg" ...
+##  $ Reactor        : Factor w/ 10 levels "1A","1B","2B",..: 4 4 6 7 7 5 5 5 4 4 ...
+##  $ Type           : chr  NA NA NA "DS" ...
+##  $ Purpose        : chr  "reactorfoampotentials" "reactorfoampotentials" "reactorfoampotentials" "foamnofoamcomparison" ...
+##  $ Experiment     : chr  "SRX8715180" "SRX8715169" "SRX8715158" "SRX8715151" ...
+##  $ lat_lon        : chr  "55.398077 N 10.415041 E" "56.175302 N 9.582588 E" "55.488235 N 8.430655 E" "56.425367 N 9.4527943 E" ...
+##  $ ReleaseDate    : chr  "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" ...
+##  $ Sample.Name    : chr  "16SAMP-17236" "16SAMP-17231" "16SAMP-17233" "MQ170915-14" ...
+##  $ Location       : Factor w/ 12 levels "Avedoere","Damhusaaen",..: 4 11 5 12 12 12 12 2 11 11 ...
+\end{verbatim}
+
+\hfill\break
+
+\hypertarget{pre-processing-of-phyloseq-object}{%
+\subsection{Pre-processing of phyloseq object}\label{pre-processing-of-phyloseq-object}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# some additional quality filtering {-} repeating steps from previous chapter. }
+  
+\NormalTok{ps.flt }\OtherTok{=} \FunctionTok{prune\_taxa}\NormalTok{(}\FunctionTok{taxa\_sums}\NormalTok{(ps) }\SpecialCharTok{\textgreater{}=} \DecValTok{5}\NormalTok{, ps) }\CommentTok{\#minimum reads per feature }
+\NormalTok{ps.flt  }\OtherTok{=} \FunctionTok{subset\_taxa}\NormalTok{(ps.flt , }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Phylum) }\SpecialCharTok{\&} \SpecialCharTok{!}\NormalTok{Phylum }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{""}\NormalTok{))}
+\NormalTok{ps.flt }\OtherTok{\textless{}{-}}\NormalTok{ ps.flt }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{subset\_taxa}\NormalTok{(Kingdom }\SpecialCharTok{==} \StringTok{"Bacteria"} \SpecialCharTok{\&}\NormalTok{ Family  }\SpecialCharTok{!=} \StringTok{"Mitochondria"} \SpecialCharTok{\&}\NormalTok{ Class   }\SpecialCharTok{!=} \StringTok{"Chloroplast"}\NormalTok{)}
+\CommentTok{\#ps.flt (not run)}
+
+\CommentTok{\# phyloseq{-}class experiment{-}level object}
+\CommentTok{\# otu\_table()   OTU Table:         [ 3853 taxa and 51 samples ]}
+\CommentTok{\# sample\_data() Sample Data:       [ 51 samples by 14 sample variables ]}
+\CommentTok{\# tax\_table()   Taxonomy Table:    [ 3853 taxa by 7 taxonomic ranks ]}
+\CommentTok{\# phy\_tree()    Phylogenetic Tree: [ 3853 tips and 3852 internal nodes ]}
+
+\CommentTok{\# confirming minimum sample size}
+\FunctionTok{min}\NormalTok{(}\FunctionTok{colSums}\NormalTok{(}\FunctionTok{otu\_table}\NormalTok{(ps.flt)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9770
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# rarefy {-} required before measuring alpha diversity. }
+\CommentTok{\# This step is to create an abundance table, where the all samples are randomly resamples such that all samples have the same number of ASVs.  }
+\CommentTok{\# It removes any bias but number of re{-}samples is based on the sample with smallest number of ASVs so one has to check and filter beforehand in case there are samples with very different number of ASVs. I am generally going by a 10x rule. If the lowest number of ASVs is 10x lower than the sample with highest number of ASVs, then I keep that sample in for alpha diversity assessments.  }
+  
+\NormalTok{ps\_rare }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{rarefy\_even\_depth}\NormalTok{(ps.flt, }
+                                       \AttributeTok{sample.size =} \FunctionTok{min}\NormalTok{(}\FunctionTok{colSums}\NormalTok{(}\FunctionTok{otu\_table}\NormalTok{(ps.flt))),  }
+                                       \AttributeTok{rngseed =} \ConstantTok{TRUE}\NormalTok{, }
+                                       \AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{, }
+                                       \AttributeTok{trimOTUs =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# check rarefied phyloseq object}
+\CommentTok{\# ps\_rare (not run)}
+
+\CommentTok{\# phyloseq{-}class experiment{-}level object}
+\CommentTok{\# otu\_table()   OTU Table:         [ 3790 taxa and 51 samples ]}
+\CommentTok{\# sample\_data() Sample Data:       [ 51 samples by 14 sample variables ]}
+\CommentTok{\# tax\_table()   Taxonomy Table:    [ 3790 taxa by 7 taxonomic ranks ]}
+\CommentTok{\# phy\_tree()    Phylogenetic Tree: [ 3790 tips and 3789 internal nodes ]}
+
+\CommentTok{\# Create diversity indices}
+\NormalTok{div.df }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{estimate\_richness}\NormalTok{(ps\_rare)}
+\CommentTok{\# add sample names}
+\NormalTok{div.df}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{\#SampleID}\StringTok{\textasciigrave{}} \OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{sample\_names}\NormalTok{(ps.flt)}
+\CommentTok{\# add diversity indices to phyloseq object}
+\NormalTok{metadf }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{sample\_data}\NormalTok{(ps.flt))  }\CommentTok{\# export metadata first}
+\NormalTok{metadf }\OtherTok{\textless{}{-}}\NormalTok{ metadf }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rownames\_to\_column}\NormalTok{(}\StringTok{"\#SampleID"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{left\_join}\NormalTok{(div.df, }\AttributeTok{by =} \StringTok{"\#SampleID"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{column\_to\_rownames}\NormalTok{(}\StringTok{"\#SampleID"}\NormalTok{) }\CommentTok{\# add the diversity indices (columns) to the metadata}
+\CommentTok{\# add pilou evenness (see calculation in "Numerical Ecology with R {-} Bocard et al")}
+\NormalTok{metadf}\SpecialCharTok{$}\NormalTok{pielou\_ev }\OtherTok{\textless{}{-}}\NormalTok{ div.df}\SpecialCharTok{$}\NormalTok{Shannon}\SpecialCharTok{/}\FunctionTok{log}\NormalTok{(div.df}\SpecialCharTok{$}\NormalTok{Observed)}
+\CommentTok{\# replace metadata with temp meta.df which includes the diversity indices}
+\NormalTok{ps.flt}\SpecialCharTok{@}\NormalTok{sam\_data }\OtherTok{\textless{}{-}} \FunctionTok{sample\_data}\NormalTok{(metadf)  }
+
+\CommentTok{\# this replaced the old metadata with new metadata that includes the diversity indices for this phyloseq object }
+\FunctionTok{str}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{sample\_data}\NormalTok{(ps.flt)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    51 obs. of  25 variables:
+##  $ Assay.Type     : chr  "AMPLICON" "AMPLICON" "AMPLICON" "AMPLICON" ...
+##  $ Bases          : int  13254234 24196788 15758554 20048406 37634632 43555904 35107436 13888140 23172184 35065898 ...
+##  $ BioProject     : chr  "PRJNA645373" "PRJNA645373" "PRJNA645373" "PRJNA645373" ...
+##  $ Bytes          : int  9235913 16404070 10758456 13009806 24207581 27963491 22585685 9388862 15125835 22520074 ...
+##  $ Organism       : chr  "anaerobic digester metagenome" "anaerobic digester metagenome" "anaerobic digester metagenome" "anaerobic digester metagenome" ...
+##  $ collection_date: chr  "30/11/16" "9/3/16" "17/3/16" "5/12/16" ...
+##  $ loc            : chr  "Ejby Moelle" "Soeholt" "Esbjerg Vest" "Viborg" ...
+##  $ Reactor        : Factor w/ 10 levels "1A","1B","2B",..: 4 4 6 7 7 5 5 5 4 4 ...
+##  $ Type           : chr  NA NA NA "DS" ...
+##  $ Purpose        : chr  "reactorfoampotentials" "reactorfoampotentials" "reactorfoampotentials" "foamnofoamcomparison" ...
+##  $ Experiment     : chr  "SRX8715180" "SRX8715169" "SRX8715158" "SRX8715151" ...
+##  $ lat_lon        : chr  "55.398077 N 10.415041 E" "56.175302 N 9.582588 E" "55.488235 N 8.430655 E" "56.425367 N 9.4527943 E" ...
+##  $ ReleaseDate    : chr  "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" ...
+##  $ Sample.Name    : chr  "16SAMP-17236" "16SAMP-17231" "16SAMP-17233" "MQ170915-14" ...
+##  $ Location       : Factor w/ 12 levels "Avedoere","Damhusaaen",..: 4 11 5 12 12 12 12 2 11 11 ...
+##  $ Observed       : num  160 349 250 261 387 451 400 301 278 371 ...
+##  $ Chao1          : num  160 353 251 261 393 ...
+##  $ se.chao1       : num  0.249 3.33 1.256 0.621 3.791 ...
+##  $ ACE            : num  160 352 251 261 392 ...
+##  $ se.ACE         : num  4.42 9.13 7.49 7.5 9.79 ...
+##  $ Shannon        : num  4.23 4.86 4.72 4.79 5.03 ...
+##  $ Simpson        : num  0.966 0.975 0.982 0.983 0.986 ...
+##  $ InvSimpson     : num  29.2 40.1 55.1 58.6 71.3 ...
+##  $ Fisher         : num  27.2 70.7 46.8 49.3 80.5 ...
+##  $ pielou_ev      : num  0.834 0.83 0.855 0.861 0.844 ...
+\end{verbatim}
+
+\hypertarget{colors}{%
+\subsection{Colors}\label{colors}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# You can check Hex codes with help of https://htmlcolorcodes.com/}
+
+\NormalTok{cols }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"\#F9E79F"}\NormalTok{, }\StringTok{"\#FDEBD0"}\NormalTok{, }\StringTok{"\#F6DDCC"}\NormalTok{,  }\StringTok{"\#E5E8E8"}\NormalTok{, }\StringTok{"\#CCD1D1"}\NormalTok{, }\StringTok{"\#AAB7B8"}\NormalTok{, }\StringTok{"\#707B7C"}\NormalTok{, }\StringTok{"\#566573"}\NormalTok{,}\StringTok{"\#82E0AA"}\NormalTok{, }\StringTok{"\#641E16"}\NormalTok{, }\StringTok{"\#8E44AD"}\NormalTok{, }\StringTok{"\#E74C3C"}\NormalTok{)}
+
+\CommentTok{\# you can also name each colour according to your treatment. This will help ggplot to associated the same colour for each treatment across different ggplots. For example, if we want to show different colour by location in this dataset: }
+\FunctionTok{names}\NormalTok{(cols)  }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{((}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{sample\_data}\NormalTok{(ps.flt)))}\SpecialCharTok{$}\NormalTok{Location)}
+\NormalTok{cols}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Ejby Moelle       Soeholt  Esbjerg Vest        Viborg    Damhusaaen 
+##     "#F9E79F"     "#FDEBD0"     "#F6DDCC"     "#E5E8E8"     "#CCD1D1" 
+##      Slagelse       Randers Mariagerfjord       Fornaes          Egaa 
+##     "#AAB7B8"     "#707B7C"     "#566573"     "#82E0AA"     "#641E16" 
+##      Avedoere     Hjoerring 
+##     "#8E44AD"     "#E74C3C"
+\end{verbatim}
+
+\hypertarget{richness}{%
+\subsection{Richness}\label{richness}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p1 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(phyloseq}\SpecialCharTok{::}\FunctionTok{sample\_data}\NormalTok{(ps.flt)) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  ggpubr}\SpecialCharTok{::}\FunctionTok{ggboxplot}\NormalTok{(., }\AttributeTok{x =} \StringTok{"Location"}\NormalTok{, }
+                    \AttributeTok{y =} \StringTok{"Observed"}\NormalTok{, }
+                    \AttributeTok{fill =} \StringTok{"Location"}\NormalTok{, }
+                    \AttributeTok{ylab =} \StringTok{"Richness"}\NormalTok{, }
+                    \AttributeTok{xlab =} \StringTok{"Location"}\NormalTok{, }
+                    \AttributeTok{palette =}\NormalTok{ cols) }\SpecialCharTok{+}
+    \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{theme}\NormalTok{( }\AttributeTok{panel.grid.major =} \FunctionTok{element\_blank}\NormalTok{(), }\AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{() ) }\SpecialCharTok{+}
+    \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.1}\NormalTok{) }\SpecialCharTok{+}
+   \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+} 
+\CommentTok{\#    theme(axis.title.x=element\_blank(),  \# Options}
+\CommentTok{\#        axis.text.x=element\_blank(),}
+\CommentTok{\#        axis.ticks.x=element\_blank()) +}
+\NormalTok{  ggpubr}\SpecialCharTok{::}\FunctionTok{stat\_compare\_means}\NormalTok{(}\AttributeTok{method =} \StringTok{"kruskal"}\NormalTok{,}\AttributeTok{label.x =} \DecValTok{2}\NormalTok{)}
+\NormalTok{p1}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/richness-1.pdf}
+
+\hypertarget{shannon}{%
+\subsection{Shannon}\label{shannon}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Shannon}
+\NormalTok{p2 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(phyloseq}\SpecialCharTok{::}\FunctionTok{sample\_data}\NormalTok{(ps.flt)) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  ggpubr}\SpecialCharTok{::}\FunctionTok{ggboxplot}\NormalTok{(., }\AttributeTok{x =} \StringTok{"Location"}\NormalTok{, }
+                    \AttributeTok{y =} \StringTok{"Shannon"}\NormalTok{, }
+                    \AttributeTok{fill =} \StringTok{"Location"}\NormalTok{, }
+                    \AttributeTok{ylab =} \StringTok{"Shannon diversity (H)"}\NormalTok{, }
+                    \AttributeTok{xlab =} \StringTok{"Location"}\NormalTok{, }
+                    \AttributeTok{palette =}\NormalTok{ cols) }\SpecialCharTok{+}
+    \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{theme}\NormalTok{( }\AttributeTok{panel.grid.major =} \FunctionTok{element\_blank}\NormalTok{(), }\AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{() ) }\SpecialCharTok{+}
+    \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.1}\NormalTok{) }\SpecialCharTok{+}
+   \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+} 
+\CommentTok{\#    theme(axis.title.x=element\_blank(),  \# Options}
+\CommentTok{\#        axis.text.x=element\_blank(),}
+\CommentTok{\#        axis.ticks.x=element\_blank()) +}
+\NormalTok{  ggpubr}\SpecialCharTok{::}\FunctionTok{stat\_compare\_means}\NormalTok{(}\AttributeTok{method =} \StringTok{"kruskal"}\NormalTok{,}\AttributeTok{label.x =} \DecValTok{2}\NormalTok{)}
+\NormalTok{p2}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/shannon-1.pdf}
+
+\hypertarget{pielous-evenness}{%
+\subsection{Pielou's evenness}\label{pielous-evenness}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Pielou}
+\NormalTok{p3 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(phyloseq}\SpecialCharTok{::}\FunctionTok{sample\_data}\NormalTok{(ps.flt)) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  ggpubr}\SpecialCharTok{::}\FunctionTok{ggboxplot}\NormalTok{(., }\AttributeTok{x =} \StringTok{"Location"}\NormalTok{, }
+                    \AttributeTok{y =} \StringTok{"pielou\_ev"}\NormalTok{, }
+                    \AttributeTok{fill =} \StringTok{"Location"}\NormalTok{, }
+                    \AttributeTok{ylab =} \StringTok{"Pielou Evenness (J)"}\NormalTok{, }
+                    \AttributeTok{xlab =} \StringTok{"Location"}\NormalTok{, }
+                    \AttributeTok{palette =}\NormalTok{ cols) }\SpecialCharTok{+}
+    \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{theme}\NormalTok{( }\AttributeTok{panel.grid.major =} \FunctionTok{element\_blank}\NormalTok{(), }\AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{() ) }\SpecialCharTok{+}
+    \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.1}\NormalTok{) }\SpecialCharTok{+}
+   \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+} 
+\CommentTok{\#    theme(axis.title.x=element\_blank(),  \# Options}
+\CommentTok{\#        axis.text.x=element\_blank(),}
+\CommentTok{\#        axis.ticks.x=element\_blank()) +}
+\NormalTok{  ggpubr}\SpecialCharTok{::}\FunctionTok{stat\_compare\_means}\NormalTok{(}\AttributeTok{method =} \StringTok{"kruskal"}\NormalTok{,}\AttributeTok{label.x =} \DecValTok{2}\NormalTok{)}
+\NormalTok{p3}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/pielou-1.pdf}
+
+\hypertarget{combined-plotting}{%
+\subsection{Combined plotting}\label{combined-plotting}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#pdf(NULL)}
+\NormalTok{g1 }\OtherTok{\textless{}{-}}\NormalTok{ ggpubr}\SpecialCharTok{::}\FunctionTok{ggarrange}\NormalTok{(p1, p2, p3, }\AttributeTok{common.legend =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{1}\NormalTok{, }\AttributeTok{legend =} \StringTok{\textquotesingle{}top\textquotesingle{}}\NormalTok{)}
+\CommentTok{\#x = dev.off()}
+\NormalTok{g1}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/plot-1.pdf}
+
+\hfill\break
+
+\hypertarget{nmds}{%
+\subsection{NMDS}\label{nmds}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{physeqNMDS }\OtherTok{\textless{}{-}}\NormalTok{  ps.flt  }\CommentTok{\# just to keep it separate.}
+
+\CommentTok{\#ordination}
+\NormalTok{ordination }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{ordinate}\NormalTok{(physeqNMDS  , }\StringTok{"NMDS"}\NormalTok{, }\AttributeTok{distance =} \StringTok{\textquotesingle{}bray\textquotesingle{}}\NormalTok{) }\CommentTok{\# using Bray{-}Curtis dissimilarities here. }
+
+\NormalTok{label }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(ordination}\SpecialCharTok{$}\NormalTok{stress,}\DecValTok{3}\NormalTok{) }\CommentTok{\# stress label}
+\CommentTok{\#plotting ordination}
+\NormalTok{NMDSplot }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{plot\_ordination}\NormalTok{(physeqNMDS, }
+\NormalTok{                                      ordination , }
+                                      \AttributeTok{color =} \StringTok{"Location"}\NormalTok{, }
+                                      \CommentTok{\#shape = "Reactor",    }
+                                      \CommentTok{\# option to add shapes to data symbols}
+                                      \AttributeTok{title =} \StringTok{"NMDS"}\NormalTok{) }\SpecialCharTok{+}
+     \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ pielou\_ev), }\AttributeTok{alpha =} \FloatTok{0.75}\NormalTok{) }\SpecialCharTok{+}    \CommentTok{\# shape size reflective of Pielou, also make transparent }
+     \FunctionTok{annotate}\NormalTok{(}\AttributeTok{geom =} \StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{, }\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{"Bray{-}Curtis, Stress = "}\NormalTok{, label), }
+             \AttributeTok{x =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{y =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{hjust =} \SpecialCharTok{{-}}\FloatTok{0.05}\NormalTok{, }\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{)  }\SpecialCharTok{+}
+     \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cols)}
+
+\NormalTok{NMDSplot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/nmds-1.pdf}
+
+\hypertarget{pca}{%
+\subsection{PCA}\label{pca}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{physeqPCA }\OtherTok{\textless{}{-}}\NormalTok{  ps.flt  }\CommentTok{\# just to keep it separate.}
+
+\CommentTok{\# normalisation and transform using the microbiome package}
+\CommentTok{\# I chose a centred log{-}ratio transform and a principle component analysis in a euclidean space.}
+\NormalTok{physeqPCA }\OtherTok{\textless{}{-}}\NormalTok{ microbiome}\SpecialCharTok{::}\FunctionTok{transform}\NormalTok{(physeqPCA, }\StringTok{"clr"}\NormalTok{)}
+
+\CommentTok{\#ordination}
+\NormalTok{ordination }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{ordinate}\NormalTok{(physeqPCA , }\StringTok{"RDA"}\NormalTok{) }\CommentTok{\# useing the centred{-}log transformed abundances}
+
+\CommentTok{\#plotting ordination}
+\NormalTok{PCAplot }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{plot\_ordination}\NormalTok{(physeqPCA, }
+\NormalTok{                                      ordination , }
+                                      \AttributeTok{color =} \StringTok{"Location"}\NormalTok{, }
+                                      \CommentTok{\#shape = "Reactor", }
+                                     \CommentTok{\# option to add shapes to data symbols}
+                                      \AttributeTok{title =} \StringTok{"Principle Component Analysis"}\NormalTok{) }\SpecialCharTok{+}
+     \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ pielou\_ev)) }\SpecialCharTok{+}    \CommentTok{\# shape size reflective of Pielou }
+    \FunctionTok{annotate}\NormalTok{(}\AttributeTok{geom =} \StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{, }\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{"Aitchison distances"}\NormalTok{), }
+             \AttributeTok{x =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{y =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{hjust =} \SpecialCharTok{{-}}\FloatTok{0.05}\NormalTok{, }\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{)  }\SpecialCharTok{+} 
+    \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cols)}
+
+\NormalTok{PCAplot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/PCA-1.pdf}
+
+\hfill\break
+
+\hypertarget{rda}{%
+\subsection{RDA}\label{rda}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# PERCENT FILTERVALUE FOR ALL RDAs}
+\NormalTok{pcnt }\OtherTok{\textless{}{-}} \FloatTok{0.25}
+\CommentTok{\# FORMULA FOR ALL RDAs}
+\NormalTok{form }\OtherTok{\textless{}{-}} \FunctionTok{formula}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ Location)}
+\CommentTok{\# labels for arrows}
+\CommentTok{\# pos for arrows}
+\NormalTok{xarw }\OtherTok{\textless{}{-}} \DecValTok{5}
+\NormalTok{yarw }\OtherTok{\textless{}{-}} \DecValTok{5}
+\CommentTok{\# arrow length map}
+\NormalTok{larw }\OtherTok{\textless{}{-}} \FloatTok{1.5}
+\CommentTok{\# arrow length map for chromosol rda}
+\NormalTok{larwch }\OtherTok{\textless{}{-}} \DecValTok{1}
+\CommentTok{\# fixed width of x axis}
+\NormalTok{xaxis }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{6.75}\NormalTok{, }\FloatTok{6.5}\NormalTok{)}
+\CommentTok{\# position of annotation}
+\NormalTok{textposx }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{4.4}\NormalTok{)}
+\CommentTok{\# arrow color}
+\NormalTok{arrowcolor }\OtherTok{\textless{}{-}} \StringTok{"grey13"}
+
+
+\NormalTok{physeqPCA }\OtherTok{\textless{}{-}}\NormalTok{ ps.flt }\CommentTok{\# excluding Heat, H2O2, reference and blank}
+
+\CommentTok{\# normalisation and transform}
+\NormalTok{physeqPCA }\OtherTok{\textless{}{-}}\NormalTok{ microbiome}\SpecialCharTok{::}\FunctionTok{transform}\NormalTok{(physeqPCA, }\StringTok{"clr"}\NormalTok{)}
+
+\CommentTok{\#ordination}
+\NormalTok{ordination }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{ordinate}\NormalTok{(physeqPCA, }\StringTok{"RDA"}\NormalTok{, }\StringTok{"bray"}\NormalTok{, }\AttributeTok{formula =}\NormalTok{ form )}
+
+\NormalTok{RDAplot }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{plot\_ordination}\NormalTok{(physeqPCA, ordination , }
+                                \AttributeTok{color =} \StringTok{"Location"}\NormalTok{)  }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept=}\DecValTok{0}\NormalTok{, }\AttributeTok{linetype=}\StringTok{"dashed"}\NormalTok{, }\AttributeTok{color =} \StringTok{"gray"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept=}\DecValTok{0}\NormalTok{, }\AttributeTok{linetype=}\StringTok{"dashed"}\NormalTok{, }\AttributeTok{color =} \StringTok{"gray"}\NormalTok{) }\SpecialCharTok{+}    \CommentTok{\# shape size reflective of Pielou  }
+     \FunctionTok{annotate}\NormalTok{(}\AttributeTok{geom =} \StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{, }\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{"Aitchison distances"}\NormalTok{), }
+             \AttributeTok{x =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{y =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{hjust =} \SpecialCharTok{{-}}\FloatTok{0.05}\NormalTok{, }\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ pielou\_ev)) }\SpecialCharTok{+}        \CommentTok{\# shape size reflective of Pielou Evenness}
+  \CommentTok{\#scale\_colour\_gradient(low = colourlow, high = colourhigh) +}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"RDA Abundances (clr) \textasciitilde{} Treatment "}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cols)}
+
+
+\CommentTok{\# Now add the environmental variables as arrows to either of these p1 or p2}
+\NormalTok{arrowmat }\OtherTok{\textless{}{-}}\NormalTok{ vegan}\SpecialCharTok{::}\FunctionTok{scores}\NormalTok{(ordination, }\AttributeTok{display =} \StringTok{"bp"}\NormalTok{)}
+\NormalTok{arrowmat }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(arrowmat)}
+\CommentTok{\#rownames(arrowmat) \textless{}{-} arrowlabel}
+\CommentTok{\# Add labels, make a data.frame}
+\NormalTok{arrowdf }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{rownames}\NormalTok{(arrowmat), arrowmat)}
+\NormalTok{arrowdf}\SpecialCharTok{$}\NormalTok{labels }\OtherTok{\textless{}{-}}\NormalTok{ arrowdf}\SpecialCharTok{$}\NormalTok{labels }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{gsub}\NormalTok{(}\StringTok{"Location"}\NormalTok{, }\StringTok{""}\NormalTok{, .) }\CommentTok{\# remove the string "Location" from the labels. }
+\CommentTok{\# Define the arrow aesthetic mapping}
+\NormalTok{arrow\_map }\OtherTok{\textless{}{-}} \FunctionTok{aes}\NormalTok{(}\AttributeTok{xend =}\NormalTok{ larw }\SpecialCharTok{*}\NormalTok{ RDA1,}
+                 \AttributeTok{yend =}\NormalTok{ larw }\SpecialCharTok{*}\NormalTok{ RDA2,}
+                 \AttributeTok{x =} \DecValTok{0}\NormalTok{,}
+                 \AttributeTok{y =} \DecValTok{0}\NormalTok{,}
+                 \AttributeTok{shape =} \ConstantTok{NULL}\NormalTok{,}
+                 \AttributeTok{color =} \ConstantTok{NULL}\NormalTok{,}
+                 \AttributeTok{label =}\NormalTok{ labels)}
+
+\NormalTok{label\_map }\OtherTok{\textless{}{-}} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ xarw }\SpecialCharTok{*}\NormalTok{ RDA1,}
+                 \AttributeTok{y =}\NormalTok{ yarw }\SpecialCharTok{*}\NormalTok{ RDA2,}
+                 \AttributeTok{shape =} \ConstantTok{NULL}\NormalTok{,}
+                 \AttributeTok{color =} \ConstantTok{NULL}\NormalTok{,}
+                 \AttributeTok{label =}\NormalTok{ labels)}
+
+\NormalTok{arrowhead }\OtherTok{=} \FunctionTok{arrow}\NormalTok{(}\AttributeTok{length =} \FunctionTok{unit}\NormalTok{(}\FloatTok{0.02}\NormalTok{, }\StringTok{"npc"}\NormalTok{))}
+
+\NormalTok{RDAplot }\OtherTok{\textless{}{-}}\NormalTok{RDAplot }\SpecialCharTok{+}
+  \FunctionTok{geom\_segment}\NormalTok{(}
+    \AttributeTok{mapping =}\NormalTok{ arrow\_map,}
+    \AttributeTok{size =}\NormalTok{ .}\DecValTok{5}\NormalTok{,}
+    \AttributeTok{data =}\NormalTok{ arrowdf,}
+    \AttributeTok{color =}\NormalTok{ arrowcolor,}
+    \AttributeTok{arrow =}\NormalTok{ arrowhead)  }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}
+   \AttributeTok{mapping =}\NormalTok{ label\_map,}
+  \AttributeTok{size =} \DecValTok{4}\NormalTok{,}
+  \AttributeTok{data =}\NormalTok{ arrowdf,}
+  \AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{)}
+
+
+\NormalTok{RDAplot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/rda-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# save figure for publication}
+\CommentTok{\# ggsave("RDA.png", height=6, width=7.5, units=\textquotesingle{}in\textquotesingle{}, dpi=600)}
+\CommentTok{\#knitr::include\_graphics("./RDA.png")}
+\end{Highlighting}
+\end{Shaded}
+
+\hfill\break
+
+\hypertarget{unweighted-unifrac}{%
+\subsection{Unweighted uniFrac}\label{unweighted-unifrac}}
+
+UniFrac distances are derived from phylogenetic distances between ASVs, which means that a phylogenetic tree needs to be included into the phyloseq object.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{physeqPcOA }\OtherTok{\textless{}{-}}\NormalTok{  ps.flt  }\CommentTok{\# just to keep it separate.}
+
+\CommentTok{\#ordination}
+\NormalTok{ordination }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{ordinate}\NormalTok{(physeqPcOA  , }
+                                 \StringTok{"PCoA"}\NormalTok{, }
+                                 \AttributeTok{distance =} \StringTok{\textquotesingle{}unifrac\textquotesingle{}}\NormalTok{) }\CommentTok{\# using just presence and absence (unweighted) dissimilarities here. }
+
+\CommentTok{\#plotting ordination}
+\NormalTok{PCOAplot }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{plot\_ordination}\NormalTok{(physeqPcOA, }
+\NormalTok{                                      ordination , }
+                                      \AttributeTok{color =} \StringTok{"Location"}\NormalTok{, }
+                                      \CommentTok{\#shape = "Reactor",    }
+                                      \CommentTok{\# option to add shapes to data symbols}
+                                      \AttributeTok{title =} \StringTok{"Principle Coordinate Analysis"}\NormalTok{) }\SpecialCharTok{+}
+     \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ pielou\_ev)) }\SpecialCharTok{+}    \CommentTok{\# shape size reflective of Pielou  }
+     \FunctionTok{annotate}\NormalTok{(}\AttributeTok{geom =} \StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{, }\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{"unweighted UniFrac"}\NormalTok{), }
+             \AttributeTok{x =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{y =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{hjust =} \SpecialCharTok{{-}}\FloatTok{0.05}\NormalTok{, }\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{)  }\SpecialCharTok{+}
+     \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cols)}
+
+\NormalTok{PCOAplot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/unifrac-1.pdf}
+
+\hypertarget{combined-plotting-1}{%
+\subsection{Combined plotting}\label{combined-plotting-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#pdf(NULL)}
+\NormalTok{g2 }\OtherTok{\textless{}{-}}\NormalTok{ ggpubr}\SpecialCharTok{::}\FunctionTok{ggarrange}\NormalTok{(NMDSplot, PCAplot, RDAplot, PCOAplot,}
+                        \AttributeTok{common.legend =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{, }\AttributeTok{legend =} \StringTok{\textquotesingle{}top\textquotesingle{}}\NormalTok{)}
+\CommentTok{\#x = dev.off()}
+\NormalTok{g2}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/plotbeta-1.pdf}
+
+\hfill\break
+
+\hypertarget{save-plots-to-png-and-pdf}{%
+\subsection{Save plots to png and pdf}\label{save-plots-to-png-and-pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# either as png or pdf}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"alphadiversity.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ (g1), }\AttributeTok{height=}\DecValTok{4}\NormalTok{, }\AttributeTok{width=}\DecValTok{10}\NormalTok{, }\AttributeTok{units=}\StringTok{\textquotesingle{}in\textquotesingle{}}\NormalTok{, }\AttributeTok{dpi=}\DecValTok{600}\NormalTok{)}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"alphadiversity.pdf"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ (g1), }\AttributeTok{height=}\DecValTok{4}\NormalTok{, }\AttributeTok{width=}\DecValTok{10}\NormalTok{, }\AttributeTok{units=}\StringTok{\textquotesingle{}in\textquotesingle{}}\NormalTok{, }\AttributeTok{dpi=}\DecValTok{600}\NormalTok{)}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"betadiversity.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ (g2), }\AttributeTok{height=}\DecValTok{10}\NormalTok{, }\AttributeTok{width=}\DecValTok{10}\NormalTok{, }\AttributeTok{units=}\StringTok{\textquotesingle{}in\textquotesingle{}}\NormalTok{, }\AttributeTok{dpi=}\DecValTok{600}\NormalTok{)}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"betadiversity.pdf"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ (g2), }\AttributeTok{height=}\DecValTok{10}\NormalTok{, }\AttributeTok{width=}\DecValTok{10}\NormalTok{, }\AttributeTok{units=}\StringTok{\textquotesingle{}in\textquotesingle{}}\NormalTok{, }\AttributeTok{dpi=}\DecValTok{600}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Note:}
+This code is an amalgamation from various sources. Apart from putting it together into a pipeline I do not take credit for it.
 
   \bibliography{book.bib,packages.bib}
 

@@ -4,6 +4,7 @@ rmd_files: ["index.Rmd",
             "03_Miseq_library_preps.Rmd",
             "04_From_Miseq_to_Qiime.Rmd",
             "05_qiimetoR.Rmd",
+            "06_diversity.Rmd",
             "references.Rmd"]
 output_dir: "docs"
 language:

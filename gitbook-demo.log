@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.4)  8 JUL 2022 10:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.4)  8 JUL 2022 15:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -553,7 +553,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 ]
 Chapter 1.
-<./img/data.jpeg, id=85, 722.7pt x 481.8pt>
+<./img/data.jpeg, id=100, 722.7pt x 481.8pt>
 File: ./img/data.jpeg Graphic file (type jpg)
 <use ./img/data.jpeg>
 Package pdftex.def Info: ./img/data.jpeg  used on input line 153.
@@ -575,7 +575,7 @@ Underfull \hbox (badness 1571) in paragraph at lines 217--218
 \T1/lmr/m/n/10 it here: []$https : / / docs . conda . io / projects / conda / en / latest / user -[] guide / getting -[]
  []
 
-<./img/condaenvs.png, id=130, 567.11874pt x 159.59625pt>
+<./img/condaenvs.png, id=145, 567.11874pt x 159.59625pt>
 File: ./img/condaenvs.png Graphic file (type png)
 <use ./img/condaenvs.png>
 Package pdftex.def Info: ./img/condaenvs.png  used on input line 224.
@@ -586,7 +586,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 223--225
  []
 
 [9 <./img/condaenvs.png>]
-<./img/qiimehelp.png, id=140, 552.0625pt x 904.37875pt>
+<./img/qiimehelp.png, id=156, 552.0625pt x 904.37875pt>
 File: ./img/qiimehelp.png Graphic file (type png)
 <use ./img/qiimehelp.png>
 Package pdftex.def Info: ./img/qiimehelp.png  used on input line 243.
@@ -596,7 +596,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [10] [11 <./img/qiimehelp.png>] [12]
 Chapter 3.
-<./img/16Slibraryprotocolworkflow.png, id=166, 835.12pt x 569.12625pt>
+<./img/16Slibraryprotocolworkflow.png, id=181, 835.12pt x 569.12625pt>
 File: ./img/16Slibraryprotocolworkflow.png Graphic file (type png)
 <use ./img/16Slibraryprotocolworkflow.png>
 Package pdftex.def Info: ./img/16Slibraryprotocolworkflow.png  used on input line 283.
@@ -607,7 +607,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [13
 
 ] [14 <./img/16Slibraryprotocolworkflow.png>]
-<./img/16s-library-prep-overview.png, id=182, 963.6pt x 542.025pt>
+<./img/16s-library-prep-overview.png, id=197, 963.6pt x 542.025pt>
 File: ./img/16s-library-prep-overview.png Graphic file (type png)
 <use ./img/16s-library-prep-overview.png>
 Package pdftex.def Info: ./img/16s-library-prep-overview.png  used on input line 293.
@@ -617,7 +617,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 295--297
 
  []
 
-<./img/dna.jpeg, id=183, 599.23875pt x 289.08pt>
+<./img/dna.jpeg, id=198, 599.23875pt x 289.08pt>
 File: ./img/dna.jpeg Graphic file (type jpg)
 <use ./img/dna.jpeg>
 Package pdftex.def Info: ./img/dna.jpeg  used on input line 306.
@@ -643,7 +643,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1}) h
                                                   \__shipout_drop_firstpage_...
 l.346 
        <./img/dna.jpeg>]
-<./img/qubit.png, id=201, 283.0575pt x 537.00626pt>
+<./img/qubit.png, id=216, 283.0575pt x 537.00626pt>
 File: ./img/qubit.png Graphic file (type png)
 <use ./img/qubit.png>
 Package pdftex.def Info: ./img/qubit.png  used on input line 358.
@@ -753,7 +753,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 460--461
 
  []
 
-<./img/manifestfile.png, id=240, 621.32124pt x 541.02126pt>
+<./img/manifestfile.png, id=255, 621.32124pt x 541.02126pt>
 File: ./img/manifestfile.png Graphic file (type png)
 <use ./img/manifestfile.png>
 Package pdftex.def Info: ./img/manifestfile.png  used on input line 464.
@@ -840,7 +840,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 593--594
 
  []
 
-<./img/scriptfile.png, id=284, 761.84625pt x 730.73pt>
+<./img/scriptfile.png, id=299, 761.84625pt x 730.73pt>
 File: ./img/scriptfile.png Graphic file (type png)
 <use ./img/scriptfile.png>
 Package pdftex.def Info: ./img/scriptfile.png  used on input line 601.
@@ -856,12 +856,12 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1}) h
                                                   \__shipout_drop_firstpage_...
 l.636 
        <./img/scriptfile.png>]
-<./img/basespacedownload.png, id=296, 861.2175pt x 674.52pt>
+<./img/basespacedownload.png, id=311, 861.2175pt x 674.52pt>
 File: ./img/basespacedownload.png Graphic file (type png)
 <use ./img/basespacedownload.png>
 Package pdftex.def Info: ./img/basespacedownload.png  used on input line 638.
 (pdftex.def)             Requested size: 345.00653pt x 270.2149pt.
-<./img/basespacedownload2.png, id=297, 587.19376pt x 588.1975pt>
+<./img/basespacedownload2.png, id=312, 587.19376pt x 588.1975pt>
 File: ./img/basespacedownload2.png Graphic file (type png)
 <use ./img/basespacedownload2.png>
 Package pdftex.def Info: ./img/basespacedownload2.png  used on input line 640.
@@ -895,7 +895,7 @@ Overfull \hbox (1.52687pt too wide) in paragraph at lines 684--687
  []
 
 [31]
-<./img/viewqiime.png, id=323, 739.76375pt x 412.54124pt>
+<./img/viewqiime.png, id=338, 739.76375pt x 412.54124pt>
 File: ./img/viewqiime.png Graphic file (type png)
 <use ./img/viewqiime.png>
 Package pdftex.def Info: ./img/viewqiime.png  used on input line 696.
@@ -905,12 +905,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 696--697
 
  []
 
-<./img/demux.qza1.png, id=324, 1192.455pt x 415.5525pt>
+<./img/demux.qza1.png, id=339, 1192.455pt x 415.5525pt>
 File: ./img/demux.qza1.png Graphic file (type png)
 <use ./img/demux.qza1.png>
 Package pdftex.def Info: ./img/demux.qza1.png  used on input line 699.
 (pdftex.def)             Requested size: 345.0025pt x 120.22813pt.
-<./img/demux.qza.png, id=325, 1111.15125pt x 355.3275pt>
+<./img/demux.qza.png, id=340, 1111.15125pt x 355.3275pt>
 File: ./img/demux.qza.png Graphic file (type png)
 <use ./img/demux.qza.png>
 Package pdftex.def Info: ./img/demux.qza.png  used on input line 704.
@@ -921,7 +921,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.4.2}) h
                                                   \__shipout_drop_firstpage_...
 l.727 T
        he output will be a feature\_table.qza and sample\_rep\_seqs.qza, con... <./img/demux.qza.png>]
-<./img/feature-table.qzv.png, id=341, 728.7225pt x 692.5875pt>
+<./img/feature-table.qzv.png, id=356, 728.7225pt x 692.5875pt>
 File: ./img/feature-table.qzv.png Graphic file (type png)
 <use ./img/feature-table.qzv.png>
 Package pdftex.def Info: ./img/feature-table.qzv.png  used on input line 756.
@@ -960,7 +960,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 897--900
 
  []
 
-<./img/ASVIDs.png, id=388, 632.3625pt x 122.4575pt>
+<./img/ASVIDs.png, id=403, 632.3625pt x 122.4575pt>
 File: ./img/ASVIDs.png Graphic file (type png)
 <use ./img/ASVIDs.png>
 Package pdftex.def Info: ./img/ASVIDs.png  used on input line 902.
@@ -971,7 +971,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 901--904
  []
 
 [41]
-<./img/ASVIDs2.png, id=394, 788.9475pt x 118.4425pt>
+<./img/ASVIDs2.png, id=409, 788.9475pt x 118.4425pt>
 File: ./img/ASVIDs2.png Graphic file (type png)
 <use ./img/ASVIDs2.png>
 Package pdftex.def Info: ./img/ASVIDs2.png  used on input line 909.
@@ -1042,7 +1042,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1142--1143
 
  []
 
-<gitbook-demo_files/figure-latex/rarefaction-1.pdf, id=439, 436.63126pt x 254.9525pt>
+<gitbook-demo_files/figure-latex/rarefaction-1.pdf, id=454, 436.63126pt x 254.9525pt>
 File: gitbook-demo_files/figure-latex/rarefaction-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/rarefaction-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/rarefaction-1.pdf  used on input line 1152.
@@ -1527,24 +1527,321 @@ Overfull \hbox (6.74898pt too wide) in paragraph at lines 1345--1345
 []\T1/lmtt/m/n/10 ## 48                        MBNT15        1.000000               2[] 
  []
 
+[52]
+Chapter 6.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1364--1365
+
+ []
+
+
+Underfull \vbox (badness 3312) has occurred while \output is active []
+
+[53
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 1387--1388
+
+ []
+
+
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 1408--1408
+[]\T1/lmtt/m/n/10 ## sample_data() Sample Data:       [ 51 samples by 15 sample variables ][] 
+ []
+
+
+Overfull \hbox (22.49893pt too wide) in paragraph at lines 1408--1408
+[]\T1/lmtt/m/n/10 ## tax_table()   Taxonomy Table:    [ 4218 taxa by 7 taxonomic ranks ][] 
+ []
+
+
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 1408--1408
+[]\T1/lmtt/m/n/10 ## phy_tree()    Phylogenetic Tree: [ 4218 tips and 4217 internal nodes ][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1410--1411
+
+ []
+
+
+Overfull \hbox (48.74886pt too wide) in paragraph at lines 1440--1440
+[]\T1/lmtt/m/n/10 ##  $ Assay.Type     : chr  "AMPLICON" "AMPLICON" "AMPLICON" "AMPLICON" ...[] 
+ []
+
+
+Overfull \hbox (290.24815pt too wide) in paragraph at lines 1440--1440
+[]\T1/lmtt/m/n/10 ##  $ Bases          : int  13254234 24196788 15758554 20048406 37634632 43555904 35107436 13888140 23172184 35065898 ...[] 
+ []
+
+[54]
+Overfull \hbox (111.74867pt too wide) in paragraph at lines 1440--1440
+[]\T1/lmtt/m/n/10 ##  $ BioProject     : chr  "PRJNA645373" "PRJNA645373" "PRJNA645373" "PRJNA645373" ...[] 
+ []
+
+
+Overfull \hbox (279.74818pt too wide) in paragraph at lines 1440--1440
+[]\T1/lmtt/m/n/10 ##  $ Bytes          : int  9235913 16404070 10758456 13009806 24207581 27963491 22585685 9388862 15125835 22520074 ...[] 
+ []
+
+
+Overfull \hbox (489.74757pt too wide) in paragraph at lines 1440--1440
+[]\T1/lmtt/m/n/10 ##  $ Organism       : chr  "anaerobic digester metagenome" "anaerobic digester metagenome" "anaerobic digester metagenome" "anaerobic digester metagenome" ...[] 
+ []
+
+
+Overfull \hbox (27.74892pt too wide) in paragraph at lines 1440--1440
+[]\T1/lmtt/m/n/10 ##  $ collection_date: chr  "30/11/16" "9/3/16" "17/3/16" "5/12/16" ...[] 
+ []
+
+
+Overfull \hbox (69.7488pt too wide) in paragraph at lines 1440--1440
+[]\T1/lmtt/m/n/10 ##  $ loc            : chr  "Ejby Moelle" "Soeholt" "Esbjerg Vest" "Viborg" ...[] 
+ []
+
+
+Overfull \hbox (101.2487pt too wide) in paragraph at lines 1440--1440
+[]\T1/lmtt/m/n/10 ##  $ Reactor        : Factor w/ 10 levels "1A","1B","2B",..: 4 4 6 7 7 5 5 5 4 4 ...[] 
+ []
+
+
+Overfull \hbox (316.49808pt too wide) in paragraph at lines 1440--1440
+[]\T1/lmtt/m/n/10 ##  $ Purpose        : chr  "reactorfoampotentials" "reactorfoampotentials" "reactorfoampotentials" "foamnofoamcomparison" ...[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 1440--1440
+[]\T1/lmtt/m/n/10 ##  $ Experiment     : chr  "SRX8715180" "SRX8715169" "SRX8715158" "SRX8715151" ...[] 
+ []
+
+
+Overfull \hbox (353.24797pt too wide) in paragraph at lines 1440--1440
+[]\T1/lmtt/m/n/10 ##  $ lat_lon        : chr  "55.398077 N 10.415041 E" "56.175302 N 9.582588 E" "55.488235 N 8.430655 E" "56.425367 N 9.4527943 E" ...[] 
+ []
+
+
+Overfull \hbox (300.74812pt too wide) in paragraph at lines 1440--1440
+[]\T1/lmtt/m/n/10 ##  $ ReleaseDate    : chr  "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" ...[] 
+ []
+
+
+Overfull \hbox (127.49863pt too wide) in paragraph at lines 1440--1440
+[]\T1/lmtt/m/n/10 ##  $ Sample.Name    : chr  "16SAMP-17236" "16SAMP-17231" "16SAMP-17233" "MQ170915-14" ...[] 
+ []
+
+
+Overfull \hbox (185.24846pt too wide) in paragraph at lines 1440--1440
+[]\T1/lmtt/m/n/10 ##  $ Location       : Factor w/ 12 levels "Avedoere","Damhusaaen",..: 4 11 5 12 12 12 12 2 11 11 ...[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1442--1443
+
+ []
+
+[55]
+Overfull \hbox (48.74886pt too wide) in paragraph at lines 1540--1540
+[]\T1/lmtt/m/n/10 ##  $ Assay.Type     : chr  "AMPLICON" "AMPLICON" "AMPLICON" "AMPLICON" ...[] 
+ []
+
+
+Overfull \hbox (290.24815pt too wide) in paragraph at lines 1540--1540
+[]\T1/lmtt/m/n/10 ##  $ Bases          : int  13254234 24196788 15758554 20048406 37634632 43555904 35107436 13888140 23172184 35065898 ...[] 
+ []
+
+
+Overfull \hbox (111.74867pt too wide) in paragraph at lines 1540--1540
+[]\T1/lmtt/m/n/10 ##  $ BioProject     : chr  "PRJNA645373" "PRJNA645373" "PRJNA645373" "PRJNA645373" ...[] 
+ []
+
+
+Overfull \hbox (279.74818pt too wide) in paragraph at lines 1540--1540
+[]\T1/lmtt/m/n/10 ##  $ Bytes          : int  9235913 16404070 10758456 13009806 24207581 27963491 22585685 9388862 15125835 22520074 ...[] 
+ []
+
+
+Overfull \hbox (489.74757pt too wide) in paragraph at lines 1540--1540
+[]\T1/lmtt/m/n/10 ##  $ Organism       : chr  "anaerobic digester metagenome" "anaerobic digester metagenome" "anaerobic digester metagenome" "anaerobic digester metagenome" ...[] 
+ []
+
+
+Overfull \hbox (27.74892pt too wide) in paragraph at lines 1540--1540
+[]\T1/lmtt/m/n/10 ##  $ collection_date: chr  "30/11/16" "9/3/16" "17/3/16" "5/12/16" ...[] 
+ []
+
+
+Overfull \hbox (69.7488pt too wide) in paragraph at lines 1540--1540
+[]\T1/lmtt/m/n/10 ##  $ loc            : chr  "Ejby Moelle" "Soeholt" "Esbjerg Vest" "Viborg" ...[] 
+ []
+
+
+Overfull \hbox (101.2487pt too wide) in paragraph at lines 1540--1540
+[]\T1/lmtt/m/n/10 ##  $ Reactor        : Factor w/ 10 levels "1A","1B","2B",..: 4 4 6 7 7 5 5 5 4 4 ...[] 
+ []
+
+[56]
+Overfull \hbox (316.49808pt too wide) in paragraph at lines 1540--1540
+[]\T1/lmtt/m/n/10 ##  $ Purpose        : chr  "reactorfoampotentials" "reactorfoampotentials" "reactorfoampotentials" "foamnofoamcomparison" ...[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 1540--1540
+[]\T1/lmtt/m/n/10 ##  $ Experiment     : chr  "SRX8715180" "SRX8715169" "SRX8715158" "SRX8715151" ...[] 
+ []
+
+
+Overfull \hbox (353.24797pt too wide) in paragraph at lines 1540--1540
+[]\T1/lmtt/m/n/10 ##  $ lat_lon        : chr  "55.398077 N 10.415041 E" "56.175302 N 9.582588 E" "55.488235 N 8.430655 E" "56.425367 N 9.4527943 E" ...[] 
+ []
+
+
+Overfull \hbox (300.74812pt too wide) in paragraph at lines 1540--1540
+[]\T1/lmtt/m/n/10 ##  $ ReleaseDate    : chr  "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" ...[] 
+ []
+
+
+Overfull \hbox (127.49863pt too wide) in paragraph at lines 1540--1540
+[]\T1/lmtt/m/n/10 ##  $ Sample.Name    : chr  "16SAMP-17236" "16SAMP-17231" "16SAMP-17233" "MQ170915-14" ...[] 
+ []
+
+
+Overfull \hbox (185.24846pt too wide) in paragraph at lines 1540--1540
+[]\T1/lmtt/m/n/10 ##  $ Location       : Factor w/ 12 levels "Avedoere","Damhusaaen",..: 4 11 5 12 12 12 12 2 11 11 ...[] 
+ []
+
+
+Overfull \hbox (27.74892pt too wide) in paragraph at lines 1540--1540
+[]\T1/lmtt/m/n/10 ##  $ Observed       : num  160 349 250 261 387 451 400 301 278 371 ...[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1564--1564
+[]\T1/lmtt/m/n/10 ##   Ejby Moelle       Soeholt  Esbjerg Vest        Viborg    Damhusaaen[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1564--1564
+[]\T1/lmtt/m/n/10 ##     "#F9E79F"     "#FDEBD0"     "#F6DDCC"     "#E5E8E8"     "#CCD1D1"[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1564--1564
+[]\T1/lmtt/m/n/10 ##      Slagelse       Randers Mariagerfjord       Fornaes          Egaa[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1564--1564
+[]\T1/lmtt/m/n/10 ##     "#AAB7B8"     "#707B7C"     "#566573"     "#82E0AA"     "#641E16"[] 
+ []
+
+[57]
+<gitbook-demo_files/figure-latex/richness-1.pdf, id=522, 453.695pt x 313.17pt>
+File: gitbook-demo_files/figure-latex/richness-1.pdf Graphic file (type pdf)
+<use gitbook-demo_files/figure-latex/richness-1.pdf>
+Package pdftex.def Info: gitbook-demo_files/figure-latex/richness-1.pdf  used on input line 1590.
+(pdftex.def)             Requested size: 344.9987pt x 238.14069pt.
+[58 <./gitbook-demo_files/figure-latex/richness-1.pdf>]
+<gitbook-demo_files/figure-latex/shannon-1.pdf, id=536, 457.71pt x 313.17pt>
+File: gitbook-demo_files/figure-latex/shannon-1.pdf Graphic file (type pdf)
+<use gitbook-demo_files/figure-latex/shannon-1.pdf>
+Package pdftex.def Info: gitbook-demo_files/figure-latex/shannon-1.pdf  used on input line 1617.
+(pdftex.def)             Requested size: 345.01372pt x 236.062pt.
+[59 <./gitbook-demo_files/figure-latex/shannon-1.pdf>]
+<gitbook-demo_files/figure-latex/pielou-1.pdf, id=551, 457.71pt x 313.17pt>
+File: gitbook-demo_files/figure-latex/pielou-1.pdf Graphic file (type pdf)
+<use gitbook-demo_files/figure-latex/pielou-1.pdf>
+Package pdftex.def Info: gitbook-demo_files/figure-latex/pielou-1.pdf  used on input line 1644.
+(pdftex.def)             Requested size: 345.01372pt x 236.062pt.
+<gitbook-demo_files/figure-latex/plot-1.pdf, id=552, 712.6625pt x 312.16624pt>
+File: gitbook-demo_files/figure-latex/plot-1.pdf Graphic file (type pdf)
+<use gitbook-demo_files/figure-latex/plot-1.pdf>
+Package pdftex.def Info: gitbook-demo_files/figure-latex/plot-1.pdf  used on input line 1658.
+(pdftex.def)             Requested size: 344.99931pt x 151.11942pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[60 <./gitbook-demo_files/figure-latex/pielou-1.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 1660--1661
+
+ []
+
+<gitbook-demo_files/figure-latex/nmds-1.pdf, id=566, 417.56pt x 336.25626pt>
+File: gitbook-demo_files/figure-latex/nmds-1.pdf Graphic file (type pdf)
+<use gitbook-demo_files/figure-latex/nmds-1.pdf>
+Package pdftex.def Info: gitbook-demo_files/figure-latex/nmds-1.pdf  used on input line 1689.
+(pdftex.def)             Requested size: 345.02007pt x 277.84068pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[61 <./gitbook-demo_files/figure-latex/plot-1.pdf>] [62 <./gitbook-demo_files/figure-latex/nmds-1.pdf>]
+<gitbook-demo_files/figure-latex/PCA-1.pdf, id=598, 421.575pt x 339.2675pt>
+File: gitbook-demo_files/figure-latex/PCA-1.pdf Graphic file (type pdf)
+<use gitbook-demo_files/figure-latex/PCA-1.pdf>
+Package pdftex.def Info: gitbook-demo_files/figure-latex/PCA-1.pdf  used on input line 1721.
+(pdftex.def)             Requested size: 345.00543pt x 277.64722pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1724
+
+ []
+
+[63 <./gitbook-demo_files/figure-latex/PCA-1.pdf>]
+Underfull \vbox (badness 10000) detected at line 1810
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1810
+ []
+
+[64]
+<gitbook-demo_files/figure-latex/rda-1.pdf, id=616, 421.575pt x 339.2675pt>
+File: gitbook-demo_files/figure-latex/rda-1.pdf Graphic file (type pdf)
+<use gitbook-demo_files/figure-latex/rda-1.pdf>
+Package pdftex.def Info: gitbook-demo_files/figure-latex/rda-1.pdf  used on input line 1812.
+(pdftex.def)             Requested size: 345.00543pt x 277.64722pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[65]
+Underfull \hbox (badness 10000) in paragraph at lines 1822--1823
+
+ []
+
+[66 <./gitbook-demo_files/figure-latex/rda-1.pdf>]
+<gitbook-demo_files/figure-latex/unifrac-1.pdf, id=634, 421.575pt x 339.2675pt>
+File: gitbook-demo_files/figure-latex/unifrac-1.pdf Graphic file (type pdf)
+<use gitbook-demo_files/figure-latex/unifrac-1.pdf>
+Package pdftex.def Info: gitbook-demo_files/figure-latex/unifrac-1.pdf  used on input line 1854.
+(pdftex.def)             Requested size: 345.00543pt x 277.64722pt.
+[67 <./gitbook-demo_files/figure-latex/unifrac-1.pdf>]
+<gitbook-demo_files/figure-latex/plotbeta-1.pdf, id=649, 716.6775pt x 711.65875pt>
+File: gitbook-demo_files/figure-latex/plotbeta-1.pdf Graphic file (type pdf)
+<use gitbook-demo_files/figure-latex/plotbeta-1.pdf>
+Package pdftex.def Info: gitbook-demo_files/figure-latex/plotbeta-1.pdf  used on input line 1869.
+(pdftex.def)             Requested size: 345.00737pt x 342.59135pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1871--1872
+
+ []
+
+[68 <./gitbook-demo_files/figure-latex/plotbeta-1.pdf>]
 No file gitbook-demo.bbl.
-[52] (./gitbook-demo.aux)
+[69] (./gitbook-demo.aux)
 Package rerunfilecheck Info: File `gitbook-demo.out' has not changed.
-(rerunfilecheck)             Checksum: B6B31BD7B08A1EBF02726F7849CE4C4F;1519.
+(rerunfilecheck)             Checksum: 229F3422B372F7A2D1EAD31E5816DD74;1866.
  ) 
 Here is how much of TeX's memory you used:
- 13530 strings out of 479996
- 215047 string characters out of 5886841
- 531076 words of memory out of 5000000
- 31293 multiletter control sequences out of 15000+600000
- 536230 words of font info for 80 fonts, out of 8000000 for 9000
+ 13666 strings out of 479996
+ 218909 string characters out of 5886841
+ 531883 words of memory out of 5000000
+ 31368 multiletter control sequences out of 15000+600000
+ 536535 words of font info for 81 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,9n,77p,1491b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on gitbook-demo.pdf (52 pages, 2698944 bytes).
+{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
+Output written on gitbook-demo.pdf (69 pages, 2853787 bytes).
 PDF statistics:
- 573 PDF objects out of 1000 (max. 8388607)
- 449 compressed objects within 5 object streams
- 133 named destinations out of 1000 (max. 500000)
- 179 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 787 PDF objects out of 1000 (max. 8388607)
+ 616 compressed objects within 7 object streams
+ 184 named destinations out of 1000 (max. 500000)
+ 248 words of extra memory for PDF output out of 10000 (max. 10000000)
 
