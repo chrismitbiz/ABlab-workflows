@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2022-07-08" />
+<meta name="date" content="2022-07-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -239,8 +239,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This chapter introduces you to a basic workflow for plotting alpha and beta diversity using phyloseq and ggplot. It provides examples for loading the phyloseq object from a previously saved .rds file, then how to calculate and include alpha diversity metrics into the sample_data of the phyloseq object, and finally how to plot some of these metrics, individually or combined.</p>
 <p>Furthermore, beta diversity, i.e. four different type of ordinations are plotted. The examples, include non-metric dimensional scaling on Bray-Curtis dissimilaries, Principal Component Analysis (Aitchison distance), Redundancy Analysis ( Aitchison) and a Principal Coordinate Analysis on unweighted uniFrac distances.</p>
 <p>The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: <a href="https://sites.google.com/site/mb3gustame/home" class="uri">https://sites.google.com/site/mb3gustame/home</a>, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter <a href="index.html#about">1</a>.</p>
-<p><br />
-</p>
+<p>Prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying I recommend this excellent paper here: <a href="https://www.nature.com/articles/s41598-021-01636-1">Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities</a>. We will follow the recommendations from the authors of this paper to resample without replacement.</p>
+<p>Other normalisation methods are possible and it is up to you, the analyst, to understand and decide on the appropriate methods. I found centred-log ratios (Aitchison distances) intuitive in interpretation, which are included into the workflow below in a PCA and RDA.<br />
+Let’s get started…</p>
 </div>
 <div id="workflow-3" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Workflow<a href="plotting-diversity.html#workflow-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -325,17 +326,17 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb36-10"><a href="plotting-diversity.html#cb36-10" aria-hidden="true" tabindex="-1"></a>ps_rare <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">rarefy_even_depth</span>(ps.flt, </span>
 <span id="cb36-11"><a href="plotting-diversity.html#cb36-11" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">sample.size =</span> <span class="fu">min</span>(<span class="fu">colSums</span>(<span class="fu">otu_table</span>(ps.flt))),  </span>
 <span id="cb36-12"><a href="plotting-diversity.html#cb36-12" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">rngseed =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb36-13"><a href="plotting-diversity.html#cb36-13" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">replace =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb36-13"><a href="plotting-diversity.html#cb36-13" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">replace =</span> <span class="cn">FALSE</span>, <span class="co">#without replacement</span></span>
 <span id="cb36-14"><a href="plotting-diversity.html#cb36-14" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">trimOTUs =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb36-15"><a href="plotting-diversity.html#cb36-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-16"><a href="plotting-diversity.html#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="co"># check rarefied phyloseq object</span></span>
 <span id="cb36-17"><a href="plotting-diversity.html#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ps_rare (not run)</span></span>
 <span id="cb36-18"><a href="plotting-diversity.html#cb36-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-19"><a href="plotting-diversity.html#cb36-19" aria-hidden="true" tabindex="-1"></a><span class="co"># phyloseq-class experiment-level object</span></span>
-<span id="cb36-20"><a href="plotting-diversity.html#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="co"># otu_table()   OTU Table:         [ 3790 taxa and 51 samples ]</span></span>
-<span id="cb36-21"><a href="plotting-diversity.html#cb36-21" aria-hidden="true" tabindex="-1"></a><span class="co"># sample_data() Sample Data:       [ 51 samples by 14 sample variables ]</span></span>
-<span id="cb36-22"><a href="plotting-diversity.html#cb36-22" aria-hidden="true" tabindex="-1"></a><span class="co"># tax_table()   Taxonomy Table:    [ 3790 taxa by 7 taxonomic ranks ]</span></span>
-<span id="cb36-23"><a href="plotting-diversity.html#cb36-23" aria-hidden="true" tabindex="-1"></a><span class="co"># phy_tree()    Phylogenetic Tree: [ 3790 tips and 3789 internal nodes ]</span></span>
+<span id="cb36-20"><a href="plotting-diversity.html#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="co"># otu_table()   OTU Table:         [ 3801 taxa and 51 samples ]</span></span>
+<span id="cb36-21"><a href="plotting-diversity.html#cb36-21" aria-hidden="true" tabindex="-1"></a><span class="co"># sample_data() Sample Data:       [ 51 samples by 15 sample variables ]</span></span>
+<span id="cb36-22"><a href="plotting-diversity.html#cb36-22" aria-hidden="true" tabindex="-1"></a><span class="co"># tax_table()   Taxonomy Table:    [ 3801 taxa by 7 taxonomic ranks ]</span></span>
+<span id="cb36-23"><a href="plotting-diversity.html#cb36-23" aria-hidden="true" tabindex="-1"></a> <span class="co">#phy_tree()    Phylogenetic Tree: [ 3801 tips and 3800 internal nodes ]</span></span>
 <span id="cb36-24"><a href="plotting-diversity.html#cb36-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-25"><a href="plotting-diversity.html#cb36-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Create diversity indices</span></span>
 <span id="cb36-26"><a href="plotting-diversity.html#cb36-26" aria-hidden="true" tabindex="-1"></a>div.df <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">estimate_richness</span>(ps_rare)</span>
@@ -351,7 +352,7 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb36-36"><a href="plotting-diversity.html#cb36-36" aria-hidden="true" tabindex="-1"></a>metadf<span class="sc">$</span>pielou_ev <span class="ot">&lt;-</span> div.df<span class="sc">$</span>Shannon<span class="sc">/</span><span class="fu">log</span>(div.df<span class="sc">$</span>Observed)</span>
 <span id="cb36-37"><a href="plotting-diversity.html#cb36-37" aria-hidden="true" tabindex="-1"></a><span class="co"># replace metadata with temp meta.df which includes the diversity indices</span></span>
 <span id="cb36-38"><a href="plotting-diversity.html#cb36-38" aria-hidden="true" tabindex="-1"></a>ps.flt<span class="sc">@</span>sam_data <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(metadf)  </span>
-<span id="cb36-39"><a href="plotting-diversity.html#cb36-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-39"><a href="plotting-diversity.html#cb36-39" aria-hidden="true" tabindex="-1"></a>ps_rare<span class="sc">@</span>sam_data <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(metadf)  </span>
 <span id="cb36-40"><a href="plotting-diversity.html#cb36-40" aria-hidden="true" tabindex="-1"></a><span class="co"># this replaced the old metadata with new metadata that includes the diversity </span></span>
 <span id="cb36-41"><a href="plotting-diversity.html#cb36-41" aria-hidden="true" tabindex="-1"></a><span class="co"># indices for this phyloseq object </span></span>
 <span id="cb36-42"><a href="plotting-diversity.html#cb36-42" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">data.frame</span>(<span class="fu">sample_data</span>(ps.flt)))</span></code></pre></div>
@@ -371,16 +372,16 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 ##  $ ReleaseDate    : chr  &quot;2021-01-01T00:00:00Z&quot; &quot;2021-01-01T00:00:00Z&quot; &quot;2021-01-01T00:00:00Z&quot; &quot;2021-01-01T00:00:00Z&quot; ...
 ##  $ Sample.Name    : chr  &quot;16SAMP-17236&quot; &quot;16SAMP-17231&quot; &quot;16SAMP-17233&quot; &quot;MQ170915-14&quot; ...
 ##  $ Location       : Factor w/ 12 levels &quot;Avedoere&quot;,&quot;Damhusaaen&quot;,..: 4 11 5 12 12 12 12 2 11 11 ...
-##  $ Observed       : num  160 349 250 261 387 451 400 301 278 371 ...
-##  $ Chao1          : num  160 353 251 261 393 ...
-##  $ se.chao1       : num  0.249 3.33 1.256 0.621 3.791 ...
-##  $ ACE            : num  160 352 251 261 392 ...
-##  $ se.ACE         : num  4.42 9.13 7.49 7.5 9.79 ...
-##  $ Shannon        : num  4.23 4.86 4.72 4.79 5.03 ...
-##  $ Simpson        : num  0.966 0.975 0.982 0.983 0.986 ...
-##  $ InvSimpson     : num  29.2 40.1 55.1 58.6 71.3 ...
-##  $ Fisher         : num  27.2 70.7 46.8 49.3 80.5 ...
-##  $ pielou_ev      : num  0.834 0.83 0.855 0.861 0.844 ...</code></pre>
+##  $ Observed       : num  161 354 247 265 389 454 406 304 278 371 ...
+##  $ Chao1          : num  161 356 247 266 395 ...
+##  $ se.chao1       : num  0 2.2689 0.0832 1.0272 3.914 ...
+##  $ ACE            : num  161 357 247 266 395 ...
+##  $ se.ACE         : num  4.6 9.28 7.43 7.72 9.83 ...
+##  $ Shannon        : num  4.24 4.84 4.74 4.78 5.03 ...
+##  $ Simpson        : num  0.966 0.973 0.982 0.983 0.986 ...
+##  $ InvSimpson     : num  29.6 37.7 56.8 57.8 70.6 ...
+##  $ Fisher         : num  27.4 72 46.1 50.2 81 ...
+##  $ pielou_ev      : num  0.834 0.825 0.861 0.857 0.843 ...</code></pre>
 </div>
 <div id="colors" class="section level3 hasAnchor" number="6.2.4">
 <h3><span class="header-section-number">6.2.4</span> Colors<a href="plotting-diversity.html#colors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -472,7 +473,7 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 </div>
 <div id="nmds" class="section level3 hasAnchor" number="6.2.9">
 <h3><span class="header-section-number">6.2.9</span> NMDS<a href="plotting-diversity.html#nmds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="plotting-diversity.html#cb44-1" aria-hidden="true" tabindex="-1"></a>physeqNMDS <span class="ot">&lt;-</span>  ps.flt  <span class="co"># just to keep it separate.</span></span>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="plotting-diversity.html#cb44-1" aria-hidden="true" tabindex="-1"></a>physeqNMDS <span class="ot">&lt;-</span>  ps_rare  <span class="co"># We are using the rarefied abundances as explained in the intro </span></span>
 <span id="cb44-2"><a href="plotting-diversity.html#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb44-3"><a href="plotting-diversity.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ordination</span></span>
 <span id="cb44-4"><a href="plotting-diversity.html#cb44-4" aria-hidden="true" tabindex="-1"></a>ordination <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">ordinate</span>(physeqNMDS  , <span class="st">&quot;NMDS&quot;</span>, <span class="at">distance =</span> <span class="st">&#39;bray&#39;</span>) <span class="co"># using Bray-Curtis dissimilarities here. </span></span>

@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 
 # Plotting diversity  
 Some visualisations of alpha and beta diversity.
@@ -10,7 +15,11 @@ Furthermore, beta diversity, i.e. four different type of ordinations are plotted
   
 The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: https://sites.google.com/site/mb3gustame/home, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter \@ref(about). 
   
-  \
+Prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying I recommend this excellent paper here: [Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities](https://www.nature.com/articles/s41598-021-01636-1). We will follow the recommendations from the authors of this paper to resample without replacement.  
+  
+Other normalisation methods are possible and it is up to you, the analyst, to understand and decide on the appropriate methods. I found centred-log ratios (Aitchison distances)  intuitive in interpretation, which are included into the workflow below in a PCA and RDA.    
+Let's get started... 
+  
   
 ## Workflow  
   
@@ -84,17 +93,17 @@ min(colSums(otu_table(ps.flt)))
 ps_rare <- phyloseq::rarefy_even_depth(ps.flt, 
                                        sample.size = min(colSums(otu_table(ps.flt))),  
                                        rngseed = TRUE, 
-                                       replace = TRUE, 
+                                       replace = FALSE, #without replacement
                                        trimOTUs = TRUE)
 
 # check rarefied phyloseq object
 # ps_rare (not run)
 
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 3790 taxa and 51 samples ]
-# sample_data() Sample Data:       [ 51 samples by 14 sample variables ]
-# tax_table()   Taxonomy Table:    [ 3790 taxa by 7 taxonomic ranks ]
-# phy_tree()    Phylogenetic Tree: [ 3790 tips and 3789 internal nodes ]
+# otu_table()   OTU Table:         [ 3801 taxa and 51 samples ]
+# sample_data() Sample Data:       [ 51 samples by 15 sample variables ]
+# tax_table()   Taxonomy Table:    [ 3801 taxa by 7 taxonomic ranks ]
+ #phy_tree()    Phylogenetic Tree: [ 3801 tips and 3800 internal nodes ]
 
 # Create diversity indices
 div.df <- phyloseq::estimate_richness(ps_rare)
@@ -110,7 +119,7 @@ metadf <- metadf %>%
 metadf$pielou_ev <- div.df$Shannon/log(div.df$Observed)
 # replace metadata with temp meta.df which includes the diversity indices
 ps.flt@sam_data <- sample_data(metadf)  
-
+ps_rare@sam_data <- sample_data(metadf)  
 # this replaced the old metadata with new metadata that includes the diversity 
 # indices for this phyloseq object 
 str(data.frame(sample_data(ps.flt)))
@@ -205,7 +214,7 @@ g1
   
 ### NMDS  
 ```{r, nmds, echo=TRUE, message=FALSE, warning=FALSE, results=FALSE, cache=FALSE,fig.asp=0.8, fig.width=6}
-physeqNMDS <-  ps.flt  # just to keep it separate.
+physeqNMDS <-  ps_rare  # We are using the rarefied abundances as explained in the intro 
 
 #ordination
 ordination <- phyloseq::ordinate(physeqNMDS  , "NMDS", distance = 'bray') # using Bray-Curtis dissimilarities here. 

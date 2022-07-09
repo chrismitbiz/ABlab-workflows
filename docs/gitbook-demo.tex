@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-07-08}
+\date{2022-07-09}
 
 \begin{document}
 \maketitle
@@ -1361,7 +1361,10 @@ Furthermore, beta diversity, i.e.~four different type of ordinations are plotted
 
 The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: \url{https://sites.google.com/site/mb3gustame/home}, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter \ref{about}.
 
-\hfill\break
+Prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying I recommend this excellent paper here: \href{https://www.nature.com/articles/s41598-021-01636-1}{Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities}. We will follow the recommendations from the authors of this paper to resample without replacement.
+
+Other normalisation methods are possible and it is up to you, the analyst, to understand and decide on the appropriate methods. I found centred-log ratios (Aitchison distances) intuitive in interpretation, which are included into the workflow below in a PCA and RDA.\\
+Let's get started\ldots{}
 
 \hypertarget{workflow-3}{%
 \section{Workflow}\label{workflow-3}}
@@ -1492,17 +1495,17 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
 \NormalTok{ps\_rare }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{rarefy\_even\_depth}\NormalTok{(ps.flt, }
                                        \AttributeTok{sample.size =} \FunctionTok{min}\NormalTok{(}\FunctionTok{colSums}\NormalTok{(}\FunctionTok{otu\_table}\NormalTok{(ps.flt))),  }
                                        \AttributeTok{rngseed =} \ConstantTok{TRUE}\NormalTok{, }
-                                       \AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{, }
+                                       \AttributeTok{replace =} \ConstantTok{FALSE}\NormalTok{, }\CommentTok{\#without replacement}
                                        \AttributeTok{trimOTUs =} \ConstantTok{TRUE}\NormalTok{)}
 
 \CommentTok{\# check rarefied phyloseq object}
 \CommentTok{\# ps\_rare (not run)}
 
 \CommentTok{\# phyloseq{-}class experiment{-}level object}
-\CommentTok{\# otu\_table()   OTU Table:         [ 3790 taxa and 51 samples ]}
-\CommentTok{\# sample\_data() Sample Data:       [ 51 samples by 14 sample variables ]}
-\CommentTok{\# tax\_table()   Taxonomy Table:    [ 3790 taxa by 7 taxonomic ranks ]}
-\CommentTok{\# phy\_tree()    Phylogenetic Tree: [ 3790 tips and 3789 internal nodes ]}
+\CommentTok{\# otu\_table()   OTU Table:         [ 3801 taxa and 51 samples ]}
+\CommentTok{\# sample\_data() Sample Data:       [ 51 samples by 15 sample variables ]}
+\CommentTok{\# tax\_table()   Taxonomy Table:    [ 3801 taxa by 7 taxonomic ranks ]}
+ \CommentTok{\#phy\_tree()    Phylogenetic Tree: [ 3801 tips and 3800 internal nodes ]}
 
 \CommentTok{\# Create diversity indices}
 \NormalTok{div.df }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{estimate\_richness}\NormalTok{(ps\_rare)}
@@ -1518,7 +1521,7 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
 \NormalTok{metadf}\SpecialCharTok{$}\NormalTok{pielou\_ev }\OtherTok{\textless{}{-}}\NormalTok{ div.df}\SpecialCharTok{$}\NormalTok{Shannon}\SpecialCharTok{/}\FunctionTok{log}\NormalTok{(div.df}\SpecialCharTok{$}\NormalTok{Observed)}
 \CommentTok{\# replace metadata with temp meta.df which includes the diversity indices}
 \NormalTok{ps.flt}\SpecialCharTok{@}\NormalTok{sam\_data }\OtherTok{\textless{}{-}} \FunctionTok{sample\_data}\NormalTok{(metadf)  }
-
+\NormalTok{ps\_rare}\SpecialCharTok{@}\NormalTok{sam\_data }\OtherTok{\textless{}{-}} \FunctionTok{sample\_data}\NormalTok{(metadf)  }
 \CommentTok{\# this replaced the old metadata with new metadata that includes the diversity }
 \CommentTok{\# indices for this phyloseq object }
 \FunctionTok{str}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{sample\_data}\NormalTok{(ps.flt)))}
@@ -1542,16 +1545,16 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
 ##  $ ReleaseDate    : chr  "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" ...
 ##  $ Sample.Name    : chr  "16SAMP-17236" "16SAMP-17231" "16SAMP-17233" "MQ170915-14" ...
 ##  $ Location       : Factor w/ 12 levels "Avedoere","Damhusaaen",..: 4 11 5 12 12 12 12 2 11 11 ...
-##  $ Observed       : num  160 349 250 261 387 451 400 301 278 371 ...
-##  $ Chao1          : num  160 353 251 261 393 ...
-##  $ se.chao1       : num  0.249 3.33 1.256 0.621 3.791 ...
-##  $ ACE            : num  160 352 251 261 392 ...
-##  $ se.ACE         : num  4.42 9.13 7.49 7.5 9.79 ...
-##  $ Shannon        : num  4.23 4.86 4.72 4.79 5.03 ...
-##  $ Simpson        : num  0.966 0.975 0.982 0.983 0.986 ...
-##  $ InvSimpson     : num  29.2 40.1 55.1 58.6 71.3 ...
-##  $ Fisher         : num  27.2 70.7 46.8 49.3 80.5 ...
-##  $ pielou_ev      : num  0.834 0.83 0.855 0.861 0.844 ...
+##  $ Observed       : num  161 354 247 265 389 454 406 304 278 371 ...
+##  $ Chao1          : num  161 356 247 266 395 ...
+##  $ se.chao1       : num  0 2.2689 0.0832 1.0272 3.914 ...
+##  $ ACE            : num  161 357 247 266 395 ...
+##  $ se.ACE         : num  4.6 9.28 7.43 7.72 9.83 ...
+##  $ Shannon        : num  4.24 4.84 4.74 4.78 5.03 ...
+##  $ Simpson        : num  0.966 0.973 0.982 0.983 0.986 ...
+##  $ InvSimpson     : num  29.6 37.7 56.8 57.8 70.6 ...
+##  $ Fisher         : num  27.4 72 46.1 50.2 81 ...
+##  $ pielou_ev      : num  0.834 0.825 0.861 0.857 0.843 ...
 \end{verbatim}
 
 \hypertarget{colors}{%
@@ -1679,7 +1682,7 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{physeqNMDS }\OtherTok{\textless{}{-}}\NormalTok{  ps.flt  }\CommentTok{\# just to keep it separate.}
+\NormalTok{physeqNMDS }\OtherTok{\textless{}{-}}\NormalTok{  ps\_rare  }\CommentTok{\# We are using the rarefied abundances as explained in the intro }
 
 \CommentTok{\#ordination}
 \NormalTok{ordination }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{ordinate}\NormalTok{(physeqNMDS  , }\StringTok{"NMDS"}\NormalTok{, }\AttributeTok{distance =} \StringTok{\textquotesingle{}bray\textquotesingle{}}\NormalTok{) }\CommentTok{\# using Bray{-}Curtis dissimilarities here. }
