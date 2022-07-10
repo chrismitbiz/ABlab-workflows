@@ -15,11 +15,15 @@ Furthermore, beta diversity, i.e. four different type of ordinations are plotted
   
 The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: https://sites.google.com/site/mb3gustame/home, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter \@ref(about). 
   
-Prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying I recommend this excellent paper here: [Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities](https://www.nature.com/articles/s41598-021-01636-1). We will follow the recommendations from the authors of this paper to resample without replacement.  
+Prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying I recommend this paper here: [Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities](https://www.nature.com/articles/s41598-021-01636-1). We will follow the recommendations from the authors of this paper to resample without replacement.       
   
-Other normalisation methods are possible and it is up to you, the analyst, to understand and decide on the appropriate methods. I found centred-log ratios (Aitchison distances)  intuitive in interpretation, which are included into the workflow below in a PCA and RDA.    
-Let's get started... 
+Other normalisation methods are also possible and it is up to you, the analyst, to understand and decide on the appropriate methods. I found centred-log ratios (Aitchison distances) also intuitive in interpretation, which are included into the workflow below in a PCA and RDA. Log-ratios are further discussed in the paper [Microbiome Datasets Are Compositional: And This Is Not Optional](https://doi.org/10.3389/fmicb.2017.02224).   
+In fact, using different types of normalisation, dissimilarities or distances, while providing different types of information, may complement each other and help in interpretation of your data.    
   
+### Prerequisites  
+* a phyloseq object; either read in from a pre-saved `.rds` file or created as described in chapter \@ref(Qiime2R).   
+   
+Time to get started... 
   
 ## Workflow  
   
@@ -29,13 +33,13 @@ Install the following packages if not already.
   
 ```{r packagesdiversity, message=FALSE, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
 # BiocManager::install("microbiome") If needed
-
 library(phyloseq)
 library(ggpubr)       # a handy helper package for ggplots
 library(tidyverse)
 theme_set(theme_bw())  # setting the theme for ggplots
 library(vegan)
 library(microbiome)
+
 ```
 
   \
@@ -67,7 +71,7 @@ str(metadf)
 Now the diversity indices can be calculated and added to the metadata of the phyloseq object for plotting. First, the abundances are pre-filtered (as shown in the previous chapter), then the ASV abundances are randomly resampled with `phyloseq::rarefy_even_depth`, such that all samples have the same number of ASVs.   
 The diversity indices are then calculated with `phyloseq::estimate_richness` based on these evenly resampled abundances. The dataframe that is created containing the range of indices is then added to the existing metadata of the phyloseq for plotting.  
   
-```{r alphadiversitypre, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE, error=FALSE}
+```{r alphadiversitypre, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE, error=FALSE, cache=TRUE}
  
 # some additional quality filtering - repeating steps from previous chapter. 
   
@@ -89,12 +93,12 @@ min(colSums(otu_table(ps.flt)))
 # there are samples with very different number of ASVs. I am generally going 
 # by a 10x rule. If the lowest number of ASVs is 10x lower than the sample with
 # highest number of ASVs, then I keep that sample in for alpha diversity assessments.  
-  
+
 ps_rare <- phyloseq::rarefy_even_depth(ps.flt, 
-                                       sample.size = min(colSums(otu_table(ps.flt))),  
-                                       rngseed = TRUE, 
-                                       replace = FALSE, #without replacement
-                                       trimOTUs = TRUE)
+    sample.size = min(colSums(otu_table(ps.flt))),  
+    rngseed = TRUE, 
+    replace = FALSE, #without replacement
+    trimOTUs = TRUE)
 
 # check rarefied phyloseq object
 # ps_rare (not run)
@@ -131,9 +135,13 @@ str(data.frame(sample_data(ps.flt)))
 ```{r cols}
 # You can check Hex codes with help of https://htmlcolorcodes.com/
 
-cols <- c("#F9E79F", "#FDEBD0", "#F6DDCC",  "#E5E8E8", "#CCD1D1", "#AAB7B8", "#707B7C", "#566573","#82E0AA", "#641E16", "#8E44AD", "#E74C3C")
+cols <- c("#F9E79F", "#FDEBD0", "#F6DDCC",  "#E5E8E8", "#CCD1D1", "#AAB7B8", 
+          "#707B7C", "#566573","#82E0AA", "#641E16", "#8E44AD", "#E74C3C")
 
-# you can also name each colour according to your treatment. This will help ggplot to associated the same colour for each treatment across different ggplots. For example, if we want to show different colour by location in this dataset: 
+# you can also name each colour according to your treatment. 
+# This will help ggplot to associated the same colour for each treatment across
+# different ggplots. For example, if we want to show different colour by location 
+# in this dataset: 
 names(cols)  <- unique((data.frame(sample_data(ps.flt)))$Location)
 cols
 ```
