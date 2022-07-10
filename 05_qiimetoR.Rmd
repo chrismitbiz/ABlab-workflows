@@ -229,6 +229,28 @@ ps.flt <- ps.flt %>%
   
   \
   
+### Proportion of ASVs identified  
+  
+Check what proportion of ASVs could be identified on phylum and genus-level. 
+  
+This will indicate how many reads you would be discarding, in case you remove ASVs, which were not assigned a taxon.  
+  
+It is also an indicator of how well the database you have been using (e.g. Silva here) has performed.You could compare that with other databases if you wish.   
+
+```{r taxapct, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE, error=FALSE}
+
+#  percent of phyla identified
+ps.flt  = subset_taxa(ps , !is.na(Phylum) & !Phylum %in% c(""))
+# percent of phyla identified
+ntaxa(ps.flt) / ntaxa(ps)
+
+ps.flt  = subset_taxa(ps , !is.na(Genus) & !Genus %in% c(""))
+# percent of phyla identified
+ntaxa(ps.flt) / ntaxa(ps)
+  
+```
+  
+  
 ### Rarefaction curve
   
 Check if you cover enough depth for diversity analyses. Some samples may have low species richness, including a negative or samples that failed during PCR for example. The rarefaction curve will help assess which samples you may have to exclude from subsequent diversity calculations. It also provides a general view if samples cover enough of the potential richness (Number of ASVs).      

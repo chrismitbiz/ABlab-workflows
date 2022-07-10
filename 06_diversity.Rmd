@@ -85,6 +85,9 @@ ps.flt
 # confirming minimum sample size
 min(colSums(otu_table(ps.flt)))
 
+# quantile summary of sample sizes
+quantile(colSums(otu_table(ps.flt)))
+
 # rarefy - required before measuring alpha diversity. 
 # This step is to create an abundance table, where the all samples are randomly 
 # resamples such that all samples have the same number of ASVs.  
