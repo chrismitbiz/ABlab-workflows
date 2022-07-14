@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-07-10}
+\date{2022-07-14}
 
 \begin{document}
 \maketitle
@@ -953,8 +953,8 @@ Once the packages are installed, load them into your working space.
 \FunctionTok{library}\NormalTok{(qiime2R)  }\CommentTok{\# to import qiime.qza into an R object}
 \FunctionTok{library}\NormalTok{(phyloseq) }\CommentTok{\# To combine all relevant data objects into one object for easy data management}
 \FunctionTok{library}\NormalTok{(tidyverse) }\CommentTok{\# Compilation of packages for data management }
-\FunctionTok{library}\NormalTok{(stringr)  }\CommentTok{\# to change some of the strings in taxonomic names in Silva }
-\FunctionTok{library}\NormalTok{(vegan)   }\CommentTok{\# A commonly used package in numerical ecological }
+\FunctionTok{library}\NormalTok{(stringr)  }\CommentTok{\# to change some of the strings in taxonomic names }
+\FunctionTok{library}\NormalTok{(vegan)   }\CommentTok{\# A commonly used package for numerical ecology}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1133,7 +1133,7 @@ Then filter out any phyla that came up as uncharacterized and taxa that came up 
 \hypertarget{proportion-of-asvs-identified}{%
 \subsection{Proportion of ASVs identified}\label{proportion-of-asvs-identified}}
 
-Check what proportion of ASVs could be identified on phylum and genus-level.
+Check what proportion of ASVs could be identified on phylum and genus-level. This is best done with the handy phyloseq function \texttt{ntaxa()}, which gives the number of taxa present in the phyloseq object.
 
 This will indicate how many reads you would be discarding, in case you remove ASVs, which were not assigned a taxon.
 
@@ -1802,7 +1802,7 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
 \NormalTok{physeqPCA }\OtherTok{\textless{}{-}}\NormalTok{  ps.flt  }\CommentTok{\# just to keep it separate.}
 
 \CommentTok{\# normalisation and transform using the microbiome package}
-\CommentTok{\# I chose a centred log{-}ratio transform and a principle component analysis in a euclidean space.}
+\CommentTok{\# I chose a centred log{-}ratio transform and a principal component analysis in a euclidean space.}
 \NormalTok{physeqPCA }\OtherTok{\textless{}{-}}\NormalTok{ microbiome}\SpecialCharTok{::}\FunctionTok{transform}\NormalTok{(physeqPCA, }\StringTok{"clr"}\NormalTok{)}
 
 \CommentTok{\#ordination}
@@ -1814,7 +1814,7 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
                                       \AttributeTok{color =} \StringTok{"Location"}\NormalTok{, }
                                       \CommentTok{\#shape = "Reactor", }
                                      \CommentTok{\# option to add shapes as data symbols}
-                                      \AttributeTok{title =} \StringTok{"Principle Component Analysis"}\NormalTok{) }\SpecialCharTok{+}
+                                      \AttributeTok{title =} \StringTok{"Principal Component Analysis"}\NormalTok{) }\SpecialCharTok{+}
      \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ pielou\_ev)) }\SpecialCharTok{+}    \CommentTok{\# \# shape size in proportion to Pielou Evenness}
     \FunctionTok{annotate}\NormalTok{(}\AttributeTok{geom =} \StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{, }\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{"Aitchison distances"}\NormalTok{), }
              \AttributeTok{x =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{y =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{hjust =} \SpecialCharTok{{-}}\FloatTok{0.05}\NormalTok{, }\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{)  }\SpecialCharTok{+} 
@@ -1947,7 +1947,7 @@ UniFrac distances are derived from phylogenetic distances between ASVs, which me
                                       \AttributeTok{color =} \StringTok{"Location"}\NormalTok{, }
                                       \CommentTok{\#shape = "Reactor",    }
                                       \CommentTok{\# option to add shapes to data symbols}
-                                      \AttributeTok{title =} \StringTok{"Principle Coordinate Analysis"}\NormalTok{) }\SpecialCharTok{+}
+                                      \AttributeTok{title =} \StringTok{"Principal Coordinate Analysis"}\NormalTok{) }\SpecialCharTok{+}
      \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ pielou\_ev)) }\SpecialCharTok{+}    \CommentTok{\# shape size reflective of Pielou  }
      \FunctionTok{annotate}\NormalTok{(}\AttributeTok{geom =} \StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{, }\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{"unweighted UniFrac"}\NormalTok{), }
              \AttributeTok{x =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{y =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{hjust =} \SpecialCharTok{{-}}\FloatTok{0.05}\NormalTok{, }\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{)  }\SpecialCharTok{+}

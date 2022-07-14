@@ -59,8 +59,8 @@ Once the packages are installed, load them into your working space.
 library(qiime2R)  # to import qiime.qza into an R object
 library(phyloseq) # To combine all relevant data objects into one object for easy data management
 library(tidyverse) # Compilation of packages for data management 
-library(stringr)  # to change some of the strings in taxonomic names in Silva 
-library(vegan)   # A commonly used package in numerical ecological 
+library(stringr)  # to change some of the strings in taxonomic names 
+library(vegan)   # A commonly used package for numerical ecology
 
 ```
   
@@ -231,7 +231,7 @@ ps.flt <- ps.flt %>%
   
 ### Proportion of ASVs identified  
   
-Check what proportion of ASVs could be identified on phylum and genus-level. 
+Check what proportion of ASVs could be identified on phylum and genus-level. This is best done with the handy phyloseq function `ntaxa()`, which gives the number of taxa present in the phyloseq object.  
   
 This will indicate how many reads you would be discarding, in case you remove ASVs, which were not assigned a taxon.  
   

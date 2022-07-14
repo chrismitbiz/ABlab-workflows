@@ -253,7 +253,7 @@ NMDSplot
 physeqPCA <-  ps.flt  # just to keep it separate.
 
 # normalisation and transform using the microbiome package
-# I chose a centred log-ratio transform and a principle component analysis in a euclidean space.
+# I chose a centred log-ratio transform and a principal component analysis in a euclidean space.
 physeqPCA <- microbiome::transform(physeqPCA, "clr")
 
 #ordination
@@ -265,7 +265,7 @@ PCAplot <- phyloseq::plot_ordination(physeqPCA,
                                       color = "Location", 
                                       #shape = "Reactor", 
                                      # option to add shapes as data symbols
-                                      title = "Principle Component Analysis") +
+                                      title = "Principal Component Analysis") +
      geom_point(aes(size = pielou_ev)) +    # # shape size in proportion to Pielou Evenness
     annotate(geom = 'text', label = paste("Aitchison distances"), 
              x = -Inf, y = -Inf, hjust = -0.05, vjust = -1, size = 3)  + 
@@ -385,7 +385,7 @@ PCOAplot <- phyloseq::plot_ordination(physeqPcOA,
                                       color = "Location", 
                                       #shape = "Reactor",    
                                       # option to add shapes to data symbols
-                                      title = "Principle Coordinate Analysis") +
+                                      title = "Principal Coordinate Analysis") +
      geom_point(aes(size = pielou_ev)) +    # shape size reflective of Pielou  
      annotate(geom = 'text', label = paste("unweighted UniFrac"), 
              x = -Inf, y = -Inf, hjust = -0.05, vjust = -1, size = 3)  +

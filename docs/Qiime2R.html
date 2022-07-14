@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2022-07-10" />
+<meta name="date" content="2022-07-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -288,8 +288,8 @@ Once the packages are installed, load them into your working space.</p>
 <span id="cb12-7"><a href="Qiime2R.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qiime2R)  <span class="co"># to import qiime.qza into an R object</span></span>
 <span id="cb12-8"><a href="Qiime2R.html#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phyloseq) <span class="co"># To combine all relevant data objects into one object for easy data management</span></span>
 <span id="cb12-9"><a href="Qiime2R.html#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># Compilation of packages for data management </span></span>
-<span id="cb12-10"><a href="Qiime2R.html#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)  <span class="co"># to change some of the strings in taxonomic names in Silva </span></span>
-<span id="cb12-11"><a href="Qiime2R.html#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)   <span class="co"># A commonly used package in numerical ecological </span></span></code></pre></div>
+<span id="cb12-10"><a href="Qiime2R.html#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)  <span class="co"># to change some of the strings in taxonomic names </span></span>
+<span id="cb12-11"><a href="Qiime2R.html#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)   <span class="co"># A commonly used package for numerical ecology</span></span></code></pre></div>
 <p><br />
 </p>
 </div>
@@ -437,7 +437,7 @@ This step allows you to save and store the R object as a RDS file and load it ba
 </div>
 <div id="proportion-of-asvs-identified" class="section level3 hasAnchor" number="5.2.5">
 <h3><span class="header-section-number">5.2.5</span> Proportion of ASVs identified<a href="Qiime2R.html#proportion-of-asvs-identified" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Check what proportion of ASVs could be identified on phylum and genus-level.</p>
+<p>Check what proportion of ASVs could be identified on phylum and genus-level. This is best done with the handy phyloseq function <code>ntaxa()</code>, which gives the number of taxa present in the phyloseq object.</p>
 <p>This will indicate how many reads you would be discarding, in case you remove ASVs, which were not assigned a taxon.</p>
 <p>It is also an indicator of how well the database you have been using (e.g. Silva here) has performed.You could compare that with other databases if you wish.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="Qiime2R.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  percent of phyla identified</span></span>

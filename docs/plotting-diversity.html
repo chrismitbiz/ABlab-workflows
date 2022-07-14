@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2022-07-10" />
+<meta name="date" content="2022-07-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -518,7 +518,7 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="plotting-diversity.html#cb52-1" aria-hidden="true" tabindex="-1"></a>physeqPCA <span class="ot">&lt;-</span>  ps.flt  <span class="co"># just to keep it separate.</span></span>
 <span id="cb52-2"><a href="plotting-diversity.html#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb52-3"><a href="plotting-diversity.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co"># normalisation and transform using the microbiome package</span></span>
-<span id="cb52-4"><a href="plotting-diversity.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I chose a centred log-ratio transform and a principle component analysis in a euclidean space.</span></span>
+<span id="cb52-4"><a href="plotting-diversity.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I chose a centred log-ratio transform and a principal component analysis in a euclidean space.</span></span>
 <span id="cb52-5"><a href="plotting-diversity.html#cb52-5" aria-hidden="true" tabindex="-1"></a>physeqPCA <span class="ot">&lt;-</span> microbiome<span class="sc">::</span><span class="fu">transform</span>(physeqPCA, <span class="st">&quot;clr&quot;</span>)</span>
 <span id="cb52-6"><a href="plotting-diversity.html#cb52-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb52-7"><a href="plotting-diversity.html#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="co">#ordination</span></span>
@@ -530,7 +530,7 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb52-13"><a href="plotting-diversity.html#cb52-13" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">color =</span> <span class="st">&quot;Location&quot;</span>, </span>
 <span id="cb52-14"><a href="plotting-diversity.html#cb52-14" aria-hidden="true" tabindex="-1"></a>                                      <span class="co">#shape = &quot;Reactor&quot;, </span></span>
 <span id="cb52-15"><a href="plotting-diversity.html#cb52-15" aria-hidden="true" tabindex="-1"></a>                                     <span class="co"># option to add shapes as data symbols</span></span>
-<span id="cb52-16"><a href="plotting-diversity.html#cb52-16" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">title =</span> <span class="st">&quot;Principle Component Analysis&quot;</span>) <span class="sc">+</span></span>
+<span id="cb52-16"><a href="plotting-diversity.html#cb52-16" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">title =</span> <span class="st">&quot;Principal Component Analysis&quot;</span>) <span class="sc">+</span></span>
 <span id="cb52-17"><a href="plotting-diversity.html#cb52-17" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> pielou_ev)) <span class="sc">+</span>    <span class="co"># # shape size in proportion to Pielou Evenness</span></span>
 <span id="cb52-18"><a href="plotting-diversity.html#cb52-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&#39;text&#39;</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Aitchison distances&quot;</span>), </span>
 <span id="cb52-19"><a href="plotting-diversity.html#cb52-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.05</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>)  <span class="sc">+</span> </span>
@@ -645,7 +645,7 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb55-11"><a href="plotting-diversity.html#cb55-11" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">color =</span> <span class="st">&quot;Location&quot;</span>, </span>
 <span id="cb55-12"><a href="plotting-diversity.html#cb55-12" aria-hidden="true" tabindex="-1"></a>                                      <span class="co">#shape = &quot;Reactor&quot;,    </span></span>
 <span id="cb55-13"><a href="plotting-diversity.html#cb55-13" aria-hidden="true" tabindex="-1"></a>                                      <span class="co"># option to add shapes to data symbols</span></span>
-<span id="cb55-14"><a href="plotting-diversity.html#cb55-14" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">title =</span> <span class="st">&quot;Principle Coordinate Analysis&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-14"><a href="plotting-diversity.html#cb55-14" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">title =</span> <span class="st">&quot;Principal Coordinate Analysis&quot;</span>) <span class="sc">+</span></span>
 <span id="cb55-15"><a href="plotting-diversity.html#cb55-15" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> pielou_ev)) <span class="sc">+</span>    <span class="co"># shape size reflective of Pielou  </span></span>
 <span id="cb55-16"><a href="plotting-diversity.html#cb55-16" aria-hidden="true" tabindex="-1"></a>     <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&#39;text&#39;</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;unweighted UniFrac&quot;</span>), </span>
 <span id="cb55-17"><a href="plotting-diversity.html#cb55-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.05</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>)  <span class="sc">+</span></span>
