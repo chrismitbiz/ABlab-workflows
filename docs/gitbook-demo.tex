@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-07-14}
+\date{2022-07-16}
 
 \begin{document}
 \maketitle
@@ -174,7 +174,11 @@ We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne. Email me or 
 Prerequisites will be listed in each sub chapter separately.
 Following a few general comments:
 
-\textbf{Access to computational resources}
+\hypertarget{general-requirements}{%
+\section{General requirements}\label{general-requirements}}
+
+\hypertarget{access-to-computational-resources}{%
+\subsection{Access to computational resources**}\label{access-to-computational-resources}}
 
 To process data you will need a personal computer or online computational resources with sufficient number of CPUs, working memory and storage. If you want to run most of the processing on a personal computer then I'd recommend a minimum of \textbf{4 CPUs, 16 Gb RAM and 500 Gb storage}. However, please note that some alignment tasks require more RAM, hence some of the steps (e.g.~taxonomic classifications) may require a more powerful resource. The advantage of using a personal computer is that you can frequently update the latest packages without relying on a university administrator to do that for you. Furthermore, with a personal computer you wont need to share with others, making it easier to run the packages without a workload manager.
 
@@ -190,21 +194,25 @@ In addition, there is the awesome \href{https://usegalaxy.org.au/}{Galaxy Austra
 
 This workbook will be based on using the Nectar Research cloud.
 
-\textbf{File storage}
+\hypertarget{file-storage}{%
+\subsection{File storage}\label{file-storage}}
 
 Working with sequencing data may require you do handle large amounts of data. From experience, a run of a 600µl pool (6-10pM) of amplicons in 2x301 Miseq cycles may produce around 10-20 Gb of FASTQ files. \href{https://sapac.support.illumina.com/bulletins/2018/01/approximate-sizes-of-sequencing-run-output-folders.html}{Much more} can be expected for NextSeq runs or for long-read sequencing.
 
 Once a Miseq run has finished it is typically available to download from the \href{https://basespace.illumina.com/dashboard}{Illumina Basespace} account. After a few runs, the data can accumulate quickly. Hence, \textbf{persistent storage space} is required. As long as you have the Basespace account you can keep a copy of the FASTQ file online. However, Basespace may delete your data if the account has been inactive for more than 6 months. Alternatively, data can be upload onto a public repository for persistent storage, such as the \href{https://www.ncbi.nlm.nih.gov/sra}{Sequence Reads Archives}. If you have access to a research cloud or commercial computational resources then you may store data on those. Personally, I prefer a 1TB solid state harddrive.
 
-\textbf{Command Line}
+\hypertarget{command-line}{%
+\subsection{Command Line}\label{command-line}}
 
 Many of the tools used are managed through command line. Cloud servers are also accessed through command line. That means there is no graphical user interphase and all commands, including installation and running of packages are done through lines of codes on a simple window interphase. This window is called Terminal (Mac, Linux) or Command Prompt application (Windows). There are lots of online sources to help you get started with command line. One example here: \url{https://towardsdatascience.com/a-quick-guide-to-using-command-line-terminal-96815b97b955}
 
-\textbf{Data storage browser}
+\hypertarget{data-storage-browser}{%
+\subsection{Data storage browser}\label{data-storage-browser}}
 
 To upload, download, move, rename files on any cloud computer or high performance computer (HPC) at your institution, you will also require a cloud storage browser, such as \href{https://docs.cyberduck.io/}{Cyberduck} (Mac) or \href{https://www.putty.org/}{PuTTY} (Windows).
 
-\textbf{R and R studio}
+\hypertarget{r-and-r-studio}{%
+\subsection{R and R studio}\label{r-and-r-studio}}
 
 R has become an essential research language. If you want to progress in research it is almost inevitable for you to learn. Just do it. :). Perhaps start here if you dont know where else to start: \url{https://education.rstudio.com/learn/beginner/}. It lists some great step-by-step tutorials on how to install R and Rstudio and then explains the basics.
 
@@ -212,7 +220,8 @@ If you are like me, then you simply copy and paste code from other sites and see
 
 At the same time you will want to do short courses (eg. from edX \href{https://www.edx.org/course/data-science-r-basics}{Data Science: R Basics}) that delve a little deeper into different data structures such as data frames, matrices, lists and the syntax to arrange stuff. Over time you understand what different lines of code mean and can trouble shoot when things don't work. And things often don't work. You will get used to troubleshooting code :).
 
-\textbf{Environment managers}
+\hypertarget{environment-managers}{%
+\subsection{Environment managers}\label{environment-managers}}
 
 Package and environment managers are extremely useful for your workflows. They help to install and run software packages such as qiime2, into individual `environments' independent of your operating system. The environment manager is installed once and from there you use it to install individual packages. The most commonly used environment manager is Conda. Learn more about it here: \url{https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html}
 
@@ -225,7 +234,8 @@ Once conda installed you can always check what environments are installed with t
 
 There are several other environment managers. We are also using \href{https://www.docker.com/}{Docker} in our work but the learning curve is a bit steeper so we wont get into it here.
 
-\textbf{Explore the help functions}
+\hypertarget{explore-the-help-functions}{%
+\subsection{Explore the help functions}\label{explore-the-help-functions}}
 
 Packages such as qiime2 have great resources to help you understand how to run any of the available commands. For example if you dont know what input parameters are available for the qiime command\\
 \texttt{qiime\ feature-classifier\ classify-sklearn}, you can simply enter this command into your Terminal (with the qiime environment activated, if it is installed with Conda) and add a \texttt{-\/-help} at the end: \texttt{qiime\ feature-classifier\ classify-sklearn\ -\/-help}.
@@ -242,11 +252,13 @@ qiime --help
 Gives\\
 \includegraphics{./img/qiimehelp.png}
 
-\textbf{GitHub account}
+\hypertarget{github-account}{%
+\subsection{GitHub account}\label{github-account}}
 
 This GitBook, including all its files, is hosted on one of my GitHub repositories (\url{https://github.com/chrismitbiz/ABlab-workflows}). If you have any comments you can ask a question on the Discussion Page of this repository. You require a GitHub account to do that. It is free.
 
-\textbf{Workflows from other lab groups}
+\hypertarget{workflows-from-other-lab-groups}{%
+\section{Workflows from other lab groups}\label{workflows-from-other-lab-groups}}
 
 Searching for ``amplicon-sequencing'' under ``Topics'' on GitHub gave 37 results.
 
