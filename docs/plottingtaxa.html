@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2022-07-16" />
+<meta name="date" content="2022-07-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -266,7 +266,7 @@ div.csl-indent {
 <li class="chapter" data-level="7.2.4" data-path="plottingtaxa.html"><a href="plottingtaxa.html#colors-1"><i class="fa fa-check"></i><b>7.2.4</b> Colors</a></li>
 <li class="chapter" data-level="7.2.5" data-path="plottingtaxa.html"><a href="plottingtaxa.html#pre-filtering"><i class="fa fa-check"></i><b>7.2.5</b> Pre-filtering</a></li>
 <li class="chapter" data-level="7.2.6" data-path="plottingtaxa.html"><a href="plottingtaxa.html#analysis-and-plotting"><i class="fa fa-check"></i><b>7.2.6</b> Analysis and plotting</a></li>
-<li class="chapter" data-level="7.2.7" data-path="plottingtaxa.html"><a href="plottingtaxa.html#prevelance-table"><i class="fa fa-check"></i><b>7.2.7</b> Prevelance table</a></li>
+<li class="chapter" data-level="7.2.7" data-path="plottingtaxa.html"><a href="plottingtaxa.html#prevalance-table"><i class="fa fa-check"></i><b>7.2.7</b> Prevalance table</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -523,8 +523,8 @@ div.csl-indent {
 <span id="cb65-55"><a href="plottingtaxa.html#cb65-55" aria-hidden="true" tabindex="-1"></a>taxaplot</span></code></pre></div>
 <p><img src="gitbook-demo_files/figure-html/Phylumplots-1.png" width="1248" /></p>
 </div>
-<div id="prevelance-table" class="section level3 hasAnchor" number="7.2.7">
-<h3><span class="header-section-number">7.2.7</span> Prevelance table<a href="plottingtaxa.html#prevelance-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="prevalance-table" class="section level3 hasAnchor" number="7.2.7">
+<h3><span class="header-section-number">7.2.7</span> Prevalance table<a href="plottingtaxa.html#prevalance-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A prevalence table may assist in getting an overview of the abundances. The mean prevalence is the average number of times that the taxon appears across all samples.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="plottingtaxa.html#cb66-1" aria-hidden="true" tabindex="-1"></a>prevalancedf <span class="ot">=</span> <span class="fu">apply</span>(<span class="at">X =</span> phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(ps_flt),</span>
 <span id="cb66-2"><a href="plottingtaxa.html#cb66-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">MARGIN =</span> <span class="dv">1</span>,</span>

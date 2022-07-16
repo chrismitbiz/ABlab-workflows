@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2022-07-16" />
+<meta name="date" content="2022-07-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -266,7 +266,7 @@ div.csl-indent {
 <li class="chapter" data-level="7.2.4" data-path="plottingtaxa.html"><a href="plottingtaxa.html#colors-1"><i class="fa fa-check"></i><b>7.2.4</b> Colors</a></li>
 <li class="chapter" data-level="7.2.5" data-path="plottingtaxa.html"><a href="plottingtaxa.html#pre-filtering"><i class="fa fa-check"></i><b>7.2.5</b> Pre-filtering</a></li>
 <li class="chapter" data-level="7.2.6" data-path="plottingtaxa.html"><a href="plottingtaxa.html#analysis-and-plotting"><i class="fa fa-check"></i><b>7.2.6</b> Analysis and plotting</a></li>
-<li class="chapter" data-level="7.2.7" data-path="plottingtaxa.html"><a href="plottingtaxa.html#prevelance-table"><i class="fa fa-check"></i><b>7.2.7</b> Prevelance table</a></li>
+<li class="chapter" data-level="7.2.7" data-path="plottingtaxa.html"><a href="plottingtaxa.html#prevalance-table"><i class="fa fa-check"></i><b>7.2.7</b> Prevalance table</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -359,7 +359,7 @@ qiime --help  </code></pre>
 <li>Rarefying data<br />
 </li>
 <li>Transformation into relative abundances</li>
-<li>Centered log-ratios</li>
+<li>Transformation into centered log-ratios</li>
 <li>Cumulative Sum Scaling (CSS)<br />
 </li>
 <li>Upper Quantile (UQ)<br />
@@ -368,10 +368,11 @@ qiime --help  </code></pre>
 </li>
 <li>DESeq-variance stabilizing transformation (VS)</li>
 </ul>
+<p>There are others. Check out this link to learn more about the different types of normalisation methods: <a href="https://www.microbiomeanalyst.ca/MicrobiomeAnalyst/docs/FaqView.xhtml#norm2">MicrobiomeAnalyst: FAQs, What are the various normalization methods and which method should I choose?</a>.</p>
 <p>Rarefying data is one of the more contested methods. We acknowledge that <strong>rarefying data</strong> (i.e. the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus <strong>not recommended for differential abundance analyses</strong>. Check out this well cited paper here to learn why: <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531">Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible</a> (<span class="citation">McMurdie and Holmes (<a href="#ref-McMurdie2014" role="doc-biblioref">2014</a>)</span>).</p>
 <p>However, rarefying still “<em>outperformed all the other normalization methods for producing accurate BC (Bray-Curtis) dissimilarities and subsequent PCoAs and PERMANOVAs.</em>” Paper here: <a href="https://doi.org/10.1111/2041-210X.13115">Methods for normalizing microbiome data: An ecological perspective</a> (<span class="citation">McKnight et al. (<a href="#ref-McKnight2019a" role="doc-biblioref">2019</a>)</span>).</p>
 <p>For our workflows we may <strong>rarefy data</strong> before creating <strong>alpha diversity</strong> indices (Shannon, Simpsons etc), <strong>beta diversity</strong> indices (Bray-Curtis dissimilarities).</p>
-<p>Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use <strong>centred-log ratios</strong> (Aitchison distances), which makes count normalisation unnecessary. The <strong>compositional approach</strong> and centred log-ratios are further discussed in the paper <a href="https://doi.org/10.3389/fmicb.2017.02224">Microbiome Datasets Are Compositional: And This Is Not Optional</a> (<span class="citation">Gloor et al. (<a href="#ref-Gloor2017" role="doc-biblioref">2017</a>)</span>).</p>
+<p>Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use <strong>centred-log ratios</strong> (Aitchison distances). The <strong>compositional approach</strong> and centred log-ratios are further discussed in the paper <a href="https://doi.org/10.3389/fmicb.2017.02224">Microbiome Datasets Are Compositional: And This Is Not Optional</a> (<span class="citation">Gloor et al. (<a href="#ref-Gloor2017" role="doc-biblioref">2017</a>)</span>). This type of transformation requires the removal of some of the rare ASVs to remove as many zeros from the abundance table as reasonable.</p>
 </div>
 <div id="workflows-from-other-lab-groups" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> Workflows from other lab groups<a href="gettingstarted.html#workflows-from-other-lab-groups" class="anchor-section" aria-label="Anchor link to header"></a></h2>

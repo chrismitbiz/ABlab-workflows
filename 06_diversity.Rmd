@@ -21,7 +21,7 @@ The stats behind the individual metrics are not discussed. If you want to learn 
 As mentioned in Chapter \@ref(gettingstarted), prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying - this paper explains the process: [Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities](https://www.nature.com/articles/s41598-021-01636-1) (@Cameron2021).   
 We will follow the recommendations from the authors of this paper to resample without replacement.  
   
-Note that rarefying is generally not recommended for differential abundance analyses due to the loss of statistical power. Learn why here: [Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531) (@McMurdie2014).
+Note that rarefying is generally not recommended for statistical inferences in differential abundance analyses due to the loss of statistical power. Learn why here: [Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531) (@McMurdie2014). 
         
 Other normalisation methods (see Chapter \@ref(gettingstarted)) are also possible and it is up to you, the analyst, to understand and decide on the appropriate methods. 
 

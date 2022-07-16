@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-07-16}
+\date{2022-07-17}
 
 \begin{document}
 \maketitle
@@ -271,7 +271,7 @@ Example of normalisation methods:
 \item
   Transformation into relative abundances
 \item
-  Centered log-ratios
+  Transformation into centered log-ratios
 \item
   Cumulative Sum Scaling (CSS)\\
 \item
@@ -282,13 +282,15 @@ Example of normalisation methods:
   DESeq-variance stabilizing transformation (VS)
 \end{itemize}
 
+There are others. Check out this link to learn more about the different types of normalisation methods: \href{https://www.microbiomeanalyst.ca/MicrobiomeAnalyst/docs/FaqView.xhtml\#norm2}{MicrobiomeAnalyst: FAQs, What are the various normalization methods and which method should I choose?}.
+
 Rarefying data is one of the more contested methods. We acknowledge that \textbf{rarefying data} (i.e.~the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus \textbf{not recommended for differential abundance analyses}. Check out this well cited paper here to learn why: \href{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531}{Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible} (\citet{McMurdie2014}).
 
 However, rarefying still ``\emph{outperformed all the other normalization methods for producing accurate BC (Bray-Curtis) dissimilarities and subsequent PCoAs and PERMANOVAs.}'' Paper here: \href{https://doi.org/10.1111/2041-210X.13115}{Methods for normalizing microbiome data: An ecological perspective} (\citet{McKnight2019a}).
 
 For our workflows we may \textbf{rarefy data} before creating \textbf{alpha diversity} indices (Shannon, Simpsons etc), \textbf{beta diversity} indices (Bray-Curtis dissimilarities).
 
-Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use \textbf{centred-log ratios} (Aitchison distances), which makes count normalisation unnecessary. The \textbf{compositional approach} and centred log-ratios are further discussed in the paper \href{https://doi.org/10.3389/fmicb.2017.02224}{Microbiome Datasets Are Compositional: And This Is Not Optional} (\citet{Gloor2017}).
+Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use \textbf{centred-log ratios} (Aitchison distances). The \textbf{compositional approach} and centred log-ratios are further discussed in the paper \href{https://doi.org/10.3389/fmicb.2017.02224}{Microbiome Datasets Are Compositional: And This Is Not Optional} (\citet{Gloor2017}). This type of transformation requires the removal of some of the rare ASVs to remove as many zeros from the abundance table as reasonable.
 
 \hypertarget{workflows-from-other-lab-groups}{%
 \section{Workflows from other lab groups}\label{workflows-from-other-lab-groups}}
@@ -1475,7 +1477,7 @@ The stats behind the individual metrics are not discussed. If you want to learn 
 As mentioned in Chapter \ref{gettingstarted}, prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying - this paper explains the process: \href{https://www.nature.com/articles/s41598-021-01636-1}{Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities} (\citet{Cameron2021}).\\
 We will follow the recommendations from the authors of this paper to resample without replacement.
 
-Note that rarefying is generally not recommended for differential abundance analyses due to the loss of statistical power. Learn why here: \href{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531}{Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible} (\citet{McMurdie2014}).
+Note that rarefying is generally not recommended for statistical inferences in differential abundance analyses due to the loss of statistical power. Learn why here: \href{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531}{Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible} (\citet{McMurdie2014}).
 
 Other normalisation methods (see Chapter \ref{gettingstarted}) are also possible and it is up to you, the analyst, to understand and decide on the appropriate methods.
 
@@ -2337,8 +2339,8 @@ Finally, the abundances of this long abundance table are summarised into the fac
 
 \includegraphics{gitbook-demo_files/figure-latex/Phylumplots-1.pdf}
 
-\hypertarget{prevelance-table}{%
-\subsection{Prevelance table}\label{prevelance-table}}
+\hypertarget{prevalance-table}{%
+\subsection{Prevalance table}\label{prevalance-table}}
 
 A prevalence table may assist in getting an overview of the abundances. The mean prevalence is the average number of times that the taxon appears across all samples.
 

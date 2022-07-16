@@ -85,11 +85,13 @@ Example of normalisation methods:
   
 * Rarefying data  
 * Transformation into relative abundances 
-* Centered log-ratios
+* Transformation into centered log-ratios
 * Cumulative Sum Scaling (CSS)  
 * Upper Quantile (UQ)  
 * edgeR-trimmed mean of M values (TMM)  
 * DESeq-variance stabilizing transformation (VS)  
+  
+There are others. Check out this link to learn more about the different types of normalisation methods: [MicrobiomeAnalyst: FAQs, What are the various normalization methods and which method should I choose?](https://www.microbiomeanalyst.ca/MicrobiomeAnalyst/docs/FaqView.xhtml#norm2).  
   
 Rarefying data is one of the more contested methods. We acknowledge that **rarefying data** (i.e. the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus **not recommended for differential abundance analyses**. Check out this well cited paper here to learn why: [Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531) (@McMurdie2014).  
   
@@ -97,7 +99,7 @@ However, rarefying still "*outperformed all the other normalization methods for 
    
 For our workflows we may **rarefy data** before creating **alpha diversity** indices (Shannon, Simpsons etc), **beta diversity** indices (Bray-Curtis dissimilarities). 
   
-Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use **centred-log ratios** (Aitchison distances), which makes count normalisation unnecessary. The **compositional approach** and centred log-ratios are further discussed in the paper [Microbiome Datasets Are Compositional: And This Is Not Optional](https://doi.org/10.3389/fmicb.2017.02224) (@Gloor2017).   
+Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use **centred-log ratios** (Aitchison distances). The **compositional approach** and centred log-ratios are further discussed in the paper [Microbiome Datasets Are Compositional: And This Is Not Optional](https://doi.org/10.3389/fmicb.2017.02224) (@Gloor2017). This type of transformation requires the removal of some of the rare ASVs to remove as many zeros from the abundance table as reasonable.  
   
 ## Workflows from other lab groups    
   

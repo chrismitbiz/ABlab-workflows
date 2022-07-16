@@ -197,7 +197,7 @@ taxaplot
 ```
   
   
-### Prevelance table  
+### Prevalance table  
   
 A prevalence table may assist in getting an overview of the abundances. The mean prevalence is the average number of times that the taxon appears across all samples.  
   
