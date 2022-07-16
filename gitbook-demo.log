@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.4)  16 JUL 2022 23:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.4)  16 JUL 2022 23:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1564,648 +1564,664 @@ Overfull \hbox (6.74898pt too wide) in paragraph at lines 1429--1429
 
 [55] [56]
 Chapter 6.
+<./img/nmds.png, id=581, 1156.32pt x 924.45375pt>
+File: ./img/nmds.png Graphic file (type png)
+<use ./img/nmds.png>
+Package pdftex.def Info: ./img/nmds.png  used on input line 1462.
+(pdftex.def)             Requested size: 344.99312pt x 275.81482pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 [57
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 1489--1491
+ <./img/nmds.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1491--1493
 
  []
 
 [58]
-Underfull \hbox (badness 10000) in paragraph at lines 1516--1517
+Underfull \hbox (badness 10000) in paragraph at lines 1518--1519
 
  []
 
 
-Overfull \hbox (38.24889pt too wide) in paragraph at lines 1537--1537
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 1539--1539
 []\T1/lmtt/m/n/10 ## sample_data() Sample Data:       [ 51 samples by 15 sample variables ][] 
  []
 
 
-Overfull \hbox (22.49893pt too wide) in paragraph at lines 1537--1537
+Overfull \hbox (22.49893pt too wide) in paragraph at lines 1539--1539
 []\T1/lmtt/m/n/10 ## tax_table()   Taxonomy Table:    [ 4218 taxa by 7 taxonomic ranks ][] 
  []
 
 
-Overfull \hbox (38.24889pt too wide) in paragraph at lines 1537--1537
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 1539--1539
 []\T1/lmtt/m/n/10 ## phy_tree()    Phylogenetic Tree: [ 4218 tips and 4217 internal nodes ][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1539--1540
+Underfull \hbox (badness 10000) in paragraph at lines 1541--1542
 
  []
 
-
-Overfull \hbox (48.74886pt too wide) in paragraph at lines 1569--1569
+[59]
+Overfull \hbox (48.74886pt too wide) in paragraph at lines 1571--1571
 []\T1/lmtt/m/n/10 ##  $ Assay.Type     : chr  "AMPLICON" "AMPLICON" "AMPLICON" "AMPLICON" ...[] 
  []
 
 
-Overfull \hbox (290.24815pt too wide) in paragraph at lines 1569--1569
+Overfull \hbox (290.24815pt too wide) in paragraph at lines 1571--1571
 []\T1/lmtt/m/n/10 ##  $ Bases          : int  13254234 24196788 15758554 20048406 37634632 43555904 35107436 13888140 23172184 35065898 ...[] 
  []
 
 
-Overfull \hbox (111.74867pt too wide) in paragraph at lines 1569--1569
+Overfull \hbox (111.74867pt too wide) in paragraph at lines 1571--1571
 []\T1/lmtt/m/n/10 ##  $ BioProject     : chr  "PRJNA645373" "PRJNA645373" "PRJNA645373" "PRJNA645373" ...[] 
  []
 
 
-Overfull \hbox (279.74818pt too wide) in paragraph at lines 1569--1569
+Overfull \hbox (279.74818pt too wide) in paragraph at lines 1571--1571
 []\T1/lmtt/m/n/10 ##  $ Bytes          : int  9235913 16404070 10758456 13009806 24207581 27963491 22585685 9388862 15125835 22520074 ...[] 
  []
 
 
-Overfull \hbox (489.74757pt too wide) in paragraph at lines 1569--1569
+Overfull \hbox (489.74757pt too wide) in paragraph at lines 1571--1571
 []\T1/lmtt/m/n/10 ##  $ Organism       : chr  "anaerobic digester metagenome" "anaerobic digester metagenome" "anaerobic digester metagenome" "anaerobic digester metagenome" ...[] 
  []
 
 
-Overfull \hbox (27.74892pt too wide) in paragraph at lines 1569--1569
+Overfull \hbox (27.74892pt too wide) in paragraph at lines 1571--1571
 []\T1/lmtt/m/n/10 ##  $ collection_date: chr  "30/11/16" "9/3/16" "17/3/16" "5/12/16" ...[] 
  []
 
 
-Overfull \hbox (69.7488pt too wide) in paragraph at lines 1569--1569
+Overfull \hbox (69.7488pt too wide) in paragraph at lines 1571--1571
 []\T1/lmtt/m/n/10 ##  $ loc            : chr  "Ejby Moelle" "Soeholt" "Esbjerg Vest" "Viborg" ...[] 
  []
 
 
-Overfull \hbox (101.2487pt too wide) in paragraph at lines 1569--1569
+Overfull \hbox (101.2487pt too wide) in paragraph at lines 1571--1571
 []\T1/lmtt/m/n/10 ##  $ Reactor        : Factor w/ 10 levels "1A","1B","2B",..: 4 4 6 7 7 5 5 5 4 4 ...[] 
  []
 
 
-Overfull \hbox (316.49808pt too wide) in paragraph at lines 1569--1569
+Overfull \hbox (316.49808pt too wide) in paragraph at lines 1571--1571
 []\T1/lmtt/m/n/10 ##  $ Purpose        : chr  "reactorfoampotentials" "reactorfoampotentials" "reactorfoampotentials" "foamnofoamcomparison" ...[] 
  []
 
 
-Overfull \hbox (90.74873pt too wide) in paragraph at lines 1569--1569
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 1571--1571
 []\T1/lmtt/m/n/10 ##  $ Experiment     : chr  "SRX8715180" "SRX8715169" "SRX8715158" "SRX8715151" ...[] 
  []
 
 
-Overfull \hbox (353.24797pt too wide) in paragraph at lines 1569--1569
+Overfull \hbox (353.24797pt too wide) in paragraph at lines 1571--1571
 []\T1/lmtt/m/n/10 ##  $ lat_lon        : chr  "55.398077 N 10.415041 E" "56.175302 N 9.582588 E" "55.488235 N 8.430655 E" "56.425367 N 9.4527943 E" ...[] 
  []
 
 
-Overfull \hbox (300.74812pt too wide) in paragraph at lines 1569--1569
+Overfull \hbox (300.74812pt too wide) in paragraph at lines 1571--1571
 []\T1/lmtt/m/n/10 ##  $ ReleaseDate    : chr  "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" ...[] 
  []
 
-[59]
-Overfull \hbox (127.49863pt too wide) in paragraph at lines 1569--1569
+
+Overfull \hbox (127.49863pt too wide) in paragraph at lines 1571--1571
 []\T1/lmtt/m/n/10 ##  $ Sample.Name    : chr  "16SAMP-17236" "16SAMP-17231" "16SAMP-17233" "MQ170915-14" ...[] 
  []
 
 
-Overfull \hbox (185.24846pt too wide) in paragraph at lines 1569--1569
+Overfull \hbox (185.24846pt too wide) in paragraph at lines 1571--1571
 []\T1/lmtt/m/n/10 ##  $ Location       : Factor w/ 12 levels "Avedoere","Damhusaaen",..: 4 11 5 12 12 12 12 2 11 11 ...[] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1571--1572
+Underfull \hbox (badness 10000) in paragraph at lines 1573--1574
 
  []
 
-
-Overfull \hbox (38.24889pt too wide) in paragraph at lines 1597--1597
+[60]
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 1599--1599
 []\T1/lmtt/m/n/10 ## sample_data() Sample Data:       [ 51 samples by 15 sample variables ][] 
  []
 
 
-Overfull \hbox (22.49893pt too wide) in paragraph at lines 1597--1597
+Overfull \hbox (22.49893pt too wide) in paragraph at lines 1599--1599
 []\T1/lmtt/m/n/10 ## tax_table()   Taxonomy Table:    [ 3853 taxa by 7 taxonomic ranks ][] 
  []
 
 
-Overfull \hbox (38.24889pt too wide) in paragraph at lines 1597--1597
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 1599--1599
 []\T1/lmtt/m/n/10 ## phy_tree()    Phylogenetic Tree: [ 3853 tips and 3852 internal nodes ][] 
  []
 
-[60] [61]
-Overfull \hbox (48.74886pt too wide) in paragraph at lines 1696--1696
+[61]
+Overfull \hbox (48.74886pt too wide) in paragraph at lines 1698--1698
 []\T1/lmtt/m/n/10 ##  $ Assay.Type     : chr  "AMPLICON" "AMPLICON" "AMPLICON" "AMPLICON" ...[] 
  []
 
 
-Overfull \hbox (290.24815pt too wide) in paragraph at lines 1696--1696
+Overfull \hbox (290.24815pt too wide) in paragraph at lines 1698--1698
 []\T1/lmtt/m/n/10 ##  $ Bases          : int  13254234 24196788 15758554 20048406 37634632 43555904 35107436 13888140 23172184 35065898 ...[] 
  []
 
 
-Overfull \hbox (111.74867pt too wide) in paragraph at lines 1696--1696
+Overfull \hbox (111.74867pt too wide) in paragraph at lines 1698--1698
 []\T1/lmtt/m/n/10 ##  $ BioProject     : chr  "PRJNA645373" "PRJNA645373" "PRJNA645373" "PRJNA645373" ...[] 
  []
 
 
-Overfull \hbox (279.74818pt too wide) in paragraph at lines 1696--1696
+Overfull \hbox (279.74818pt too wide) in paragraph at lines 1698--1698
 []\T1/lmtt/m/n/10 ##  $ Bytes          : int  9235913 16404070 10758456 13009806 24207581 27963491 22585685 9388862 15125835 22520074 ...[] 
  []
 
 
-Overfull \hbox (489.74757pt too wide) in paragraph at lines 1696--1696
+Overfull \hbox (489.74757pt too wide) in paragraph at lines 1698--1698
 []\T1/lmtt/m/n/10 ##  $ Organism       : chr  "anaerobic digester metagenome" "anaerobic digester metagenome" "anaerobic digester metagenome" "anaerobic digester metagenome" ...[] 
  []
 
 
-Overfull \hbox (27.74892pt too wide) in paragraph at lines 1696--1696
+Overfull \hbox (27.74892pt too wide) in paragraph at lines 1698--1698
 []\T1/lmtt/m/n/10 ##  $ collection_date: chr  "30/11/16" "9/3/16" "17/3/16" "5/12/16" ...[] 
  []
 
 
-Overfull \hbox (69.7488pt too wide) in paragraph at lines 1696--1696
+Overfull \hbox (69.7488pt too wide) in paragraph at lines 1698--1698
 []\T1/lmtt/m/n/10 ##  $ loc            : chr  "Ejby Moelle" "Soeholt" "Esbjerg Vest" "Viborg" ...[] 
  []
 
 
-Overfull \hbox (101.2487pt too wide) in paragraph at lines 1696--1696
+Overfull \hbox (101.2487pt too wide) in paragraph at lines 1698--1698
 []\T1/lmtt/m/n/10 ##  $ Reactor        : Factor w/ 10 levels "1A","1B","2B",..: 4 4 6 7 7 5 5 5 4 4 ...[] 
  []
 
 
-Overfull \hbox (316.49808pt too wide) in paragraph at lines 1696--1696
+Overfull \hbox (316.49808pt too wide) in paragraph at lines 1698--1698
 []\T1/lmtt/m/n/10 ##  $ Purpose        : chr  "reactorfoampotentials" "reactorfoampotentials" "reactorfoampotentials" "foamnofoamcomparison" ...[] 
  []
 
 
-Overfull \hbox (90.74873pt too wide) in paragraph at lines 1696--1696
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 1698--1698
 []\T1/lmtt/m/n/10 ##  $ Experiment     : chr  "SRX8715180" "SRX8715169" "SRX8715158" "SRX8715151" ...[] 
  []
 
 
-Overfull \hbox (353.24797pt too wide) in paragraph at lines 1696--1696
+Overfull \hbox (353.24797pt too wide) in paragraph at lines 1698--1698
 []\T1/lmtt/m/n/10 ##  $ lat_lon        : chr  "55.398077 N 10.415041 E" "56.175302 N 9.582588 E" "55.488235 N 8.430655 E" "56.425367 N 9.4527943 E" ...[] 
  []
 
 
-Overfull \hbox (300.74812pt too wide) in paragraph at lines 1696--1696
+Overfull \hbox (300.74812pt too wide) in paragraph at lines 1698--1698
 []\T1/lmtt/m/n/10 ##  $ ReleaseDate    : chr  "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" ...[] 
  []
 
 
-Overfull \hbox (127.49863pt too wide) in paragraph at lines 1696--1696
+Overfull \hbox (127.49863pt too wide) in paragraph at lines 1698--1698
 []\T1/lmtt/m/n/10 ##  $ Sample.Name    : chr  "16SAMP-17236" "16SAMP-17231" "16SAMP-17233" "MQ170915-14" ...[] 
  []
 
 
-Overfull \hbox (185.24846pt too wide) in paragraph at lines 1696--1696
+Overfull \hbox (185.24846pt too wide) in paragraph at lines 1698--1698
 []\T1/lmtt/m/n/10 ##  $ Location       : Factor w/ 12 levels "Avedoere","Damhusaaen",..: 4 11 5 12 12 12 12 2 11 11 ...[] 
  []
 
 
-Overfull \hbox (27.74892pt too wide) in paragraph at lines 1696--1696
+Overfull \hbox (27.74892pt too wide) in paragraph at lines 1698--1698
 []\T1/lmtt/m/n/10 ##  $ Observed       : num  161 354 247 265 389 454 406 304 278 371 ...[] 
  []
 
-
-Overfull \hbox (32.9989pt too wide) in paragraph at lines 1724--1724
+[62]
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1726--1726
 []\T1/lmtt/m/n/10 ##   Ejby Moelle       Soeholt  Esbjerg Vest        Viborg    Damhusaaen[] 
  []
 
 
-Overfull \hbox (32.9989pt too wide) in paragraph at lines 1724--1724
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1726--1726
 []\T1/lmtt/m/n/10 ##     "#F9E79F"     "#FDEBD0"     "#F6DDCC"     "#E5E8E8"     "#CCD1D1"[] 
  []
 
 
-Overfull \hbox (32.9989pt too wide) in paragraph at lines 1724--1724
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1726--1726
 []\T1/lmtt/m/n/10 ##      Slagelse       Randers Mariagerfjord       Fornaes          Egaa[] 
  []
 
 
-Overfull \hbox (32.9989pt too wide) in paragraph at lines 1724--1724
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1726--1726
 []\T1/lmtt/m/n/10 ##     "#AAB7B8"     "#707B7C"     "#566573"     "#82E0AA"     "#641E16"[] 
  []
 
-[62]
-<gitbook-demo_files/figure-latex/richness-1.pdf, id=641, 453.695pt x 313.17pt>
+[63]
+<gitbook-demo_files/figure-latex/richness-1.pdf, id=647, 453.695pt x 313.17pt>
 File: gitbook-demo_files/figure-latex/richness-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/richness-1.pdf>
-Package pdftex.def Info: gitbook-demo_files/figure-latex/richness-1.pdf  used on input line 1750.
+Package pdftex.def Info: gitbook-demo_files/figure-latex/richness-1.pdf  used on input line 1752.
 (pdftex.def)             Requested size: 344.9987pt x 238.14069pt.
-[63 <./gitbook-demo_files/figure-latex/richness-1.pdf>]
-<gitbook-demo_files/figure-latex/shannon-1.pdf, id=656, 457.71pt x 313.17pt>
+[64 <./gitbook-demo_files/figure-latex/richness-1.pdf>]
+<gitbook-demo_files/figure-latex/shannon-1.pdf, id=661, 457.71pt x 313.17pt>
 File: gitbook-demo_files/figure-latex/shannon-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/shannon-1.pdf>
-Package pdftex.def Info: gitbook-demo_files/figure-latex/shannon-1.pdf  used on input line 1777.
+Package pdftex.def Info: gitbook-demo_files/figure-latex/shannon-1.pdf  used on input line 1779.
 (pdftex.def)             Requested size: 345.01372pt x 236.062pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Overfull \vbox (1.20366pt too high) detected at line 1804
+ []
 
-[64 <./gitbook-demo_files/figure-latex/shannon-1.pdf>]
-<gitbook-demo_files/figure-latex/pielou-1.pdf, id=671, 457.71pt x 313.17pt>
+[65 <./gitbook-demo_files/figure-latex/shannon-1.pdf>]
+<gitbook-demo_files/figure-latex/pielou-1.pdf, id=676, 457.71pt x 313.17pt>
 File: gitbook-demo_files/figure-latex/pielou-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/pielou-1.pdf>
-Package pdftex.def Info: gitbook-demo_files/figure-latex/pielou-1.pdf  used on input line 1804.
+Package pdftex.def Info: gitbook-demo_files/figure-latex/pielou-1.pdf  used on input line 1806.
 (pdftex.def)             Requested size: 345.01372pt x 236.062pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[65 <./gitbook-demo_files/figure-latex/pielou-1.pdf>]
-<gitbook-demo_files/figure-latex/plot-1.pdf, id=685, 712.6625pt x 312.16624pt>
+<gitbook-demo_files/figure-latex/plot-1.pdf, id=677, 712.6625pt x 312.16624pt>
 File: gitbook-demo_files/figure-latex/plot-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/plot-1.pdf>
-Package pdftex.def Info: gitbook-demo_files/figure-latex/plot-1.pdf  used on input line 1818.
+Package pdftex.def Info: gitbook-demo_files/figure-latex/plot-1.pdf  used on input line 1820.
 (pdftex.def)             Requested size: 344.99931pt x 151.11942pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1820--1821
+Underfull \hbox (badness 10000) in paragraph at lines 1822--1823
 
  []
 
-[66 <./gitbook-demo_files/figure-latex/plot-1.pdf>]
-<gitbook-demo_files/figure-latex/nmds-1.pdf, id=700, 417.56pt x 336.25626pt>
+[66 <./gitbook-demo_files/figure-latex/pielou-1.pdf> <./gitbook-demo_files/figure-latex/plot-1.pdf>]
+<gitbook-demo_files/figure-latex/nmds-1.pdf, id=698, 417.56pt x 336.25626pt>
 File: gitbook-demo_files/figure-latex/nmds-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/nmds-1.pdf>
-Package pdftex.def Info: gitbook-demo_files/figure-latex/nmds-1.pdf  used on input line 1849.
+Package pdftex.def Info: gitbook-demo_files/figure-latex/nmds-1.pdf  used on input line 1851.
 (pdftex.def)             Requested size: 345.02007pt x 277.84068pt.
-[67 <./gitbook-demo_files/figure-latex/nmds-1.pdf>]
-<gitbook-demo_files/figure-latex/PCA-1.pdf, id=719, 421.575pt x 339.2675pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[67] [68 <./gitbook-demo_files/figure-latex/nmds-1.pdf>]
+<gitbook-demo_files/figure-latex/PCA-1.pdf, id=723, 421.575pt x 339.2675pt>
 File: gitbook-demo_files/figure-latex/PCA-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/PCA-1.pdf>
-Package pdftex.def Info: gitbook-demo_files/figure-latex/PCA-1.pdf  used on input line 1881.
+Package pdftex.def Info: gitbook-demo_files/figure-latex/PCA-1.pdf  used on input line 1883.
 (pdftex.def)             Requested size: 345.00543pt x 277.64722pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1883--1884
+Underfull \hbox (badness 10000) in paragraph at lines 1885--1886
 
  []
 
-[68 <./gitbook-demo_files/figure-latex/PCA-1.pdf>]
-Underfull \vbox (badness 10000) detected at line 1970
+[69 <./gitbook-demo_files/figure-latex/PCA-1.pdf>]
+Underfull \vbox (badness 10000) detected at line 1972
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1970
+Underfull \vbox (badness 10000) detected at line 1972
  []
 
-[69]
-<gitbook-demo_files/figure-latex/rda-1.pdf, id=737, 421.575pt x 339.2675pt>
+[70]
+<gitbook-demo_files/figure-latex/rda-1.pdf, id=741, 421.575pt x 339.2675pt>
 File: gitbook-demo_files/figure-latex/rda-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/rda-1.pdf>
-Package pdftex.def Info: gitbook-demo_files/figure-latex/rda-1.pdf  used on input line 1972.
+Package pdftex.def Info: gitbook-demo_files/figure-latex/rda-1.pdf  used on input line 1974.
 (pdftex.def)             Requested size: 345.00543pt x 277.64722pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[70]
-Underfull \hbox (badness 10000) in paragraph at lines 1982--1983
+[71]
+Underfull \hbox (badness 10000) in paragraph at lines 1984--1985
 
  []
 
-[71 <./gitbook-demo_files/figure-latex/rda-1.pdf>]
-<gitbook-demo_files/figure-latex/unifrac-1.pdf, id=755, 421.575pt x 339.2675pt>
+[72 <./gitbook-demo_files/figure-latex/rda-1.pdf>]
+<gitbook-demo_files/figure-latex/unifrac-1.pdf, id=759, 421.575pt x 339.2675pt>
 File: gitbook-demo_files/figure-latex/unifrac-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/unifrac-1.pdf>
-Package pdftex.def Info: gitbook-demo_files/figure-latex/unifrac-1.pdf  used on input line 2014.
+Package pdftex.def Info: gitbook-demo_files/figure-latex/unifrac-1.pdf  used on input line 2016.
 (pdftex.def)             Requested size: 345.00543pt x 277.64722pt.
-[72 <./gitbook-demo_files/figure-latex/unifrac-1.pdf>]
-<gitbook-demo_files/figure-latex/plotbeta-1.pdf, id=769, 716.6775pt x 711.65875pt>
+[73 <./gitbook-demo_files/figure-latex/unifrac-1.pdf>]
+<gitbook-demo_files/figure-latex/plotbeta-1.pdf, id=774, 716.6775pt x 711.65875pt>
 File: gitbook-demo_files/figure-latex/plotbeta-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/plotbeta-1.pdf>
-Package pdftex.def Info: gitbook-demo_files/figure-latex/plotbeta-1.pdf  used on input line 2029.
+Package pdftex.def Info: gitbook-demo_files/figure-latex/plotbeta-1.pdf  used on input line 2031.
 (pdftex.def)             Requested size: 345.00737pt x 342.59135pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 2031--2032
+Underfull \hbox (badness 10000) in paragraph at lines 2033--2034
 
  []
 
-[73 <./gitbook-demo_files/figure-latex/plotbeta-1.pdf>] [74]
-Chapter 7.
-
-Underfull \hbox (badness 10000) in paragraph at lines 2066--2068
-
- []
-
-[75
+[74 <./gitbook-demo_files/figure-latex/plotbeta-1.pdf>] [75] [76
 
 ]
-Overfull \hbox (48.74886pt too wide) in paragraph at lines 2140--2140
+Chapter 7.
+<./img/phylumplot.png, id=801, 2505.36pt x 1127.21124pt>
+File: ./img/phylumplot.png Graphic file (type png)
+<use ./img/phylumplot.png>
+Package pdftex.def Info: ./img/phylumplot.png  used on input line 2055.
+(pdftex.def)             Requested size: 344.97548pt x 155.21132pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 2068--2070
+
+ []
+
+[77 <./img/phylumplot.png>]
+Overfull \hbox (48.74886pt too wide) in paragraph at lines 2142--2142
 []\T1/lmtt/m/n/10 ##  $ Assay.Type     : chr  "AMPLICON" "AMPLICON" "AMPLICON" "AMPLICON" ...[] 
  []
 
 
-Overfull \hbox (290.24815pt too wide) in paragraph at lines 2140--2140
+Overfull \hbox (290.24815pt too wide) in paragraph at lines 2142--2142
 []\T1/lmtt/m/n/10 ##  $ Bases          : int  13254234 24196788 15758554 20048406 37634632 43555904 35107436 13888140 23172184 35065898 ...[] 
  []
 
-
-Overfull \hbox (111.74867pt too wide) in paragraph at lines 2140--2140
+[78]
+Overfull \hbox (111.74867pt too wide) in paragraph at lines 2142--2142
 []\T1/lmtt/m/n/10 ##  $ BioProject     : chr  "PRJNA645373" "PRJNA645373" "PRJNA645373" "PRJNA645373" ...[] 
  []
 
 
-Overfull \hbox (279.74818pt too wide) in paragraph at lines 2140--2140
+Overfull \hbox (279.74818pt too wide) in paragraph at lines 2142--2142
 []\T1/lmtt/m/n/10 ##  $ Bytes          : int  9235913 16404070 10758456 13009806 24207581 27963491 22585685 9388862 15125835 22520074 ...[] 
  []
 
 
-Overfull \hbox (489.74757pt too wide) in paragraph at lines 2140--2140
+Overfull \hbox (489.74757pt too wide) in paragraph at lines 2142--2142
 []\T1/lmtt/m/n/10 ##  $ Organism       : chr  "anaerobic digester metagenome" "anaerobic digester metagenome" "anaerobic digester metagenome" "anaerobic digester metagenome" ...[] 
  []
 
 
-Overfull \hbox (27.74892pt too wide) in paragraph at lines 2140--2140
+Overfull \hbox (27.74892pt too wide) in paragraph at lines 2142--2142
 []\T1/lmtt/m/n/10 ##  $ collection_date: chr  "30/11/16" "9/3/16" "17/3/16" "5/12/16" ...[] 
  []
 
 
-Overfull \hbox (69.7488pt too wide) in paragraph at lines 2140--2140
+Overfull \hbox (69.7488pt too wide) in paragraph at lines 2142--2142
 []\T1/lmtt/m/n/10 ##  $ loc            : chr  "Ejby Moelle" "Soeholt" "Esbjerg Vest" "Viborg" ...[] 
  []
 
 
-Overfull \hbox (101.2487pt too wide) in paragraph at lines 2140--2140
+Overfull \hbox (101.2487pt too wide) in paragraph at lines 2142--2142
 []\T1/lmtt/m/n/10 ##  $ Reactor        : Factor w/ 10 levels "1A","1B","2B",..: 4 4 6 7 7 5 5 5 4 4 ...[] 
  []
 
 
-Overfull \hbox (316.49808pt too wide) in paragraph at lines 2140--2140
+Overfull \hbox (316.49808pt too wide) in paragraph at lines 2142--2142
 []\T1/lmtt/m/n/10 ##  $ Purpose        : chr  "reactorfoampotentials" "reactorfoampotentials" "reactorfoampotentials" "foamnofoamcomparison" ...[] 
  []
 
 
-Overfull \hbox (90.74873pt too wide) in paragraph at lines 2140--2140
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2142--2142
 []\T1/lmtt/m/n/10 ##  $ Experiment     : chr  "SRX8715180" "SRX8715169" "SRX8715158" "SRX8715151" ...[] 
  []
 
 
-Overfull \hbox (353.24797pt too wide) in paragraph at lines 2140--2140
+Overfull \hbox (353.24797pt too wide) in paragraph at lines 2142--2142
 []\T1/lmtt/m/n/10 ##  $ lat_lon        : chr  "55.398077 N 10.415041 E" "56.175302 N 9.582588 E" "55.488235 N 8.430655 E" "56.425367 N 9.4527943 E" ...[] 
  []
 
 
-Overfull \hbox (300.74812pt too wide) in paragraph at lines 2140--2140
+Overfull \hbox (300.74812pt too wide) in paragraph at lines 2142--2142
 []\T1/lmtt/m/n/10 ##  $ ReleaseDate    : chr  "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" ...[] 
  []
 
 
-Overfull \hbox (127.49863pt too wide) in paragraph at lines 2140--2140
+Overfull \hbox (127.49863pt too wide) in paragraph at lines 2142--2142
 []\T1/lmtt/m/n/10 ##  $ Sample.Name    : chr  "16SAMP-17236" "16SAMP-17231" "16SAMP-17233" "MQ170915-14" ...[] 
  []
 
 
-Overfull \hbox (185.24846pt too wide) in paragraph at lines 2140--2140
+Overfull \hbox (185.24846pt too wide) in paragraph at lines 2142--2142
 []\T1/lmtt/m/n/10 ##  $ Location       : Factor w/ 12 levels "Avedoere","Damhusaaen",..: 4 11 5 12 12 12 12 2 11 11 ...[] 
  []
 
-[76] [77] [78] [79] [80]
-<gitbook-demo_files/figure-latex/Phylumplots-1.pdf, id=842, 927.465pt x 410.53375pt>
+[79] [80] [81] [82]
+<gitbook-demo_files/figure-latex/Phylumplots-1.pdf, id=852, 927.465pt x 410.53375pt>
 File: gitbook-demo_files/figure-latex/Phylumplots-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/Phylumplots-1.pdf>
-Package pdftex.def Info: gitbook-demo_files/figure-latex/Phylumplots-1.pdf  used on input line 2336.
+Package pdftex.def Info: gitbook-demo_files/figure-latex/Phylumplots-1.pdf  used on input line 2338.
 (pdftex.def)             Requested size: 344.99643pt x 152.70946pt.
-[81 <./gitbook-demo_files/figure-latex/Phylumplots-1.pdf>]
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[83 <./gitbook-demo_files/figure-latex/Phylumplots-1.pdf>]
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ##                           Phylum mean_prevalence total_abundance[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 1                    Chloroflexi        5.124069          228197[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 2                   Bacteroidota        4.688679          201921[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 3                     Firmicutes        4.453435          197683[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 4               Actinobacteriota        5.231343          165740[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 5                 Proteobacteria        4.249147          161756[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 6               Desulfobacterota        5.425743           57146[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 7                   Synergistota        6.595506           51225[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 8                 Cloacimonadota        6.500000           45294[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 9                Acidobacteriota        3.953488           35304[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 10                  Thermotogota       10.190476           33489[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 11                 Spirochaetota        4.578431           25015[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 12             Verrucomicrobiota        3.382022           16598[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 13             Fermentibacterota       35.000000           14812[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 14               Patescibacteria        3.669173           14399[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 15            Caldatribacteriota        5.500000            8932[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 16               Planctomycetota        2.573171            5455[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 17                Armatimonadota        2.933333            4443[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 18 Marinimicrobia_(SAR406_clade)       20.000000            3818[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 19                          <NA>        4.052632            3511[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 20               Hydrogenedentes        3.950000            3411[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 21                  Nitrospirota        8.750000            2853[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 22              Campilobacterota        4.187500            2710[] 
  []
 
-
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+[84]
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 23  SAR324_clade(Marine_group_B)        4.000000            2616[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 24                           WS1        3.625000            2559[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 25                Fibrobacterota        2.826087            1938[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 26                   Myxococcota        3.176471            1353[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 27              Bdellovibrionota        3.600000            1111[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 28                 Caldisericota        3.818182            1067[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 29                         WPS-2        2.666667             897[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 30                   Sumerlaeota        3.888889             683[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 31                 Cyanobacteria        9.000000             647[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 32                Fusobacteriota        2.888889             565[] 
  []
 
-[82]
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 33          Coprothermobacterota        2.800000             511[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 34               Gemmatimonadota        2.875000             300[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 35               Elusimicrobiota        2.833333             225[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 36                      CK-2C2-2        4.000000             162[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 37             Methylomirabilota        4.000000             159[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 38              Latescibacterota        2.333333              86[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 39                  Dependentiae        2.500000              78[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 40                  Zixibacteria        5.000000              74[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 41                       Sva0485        2.333333              66[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 42                  Acetothermia        2.000000              59[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 43                           WS4        1.500000              39[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 44                  Hydrothermae        1.000000              26[] 
  []
 
 
-Overfull \hbox (6.74898pt too wide) in paragraph at lines 2412--2412
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 2414--2414
 []\T1/lmtt/m/n/10 ## 45                  Deinococcota        1.000000              11[] 
  []
 
-(./gitbook-demo.bbl [83] [84
+(./gitbook-demo.bbl [85] [86
 
-]) [85] (./gitbook-demo.aux)
+]) [87] (./gitbook-demo.aux)
 Package rerunfilecheck Info: File `gitbook-demo.out' has not changed.
 (rerunfilecheck)             Checksum: 05E056D7800215E35761E564CA299D5C;2826.
  ) 
 Here is how much of TeX's memory you used:
- 13797 strings out of 479996
- 221401 string characters out of 5886841
- 533437 words of memory out of 5000000
- 31423 multiletter control sequences out of 15000+600000
+ 13813 strings out of 479996
+ 221703 string characters out of 5886841
+ 532437 words of memory out of 5000000
+ 31435 multiletter control sequences out of 15000+600000
  536535 words of font info for 81 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,9n,77p,1491b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on gitbook-demo.pdf (85 pages, 2900788 bytes).
+Output written on gitbook-demo.pdf (87 pages, 3178277 bytes).
 PDF statistics:
- 1007 PDF objects out of 1200 (max. 8388607)
- 815 compressed objects within 9 object streams
- 257 named destinations out of 1000 (max. 500000)
- 301 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1018 PDF objects out of 1200 (max. 8388607)
+ 820 compressed objects within 9 object streams
+ 259 named destinations out of 1000 (max. 500000)
+ 311 words of extra memory for PDF output out of 10000 (max. 10000000)
 

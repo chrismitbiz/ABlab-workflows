@@ -5,8 +5,8 @@ editor_options:
 ---
 
 # Plotting taxonomy {#plottingtaxa}
+![](./img/phylumplot.png)   
   
-Some ggplots to visualise and compare taxonomy. 
   
 ## Introduction  
   
