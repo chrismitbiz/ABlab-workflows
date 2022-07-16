@@ -12,7 +12,7 @@ Some ggplots to visualise and compare taxonomy.
   
 ### Prerequisites   
     
-* A phyloseq object; either read in from a pre-saved `.rds` file or created as described in chapter \@ref(Qiime2R) under "Import qiime-files and create a phyloseq object".   
+A phyloseq object; either read in from a pre-saved `.rds` file or created as described in chapter \@ref(Qiime2R) under "Import qiime-files and create a phyloseq object".   
   
 ## Workflow
   
@@ -26,7 +26,7 @@ theme_set(theme_bw())  # setting the theme for ggplots
 library(microbiome)
 ```
 
-### Load phyloseq object  
+#### Load phyloseq object  
   
 Do this if you saved a phyloseq object in .rds format before. Otherwise create a phyloseq object as described in chapter \@ref(Qiime2R) under "Import qiime-files and create a phyloseq object".  
   
@@ -44,18 +44,18 @@ ps <- readRDS('ps_ProjectX_2022July')
 # phy_tree()    Phylogenetic Tree: [ 4218 tips and 4217 internal nodes ]
 ```
   
-### Check metadata contained in the phyloseq object.  
+#### Check metadata contained in the phyloseq object.  
   
 Now lets check which columns in the metadata contain factors. Factors enable you to determine the order of categorical data, such as treatments, in the ggplots. Learn more about factors here: https://swcarpentry.github.io/r-novice-inflammation/12-supp-factors/index.html.  
   
-```{r 07metadatacheck, include=FALSE, echo=TRUE, warning=FALSE, message=FALSE}
+```{r 07metadatacheck, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
 # Use the 'structure' (str) command to get an overview of your data columns
 # Learn what are characters, integers or factors, 
 str(data.frame(sample_data(ps)))
 ```
   
   
-### Colors  
+#### Colors  
   
 Colors: Before you create ggplots to compare taxonomic compositions between samples and treatments it is helpful to create a named color vector that will apply to all your plots and ensures that each taxonomic name is a specific color across all your plots. It is only optional as ggplot can refer to its default colors, however the colours for individual taxa will be different between plots.    
   
@@ -65,7 +65,7 @@ A handy color cheat sheet is available here: https://www.nceas.ucsb.edu/sites/de
   
 First create a vector of all possible taxonomic names that could be included in your ggplot. For example, if you plan to plot on phylum-level then all phyla names are extracted from the phyloseq object and then those names are given a color code.  
   
-```{r cols, , include=FALSE, echo=TRUE, warning=FALSE, message=FALSE, results=FALSE}
+```{r cols, , include=TRUE, echo=TRUE, warning=FALSE, message=FALSE, results=FALSE}
 # You can check Hex codes with help of https://htmlcolorcodes.com/
 # https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf
 
@@ -94,14 +94,11 @@ names(cols) <- names  # name each hex code with phyla names.
 ```
   
   
-### Normalisation and pre-filtering  
+#### Pre-filtering  
   
-For a 'fair' comparison, abundances should be normalised to minimise potential bias due to the different sample library sizes, i.e the different total number of sequences in each sample. See alsoChapter \@ref(plottingdiversity) in subchapter "Pre-filter, rarefy and calculate diversity".  
+Some arbitrary quality filtering of individual ASVs. For example, here we choose to remove ASVs that have very few reads (i.e. less than 5 counts of the amplicon sequence)  
   
 ```{r filterps, echo=TRUE, message=FALSE, warning=FALSE, results=FALSE}
-# Some arbitrary quality filtering of individual ASVs. For example, here we choose to
-# remove ASVs that have very few reads (i.e. less than 5 counts of the amplicon sequence).
-# The may remove some more arbitrary ASVs. 
 ps_flt  <-  prune_taxa(taxa_sums(ps) >= 5, ps) #minimum reads per feature  
 #ps_flt 
 # phyloseq-class experiment-level object
@@ -123,19 +120,6 @@ ps_flt_1A  <- prune_taxa(taxa_sums(ps_flt_1A) > 0, ps_flt_1A)
 #sample_data() Sample Data:       [ 2 samples by 15 sample variables ]
 #tax_table()   Taxonomy Table:    [ 420 taxa by 7 taxonomic ranks ]
 #phy_tree()    Phylogenetic Tree: [ 420 tips and 419 internal nodes ]
-
-# rarefy and create a new phyloseq object containing normalised abundances
-ps_rare <- phyloseq::rarefy_even_depth(ps_flt, 
-    sample.size = min(colSums(otu_table(ps_flt))),  
-    rngseed = TRUE, # set a seed for the random subsampling
-    replace = FALSE, # without replacement
-    trimOTUs = TRUE ) # remove ASVs that are no longer observed in any sample 
-# ps_rare 
-# phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 3862 taxa and 51 samples ]
-# sample_data() Sample Data:       [ 51 samples by 15 sample variables ]
-#tax_table()   Taxonomy Table:    [ 3862 taxa by 7 taxonomic ranks ]
-# phy_tree()    Phylogenetic Tree: [ 3862 tips and 3861 internal nodes ]
 ```
   
   
@@ -208,7 +192,7 @@ taxaplot
   
 ### Prevelance table  
   
-A prevalence table may assist in getting an overview of the abundances.    
+A prevalence table may assist in getting an overview of the abundances. The mean prevalence is the average number of times that the taxon appears across all samples.  
   
 ```{r prevalencetable}
 

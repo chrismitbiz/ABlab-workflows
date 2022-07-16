@@ -2056,11 +2056,7 @@ Some ggplots to visualise and compare taxonomy.
 \hypertarget{prerequisites-1}{%
 \subsection{Prerequisites}\label{prerequisites-1}}
 
-\begin{itemize}
-\tightlist
-\item
-  A phyloseq object; either read in from a pre-saved \texttt{.rds} file or created as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.
-\end{itemize}
+A phyloseq object; either read in from a pre-saved \texttt{.rds} file or created as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.
 
 \hypertarget{workflow-4}{%
 \section{Workflow}\label{workflow-4}}
@@ -2079,7 +2075,7 @@ Some ggplots to visualise and compare taxonomy.
 \end{Shaded}
 
 \hypertarget{load-phyloseq-object-1}{%
-\subsection{Load phyloseq object}\label{load-phyloseq-object-1}}
+\subsubsection{Load phyloseq object}\label{load-phyloseq-object-1}}
 
 Do this if you saved a phyloseq object in .rds format before. Otherwise create a phyloseq object as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.
 
@@ -2100,12 +2096,39 @@ Do this if you saved a phyloseq object in .rds format before. Otherwise create a
 \end{Shaded}
 
 \hypertarget{check-metadata-contained-in-the-phyloseq-object.}{%
-\subsection{Check metadata contained in the phyloseq object.}\label{check-metadata-contained-in-the-phyloseq-object.}}
+\subsubsection{Check metadata contained in the phyloseq object.}\label{check-metadata-contained-in-the-phyloseq-object.}}
 
 Now lets check which columns in the metadata contain factors. Factors enable you to determine the order of categorical data, such as treatments, in the ggplots. Learn more about factors here: \url{https://swcarpentry.github.io/r-novice-inflammation/12-supp-factors/index.html}.
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Use the \textquotesingle{}structure\textquotesingle{} (str) command to get an overview of your data columns}
+\CommentTok{\# Learn what are characters, integers or factors, }
+\FunctionTok{str}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{sample\_data}\NormalTok{(ps)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    51 obs. of  15 variables:
+##  $ Assay.Type     : chr  "AMPLICON" "AMPLICON" "AMPLICON" "AMPLICON" ...
+##  $ Bases          : int  13254234 24196788 15758554 20048406 37634632 43555904 35107436 13888140 23172184 35065898 ...
+##  $ BioProject     : chr  "PRJNA645373" "PRJNA645373" "PRJNA645373" "PRJNA645373" ...
+##  $ Bytes          : int  9235913 16404070 10758456 13009806 24207581 27963491 22585685 9388862 15125835 22520074 ...
+##  $ Organism       : chr  "anaerobic digester metagenome" "anaerobic digester metagenome" "anaerobic digester metagenome" "anaerobic digester metagenome" ...
+##  $ collection_date: chr  "30/11/16" "9/3/16" "17/3/16" "5/12/16" ...
+##  $ loc            : chr  "Ejby Moelle" "Soeholt" "Esbjerg Vest" "Viborg" ...
+##  $ Reactor        : Factor w/ 10 levels "1A","1B","2B",..: 4 4 6 7 7 5 5 5 4 4 ...
+##  $ Type           : chr  NA NA NA "DS" ...
+##  $ Purpose        : chr  "reactorfoampotentials" "reactorfoampotentials" "reactorfoampotentials" "foamnofoamcomparison" ...
+##  $ Experiment     : chr  "SRX8715180" "SRX8715169" "SRX8715158" "SRX8715151" ...
+##  $ lat_lon        : chr  "55.398077 N 10.415041 E" "56.175302 N 9.582588 E" "55.488235 N 8.430655 E" "56.425367 N 9.4527943 E" ...
+##  $ ReleaseDate    : chr  "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" "2021-01-01T00:00:00Z" ...
+##  $ Sample.Name    : chr  "16SAMP-17236" "16SAMP-17231" "16SAMP-17233" "MQ170915-14" ...
+##  $ Location       : Factor w/ 12 levels "Avedoere","Damhusaaen",..: 4 11 5 12 12 12 12 2 11 11 ...
+\end{verbatim}
+
 \hypertarget{colors-1}{%
-\subsection{Colors}\label{colors-1}}
+\subsubsection{Colors}\label{colors-1}}
 
 Colors: Before you create ggplots to compare taxonomic compositions between samples and treatments it is helpful to create a named color vector that will apply to all your plots and ensures that each taxonomic name is a specific color across all your plots. It is only optional as ggplot can refer to its default colors, however the colours for individual taxa will be different between plots.
 
@@ -2115,16 +2138,43 @@ A handy color cheat sheet is available here: \url{https://www.nceas.ucsb.edu/sit
 
 First create a vector of all possible taxonomic names that could be included in your ggplot. For example, if you plan to plot on phylum-level then all phyla names are extracted from the phyloseq object and then those names are given a color code.
 
-\hypertarget{normalisation-and-pre-filtering}{%
-\subsection{Normalisation and pre-filtering}\label{normalisation-and-pre-filtering}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# You can check Hex codes with help of https://htmlcolorcodes.com/}
+\CommentTok{\# https://www.nceas.ucsb.edu/sites/default/files/2020{-}04/colorPaletteCheatsheet.pdf}
 
-For a `fair' comparison, abundances should be normalised to minimise potential bias due to the different sample library sizes, i.e the different total number of sequences in each sample. See alsoChapter \ref{plottingdiversity} in subchapter ``Pre-filter, rarefy and calculate diversity''.
+\CommentTok{\# For all possible phyla  names}
+\NormalTok{phylum\_data }\OtherTok{\textless{}{-}}\NormalTok{  microbiome}\SpecialCharTok{::}\FunctionTok{aggregate\_taxa}\NormalTok{(ps, }\StringTok{"Phylum"}\NormalTok{) }\CommentTok{\# aggregate data to phylum level }
+\CommentTok{\# the pacakage \textquotesingle{}microbiome\textquotesingle{} has some handy helper functions such as \textasciigrave{}aggregate\textasciigrave{}.}
+\NormalTok{names }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(phylum\_data}\SpecialCharTok{@}\NormalTok{tax\_table) }\CommentTok{\# extract a vector of phylum names using \textasciigrave{}rownames\textasciigrave{}}
+
+\CommentTok{\# Package colorspace}
+\FunctionTok{library}\NormalTok{(colorspace)}
+\NormalTok{cols }\OtherTok{\textless{}{-}}\NormalTok{ colorspace}\SpecialCharTok{::}\FunctionTok{rainbow\_hcl}\NormalTok{(}\FunctionTok{length}\NormalTok{(names)) }\CommentTok{\# this creates x number of hex codes. x = \textasciigrave{}length(names)\textasciigrave{}. }
+\CommentTok{\#  in this case there are 48 phyla, hence we get 48 hex codes. }
+\FunctionTok{names}\NormalTok{(cols) }\OtherTok{\textless{}{-}}\NormalTok{ names  }\CommentTok{\# name each hex code with phyla names. }
+
+\CommentTok{\# Option to use the package  viridis}
+\CommentTok{\#library(viridis)}
+\CommentTok{\# cols \textless{}{-} viridis::turbo(length(names), direction = {-}1)}
+\CommentTok{\# names(cols) \textless{}{-} names}
+
+\CommentTok{\# Option to use the package RColorBrewer}
+\CommentTok{\# library(RColorBrewer)}
+\CommentTok{\# display.brewer.all(length(names))  \# check colour themes available in the RColorBrewer package}
+\CommentTok{\# cols \textless{}{-} brewer.pal(length(names), \textquotesingle{}RdYlBu\textquotesingle{})}
+\CommentTok{\# cols \textless{}{-} rainbow\_hcl(length(names))}
+\CommentTok{\# names(cols) \textless{}{-} names}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{pre-filtering}{%
+\subsubsection{Pre-filtering}\label{pre-filtering}}
+
+Some arbitrary quality filtering of individual ASVs. For example, here we choose to remove ASVs that have very few reads (i.e.~less than 5 counts of the amplicon sequence)
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Some arbitrary quality filtering of individual ASVs. For example, here we choose to}
-\CommentTok{\# remove ASVs that have very few reads (i.e. less than 5 counts of the amplicon sequence).}
-\CommentTok{\# The may remove some more arbitrary ASVs. }
 \NormalTok{ps\_flt  }\OtherTok{\textless{}{-}}  \FunctionTok{prune\_taxa}\NormalTok{(}\FunctionTok{taxa\_sums}\NormalTok{(ps) }\SpecialCharTok{\textgreater{}=} \DecValTok{5}\NormalTok{, ps) }\CommentTok{\#minimum reads per feature  }
 \CommentTok{\#ps\_flt }
 \CommentTok{\# phyloseq{-}class experiment{-}level object}
@@ -2146,19 +2196,6 @@ For a `fair' comparison, abundances should be normalised to minimise potential b
 \CommentTok{\#sample\_data() Sample Data:       [ 2 samples by 15 sample variables ]}
 \CommentTok{\#tax\_table()   Taxonomy Table:    [ 420 taxa by 7 taxonomic ranks ]}
 \CommentTok{\#phy\_tree()    Phylogenetic Tree: [ 420 tips and 419 internal nodes ]}
-
-\CommentTok{\# rarefy and create a new phyloseq object containing normalised abundances}
-\NormalTok{ps\_rare }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{rarefy\_even\_depth}\NormalTok{(ps\_flt, }
-    \AttributeTok{sample.size =} \FunctionTok{min}\NormalTok{(}\FunctionTok{colSums}\NormalTok{(}\FunctionTok{otu\_table}\NormalTok{(ps\_flt))),  }
-    \AttributeTok{rngseed =} \ConstantTok{TRUE}\NormalTok{, }\CommentTok{\# set a seed for the random subsampling}
-    \AttributeTok{replace =} \ConstantTok{FALSE}\NormalTok{, }\CommentTok{\# without replacement}
-    \AttributeTok{trimOTUs =} \ConstantTok{TRUE}\NormalTok{ ) }\CommentTok{\# remove ASVs that are no longer observed in any sample }
-\CommentTok{\# ps\_rare }
-\CommentTok{\# phyloseq{-}class experiment{-}level object}
-\CommentTok{\# otu\_table()   OTU Table:         [ 3862 taxa and 51 samples ]}
-\CommentTok{\# sample\_data() Sample Data:       [ 51 samples by 15 sample variables ]}
-\CommentTok{\#tax\_table()   Taxonomy Table:    [ 3862 taxa by 7 taxonomic ranks ]}
-\CommentTok{\# phy\_tree()    Phylogenetic Tree: [ 3862 tips and 3861 internal nodes ]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2236,7 +2273,7 @@ Finally, the abundances of this long abundance table are summarised into the fac
 \hypertarget{prevelance-table}{%
 \subsection{Prevelance table}\label{prevelance-table}}
 
-A prevalence table may assist in getting an overview of the abundances.
+A prevalence table may assist in getting an overview of the abundances. The mean prevalence is the average number of times that the taxon appears across all samples.
 
 \begin{Shaded}
 \begin{Highlighting}[]
