@@ -72,6 +72,13 @@ qiime --help
 Gives  
 ![](./img/qiimehelp.png)
   
+Within R studio you can access the documentation of individual packages by searching for package or function names in the help windows.  
+  
+For example looking for `phyloseq` in the Help window gives this:  
+![](./img/helpR1.png)
+  
+![](./img/helpR.png)
+  
   
 ### GitHub account  
   
