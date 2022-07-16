@@ -15,7 +15,7 @@ In this chapter you will learn how to plot a custom taxa barplot to compare rela
 ### Required files or objects   
     
 * A `phyloseq` object; either read in from a pre-saved `.rds` file or created as described in chapter \@ref(Qiime2R) under "Import qiime-files and create a phyloseq object".  
-* If you dont have your own data you can download the pre-saved `.rds` object from this Chapter and follow the below steps: [ps_ProjectX_2022July](./ps_ProjectX_2022July) (unzip file once downloaded).  
+* If you dont have your own data you can download the pre-saved `.rds` object from this Chapter and follow the below steps: [ps_ProjectX_2022July](./ps_ProjectX_2022July).  
   
 ## Workflow
   
@@ -70,7 +70,7 @@ A handy color cheat sheet is available here: https://www.nceas.ucsb.edu/sites/de
   
 First create a vector of all possible taxonomic names that could be included in your ggplot. For example, if you plan to plot on phylum-level then all phyla names are extracted from the phyloseq object and then those names are given a color code. The colors are defined as hex color codes.   
   
-```{r cols, , include=TRUE, echo=TRUE, warning=FALSE, message=FALSE, results=FALSE}
+```{r cols, , include=TRUE, echo=TRUE, warning=FALSE, message=FALSE, results=TRUE}
 # You can check Hex codes with help of https://htmlcolorcodes.com/
 # https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf
 

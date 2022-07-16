@@ -353,7 +353,7 @@ qiime --help  </code></pre>
 </div>
 <div id="a-note-on-rarefying-normalising" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> A note on rarefying (normalising)<a href="gettingstarted.html#a-note-on-rarefying-normalising" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Various data normalisation methods exists and opinions on their applicability diverge.</p>
+<p>Various data normalisation methods exist and opinions on their applicability diverge.</p>
 <p>Example of normalisation methods:</p>
 <ul>
 <li>Rarefying data<br />
@@ -368,14 +368,14 @@ qiime --help  </code></pre>
 </li>
 <li>DESeq-variance stabilizing transformation (VS)</li>
 </ul>
-<p>Rarefying data is one of the more contested methods. We acknowledge that <strong>rarefying data</strong> (i.e. the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus <strong>not recommended for differential abundance analyses</strong>. Check out this well cited paper here to learn why: <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531">Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible</a></p>
-<p>However, rarefying still “<em>outperformed all the other normalization methods for producing accurate BC (Bray-Curtis) dissimilarities and subsequent PCoAs and PERMANOVAs.</em>” Paper here: <a href="https://doi.org/10.1111/2041-210X.13115">Methods for normalizing microbiome data: An ecological perspective</a>.</p>
+<p>Rarefying data is one of the more contested methods. We acknowledge that <strong>rarefying data</strong> (i.e. the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus <strong>not recommended for differential abundance analyses</strong>. Check out this well cited paper here to learn why: <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531">Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible</a> (<span class="citation">McMurdie and Holmes (<a href="#ref-McMurdie2014" role="doc-biblioref">2014</a>)</span>).</p>
+<p>However, rarefying still “<em>outperformed all the other normalization methods for producing accurate BC (Bray-Curtis) dissimilarities and subsequent PCoAs and PERMANOVAs.</em>” Paper here: <a href="https://doi.org/10.1111/2041-210X.13115">Methods for normalizing microbiome data: An ecological perspective</a> (<span class="citation">McKnight et al. (<a href="#ref-McKnight2019a" role="doc-biblioref">2019</a>)</span>).</p>
 <p>For our workflows we may <strong>rarefy data</strong> before creating <strong>alpha diversity</strong> indices (Shannon, Simpsons etc), <strong>beta diversity</strong> indices (Bray-Curtis dissimilarities).</p>
-<p>Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use <strong>centred-log ratios</strong> (Aitchison distances), which makes count normalisation unnecessary. The <strong>compositional approach</strong> and centred log-ratios are further discussed in the paper <a href="https://doi.org/10.3389/fmicb.2017.02224">Microbiome Datasets Are Compositional: And This Is Not Optional</a>.</p>
+<p>Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use <strong>centred-log ratios</strong> (Aitchison distances), which makes count normalisation unnecessary. The <strong>compositional approach</strong> and centred log-ratios are further discussed in the paper <a href="https://doi.org/10.3389/fmicb.2017.02224">Microbiome Datasets Are Compositional: And This Is Not Optional</a> (<span class="citation">Gloor et al. (<a href="#ref-Gloor2017" role="doc-biblioref">2017</a>)</span>).</p>
 </div>
 <div id="workflows-from-other-lab-groups" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> Workflows from other lab groups<a href="gettingstarted.html#workflows-from-other-lab-groups" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The following review “<em>should serve as a starting point for considering what options are available</em>”: <a href="https://www.frontiersin.org/articles/10.3389/fmicb.2017.01561/full">Analysing microbial community composition through amplicon sequencing: from sampling to hypothesis testing</a></p>
+<p>The following review “<em>should serve as a starting point for considering what options are available</em>”: <a href="https://www.frontiersin.org/articles/10.3389/fmicb.2017.01561/full">Analysing microbial community composition through amplicon sequencing: from sampling to hypothesis testing</a> (<span class="citation">Hugerth and Andersson (<a href="#ref-Hugerth2017a" role="doc-biblioref">2017</a>)</span>).</p>
 <p>Furthermore, searching for “amplicon-sequencing” under “Topics” on GitHub gave 37 results.</p>
 <ul>
 <li><p>nf-core/ampliseq<br />
@@ -383,11 +383,29 @@ On the top of that list is the <a href="https://github.com/topics/amplicon-seque
 <li><p>Tools-Microbiome-Analysis<br />
 <a href="https://microsud.github.io/Tools-Microbiome-Analysis/">Tools-Microbiome-Analysis</a> is a websites containing a comprehensive list of R packages and, more importantly, tutorials related to analysis of microbial amplicons and ecology. Really good reference to go back to every now and then. <strong>Highly recommended</strong>.</p></li>
 <li><p>grimmlab/MicrobiomeBestPracticeReview<br />
-Essential paper to read (<a href="https://academic.oup.com/bib/article/22/1/178/5678919">Current challenges and best-practice protocols for microbiome analysis, 2021</a>) and a great <a href="https://github.com/grimmlab/MicrobiomeBestPracticeReview">workflow resource</a> on GitHub. <strong>Essential read</strong>. The Grimm lab in Munich published this paper as well as developed a python and R-based workflow that assists with the recommended best practices (amplicon as well as metagenomic workflows).</p></li>
+Essential paper to read (<a href="https://academic.oup.com/bib/article/22/1/178/5678919">Current challenges and best-practice protocols for microbiome analysis, 2021</a> (<span class="citation">Bharti and Grimm (<a href="#ref-Bharti2021" role="doc-biblioref">2021</a>)</span>)) and a great <a href="https://github.com/grimmlab/MicrobiomeBestPracticeReview">workflow resource</a> on GitHub. <strong>Essential read</strong>. The Grimm lab in Munich published this paper as well as developed a python and R-based workflow that assists with the recommended best practices (amplicon as well as metagenomic workflows).</p></li>
 <li><p>KasperSkytte/ampvis2<br />
 <a href="https://kasperskytte.github.io/ampvis2/articles/ampvis2.html">Ampviz2</a> is an R-package to visualise and analyse 16S rRNA amplicon data. It is always more convenient to have packages that have the details and optics worked out for you. Like phyloseq, the ampviz2 package combines different tables from data (E.g. otu table, taxonomic table, phylogenetic tree, sample data etc) and then provides different functions to apply to that combined object to visualise the data.</p></li>
 </ul>
 
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Bharti2021" class="csl-entry">
+Bharti, Richa, and Dominik G Grimm. 2021. <span>“<span class="nocase">Current challenges and best-practice protocols for microbiome analysis</span>.”</span> <em>Briefings in Bioinformatics</em> 22 (1): 178–93.
+</div>
+<div id="ref-Gloor2017" class="csl-entry">
+Gloor, Gregory B., Jean M. Macklaim, Vera Pawlowsky-Glahn, and Juan J. Egozcue. 2017. <span>“<span class="nocase">Microbiome datasets are compositional: And this is not optional</span>.”</span> <em>Frontiers in Microbiology</em> 8 (NOV). <a href="https://doi.org/10.3389/fmicb.2017.02224">https://doi.org/10.3389/fmicb.2017.02224</a>.
+</div>
+<div id="ref-Hugerth2017a" class="csl-entry">
+Hugerth, Luisa W., and Anders F. Andersson. 2017. <span>“<span class="nocase">Analysing microbial community composition through amplicon sequencing: From sampling to hypothesis testing</span>.”</span> <a href="https://doi.org/10.3389/fmicb.2017.01561">https://doi.org/10.3389/fmicb.2017.01561</a>.
+</div>
+<div id="ref-McKnight2019a" class="csl-entry">
+McKnight, Donald T., Roger Huerlimann, Deborah S. Bower, Lin Schwarzkopf, Ross A. Alford, and Kyall R. Zenger. 2019. <span>“<span class="nocase">Methods for normalizing microbiome data: An ecological perspective</span>.”</span> <em>Methods in Ecology and Evolution</em>. <a href="https://doi.org/10.1111/2041-210X.13115">https://doi.org/10.1111/2041-210X.13115</a>.
+</div>
+<div id="ref-McMurdie2014" class="csl-entry">
+McMurdie, Paul J, and Susan Holmes. 2014. <span>“<span class="nocase">Waste not, want not: why rarefying microbiome data is inadmissible</span>.”</span> <em>PLoS Computational Biology</em> 10 (4): e1003531.
 </div>
 </div>
             </section>

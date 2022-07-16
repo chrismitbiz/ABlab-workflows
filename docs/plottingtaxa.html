@@ -301,7 +301,7 @@ div.csl-indent {
 <ul>
 <li>A <code>phyloseq</code> object; either read in from a pre-saved <code>.rds</code> file or created as described in chapter <a href="Qiime2R.html#Qiime2R">5</a> under “Import qiime-files and create a phyloseq object”.<br />
 </li>
-<li>If you dont have your own data you can download the pre-saved <code>.rds</code> object from this Chapter and follow the below steps: <a href="./ps_ProjectX_2022July">ps_ProjectX_2022July</a> (unzip file once downloaded).</li>
+<li>If you dont have your own data you can download the pre-saved <code>.rds</code> object from this Chapter and follow the below steps: <a href="./ps_ProjectX_2022July">ps_ProjectX_2022July</a>.</li>
 </ul>
 </div>
 </div>
@@ -387,114 +387,162 @@ div.csl-indent {
 <span id="cb62-25"><a href="plottingtaxa.html#cb62-25" aria-hidden="true" tabindex="-1"></a><span class="co"># names(cols) &lt;- names</span></span>
 <span id="cb62-26"><a href="plottingtaxa.html#cb62-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-27"><a href="plottingtaxa.html#cb62-27" aria-hidden="true" tabindex="-1"></a>cols <span class="co"># check content of the color vector</span></span></code></pre></div>
+<pre><code>##                  Acetothermia               Acidobacteriota 
+##                     &quot;#E495A5&quot;                     &quot;#E3979D&quot; 
+##              Actinobacteriota                Armatimonadota 
+##                     &quot;#E19995&quot;                     &quot;#DE9B8D&quot; 
+##                  Bacteroidota              Bdellovibrionota 
+##                     &quot;#DB9D85&quot;                     &quot;#D79F7E&quot; 
+##            Caldatribacteriota                 Caldisericota 
+##                     &quot;#D2A277&quot;                     &quot;#CDA471&quot; 
+##              Campilobacterota                   Chloroflexi 
+##                     &quot;#C7A76C&quot;                     &quot;#C1A968&quot; 
+##                      CK-2C2-2                Cloacimonadota 
+##                     &quot;#BAAC65&quot;                     &quot;#B3AE64&quot; 
+##          Coprothermobacterota                 Cyanobacteria 
+##                     &quot;#ABB065&quot;                     &quot;#A2B367&quot; 
+##                  Deinococcota                  Dependentiae 
+##                     &quot;#99B56B&quot;                     &quot;#90B66F&quot; 
+##              Desulfobacterota               Elusimicrobiota 
+##                     &quot;#86B875&quot;                     &quot;#7CBA7C&quot; 
+##                       FCPU426             Fermentibacterota 
+##                     &quot;#72BB83&quot;                     &quot;#67BC8A&quot; 
+##                Fibrobacterota                    Firmicutes 
+##                     &quot;#5CBD92&quot;                     &quot;#51BE9A&quot; 
+##                Fusobacteriota               Gemmatimonadota 
+##                     &quot;#47BEA2&quot;                     &quot;#3FBEA9&quot; 
+##               Hydrogenedentes                  Hydrothermae 
+##                     &quot;#39BEB1&quot;                     &quot;#37BDB8&quot; 
+##              Latescibacterota              Margulisbacteria 
+##                     &quot;#3BBCBF&quot;                     &quot;#42BBC6&quot; 
+## Marinimicrobia_(SAR406_clade)                        MBNT15 
+##                     &quot;#4CB9CC&quot;                     &quot;#57B8D1&quot; 
+##             Methylomirabilota                   Myxococcota 
+##                     &quot;#64B5D6&quot;                     &quot;#70B3DA&quot; 
+##                  Nitrospirota               Patescibacteria 
+##                     &quot;#7DB0DD&quot;                     &quot;#8AADE0&quot; 
+##               Planctomycetota                Proteobacteria 
+##                     &quot;#96AAE1&quot;                     &quot;#A1A7E2&quot; 
+##  SAR324_clade(Marine_group_B)                 Spirochaetota 
+##                     &quot;#ACA4E2&quot;                     &quot;#B5A1E1&quot; 
+##                   Sumerlaeota                       Sva0485 
+##                     &quot;#BE9EDF&quot;                     &quot;#C69BDC&quot; 
+##                  Synergistota                  Thermotogota 
+##                     &quot;#CD99D8&quot;                     &quot;#D497D4&quot; 
+##             Verrucomicrobiota                         WPS-2 
+##                     &quot;#D995CF&quot;                     &quot;#DD94C9&quot; 
+##                           WS1                           WS4 
+##                     &quot;#E093C3&quot;                     &quot;#E293BC&quot; 
+##                  Zixibacteria                       Unknown 
+##                     &quot;#E493B4&quot;                     &quot;#E494AD&quot;</code></pre>
 </div>
 <div id="pre-filtering" class="section level3 hasAnchor" number="7.2.5">
 <h3><span class="header-section-number">7.2.5</span> Pre-filtering<a href="plottingtaxa.html#pre-filtering" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Some arbitrary quality filtering of individual ASVs. For example, here we choose to remove ASVs that have very few reads (i.e. less than 5 counts). Use the <code>prune_taxa()</code> function from phyloseq to filter taxa or the <code>prune_samples()</code> function to filter selected samples.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="plottingtaxa.html#cb63-1" aria-hidden="true" tabindex="-1"></a>ps_flt  <span class="ot">&lt;-</span>  <span class="fu">prune_taxa</span>(<span class="fu">taxa_sums</span>(ps) <span class="sc">&gt;=</span> <span class="dv">5</span>, ps) <span class="co">#minimum reads per feature  </span></span>
-<span id="cb63-2"><a href="plottingtaxa.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ps_flt </span></span>
-<span id="cb63-3"><a href="plottingtaxa.html#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="co"># phyloseq-class experiment-level object</span></span>
-<span id="cb63-4"><a href="plottingtaxa.html#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="co"># otu_table()   OTU Table:         [ 3911 taxa and 51 samples ]</span></span>
-<span id="cb63-5"><a href="plottingtaxa.html#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="co"># sample_data() Sample Data:       [ 51 samples by 15 sample variables ]</span></span>
-<span id="cb63-6"><a href="plottingtaxa.html#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="co"># tax_table()   Taxonomy Table:    [ 3911 taxa by 7 taxonomic ranks ]</span></span>
-<span id="cb63-7"><a href="plottingtaxa.html#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="co"># phy_tree()    Phylogenetic Tree: [ 3911 tips and 3910 internal nodes ]</span></span>
-<span id="cb63-8"><a href="plottingtaxa.html#cb63-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-9"><a href="plottingtaxa.html#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Use `prune_samples()` If you need to filter data to a subset of samples.</span></span>
-<span id="cb63-10"><a href="plottingtaxa.html#cb63-10" aria-hidden="true" tabindex="-1"></a><span class="co"># E.g. choose samples of reactor 1A only</span></span>
-<span id="cb63-11"><a href="plottingtaxa.html#cb63-11" aria-hidden="true" tabindex="-1"></a>ps_flt_1A  <span class="ot">&lt;-</span>  <span class="fu">prune_samples</span>(<span class="fu">sample_data</span>(ps_flt)<span class="sc">$</span>Reactor <span class="sc">==</span> <span class="st">&quot;1A&quot;</span>, ps_flt) </span>
-<span id="cb63-12"><a href="plottingtaxa.html#cb63-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-13"><a href="plottingtaxa.html#cb63-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Use `prune_taxa` to remove any ASVs/taxa that are now zero </span></span>
-<span id="cb63-14"><a href="plottingtaxa.html#cb63-14" aria-hidden="true" tabindex="-1"></a><span class="co"># (i.e. are not present in reactor 1A). </span></span>
-<span id="cb63-15"><a href="plottingtaxa.html#cb63-15" aria-hidden="true" tabindex="-1"></a><span class="co"># In other words we keep only those ASVs/Taxa that are present in the filtered samples. </span></span>
-<span id="cb63-16"><a href="plottingtaxa.html#cb63-16" aria-hidden="true" tabindex="-1"></a>ps_flt_1A  <span class="ot">&lt;-</span> <span class="fu">prune_taxa</span>(<span class="fu">taxa_sums</span>(ps_flt_1A) <span class="sc">&gt;</span> <span class="dv">0</span>, ps_flt_1A)</span>
-<span id="cb63-17"><a href="plottingtaxa.html#cb63-17" aria-hidden="true" tabindex="-1"></a><span class="co">#phyloseq-class experiment-level object</span></span>
-<span id="cb63-18"><a href="plottingtaxa.html#cb63-18" aria-hidden="true" tabindex="-1"></a><span class="co">#otu_table()   OTU Table:         [ 420 taxa and 2 samples ]</span></span>
-<span id="cb63-19"><a href="plottingtaxa.html#cb63-19" aria-hidden="true" tabindex="-1"></a><span class="co">#sample_data() Sample Data:       [ 2 samples by 15 sample variables ]</span></span>
-<span id="cb63-20"><a href="plottingtaxa.html#cb63-20" aria-hidden="true" tabindex="-1"></a><span class="co">#tax_table()   Taxonomy Table:    [ 420 taxa by 7 taxonomic ranks ]</span></span>
-<span id="cb63-21"><a href="plottingtaxa.html#cb63-21" aria-hidden="true" tabindex="-1"></a><span class="co">#phy_tree()    Phylogenetic Tree: [ 420 tips and 419 internal nodes ]</span></span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="plottingtaxa.html#cb64-1" aria-hidden="true" tabindex="-1"></a>ps_flt  <span class="ot">&lt;-</span>  <span class="fu">prune_taxa</span>(<span class="fu">taxa_sums</span>(ps) <span class="sc">&gt;=</span> <span class="dv">5</span>, ps) <span class="co">#minimum reads per feature  </span></span>
+<span id="cb64-2"><a href="plottingtaxa.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ps_flt </span></span>
+<span id="cb64-3"><a href="plottingtaxa.html#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="co"># phyloseq-class experiment-level object</span></span>
+<span id="cb64-4"><a href="plottingtaxa.html#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="co"># otu_table()   OTU Table:         [ 3911 taxa and 51 samples ]</span></span>
+<span id="cb64-5"><a href="plottingtaxa.html#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="co"># sample_data() Sample Data:       [ 51 samples by 15 sample variables ]</span></span>
+<span id="cb64-6"><a href="plottingtaxa.html#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="co"># tax_table()   Taxonomy Table:    [ 3911 taxa by 7 taxonomic ranks ]</span></span>
+<span id="cb64-7"><a href="plottingtaxa.html#cb64-7" aria-hidden="true" tabindex="-1"></a><span class="co"># phy_tree()    Phylogenetic Tree: [ 3911 tips and 3910 internal nodes ]</span></span>
+<span id="cb64-8"><a href="plottingtaxa.html#cb64-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-9"><a href="plottingtaxa.html#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Use `prune_samples()` If you need to filter data to a subset of samples.</span></span>
+<span id="cb64-10"><a href="plottingtaxa.html#cb64-10" aria-hidden="true" tabindex="-1"></a><span class="co"># E.g. choose samples of reactor 1A only</span></span>
+<span id="cb64-11"><a href="plottingtaxa.html#cb64-11" aria-hidden="true" tabindex="-1"></a>ps_flt_1A  <span class="ot">&lt;-</span>  <span class="fu">prune_samples</span>(<span class="fu">sample_data</span>(ps_flt)<span class="sc">$</span>Reactor <span class="sc">==</span> <span class="st">&quot;1A&quot;</span>, ps_flt) </span>
+<span id="cb64-12"><a href="plottingtaxa.html#cb64-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-13"><a href="plottingtaxa.html#cb64-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Use `prune_taxa` to remove any ASVs/taxa that are now zero </span></span>
+<span id="cb64-14"><a href="plottingtaxa.html#cb64-14" aria-hidden="true" tabindex="-1"></a><span class="co"># (i.e. are not present in reactor 1A). </span></span>
+<span id="cb64-15"><a href="plottingtaxa.html#cb64-15" aria-hidden="true" tabindex="-1"></a><span class="co"># In other words we keep only those ASVs/Taxa that are present in the filtered samples. </span></span>
+<span id="cb64-16"><a href="plottingtaxa.html#cb64-16" aria-hidden="true" tabindex="-1"></a>ps_flt_1A  <span class="ot">&lt;-</span> <span class="fu">prune_taxa</span>(<span class="fu">taxa_sums</span>(ps_flt_1A) <span class="sc">&gt;</span> <span class="dv">0</span>, ps_flt_1A)</span>
+<span id="cb64-17"><a href="plottingtaxa.html#cb64-17" aria-hidden="true" tabindex="-1"></a><span class="co">#phyloseq-class experiment-level object</span></span>
+<span id="cb64-18"><a href="plottingtaxa.html#cb64-18" aria-hidden="true" tabindex="-1"></a><span class="co">#otu_table()   OTU Table:         [ 420 taxa and 2 samples ]</span></span>
+<span id="cb64-19"><a href="plottingtaxa.html#cb64-19" aria-hidden="true" tabindex="-1"></a><span class="co">#sample_data() Sample Data:       [ 2 samples by 15 sample variables ]</span></span>
+<span id="cb64-20"><a href="plottingtaxa.html#cb64-20" aria-hidden="true" tabindex="-1"></a><span class="co">#tax_table()   Taxonomy Table:    [ 420 taxa by 7 taxonomic ranks ]</span></span>
+<span id="cb64-21"><a href="plottingtaxa.html#cb64-21" aria-hidden="true" tabindex="-1"></a><span class="co">#phy_tree()    Phylogenetic Tree: [ 420 tips and 419 internal nodes ]</span></span></code></pre></div>
 </div>
 <div id="analysis-and-plotting" class="section level3 hasAnchor" number="7.2.6">
 <h3><span class="header-section-number">7.2.6</span> Analysis and plotting<a href="plottingtaxa.html#analysis-and-plotting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Create stacked barplot comparing relative abundances of the normalised phyloseq object.</p>
 <p>First abundances are aggregated to phylum level and then transformed into relative abundances. This is followed by the creation of a long-form abundance table that includes metadata with help of the very handy <code>psmelt</code> function from the phyloseq package. The function <code>psmelt</code> takes a phyloseq object and extracts abundances and related metadata into a dataframe for plotting.</p>
 <p>Finally, the abundances of this long abundance table are summarised into the factors that you want to compare. In this example, abundances of different Locations are compared, hence the column <code>Location</code> will be summarised and plotted.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="plottingtaxa.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Phylum plot  </span></span>
-<span id="cb64-2"><a href="plottingtaxa.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="co"># First, create a long abundance data table  </span></span>
-<span id="cb64-3"><a href="plottingtaxa.html#cb64-3" aria-hidden="true" tabindex="-1"></a>taxa_data <span class="ot">&lt;-</span>  microbiome<span class="sc">::</span><span class="fu">aggregate_taxa</span>(ps_flt, <span class="st">&quot;Phylum&quot;</span>) <span class="sc">%&gt;%</span>   </span>
-<span id="cb64-4"><a href="plottingtaxa.html#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># aggregate abundances to phylum-level</span></span>
-<span id="cb64-5"><a href="plottingtaxa.html#cb64-5" aria-hidden="true" tabindex="-1"></a>  microbiome<span class="sc">::</span><span class="fu">transform</span>(., <span class="st">&quot;compositional&quot;</span>) <span class="sc">%&gt;%</span>  <span class="co"># transform abundance to relative abundances</span></span>
-<span id="cb64-6"><a href="plottingtaxa.html#cb64-6" aria-hidden="true" tabindex="-1"></a>  phyloseq<span class="sc">::</span><span class="fu">psmelt</span>(.)  <span class="co"># extract long abundance table with metadata for plotting. </span></span>
-<span id="cb64-7"><a href="plottingtaxa.html#cb64-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-8"><a href="plottingtaxa.html#cb64-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: The `.` replaces the phyloseq object. </span></span>
-<span id="cb64-9"><a href="plottingtaxa.html#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="co"># This is because the functions are piped into a sequence by using the `%&gt;%` operator. </span></span>
-<span id="cb64-10"><a href="plottingtaxa.html#cb64-10" aria-hidden="true" tabindex="-1"></a><span class="co"># The `%&gt;%` operator is a Tidyverse function and is very helpful in putting </span></span>
-<span id="cb64-11"><a href="plottingtaxa.html#cb64-11" aria-hidden="true" tabindex="-1"></a><span class="co"># various different operations and changes to the data into one sequence. </span></span>
-<span id="cb64-12"><a href="plottingtaxa.html#cb64-12" aria-hidden="true" tabindex="-1"></a><span class="co"># We could have put the below operations into the same above sequence too.</span></span>
-<span id="cb64-13"><a href="plottingtaxa.html#cb64-13" aria-hidden="true" tabindex="-1"></a><span class="co"># There is no difference in the outcome.</span></span>
-<span id="cb64-14"><a href="plottingtaxa.html#cb64-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-15"><a href="plottingtaxa.html#cb64-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarise abundances by columns of your choice containing factors.</span></span>
-<span id="cb64-16"><a href="plottingtaxa.html#cb64-16" aria-hidden="true" tabindex="-1"></a><span class="co"># E.g. compute the mean abundances based on the columns `Location`, `Reactor` and `Phylum.   </span></span>
-<span id="cb64-17"><a href="plottingtaxa.html#cb64-17" aria-hidden="true" tabindex="-1"></a>taxa_data <span class="ot">&lt;-</span> taxa_data <span class="sc">%&gt;%</span></span>
-<span id="cb64-18"><a href="plottingtaxa.html#cb64-18" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(Location, Reactor, Phylum) <span class="sc">%&gt;%</span>  <span class="co"># group by Location and Phylum to summarise data</span></span>
-<span id="cb64-19"><a href="plottingtaxa.html#cb64-19" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">Meanabu =</span> <span class="fu">mean</span>(Abundance)) <span class="sc">%&gt;%</span>  <span class="co"># Create a column called `Meanabu`</span></span>
-<span id="cb64-20"><a href="plottingtaxa.html#cb64-20" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(Meanabu <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span>                  <span class="co"># filter out rows that have 0 abundance</span></span>
-<span id="cb64-21"><a href="plottingtaxa.html#cb64-21" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(Meanabu)) <span class="co"># sort the abundances </span></span>
-<span id="cb64-22"><a href="plottingtaxa.html#cb64-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-23"><a href="plottingtaxa.html#cb64-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, create a vector with phylum names that will determine the order of </span></span>
-<span id="cb64-24"><a href="plottingtaxa.html#cb64-24" aria-hidden="true" tabindex="-1"></a><span class="co"># phylum names in the stacked barcharts.</span></span>
-<span id="cb64-25"><a href="plottingtaxa.html#cb64-25" aria-hidden="true" tabindex="-1"></a>order <span class="ot">&lt;-</span> taxa_data<span class="sc">$</span>Phylum <span class="sc">%&gt;%</span> unique</span>
-<span id="cb64-26"><a href="plottingtaxa.html#cb64-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-27"><a href="plottingtaxa.html#cb64-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Phylum names need to be factors for plotting. </span></span>
-<span id="cb64-28"><a href="plottingtaxa.html#cb64-28" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the final dataframe for plotting</span></span>
-<span id="cb64-29"><a href="plottingtaxa.html#cb64-29" aria-hidden="true" tabindex="-1"></a>taxa_data<span class="sc">$</span>Phylum <span class="ot">&lt;-</span> <span class="fu">factor</span>(taxa_data<span class="sc">$</span>Phylum, <span class="at">levels =</span> order) <span class="co"># </span></span>
-<span id="cb64-30"><a href="plottingtaxa.html#cb64-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out the first few rows</span></span>
-<span id="cb64-31"><a href="plottingtaxa.html#cb64-31" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(taxa_data)</span>
-<span id="cb64-32"><a href="plottingtaxa.html#cb64-32" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb64-33"><a href="plottingtaxa.html#cb64-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Finally its time to create a ggplot. </span></span>
-<span id="cb64-34"><a href="plottingtaxa.html#cb64-34" aria-hidden="true" tabindex="-1"></a>taxaplot <span class="ot">&lt;-</span> taxa_data <span class="sc">%&gt;%</span></span>
-<span id="cb64-35"><a href="plottingtaxa.html#cb64-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggbarplot</span>( <span class="at">x=</span> <span class="st">&quot;Reactor&quot;</span>, </span>
-<span id="cb64-36"><a href="plottingtaxa.html#cb64-36" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> <span class="st">&quot;Meanabu&quot;</span>, </span>
-<span id="cb64-37"><a href="plottingtaxa.html#cb64-37" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">&quot;Phylum&quot;</span>,</span>
-<span id="cb64-38"><a href="plottingtaxa.html#cb64-38" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_stack</span>(),</span>
-<span id="cb64-39"><a href="plottingtaxa.html#cb64-39" aria-hidden="true" tabindex="-1"></a>               <span class="at">legend =</span> <span class="st">&quot;right&quot;</span>,</span>
-<span id="cb64-40"><a href="plottingtaxa.html#cb64-40" aria-hidden="true" tabindex="-1"></a>               <span class="at">ylab =</span> <span class="st">&quot;Relative Abundances&quot;</span>) <span class="sc">+</span></span>
-<span id="cb64-41"><a href="plottingtaxa.html#cb64-41" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Tell ggplot to use the `cols` vector created earlier</span></span>
-<span id="cb64-42"><a href="plottingtaxa.html#cb64-42" aria-hidden="true" tabindex="-1"></a>            <span class="co"># only the first 20 colors are shown in legend, hence the `order[1:20]`</span></span>
-<span id="cb64-43"><a href="plottingtaxa.html#cb64-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cols, </span>
-<span id="cb64-44"><a href="plottingtaxa.html#cb64-44" aria-hidden="true" tabindex="-1"></a>                      <span class="at">limits =</span> order[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]) <span class="sc">+</span>   </span>
-<span id="cb64-45"><a href="plottingtaxa.html#cb64-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="at">cols =</span> <span class="fu">vars</span>(Location),     <span class="co"># create facets by factors in column `Location`.</span></span>
-<span id="cb64-46"><a href="plottingtaxa.html#cb64-46" aria-hidden="true" tabindex="-1"></a>               <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>,</span>
-<span id="cb64-47"><a href="plottingtaxa.html#cb64-47" aria-hidden="true" tabindex="-1"></a>               <span class="at">space =</span> <span class="st">&quot;free_x&quot;</span>) <span class="sc">+</span></span>
-<span id="cb64-48"><a href="plottingtaxa.html#cb64-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">byrow =</span> <span class="cn">FALSE</span>)) <span class="sc">+</span> </span>
-<span id="cb64-49"><a href="plottingtaxa.html#cb64-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rotate_x_text</span>(<span class="at">angle =</span> <span class="dv">45</span>) <span class="sc">+</span>           <span class="co"># rotate the x-axis labels</span></span>
-<span id="cb64-50"><a href="plottingtaxa.html#cb64-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span>                          <span class="co"># makes ggplots look better</span></span>
-<span id="cb64-51"><a href="plottingtaxa.html#cb64-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.title.x=</span><span class="fu">element_blank</span>(),   <span class="co"># remove the background grid</span></span>
-<span id="cb64-52"><a href="plottingtaxa.html#cb64-52" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb64-53"><a href="plottingtaxa.html#cb64-53" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()) </span>
-<span id="cb64-54"><a href="plottingtaxa.html#cb64-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-55"><a href="plottingtaxa.html#cb64-55" aria-hidden="true" tabindex="-1"></a>taxaplot</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="plottingtaxa.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Phylum plot  </span></span>
+<span id="cb65-2"><a href="plottingtaxa.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="co"># First, create a long abundance data table  </span></span>
+<span id="cb65-3"><a href="plottingtaxa.html#cb65-3" aria-hidden="true" tabindex="-1"></a>taxa_data <span class="ot">&lt;-</span>  microbiome<span class="sc">::</span><span class="fu">aggregate_taxa</span>(ps_flt, <span class="st">&quot;Phylum&quot;</span>) <span class="sc">%&gt;%</span>   </span>
+<span id="cb65-4"><a href="plottingtaxa.html#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># aggregate abundances to phylum-level</span></span>
+<span id="cb65-5"><a href="plottingtaxa.html#cb65-5" aria-hidden="true" tabindex="-1"></a>  microbiome<span class="sc">::</span><span class="fu">transform</span>(., <span class="st">&quot;compositional&quot;</span>) <span class="sc">%&gt;%</span>  <span class="co"># transform abundance to relative abundances</span></span>
+<span id="cb65-6"><a href="plottingtaxa.html#cb65-6" aria-hidden="true" tabindex="-1"></a>  phyloseq<span class="sc">::</span><span class="fu">psmelt</span>(.)  <span class="co"># extract long abundance table with metadata for plotting. </span></span>
+<span id="cb65-7"><a href="plottingtaxa.html#cb65-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-8"><a href="plottingtaxa.html#cb65-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: The `.` replaces the phyloseq object. </span></span>
+<span id="cb65-9"><a href="plottingtaxa.html#cb65-9" aria-hidden="true" tabindex="-1"></a><span class="co"># This is because the functions are piped into a sequence by using the `%&gt;%` operator. </span></span>
+<span id="cb65-10"><a href="plottingtaxa.html#cb65-10" aria-hidden="true" tabindex="-1"></a><span class="co"># The `%&gt;%` operator is a Tidyverse function and is very helpful in putting </span></span>
+<span id="cb65-11"><a href="plottingtaxa.html#cb65-11" aria-hidden="true" tabindex="-1"></a><span class="co"># various different operations and changes to the data into one sequence. </span></span>
+<span id="cb65-12"><a href="plottingtaxa.html#cb65-12" aria-hidden="true" tabindex="-1"></a><span class="co"># We could have put the below operations into the same above sequence too.</span></span>
+<span id="cb65-13"><a href="plottingtaxa.html#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="co"># There is no difference in the outcome.</span></span>
+<span id="cb65-14"><a href="plottingtaxa.html#cb65-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-15"><a href="plottingtaxa.html#cb65-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarise abundances by columns of your choice containing factors.</span></span>
+<span id="cb65-16"><a href="plottingtaxa.html#cb65-16" aria-hidden="true" tabindex="-1"></a><span class="co"># E.g. compute the mean abundances based on the columns `Location`, `Reactor` and `Phylum.   </span></span>
+<span id="cb65-17"><a href="plottingtaxa.html#cb65-17" aria-hidden="true" tabindex="-1"></a>taxa_data <span class="ot">&lt;-</span> taxa_data <span class="sc">%&gt;%</span></span>
+<span id="cb65-18"><a href="plottingtaxa.html#cb65-18" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(Location, Reactor, Phylum) <span class="sc">%&gt;%</span>  <span class="co"># group by Location and Phylum to summarise data</span></span>
+<span id="cb65-19"><a href="plottingtaxa.html#cb65-19" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">Meanabu =</span> <span class="fu">mean</span>(Abundance)) <span class="sc">%&gt;%</span>  <span class="co"># Create a column called `Meanabu`</span></span>
+<span id="cb65-20"><a href="plottingtaxa.html#cb65-20" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(Meanabu <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span>                  <span class="co"># filter out rows that have 0 abundance</span></span>
+<span id="cb65-21"><a href="plottingtaxa.html#cb65-21" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(Meanabu)) <span class="co"># sort the abundances </span></span>
+<span id="cb65-22"><a href="plottingtaxa.html#cb65-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-23"><a href="plottingtaxa.html#cb65-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, create a vector with phylum names that will determine the order of </span></span>
+<span id="cb65-24"><a href="plottingtaxa.html#cb65-24" aria-hidden="true" tabindex="-1"></a><span class="co"># phylum names in the stacked barcharts.</span></span>
+<span id="cb65-25"><a href="plottingtaxa.html#cb65-25" aria-hidden="true" tabindex="-1"></a>order <span class="ot">&lt;-</span> taxa_data<span class="sc">$</span>Phylum <span class="sc">%&gt;%</span> unique</span>
+<span id="cb65-26"><a href="plottingtaxa.html#cb65-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-27"><a href="plottingtaxa.html#cb65-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Phylum names need to be factors for plotting. </span></span>
+<span id="cb65-28"><a href="plottingtaxa.html#cb65-28" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the final dataframe for plotting</span></span>
+<span id="cb65-29"><a href="plottingtaxa.html#cb65-29" aria-hidden="true" tabindex="-1"></a>taxa_data<span class="sc">$</span>Phylum <span class="ot">&lt;-</span> <span class="fu">factor</span>(taxa_data<span class="sc">$</span>Phylum, <span class="at">levels =</span> order) <span class="co"># </span></span>
+<span id="cb65-30"><a href="plottingtaxa.html#cb65-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out the first few rows</span></span>
+<span id="cb65-31"><a href="plottingtaxa.html#cb65-31" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(taxa_data)</span>
+<span id="cb65-32"><a href="plottingtaxa.html#cb65-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-33"><a href="plottingtaxa.html#cb65-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Finally its time to create a ggplot. </span></span>
+<span id="cb65-34"><a href="plottingtaxa.html#cb65-34" aria-hidden="true" tabindex="-1"></a>taxaplot <span class="ot">&lt;-</span> taxa_data <span class="sc">%&gt;%</span></span>
+<span id="cb65-35"><a href="plottingtaxa.html#cb65-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggbarplot</span>( <span class="at">x=</span> <span class="st">&quot;Reactor&quot;</span>, </span>
+<span id="cb65-36"><a href="plottingtaxa.html#cb65-36" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> <span class="st">&quot;Meanabu&quot;</span>, </span>
+<span id="cb65-37"><a href="plottingtaxa.html#cb65-37" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">&quot;Phylum&quot;</span>,</span>
+<span id="cb65-38"><a href="plottingtaxa.html#cb65-38" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_stack</span>(),</span>
+<span id="cb65-39"><a href="plottingtaxa.html#cb65-39" aria-hidden="true" tabindex="-1"></a>               <span class="at">legend =</span> <span class="st">&quot;right&quot;</span>,</span>
+<span id="cb65-40"><a href="plottingtaxa.html#cb65-40" aria-hidden="true" tabindex="-1"></a>               <span class="at">ylab =</span> <span class="st">&quot;Relative Abundances&quot;</span>) <span class="sc">+</span></span>
+<span id="cb65-41"><a href="plottingtaxa.html#cb65-41" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Tell ggplot to use the `cols` vector created earlier</span></span>
+<span id="cb65-42"><a href="plottingtaxa.html#cb65-42" aria-hidden="true" tabindex="-1"></a>            <span class="co"># only the first 20 colors are shown in legend, hence the `order[1:20]`</span></span>
+<span id="cb65-43"><a href="plottingtaxa.html#cb65-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cols, </span>
+<span id="cb65-44"><a href="plottingtaxa.html#cb65-44" aria-hidden="true" tabindex="-1"></a>                      <span class="at">limits =</span> order[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]) <span class="sc">+</span>   </span>
+<span id="cb65-45"><a href="plottingtaxa.html#cb65-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="at">cols =</span> <span class="fu">vars</span>(Location),     <span class="co"># create facets by factors in column `Location`.</span></span>
+<span id="cb65-46"><a href="plottingtaxa.html#cb65-46" aria-hidden="true" tabindex="-1"></a>               <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>,</span>
+<span id="cb65-47"><a href="plottingtaxa.html#cb65-47" aria-hidden="true" tabindex="-1"></a>               <span class="at">space =</span> <span class="st">&quot;free_x&quot;</span>) <span class="sc">+</span></span>
+<span id="cb65-48"><a href="plottingtaxa.html#cb65-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">byrow =</span> <span class="cn">FALSE</span>)) <span class="sc">+</span> </span>
+<span id="cb65-49"><a href="plottingtaxa.html#cb65-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rotate_x_text</span>(<span class="at">angle =</span> <span class="dv">45</span>) <span class="sc">+</span>           <span class="co"># rotate the x-axis labels</span></span>
+<span id="cb65-50"><a href="plottingtaxa.html#cb65-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span>                          <span class="co"># makes ggplots look better</span></span>
+<span id="cb65-51"><a href="plottingtaxa.html#cb65-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.title.x=</span><span class="fu">element_blank</span>(),   <span class="co"># remove the background grid</span></span>
+<span id="cb65-52"><a href="plottingtaxa.html#cb65-52" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb65-53"><a href="plottingtaxa.html#cb65-53" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()) </span>
+<span id="cb65-54"><a href="plottingtaxa.html#cb65-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-55"><a href="plottingtaxa.html#cb65-55" aria-hidden="true" tabindex="-1"></a>taxaplot</span></code></pre></div>
 <p><img src="gitbook-demo_files/figure-html/Phylumplots-1.png" width="1248" /></p>
 </div>
 <div id="prevelance-table" class="section level3 hasAnchor" number="7.2.7">
 <h3><span class="header-section-number">7.2.7</span> Prevelance table<a href="plottingtaxa.html#prevelance-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A prevalence table may assist in getting an overview of the abundances. The mean prevalence is the average number of times that the taxon appears across all samples.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="plottingtaxa.html#cb65-1" aria-hidden="true" tabindex="-1"></a>prevalancedf <span class="ot">=</span> <span class="fu">apply</span>(<span class="at">X =</span> phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(ps_flt),</span>
-<span id="cb65-2"><a href="plottingtaxa.html#cb65-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">MARGIN =</span> <span class="dv">1</span>,</span>
-<span id="cb65-3"><a href="plottingtaxa.html#cb65-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> <span class="cf">function</span>(x){<span class="fu">sum</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)})</span>
-<span id="cb65-4"><a href="plottingtaxa.html#cb65-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-5"><a href="plottingtaxa.html#cb65-5" aria-hidden="true" tabindex="-1"></a>prevalancedf <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Prevalence =</span> prevalancedf,</span>
-<span id="cb65-6"><a href="plottingtaxa.html#cb65-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">TotalAbundance =</span> phyloseq<span class="sc">::</span><span class="fu">taxa_sums</span>(ps_flt),</span>
-<span id="cb65-7"><a href="plottingtaxa.html#cb65-7" aria-hidden="true" tabindex="-1"></a>                      phyloseq<span class="sc">::</span><span class="fu">tax_table</span>(ps_flt))</span>
-<span id="cb65-8"><a href="plottingtaxa.html#cb65-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-9"><a href="plottingtaxa.html#cb65-9" aria-hidden="true" tabindex="-1"></a>prevalancedf <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ddply</span>(prevalancedf, <span class="st">&quot;Phylum&quot;</span>, <span class="cf">function</span>(df1){</span>
-<span id="cb65-10"><a href="plottingtaxa.html#cb65-10" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">data.frame</span>(<span class="at">mean_prevalence=</span><span class="fu">mean</span>(df1<span class="sc">$</span>Prevalence), </span>
-<span id="cb65-11"><a href="plottingtaxa.html#cb65-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">total_abundance=</span><span class="fu">sum</span>(df1<span class="sc">$</span>TotalAbundance, <span class="at">na.rm =</span> T), </span>
-<span id="cb65-12"><a href="plottingtaxa.html#cb65-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">stringsAsFactors =</span> F)</span>
-<span id="cb65-13"><a href="plottingtaxa.html#cb65-13" aria-hidden="true" tabindex="-1"></a>                    })</span>
-<span id="cb65-14"><a href="plottingtaxa.html#cb65-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-15"><a href="plottingtaxa.html#cb65-15" aria-hidden="true" tabindex="-1"></a><span class="co"># print table from highest to lowest abundance </span></span>
-<span id="cb65-16"><a href="plottingtaxa.html#cb65-16" aria-hidden="true" tabindex="-1"></a>prevalancedf <span class="sc">%&gt;%</span> </span>
-<span id="cb65-17"><a href="plottingtaxa.html#cb65-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(total_abundance))  </span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="plottingtaxa.html#cb66-1" aria-hidden="true" tabindex="-1"></a>prevalancedf <span class="ot">=</span> <span class="fu">apply</span>(<span class="at">X =</span> phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(ps_flt),</span>
+<span id="cb66-2"><a href="plottingtaxa.html#cb66-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">MARGIN =</span> <span class="dv">1</span>,</span>
+<span id="cb66-3"><a href="plottingtaxa.html#cb66-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> <span class="cf">function</span>(x){<span class="fu">sum</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)})</span>
+<span id="cb66-4"><a href="plottingtaxa.html#cb66-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-5"><a href="plottingtaxa.html#cb66-5" aria-hidden="true" tabindex="-1"></a>prevalancedf <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Prevalence =</span> prevalancedf,</span>
+<span id="cb66-6"><a href="plottingtaxa.html#cb66-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">TotalAbundance =</span> phyloseq<span class="sc">::</span><span class="fu">taxa_sums</span>(ps_flt),</span>
+<span id="cb66-7"><a href="plottingtaxa.html#cb66-7" aria-hidden="true" tabindex="-1"></a>                      phyloseq<span class="sc">::</span><span class="fu">tax_table</span>(ps_flt))</span>
+<span id="cb66-8"><a href="plottingtaxa.html#cb66-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-9"><a href="plottingtaxa.html#cb66-9" aria-hidden="true" tabindex="-1"></a>prevalancedf <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ddply</span>(prevalancedf, <span class="st">&quot;Phylum&quot;</span>, <span class="cf">function</span>(df1){</span>
+<span id="cb66-10"><a href="plottingtaxa.html#cb66-10" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">data.frame</span>(<span class="at">mean_prevalence=</span><span class="fu">mean</span>(df1<span class="sc">$</span>Prevalence), </span>
+<span id="cb66-11"><a href="plottingtaxa.html#cb66-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">total_abundance=</span><span class="fu">sum</span>(df1<span class="sc">$</span>TotalAbundance, <span class="at">na.rm =</span> T), </span>
+<span id="cb66-12"><a href="plottingtaxa.html#cb66-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">stringsAsFactors =</span> F)</span>
+<span id="cb66-13"><a href="plottingtaxa.html#cb66-13" aria-hidden="true" tabindex="-1"></a>                    })</span>
+<span id="cb66-14"><a href="plottingtaxa.html#cb66-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-15"><a href="plottingtaxa.html#cb66-15" aria-hidden="true" tabindex="-1"></a><span class="co"># print table from highest to lowest abundance </span></span>
+<span id="cb66-16"><a href="plottingtaxa.html#cb66-16" aria-hidden="true" tabindex="-1"></a>prevalancedf <span class="sc">%&gt;%</span> </span>
+<span id="cb66-17"><a href="plottingtaxa.html#cb66-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(total_abundance))  </span></code></pre></div>
 <pre><code>##                           Phylum mean_prevalence total_abundance
 ## 1                    Chloroflexi        5.124069          228197
 ## 2                   Bacteroidota        4.688679          201921

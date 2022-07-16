@@ -79,7 +79,7 @@ This GitBook, including all its files, is hosted on one of my GitHub repositorie
   
 ## A note on rarefying (normalising)
 
-Various data normalisation methods exists and opinions on their applicability diverge.  
+Various data normalisation methods exist and opinions on their applicability diverge.  
 
 Example of normalisation methods:  
   
@@ -91,17 +91,17 @@ Example of normalisation methods:
 * edgeR-trimmed mean of M values (TMM)  
 * DESeq-variance stabilizing transformation (VS)  
   
-Rarefying data is one of the more contested methods. We acknowledge that **rarefying data** (i.e. the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus **not recommended for differential abundance analyses**. Check out this well cited paper here to learn why: [Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531)  
+Rarefying data is one of the more contested methods. We acknowledge that **rarefying data** (i.e. the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus **not recommended for differential abundance analyses**. Check out this well cited paper here to learn why: [Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531) (@McMurdie2014).  
   
-However, rarefying still "*outperformed all the other normalization methods for producing accurate BC (Bray-Curtis) dissimilarities and subsequent PCoAs and PERMANOVAs.*" Paper here: [Methods for normalizing microbiome data: An ecological perspective](https://doi.org/10.1111/2041-210X.13115).  
+However, rarefying still "*outperformed all the other normalization methods for producing accurate BC (Bray-Curtis) dissimilarities and subsequent PCoAs and PERMANOVAs.*" Paper here: [Methods for normalizing microbiome data: An ecological perspective](https://doi.org/10.1111/2041-210X.13115) (@McKnight2019a).  
    
 For our workflows we may **rarefy data** before creating **alpha diversity** indices (Shannon, Simpsons etc), **beta diversity** indices (Bray-Curtis dissimilarities). 
   
-Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use **centred-log ratios** (Aitchison distances), which makes count normalisation unnecessary. The **compositional approach** and centred log-ratios are further discussed in the paper [Microbiome Datasets Are Compositional: And This Is Not Optional](https://doi.org/10.3389/fmicb.2017.02224).   
+Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use **centred-log ratios** (Aitchison distances), which makes count normalisation unnecessary. The **compositional approach** and centred log-ratios are further discussed in the paper [Microbiome Datasets Are Compositional: And This Is Not Optional](https://doi.org/10.3389/fmicb.2017.02224) (@Gloor2017).   
   
 ## Workflows from other lab groups    
   
-The following review "*should serve as a starting point for considering what options are available*": [Analysing microbial community composition through amplicon sequencing: from sampling to hypothesis testing](https://www.frontiersin.org/articles/10.3389/fmicb.2017.01561/full)
+The following review "*should serve as a starting point for considering what options are available*": [Analysing microbial community composition through amplicon sequencing: from sampling to hypothesis testing](https://www.frontiersin.org/articles/10.3389/fmicb.2017.01561/full) (@Hugerth2017a).  
   
 Furthermore, searching for "amplicon-sequencing" under "Topics" on GitHub gave 37 results. 
   
@@ -112,7 +112,7 @@ On the top of that list is the [nf-core/ampliseq](https://github.com/topics/ampl
 [Tools-Microbiome-Analysis](https://microsud.github.io/Tools-Microbiome-Analysis/) is a websites containing a comprehensive list of R packages and, more importantly, tutorials related to analysis of microbial amplicons and ecology. Really good reference to go back to every now and then. **Highly recommended**.  
   
 * grimmlab/MicrobiomeBestPracticeReview  
-Essential paper to read ([Current challenges and best-practice protocols for microbiome analysis, 2021](https://academic.oup.com/bib/article/22/1/178/5678919)) and a great [workflow resource](https://github.com/grimmlab/MicrobiomeBestPracticeReview) on GitHub. **Essential read**. The Grimm lab in Munich published this paper as well as developed a python and R-based workflow that assists with the recommended best practices (amplicon as well as metagenomic workflows).  
+Essential paper to read ([Current challenges and best-practice protocols for microbiome analysis, 2021](https://academic.oup.com/bib/article/22/1/178/5678919) (@Bharti2021)) and a great [workflow resource](https://github.com/grimmlab/MicrobiomeBestPracticeReview) on GitHub. **Essential read**. The Grimm lab in Munich published this paper as well as developed a python and R-based workflow that assists with the recommended best practices (amplicon as well as metagenomic workflows).  
   
 * KasperSkytte/ampvis2  
 [Ampviz2](https://kasperskytte.github.io/ampvis2/articles/ampvis2.html) is an R-package to visualise and analyse 16S rRNA amplicon data. It is always more convenient to have packages that have the details and optics worked out for you. Like phyloseq, the ampviz2 package combines different tables from data (E.g. otu table, taxonomic table, phylogenetic tree, sample data etc) and then provides different functions to apply to that combined object to visualise the data. 

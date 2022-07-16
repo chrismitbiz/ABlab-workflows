@@ -260,7 +260,7 @@ This GitBook, including all its files, is hosted on one of my GitHub repositorie
 \hypertarget{a-note-on-rarefying-normalising}{%
 \section{A note on rarefying (normalising)}\label{a-note-on-rarefying-normalising}}
 
-Various data normalisation methods exists and opinions on their applicability diverge.
+Various data normalisation methods exist and opinions on their applicability diverge.
 
 Example of normalisation methods:
 
@@ -282,18 +282,18 @@ Example of normalisation methods:
   DESeq-variance stabilizing transformation (VS)
 \end{itemize}
 
-Rarefying data is one of the more contested methods. We acknowledge that \textbf{rarefying data} (i.e.~the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus \textbf{not recommended for differential abundance analyses}. Check out this well cited paper here to learn why: \href{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531}{Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible}
+Rarefying data is one of the more contested methods. We acknowledge that \textbf{rarefying data} (i.e.~the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus \textbf{not recommended for differential abundance analyses}. Check out this well cited paper here to learn why: \href{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531}{Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible} (\citet{McMurdie2014}).
 
-However, rarefying still ``\emph{outperformed all the other normalization methods for producing accurate BC (Bray-Curtis) dissimilarities and subsequent PCoAs and PERMANOVAs.}'' Paper here: \href{https://doi.org/10.1111/2041-210X.13115}{Methods for normalizing microbiome data: An ecological perspective}.
+However, rarefying still ``\emph{outperformed all the other normalization methods for producing accurate BC (Bray-Curtis) dissimilarities and subsequent PCoAs and PERMANOVAs.}'' Paper here: \href{https://doi.org/10.1111/2041-210X.13115}{Methods for normalizing microbiome data: An ecological perspective} (\citet{McKnight2019a}).
 
 For our workflows we may \textbf{rarefy data} before creating \textbf{alpha diversity} indices (Shannon, Simpsons etc), \textbf{beta diversity} indices (Bray-Curtis dissimilarities).
 
-Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use \textbf{centred-log ratios} (Aitchison distances), which makes count normalisation unnecessary. The \textbf{compositional approach} and centred log-ratios are further discussed in the paper \href{https://doi.org/10.3389/fmicb.2017.02224}{Microbiome Datasets Are Compositional: And This Is Not Optional}.
+Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use \textbf{centred-log ratios} (Aitchison distances), which makes count normalisation unnecessary. The \textbf{compositional approach} and centred log-ratios are further discussed in the paper \href{https://doi.org/10.3389/fmicb.2017.02224}{Microbiome Datasets Are Compositional: And This Is Not Optional} (\citet{Gloor2017}).
 
 \hypertarget{workflows-from-other-lab-groups}{%
 \section{Workflows from other lab groups}\label{workflows-from-other-lab-groups}}
 
-The following review ``\emph{should serve as a starting point for considering what options are available}'': \href{https://www.frontiersin.org/articles/10.3389/fmicb.2017.01561/full}{Analysing microbial community composition through amplicon sequencing: from sampling to hypothesis testing}
+The following review ``\emph{should serve as a starting point for considering what options are available}'': \href{https://www.frontiersin.org/articles/10.3389/fmicb.2017.01561/full}{Analysing microbial community composition through amplicon sequencing: from sampling to hypothesis testing} (\citet{Hugerth2017a}).
 
 Furthermore, searching for ``amplicon-sequencing'' under ``Topics'' on GitHub gave 37 results.
 
@@ -306,7 +306,7 @@ Furthermore, searching for ``amplicon-sequencing'' under ``Topics'' on GitHub ga
   \href{https://microsud.github.io/Tools-Microbiome-Analysis/}{Tools-Microbiome-Analysis} is a websites containing a comprehensive list of R packages and, more importantly, tutorials related to analysis of microbial amplicons and ecology. Really good reference to go back to every now and then. \textbf{Highly recommended}.
 \item
   grimmlab/MicrobiomeBestPracticeReview\\
-  Essential paper to read (\href{https://academic.oup.com/bib/article/22/1/178/5678919}{Current challenges and best-practice protocols for microbiome analysis, 2021}) and a great \href{https://github.com/grimmlab/MicrobiomeBestPracticeReview}{workflow resource} on GitHub. \textbf{Essential read}. The Grimm lab in Munich published this paper as well as developed a python and R-based workflow that assists with the recommended best practices (amplicon as well as metagenomic workflows).
+  Essential paper to read (\href{https://academic.oup.com/bib/article/22/1/178/5678919}{Current challenges and best-practice protocols for microbiome analysis, 2021} (\citet{Bharti2021})) and a great \href{https://github.com/grimmlab/MicrobiomeBestPracticeReview}{workflow resource} on GitHub. \textbf{Essential read}. The Grimm lab in Munich published this paper as well as developed a python and R-based workflow that assists with the recommended best practices (amplicon as well as metagenomic workflows).
 \item
   KasperSkytte/ampvis2\\
   \href{https://kasperskytte.github.io/ampvis2/articles/ampvis2.html}{Ampviz2} is an R-package to visualise and analyse 16S rRNA amplicon data. It is always more convenient to have packages that have the details and optics worked out for you. Like phyloseq, the ampviz2 package combines different tables from data (E.g. otu table, taxonomic table, phylogenetic tree, sample data etc) and then provides different functions to apply to that combined object to visualise the data.
@@ -1473,7 +1473,7 @@ The stats behind the individual metrics are not discussed. If you want to learn 
 As mentioned in Chapter \ref{gettingstarted}, prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying - this paper explains the process: \href{https://www.nature.com/articles/s41598-021-01636-1}{Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities} (\citet{Cameron2021}).\\
 We will follow the recommendations from the authors of this paper to resample without replacement.
 
-Note that rarefying is generally not recommended for differential abundance analyses due to the loss of statistical power. Learn why here: \href{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531}{Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible} (\citet{McKnight2019a}).
+Note that rarefying is generally not recommended for differential abundance analyses due to the loss of statistical power. Learn why here: \href{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531}{Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible} (\citet{McMurdie2014}).
 
 Other normalisation methods (see Chapter \ref{gettingstarted}) are also possible and it is up to you, the analyst, to understand and decide on the appropriate methods.
 
@@ -1488,7 +1488,7 @@ In fact, comparing the results after applying different types of normalisation m
 \item
   A \texttt{phyloseq} object; either read in from a pre-saved \texttt{.rds} file or created as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.\\
 \item
-  If you dont have your own data you can download the pre-saved \texttt{.rds} object from this Chapter and follow the below steps: \href{./ps_ProjectX_2022July}{ps\_ProjectX\_2022July} (unzip file once downloaded).
+  If you dont have your own data you can download the pre-saved \texttt{.rds} object from this Chapter and follow the below steps: \href{./ps_ProjectX_2022July}{ps\_ProjectX\_2022July}.
 \end{itemize}
 
 Time to get started\ldots{}
@@ -2065,7 +2065,7 @@ In this chapter you will learn how to plot a custom taxa barplot to compare rela
 \item
   A \texttt{phyloseq} object; either read in from a pre-saved \texttt{.rds} file or created as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.\\
 \item
-  If you dont have your own data you can download the pre-saved \texttt{.rds} object from this Chapter and follow the below steps: \href{./ps_ProjectX_2022July}{ps\_ProjectX\_2022July} (unzip file once downloaded).
+  If you dont have your own data you can download the pre-saved \texttt{.rds} object from this Chapter and follow the below steps: \href{./ps_ProjectX_2022July}{ps\_ProjectX\_2022July}.
 \end{itemize}
 
 \hypertarget{workflow-4}{%
@@ -2181,6 +2181,57 @@ First create a vector of all possible taxonomic names that could be included in 
 \NormalTok{cols }\CommentTok{\# check content of the color vector}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+##                  Acetothermia               Acidobacteriota 
+##                     "#E495A5"                     "#E3979D" 
+##              Actinobacteriota                Armatimonadota 
+##                     "#E19995"                     "#DE9B8D" 
+##                  Bacteroidota              Bdellovibrionota 
+##                     "#DB9D85"                     "#D79F7E" 
+##            Caldatribacteriota                 Caldisericota 
+##                     "#D2A277"                     "#CDA471" 
+##              Campilobacterota                   Chloroflexi 
+##                     "#C7A76C"                     "#C1A968" 
+##                      CK-2C2-2                Cloacimonadota 
+##                     "#BAAC65"                     "#B3AE64" 
+##          Coprothermobacterota                 Cyanobacteria 
+##                     "#ABB065"                     "#A2B367" 
+##                  Deinococcota                  Dependentiae 
+##                     "#99B56B"                     "#90B66F" 
+##              Desulfobacterota               Elusimicrobiota 
+##                     "#86B875"                     "#7CBA7C" 
+##                       FCPU426             Fermentibacterota 
+##                     "#72BB83"                     "#67BC8A" 
+##                Fibrobacterota                    Firmicutes 
+##                     "#5CBD92"                     "#51BE9A" 
+##                Fusobacteriota               Gemmatimonadota 
+##                     "#47BEA2"                     "#3FBEA9" 
+##               Hydrogenedentes                  Hydrothermae 
+##                     "#39BEB1"                     "#37BDB8" 
+##              Latescibacterota              Margulisbacteria 
+##                     "#3BBCBF"                     "#42BBC6" 
+## Marinimicrobia_(SAR406_clade)                        MBNT15 
+##                     "#4CB9CC"                     "#57B8D1" 
+##             Methylomirabilota                   Myxococcota 
+##                     "#64B5D6"                     "#70B3DA" 
+##                  Nitrospirota               Patescibacteria 
+##                     "#7DB0DD"                     "#8AADE0" 
+##               Planctomycetota                Proteobacteria 
+##                     "#96AAE1"                     "#A1A7E2" 
+##  SAR324_clade(Marine_group_B)                 Spirochaetota 
+##                     "#ACA4E2"                     "#B5A1E1" 
+##                   Sumerlaeota                       Sva0485 
+##                     "#BE9EDF"                     "#C69BDC" 
+##                  Synergistota                  Thermotogota 
+##                     "#CD99D8"                     "#D497D4" 
+##             Verrucomicrobiota                         WPS-2 
+##                     "#D995CF"                     "#DD94C9" 
+##                           WS1                           WS4 
+##                     "#E093C3"                     "#E293BC" 
+##                  Zixibacteria                       Unknown 
+##                     "#E493B4"                     "#E494AD"
+\end{verbatim}
 
 \hypertarget{pre-filtering}{%
 \subsection{Pre-filtering}\label{pre-filtering}}

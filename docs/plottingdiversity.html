@@ -300,7 +300,7 @@ div.csl-indent {
 <p>The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: <a href="https://sites.google.com/site/mb3gustame/home" class="uri">https://sites.google.com/site/mb3gustame/home</a>, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter <a href="gettingstarted.html#gettingstarted">2</a> under “Workflows from other lab groups”.</p>
 <p>As mentioned in Chapter <a href="gettingstarted.html#gettingstarted">2</a>, prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying - this paper explains the process: <a href="https://www.nature.com/articles/s41598-021-01636-1">Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities</a> (<span class="citation">Cameron et al. (<a href="#ref-Cameron2021" role="doc-biblioref">2021</a>)</span>).<br />
 We will follow the recommendations from the authors of this paper to resample without replacement.</p>
-<p>Note that rarefying is generally not recommended for differential abundance analyses due to the loss of statistical power. Learn why here: <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531">Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible</a> (<span class="citation">McKnight et al. (<a href="#ref-McKnight2019a" role="doc-biblioref">2019</a>)</span>).</p>
+<p>Note that rarefying is generally not recommended for differential abundance analyses due to the loss of statistical power. Learn why here: <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531">Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible</a> (<span class="citation">McMurdie and Holmes (<a href="#ref-McMurdie2014" role="doc-biblioref">2014</a>)</span>).</p>
 <p>Other normalisation methods (see Chapter <a href="gettingstarted.html#gettingstarted">2</a>) are also possible and it is up to you, the analyst, to understand and decide on the appropriate methods.</p>
 <p>My preference is to use centred-log ratios (Aitchison distances), which makes count normalisation unnecessary. Aitchison distances are included into the workflow below in a PCA and RDA. The compositional approach and centred log-ratios are further discussed in the paper <a href="https://doi.org/10.3389/fmicb.2017.02224">Microbiome Datasets Are Compositional: And This Is Not Optional</a> (<span class="citation">Gloor et al. (<a href="#ref-Gloor2017" role="doc-biblioref">2017</a>)</span>).<br />
 In fact, comparing the results after applying different types of normalisation methods, dissimilarities or distances may complement your analysis and help in interpretation of data.</p>
@@ -309,7 +309,7 @@ In fact, comparing the results after applying different types of normalisation m
 <ul>
 <li>A <code>phyloseq</code> object; either read in from a pre-saved <code>.rds</code> file or created as described in chapter <a href="Qiime2R.html#Qiime2R">5</a> under “Import qiime-files and create a phyloseq object”.<br />
 </li>
-<li>If you dont have your own data you can download the pre-saved <code>.rds</code> object from this Chapter and follow the below steps: <a href="./ps_ProjectX_2022July">ps_ProjectX_2022July</a> (unzip file once downloaded).</li>
+<li>If you dont have your own data you can download the pre-saved <code>.rds</code> object from this Chapter and follow the below steps: <a href="./ps_ProjectX_2022July">ps_ProjectX_2022July</a>.</li>
 </ul>
 <p>Time to get started…</p>
 </div>
@@ -746,8 +746,8 @@ Cameron, Ellen S, Philip J Schmidt, Benjamin J-M Tremblay, Monica B Emelko, and 
 <div id="ref-Gloor2017" class="csl-entry">
 Gloor, Gregory B., Jean M. Macklaim, Vera Pawlowsky-Glahn, and Juan J. Egozcue. 2017. <span>“<span class="nocase">Microbiome datasets are compositional: And this is not optional</span>.”</span> <em>Frontiers in Microbiology</em> 8 (NOV). <a href="https://doi.org/10.3389/fmicb.2017.02224">https://doi.org/10.3389/fmicb.2017.02224</a>.
 </div>
-<div id="ref-McKnight2019a" class="csl-entry">
-McKnight, Donald T., Roger Huerlimann, Deborah S. Bower, Lin Schwarzkopf, Ross A. Alford, and Kyall R. Zenger. 2019. <span>“<span class="nocase">Methods for normalizing microbiome data: An ecological perspective</span>.”</span> <em>Methods in Ecology and Evolution</em>. <a href="https://doi.org/10.1111/2041-210X.13115">https://doi.org/10.1111/2041-210X.13115</a>.
+<div id="ref-McMurdie2014" class="csl-entry">
+McMurdie, Paul J, and Susan Holmes. 2014. <span>“<span class="nocase">Waste not, want not: why rarefying microbiome data is inadmissible</span>.”</span> <em>PLoS Computational Biology</em> 10 (4): e1003531.
 </div>
 </div>
             </section>
