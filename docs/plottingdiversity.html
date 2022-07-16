@@ -292,7 +292,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="plottingdiversity" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Plotting diversity<a href="plottingdiversity.html#plottingdiversity" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><img src="img/nmds.png" /></p>
+<p><img src="img/nmds-1.png" /></p>
 <p>Some visualisations of alpha and beta diversity.</p>
 <div id="introduction-3" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Introduction<a href="plottingdiversity.html#introduction-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -555,22 +555,27 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="plottingdiversity.html#cb51-1" aria-hidden="true" tabindex="-1"></a>physeqNMDS <span class="ot">&lt;-</span>  ps_rare  <span class="co"># We are using the rarefied abundances as explained in the intro </span></span>
 <span id="cb51-2"><a href="plottingdiversity.html#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-3"><a href="plottingdiversity.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ordination</span></span>
-<span id="cb51-4"><a href="plottingdiversity.html#cb51-4" aria-hidden="true" tabindex="-1"></a>ordination <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">ordinate</span>(physeqNMDS  , <span class="st">&quot;NMDS&quot;</span>, <span class="at">distance =</span> <span class="st">&#39;bray&#39;</span>) <span class="co"># using Bray-Curtis dissimilarities here. </span></span>
-<span id="cb51-5"><a href="plottingdiversity.html#cb51-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-6"><a href="plottingdiversity.html#cb51-6" aria-hidden="true" tabindex="-1"></a>label <span class="ot">&lt;-</span> <span class="fu">round</span>(ordination<span class="sc">$</span>stress,<span class="dv">3</span>) <span class="co"># stress label</span></span>
-<span id="cb51-7"><a href="plottingdiversity.html#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting ordination</span></span>
-<span id="cb51-8"><a href="plottingdiversity.html#cb51-8" aria-hidden="true" tabindex="-1"></a>NMDSplot <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">plot_ordination</span>(physeqNMDS, </span>
-<span id="cb51-9"><a href="plottingdiversity.html#cb51-9" aria-hidden="true" tabindex="-1"></a>                                      ordination , </span>
-<span id="cb51-10"><a href="plottingdiversity.html#cb51-10" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">color =</span> <span class="st">&quot;Location&quot;</span>, </span>
-<span id="cb51-11"><a href="plottingdiversity.html#cb51-11" aria-hidden="true" tabindex="-1"></a>                                      <span class="co">#shape = &quot;Reactor&quot;,    </span></span>
-<span id="cb51-12"><a href="plottingdiversity.html#cb51-12" aria-hidden="true" tabindex="-1"></a>                                      <span class="co"># option to add shapes as data symbols</span></span>
-<span id="cb51-13"><a href="plottingdiversity.html#cb51-13" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">title =</span> <span class="st">&quot;NMDS&quot;</span>) <span class="sc">+</span></span>
-<span id="cb51-14"><a href="plottingdiversity.html#cb51-14" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> pielou_ev), <span class="at">alpha =</span> <span class="fl">0.75</span>) <span class="sc">+</span>   <span class="co"># shape size in proportion to Pielou Evenness, also make transparent </span></span>
-<span id="cb51-15"><a href="plottingdiversity.html#cb51-15" aria-hidden="true" tabindex="-1"></a>     <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&#39;text&#39;</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Bray-Curtis, Stress = &quot;</span>, label), </span>
-<span id="cb51-16"><a href="plottingdiversity.html#cb51-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.05</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>)  <span class="sc">+</span></span>
-<span id="cb51-17"><a href="plottingdiversity.html#cb51-17" aria-hidden="true" tabindex="-1"></a>     <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cols)</span>
-<span id="cb51-18"><a href="plottingdiversity.html#cb51-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-19"><a href="plottingdiversity.html#cb51-19" aria-hidden="true" tabindex="-1"></a>NMDSplot</span></code></pre></div>
+<span id="cb51-4"><a href="plottingdiversity.html#cb51-4" aria-hidden="true" tabindex="-1"></a>ordination <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">ordinate</span>(physeqNMDS  , <span class="st">&quot;NMDS&quot;</span>, <span class="at">distance =</span> <span class="st">&#39;bray&#39;</span>) </span>
+<span id="cb51-5"><a href="plottingdiversity.html#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="co"># using Bray-Curtis dissimilarities here. </span></span>
+<span id="cb51-6"><a href="plottingdiversity.html#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-7"><a href="plottingdiversity.html#cb51-7" aria-hidden="true" tabindex="-1"></a>label <span class="ot">&lt;-</span> <span class="fu">round</span>(ordination<span class="sc">$</span>stress,<span class="dv">3</span>) <span class="co"># stress label</span></span>
+<span id="cb51-8"><a href="plottingdiversity.html#cb51-8" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting ordination</span></span>
+<span id="cb51-9"><a href="plottingdiversity.html#cb51-9" aria-hidden="true" tabindex="-1"></a>NMDSplot <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">plot_ordination</span>(physeqNMDS, </span>
+<span id="cb51-10"><a href="plottingdiversity.html#cb51-10" aria-hidden="true" tabindex="-1"></a>                  ordination , </span>
+<span id="cb51-11"><a href="plottingdiversity.html#cb51-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">color =</span> <span class="st">&quot;Location&quot;</span>, </span>
+<span id="cb51-12"><a href="plottingdiversity.html#cb51-12" aria-hidden="true" tabindex="-1"></a>                  <span class="co">#shape = &quot;Reactor&quot;,    </span></span>
+<span id="cb51-13"><a href="plottingdiversity.html#cb51-13" aria-hidden="true" tabindex="-1"></a>                  <span class="co"># option to add shapes as data symbols</span></span>
+<span id="cb51-14"><a href="plottingdiversity.html#cb51-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title =</span> <span class="st">&quot;NMDS&quot;</span>) <span class="sc">+</span></span>
+<span id="cb51-15"><a href="plottingdiversity.html#cb51-15" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> pielou_ev), <span class="at">alpha =</span> <span class="fl">0.75</span>) <span class="sc">+</span>   </span>
+<span id="cb51-16"><a href="plottingdiversity.html#cb51-16" aria-hidden="true" tabindex="-1"></a><span class="co"># shape size in proportion to Pielou Evenness, also make transparent </span></span>
+<span id="cb51-17"><a href="plottingdiversity.html#cb51-17" aria-hidden="true" tabindex="-1"></a>     <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&#39;text&#39;</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Bray-Curtis, Stress = &quot;</span>, label), </span>
+<span id="cb51-18"><a href="plottingdiversity.html#cb51-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.05</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>)  <span class="sc">+</span></span>
+<span id="cb51-19"><a href="plottingdiversity.html#cb51-19" aria-hidden="true" tabindex="-1"></a>     <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cols) <span class="sc">+</span> </span>
+<span id="cb51-20"><a href="plottingdiversity.html#cb51-20" aria-hidden="true" tabindex="-1"></a><span class="co"># increase symbol size in legend and set order of legend items</span></span>
+<span id="cb51-21"><a href="plottingdiversity.html#cb51-21" aria-hidden="true" tabindex="-1"></a>     <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">3</span>), <span class="at">order =</span> <span class="dv">1</span>), </span>
+<span id="cb51-22"><a href="plottingdiversity.html#cb51-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span><span class="st">&quot;Pielou Evenness&quot;</span>) ) <span class="co"># change the legend title for `size`.</span></span>
+<span id="cb51-23"><a href="plottingdiversity.html#cb51-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-24"><a href="plottingdiversity.html#cb51-24" aria-hidden="true" tabindex="-1"></a>NMDSplot</span></code></pre></div>
 <p><img src="gitbook-demo_files/figure-html/nmds-1.png" width="576" /></p>
 </div>
 <div id="pca" class="section level3 hasAnchor" number="6.2.10">
@@ -594,9 +599,13 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb52-17"><a href="plottingdiversity.html#cb52-17" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> pielou_ev)) <span class="sc">+</span>    <span class="co"># # shape size in proportion to Pielou Evenness</span></span>
 <span id="cb52-18"><a href="plottingdiversity.html#cb52-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&#39;text&#39;</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Aitchison distances&quot;</span>), </span>
 <span id="cb52-19"><a href="plottingdiversity.html#cb52-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.05</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>)  <span class="sc">+</span> </span>
-<span id="cb52-20"><a href="plottingdiversity.html#cb52-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cols)</span>
-<span id="cb52-21"><a href="plottingdiversity.html#cb52-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-22"><a href="plottingdiversity.html#cb52-22" aria-hidden="true" tabindex="-1"></a>PCAplot</span></code></pre></div>
+<span id="cb52-20"><a href="plottingdiversity.html#cb52-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cols) <span class="sc">+</span> </span>
+<span id="cb52-21"><a href="plottingdiversity.html#cb52-21" aria-hidden="true" tabindex="-1"></a><span class="co"># increase symbol size in legend and set order of legend items</span></span>
+<span id="cb52-22"><a href="plottingdiversity.html#cb52-22" aria-hidden="true" tabindex="-1"></a><span class="co"># change the legend title for `size`.</span></span>
+<span id="cb52-23"><a href="plottingdiversity.html#cb52-23" aria-hidden="true" tabindex="-1"></a>     <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">3</span>), <span class="at">order =</span> <span class="dv">1</span>), </span>
+<span id="cb52-24"><a href="plottingdiversity.html#cb52-24" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span><span class="st">&quot;Pielou Evenness&quot;</span>) ) </span>
+<span id="cb52-25"><a href="plottingdiversity.html#cb52-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-26"><a href="plottingdiversity.html#cb52-26" aria-hidden="true" tabindex="-1"></a>PCAplot</span></code></pre></div>
 <p><img src="gitbook-demo_files/figure-html/PCA-1.png" width="576" /></p>
 <p><br />
 </p>
@@ -640,48 +649,53 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb53-35"><a href="plottingdiversity.html#cb53-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> pielou_ev)) <span class="sc">+</span>        <span class="co"># shape size in proportion to Pielou Evenness</span></span>
 <span id="cb53-36"><a href="plottingdiversity.html#cb53-36" aria-hidden="true" tabindex="-1"></a>  <span class="co">#scale_colour_gradient(low = colourlow, high = colourhigh) +</span></span>
 <span id="cb53-37"><a href="plottingdiversity.html#cb53-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;RDA Abundances (clr) ~ Location&quot;</span>) <span class="sc">+</span></span>
-<span id="cb53-38"><a href="plottingdiversity.html#cb53-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cols)</span>
-<span id="cb53-39"><a href="plottingdiversity.html#cb53-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-40"><a href="plottingdiversity.html#cb53-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-41"><a href="plottingdiversity.html#cb53-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Now add the environmental variables as arrows to either of these p1 or p2</span></span>
-<span id="cb53-42"><a href="plottingdiversity.html#cb53-42" aria-hidden="true" tabindex="-1"></a>arrowmat <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">scores</span>(ordination, <span class="at">display =</span> <span class="st">&quot;bp&quot;</span>)</span>
-<span id="cb53-43"><a href="plottingdiversity.html#cb53-43" aria-hidden="true" tabindex="-1"></a>arrowmat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(arrowmat)</span>
-<span id="cb53-44"><a href="plottingdiversity.html#cb53-44" aria-hidden="true" tabindex="-1"></a><span class="co">#rownames(arrowmat) &lt;- arrowlabel</span></span>
-<span id="cb53-45"><a href="plottingdiversity.html#cb53-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels, make a data.frame</span></span>
-<span id="cb53-46"><a href="plottingdiversity.html#cb53-46" aria-hidden="true" tabindex="-1"></a>arrowdf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">labels =</span> <span class="fu">rownames</span>(arrowmat), arrowmat)</span>
-<span id="cb53-47"><a href="plottingdiversity.html#cb53-47" aria-hidden="true" tabindex="-1"></a>arrowdf<span class="sc">$</span>labels <span class="ot">&lt;-</span> arrowdf<span class="sc">$</span>labels <span class="sc">%&gt;%</span> <span class="fu">gsub</span>(<span class="st">&quot;Location&quot;</span>, <span class="st">&quot;&quot;</span>, .) <span class="co"># remove the string &quot;Location&quot; from the labels. </span></span>
-<span id="cb53-48"><a href="plottingdiversity.html#cb53-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the arrow aesthetic mapping</span></span>
-<span id="cb53-49"><a href="plottingdiversity.html#cb53-49" aria-hidden="true" tabindex="-1"></a>arrow_map <span class="ot">&lt;-</span> <span class="fu">aes</span>(<span class="at">xend =</span> larw <span class="sc">*</span> RDA1,</span>
-<span id="cb53-50"><a href="plottingdiversity.html#cb53-50" aria-hidden="true" tabindex="-1"></a>                 <span class="at">yend =</span> larw <span class="sc">*</span> RDA2,</span>
-<span id="cb53-51"><a href="plottingdiversity.html#cb53-51" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> <span class="dv">0</span>,</span>
-<span id="cb53-52"><a href="plottingdiversity.html#cb53-52" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> <span class="dv">0</span>,</span>
-<span id="cb53-53"><a href="plottingdiversity.html#cb53-53" aria-hidden="true" tabindex="-1"></a>                 <span class="at">shape =</span> <span class="cn">NULL</span>,</span>
-<span id="cb53-54"><a href="plottingdiversity.html#cb53-54" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="cn">NULL</span>,</span>
-<span id="cb53-55"><a href="plottingdiversity.html#cb53-55" aria-hidden="true" tabindex="-1"></a>                 <span class="at">label =</span> labels)</span>
-<span id="cb53-56"><a href="plottingdiversity.html#cb53-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-57"><a href="plottingdiversity.html#cb53-57" aria-hidden="true" tabindex="-1"></a>label_map <span class="ot">&lt;-</span> <span class="fu">aes</span>(<span class="at">x =</span> xarw <span class="sc">*</span> RDA1,</span>
-<span id="cb53-58"><a href="plottingdiversity.html#cb53-58" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> yarw <span class="sc">*</span> RDA2,</span>
-<span id="cb53-59"><a href="plottingdiversity.html#cb53-59" aria-hidden="true" tabindex="-1"></a>                 <span class="at">shape =</span> <span class="cn">NULL</span>,</span>
-<span id="cb53-60"><a href="plottingdiversity.html#cb53-60" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="cn">NULL</span>,</span>
-<span id="cb53-61"><a href="plottingdiversity.html#cb53-61" aria-hidden="true" tabindex="-1"></a>                 <span class="at">label =</span> labels)</span>
-<span id="cb53-62"><a href="plottingdiversity.html#cb53-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-63"><a href="plottingdiversity.html#cb53-63" aria-hidden="true" tabindex="-1"></a>arrowhead <span class="ot">=</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.02</span>, <span class="st">&quot;npc&quot;</span>))</span>
-<span id="cb53-64"><a href="plottingdiversity.html#cb53-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-65"><a href="plottingdiversity.html#cb53-65" aria-hidden="true" tabindex="-1"></a>RDAplot <span class="ot">&lt;-</span>RDAplot <span class="sc">+</span></span>
-<span id="cb53-66"><a href="plottingdiversity.html#cb53-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
-<span id="cb53-67"><a href="plottingdiversity.html#cb53-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> arrow_map,</span>
-<span id="cb53-68"><a href="plottingdiversity.html#cb53-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> .<span class="dv">5</span>,</span>
-<span id="cb53-69"><a href="plottingdiversity.html#cb53-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> arrowdf,</span>
-<span id="cb53-70"><a href="plottingdiversity.html#cb53-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> arrowcolor,</span>
-<span id="cb53-71"><a href="plottingdiversity.html#cb53-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> arrowhead)  <span class="sc">+</span></span>
-<span id="cb53-72"><a href="plottingdiversity.html#cb53-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb53-73"><a href="plottingdiversity.html#cb53-73" aria-hidden="true" tabindex="-1"></a>   <span class="at">mapping =</span> label_map,</span>
-<span id="cb53-74"><a href="plottingdiversity.html#cb53-74" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">4</span>,</span>
-<span id="cb53-75"><a href="plottingdiversity.html#cb53-75" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> arrowdf,</span>
-<span id="cb53-76"><a href="plottingdiversity.html#cb53-76" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb53-77"><a href="plottingdiversity.html#cb53-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-78"><a href="plottingdiversity.html#cb53-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-79"><a href="plottingdiversity.html#cb53-79" aria-hidden="true" tabindex="-1"></a>RDAplot</span></code></pre></div>
+<span id="cb53-38"><a href="plottingdiversity.html#cb53-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cols) <span class="sc">+</span> </span>
+<span id="cb53-39"><a href="plottingdiversity.html#cb53-39" aria-hidden="true" tabindex="-1"></a><span class="co"># increase symbol size in legend and set order of legend items</span></span>
+<span id="cb53-40"><a href="plottingdiversity.html#cb53-40" aria-hidden="true" tabindex="-1"></a><span class="co"># change the legend title for `size`.</span></span>
+<span id="cb53-41"><a href="plottingdiversity.html#cb53-41" aria-hidden="true" tabindex="-1"></a>     <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">3</span>), <span class="at">order =</span> <span class="dv">1</span>), </span>
+<span id="cb53-42"><a href="plottingdiversity.html#cb53-42" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span><span class="st">&quot;Pielou Evenness&quot;</span>) ) </span>
+<span id="cb53-43"><a href="plottingdiversity.html#cb53-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-44"><a href="plottingdiversity.html#cb53-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-45"><a href="plottingdiversity.html#cb53-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-46"><a href="plottingdiversity.html#cb53-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Now add the environmental variables as arrows to either of these p1 or p2</span></span>
+<span id="cb53-47"><a href="plottingdiversity.html#cb53-47" aria-hidden="true" tabindex="-1"></a>arrowmat <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">scores</span>(ordination, <span class="at">display =</span> <span class="st">&quot;bp&quot;</span>)</span>
+<span id="cb53-48"><a href="plottingdiversity.html#cb53-48" aria-hidden="true" tabindex="-1"></a>arrowmat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(arrowmat)</span>
+<span id="cb53-49"><a href="plottingdiversity.html#cb53-49" aria-hidden="true" tabindex="-1"></a><span class="co">#rownames(arrowmat) &lt;- arrowlabel</span></span>
+<span id="cb53-50"><a href="plottingdiversity.html#cb53-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels, make a data.frame</span></span>
+<span id="cb53-51"><a href="plottingdiversity.html#cb53-51" aria-hidden="true" tabindex="-1"></a>arrowdf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">labels =</span> <span class="fu">rownames</span>(arrowmat), arrowmat)</span>
+<span id="cb53-52"><a href="plottingdiversity.html#cb53-52" aria-hidden="true" tabindex="-1"></a>arrowdf<span class="sc">$</span>labels <span class="ot">&lt;-</span> arrowdf<span class="sc">$</span>labels <span class="sc">%&gt;%</span> <span class="fu">gsub</span>(<span class="st">&quot;Location&quot;</span>, <span class="st">&quot;&quot;</span>, .) <span class="co"># remove the string &quot;Location&quot; from the labels. </span></span>
+<span id="cb53-53"><a href="plottingdiversity.html#cb53-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the arrow aesthetic mapping</span></span>
+<span id="cb53-54"><a href="plottingdiversity.html#cb53-54" aria-hidden="true" tabindex="-1"></a>arrow_map <span class="ot">&lt;-</span> <span class="fu">aes</span>(<span class="at">xend =</span> larw <span class="sc">*</span> RDA1,</span>
+<span id="cb53-55"><a href="plottingdiversity.html#cb53-55" aria-hidden="true" tabindex="-1"></a>                 <span class="at">yend =</span> larw <span class="sc">*</span> RDA2,</span>
+<span id="cb53-56"><a href="plottingdiversity.html#cb53-56" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> <span class="dv">0</span>,</span>
+<span id="cb53-57"><a href="plottingdiversity.html#cb53-57" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> <span class="dv">0</span>,</span>
+<span id="cb53-58"><a href="plottingdiversity.html#cb53-58" aria-hidden="true" tabindex="-1"></a>                 <span class="at">shape =</span> <span class="cn">NULL</span>,</span>
+<span id="cb53-59"><a href="plottingdiversity.html#cb53-59" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="cn">NULL</span>,</span>
+<span id="cb53-60"><a href="plottingdiversity.html#cb53-60" aria-hidden="true" tabindex="-1"></a>                 <span class="at">label =</span> labels)</span>
+<span id="cb53-61"><a href="plottingdiversity.html#cb53-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-62"><a href="plottingdiversity.html#cb53-62" aria-hidden="true" tabindex="-1"></a>label_map <span class="ot">&lt;-</span> <span class="fu">aes</span>(<span class="at">x =</span> xarw <span class="sc">*</span> RDA1,</span>
+<span id="cb53-63"><a href="plottingdiversity.html#cb53-63" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> yarw <span class="sc">*</span> RDA2,</span>
+<span id="cb53-64"><a href="plottingdiversity.html#cb53-64" aria-hidden="true" tabindex="-1"></a>                 <span class="at">shape =</span> <span class="cn">NULL</span>,</span>
+<span id="cb53-65"><a href="plottingdiversity.html#cb53-65" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="cn">NULL</span>,</span>
+<span id="cb53-66"><a href="plottingdiversity.html#cb53-66" aria-hidden="true" tabindex="-1"></a>                 <span class="at">label =</span> labels)</span>
+<span id="cb53-67"><a href="plottingdiversity.html#cb53-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-68"><a href="plottingdiversity.html#cb53-68" aria-hidden="true" tabindex="-1"></a>arrowhead <span class="ot">=</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.02</span>, <span class="st">&quot;npc&quot;</span>))</span>
+<span id="cb53-69"><a href="plottingdiversity.html#cb53-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-70"><a href="plottingdiversity.html#cb53-70" aria-hidden="true" tabindex="-1"></a>RDAplot <span class="ot">&lt;-</span>RDAplot <span class="sc">+</span></span>
+<span id="cb53-71"><a href="plottingdiversity.html#cb53-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb53-72"><a href="plottingdiversity.html#cb53-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> arrow_map,</span>
+<span id="cb53-73"><a href="plottingdiversity.html#cb53-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> .<span class="dv">5</span>,</span>
+<span id="cb53-74"><a href="plottingdiversity.html#cb53-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> arrowdf,</span>
+<span id="cb53-75"><a href="plottingdiversity.html#cb53-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> arrowcolor,</span>
+<span id="cb53-76"><a href="plottingdiversity.html#cb53-76" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> arrowhead)  <span class="sc">+</span></span>
+<span id="cb53-77"><a href="plottingdiversity.html#cb53-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb53-78"><a href="plottingdiversity.html#cb53-78" aria-hidden="true" tabindex="-1"></a>   <span class="at">mapping =</span> label_map,</span>
+<span id="cb53-79"><a href="plottingdiversity.html#cb53-79" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">4</span>,</span>
+<span id="cb53-80"><a href="plottingdiversity.html#cb53-80" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> arrowdf,</span>
+<span id="cb53-81"><a href="plottingdiversity.html#cb53-81" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb53-82"><a href="plottingdiversity.html#cb53-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-83"><a href="plottingdiversity.html#cb53-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-84"><a href="plottingdiversity.html#cb53-84" aria-hidden="true" tabindex="-1"></a>RDAplot</span></code></pre></div>
 <p><img src="gitbook-demo_files/figure-html/rda-1.png" width="576" /></p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="plottingdiversity.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save figure for publication</span></span>
 <span id="cb54-2"><a href="plottingdiversity.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ggsave(&quot;RDA.png&quot;, height=6, width=7.5, units=&#39;in&#39;, dpi=600)</span></span>

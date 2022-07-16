@@ -1468,7 +1468,7 @@ This code is an amalgamation from various sources. Apart from putting it togethe
 \hypertarget{plottingdiversity}{%
 \chapter{Plotting diversity}\label{plottingdiversity}}
 
-\includegraphics{./img/nmds.png}
+\includegraphics{./img/nmds-1.png}
 
 Some visualisations of alpha and beta diversity.
 
@@ -1838,20 +1838,25 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
 \NormalTok{physeqNMDS }\OtherTok{\textless{}{-}}\NormalTok{  ps\_rare  }\CommentTok{\# We are using the rarefied abundances as explained in the intro }
 
 \CommentTok{\#ordination}
-\NormalTok{ordination }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{ordinate}\NormalTok{(physeqNMDS  , }\StringTok{"NMDS"}\NormalTok{, }\AttributeTok{distance =} \StringTok{\textquotesingle{}bray\textquotesingle{}}\NormalTok{) }\CommentTok{\# using Bray{-}Curtis dissimilarities here. }
+\NormalTok{ordination }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{ordinate}\NormalTok{(physeqNMDS  , }\StringTok{"NMDS"}\NormalTok{, }\AttributeTok{distance =} \StringTok{\textquotesingle{}bray\textquotesingle{}}\NormalTok{) }
+\CommentTok{\# using Bray{-}Curtis dissimilarities here. }
 
 \NormalTok{label }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(ordination}\SpecialCharTok{$}\NormalTok{stress,}\DecValTok{3}\NormalTok{) }\CommentTok{\# stress label}
 \CommentTok{\#plotting ordination}
 \NormalTok{NMDSplot }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{plot\_ordination}\NormalTok{(physeqNMDS, }
-\NormalTok{                                      ordination , }
-                                      \AttributeTok{color =} \StringTok{"Location"}\NormalTok{, }
-                                      \CommentTok{\#shape = "Reactor",    }
-                                      \CommentTok{\# option to add shapes as data symbols}
-                                      \AttributeTok{title =} \StringTok{"NMDS"}\NormalTok{) }\SpecialCharTok{+}
-     \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ pielou\_ev), }\AttributeTok{alpha =} \FloatTok{0.75}\NormalTok{) }\SpecialCharTok{+}   \CommentTok{\# shape size in proportion to Pielou Evenness, also make transparent }
+\NormalTok{                  ordination , }
+                  \AttributeTok{color =} \StringTok{"Location"}\NormalTok{, }
+                  \CommentTok{\#shape = "Reactor",    }
+                  \CommentTok{\# option to add shapes as data symbols}
+                  \AttributeTok{title =} \StringTok{"NMDS"}\NormalTok{) }\SpecialCharTok{+}
+     \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ pielou\_ev), }\AttributeTok{alpha =} \FloatTok{0.75}\NormalTok{) }\SpecialCharTok{+}   
+\CommentTok{\# shape size in proportion to Pielou Evenness, also make transparent }
      \FunctionTok{annotate}\NormalTok{(}\AttributeTok{geom =} \StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{, }\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{"Bray{-}Curtis, Stress = "}\NormalTok{, label), }
              \AttributeTok{x =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{y =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{hjust =} \SpecialCharTok{{-}}\FloatTok{0.05}\NormalTok{, }\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{)  }\SpecialCharTok{+}
-     \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cols)}
+     \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cols) }\SpecialCharTok{+} 
+\CommentTok{\# increase symbol size in legend and set order of legend items}
+     \FunctionTok{guides}\NormalTok{(}\AttributeTok{color =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{override.aes =} \FunctionTok{list}\NormalTok{(}\AttributeTok{size =} \DecValTok{3}\NormalTok{), }\AttributeTok{order =} \DecValTok{1}\NormalTok{), }
+            \AttributeTok{size =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title =}\StringTok{"Pielou Evenness"}\NormalTok{) ) }\CommentTok{\# change the legend title for \textasciigrave{}size\textasciigrave{}.}
 
 \NormalTok{NMDSplot}
 \end{Highlighting}
@@ -1883,7 +1888,11 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
      \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ pielou\_ev)) }\SpecialCharTok{+}    \CommentTok{\# \# shape size in proportion to Pielou Evenness}
     \FunctionTok{annotate}\NormalTok{(}\AttributeTok{geom =} \StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{, }\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{"Aitchison distances"}\NormalTok{), }
              \AttributeTok{x =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{y =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{hjust =} \SpecialCharTok{{-}}\FloatTok{0.05}\NormalTok{, }\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{)  }\SpecialCharTok{+} 
-    \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cols)}
+    \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cols) }\SpecialCharTok{+} 
+\CommentTok{\# increase symbol size in legend and set order of legend items}
+\CommentTok{\# change the legend title for \textasciigrave{}size\textasciigrave{}.}
+     \FunctionTok{guides}\NormalTok{(}\AttributeTok{color =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{override.aes =} \FunctionTok{list}\NormalTok{(}\AttributeTok{size =} \DecValTok{3}\NormalTok{), }\AttributeTok{order =} \DecValTok{1}\NormalTok{), }
+            \AttributeTok{size =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title =}\StringTok{"Pielou Evenness"}\NormalTok{) ) }
 
 \NormalTok{PCAplot}
 \end{Highlighting}
@@ -1935,7 +1944,12 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
   \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ pielou\_ev)) }\SpecialCharTok{+}        \CommentTok{\# shape size in proportion to Pielou Evenness}
   \CommentTok{\#scale\_colour\_gradient(low = colourlow, high = colourhigh) +}
   \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"RDA Abundances (clr) \textasciitilde{} Location"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cols)}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cols) }\SpecialCharTok{+} 
+\CommentTok{\# increase symbol size in legend and set order of legend items}
+\CommentTok{\# change the legend title for \textasciigrave{}size\textasciigrave{}.}
+     \FunctionTok{guides}\NormalTok{(}\AttributeTok{color =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{override.aes =} \FunctionTok{list}\NormalTok{(}\AttributeTok{size =} \DecValTok{3}\NormalTok{), }\AttributeTok{order =} \DecValTok{1}\NormalTok{), }
+            \AttributeTok{size =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title =}\StringTok{"Pielou Evenness"}\NormalTok{) ) }
+
 
 
 \CommentTok{\# Now add the environmental variables as arrows to either of these p1 or p2}

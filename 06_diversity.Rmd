@@ -5,7 +5,7 @@ editor_options:
 ---
 
 # Plotting diversity  {#plottingdiversity}
-![](./img/nmds.png)   
+![](./img/nmds-1.png)   
   
   
 Some visualisations of alpha and beta diversity.
@@ -238,20 +238,25 @@ g1
 physeqNMDS <-  ps_rare  # We are using the rarefied abundances as explained in the intro 
 
 #ordination
-ordination <- phyloseq::ordinate(physeqNMDS  , "NMDS", distance = 'bray') # using Bray-Curtis dissimilarities here. 
+ordination <- phyloseq::ordinate(physeqNMDS  , "NMDS", distance = 'bray') 
+# using Bray-Curtis dissimilarities here. 
 
 label <- round(ordination$stress,3) # stress label
 #plotting ordination
 NMDSplot <- phyloseq::plot_ordination(physeqNMDS, 
-                                      ordination , 
-                                      color = "Location", 
-                                      #shape = "Reactor",    
-                                      # option to add shapes as data symbols
-                                      title = "NMDS") +
-     geom_point(aes(size = pielou_ev), alpha = 0.75) +   # shape size in proportion to Pielou Evenness, also make transparent 
+                  ordination , 
+                  color = "Location", 
+                  #shape = "Reactor",    
+                  # option to add shapes as data symbols
+                  title = "NMDS") +
+     geom_point(aes(size = pielou_ev), alpha = 0.75) +   
+# shape size in proportion to Pielou Evenness, also make transparent 
      annotate(geom = 'text', label = paste("Bray-Curtis, Stress = ", label), 
              x = -Inf, y = -Inf, hjust = -0.05, vjust = -1, size = 3)  +
-     scale_color_manual(values = cols)
+     scale_color_manual(values = cols) + 
+# increase symbol size in legend and set order of legend items
+     guides(color = guide_legend(override.aes = list(size = 3), order = 1), 
+            size = guide_legend(title ="Pielou Evenness") ) # change the legend title for `size`.
 
 NMDSplot
 ```
@@ -279,7 +284,11 @@ PCAplot <- phyloseq::plot_ordination(physeqPCA,
      geom_point(aes(size = pielou_ev)) +    # # shape size in proportion to Pielou Evenness
     annotate(geom = 'text', label = paste("Aitchison distances"), 
              x = -Inf, y = -Inf, hjust = -0.05, vjust = -1, size = 3)  + 
-    scale_color_manual(values = cols)
+    scale_color_manual(values = cols) + 
+# increase symbol size in legend and set order of legend items
+# change the legend title for `size`.
+     guides(color = guide_legend(override.aes = list(size = 3), order = 1), 
+            size = guide_legend(title ="Pielou Evenness") ) 
 
 PCAplot
 
@@ -326,7 +335,12 @@ RDAplot <- phyloseq::plot_ordination(physeqPCA, ordination ,
   geom_point(aes(size = pielou_ev)) +        # shape size in proportion to Pielou Evenness
   #scale_colour_gradient(low = colourlow, high = colourhigh) +
   ggtitle("RDA Abundances (clr) ~ Location") +
-  scale_color_manual(values = cols)
+  scale_color_manual(values = cols) + 
+# increase symbol size in legend and set order of legend items
+# change the legend title for `size`.
+     guides(color = guide_legend(override.aes = list(size = 3), order = 1), 
+            size = guide_legend(title ="Pielou Evenness") ) 
+
 
 
 # Now add the environmental variables as arrows to either of these p1 or p2
