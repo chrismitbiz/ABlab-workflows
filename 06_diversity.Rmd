@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Plotting diversity  
+# Plotting diversity  {#plottingdiversity}
 Some visualisations of alpha and beta diversity.
 
 ## Introduction
@@ -13,17 +13,22 @@ This chapter introduces you to a basic workflow for plotting alpha and beta dive
   
 Furthermore, beta diversity, i.e. four different type of ordinations are plotted. The examples, include non-metric dimensional scaling on Bray-Curtis dissimilaries, Principal Component Analysis (Aitchison distance), Redundancy Analysis ( Aitchison) and a Principal Coordinate Analysis on unweighted uniFrac distances.   
   
-The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: https://sites.google.com/site/mb3gustame/home, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter \@ref(about). 
+The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: https://sites.google.com/site/mb3gustame/home, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter \@ref(gettingstarted) under "Workflows from other lab groups". 
   
-Prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying I recommend this paper here: [Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities](https://www.nature.com/articles/s41598-021-01636-1). We will follow the recommendations from the authors of this paper to resample without replacement.       
+As mentioned in Chapter \@ref(gettingstarted), prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying - this paper explains the process: [Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities](https://www.nature.com/articles/s41598-021-01636-1).   
+We will follow the recommendations from the authors of this paper to resample without replacement.  
   
-Other normalisation methods are also possible and it is up to you, the analyst, to understand and decide on the appropriate methods. I found centred-log ratios (Aitchison distances) also intuitive in interpretation, which are included into the workflow below in a PCA and RDA. Log-ratios are further discussed in the paper [Microbiome Datasets Are Compositional: And This Is Not Optional](https://doi.org/10.3389/fmicb.2017.02224).   
-In fact, using different types of normalisation, dissimilarities or distances, while providing different types of information, may complement each other and help in interpretation of your data.    
+Note that rarefying is generally not recommended for differential abundance analyses due to the loss of statistical power. Learn why here: [Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531).  
+        
+Other normalisation methods (see Chapter \@ref(gettingstarted)) are also possible and it is up to you, the analyst, to understand and decide on the appropriate methods. 
+
+My preference is to use centred-log ratios (Aitchison distances), which makes count normalisation unnecessary. Aitchison distances are included into the workflow below in a PCA and RDA. The compositional approach and centred log-ratios are further discussed in the paper [Microbiome Datasets Are Compositional: And This Is Not Optional](https://doi.org/10.3389/fmicb.2017.02224).   
+In fact, comparing the results after applying different types of normalisation methods, dissimilarities or distances may complement your analysis and help in interpretation of data.    
   
 ### Prerequisites  
-* a phyloseq object; either read in from a pre-saved `.rds` file or created as described in chapter \@ref(Qiime2R).   
+* A phyloseq object; either read in from a pre-saved `.rds` file or created as described in chapter \@ref(Qiime2R) under "Import qiime-files and create a phyloseq object".   
    
-Time to get started... 
+Time to get started...  
   
 ## Workflow  
   

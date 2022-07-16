@@ -282,7 +282,7 @@ min(colSums(otu_table(ps.flt)))
 ```
     
   
-Once you identified the samples you would like to remove, you can filter out specific samples or treatments from the phyloseq objects. For example, with the  `prune_samples(sample_data(ps.flt)$Treatment %notin% c("Negative"), ps.flt)` command here we would sample out any samples labeled as "Negative" in the metadata. Afterwards make sure to sample out any taxa that now contain zero reads because they were only present in the removed samples. Perhaps, create new phyloseq objects to differentiate from your different filtered object `ps.flt.flt <- prune_taxa(taxa_sums(ps.flt) != 0, ps.flt)`.  
+Once you identified the samples you would like to remove (e.g. samples with too few reads), you can filter out these specific samples or treatments from the phyloseq objects. For example, with the  `prune_samples(sample_data(ps.flt)$Treatment %notin% c("Negative"), ps.flt)` command here we would sample out any samples labeled as "Negative" in the metadata. Afterwards make sure to sample out any taxa that now contain zero reads because they were only present in the removed samples. Perhaps, create new phyloseq objects to differentiate from your different filtered object `ps.flt.flt <- prune_taxa(taxa_sums(ps.flt) != 0, ps.flt)`. See also Chapter \@ref(plottingtaxa) where the phyloseq object is pre-filtered before ggplotting.  
    
 In this example, we are keeping the sample with lowest reads. No further filtering required at this stage.   
   

@@ -178,7 +178,7 @@ Following a few general comments:
 \section{General requirements}\label{general-requirements}}
 
 \hypertarget{access-to-computational-resources}{%
-\subsection{Access to computational resources**}\label{access-to-computational-resources}}
+\subsection{Access to computational resources}\label{access-to-computational-resources}}
 
 To process data you will need a personal computer or online computational resources with sufficient number of CPUs, working memory and storage. If you want to run most of the processing on a personal computer then I'd recommend a minimum of \textbf{4 CPUs, 16 Gb RAM and 500 Gb storage}. However, please note that some alignment tasks require more RAM, hence some of the steps (e.g.~taxonomic classifications) may require a more powerful resource. The advantage of using a personal computer is that you can frequently update the latest packages without relying on a university administrator to do that for you. Furthermore, with a personal computer you wont need to share with others, making it easier to run the packages without a workload manager.
 
@@ -257,10 +257,45 @@ Gives\\
 
 This GitBook, including all its files, is hosted on one of my GitHub repositories (\url{https://github.com/chrismitbiz/ABlab-workflows}). If you have any comments you can ask a question on the Discussion Page of this repository. You require a GitHub account to do that. It is free.
 
+\hypertarget{a-note-on-rarefying-normalising}{%
+\section{A note on rarefying (normalising)}\label{a-note-on-rarefying-normalising}}
+
+Various data normalisation methods exists and opinions on their applicability diverge.
+
+Example of normalisation methods:
+
+\begin{itemize}
+\tightlist
+\item
+  Rarefying data\\
+\item
+  Transformation into relative abundances
+\item
+  Centered log-ratios
+\item
+  Cumulative Sum Scaling (CSS)\\
+\item
+  Upper Quantile (UQ)\\
+\item
+  edgeR-trimmed mean of M values (TMM)\\
+\item
+  DESeq-variance stabilizing transformation (VS)
+\end{itemize}
+
+Rarefying data is one of the more contested methods. We acknowledge that \textbf{rarefying data} (i.e.~the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus \textbf{not recommended for differential abundance analyses}. Check out this well cited paper here to learn why: \href{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531}{Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible}
+
+However, rarefying still ``\emph{outperformed all the other normalization methods for producing accurate BC (Bray-Curtis) dissimilarities and subsequent PCoAs and PERMANOVAs.}'' Paper here: \href{https://doi.org/10.1111/2041-210X.13115}{Methods for normalizing microbiome data: An ecological perspective}.
+
+For our workflows we may \textbf{rarefy data} before creating \textbf{alpha diversity} indices (Shannon, Simpsons etc), \textbf{beta diversity} indices (Bray-Curtis dissimilarities).
+
+Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use \textbf{centred-log ratios} (Aitchison distances), which makes count normalisation unnecessary. The \textbf{compositional approach} and centred log-ratios are further discussed in the paper \href{https://doi.org/10.3389/fmicb.2017.02224}{Microbiome Datasets Are Compositional: And This Is Not Optional}.
+
 \hypertarget{workflows-from-other-lab-groups}{%
 \section{Workflows from other lab groups}\label{workflows-from-other-lab-groups}}
 
-Searching for ``amplicon-sequencing'' under ``Topics'' on GitHub gave 37 results.
+The following review ``\emph{should serve as a starting point for considering what options are available}'': \href{https://www.frontiersin.org/articles/10.3389/fmicb.2017.01561/full}{Analysing microbial community composition through amplicon sequencing: from sampling to hypothesis testing}
+
+Furthermore, searching for ``amplicon-sequencing'' under ``Topics'' on GitHub gave 37 results.
 
 \begin{itemize}
 \item
@@ -1232,7 +1267,7 @@ I typically use the rarefaction curve to check if there are samples that need re
 \end{Highlighting}
 \end{Shaded}
 
-Once you identified the samples you would like to remove, you can filter out specific samples or treatments from the phyloseq objects. For example, with the \texttt{prune\_samples(sample\_data(ps.flt)\$Treatment\ \%notin\%\ c("Negative"),\ ps.flt)} command here we would sample out any samples labeled as ``Negative'' in the metadata. Afterwards make sure to sample out any taxa that now contain zero reads because they were only present in the removed samples. Perhaps, create new phyloseq objects to differentiate from your different filtered object \texttt{ps.flt.flt\ \textless{}-\ prune\_taxa(taxa\_sums(ps.flt)\ !=\ 0,\ ps.flt)}.
+Once you identified the samples you would like to remove (e.g.~samples with too few reads), you can filter out these specific samples or treatments from the phyloseq objects. For example, with the \texttt{prune\_samples(sample\_data(ps.flt)\$Treatment\ \%notin\%\ c("Negative"),\ ps.flt)} command here we would sample out any samples labeled as ``Negative'' in the metadata. Afterwards make sure to sample out any taxa that now contain zero reads because they were only present in the removed samples. Perhaps, create new phyloseq objects to differentiate from your different filtered object \texttt{ps.flt.flt\ \textless{}-\ prune\_taxa(taxa\_sums(ps.flt)\ !=\ 0,\ ps.flt)}. See also Chapter \ref{plottingtaxa} where the phyloseq object is pre-filtered before ggplotting.
 
 In this example, we are keeping the sample with lowest reads. No further filtering required at this stage.
 
@@ -1421,8 +1456,8 @@ This might be useful if you would like to share your abundance and taxa tables w
 \textbf{Note:}\\
 This code is an amalgamation from various sources. Apart from putting it together into this workflow I do not take credit for it.
 
-\hypertarget{plotting-diversity}{%
-\chapter{Plotting diversity}\label{plotting-diversity}}
+\hypertarget{plottingdiversity}{%
+\chapter{Plotting diversity}\label{plottingdiversity}}
 
 Some visualisations of alpha and beta diversity.
 
@@ -1433,12 +1468,17 @@ This chapter introduces you to a basic workflow for plotting alpha and beta dive
 
 Furthermore, beta diversity, i.e.~four different type of ordinations are plotted. The examples, include non-metric dimensional scaling on Bray-Curtis dissimilaries, Principal Component Analysis (Aitchison distance), Redundancy Analysis ( Aitchison) and a Principal Coordinate Analysis on unweighted uniFrac distances.
 
-The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: \url{https://sites.google.com/site/mb3gustame/home}, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter \ref{about}.
+The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: \url{https://sites.google.com/site/mb3gustame/home}, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter \ref{gettingstarted} under ``Workflows from other lab groups''.
 
-Prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying I recommend this paper here: \href{https://www.nature.com/articles/s41598-021-01636-1}{Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities}. We will follow the recommendations from the authors of this paper to resample without replacement.
+As mentioned in Chapter \ref{gettingstarted}, prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying - this paper explains the process: \href{https://www.nature.com/articles/s41598-021-01636-1}{Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities}.\\
+We will follow the recommendations from the authors of this paper to resample without replacement.
 
-Other normalisation methods are also possible and it is up to you, the analyst, to understand and decide on the appropriate methods. I found centred-log ratios (Aitchison distances) also intuitive in interpretation, which are included into the workflow below in a PCA and RDA. Log-ratios are further discussed in the paper \href{https://doi.org/10.3389/fmicb.2017.02224}{Microbiome Datasets Are Compositional: And This Is Not Optional}.\\
-In fact, using different types of normalisation, dissimilarities or distances, while providing different types of information, may complement each other and help in interpretation of your data.
+Note that rarefying is generally not recommended for differential abundance analyses due to the loss of statistical power. Learn why here: \href{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531}{Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible}.
+
+Other normalisation methods (see Chapter \ref{gettingstarted}) are also possible and it is up to you, the analyst, to understand and decide on the appropriate methods.
+
+My preference is to use centred-log ratios (Aitchison distances), which makes count normalisation unnecessary. Aitchison distances are included into the workflow below in a PCA and RDA. The compositional approach and centred log-ratios are further discussed in the paper \href{https://doi.org/10.3389/fmicb.2017.02224}{Microbiome Datasets Are Compositional: And This Is Not Optional}.\\
+In fact, comparing the results after applying different types of normalisation methods, dissimilarities or distances may complement your analysis and help in interpretation of data.
 
 \hypertarget{prerequisites}{%
 \subsection{Prerequisites}\label{prerequisites}}
@@ -1446,7 +1486,7 @@ In fact, using different types of normalisation, dissimilarities or distances, w
 \begin{itemize}
 \tightlist
 \item
-  a phyloseq object; either read in from a pre-saved \texttt{.rds} file or created as described in chapter \ref{Qiime2R}.
+  A phyloseq object; either read in from a pre-saved \texttt{.rds} file or created as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.
 \end{itemize}
 
 Time to get started\ldots{}
@@ -2004,6 +2044,270 @@ UniFrac distances are derived from phylogenetic distances between ASVs, which me
 
 \textbf{Note:}
 This code is an amalgamation from various sources. Apart from putting it together into a pipeline I do not take credit for it.
+
+\hypertarget{plottingtaxa}{%
+\chapter{Plotting taxonomy}\label{plottingtaxa}}
+
+Some ggplots to visualise and compare taxonomy.
+
+\hypertarget{introduction-4}{%
+\section{Introduction}\label{introduction-4}}
+
+\hypertarget{prerequisites-1}{%
+\subsection{Prerequisites}\label{prerequisites-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  A phyloseq object; either read in from a pre-saved \texttt{.rds} file or created as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.
+\end{itemize}
+
+\hypertarget{workflow-4}{%
+\section{Workflow}\label{workflow-4}}
+
+\hypertarget{prepare}{%
+\subsection{Prepare}\label{prepare}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(phyloseq)}
+\FunctionTok{library}\NormalTok{(ggpubr)       }\CommentTok{\# a handy helper package for ggplots}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{theme\_set}\NormalTok{(}\FunctionTok{theme\_bw}\NormalTok{())  }\CommentTok{\# setting the theme for ggplots}
+\FunctionTok{library}\NormalTok{(microbiome)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{load-phyloseq-object-1}{%
+\subsection{Load phyloseq object}\label{load-phyloseq-object-1}}
+
+Do this if you saved a phyloseq object in .rds format before. Otherwise create a phyloseq object as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# reading in a previously saved phyloseq object}
+\NormalTok{ps }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{\textquotesingle{}ps\_ProjectX\_2022July\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\#ps (not run) to get an overview of number of taxa and samples contained in the phyloseq object}
+
+\CommentTok{\# output}
+\CommentTok{\# phyloseq{-}class experiment{-}level object}
+\CommentTok{\# otu\_table()   OTU Table:         [ 4218 taxa and 51 samples ]}
+\CommentTok{\# sample\_data() Sample Data:       [ 51 samples by 15 sample variables ]}
+\CommentTok{\# tax\_table()   Taxonomy Table:    [ 4218 taxa by 7 taxonomic ranks ]}
+\CommentTok{\# phy\_tree()    Phylogenetic Tree: [ 4218 tips and 4217 internal nodes ]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{check-metadata-contained-in-the-phyloseq-object.}{%
+\subsection{Check metadata contained in the phyloseq object.}\label{check-metadata-contained-in-the-phyloseq-object.}}
+
+Now lets check which columns in the metadata contain factors. Factors enable you to determine the order of categorical data, such as treatments, in the ggplots. Learn more about factors here: \url{https://swcarpentry.github.io/r-novice-inflammation/12-supp-factors/index.html}.
+
+\hypertarget{colors-1}{%
+\subsection{Colors}\label{colors-1}}
+
+Colors: Before you create ggplots to compare taxonomic compositions between samples and treatments it is helpful to create a named color vector that will apply to all your plots and ensures that each taxonomic name is a specific color across all your plots. It is only optional as ggplot can refer to its default colors, however the colours for individual taxa will be different between plots.
+
+There are different packages that help to create a names color vector. Here we use the package \texttt{colorspace}.
+
+A handy color cheat sheet is available here: \url{https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf}
+
+First create a vector of all possible taxonomic names that could be included in your ggplot. For example, if you plan to plot on phylum-level then all phyla names are extracted from the phyloseq object and then those names are given a color code.
+
+\hypertarget{normalisation-and-pre-filtering}{%
+\subsection{Normalisation and pre-filtering}\label{normalisation-and-pre-filtering}}
+
+For a `fair' comparison, abundances should be normalised to minimise potential bias due to the different sample library sizes, i.e the different total number of sequences in each sample. See alsoChapter \ref{plottingdiversity} in subchapter ``Pre-filter, rarefy and calculate diversity''.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Some arbitrary quality filtering of individual ASVs. For example, here we choose to}
+\CommentTok{\# remove ASVs that have very few reads (i.e. less than 5 counts of the amplicon sequence).}
+\CommentTok{\# The may remove some more arbitrary ASVs. }
+\NormalTok{ps\_flt  }\OtherTok{\textless{}{-}}  \FunctionTok{prune\_taxa}\NormalTok{(}\FunctionTok{taxa\_sums}\NormalTok{(ps) }\SpecialCharTok{\textgreater{}=} \DecValTok{5}\NormalTok{, ps) }\CommentTok{\#minimum reads per feature  }
+\CommentTok{\#ps\_flt }
+\CommentTok{\# phyloseq{-}class experiment{-}level object}
+\CommentTok{\# otu\_table()   OTU Table:         [ 3911 taxa and 51 samples ]}
+\CommentTok{\# sample\_data() Sample Data:       [ 51 samples by 15 sample variables ]}
+\CommentTok{\# tax\_table()   Taxonomy Table:    [ 3911 taxa by 7 taxonomic ranks ]}
+\CommentTok{\# phy\_tree()    Phylogenetic Tree: [ 3911 tips and 3910 internal nodes ]}
+
+\CommentTok{\# Use \textasciigrave{}prune\_samples()\textasciigrave{} If you need to filter data to a subset of samples.}
+\CommentTok{\# E.g. choose samples of reactor 1A only}
+\NormalTok{ps\_flt\_1A  }\OtherTok{\textless{}{-}}  \FunctionTok{prune\_samples}\NormalTok{(}\FunctionTok{sample\_data}\NormalTok{(ps\_flt)}\SpecialCharTok{$}\NormalTok{Reactor }\SpecialCharTok{==} \StringTok{"1A"}\NormalTok{, ps\_flt) }
+
+\CommentTok{\# Use \textasciigrave{}prune\_taxa\textasciigrave{} to remove any ASVs/taxa that are now zero }
+\CommentTok{\# (i.e. are not present in reactor 1A). }
+\CommentTok{\# In other words we keep only those ASVs/Taxa that are present in the filtered samples. }
+\NormalTok{ps\_flt\_1A  }\OtherTok{\textless{}{-}} \FunctionTok{prune\_taxa}\NormalTok{(}\FunctionTok{taxa\_sums}\NormalTok{(ps\_flt\_1A) }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{, ps\_flt\_1A)}
+\CommentTok{\#phyloseq{-}class experiment{-}level object}
+\CommentTok{\#otu\_table()   OTU Table:         [ 420 taxa and 2 samples ]}
+\CommentTok{\#sample\_data() Sample Data:       [ 2 samples by 15 sample variables ]}
+\CommentTok{\#tax\_table()   Taxonomy Table:    [ 420 taxa by 7 taxonomic ranks ]}
+\CommentTok{\#phy\_tree()    Phylogenetic Tree: [ 420 tips and 419 internal nodes ]}
+
+\CommentTok{\# rarefy and create a new phyloseq object containing normalised abundances}
+\NormalTok{ps\_rare }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{rarefy\_even\_depth}\NormalTok{(ps\_flt, }
+    \AttributeTok{sample.size =} \FunctionTok{min}\NormalTok{(}\FunctionTok{colSums}\NormalTok{(}\FunctionTok{otu\_table}\NormalTok{(ps\_flt))),  }
+    \AttributeTok{rngseed =} \ConstantTok{TRUE}\NormalTok{, }\CommentTok{\# set a seed for the random subsampling}
+    \AttributeTok{replace =} \ConstantTok{FALSE}\NormalTok{, }\CommentTok{\# without replacement}
+    \AttributeTok{trimOTUs =} \ConstantTok{TRUE}\NormalTok{ ) }\CommentTok{\# remove ASVs that are no longer observed in any sample }
+\CommentTok{\# ps\_rare }
+\CommentTok{\# phyloseq{-}class experiment{-}level object}
+\CommentTok{\# otu\_table()   OTU Table:         [ 3862 taxa and 51 samples ]}
+\CommentTok{\# sample\_data() Sample Data:       [ 51 samples by 15 sample variables ]}
+\CommentTok{\#tax\_table()   Taxonomy Table:    [ 3862 taxa by 7 taxonomic ranks ]}
+\CommentTok{\# phy\_tree()    Phylogenetic Tree: [ 3862 tips and 3861 internal nodes ]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{analysis-and-plotting}{%
+\subsection{Analysis and plotting}\label{analysis-and-plotting}}
+
+Create stacked barplot comparing relative abundances of the normalised phyloseq object.
+
+First abundances are aggregated to phylum level and then transformed into relative abundances. This is followed by the creation of a long-form abundance table that includes metadata with help of the very handy \texttt{psmelt} function from the phyloseq package. The function \texttt{psmelt} takes a phyloseq object and extracts abundances and related metadata into a dataframe for plotting.
+
+Finally, the abundances of this long abundance table are summarised into the factors that you want to compare. In this example, abundances of different Locations are compared, hence the column \texttt{Location} will be summarised and plotted.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Phylum plot  }
+\CommentTok{\# First, create a long abundance data table  }
+\NormalTok{taxa\_data }\OtherTok{\textless{}{-}}\NormalTok{  microbiome}\SpecialCharTok{::}\FunctionTok{aggregate\_taxa}\NormalTok{(ps\_flt, }\StringTok{"Phylum"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}   
+  \CommentTok{\# aggregate abundances to phylum{-}level}
+\NormalTok{  microbiome}\SpecialCharTok{::}\FunctionTok{transform}\NormalTok{(., }\StringTok{"compositional"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# transform abundance to relative abundances}
+\NormalTok{  phyloseq}\SpecialCharTok{::}\FunctionTok{psmelt}\NormalTok{(.)  }\CommentTok{\# extract long abundance table with metadata for plotting. }
+
+\CommentTok{\# Note: The \textasciigrave{}.\textasciigrave{} replaces the phyloseq object. }
+\CommentTok{\# This is because the functions are piped into a sequence by using the \textasciigrave{}\%\textgreater{}\%\textasciigrave{} operator. }
+\CommentTok{\# The \textasciigrave{}\%\textgreater{}\%\textasciigrave{} operator is a Tidyverse function and is very helpful in putting }
+\CommentTok{\# various different operations and changes to the data into one sequence. }
+\CommentTok{\# We could have put the below operations into the same above sequence too.}
+\CommentTok{\# There is no difference in the outcome.}
+
+\CommentTok{\# Summarise abundances by columns of your choice containing factors.}
+\CommentTok{\# E.g. compute the mean abundances based on the columns \textasciigrave{}Location\textasciigrave{}, \textasciigrave{}Reactor\textasciigrave{} and \textasciigrave{}Phylum.   }
+\NormalTok{taxa\_data }\OtherTok{\textless{}{-}}\NormalTok{ taxa\_data }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(Location, Reactor, Phylum) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# group by Location and Phylum to summarise data}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{Meanabu =} \FunctionTok{mean}\NormalTok{(Abundance)) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# Create a column called \textasciigrave{}Meanabu\textasciigrave{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Meanabu }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}                  \CommentTok{\# filter out rows that have 0 abundance}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(Meanabu)) }\CommentTok{\# sort the abundances }
+
+\CommentTok{\# Now, create a vector with phylum names that will determine the order of }
+\CommentTok{\# phylum names in the stacked barcharts.}
+\NormalTok{order }\OtherTok{\textless{}{-}}\NormalTok{ taxa\_data}\SpecialCharTok{$}\NormalTok{Phylum }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ unique}
+
+\CommentTok{\# Phylum names need to be factors for plotting. }
+\CommentTok{\# This is the final dataframe for plotting}
+\NormalTok{taxa\_data}\SpecialCharTok{$}\NormalTok{Phylum }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(taxa\_data}\SpecialCharTok{$}\NormalTok{Phylum, }\AttributeTok{levels =}\NormalTok{ order) }\CommentTok{\# }
+\CommentTok{\# Check out the first few rows}
+\FunctionTok{head}\NormalTok{(taxa\_data)}
+  
+\CommentTok{\# Finally its time to create a ggplot. }
+\NormalTok{taxaplot }\OtherTok{\textless{}{-}}\NormalTok{ taxa\_data }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggbarplot}\NormalTok{( }\AttributeTok{x=} \StringTok{"Reactor"}\NormalTok{, }
+               \AttributeTok{y =} \StringTok{"Meanabu"}\NormalTok{, }
+               \AttributeTok{fill =} \StringTok{"Phylum"}\NormalTok{,}
+               \AttributeTok{position =} \FunctionTok{position\_stack}\NormalTok{(),}
+               \AttributeTok{legend =} \StringTok{"right"}\NormalTok{,}
+               \AttributeTok{ylab =} \StringTok{"Relative Abundances"}\NormalTok{) }\SpecialCharTok{+}
+            \CommentTok{\# Tell ggplot to use the \textasciigrave{}cols\textasciigrave{} vector created earlier}
+            \CommentTok{\# only the first 20 colors are shown in legend, hence the \textasciigrave{}order[1:20]\textasciigrave{}}
+    \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cols, }
+                      \AttributeTok{limits =}\NormalTok{ order[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{]) }\SpecialCharTok{+}   
+    \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{vars}\NormalTok{(Location),     }\CommentTok{\# create facets by factors in column \textasciigrave{}Location\textasciigrave{}.}
+               \AttributeTok{scales =} \StringTok{"free\_x"}\NormalTok{,}
+               \AttributeTok{space =} \StringTok{"free\_x"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{byrow =} \ConstantTok{FALSE}\NormalTok{)) }\SpecialCharTok{+} 
+    \FunctionTok{rotate\_x\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{) }\SpecialCharTok{+}           \CommentTok{\# rotate the x{-}axis labels}
+    \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}                          \CommentTok{\# makes ggplots look better}
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.x=}\FunctionTok{element\_blank}\NormalTok{(),   }\CommentTok{\# remove the background grid}
+          \AttributeTok{panel.grid.major =} \FunctionTok{element\_blank}\NormalTok{(),}
+          \AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{()) }
+
+\NormalTok{taxaplot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/Phylumplots-1.pdf}
+
+\hypertarget{prevelance-table}{%
+\subsection{Prevelance table}\label{prevelance-table}}
+
+A prevalence table may assist in getting an overview of the abundances.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prevalancedf }\OtherTok{=} \FunctionTok{apply}\NormalTok{(}\AttributeTok{X =}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{otu\_table}\NormalTok{(ps\_flt),}
+                       \AttributeTok{MARGIN =} \DecValTok{1}\NormalTok{,}
+                       \AttributeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{sum}\NormalTok{(x }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{)\})}
+
+\NormalTok{prevalancedf }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Prevalence =}\NormalTok{ prevalancedf,}
+                      \AttributeTok{TotalAbundance =}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{taxa\_sums}\NormalTok{(ps\_flt),}
+\NormalTok{                      phyloseq}\SpecialCharTok{::}\FunctionTok{tax\_table}\NormalTok{(ps\_flt))}
+
+\NormalTok{prevalancedf }\OtherTok{\textless{}{-}}\NormalTok{ plyr}\SpecialCharTok{::}\FunctionTok{ddply}\NormalTok{(prevalancedf, }\StringTok{"Phylum"}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(df1)\{}
+                  \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{mean\_prevalence=}\FunctionTok{mean}\NormalTok{(df1}\SpecialCharTok{$}\NormalTok{Prevalence), }
+                  \AttributeTok{total\_abundance=}\FunctionTok{sum}\NormalTok{(df1}\SpecialCharTok{$}\NormalTok{TotalAbundance, }\AttributeTok{na.rm =}\NormalTok{ T), }
+                  \AttributeTok{stringsAsFactors =}\NormalTok{ F)}
+\NormalTok{                    \})}
+
+\CommentTok{\# print table from highest to lowest abundance }
+\NormalTok{prevalancedf }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(total\_abundance))  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                           Phylum mean_prevalence total_abundance
+## 1                    Chloroflexi        5.124069          228197
+## 2                   Bacteroidota        4.688679          201921
+## 3                     Firmicutes        4.453435          197683
+## 4               Actinobacteriota        5.231343          165740
+## 5                 Proteobacteria        4.249147          161756
+## 6               Desulfobacterota        5.425743           57146
+## 7                   Synergistota        6.595506           51225
+## 8                 Cloacimonadota        6.500000           45294
+## 9                Acidobacteriota        3.953488           35304
+## 10                  Thermotogota       10.190476           33489
+## 11                 Spirochaetota        4.578431           25015
+## 12             Verrucomicrobiota        3.382022           16598
+## 13             Fermentibacterota       35.000000           14812
+## 14               Patescibacteria        3.669173           14399
+## 15            Caldatribacteriota        5.500000            8932
+## 16               Planctomycetota        2.573171            5455
+## 17                Armatimonadota        2.933333            4443
+## 18 Marinimicrobia_(SAR406_clade)       20.000000            3818
+## 19                          <NA>        4.052632            3511
+## 20               Hydrogenedentes        3.950000            3411
+## 21                  Nitrospirota        8.750000            2853
+## 22              Campilobacterota        4.187500            2710
+## 23  SAR324_clade(Marine_group_B)        4.000000            2616
+## 24                           WS1        3.625000            2559
+## 25                Fibrobacterota        2.826087            1938
+## 26                   Myxococcota        3.176471            1353
+## 27              Bdellovibrionota        3.600000            1111
+## 28                 Caldisericota        3.818182            1067
+## 29                         WPS-2        2.666667             897
+## 30                   Sumerlaeota        3.888889             683
+## 31                 Cyanobacteria        9.000000             647
+## 32                Fusobacteriota        2.888889             565
+## 33          Coprothermobacterota        2.800000             511
+## 34               Gemmatimonadota        2.875000             300
+## 35               Elusimicrobiota        2.833333             225
+## 36                      CK-2C2-2        4.000000             162
+## 37             Methylomirabilota        4.000000             159
+## 38              Latescibacterota        2.333333              86
+## 39                  Dependentiae        2.500000              78
+## 40                  Zixibacteria        5.000000              74
+## 41                       Sva0485        2.333333              66
+## 42                  Acetothermia        2.000000              59
+## 43                           WS4        1.500000              39
+## 44                  Hydrothermae        1.000000              26
+## 45                  Deinococcota        1.000000              11
+\end{verbatim}
 
   \bibliography{book.bib,packages.bib}
 

@@ -1,0 +1,235 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Plotting taxonomy {#plottingtaxa}
+  
+Some ggplots to visualise and compare taxonomy. 
+  
+## Introduction  
+  
+### Prerequisites   
+    
+* A phyloseq object; either read in from a pre-saved `.rds` file or created as described in chapter \@ref(Qiime2R) under "Import qiime-files and create a phyloseq object".   
+  
+## Workflow
+  
+### Prepare
+
+```{r 07packagesdiversity, message=FALSE, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
+library(phyloseq)
+library(ggpubr)       # a handy helper package for ggplots
+library(tidyverse)
+theme_set(theme_bw())  # setting the theme for ggplots
+library(microbiome)
+```
+
+### Load phyloseq object  
+  
+Do this if you saved a phyloseq object in .rds format before. Otherwise create a phyloseq object as described in chapter \@ref(Qiime2R) under "Import qiime-files and create a phyloseq object".  
+  
+```{r loadpsV4, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
+# reading in a previously saved phyloseq object
+ps <- readRDS('ps_ProjectX_2022July')
+
+#ps (not run) to get an overview of number of taxa and samples contained in the phyloseq object
+
+# output
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 4218 taxa and 51 samples ]
+# sample_data() Sample Data:       [ 51 samples by 15 sample variables ]
+# tax_table()   Taxonomy Table:    [ 4218 taxa by 7 taxonomic ranks ]
+# phy_tree()    Phylogenetic Tree: [ 4218 tips and 4217 internal nodes ]
+```
+  
+### Check metadata contained in the phyloseq object.  
+  
+Now lets check which columns in the metadata contain factors. Factors enable you to determine the order of categorical data, such as treatments, in the ggplots. Learn more about factors here: https://swcarpentry.github.io/r-novice-inflammation/12-supp-factors/index.html.  
+  
+```{r 07metadatacheck, include=FALSE, echo=TRUE, warning=FALSE, message=FALSE}
+# Use the 'structure' (str) command to get an overview of your data columns
+# Learn what are characters, integers or factors, 
+str(data.frame(sample_data(ps)))
+```
+  
+  
+### Colors  
+  
+Colors: Before you create ggplots to compare taxonomic compositions between samples and treatments it is helpful to create a named color vector that will apply to all your plots and ensures that each taxonomic name is a specific color across all your plots. It is only optional as ggplot can refer to its default colors, however the colours for individual taxa will be different between plots.    
+  
+There are different packages that help to create a names color vector. Here we use the package `colorspace`.  
+  
+A handy color cheat sheet is available here: https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf  
+  
+First create a vector of all possible taxonomic names that could be included in your ggplot. For example, if you plan to plot on phylum-level then all phyla names are extracted from the phyloseq object and then those names are given a color code.  
+  
+```{r cols, , include=FALSE, echo=TRUE, warning=FALSE, message=FALSE, results=FALSE}
+# You can check Hex codes with help of https://htmlcolorcodes.com/
+# https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf
+
+# For all possible phyla  names
+phylum_data <-  microbiome::aggregate_taxa(ps, "Phylum") # aggregate data to phylum level 
+# the pacakage 'microbiome' has some handy helper functions such as `aggregate`.
+names <- rownames(phylum_data@tax_table) # extract a vector of phylum names using `rownames`
+
+# Package colorspace
+library(colorspace)
+cols <- colorspace::rainbow_hcl(length(names)) # this creates x number of hex codes. x = `length(names)`. 
+#  in this case there are 48 phyla, hence we get 48 hex codes. 
+names(cols) <- names  # name each hex code with phyla names. 
+
+# Option to use the package  viridis
+#library(viridis)
+# cols <- viridis::turbo(length(names), direction = -1)
+# names(cols) <- names
+
+# Option to use the package RColorBrewer
+# library(RColorBrewer)
+# display.brewer.all(length(names))  # check colour themes available in the RColorBrewer package
+# cols <- brewer.pal(length(names), 'RdYlBu')
+# cols <- rainbow_hcl(length(names))
+# names(cols) <- names
+```
+  
+  
+### Normalisation and pre-filtering  
+  
+For a 'fair' comparison, abundances should be normalised to minimise potential bias due to the different sample library sizes, i.e the different total number of sequences in each sample. See alsoChapter \@ref(plottingdiversity) in subchapter "Pre-filter, rarefy and calculate diversity".  
+  
+```{r filterps, echo=TRUE, message=FALSE, warning=FALSE, results=FALSE}
+# Some arbitrary quality filtering of individual ASVs. For example, here we choose to
+# remove ASVs that have very few reads (i.e. less than 5 counts of the amplicon sequence).
+# The may remove some more arbitrary ASVs. 
+ps_flt  <-  prune_taxa(taxa_sums(ps) >= 5, ps) #minimum reads per feature  
+#ps_flt 
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 3911 taxa and 51 samples ]
+# sample_data() Sample Data:       [ 51 samples by 15 sample variables ]
+# tax_table()   Taxonomy Table:    [ 3911 taxa by 7 taxonomic ranks ]
+# phy_tree()    Phylogenetic Tree: [ 3911 tips and 3910 internal nodes ]
+
+# Use `prune_samples()` If you need to filter data to a subset of samples.
+# E.g. choose samples of reactor 1A only
+ps_flt_1A  <-  prune_samples(sample_data(ps_flt)$Reactor == "1A", ps_flt) 
+
+# Use `prune_taxa` to remove any ASVs/taxa that are now zero 
+# (i.e. are not present in reactor 1A). 
+# In other words we keep only those ASVs/Taxa that are present in the filtered samples. 
+ps_flt_1A  <- prune_taxa(taxa_sums(ps_flt_1A) > 0, ps_flt_1A)
+#phyloseq-class experiment-level object
+#otu_table()   OTU Table:         [ 420 taxa and 2 samples ]
+#sample_data() Sample Data:       [ 2 samples by 15 sample variables ]
+#tax_table()   Taxonomy Table:    [ 420 taxa by 7 taxonomic ranks ]
+#phy_tree()    Phylogenetic Tree: [ 420 tips and 419 internal nodes ]
+
+# rarefy and create a new phyloseq object containing normalised abundances
+ps_rare <- phyloseq::rarefy_even_depth(ps_flt, 
+    sample.size = min(colSums(otu_table(ps_flt))),  
+    rngseed = TRUE, # set a seed for the random subsampling
+    replace = FALSE, # without replacement
+    trimOTUs = TRUE ) # remove ASVs that are no longer observed in any sample 
+# ps_rare 
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 3862 taxa and 51 samples ]
+# sample_data() Sample Data:       [ 51 samples by 15 sample variables ]
+#tax_table()   Taxonomy Table:    [ 3862 taxa by 7 taxonomic ranks ]
+# phy_tree()    Phylogenetic Tree: [ 3862 tips and 3861 internal nodes ]
+```
+  
+  
+### Analysis and plotting  
+  
+Create stacked barplot comparing relative abundances of the normalised phyloseq object.  
+  
+First abundances are aggregated to phylum level and then transformed into relative abundances. This is followed by the creation of a long-form abundance table that includes metadata with help of the very handy `psmelt` function from the phyloseq package. The function `psmelt` takes a phyloseq object and extracts abundances and related metadata into a dataframe for plotting. 
+  
+Finally, the abundances of this long abundance table are summarised into the factors that you want to compare. In this example, abundances of different Locations are compared, hence the column `Location` will be summarised and plotted.  
+  
+```{r Phylumplots, echo=TRUE, message=FALSE, warning=FALSE, results=FALSE, fig.asp=0.45, fig.width=13}
+# Phylum plot  
+# First, create a long abundance data table  
+taxa_data <-  microbiome::aggregate_taxa(ps_flt, "Phylum") %>%   
+  # aggregate abundances to phylum-level
+  microbiome::transform(., "compositional") %>%  # transform abundance to relative abundances
+  phyloseq::psmelt(.)  # extract long abundance table with metadata for plotting. 
+
+# Note: The `.` replaces the phyloseq object. 
+# This is because the functions are piped into a sequence by using the `%>%` operator. 
+# The `%>%` operator is a Tidyverse function and is very helpful in putting 
+# various different operations and changes to the data into one sequence. 
+# We could have put the below operations into the same above sequence too.
+# There is no difference in the outcome.
+
+# Summarise abundances by columns of your choice containing factors.
+# E.g. compute the mean abundances based on the columns `Location`, `Reactor` and `Phylum.   
+taxa_data <- taxa_data %>%
+    dplyr::group_by(Location, Reactor, Phylum) %>%  # group by Location and Phylum to summarise data
+    dplyr::summarise(Meanabu = mean(Abundance)) %>%  # Create a column called `Meanabu`
+    dplyr::filter(Meanabu > 0) %>%                  # filter out rows that have 0 abundance
+    dplyr::arrange(desc(Meanabu)) # sort the abundances 
+
+# Now, create a vector with phylum names that will determine the order of 
+# phylum names in the stacked barcharts.
+order <- taxa_data$Phylum %>% unique
+
+# Phylum names need to be factors for plotting. 
+# This is the final dataframe for plotting
+taxa_data$Phylum <- factor(taxa_data$Phylum, levels = order) # 
+# Check out the first few rows
+head(taxa_data)
+  
+# Finally its time to create a ggplot. 
+taxaplot <- taxa_data %>%
+    ggbarplot( x= "Reactor", 
+               y = "Meanabu", 
+               fill = "Phylum",
+               position = position_stack(),
+               legend = "right",
+               ylab = "Relative Abundances") +
+            # Tell ggplot to use the `cols` vector created earlier
+            # only the first 20 colors are shown in legend, hence the `order[1:20]`
+    scale_fill_manual(values = cols, 
+                      limits = order[1:20]) +   
+    facet_grid(cols = vars(Location),     # create facets by factors in column `Location`.
+               scales = "free_x",
+               space = "free_x") +
+    guides(fill = guide_legend(byrow = FALSE)) + 
+    rotate_x_text(angle = 45) +           # rotate the x-axis labels
+    theme_bw() +                          # makes ggplots look better
+    theme(axis.title.x=element_blank(),   # remove the background grid
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank()) 
+
+taxaplot
+```
+  
+  
+### Prevelance table  
+  
+A prevalence table may assist in getting an overview of the abundances.    
+  
+```{r prevalencetable}
+
+prevalancedf = apply(X = phyloseq::otu_table(ps_flt),
+                       MARGIN = 1,
+                       FUN = function(x){sum(x > 0)})
+
+prevalancedf = data.frame(Prevalence = prevalancedf,
+                      TotalAbundance = phyloseq::taxa_sums(ps_flt),
+                      phyloseq::tax_table(ps_flt))
+
+prevalancedf <- plyr::ddply(prevalancedf, "Phylum", function(df1){
+                  data.frame(mean_prevalence=mean(df1$Prevalence), 
+                  total_abundance=sum(df1$TotalAbundance, na.rm = T), 
+                  stringsAsFactors = F)
+                    })
+
+# print table from highest to lowest abundance 
+prevalancedf %>% 
+  arrange(desc(total_abundance))  
+
+```
+  
+    

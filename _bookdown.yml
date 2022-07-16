@@ -5,6 +5,7 @@ rmd_files: ["index.Rmd",
             "04_From_Miseq_to_Qiime.Rmd",
             "05_qiimetoR.Rmd",
             "06_diversity.Rmd",
+            "07_taxonomic_visualisations.Rmd",
             "references.Rmd"]
 output_dir: "docs"
 language:

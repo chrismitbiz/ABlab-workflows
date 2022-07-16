@@ -1,12 +1,11 @@
 # Getting started  {#gettingstarted}
-
-
+  
 Prerequisites will be listed in each sub chapter separately. 
 Following a few general comments:  
   
 ## General requirements 
   
-### Access to computational resources**
+### Access to computational resources
   
 To process data you will need a personal computer or online computational resources with sufficient number of CPUs, working memory and storage. If you want to run most of the processing on a personal computer then I'd recommend a minimum of **4 CPUs, 16 Gb RAM and 500 Gb storage**. However, please note that some alignment tasks require more RAM, hence some of the steps (e.g. taxonomic classifications) may require a more powerful resource. The advantage of using a personal computer is that you can frequently update the latest packages without relying on a university administrator to do that for you. Furthermore, with a personal computer you wont need to share with others, making it easier to run the packages without a workload manager. 
   
@@ -78,9 +77,33 @@ Gives
   
 This GitBook, including all its files, is hosted on one of my GitHub repositories (https://github.com/chrismitbiz/ABlab-workflows). If you have any comments you can ask a question on the Discussion Page of this repository. You require a GitHub account to do that. It is free.  
   
+## A note on rarefying (normalising)
+
+Various data normalisation methods exists and opinions on their applicability diverge.  
+
+Example of normalisation methods:  
+  
+* Rarefying data  
+* Transformation into relative abundances 
+* Centered log-ratios
+* Cumulative Sum Scaling (CSS)  
+* Upper Quantile (UQ)  
+* edgeR-trimmed mean of M values (TMM)  
+* DESeq-variance stabilizing transformation (VS)  
+  
+Rarefying data is one of the more contested methods. We acknowledge that **rarefying data** (i.e. the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus **not recommended for differential abundance analyses**. Check out this well cited paper here to learn why: [Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531)  
+  
+However, rarefying still "*outperformed all the other normalization methods for producing accurate BC (Bray-Curtis) dissimilarities and subsequent PCoAs and PERMANOVAs.*" Paper here: [Methods for normalizing microbiome data: An ecological perspective](https://doi.org/10.1111/2041-210X.13115).  
+   
+For our workflows we may **rarefy data** before creating **alpha diversity** indices (Shannon, Simpsons etc), **beta diversity** indices (Bray-Curtis dissimilarities). 
+  
+Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use **centred-log ratios** (Aitchison distances), which makes count normalisation unnecessary. The **compositional approach** and centred log-ratios are further discussed in the paper [Microbiome Datasets Are Compositional: And This Is Not Optional](https://doi.org/10.3389/fmicb.2017.02224).   
+  
 ## Workflows from other lab groups    
   
-Searching for "amplicon-sequencing" under "Topics" on GitHub gave 37 results. 
+The following review "*should serve as a starting point for considering what options are available*": [Analysing microbial community composition through amplicon sequencing: from sampling to hypothesis testing](https://www.frontiersin.org/articles/10.3389/fmicb.2017.01561/full)
+  
+Furthermore, searching for "amplicon-sequencing" under "Topics" on GitHub gave 37 results. 
   
 * nf-core/ampliseq  
 On the top of that list is the [nf-core/ampliseq](https://github.com/topics/amplicon-sequencing) pipeline developed by the nf-core community. It is based on a software called [Nextflow](https://www.nextflow.io/) which allows to put different processes into a pipeline. This is great for doing things a little more reproducible but it requires you to be fairly knowledgeable with Linux, container software, config files etc.. Not great to learn stuff for beginners.  
