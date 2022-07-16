@@ -10,13 +10,16 @@ Some ggplots to visualise and compare taxonomy.
   
 ## Introduction  
   
-### Prerequisites   
+In this chapter you will learn how to plot a custom taxa barplot to compare relative abundances between different sets of samples or treatments.  
+  
+### Required files or objects   
     
-A phyloseq object; either read in from a pre-saved `.rds` file or created as described in chapter \@ref(Qiime2R) under "Import qiime-files and create a phyloseq object".   
+* A `phyloseq` object; either read in from a pre-saved `.rds` file or created as described in chapter \@ref(Qiime2R) under "Import qiime-files and create a phyloseq object".  
+* If you dont have your own data you can download the pre-saved `.rds` object from this Chapter and follow the below steps: [ps_ProjectX_2022July](./ps_ProjectX_2022July) (unzip file once downloaded).  
   
 ## Workflow
   
-### Prepare
+### Packages
 
 ```{r 07packagesdiversity, message=FALSE, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
 library(phyloseq)
@@ -26,7 +29,7 @@ theme_set(theme_bw())  # setting the theme for ggplots
 library(microbiome)
 ```
 
-#### Load phyloseq object  
+### Load phyloseq object  
   
 Do this if you saved a phyloseq object in .rds format before. Otherwise create a phyloseq object as described in chapter \@ref(Qiime2R) under "Import qiime-files and create a phyloseq object".  
   
@@ -44,9 +47,11 @@ ps <- readRDS('ps_ProjectX_2022July')
 # phy_tree()    Phylogenetic Tree: [ 4218 tips and 4217 internal nodes ]
 ```
   
-#### Check metadata contained in the phyloseq object.  
+### Check metadata contained in the phyloseq object.  
   
 Now lets check which columns in the metadata contain factors. Factors enable you to determine the order of categorical data, such as treatments, in the ggplots. Learn more about factors here: https://swcarpentry.github.io/r-novice-inflammation/12-supp-factors/index.html.  
+  
+In this case, the columns `Reactor` and `Location` contain factors. 
   
 ```{r 07metadatacheck, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
 # Use the 'structure' (str) command to get an overview of your data columns
@@ -55,15 +60,15 @@ str(data.frame(sample_data(ps)))
 ```
   
   
-#### Colors  
+### Colors  
   
-Colors: Before you create ggplots to compare taxonomic compositions between samples and treatments it is helpful to create a named color vector that will apply to all your plots and ensures that each taxonomic name is a specific color across all your plots. It is only optional as ggplot can refer to its default colors, however the colours for individual taxa will be different between plots.    
+Before you create ggplots to compare taxonomic compositions between samples and treatments it is helpful to create a named color vector that will apply to all your plots and ensures that each taxonomic name is a specific color across all your plots.   
   
 There are different packages that help to create a names color vector. Here we use the package `colorspace`.  
   
 A handy color cheat sheet is available here: https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf  
   
-First create a vector of all possible taxonomic names that could be included in your ggplot. For example, if you plan to plot on phylum-level then all phyla names are extracted from the phyloseq object and then those names are given a color code.  
+First create a vector of all possible taxonomic names that could be included in your ggplot. For example, if you plan to plot on phylum-level then all phyla names are extracted from the phyloseq object and then those names are given a color code. The colors are defined as hex color codes.   
   
 ```{r cols, , include=TRUE, echo=TRUE, warning=FALSE, message=FALSE, results=FALSE}
 # You can check Hex codes with help of https://htmlcolorcodes.com/
@@ -91,12 +96,14 @@ names(cols) <- names  # name each hex code with phyla names.
 # cols <- brewer.pal(length(names), 'RdYlBu')
 # cols <- rainbow_hcl(length(names))
 # names(cols) <- names
+
+cols # check content of the color vector
 ```
   
   
-#### Pre-filtering  
+### Pre-filtering  
   
-Some arbitrary quality filtering of individual ASVs. For example, here we choose to remove ASVs that have very few reads (i.e. less than 5 counts of the amplicon sequence)  
+Some arbitrary quality filtering of individual ASVs. For example, here we choose to remove ASVs that have very few reads (i.e. less than 5 counts). Use the `prune_taxa()` function from phyloseq to filter taxa or the `prune_samples()` function to filter selected samples.  
   
 ```{r filterps, echo=TRUE, message=FALSE, warning=FALSE, results=FALSE}
 ps_flt  <-  prune_taxa(taxa_sums(ps) >= 5, ps) #minimum reads per feature  

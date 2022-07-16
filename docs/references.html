@@ -121,6 +121,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -210,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="6.1.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#prerequisites"><i class="fa fa-check"></i><b>6.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="6.1.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#required-files"><i class="fa fa-check"></i><b>6.1.1</b> Required files</a></li>
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="plottingdiversity.html"><a href="plottingdiversity.html#workflow-3"><i class="fa fa-check"></i><b>6.2</b> Workflow</a>
 <ul>
@@ -234,13 +256,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="7.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#introduction-4"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#prerequisites-1"><i class="fa fa-check"></i><b>7.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="7.1.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#required-files-or-objects"><i class="fa fa-check"></i><b>7.1.1</b> Required files or objects</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="plottingtaxa.html"><a href="plottingtaxa.html#workflow-4"><i class="fa fa-check"></i><b>7.2</b> Workflow</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#prepare"><i class="fa fa-check"></i><b>7.2.1</b> Prepare</a></li>
-<li class="chapter" data-level="7.2.2" data-path="plottingtaxa.html"><a href="plottingtaxa.html#analysis-and-plotting"><i class="fa fa-check"></i><b>7.2.2</b> Analysis and plotting</a></li>
-<li class="chapter" data-level="7.2.3" data-path="plottingtaxa.html"><a href="plottingtaxa.html#prevelance-table"><i class="fa fa-check"></i><b>7.2.3</b> Prevelance table</a></li>
+<li class="chapter" data-level="7.2.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#packages-2"><i class="fa fa-check"></i><b>7.2.1</b> Packages</a></li>
+<li class="chapter" data-level="7.2.2" data-path="plottingtaxa.html"><a href="plottingtaxa.html#load-phyloseq-object-1"><i class="fa fa-check"></i><b>7.2.2</b> Load phyloseq object</a></li>
+<li class="chapter" data-level="7.2.3" data-path="plottingtaxa.html"><a href="plottingtaxa.html#check-metadata-contained-in-the-phyloseq-object."><i class="fa fa-check"></i><b>7.2.3</b> Check metadata contained in the phyloseq object.</a></li>
+<li class="chapter" data-level="7.2.4" data-path="plottingtaxa.html"><a href="plottingtaxa.html#colors-1"><i class="fa fa-check"></i><b>7.2.4</b> Colors</a></li>
+<li class="chapter" data-level="7.2.5" data-path="plottingtaxa.html"><a href="plottingtaxa.html#pre-filtering"><i class="fa fa-check"></i><b>7.2.5</b> Pre-filtering</a></li>
+<li class="chapter" data-level="7.2.6" data-path="plottingtaxa.html"><a href="plottingtaxa.html#analysis-and-plotting"><i class="fa fa-check"></i><b>7.2.6</b> Analysis and plotting</a></li>
+<li class="chapter" data-level="7.2.7" data-path="plottingtaxa.html"><a href="plottingtaxa.html#prevelance-table"><i class="fa fa-check"></i><b>7.2.7</b> Prevelance table</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -267,6 +293,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="references" class="section level1 unnumbered hasAnchor">
 <h1>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+Cameron, Ellen S, Philip J Schmidt, Benjamin J-M Tremblay, Monica B Emelko, and Kirsten M Müller. 2021. <span>“<span class="nocase">Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities</span>.”</span> <em>Scientific Reports</em> 11 (1): 1–13.
+</div>
+<div class="csl-entry">
+Gloor, Gregory B., Jean M. Macklaim, Vera Pawlowsky-Glahn, and Juan J. Egozcue. 2017. <span>“<span class="nocase">Microbiome datasets are compositional: And this is not optional</span>.”</span> <em>Frontiers in Microbiology</em> 8 (NOV). <a href="https://doi.org/10.3389/fmicb.2017.02224">https://doi.org/10.3389/fmicb.2017.02224</a>.
+</div>
+<div class="csl-entry">
+McKnight, Donald T., Roger Huerlimann, Deborah S. Bower, Lin Schwarzkopf, Ross A. Alford, and Kyall R. Zenger. 2019. <span>“<span class="nocase">Methods for normalizing microbiome data: An ecological perspective</span>.”</span> <em>Methods in Ecology and Evolution</em>. <a href="https://doi.org/10.1111/2041-210X.13115">https://doi.org/10.1111/2041-210X.13115</a>.
+</div>
+</div>
 </div>
             </section>
 

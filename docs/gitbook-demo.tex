@@ -1470,23 +1470,25 @@ Furthermore, beta diversity, i.e.~four different type of ordinations are plotted
 
 The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: \url{https://sites.google.com/site/mb3gustame/home}, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter \ref{gettingstarted} under ``Workflows from other lab groups''.
 
-As mentioned in Chapter \ref{gettingstarted}, prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying - this paper explains the process: \href{https://www.nature.com/articles/s41598-021-01636-1}{Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities}.\\
+As mentioned in Chapter \ref{gettingstarted}, prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying - this paper explains the process: \href{https://www.nature.com/articles/s41598-021-01636-1}{Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities} (\citet{Cameron2021}).\\
 We will follow the recommendations from the authors of this paper to resample without replacement.
 
-Note that rarefying is generally not recommended for differential abundance analyses due to the loss of statistical power. Learn why here: \href{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531}{Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible}.
+Note that rarefying is generally not recommended for differential abundance analyses due to the loss of statistical power. Learn why here: \href{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531}{Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible} (\citet{McKnight2019a}).
 
 Other normalisation methods (see Chapter \ref{gettingstarted}) are also possible and it is up to you, the analyst, to understand and decide on the appropriate methods.
 
-My preference is to use centred-log ratios (Aitchison distances), which makes count normalisation unnecessary. Aitchison distances are included into the workflow below in a PCA and RDA. The compositional approach and centred log-ratios are further discussed in the paper \href{https://doi.org/10.3389/fmicb.2017.02224}{Microbiome Datasets Are Compositional: And This Is Not Optional}.\\
+My preference is to use centred-log ratios (Aitchison distances), which makes count normalisation unnecessary. Aitchison distances are included into the workflow below in a PCA and RDA. The compositional approach and centred log-ratios are further discussed in the paper \href{https://doi.org/10.3389/fmicb.2017.02224}{Microbiome Datasets Are Compositional: And This Is Not Optional} (\citet{Gloor2017}).\\
 In fact, comparing the results after applying different types of normalisation methods, dissimilarities or distances may complement your analysis and help in interpretation of data.
 
-\hypertarget{prerequisites}{%
-\subsection{Prerequisites}\label{prerequisites}}
+\hypertarget{required-files}{%
+\subsection{Required files}\label{required-files}}
 
 \begin{itemize}
 \tightlist
 \item
-  A phyloseq object; either read in from a pre-saved \texttt{.rds} file or created as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.
+  A \texttt{phyloseq} object; either read in from a pre-saved \texttt{.rds} file or created as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.\\
+\item
+  If you dont have your own data you can download the pre-saved \texttt{.rds} object from this Chapter and follow the below steps: \href{./ps_ProjectX_2022July}{ps\_ProjectX\_2022July} (unzip file once downloaded).
 \end{itemize}
 
 Time to get started\ldots{}
@@ -2053,16 +2055,24 @@ Some ggplots to visualise and compare taxonomy.
 \hypertarget{introduction-4}{%
 \section{Introduction}\label{introduction-4}}
 
-\hypertarget{prerequisites-1}{%
-\subsection{Prerequisites}\label{prerequisites-1}}
+In this chapter you will learn how to plot a custom taxa barplot to compare relative abundances between different sets of samples or treatments.
 
-A phyloseq object; either read in from a pre-saved \texttt{.rds} file or created as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.
+\hypertarget{required-files-or-objects}{%
+\subsection{Required files or objects}\label{required-files-or-objects}}
+
+\begin{itemize}
+\tightlist
+\item
+  A \texttt{phyloseq} object; either read in from a pre-saved \texttt{.rds} file or created as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.\\
+\item
+  If you dont have your own data you can download the pre-saved \texttt{.rds} object from this Chapter and follow the below steps: \href{./ps_ProjectX_2022July}{ps\_ProjectX\_2022July} (unzip file once downloaded).
+\end{itemize}
 
 \hypertarget{workflow-4}{%
 \section{Workflow}\label{workflow-4}}
 
-\hypertarget{prepare}{%
-\subsection{Prepare}\label{prepare}}
+\hypertarget{packages-2}{%
+\subsection{Packages}\label{packages-2}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2075,7 +2085,7 @@ A phyloseq object; either read in from a pre-saved \texttt{.rds} file or created
 \end{Shaded}
 
 \hypertarget{load-phyloseq-object-1}{%
-\subsubsection{Load phyloseq object}\label{load-phyloseq-object-1}}
+\subsection{Load phyloseq object}\label{load-phyloseq-object-1}}
 
 Do this if you saved a phyloseq object in .rds format before. Otherwise create a phyloseq object as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.
 
@@ -2096,9 +2106,11 @@ Do this if you saved a phyloseq object in .rds format before. Otherwise create a
 \end{Shaded}
 
 \hypertarget{check-metadata-contained-in-the-phyloseq-object.}{%
-\subsubsection{Check metadata contained in the phyloseq object.}\label{check-metadata-contained-in-the-phyloseq-object.}}
+\subsection{Check metadata contained in the phyloseq object.}\label{check-metadata-contained-in-the-phyloseq-object.}}
 
 Now lets check which columns in the metadata contain factors. Factors enable you to determine the order of categorical data, such as treatments, in the ggplots. Learn more about factors here: \url{https://swcarpentry.github.io/r-novice-inflammation/12-supp-factors/index.html}.
+
+In this case, the columns \texttt{Reactor} and \texttt{Location} contain factors.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2128,15 +2140,15 @@ Now lets check which columns in the metadata contain factors. Factors enable you
 \end{verbatim}
 
 \hypertarget{colors-1}{%
-\subsubsection{Colors}\label{colors-1}}
+\subsection{Colors}\label{colors-1}}
 
-Colors: Before you create ggplots to compare taxonomic compositions between samples and treatments it is helpful to create a named color vector that will apply to all your plots and ensures that each taxonomic name is a specific color across all your plots. It is only optional as ggplot can refer to its default colors, however the colours for individual taxa will be different between plots.
+Before you create ggplots to compare taxonomic compositions between samples and treatments it is helpful to create a named color vector that will apply to all your plots and ensures that each taxonomic name is a specific color across all your plots.
 
 There are different packages that help to create a names color vector. Here we use the package \texttt{colorspace}.
 
 A handy color cheat sheet is available here: \url{https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf}
 
-First create a vector of all possible taxonomic names that could be included in your ggplot. For example, if you plan to plot on phylum-level then all phyla names are extracted from the phyloseq object and then those names are given a color code.
+First create a vector of all possible taxonomic names that could be included in your ggplot. For example, if you plan to plot on phylum-level then all phyla names are extracted from the phyloseq object and then those names are given a color code. The colors are defined as hex color codes.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2165,13 +2177,15 @@ First create a vector of all possible taxonomic names that could be included in 
 \CommentTok{\# cols \textless{}{-} brewer.pal(length(names), \textquotesingle{}RdYlBu\textquotesingle{})}
 \CommentTok{\# cols \textless{}{-} rainbow\_hcl(length(names))}
 \CommentTok{\# names(cols) \textless{}{-} names}
+
+\NormalTok{cols }\CommentTok{\# check content of the color vector}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{pre-filtering}{%
-\subsubsection{Pre-filtering}\label{pre-filtering}}
+\subsection{Pre-filtering}\label{pre-filtering}}
 
-Some arbitrary quality filtering of individual ASVs. For example, here we choose to remove ASVs that have very few reads (i.e.~less than 5 counts of the amplicon sequence)
+Some arbitrary quality filtering of individual ASVs. For example, here we choose to remove ASVs that have very few reads (i.e.~less than 5 counts). Use the \texttt{prune\_taxa()} function from phyloseq to filter taxa or the \texttt{prune\_samples()} function to filter selected samples.
 
 \begin{Shaded}
 \begin{Highlighting}[]
