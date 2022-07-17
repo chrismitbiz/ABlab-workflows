@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.17)  17 JUL 2022 09:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.17)  17 JUL 2022 09:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2232,7 +2232,7 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  72i,9n,77p,1491b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on gitbook-demo.pdf (89 pages, 3481180 bytes).
+Output written on gitbook-demo.pdf (89 pages, 3481119 bytes).
 PDF statistics:
  1031 PDF objects out of 1200 (max. 8388607)
  827 compressed objects within 9 object streams

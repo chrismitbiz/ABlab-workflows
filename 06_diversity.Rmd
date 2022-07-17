@@ -25,7 +25,7 @@ Note that rarefying is generally not recommended for statistical inferences in d
         
 Other normalisation methods (see Chapter \@ref(gettingstarted)) are also possible and it is up to you, the analyst, to understand and decide on the appropriate methods. 
 
-My preference is to use centred-log ratios (Aitchison distances), which makes count normalisation unnecessary. Aitchison distances are included into the workflow below in a PCA and RDA. The compositional approach and centred log-ratios are further discussed in the paper [Microbiome Datasets Are Compositional: And This Is Not Optional](https://doi.org/10.3389/fmicb.2017.02224) (@Gloor2017).   
+My preference is to use centred-log ratios (Aitchison distances). Aitchison distances are used in the workflow below for the PCA and RDA. The compositional approach and centred log-ratios are further discussed in the paper [Microbiome Datasets Are Compositional: And This Is Not Optional](https://doi.org/10.3389/fmicb.2017.02224) (@Gloor2017).   
 In fact, comparing the results after applying different types of normalisation methods, dissimilarities or distances may complement your analysis and help in interpretation of data.    
   
 ### Required files   
