@@ -138,7 +138,7 @@ First abundances are aggregated to phylum level and then transformed into relati
   
 Finally, the abundances of this long abundance table are summarised into the factors that you want to compare. In this example, abundances of different Locations are compared, hence the column `Location` will be summarised and plotted.  
   
-```{r Phylumplots, echo=TRUE, message=FALSE, warning=FALSE, results=FALSE, fig.asp=0.45, fig.width=13}
+```{r Phylumplots, echo=TRUE, message=FALSE, warning=FALSE, results=TRUE, fig.asp=0.45, fig.width=13}
 # Phylum plot  
 # First, create a long abundance data table  
 taxa_data <-  microbiome::aggregate_taxa(ps_flt, "Phylum") %>%   
@@ -163,7 +163,7 @@ taxa_data <- taxa_data %>%
 
 # Now, create a vector with phylum names that will determine the order of 
 # phylum names in the stacked barcharts.
-order <- taxa_data$Phylum %>% unique
+order <- taxa_data$Phylum %>% unique()
 
 # Phylum names need to be factors for plotting. 
 # This is the final dataframe for plotting

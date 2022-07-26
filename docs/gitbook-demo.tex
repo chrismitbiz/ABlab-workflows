@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-07-17}
+\date{2022-07-26}
 
 \begin{document}
 \maketitle
@@ -330,7 +330,7 @@ Furthermore, searching for ``amplicon-sequencing'' under ``Topics'' on GitHub ga
 \textbf{Some info on getting your run ready}
 
 In our lab we usually prepare a 6-10 pM pool of libraries following the \href{https://sapac.support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/16s/16s-metagenomic-library-prep-guide-15044223-b.pdf}{16S Metagenomic Sequencing Library
-Preparation} protocol from Illumina with 10\% Phix. \textbf{Download it, study it and refer to it throughout your labwork}. This protocol is not limited to 16S amplicons. You can use it for fungal (e.g.~ITS) amplicons too. In the last section there are also valuable tips for pre‐PCR and post‐PCR lab procedures. There is also some additional Illumina guidance here: \url{https://sapac.support.illumina.com/downloads/16s_metagenomic_sequencing_library_preparation.html}
+Preparation} protocol from Illumina with 10-30\% Phix. \textbf{Download it, study it and refer to it throughout your labwork}. This protocol is not limited to 16S amplicons. You can use it for fungal (e.g.~ITS) amplicons too. In the last section there are also valuable tips for pre‐PCR and post‐PCR lab procedures. There is also some additional Illumina guidance here: \url{https://sapac.support.illumina.com/downloads/16s_metagenomic_sequencing_library_preparation.html}
 
 \hypertarget{overview}{%
 \subsection{Overview}\label{overview}}
@@ -2324,14 +2324,31 @@ Finally, the abundances of this long abundance table are summarised into the fac
 
 \CommentTok{\# Now, create a vector with phylum names that will determine the order of }
 \CommentTok{\# phylum names in the stacked barcharts.}
-\NormalTok{order }\OtherTok{\textless{}{-}}\NormalTok{ taxa\_data}\SpecialCharTok{$}\NormalTok{Phylum }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ unique}
+\NormalTok{order }\OtherTok{\textless{}{-}}\NormalTok{ taxa\_data}\SpecialCharTok{$}\NormalTok{Phylum }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{unique}\NormalTok{()}
 
 \CommentTok{\# Phylum names need to be factors for plotting. }
 \CommentTok{\# This is the final dataframe for plotting}
 \NormalTok{taxa\_data}\SpecialCharTok{$}\NormalTok{Phylum }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(taxa\_data}\SpecialCharTok{$}\NormalTok{Phylum, }\AttributeTok{levels =}\NormalTok{ order) }\CommentTok{\# }
 \CommentTok{\# Check out the first few rows}
 \FunctionTok{head}\NormalTok{(taxa\_data)}
-  
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 4
+## # Groups:   Location, Reactor [6]
+##   Location     Reactor Phylum         Meanabu
+##   <fct>        <fct>   <fct>            <dbl>
+## 1 Avedoere     RT1     Chloroflexi      0.279
+## 2 Slagelse     RT2     Proteobacteria   0.278
+## 3 Esbjerg Vest 1B      Chloroflexi      0.256
+## 4 Avedoere     RT2     Chloroflexi      0.251
+## 5 Esbjerg Vest 2B      Chloroflexi      0.243
+## 6 Esbjerg Vest RT2B    Firmicutes       0.236
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# Finally its time to create a ggplot. }
 \NormalTok{taxaplot }\OtherTok{\textless{}{-}}\NormalTok{ taxa\_data }\SpecialCharTok{\%\textgreater{}\%}
     \FunctionTok{ggbarplot}\NormalTok{( }\AttributeTok{x=} \StringTok{"Reactor"}\NormalTok{, }
