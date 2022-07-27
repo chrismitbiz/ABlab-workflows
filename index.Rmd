@@ -2,9 +2,11 @@
 title: "Workflows for processing microbial amplicon sequences"
 author: "[Christian Krohn, PhD, RMIT University](https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian)"
 date: "`r Sys.Date()`"
-description: This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment.
+description: "This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence
+  reads generated with a Miseq instrument to pre-processing reads with packages such
+  as Qiime2, followed by applying various packages within the R Environment."
 documentclass: book
-github-repo: chrismitbiz/ABlab-workflows
+github-repo: "chrismitbiz/ABlab-workflows"
 link-citations: yes
 bibliography:
 - book.bib
@@ -34,3 +36,4 @@ Everyone is at a different level in the journey to exploring microbial diversity
   
 We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne. Email me or comment on the discussion section of the [GitHub repository](https://github.com/chrismitbiz/ABlab-workflows/discussions/) for this GitBook. You will need to get a GitHub account to join the discussion. Its free. 
 
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
