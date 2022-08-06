@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-07-28}
+\date{2022-08-06}
 
 \begin{document}
 \maketitle
@@ -186,9 +186,7 @@ To process data you will need a personal computer or online computational resour
 
 Some university may provide their own access to a high performance computer (HPC) for staff and students and likely have certain packages pre-installed. In such cases a batch workload manger such as Slurm may be used, to manage multiple users trying to run computationally heavy jobs. This works fine too but its a bit of a hassle and I would use such an HPC only if really necessary, i.e.~smaller jobs on my personal computer and bigger jobs on the HPC.
 
-I am not aware that RMIT University offers that type of service yet.
-
-In Australia there is also the \href{https://ardc.edu.au/services/nectar-research-cloud/}{ARDC Nectar Research Cloud}, which provides free resources to Universities. This is basically like providing access to an online Linux computer with complete freedom to install any packages as if it was your own. If you are a student you can \href{https://dashboard.rc.nectar.org.au/}{create a trial account} with your student email address (Using your ID only; without the student.edu.au) and check out how it all works, albeit with limited resources. The Nectar service also provides \href{https://tutorials.rc.nectar.org.au/}{tuturials for starters}. However, to get serious with Nectar, you have to request more resources, which is a fairly straight-forward process. Check out the \href{https://support.ehelp.edu.au/support/solutions/articles/6000068044-managing-an-allocation}{eligibilities} and chat to your supervisor if you are interested.
+In Australia the \href{https://ardc.edu.au/services/nectar-research-cloud/}{ARDC Nectar Research Cloud} provides free computational resources to students and staff at Universities. This is basically like providing access to an online Linux computer with complete freedom to install any packages as if it was your own. If you are a student you can \href{https://dashboard.rc.nectar.org.au/}{create a trial account} with your student email address (Using your ID only; without the student.edu.au) and check out how it all works, albeit with limited resources. The Nectar service also provides \href{https://tutorials.rc.nectar.org.au/}{tuturials for starters}. However, to get serious with Nectar, you have to request more resources, which is a fairly straight-forward process. Check out the \href{https://support.ehelp.edu.au/support/solutions/articles/6000068044-managing-an-allocation}{eligibilities} and chat to your supervisor if you are interested.
 
 There are also commercial options, which probably offer very similar type of services to Nectar.
 
@@ -297,7 +295,7 @@ Rarefying data is one of the more contested methods. We acknowledge that \textbf
 
 However, rarefying still ``\emph{outperformed all the other normalization methods for producing accurate BC (Bray-Curtis) dissimilarities and subsequent PCoAs and PERMANOVAs.}'' Paper here: \href{https://doi.org/10.1111/2041-210X.13115}{Methods for normalizing microbiome data: An ecological perspective} (\citet{McKnight2019a}).
 
-For our workflows we may \textbf{rarefy data} before creating \textbf{alpha diversity} indices (Shannon, Simpsons etc), \textbf{beta diversity} indices (Bray-Curtis dissimilarities).
+For our workflows we may \textbf{rarefy data} before creating \textbf{alpha diversity} indices (Shannon, Simpsons etc) and \textbf{beta diversity} indices (Bray-Curtis dissimilarities).
 
 Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use \textbf{centred-log ratios} (Aitchison distances). The \textbf{compositional approach} and centred log-ratios are further discussed in the paper \href{https://doi.org/10.3389/fmicb.2017.02224}{Microbiome Datasets Are Compositional: And This Is Not Optional} (\citet{Gloor2017}). This type of transformation requires the removal of some of the rare ASVs to remove as many zeros from the abundance table as reasonable.
 
