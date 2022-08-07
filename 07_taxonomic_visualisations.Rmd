@@ -227,7 +227,7 @@ prevalancedf %>%
     
 ### Krona charts
   
-If you have a mac, a more interactive way to explore the hierarchicataxonomy in your data is to use Krona plots.   
+On macOS or Linux, a more interactive way to explore the various levels of the taxonomy in your data is to use Krona charts.   
   
 All you need is [KronaTools](https://github.com/marbl/Krona/wiki/KronaTools) and the R package `psadd`.  
   
@@ -247,5 +247,5 @@ library(psadd)
 
 ```
   
-Download and explore the Krona plot in your web browser: [krona-file](./krona-file/krona-file.html)   
+Explore the Krona plot in your web browser: [krona-file](./krona-file/krona-file.html)   
   
