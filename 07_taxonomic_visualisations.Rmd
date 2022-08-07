@@ -121,6 +121,7 @@ ps_flt_1A  <-  prune_samples(sample_data(ps_flt)$Reactor == "1A", ps_flt)
 # Use `prune_taxa` to remove any ASVs/taxa that are now zero 
 # (i.e. are not present in reactor 1A). 
 # In other words we keep only those ASVs/Taxa that are present in the filtered samples. 
+  
 ps_flt_1A  <- prune_taxa(taxa_sums(ps_flt_1A) > 0, ps_flt_1A)
 #phyloseq-class experiment-level object
 #otu_table()   OTU Table:         [ 420 taxa and 2 samples ]
@@ -201,7 +202,7 @@ taxaplot
   
 A prevalence table may assist in getting an overview of the abundances. The mean prevalence is the average number of times that the taxon appears across all samples.  
   
-```{r prevalencetable}
+```{r prevalencetable, echo=TRUE, message=FALSE, warning=FALSE, }
 
 prevalancedf = apply(X = phyloseq::otu_table(ps_flt),
                        MARGIN = 1,
@@ -224,3 +225,27 @@ prevalancedf %>%
 ```
   
     
+### Krona charts
+  
+If you have a mac, a more interactive way to explore the hierarchicataxonomy in your data is to use Krona plots.   
+  
+All you need is [KronaTools](https://github.com/marbl/Krona/wiki/KronaTools) and the R package `psadd`.  
+  
+To install KronaTools simply download and unzip the repository of https://github.com/marbl/Krona (The green "Code" button) and execute the `install.pl` file as described in the Installation Wiki at https://github.com/marbl/Krona/wiki/Installing. Once installed you can run the following:    
+  
+```{r krona, echo=TRUE, message=FALSE, warning=FALSE, }
+# install a package with custom function for the phyloseq package
+# remotes::install_github("cpauvert/psadd")
+library(psadd)
+# Load ps files 
+# Use the data-set that we filtered earlier 'ps_flt'
+# Separate the output by the metadata column "Location". We will get a krona plot for digesters in each location.
+
+# not run
+# plot_krona(ps_flt,"krona-file", "Location",trim=T) # Function plot_krona from the psadd package
+# This creates an 'html' file named 'krona-file, which you can open in any web browser. 
+
+```
+  
+Download and explore the Krona plot in your web browser: [krona-file](./krona-file/krona-file.html)   
+  

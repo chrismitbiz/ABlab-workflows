@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-08-06}
+\date{2022-08-07}
 
 \begin{document}
 \maketitle
@@ -2280,6 +2280,7 @@ Some arbitrary quality filtering of individual ASVs. For example, here we choose
 \CommentTok{\# Use \textasciigrave{}prune\_taxa\textasciigrave{} to remove any ASVs/taxa that are now zero }
 \CommentTok{\# (i.e. are not present in reactor 1A). }
 \CommentTok{\# In other words we keep only those ASVs/Taxa that are present in the filtered samples. }
+  
 \NormalTok{ps\_flt\_1A  }\OtherTok{\textless{}{-}} \FunctionTok{prune\_taxa}\NormalTok{(}\FunctionTok{taxa\_sums}\NormalTok{(ps\_flt\_1A) }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{, ps\_flt\_1A)}
 \CommentTok{\#phyloseq{-}class experiment{-}level object}
 \CommentTok{\#otu\_table()   OTU Table:         [ 420 taxa and 2 samples ]}
@@ -2452,6 +2453,32 @@ A prevalence table may assist in getting an overview of the abundances. The mean
 ## 44                  Hydrothermae        1.000000              26
 ## 45                  Deinococcota        1.000000              11
 \end{verbatim}
+
+\hypertarget{krona-charts}{%
+\subsection{Krona charts}\label{krona-charts}}
+
+If you have a mac, a more interactive way to explore the hierarchicataxonomy in your data is to use Krona plots.
+
+All you need is \href{https://github.com/marbl/Krona/wiki/KronaTools}{KronaTools} and the R package \texttt{psadd}.
+
+To install KronaTools simply download and unzip the repository of \url{https://github.com/marbl/Krona} (The green ``Code'' button) and execute the \texttt{install.pl} file as described in the Installation Wiki at \url{https://github.com/marbl/Krona/wiki/Installing}. Once installed you can run the following:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# install a package with custom function for the phyloseq package}
+\CommentTok{\# remotes::install\_github("cpauvert/psadd")}
+\FunctionTok{library}\NormalTok{(psadd)}
+\CommentTok{\# Load ps files }
+\CommentTok{\# Use the data{-}set that we filtered earlier \textquotesingle{}ps\_flt\textquotesingle{}}
+\CommentTok{\# Separate the output by the metadata column "Location". We will get a krona plot for digesters in each location.}
+
+\CommentTok{\# not run}
+\CommentTok{\# plot\_krona(ps\_flt,"krona{-}file", "Location",trim=T) \# Function plot\_krona from the psadd package}
+\CommentTok{\# This creates an \textquotesingle{}html\textquotesingle{} file named \textquotesingle{}krona{-}file, which you can open in any web browser. }
+\end{Highlighting}
+\end{Shaded}
+
+Download and explore the Krona plot in your web browser: \href{./krona-file/krona-file.html}{krona-file}
 
   \bibliography{book.bib,packages.bib}
 

@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2022-08-06" />
+<meta name="date" content="2022-08-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -267,6 +267,7 @@ div.csl-indent {
 <li class="chapter" data-level="7.2.5" data-path="plottingtaxa.html"><a href="plottingtaxa.html#pre-filtering"><i class="fa fa-check"></i><b>7.2.5</b> Pre-filtering</a></li>
 <li class="chapter" data-level="7.2.6" data-path="plottingtaxa.html"><a href="plottingtaxa.html#analysis-and-plotting"><i class="fa fa-check"></i><b>7.2.6</b> Analysis and plotting</a></li>
 <li class="chapter" data-level="7.2.7" data-path="plottingtaxa.html"><a href="plottingtaxa.html#prevalance-table"><i class="fa fa-check"></i><b>7.2.7</b> Prevalance table</a></li>
+<li class="chapter" data-level="7.2.8" data-path="plottingtaxa.html"><a href="plottingtaxa.html#krona-charts"><i class="fa fa-check"></i><b>7.2.8</b> Krona charts</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -454,12 +455,13 @@ div.csl-indent {
 <span id="cb64-13"><a href="plottingtaxa.html#cb64-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Use `prune_taxa` to remove any ASVs/taxa that are now zero </span></span>
 <span id="cb64-14"><a href="plottingtaxa.html#cb64-14" aria-hidden="true" tabindex="-1"></a><span class="co"># (i.e. are not present in reactor 1A). </span></span>
 <span id="cb64-15"><a href="plottingtaxa.html#cb64-15" aria-hidden="true" tabindex="-1"></a><span class="co"># In other words we keep only those ASVs/Taxa that are present in the filtered samples. </span></span>
-<span id="cb64-16"><a href="plottingtaxa.html#cb64-16" aria-hidden="true" tabindex="-1"></a>ps_flt_1A  <span class="ot">&lt;-</span> <span class="fu">prune_taxa</span>(<span class="fu">taxa_sums</span>(ps_flt_1A) <span class="sc">&gt;</span> <span class="dv">0</span>, ps_flt_1A)</span>
-<span id="cb64-17"><a href="plottingtaxa.html#cb64-17" aria-hidden="true" tabindex="-1"></a><span class="co">#phyloseq-class experiment-level object</span></span>
-<span id="cb64-18"><a href="plottingtaxa.html#cb64-18" aria-hidden="true" tabindex="-1"></a><span class="co">#otu_table()   OTU Table:         [ 420 taxa and 2 samples ]</span></span>
-<span id="cb64-19"><a href="plottingtaxa.html#cb64-19" aria-hidden="true" tabindex="-1"></a><span class="co">#sample_data() Sample Data:       [ 2 samples by 15 sample variables ]</span></span>
-<span id="cb64-20"><a href="plottingtaxa.html#cb64-20" aria-hidden="true" tabindex="-1"></a><span class="co">#tax_table()   Taxonomy Table:    [ 420 taxa by 7 taxonomic ranks ]</span></span>
-<span id="cb64-21"><a href="plottingtaxa.html#cb64-21" aria-hidden="true" tabindex="-1"></a><span class="co">#phy_tree()    Phylogenetic Tree: [ 420 tips and 419 internal nodes ]</span></span></code></pre></div>
+<span id="cb64-16"><a href="plottingtaxa.html#cb64-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb64-17"><a href="plottingtaxa.html#cb64-17" aria-hidden="true" tabindex="-1"></a>ps_flt_1A  <span class="ot">&lt;-</span> <span class="fu">prune_taxa</span>(<span class="fu">taxa_sums</span>(ps_flt_1A) <span class="sc">&gt;</span> <span class="dv">0</span>, ps_flt_1A)</span>
+<span id="cb64-18"><a href="plottingtaxa.html#cb64-18" aria-hidden="true" tabindex="-1"></a><span class="co">#phyloseq-class experiment-level object</span></span>
+<span id="cb64-19"><a href="plottingtaxa.html#cb64-19" aria-hidden="true" tabindex="-1"></a><span class="co">#otu_table()   OTU Table:         [ 420 taxa and 2 samples ]</span></span>
+<span id="cb64-20"><a href="plottingtaxa.html#cb64-20" aria-hidden="true" tabindex="-1"></a><span class="co">#sample_data() Sample Data:       [ 2 samples by 15 sample variables ]</span></span>
+<span id="cb64-21"><a href="plottingtaxa.html#cb64-21" aria-hidden="true" tabindex="-1"></a><span class="co">#tax_table()   Taxonomy Table:    [ 420 taxa by 7 taxonomic ranks ]</span></span>
+<span id="cb64-22"><a href="plottingtaxa.html#cb64-22" aria-hidden="true" tabindex="-1"></a><span class="co">#phy_tree()    Phylogenetic Tree: [ 420 tips and 419 internal nodes ]</span></span></code></pre></div>
 </div>
 <div id="analysis-and-plotting" class="section level3 hasAnchor" number="7.2.6">
 <h3><span class="header-section-number">7.2.6</span> Analysis and plotting<a href="plottingtaxa.html#analysis-and-plotting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -598,6 +600,23 @@ div.csl-indent {
 ## 43                           WS4        1.500000              39
 ## 44                  Hydrothermae        1.000000              26
 ## 45                  Deinococcota        1.000000              11</code></pre>
+</div>
+<div id="krona-charts" class="section level3 hasAnchor" number="7.2.8">
+<h3><span class="header-section-number">7.2.8</span> Krona charts<a href="plottingtaxa.html#krona-charts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If you have a mac, a more interactive way to explore the hierarchicataxonomy in your data is to use Krona plots.</p>
+<p>All you need is <a href="https://github.com/marbl/Krona/wiki/KronaTools">KronaTools</a> and the R package <code>psadd</code>.</p>
+<p>To install KronaTools simply download and unzip the repository of <a href="https://github.com/marbl/Krona" class="uri">https://github.com/marbl/Krona</a> (The green “Code” button) and execute the <code>install.pl</code> file as described in the Installation Wiki at <a href="https://github.com/marbl/Krona/wiki/Installing" class="uri">https://github.com/marbl/Krona/wiki/Installing</a>. Once installed you can run the following:</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="plottingtaxa.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install a package with custom function for the phyloseq package</span></span>
+<span id="cb70-2"><a href="plottingtaxa.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;cpauvert/psadd&quot;)</span></span>
+<span id="cb70-3"><a href="plottingtaxa.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psadd)</span>
+<span id="cb70-4"><a href="plottingtaxa.html#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load ps files </span></span>
+<span id="cb70-5"><a href="plottingtaxa.html#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the data-set that we filtered earlier &#39;ps_flt&#39;</span></span>
+<span id="cb70-6"><a href="plottingtaxa.html#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate the output by the metadata column &quot;Location&quot;. We will get a krona plot for digesters in each location.</span></span>
+<span id="cb70-7"><a href="plottingtaxa.html#cb70-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-8"><a href="plottingtaxa.html#cb70-8" aria-hidden="true" tabindex="-1"></a><span class="co"># not run</span></span>
+<span id="cb70-9"><a href="plottingtaxa.html#cb70-9" aria-hidden="true" tabindex="-1"></a><span class="co"># plot_krona(ps_flt,&quot;krona-file&quot;, &quot;Location&quot;,trim=T) # Function plot_krona from the psadd package</span></span>
+<span id="cb70-10"><a href="plottingtaxa.html#cb70-10" aria-hidden="true" tabindex="-1"></a><span class="co"># This creates an &#39;html&#39; file named &#39;krona-file, which you can open in any web browser. </span></span></code></pre></div>
+<p>Download and explore the Krona plot in your web browser: <a href="./krona-file/krona-file.html">krona-file</a></p>
 
 </div>
 </div>
