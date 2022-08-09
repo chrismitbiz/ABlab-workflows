@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.17)  7 AUG 2022 18:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.17)  9 AUG 2022 14:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -845,7 +845,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 649--650
 
  []
 
-<./img/scriptfile.png, id=392, 761.84625pt x 730.73pt>
+<./img/scriptfile.png, id=393, 761.84625pt x 730.73pt>
 File: ./img/scriptfile.png Graphic file (type png)
 <use ./img/scriptfile.png>
 Package pdftex.def Info: ./img/scriptfile.png  used on input line 657.
@@ -856,12 +856,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 661--662
  []
 
 [31] [32 <./img/scriptfile.png>]
-<./img/basespacedownload.png, id=405, 861.2175pt x 674.52pt>
+<./img/basespacedownload.png, id=406, 861.2175pt x 674.52pt>
 File: ./img/basespacedownload.png Graphic file (type png)
 <use ./img/basespacedownload.png>
 Package pdftex.def Info: ./img/basespacedownload.png  used on input line 694.
 (pdftex.def)             Requested size: 345.00653pt x 270.2149pt.
-<./img/basespacedownload2.png, id=406, 587.19376pt x 588.1975pt>
+<./img/basespacedownload2.png, id=407, 587.19376pt x 588.1975pt>
 File: ./img/basespacedownload2.png Graphic file (type png)
 <use ./img/basespacedownload2.png>
 Package pdftex.def Info: ./img/basespacedownload2.png  used on input line 696.
@@ -895,7 +895,7 @@ Overfull \hbox (1.52687pt too wide) in paragraph at lines 740--743
  []
 
 [35]
-<./img/viewqiime.png, id=432, 739.76375pt x 412.54124pt>
+<./img/viewqiime.png, id=433, 739.76375pt x 412.54124pt>
 File: ./img/viewqiime.png Graphic file (type png)
 <use ./img/viewqiime.png>
 Package pdftex.def Info: ./img/viewqiime.png  used on input line 752.
@@ -905,12 +905,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 752--753
 
  []
 
-<./img/demux.qza1.png, id=433, 1192.455pt x 415.5525pt>
+<./img/demux.qza1.png, id=434, 1192.455pt x 415.5525pt>
 File: ./img/demux.qza1.png Graphic file (type png)
 <use ./img/demux.qza1.png>
 Package pdftex.def Info: ./img/demux.qza1.png  used on input line 755.
 (pdftex.def)             Requested size: 345.0025pt x 120.22813pt.
-<./img/demux.qza.png, id=434, 1111.15125pt x 355.3275pt>
+<./img/demux.qza.png, id=435, 1111.15125pt x 355.3275pt>
 File: ./img/demux.qza.png Graphic file (type png)
 <use ./img/demux.qza.png>
 Package pdftex.def Info: ./img/demux.qza.png  used on input line 760.
@@ -919,7 +919,7 @@ Package pdftex.def Info: ./img/demux.qza.png  used on input line 760.
 Underfull \vbox (badness 2103) has occurred while \output is active []
 
 [37 <./img/demux.qza.png>]
-<./img/feature-table.qzv.png, id=451, 728.7225pt x 692.5875pt>
+<./img/feature-table.qzv.png, id=452, 728.7225pt x 692.5875pt>
 File: ./img/feature-table.qzv.png Graphic file (type png)
 <use ./img/feature-table.qzv.png>
 Package pdftex.def Info: ./img/feature-table.qzv.png  used on input line 812.
@@ -953,7 +953,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 953--956
 
  []
 
-<./img/ASVIDs.png, id=498, 632.3625pt x 122.4575pt>
+<./img/ASVIDs.png, id=499, 632.3625pt x 122.4575pt>
 File: ./img/ASVIDs.png Graphic file (type png)
 <use ./img/ASVIDs.png>
 Package pdftex.def Info: ./img/ASVIDs.png  used on input line 958.
@@ -964,7 +964,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 957--960
  []
 
 [45]
-<./img/ASVIDs2.png, id=504, 788.9475pt x 118.4425pt>
+<./img/ASVIDs2.png, id=505, 788.9475pt x 118.4425pt>
 File: ./img/ASVIDs2.png Graphic file (type png)
 <use ./img/ASVIDs2.png>
 Package pdftex.def Info: ./img/ASVIDs2.png  used on input line 965.
@@ -1035,7 +1035,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1232--1233
 
  []
 
-<gitbook-demo_files/figure-latex/rarefaction-1.pdf, id=548, 436.63126pt x 257.96375pt>
+<gitbook-demo_files/figure-latex/rarefaction-1.pdf, id=549, 436.63126pt x 257.96375pt>
 File: gitbook-demo_files/figure-latex/rarefaction-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/rarefaction-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/rarefaction-1.pdf  used on input line 1242.
@@ -1537,7 +1537,7 @@ Overfull \hbox (6.74898pt too wide) in paragraph at lines 1438--1438
 
 [57] [58]
 Chapter 6.
-<./img/nmds-1.png, id=594, 1156.32pt x 924.45375pt>
+<./img/nmds-1.png, id=595, 1156.32pt x 924.45375pt>
 File: ./img/nmds-1.png Graphic file (type png)
 <use ./img/nmds-1.png>
 Package pdftex.def Info: ./img/nmds-1.png  used on input line 1471.
@@ -1763,13 +1763,13 @@ Overfull \hbox (32.9989pt too wide) in paragraph at lines 1735--1735
  []
 
 [65]
-<gitbook-demo_files/figure-latex/richness-1.pdf, id=659, 453.695pt x 313.17pt>
+<gitbook-demo_files/figure-latex/richness-1.pdf, id=660, 453.695pt x 313.17pt>
 File: gitbook-demo_files/figure-latex/richness-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/richness-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/richness-1.pdf  used on input line 1761.
 (pdftex.def)             Requested size: 344.9987pt x 238.14069pt.
 [66 <./gitbook-demo_files/figure-latex/richness-1.pdf>]
-<gitbook-demo_files/figure-latex/shannon-1.pdf, id=673, 457.71pt x 313.17pt>
+<gitbook-demo_files/figure-latex/shannon-1.pdf, id=674, 457.71pt x 313.17pt>
 File: gitbook-demo_files/figure-latex/shannon-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/shannon-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/shannon-1.pdf  used on input line 1788.
@@ -1779,12 +1779,12 @@ Overfull \vbox (1.20366pt too high) detected at line 1813
  []
 
 [67 <./gitbook-demo_files/figure-latex/shannon-1.pdf>]
-<gitbook-demo_files/figure-latex/pielou-1.pdf, id=689, 457.71pt x 313.17pt>
+<gitbook-demo_files/figure-latex/pielou-1.pdf, id=690, 457.71pt x 313.17pt>
 File: gitbook-demo_files/figure-latex/pielou-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/pielou-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/pielou-1.pdf  used on input line 1815.
 (pdftex.def)             Requested size: 345.01372pt x 236.062pt.
-<gitbook-demo_files/figure-latex/plot-1.pdf, id=690, 712.6625pt x 312.16624pt>
+<gitbook-demo_files/figure-latex/plot-1.pdf, id=691, 712.6625pt x 312.16624pt>
 File: gitbook-demo_files/figure-latex/plot-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/plot-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/plot-1.pdf  used on input line 1829.
@@ -1795,7 +1795,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1831--1832
  []
 
 [68 <./gitbook-demo_files/figure-latex/pielou-1.pdf> <./gitbook-demo_files/figure-latex/plot-1.pdf>]
-<gitbook-demo_files/figure-latex/nmds-1.pdf, id=711, 417.56pt x 336.25626pt>
+<gitbook-demo_files/figure-latex/nmds-1.pdf, id=712, 417.56pt x 336.25626pt>
 File: gitbook-demo_files/figure-latex/nmds-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/nmds-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/nmds-1.pdf  used on input line 1865.
@@ -1804,7 +1804,7 @@ Package pdftex.def Info: gitbook-demo_files/figure-latex/nmds-1.pdf  used on inp
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [69] [70 <./gitbook-demo_files/figure-latex/nmds-1.pdf>]
-<gitbook-demo_files/figure-latex/PCA-1.pdf, id=735, 421.575pt x 339.2675pt>
+<gitbook-demo_files/figure-latex/PCA-1.pdf, id=736, 421.575pt x 339.2675pt>
 File: gitbook-demo_files/figure-latex/PCA-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/PCA-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/PCA-1.pdf  used on input line 1901.
@@ -1823,7 +1823,7 @@ Underfull \vbox (badness 10000) detected at line 1995
  []
 
 [72]
-<gitbook-demo_files/figure-latex/rda-1.pdf, id=753, 421.575pt x 339.2675pt>
+<gitbook-demo_files/figure-latex/rda-1.pdf, id=754, 421.575pt x 339.2675pt>
 File: gitbook-demo_files/figure-latex/rda-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/rda-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/rda-1.pdf  used on input line 1997.
@@ -1837,13 +1837,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 2007--2008
  []
 
 [74 <./gitbook-demo_files/figure-latex/rda-1.pdf>]
-<gitbook-demo_files/figure-latex/unifrac-1.pdf, id=772, 421.575pt x 339.2675pt>
+<gitbook-demo_files/figure-latex/unifrac-1.pdf, id=773, 421.575pt x 339.2675pt>
 File: gitbook-demo_files/figure-latex/unifrac-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/unifrac-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/unifrac-1.pdf  used on input line 2039.
 (pdftex.def)             Requested size: 345.00543pt x 277.64722pt.
 [75 <./gitbook-demo_files/figure-latex/unifrac-1.pdf>]
-<gitbook-demo_files/figure-latex/plotbeta-1.pdf, id=786, 716.6775pt x 711.65875pt>
+<gitbook-demo_files/figure-latex/plotbeta-1.pdf, id=787, 716.6775pt x 711.65875pt>
 File: gitbook-demo_files/figure-latex/plotbeta-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/plotbeta-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/plotbeta-1.pdf  used on input line 2054.
@@ -1857,7 +1857,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 2056--2057
 
 ]
 Chapter 7.
-<./img/phylumplot.png, id=814, 2505.36pt x 1127.21124pt>
+<./img/phylumplot.png, id=815, 2505.36pt x 1127.21124pt>
 File: ./img/phylumplot.png Graphic file (type png)
 <use ./img/phylumplot.png>
 Package pdftex.def Info: ./img/phylumplot.png  used on input line 2078.
@@ -1938,7 +1938,7 @@ Overfull \hbox (185.24846pt too wide) in paragraph at lines 2165--2165
  []
 
 [81] [82] [83] [84]
-<gitbook-demo_files/figure-latex/Phylumplots-1.pdf, id=864, 927.465pt x 410.53375pt>
+<gitbook-demo_files/figure-latex/Phylumplots-1.pdf, id=865, 927.465pt x 410.53375pt>
 File: gitbook-demo_files/figure-latex/Phylumplots-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/Phylumplots-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/Phylumplots-1.pdf  used on input line 2379.
@@ -2203,18 +2203,18 @@ Package rerunfilecheck Info: File `gitbook-demo.out' has not changed.
 (rerunfilecheck)             Checksum: 05E056D7800215E35761E564CA299D5C;2826.
  ) 
 Here is how much of TeX's memory you used:
- 13825 strings out of 479983
- 221954 string characters out of 5886474
+ 13827 strings out of 479983
+ 221973 string characters out of 5886474
  532444 words of memory out of 5000000
- 31455 multiletter control sequences out of 15000+600000
- 536535 words of font info for 81 fonts, out of 8000000 for 9000
+ 31456 multiletter control sequences out of 15000+600000
+ 539527 words of font info for 82 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,9n,77p,1491b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on gitbook-demo.pdf (89 pages, 3483253 bytes).
+Output written on gitbook-demo.pdf (89 pages, 3484277 bytes).
 PDF statistics:
- 1036 PDF objects out of 1200 (max. 8388607)
- 832 compressed objects within 9 object streams
+ 1039 PDF objects out of 1200 (max. 8388607)
+ 834 compressed objects within 9 object streams
  263 named destinations out of 1000 (max. 500000)
  321 words of extra memory for PDF output out of 10000 (max. 10000000)
 
