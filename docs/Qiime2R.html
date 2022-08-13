@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2022-08-09" />
+<meta name="date" content="2022-08-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -545,150 +545,1724 @@ However, in environments where you get higher contributions of unknown amplicons
 <span id="cb27-2"><a href="Qiime2R.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ps.flt.prev &lt;-  prune_samples(sample_data(physeqB.flt)$Treatment != &quot;Reference&quot;, physeqB.flt)</span></span>
 <span id="cb27-3"><a href="Qiime2R.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ps.flt.prevtab &lt;-  prune_samples(sample_data(physeqB.flt.prevtab)$Treatment != &quot;Blank&quot;, physeqB.flt.prevtab)</span></span>
 <span id="cb27-4"><a href="Qiime2R.html#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="Qiime2R.html#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-6"><a href="Qiime2R.html#cb27-6" aria-hidden="true" tabindex="-1"></a>prevelancedf <span class="ot">=</span> <span class="fu">apply</span>(<span class="at">X =</span> phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(ps.flt),</span>
-<span id="cb27-7"><a href="Qiime2R.html#cb27-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">MARGIN =</span> <span class="dv">1</span>,</span>
-<span id="cb27-8"><a href="Qiime2R.html#cb27-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> <span class="cf">function</span>(x){<span class="fu">sum</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)})</span>
-<span id="cb27-9"><a href="Qiime2R.html#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-10"><a href="Qiime2R.html#cb27-10" aria-hidden="true" tabindex="-1"></a>prevelancedf <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Prevalence =</span> prevelancedf,</span>
-<span id="cb27-11"><a href="Qiime2R.html#cb27-11" aria-hidden="true" tabindex="-1"></a>                            <span class="at">TotalAbundance =</span> <span class="fu">taxa_sums</span>(ps.flt),</span>
-<span id="cb27-12"><a href="Qiime2R.html#cb27-12" aria-hidden="true" tabindex="-1"></a>                            phyloseq<span class="sc">::</span><span class="fu">tax_table</span>(ps.flt))</span>
-<span id="cb27-13"><a href="Qiime2R.html#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-14"><a href="Qiime2R.html#cb27-14" aria-hidden="true" tabindex="-1"></a>prevelancedf <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ddply</span>(prevelancedf, <span class="st">&quot;Phylum&quot;</span>, <span class="cf">function</span>(df1){</span>
-<span id="cb27-15"><a href="Qiime2R.html#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">mean_prevalence=</span><span class="fu">mean</span>(df1<span class="sc">$</span>Prevalence), <span class="at">total_abundance=</span><span class="fu">sum</span>(df1<span class="sc">$</span>TotalAbundance,<span class="at">na.rm =</span> T), <span class="at">stringsAsFactors =</span> F)</span>
-<span id="cb27-16"><a href="Qiime2R.html#cb27-16" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb27-17"><a href="Qiime2R.html#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-18"><a href="Qiime2R.html#cb27-18" aria-hidden="true" tabindex="-1"></a>prevelancedf <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(total_abundance))  <span class="co"># print table from highest to lowest abundance </span></span></code></pre></div>
-<pre><code>##                           Phylum mean_prevalence total_abundance
-## 1                    Chloroflexi        4.894366          228035
-## 2                   Bacteroidota        4.491773          199720
-## 3                     Firmicutes        4.298273          179454
-## 4               Actinobacteriota        5.101010          161701
-## 5                 Proteobacteria        4.111111          151650
-## 6               Desulfobacterota        4.895652           57139
-## 7                   Synergistota        6.712644           51049
-## 8                 Cloacimonadota        6.652174           43842
-## 9                Acidobacteriota        3.808989           35158
-## 10                  Thermotogota       10.190476           33489
-## 11                 Spirochaetota        4.475728           24593
-## 12             Verrucomicrobiota        2.989899           16246
-## 13             Fermentibacterota       35.000000           14812
-## 14               Patescibacteria        3.192547           14454
-## 15            Caldatribacteriota        5.304348            8934
-## 16               Planctomycetota        2.397727            5158
-## 17                Armatimonadota        2.611111            4462
-## 18 Marinimicrobia_(SAR406_clade)       20.000000            3818
-## 19               Hydrogenedentes        3.950000            3411
-## 20                  Nitrospirota        8.750000            2853
-## 21  SAR324_clade(Marine_group_B)        3.333333            2622
-## 22                           WS1        3.625000            2559
-## 23              Campilobacterota        3.866667            2465
-## 24                Fibrobacterota        2.739130            1874
-## 25                   Myxococcota        2.761905            1366
-## 26              Bdellovibrionota        2.444444            1133
-## 27                 Caldisericota        3.583333            1071
-## 28                         WPS-2        2.666667             897
-## 29                   Sumerlaeota        3.600000             686
-## 30                 Cyanobacteria        9.000000             647
-## 31                Fusobacteriota        2.888889             565
-## 32          Coprothermobacterota        2.800000             511
-## 33               Gemmatimonadota        2.666667             304
-## 34               Elusimicrobiota        2.833333             225
-## 35                      CK-2C2-2        4.000000             162
-## 36             Methylomirabilota        4.000000             159
-## 37                  Dependentiae        1.857143              90
-## 38              Latescibacterota        2.000000              89
-## 39                  Zixibacteria        5.000000              74
-## 40                       Sva0485        2.000000              69
-## 41                  Acetothermia        2.000000              59
-## 42                           WS4        1.250000              46
-## 43                  Hydrothermae        1.000000              26
-## 44                  Deinococcota        1.000000              11
-## 45                       FCPU426        1.000000               3
-## 46              Margulisbacteria        1.000000               3
-## 47                        MBNT15        1.000000               2</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="Qiime2R.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Compare with the original, unfiltered ps object</span></span>
-<span id="cb29-2"><a href="Qiime2R.html#cb29-2" aria-hidden="true" tabindex="-1"></a>prevelancedf <span class="ot">=</span> <span class="fu">apply</span>(<span class="at">X =</span> phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(ps),</span>
-<span id="cb29-3"><a href="Qiime2R.html#cb29-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">MARGIN =</span> <span class="dv">1</span>,</span>
-<span id="cb29-4"><a href="Qiime2R.html#cb29-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> <span class="cf">function</span>(x){<span class="fu">sum</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)})</span>
-<span id="cb29-5"><a href="Qiime2R.html#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-6"><a href="Qiime2R.html#cb29-6" aria-hidden="true" tabindex="-1"></a>prevelancedf <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Prevalence =</span> prevelancedf,</span>
-<span id="cb29-7"><a href="Qiime2R.html#cb29-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">TotalAbundance =</span> <span class="fu">taxa_sums</span>(ps),</span>
-<span id="cb29-8"><a href="Qiime2R.html#cb29-8" aria-hidden="true" tabindex="-1"></a>                            phyloseq<span class="sc">::</span><span class="fu">tax_table</span>(ps))</span>
-<span id="cb29-9"><a href="Qiime2R.html#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-10"><a href="Qiime2R.html#cb29-10" aria-hidden="true" tabindex="-1"></a>prevelancedf <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ddply</span>(prevelancedf, <span class="st">&quot;Phylum&quot;</span>, <span class="cf">function</span>(df1){</span>
-<span id="cb29-11"><a href="Qiime2R.html#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">mean_prevalence=</span><span class="fu">mean</span>(df1<span class="sc">$</span>Prevalence), <span class="at">total_abundance=</span><span class="fu">sum</span>(df1<span class="sc">$</span>TotalAbundance,<span class="at">na.rm =</span> T), <span class="at">stringsAsFactors =</span> F)</span>
-<span id="cb29-12"><a href="Qiime2R.html#cb29-12" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb29-13"><a href="Qiime2R.html#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-14"><a href="Qiime2R.html#cb29-14" aria-hidden="true" tabindex="-1"></a>prevelancedf <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(total_abundance))  <span class="co"># print table from highest to lowest abundance </span></span></code></pre></div>
-<pre><code>##                           Phylum mean_prevalence total_abundance
-## 1                    Chloroflexi        4.865429          228276
-## 2                   Bacteroidota        4.451499          202022
-## 3                     Firmicutes        4.283019          197782
-## 4               Actinobacteriota        5.045131          165791
-## 5                 Proteobacteria        4.046709          161897
-## 6               Desulfobacterota        4.829060           57187
-## 7                   Synergistota        6.533333           51227
-## 8                 Cloacimonadota        6.387755           45296
-## 9                Acidobacteriota        3.791209           35318
-## 10                  Thermotogota       10.190476           33489
-## 11                 Spirochaetota        4.443396           25028
-## 12             Verrucomicrobiota        2.981308           16649
-## 13             Fermentibacterota       35.000000           14812
-## 14               Patescibacteria        3.138554           14501
-## 15            Caldatribacteriota        5.304348            8934
-## 16               Planctomycetota        2.433333            5478
-## 17                Armatimonadota        2.611111            4462
-## 18 Marinimicrobia_(SAR406_clade)       20.000000            3818
-## 19                          &lt;NA&gt;        3.636364            3522
-## 20               Hydrogenedentes        3.950000            3411
-## 21                  Nitrospirota        8.750000            2853
-## 22              Campilobacterota        4.187500            2710
-## 23  SAR324_clade(Marine_group_B)        3.333333            2622
-## 24                           WS1        3.625000            2559
-## 25                Fibrobacterota        2.750000            1942
-## 26                   Myxococcota        2.681818            1369
-## 27              Bdellovibrionota        2.444444            1133
-## 28                 Caldisericota        3.583333            1071
-## 29                         WPS-2        2.666667             897
-## 30                   Sumerlaeota        3.600000             686
-## 31                 Cyanobacteria        9.000000             647
-## 32                Fusobacteriota        2.888889             565
-## 33          Coprothermobacterota        2.800000             511
-## 34               Gemmatimonadota        2.666667             304
-## 35               Elusimicrobiota        2.833333             225
-## 36                      CK-2C2-2        4.000000             162
-## 37             Methylomirabilota        4.000000             159
-## 38                  Dependentiae        1.750000              94
-## 39              Latescibacterota        2.000000              89
-## 40                  Zixibacteria        5.000000              74
-## 41                       Sva0485        2.000000              69
-## 42                  Acetothermia        2.000000              59
-## 43                           WS4        1.250000              46
-## 44                  Hydrothermae        1.000000              26
-## 45                  Deinococcota        1.000000              11
-## 46                       FCPU426        1.000000               3
-## 47              Margulisbacteria        1.000000               3
-## 48                        MBNT15        1.000000               2</code></pre>
+<span id="cb27-5"><a href="Qiime2R.html#cb27-5" aria-hidden="true" tabindex="-1"></a>prevalencedf <span class="ot">=</span> <span class="fu">apply</span>(<span class="at">X =</span> phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(ps.flt),</span>
+<span id="cb27-6"><a href="Qiime2R.html#cb27-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">MARGIN =</span> <span class="dv">1</span>,</span>
+<span id="cb27-7"><a href="Qiime2R.html#cb27-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> <span class="cf">function</span>(x){<span class="fu">sum</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)})</span>
+<span id="cb27-8"><a href="Qiime2R.html#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="Qiime2R.html#cb27-9" aria-hidden="true" tabindex="-1"></a>prevalencedf  <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Prevalence =</span> prevalencedf ,</span>
+<span id="cb27-10"><a href="Qiime2R.html#cb27-10" aria-hidden="true" tabindex="-1"></a>                            <span class="at">TotalAbundance =</span> <span class="fu">taxa_sums</span>(ps.flt),</span>
+<span id="cb27-11"><a href="Qiime2R.html#cb27-11" aria-hidden="true" tabindex="-1"></a>                            phyloseq<span class="sc">::</span><span class="fu">tax_table</span>(ps.flt))</span>
+<span id="cb27-12"><a href="Qiime2R.html#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="Qiime2R.html#cb27-13" aria-hidden="true" tabindex="-1"></a>prevalencedf <span class="ot">&lt;-</span> prevalencedf <span class="sc">%&gt;%</span></span>
+<span id="cb27-14"><a href="Qiime2R.html#cb27-14" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>( Phylum ) <span class="sc">%&gt;%</span>   <span class="co"># choose phylym level</span></span>
+<span id="cb27-15"><a href="Qiime2R.html#cb27-15" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">Mean_prevalence =</span> <span class="fu">mean</span>(Prevalence),</span>
+<span id="cb27-16"><a href="Qiime2R.html#cb27-16" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Total_abundance =</span> <span class="fu">sum</span>(TotalAbundance)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-17"><a href="Qiime2R.html#cb27-17" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Rel_abundance =</span> (Total_abundance <span class="sc">/</span> <span class="fu">sum</span>(Total_abundance) <span class="sc">*</span><span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-18"><a href="Qiime2R.html#cb27-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(Total_abundance)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-19"><a href="Qiime2R.html#cb27-19" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Cumulated =</span> <span class="fu">cumsum</span>(Rel_abundance))</span>
+<span id="cb27-20"><a href="Qiime2R.html#cb27-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-21"><a href="Qiime2R.html#cb27-21" aria-hidden="true" tabindex="-1"></a><span class="co"># print table from highest to lowest abundance </span></span>
+<span id="cb27-22"><a href="Qiime2R.html#cb27-22" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(prevalencedf, <span class="at">digits =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-23"><a href="Qiime2R.html#cb27-23" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>), <span class="at">full_width =</span> F, <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<table class="table table-striped table-condensed table-responsive" style="font-size: 10px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Phylum
+</th>
+<th style="text-align:right;">
+Mean_prevalence
+</th>
+<th style="text-align:right;">
+Total_abundance
+</th>
+<th style="text-align:right;">
+Rel_abundance
+</th>
+<th style="text-align:right;">
+Cumulated
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Chloroflexi
+</td>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+228035
+</td>
+<td style="text-align:right;">
+18.1
+</td>
+<td style="text-align:right;">
+18.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bacteroidota
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+<td style="text-align:right;">
+199720
+</td>
+<td style="text-align:right;">
+15.9
+</td>
+<td style="text-align:right;">
+34.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Firmicutes
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+179454
+</td>
+<td style="text-align:right;">
+14.3
+</td>
+<td style="text-align:right;">
+48.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Actinobacteriota
+</td>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+161701
+</td>
+<td style="text-align:right;">
+12.9
+</td>
+<td style="text-align:right;">
+61.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Proteobacteria
+</td>
+<td style="text-align:right;">
+4.1
+</td>
+<td style="text-align:right;">
+151650
+</td>
+<td style="text-align:right;">
+12.1
+</td>
+<td style="text-align:right;">
+73.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Desulfobacterota
+</td>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+57139
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+<td style="text-align:right;">
+77.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Synergistota
+</td>
+<td style="text-align:right;">
+6.7
+</td>
+<td style="text-align:right;">
+51049
+</td>
+<td style="text-align:right;">
+4.1
+</td>
+<td style="text-align:right;">
+81.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cloacimonadota
+</td>
+<td style="text-align:right;">
+6.7
+</td>
+<td style="text-align:right;">
+43842
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+85.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Acidobacteriota
+</td>
+<td style="text-align:right;">
+3.8
+</td>
+<td style="text-align:right;">
+35158
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+88.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Thermotogota
+</td>
+<td style="text-align:right;">
+10.2
+</td>
+<td style="text-align:right;">
+33489
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+90.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Spirochaetota
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+<td style="text-align:right;">
+24593
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+92.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Verrucomicrobiota
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+16246
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+94.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fermentibacterota
+</td>
+<td style="text-align:right;">
+35.0
+</td>
+<td style="text-align:right;">
+14812
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+95.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Patescibacteria
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+14454
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+96.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Caldatribacteriota
+</td>
+<td style="text-align:right;">
+5.3
+</td>
+<td style="text-align:right;">
+8934
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+97.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Planctomycetota
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+5158
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:right;">
+97.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Armatimonadota
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+4462
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:right;">
+97.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Marinimicrobia_(SAR406_clade)
+</td>
+<td style="text-align:right;">
+20.0
+</td>
+<td style="text-align:right;">
+3818
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+98.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrogenedentes
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+3411
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+98.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nitrospirota
+</td>
+<td style="text-align:right;">
+8.8
+</td>
+<td style="text-align:right;">
+2853
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+98.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SAR324_clade(Marine_group_B)
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+2622
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+98.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WS1
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+2559
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+99.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Campilobacterota
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:right;">
+2465
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+99.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fibrobacterota
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+1874
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Myxococcota
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+1366
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bdellovibrionota
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+1133
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Caldisericota
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+1071
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WPS-2
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+897
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sumerlaeota
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+686
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cyanobacteria
+</td>
+<td style="text-align:right;">
+9.0
+</td>
+<td style="text-align:right;">
+647
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fusobacteriota
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+565
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+99.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Coprothermobacterota
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+511
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+99.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gemmatimonadota
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+304
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+99.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Elusimicrobiota
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+225
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+99.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CK-2C2-2
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+162
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+99.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Methylomirabilota
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+159
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dependentiae
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Latescibacterota
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Zixibacteria
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sva0485
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+69
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Acetothermia
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WS4
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+46
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrothermae
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Deinococcota
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCPU426
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Margulisbacteria
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MBNT15
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="Qiime2R.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Compare with the original, unfiltered ps object</span></span>
+<span id="cb28-2"><a href="Qiime2R.html#cb28-2" aria-hidden="true" tabindex="-1"></a>prevalencedf <span class="ot">=</span> <span class="fu">apply</span>(<span class="at">X =</span> phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(ps),</span>
+<span id="cb28-3"><a href="Qiime2R.html#cb28-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">MARGIN =</span> <span class="dv">1</span>,</span>
+<span id="cb28-4"><a href="Qiime2R.html#cb28-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> <span class="cf">function</span>(x){<span class="fu">sum</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)})</span>
+<span id="cb28-5"><a href="Qiime2R.html#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="Qiime2R.html#cb28-6" aria-hidden="true" tabindex="-1"></a>prevalencedf <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Prevalence =</span> prevalencedf,</span>
+<span id="cb28-7"><a href="Qiime2R.html#cb28-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">TotalAbundance =</span> <span class="fu">taxa_sums</span>(ps),</span>
+<span id="cb28-8"><a href="Qiime2R.html#cb28-8" aria-hidden="true" tabindex="-1"></a>                            phyloseq<span class="sc">::</span><span class="fu">tax_table</span>(ps))</span>
+<span id="cb28-9"><a href="Qiime2R.html#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="Qiime2R.html#cb28-10" aria-hidden="true" tabindex="-1"></a>prevalencedf <span class="ot">&lt;-</span> prevalencedf <span class="sc">%&gt;%</span></span>
+<span id="cb28-11"><a href="Qiime2R.html#cb28-11" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>( Phylum ) <span class="sc">%&gt;%</span>   <span class="co"># choose phylym level</span></span>
+<span id="cb28-12"><a href="Qiime2R.html#cb28-12" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">Mean_prevalence =</span> <span class="fu">mean</span>(Prevalence),</span>
+<span id="cb28-13"><a href="Qiime2R.html#cb28-13" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Total_abundance =</span> <span class="fu">sum</span>(TotalAbundance)) <span class="sc">%&gt;%</span></span>
+<span id="cb28-14"><a href="Qiime2R.html#cb28-14" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Rel_abundance =</span> (Total_abundance <span class="sc">/</span> <span class="fu">sum</span>(Total_abundance) <span class="sc">*</span><span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb28-15"><a href="Qiime2R.html#cb28-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(Total_abundance)) <span class="sc">%&gt;%</span></span>
+<span id="cb28-16"><a href="Qiime2R.html#cb28-16" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Cumulated =</span> <span class="fu">cumsum</span>(Rel_abundance))</span>
+<span id="cb28-17"><a href="Qiime2R.html#cb28-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-18"><a href="Qiime2R.html#cb28-18" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(prevalencedf, <span class="at">digits =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-19"><a href="Qiime2R.html#cb28-19" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),<span class="at">full_width =</span> F, <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<table class="table table-striped table-condensed table-responsive" style="font-size: 10px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Phylum
+</th>
+<th style="text-align:right;">
+Mean_prevalence
+</th>
+<th style="text-align:right;">
+Total_abundance
+</th>
+<th style="text-align:right;">
+Rel_abundance
+</th>
+<th style="text-align:right;">
+Cumulated
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Chloroflexi
+</td>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+228276
+</td>
+<td style="text-align:right;">
+17.6
+</td>
+<td style="text-align:right;">
+17.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bacteroidota
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+<td style="text-align:right;">
+202022
+</td>
+<td style="text-align:right;">
+15.5
+</td>
+<td style="text-align:right;">
+33.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Firmicutes
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+197782
+</td>
+<td style="text-align:right;">
+15.2
+</td>
+<td style="text-align:right;">
+48.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Actinobacteriota
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+165791
+</td>
+<td style="text-align:right;">
+12.8
+</td>
+<td style="text-align:right;">
+61.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Proteobacteria
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+161897
+</td>
+<td style="text-align:right;">
+12.5
+</td>
+<td style="text-align:right;">
+73.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Desulfobacterota
+</td>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:right;">
+57187
+</td>
+<td style="text-align:right;">
+4.4
+</td>
+<td style="text-align:right;">
+77.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Synergistota
+</td>
+<td style="text-align:right;">
+6.5
+</td>
+<td style="text-align:right;">
+51227
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:right;">
+81.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cloacimonadota
+</td>
+<td style="text-align:right;">
+6.4
+</td>
+<td style="text-align:right;">
+45296
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+85.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Acidobacteriota
+</td>
+<td style="text-align:right;">
+3.8
+</td>
+<td style="text-align:right;">
+35318
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+88.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Thermotogota
+</td>
+<td style="text-align:right;">
+10.2
+</td>
+<td style="text-align:right;">
+33489
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+90.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Spirochaetota
+</td>
+<td style="text-align:right;">
+4.4
+</td>
+<td style="text-align:right;">
+25028
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+92.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Verrucomicrobiota
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+16649
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+93.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fermentibacterota
+</td>
+<td style="text-align:right;">
+35.0
+</td>
+<td style="text-align:right;">
+14812
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+95.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Patescibacteria
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+14501
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+96.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Caldatribacteriota
+</td>
+<td style="text-align:right;">
+5.3
+</td>
+<td style="text-align:right;">
+8934
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+96.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Planctomycetota
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+5478
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:right;">
+97.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Armatimonadota
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+4462
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+97.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Marinimicrobia_(SAR406_clade)
+</td>
+<td style="text-align:right;">
+20.0
+</td>
+<td style="text-align:right;">
+3818
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+97.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+3522
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+98.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrogenedentes
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+3411
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+98.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nitrospirota
+</td>
+<td style="text-align:right;">
+8.8
+</td>
+<td style="text-align:right;">
+2853
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+98.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Campilobacterota
+</td>
+<td style="text-align:right;">
+4.2
+</td>
+<td style="text-align:right;">
+2710
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+98.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SAR324_clade(Marine_group_B)
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+2622
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+99.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WS1
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+2559
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+99.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fibrobacterota
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+1942
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Myxococcota
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+1369
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bdellovibrionota
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+1133
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Caldisericota
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+1071
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WPS-2
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+897
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sumerlaeota
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+686
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cyanobacteria
+</td>
+<td style="text-align:right;">
+9.0
+</td>
+<td style="text-align:right;">
+647
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+99.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fusobacteriota
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+565
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+99.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Coprothermobacterota
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+511
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+99.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gemmatimonadota
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+304
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+99.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Elusimicrobiota
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+225
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+99.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CK-2C2-2
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+162
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Methylomirabilota
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+159
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dependentiae
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+94
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Latescibacterota
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Zixibacteria
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sva0485
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+69
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Acetothermia
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WS4
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+46
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrothermae
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Deinococcota
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCPU426
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Margulisbacteria
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MBNT15
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="export-asv-and-taxa-tables-to-excel" class="section level3 hasAnchor" number="5.2.8">
 <h3><span class="header-section-number">5.2.8</span> Export ASV and taxa tables to Excel<a href="Qiime2R.html#export-asv-and-taxa-tables-to-excel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This might be useful if you would like to share your abundance and taxa tables with someone that does not use R.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="Qiime2R.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract ASV table from ps object</span></span>
-<span id="cb31-2"><a href="Qiime2R.html#cb31-2" aria-hidden="true" tabindex="-1"></a>ASVs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">otu_table</span>(ps.flt)) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-3"><a href="Qiime2R.html#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">&quot;FeatureID&quot;</span>)</span>
-<span id="cb31-4"><a href="Qiime2R.html#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="Qiime2R.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># extract taxonomy table from ps object</span></span>
-<span id="cb31-6"><a href="Qiime2R.html#cb31-6" aria-hidden="true" tabindex="-1"></a>taxtable <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">tax_table</span>(ps.flt))</span>
-<span id="cb31-7"><a href="Qiime2R.html#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># combine the taxonomy levels into one colum, separated by a ;</span></span>
-<span id="cb31-8"><a href="Qiime2R.html#cb31-8" aria-hidden="true" tabindex="-1"></a>taxtable <span class="ot">&lt;-</span> taxtable <span class="sc">%&gt;%</span></span>
-<span id="cb31-9"><a href="Qiime2R.html#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">&quot;FeatureID&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb31-10"><a href="Qiime2R.html#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(Taxon, <span class="at">sep=</span><span class="st">&quot;;&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;Kingdom&quot;</span>,<span class="st">&quot;Phylum&quot;</span>,<span class="st">&quot;Class&quot;</span>,<span class="st">&quot;Order&quot;</span>,<span class="st">&quot;Family&quot;</span>,<span class="st">&quot;Genus&quot;</span>,<span class="st">&quot;Species&quot;</span>))</span>
-<span id="cb31-11"><a href="Qiime2R.html#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="co"># combine ASVs and taxatable into one object</span></span>
-<span id="cb31-12"><a href="Qiime2R.html#cb31-12" aria-hidden="true" tabindex="-1"></a>ASVTable <span class="ot">&lt;-</span> ASVs <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(taxtable, <span class="at">by =</span> <span class="st">&quot;FeatureID&quot;</span>)</span>
-<span id="cb31-13"><a href="Qiime2R.html#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-14"><a href="Qiime2R.html#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="co"># write .csv file</span></span>
-<span id="cb31-15"><a href="Qiime2R.html#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="co"># write.csv(ASVTable, &quot;ASVTable.csv&quot;) not run</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="Qiime2R.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract ASV table from ps object</span></span>
+<span id="cb29-2"><a href="Qiime2R.html#cb29-2" aria-hidden="true" tabindex="-1"></a>ASVs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">otu_table</span>(ps.flt)) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-3"><a href="Qiime2R.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">&quot;FeatureID&quot;</span>)</span>
+<span id="cb29-4"><a href="Qiime2R.html#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="Qiime2R.html#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># extract taxonomy table from ps object</span></span>
+<span id="cb29-6"><a href="Qiime2R.html#cb29-6" aria-hidden="true" tabindex="-1"></a>taxtable <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">tax_table</span>(ps.flt))</span>
+<span id="cb29-7"><a href="Qiime2R.html#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># combine the taxonomy levels into one colum, separated by a ;</span></span>
+<span id="cb29-8"><a href="Qiime2R.html#cb29-8" aria-hidden="true" tabindex="-1"></a>taxtable <span class="ot">&lt;-</span> taxtable <span class="sc">%&gt;%</span></span>
+<span id="cb29-9"><a href="Qiime2R.html#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">&quot;FeatureID&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb29-10"><a href="Qiime2R.html#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(Taxon, <span class="at">sep=</span><span class="st">&quot;;&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;Kingdom&quot;</span>,<span class="st">&quot;Phylum&quot;</span>,<span class="st">&quot;Class&quot;</span>,<span class="st">&quot;Order&quot;</span>,<span class="st">&quot;Family&quot;</span>,<span class="st">&quot;Genus&quot;</span>,<span class="st">&quot;Species&quot;</span>))</span>
+<span id="cb29-11"><a href="Qiime2R.html#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co"># combine ASVs and taxatable into one object</span></span>
+<span id="cb29-12"><a href="Qiime2R.html#cb29-12" aria-hidden="true" tabindex="-1"></a>ASVTable <span class="ot">&lt;-</span> ASVs <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(taxtable, <span class="at">by =</span> <span class="st">&quot;FeatureID&quot;</span>)</span>
+<span id="cb29-13"><a href="Qiime2R.html#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="Qiime2R.html#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co"># write .csv file</span></span>
+<span id="cb29-15"><a href="Qiime2R.html#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co"># write.csv(ASVTable, &quot;ASVTable.csv&quot;) not run</span></span></code></pre></div>
 <p><strong>Note:</strong><br />
 This code is an amalgamation from various sources. Apart from putting it together into this workflow I do not take credit for it.</p>
 

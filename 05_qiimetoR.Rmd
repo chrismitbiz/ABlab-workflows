@@ -302,36 +302,46 @@ However, in environments where you get higher contributions of unknown amplicons
 #ps.flt.prev <-  prune_samples(sample_data(physeqB.flt)$Treatment != "Reference", physeqB.flt)
 # ps.flt.prevtab <-  prune_samples(sample_data(physeqB.flt.prevtab)$Treatment != "Blank", physeqB.flt.prevtab)
 
-
-prevelancedf = apply(X = phyloseq::otu_table(ps.flt),
+prevalencedf = apply(X = phyloseq::otu_table(ps.flt),
                        MARGIN = 1,
                        FUN = function(x){sum(x > 0)})
 
-prevelancedf = data.frame(Prevalence = prevelancedf,
+prevalencedf  = data.frame(Prevalence = prevalencedf ,
                             TotalAbundance = taxa_sums(ps.flt),
                             phyloseq::tax_table(ps.flt))
 
-prevelancedf <- plyr::ddply(prevelancedf, "Phylum", function(df1){
-  data.frame(mean_prevalence=mean(df1$Prevalence), total_abundance=sum(df1$TotalAbundance,na.rm = T), stringsAsFactors = F)
-  })
+prevalencedf <- prevalencedf %>%
+    dplyr::group_by( Phylum ) %>%   # choose phylym level
+    dplyr::summarise(Mean_prevalence = mean(Prevalence),
+                     Total_abundance = sum(TotalAbundance)) %>%
+    dplyr::mutate(Rel_abundance = (Total_abundance / sum(Total_abundance) *100)) %>%
+    arrange(desc(Total_abundance)) %>%
+    dplyr::mutate(Cumulated = cumsum(Rel_abundance))
 
-prevelancedf %>% arrange(desc(total_abundance))  # print table from highest to lowest abundance 
+# print table from highest to lowest abundance 
+knitr::kable(prevalencedf, digits = 1) %>% 
+  kableExtra::kable_styling(bootstrap_options = c("striped", "condensed", "responsive"), full_width = F, font_size = 10)
 
 
 ## Compare with the original, unfiltered ps object
-prevelancedf = apply(X = phyloseq::otu_table(ps),
+prevalencedf = apply(X = phyloseq::otu_table(ps),
                        MARGIN = 1,
                        FUN = function(x){sum(x > 0)})
 
-prevelancedf = data.frame(Prevalence = prevelancedf,
+prevalencedf = data.frame(Prevalence = prevalencedf,
                             TotalAbundance = taxa_sums(ps),
                             phyloseq::tax_table(ps))
 
-prevelancedf <- plyr::ddply(prevelancedf, "Phylum", function(df1){
-  data.frame(mean_prevalence=mean(df1$Prevalence), total_abundance=sum(df1$TotalAbundance,na.rm = T), stringsAsFactors = F)
-  })
+prevalencedf <- prevalencedf %>%
+    dplyr::group_by( Phylum ) %>%   # choose phylym level
+    dplyr::summarise(Mean_prevalence = mean(Prevalence),
+                     Total_abundance = sum(TotalAbundance)) %>%
+    dplyr::mutate(Rel_abundance = (Total_abundance / sum(Total_abundance) *100)) %>%
+    arrange(desc(Total_abundance)) %>%
+    dplyr::mutate(Cumulated = cumsum(Rel_abundance))
 
-prevelancedf %>% arrange(desc(total_abundance))  # print table from highest to lowest abundance 
+knitr::kable(prevalencedf, digits = 1) %>% 
+  kableExtra::kable_styling(bootstrap_options = c("striped", "condensed", "responsive"),full_width = F, font_size = 10)
 
 ```
   
