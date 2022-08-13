@@ -1294,10 +1294,6 @@ However, in environments where you get higher contributions of unknown amplicons
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# Create a prevalence table to see which phyla have low prevalence}
-\CommentTok{\#ps.flt.prev \textless{}{-}  prune\_samples(sample\_data(physeqB.flt)$Treatment != "Reference", physeqB.flt)}
-\CommentTok{\# ps.flt.prevtab \textless{}{-}  prune\_samples(sample\_data(physeqB.flt.prevtab)$Treatment != "Blank", physeqB.flt.prevtab)}
-
 \NormalTok{prevalencedf }\OtherTok{=} \FunctionTok{apply}\NormalTok{(}\AttributeTok{X =}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{otu\_table}\NormalTok{(ps.flt),}
                        \AttributeTok{MARGIN =} \DecValTok{1}\NormalTok{,}
                        \AttributeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{sum}\NormalTok{(x }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{)\})}

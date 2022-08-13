@@ -298,10 +298,6 @@ This table is handy to decide if you want to remove certain phyla from some visu
 However, in environments where you get higher contributions of unknown amplicons, it may indicate that the taxonomic database does not capture your samples well. In that case it would be wise to keep the NAs in for measuring alpha and beta diversity.   
   
 ```{r prevalence, include=TRUE, echo=TRUE,warning=FALSE, message=FALSE}
-## Create a prevalence table to see which phyla have low prevalence
-#ps.flt.prev <-  prune_samples(sample_data(physeqB.flt)$Treatment != "Reference", physeqB.flt)
-# ps.flt.prevtab <-  prune_samples(sample_data(physeqB.flt.prevtab)$Treatment != "Blank", physeqB.flt.prevtab)
-
 prevalencedf = apply(X = phyloseq::otu_table(ps.flt),
                        MARGIN = 1,
                        FUN = function(x){sum(x > 0)})
