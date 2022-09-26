@@ -2843,7 +2843,7 @@ For this example, the explanatory variable \texttt{Location} is used to regress 
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0251 minutes.    Estimated time of completion: 2022-09-27 08:11:17    2 factors completed in 0.0469 minutes.     Estimated time of completion: 2022-09-27 08:11:16    3 factors completed in 0.0687 minutes.     Estimated time of completion: 2022-09-27 08:11:16    4 factors completed in 0.0907 minutes.     Estimated time of completion: 2022-09-27 08:11:16    5 factors completed in 0.111 minutes.     Estimated time of completion: 2022-09-27 08:11:16   
+##  1 factor completed in 0.0253 minutes.    Estimated time of completion: 2022-09-27 09:03:05    2 factors completed in 0.0471 minutes.     Estimated time of completion: 2022-09-27 09:03:04    3 factors completed in 0.0689 minutes.     Estimated time of completion: 2022-09-27 09:03:04    4 factors completed in 0.0909 minutes.     Estimated time of completion: 2022-09-27 09:03:04    5 factors completed in 0.111 minutes.     Estimated time of completion: 2022-09-27 09:03:04   
 \end{verbatim}
 
 \begin{Shaded}
@@ -3420,6 +3420,48 @@ The locations of phylofactor (PF) 1, 2, 4 and 5 are now indicated by a text labe
 The text label for PF 3 is aligned with the outside `centre' of the grey shaded circle representing Group 1 of this factor.
 
 The outside bars indicate abundance of the relevant genus.
+
+There are too many colours here and it is difficult to differentiate the different phyla. One solution for that is to create custom colours and order the legend in order of appearance of the phyla (using the \texttt{ordervec} vector). Alternatively, you can just add colour for selected phyla that you want to highlight (again using the \texttt{ordervec} vector). For example, from the summary results above we may want to highlight only the phyla in Group 2 of factor 3 (the uncoloured remainder bin from Factor 3) and perhaps include the phyla from PF 1, 2, 4 and 5.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# check which phyla to highlight in tree}
+\NormalTok{s}\SpecialCharTok{$}\NormalTok{taxa.split}\SpecialCharTok{$}\NormalTok{group2 }\CommentTok{\# this is the summary for factor 3 create above}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Bacteria;Proteobacteria"   "Bacteria;Cyanobacteria"   
+## [3] "Bacteria;Campilobacterota" "Bacteria;WPS-2"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# check which taxa are involved for other factors}
+\CommentTok{\# summary(PF,taxonomy,factor=1) \# Acidobacteriota}
+\CommentTok{\# summary(PF,taxonomy,factor=2) \# Chloroflexi}
+\CommentTok{\# summary(PF,taxonomy,factor=4) \# Bacteroidota}
+\CommentTok{\# summary(PF,taxonomy,factor=5) \#Firmicutes}
+
+\CommentTok{\# create ordervec}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{prevalencedf}\NormalTok{(ps.phylo, Phylum)}
+\NormalTok{ordervec }\OtherTok{\textless{}{-}}\NormalTok{ (df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylum }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Proteobacteria"}\NormalTok{, }\StringTok{"Cyanobacteria"}\NormalTok{, }\StringTok{"Campilobacterota"}\NormalTok{, }\StringTok{"WPS{-}2"}\NormalTok{,}
+                              \StringTok{"Acidobacteriota"}\NormalTok{,}\StringTok{"Chloroflexi"}\NormalTok{, }\StringTok{"Bacteroidota"}\NormalTok{, }\StringTok{"Firmicutes"}\NormalTok{)))}\SpecialCharTok{$}\NormalTok{Phylum}
+\CommentTok{\# plot tree}
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{mytreefunctionwithbarplots}\NormalTok{(PF, ps.phylo, }
+         \AttributeTok{layout =} \StringTok{"circular"}\NormalTok{,}
+         \AttributeTok{branch.length =} \StringTok{"none"}\NormalTok{,}
+         \AttributeTok{factorvector =}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{),}
+         \AttributeTok{offset.text =} \DecValTok{5}\NormalTok{,}
+         \AttributeTok{pwidth =} \FloatTok{0.05}\NormalTok{)}
+\NormalTok{p}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/coloredtree2-1.pdf}
+
+Now its a little easier to identify the who is who. This is just another way to explore your phylogeny and how they relate to the phylofactors.
 
   \bibliography{book.bib,packages.bib}
 

@@ -489,3 +489,31 @@ The text label for PF 3 is aligned with the outside 'centre' of the grey shaded 
   
 The outside bars indicate abundance of the relevant genus.  
   
+There are too many colours here and it is difficult to differentiate the different phyla. One solution for that is to create custom colours and order the legend in order of appearance of the phyla (using the `ordervec` vector). Alternatively, you can just add colour for selected phyla that you want to highlight (again using the `ordervec` vector). For example, from the summary results above we may want to highlight only the phyla in Group 2 of factor 3 (the uncoloured remainder bin from Factor 3) and perhaps include the phyla from PF 1, 2, 4 and 5.  
+  
+```{r coloredtree2, echo=TRUE, message=FALSE, warning=FALSE, fig.asp=0.8, fig.width=10}
+# check which phyla to highlight in tree
+s$taxa.split$group2 # this is the summary for factor 3 create above
+# check which taxa are involved for other factors
+# summary(PF,taxonomy,factor=1) # Acidobacteriota
+# summary(PF,taxonomy,factor=2) # Chloroflexi
+# summary(PF,taxonomy,factor=4) # Bacteroidota
+# summary(PF,taxonomy,factor=5) #Firmicutes
+
+# create ordervec
+df <- prevalencedf(ps.phylo, Phylum)
+ordervec <- (df %>% 
+  dplyr::filter(Phylum %in% c("Proteobacteria", "Cyanobacteria", "Campilobacterota", "WPS-2",
+                              "Acidobacteriota","Chloroflexi", "Bacteroidota", "Firmicutes")))$Phylum
+# plot tree
+p <- mytreefunctionwithbarplots(PF, ps.phylo, 
+         layout = "circular",
+         branch.length = "none",
+         factorvector =c(1,2,3,4),
+         offset.text = 5,
+         pwidth = 0.05)
+p
+```
+  
+Now its a little easier to identify the who is who. This is just another way to explore your phylogeny and how they relate to the phylofactors.   
+  
