@@ -498,13 +498,13 @@ s$taxa.split$group2 # this is the summary for factor 3 create above
 # summary(PF,taxonomy,factor=1) # Acidobacteriota
 # summary(PF,taxonomy,factor=2) # Chloroflexi
 # summary(PF,taxonomy,factor=4) # Bacteroidota
-# summary(PF,taxonomy,factor=5) #Firmicutes
+# summary(PF,taxonomy,factor=5) # Fermentibacterota
 
 # create ordervec
 df <- prevalencedf(ps.phylo, Phylum)
 ordervec <- (df %>% 
   dplyr::filter(Phylum %in% c("Proteobacteria", "Cyanobacteria", "Campilobacterota", "WPS-2",
-                              "Acidobacteriota","Chloroflexi", "Bacteroidota", "Firmicutes")))$Phylum
+                              "Acidobacteriota","Chloroflexi", "Bacteroidota", "Fermentibacterota")))$Phylum
 # plot tree
 p <- mytreefunctionwithbarplots(PF, ps.phylo, 
          layout = "circular",

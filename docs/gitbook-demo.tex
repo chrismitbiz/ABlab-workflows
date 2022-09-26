@@ -2843,7 +2843,7 @@ For this example, the explanatory variable \texttt{Location} is used to regress 
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0267 minutes.    Estimated time of completion: 2022-09-27 09:05:41    2 factors completed in 0.0484 minutes.     Estimated time of completion: 2022-09-27 09:05:40    3 factors completed in 0.0701 minutes.     Estimated time of completion: 2022-09-27 09:05:40    4 factors completed in 0.0927 minutes.     Estimated time of completion: 2022-09-27 09:05:39    5 factors completed in 0.113 minutes.     Estimated time of completion: 2022-09-27 09:05:39   
+##  1 factor completed in 0.0252 minutes.    Estimated time of completion: 2022-09-27 09:15:37    2 factors completed in 0.0471 minutes.     Estimated time of completion: 2022-09-27 09:15:36    3 factors completed in 0.0689 minutes.     Estimated time of completion: 2022-09-27 09:15:36    4 factors completed in 0.091 minutes.     Estimated time of completion: 2022-09-27 09:15:36    5 factors completed in 0.111 minutes.     Estimated time of completion: 2022-09-27 09:15:36   
 \end{verbatim}
 
 \begin{Shaded}
@@ -3441,13 +3441,13 @@ There are too many colours here and it is difficult to differentiate the differe
 \CommentTok{\# summary(PF,taxonomy,factor=1) \# Acidobacteriota}
 \CommentTok{\# summary(PF,taxonomy,factor=2) \# Chloroflexi}
 \CommentTok{\# summary(PF,taxonomy,factor=4) \# Bacteroidota}
-\CommentTok{\# summary(PF,taxonomy,factor=5) \#Firmicutes}
+\CommentTok{\# summary(PF,taxonomy,factor=5) \# Fermentibacterota}
 
 \CommentTok{\# create ordervec}
 \NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{prevalencedf}\NormalTok{(ps.phylo, Phylum)}
 \NormalTok{ordervec }\OtherTok{\textless{}{-}}\NormalTok{ (df }\SpecialCharTok{\%\textgreater{}\%} 
 \NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylum }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Proteobacteria"}\NormalTok{, }\StringTok{"Cyanobacteria"}\NormalTok{, }\StringTok{"Campilobacterota"}\NormalTok{, }\StringTok{"WPS{-}2"}\NormalTok{,}
-                              \StringTok{"Acidobacteriota"}\NormalTok{,}\StringTok{"Chloroflexi"}\NormalTok{, }\StringTok{"Bacteroidota"}\NormalTok{, }\StringTok{"Firmicutes"}\NormalTok{)))}\SpecialCharTok{$}\NormalTok{Phylum}
+                              \StringTok{"Acidobacteriota"}\NormalTok{,}\StringTok{"Chloroflexi"}\NormalTok{, }\StringTok{"Bacteroidota"}\NormalTok{, }\StringTok{"Fermentibacterota"}\NormalTok{)))}\SpecialCharTok{$}\NormalTok{Phylum}
 \CommentTok{\# plot tree}
 \NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{mytreefunctionwithbarplots}\NormalTok{(PF, ps.phylo, }
          \AttributeTok{layout =} \StringTok{"circular"}\NormalTok{,}
