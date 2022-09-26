@@ -313,7 +313,7 @@ div.csl-indent {
 <div id="introduction-5" class="section level2 hasAnchor" number="8.1">
 <h2><span class="header-section-number">8.1</span> Introduction<a href="phylofactor.html#introduction-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this chapter you will learn how to use one of the main functions from the package phylofactor, as well as analyse and visualise the results.</p>
-<p><a href="https://github.com/reptalex/phylofactor">Phylofactor</a> is a R package developed by <a href="https://github.com/reptalex">Alex Washburne</a>, a mathematical biologist. It is a compositional analysis tool that ‘iteratively identifies the most important clades driving variation in the data through their associations with independent variables’ (<span class="citation">Washburne et al. (<a href="#ref-Washburne2017" role="doc-biblioref">2017</a>)</span>). For me, it is a great way to assess clade-specific treatment effects or environmental associations. In combination with other differential abundance analysis methods it helped me to gain confidence in biological interpretations of microbial community associations to environmental metadata or treatments. I also use it to visualise selected identified clades on a phylogenetic tree.</p>
+<p><a href="https://github.com/reptalex/phylofactor">Phylofactor</a> is a package developed by <a href="https://github.com/reptalex">Alex Washburne</a>, a mathematical biologist. It is a compositional analysis tool that ‘iteratively identifies the most important clades driving variation in the data through their associations with independent variables’ (<span class="citation">Washburne et al. (<a href="#ref-Washburne2017" role="doc-biblioref">2017</a>)</span>). For me, it is a great way to assess clade-specific treatment effects or environmental associations. In combination with other differential abundance analysis methods it helped me to gain confidence in biological interpretations of microbial community associations to environmental metadata or treatments. I also use it to visualise selected identified clades on a phylogenetic tree.</p>
 <p>The package enables the use of different statistical tests, such as twoSample comparisons (i.e. t-test, Wilcox text, Fisher exact test) or regression modelling of abundances, transformed into isometric log ratios (ILRs) - sometimes called balances - to study treatment effects or environmental associations. It does this for aggregated abundances on edges of a phylogenetic tree, hence includes associations of abundances of whole clades of ASVs.</p>
 <p>Check out the papers <a href="https://www.biorxiv.org/content/10.1101/235341v2">Phylofactorization: a graph-partitioning algorithm to identify phylogenetic scales of ecological data</a> (<span class="citation">Washburne et al. (<a href="#ref-Washburne2019a" role="doc-biblioref">2019</a>)</span>) and <a href="https://peerj.com/articles/2969/">Phylogenetic factorization of compositional data yields lineage-level associations in microbiome datasets</a> (<span class="citation">Washburne et al. (<a href="#ref-Washburne2017" role="doc-biblioref">2017</a>)</span>) to learn more about the algorithms used.</p>
 <p>You will need a phylogenic tree for this analysis. For example, in chapter <a href="miseqtoqiime.html#miseqtoqiime">4</a> we have built a phylogenetic tree from ASVs using the insertion tree method with qiime2. This tree was then imported into R and included into a phyloseq object as shown in chapter <a href="Qiime2R.html#Qiime2R">5</a>.</p>
@@ -335,12 +335,18 @@ div.csl-indent {
 <p>There are several functions available in phylofactor to review the model outputs and to review which taxa were associated with groups of ASVs/clades that are part of significant edges in each factor.</p>
 <p>I also created some custom functions that make it a little easier (for me). They are available to download. I am no coder so the code in the functions may offend you but they worked :). If you want to use these extra functions you can download them into your working directory and load them into your R environment using the <code>dget</code> function (e.g. <code>phyfacsummary &lt;- dget("./custom-functions/phyfacsummary.R")</code>). I usually keep custom functions in a separate folder, here named ‘custom-functions’.</p>
 <p>If you want to learn what the functions do, you can also copy the code out of the function and have a go at running the code yourself.</p>
-<p>Custom functions. Right-click to download and add to your working directory:<br />
-* <a href="./custom-functions/phyfacsummary.R">phyfacsummary</a><br />
-* <a href="./custom-functions/addILRtophyloseq.R">addILRtophyloseq</a><br />
-* <a href="./custom-functions/ILR_plotfunction.R">ILR_plotfunction</a><br />
-* <a href="./custom-functions/mytreefunctionwithbarplots.R">mytreefunctionwithbarplots</a><br />
-* <a href="./custom-functions/myprevalencetablefunction">myprevalencetablefunction</a></p>
+<p>Custom functions. Download and add to your working directory:</p>
+<ul>
+<li><a href="./custom-functions/phyfacsummary.R">phyfacsummary</a><br />
+</li>
+<li><a href="./custom-functions/addILRtophyloseq.R">addILRtophyloseq</a><br />
+</li>
+<li><a href="./custom-functions/ILR_plotfunction.R">ILR_plotfunction</a><br />
+</li>
+<li><a href="./custom-functions/mytreefunctionwithbarplots.R">mytreefunctionwithbarplots</a><br />
+</li>
+<li><a href="./custom-functions/myprevalencetablefunction.R">myprevalencetablefunction</a></li>
+</ul>
 </div>
 </div>
 <div id="workflow-5" class="section level2 hasAnchor" number="8.2">
@@ -474,15 +480,15 @@ div.csl-indent {
 <span id="cb80-8"><a href="phylofactor.html#cb80-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">nfactors =</span> <span class="dv">5</span>, <span class="co"># the first 5 phylofactors only - in interest of time </span></span>
 <span id="cb80-9"><a href="phylofactor.html#cb80-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>)</span></code></pre></div>
 <pre><code>## 
- 1 factor completed in 0.0253 minutes.    Estimated time of completion: 2022-09-27 07:57:34   
+ 1 factor completed in 0.0254 minutes.    Estimated time of completion: 2022-09-27 08:10:27   
 
- 2 factors completed in 0.0472 minutes.     Estimated time of completion: 2022-09-27 07:57:33   
+ 2 factors completed in 0.0475 minutes.     Estimated time of completion: 2022-09-27 08:10:27   
 
- 3 factors completed in 0.069 minutes.     Estimated time of completion: 2022-09-27 07:57:33   
+ 3 factors completed in 0.0692 minutes.     Estimated time of completion: 2022-09-27 08:10:26   
 
- 4 factors completed in 0.091 minutes.     Estimated time of completion: 2022-09-27 07:57:33   
+ 4 factors completed in 0.0913 minutes.     Estimated time of completion: 2022-09-27 08:10:26   
 
- 5 factors completed in 0.111 minutes.     Estimated time of completion: 2022-09-27 07:57:33   </code></pre>
+ 5 factors completed in 0.112 minutes.     Estimated time of completion: 2022-09-27 08:10:26   </code></pre>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="phylofactor.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># saveRDS(PF,&#39;pf-example.rds&#39;)  # save Phylofactor object to .rds file </span></span>
 <span id="cb82-2"><a href="phylofactor.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(tree, tree_ur, Data, X, meta.df) <span class="co">#remove unnecessary objects from R environment</span></span>
 <span id="cb82-3"><a href="phylofactor.html#cb82-3" aria-hidden="true" tabindex="-1"></a></span>

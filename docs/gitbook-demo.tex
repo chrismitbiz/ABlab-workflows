@@ -2603,7 +2603,7 @@ Explore the Krona plot in your web browser: \href{./krona-file/krona-file.html}{
 
 In this chapter you will learn how to use one of the main functions from the package phylofactor, as well as analyse and visualise the results.
 
-\href{https://github.com/reptalex/phylofactor}{Phylofactor} is a R package developed by \href{https://github.com/reptalex}{Alex Washburne}, a mathematical biologist. It is a compositional analysis tool that `iteratively identifies the most important clades driving variation in the data through their associations with independent variables' (\citet{Washburne2017}). For me, it is a great way to assess clade-specific treatment effects or environmental associations. In combination with other differential abundance analysis methods it helped me to gain confidence in biological interpretations of microbial community associations to environmental metadata or treatments. I also use it to visualise selected identified clades on a phylogenetic tree.
+\href{https://github.com/reptalex/phylofactor}{Phylofactor} is a package developed by \href{https://github.com/reptalex}{Alex Washburne}, a mathematical biologist. It is a compositional analysis tool that `iteratively identifies the most important clades driving variation in the data through their associations with independent variables' (\citet{Washburne2017}). For me, it is a great way to assess clade-specific treatment effects or environmental associations. In combination with other differential abundance analysis methods it helped me to gain confidence in biological interpretations of microbial community associations to environmental metadata or treatments. I also use it to visualise selected identified clades on a phylogenetic tree.
 
 The package enables the use of different statistical tests, such as twoSample comparisons (i.e.~t-test, Wilcox text, Fisher exact test) or regression modelling of abundances, transformed into isometric log ratios (ILRs) - sometimes called balances - to study treatment effects or environmental associations. It does this for aggregated abundances on edges of a phylogenetic tree, hence includes associations of abundances of whole clades of ASVs.
 
@@ -2637,12 +2637,21 @@ I also created some custom functions that make it a little easier (for me). They
 
 If you want to learn what the functions do, you can also copy the code out of the function and have a go at running the code yourself.
 
-Custom functions. Right-click to download and add to your working directory:\\
-* \href{./custom-functions/phyfacsummary.R}{phyfacsummary}\\
-* \href{./custom-functions/addILRtophyloseq.R}{addILRtophyloseq}\\
-* \href{./custom-functions/ILR_plotfunction.R}{ILR\_plotfunction}\\
-* \href{./custom-functions/mytreefunctionwithbarplots.R}{mytreefunctionwithbarplots}\\
-* \href{./custom-functions/myprevalencetablefunction}{myprevalencetablefunction}
+Custom functions. Download and add to your working directory:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{./custom-functions/phyfacsummary.R}{phyfacsummary}\\
+\item
+  \href{./custom-functions/addILRtophyloseq.R}{addILRtophyloseq}\\
+\item
+  \href{./custom-functions/ILR_plotfunction.R}{ILR\_plotfunction}\\
+\item
+  \href{./custom-functions/mytreefunctionwithbarplots.R}{mytreefunctionwithbarplots}\\
+\item
+  \href{./custom-functions/myprevalencetablefunction.R}{myprevalencetablefunction}
+\end{itemize}
 
 \hypertarget{workflow-5}{%
 \section{Workflow}\label{workflow-5}}
@@ -2834,7 +2843,7 @@ For this example, the explanatory variable \texttt{Location} is used to regress 
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0254 minutes.    Estimated time of completion: 2022-09-27 07:58:24    2 factors completed in 0.0473 minutes.     Estimated time of completion: 2022-09-27 07:58:24    3 factors completed in 0.0691 minutes.     Estimated time of completion: 2022-09-27 07:58:23    4 factors completed in 0.0912 minutes.     Estimated time of completion: 2022-09-27 07:58:23    5 factors completed in 0.112 minutes.     Estimated time of completion: 2022-09-27 07:58:23   
+##  1 factor completed in 0.0251 minutes.    Estimated time of completion: 2022-09-27 08:11:17    2 factors completed in 0.0469 minutes.     Estimated time of completion: 2022-09-27 08:11:16    3 factors completed in 0.0687 minutes.     Estimated time of completion: 2022-09-27 08:11:16    4 factors completed in 0.0907 minutes.     Estimated time of completion: 2022-09-27 08:11:16    5 factors completed in 0.111 minutes.     Estimated time of completion: 2022-09-27 08:11:16   
 \end{verbatim}
 
 \begin{Shaded}

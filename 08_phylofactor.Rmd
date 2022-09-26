@@ -9,7 +9,7 @@ editor_options:
 
 In this chapter you will learn how to use one of the main functions from the package phylofactor, as well as analyse and visualise the results.  
   
-[Phylofactor](https://github.com/reptalex/phylofactor) is a R package developed by [Alex Washburne](https://github.com/reptalex), a mathematical biologist. It is a compositional analysis tool that 'iteratively identifies the most important clades driving variation in the data through their associations with independent variables' (@Washburne2017). For me, it is a great way to assess clade-specific treatment effects or environmental associations. In combination with other differential abundance analysis methods it helped me to gain confidence in biological interpretations of microbial community associations to environmental metadata or treatments. I also use it to visualise selected identified clades on a phylogenetic tree.  
+[Phylofactor](https://github.com/reptalex/phylofactor) is a package developed by [Alex Washburne](https://github.com/reptalex), a mathematical biologist. It is a compositional analysis tool that 'iteratively identifies the most important clades driving variation in the data through their associations with independent variables' (@Washburne2017). For me, it is a great way to assess clade-specific treatment effects or environmental associations. In combination with other differential abundance analysis methods it helped me to gain confidence in biological interpretations of microbial community associations to environmental metadata or treatments. I also use it to visualise selected identified clades on a phylogenetic tree.  
   
 The package enables the use of different statistical tests, such as twoSample comparisons (i.e. t-test, Wilcox text, Fisher exact test) or regression modelling of abundances, transformed into isometric log ratios (ILRs) - sometimes called balances - to study treatment effects or environmental associations. It does this for aggregated abundances on edges of a phylogenetic tree, hence includes associations of abundances of whole clades of ASVs. 
   
@@ -34,12 +34,13 @@ I also created some custom functions that make it a little easier (for me). They
   
 If you want to learn what the functions do, you can also copy the code out of the function and have a go at running the code yourself.  
     
-Custom functions. Right-click to download and add to your working directory:  
-* [phyfacsummary](./custom-functions/phyfacsummary.R)  
-* [addILRtophyloseq](./custom-functions/addILRtophyloseq.R)  
-* [ILR_plotfunction](./custom-functions/ILR_plotfunction.R)  
-* [mytreefunctionwithbarplots](./custom-functions/mytreefunctionwithbarplots.R)  
-* [myprevalencetablefunction](./custom-functions/myprevalencetablefunction)  
+Custom functions. Download and add to your working directory:  
+  
+* [phyfacsummary](./custom-functions/phyfacsummary.R)   
+* [addILRtophyloseq](./custom-functions/addILRtophyloseq.R)   
+* [ILR_plotfunction](./custom-functions/ILR_plotfunction.R)   
+* [mytreefunctionwithbarplots](./custom-functions/mytreefunctionwithbarplots.R)   
+* [myprevalencetablefunction](./custom-functions/myprevalencetablefunction.R)    
   
 ## Workflow  
   
