@@ -480,15 +480,15 @@ div.csl-indent {
 <span id="cb80-8"><a href="phylofactor.html#cb80-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">nfactors =</span> <span class="dv">5</span>, <span class="co"># the first 5 phylofactors only - in interest of time </span></span>
 <span id="cb80-9"><a href="phylofactor.html#cb80-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>)</span></code></pre></div>
 <pre><code>## 
- 1 factor completed in 0.0255 minutes.    Estimated time of completion: 2022-09-27 09:02:06   
+ 1 factor completed in 0.028 minutes.    Estimated time of completion: 2022-09-27 09:04:43   
 
- 2 factors completed in 0.0482 minutes.     Estimated time of completion: 2022-09-27 09:02:06   
+ 2 factors completed in 0.0508 minutes.     Estimated time of completion: 2022-09-27 09:04:42   
 
- 3 factors completed in 0.0704 minutes.     Estimated time of completion: 2022-09-27 09:02:06   
+ 3 factors completed in 0.0731 minutes.     Estimated time of completion: 2022-09-27 09:04:42   
 
- 4 factors completed in 0.0927 minutes.     Estimated time of completion: 2022-09-27 09:02:06   
+ 4 factors completed in 0.0952 minutes.     Estimated time of completion: 2022-09-27 09:04:42   
 
- 5 factors completed in 0.114 minutes.     Estimated time of completion: 2022-09-27 09:02:05   </code></pre>
+ 5 factors completed in 0.115 minutes.     Estimated time of completion: 2022-09-27 09:04:41   </code></pre>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="phylofactor.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># saveRDS(PF,&#39;pf-example.rds&#39;)  # save Phylofactor object to .rds file </span></span>
 <span id="cb82-2"><a href="phylofactor.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(tree, tree_ur, Data, X, meta.df) <span class="co">#remove unnecessary objects from R environment</span></span>
 <span id="cb82-3"><a href="phylofactor.html#cb82-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -971,7 +971,7 @@ div.csl-indent {
 <span id="cb103-13"><a href="phylofactor.html#cb103-13" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">mytreefunctionwithbarplots</span>(PF, ps.phylo, </span>
 <span id="cb103-14"><a href="phylofactor.html#cb103-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">layout =</span> <span class="st">&quot;circular&quot;</span>,</span>
 <span id="cb103-15"><a href="phylofactor.html#cb103-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">branch.length =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb103-16"><a href="phylofactor.html#cb103-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">factorvector =</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),</span>
+<span id="cb103-16"><a href="phylofactor.html#cb103-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">factorvector =</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
 <span id="cb103-17"><a href="phylofactor.html#cb103-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">offset.text =</span> <span class="dv">5</span>,</span>
 <span id="cb103-18"><a href="phylofactor.html#cb103-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">pwidth =</span> <span class="fl">0.05</span>)</span>
 <span id="cb103-19"><a href="phylofactor.html#cb103-19" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>

@@ -509,7 +509,7 @@ ordervec <- (df %>%
 p <- mytreefunctionwithbarplots(PF, ps.phylo, 
          layout = "circular",
          branch.length = "none",
-         factorvector =c(1,2,3,4),
+         factorvector =c(1,2,3,4,5),
          offset.text = 5,
          pwidth = 0.05)
 p
