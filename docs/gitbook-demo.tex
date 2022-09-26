@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-08-13}
+\date{2022-09-27}
 
 \begin{document}
 \maketitle
@@ -559,8 +559,8 @@ Optical Plate Seals & V7840 & Promega & For PCR\\
 \end{tabular}
 \end{table}
 
-\hypertarget{from-basespace-to-qiime2-and-dada2}{%
-\chapter{From BaseSpace to Qiime2 and DADA2}\label{from-basespace-to-qiime2-and-dada2}}
+\hypertarget{miseqtoqiime}{%
+\chapter{From BaseSpace to Qiime2 and DADA2}\label{miseqtoqiime}}
 
 \hypertarget{introduction-1}{%
 \section{Introduction}\label{introduction-1}}
@@ -2205,7 +2205,7 @@ In this chapter you will learn how to plot a custom taxa barplot to compare rela
 \item
   A \texttt{phyloseq} object; either read in from a pre-saved \texttt{.rds} file or created as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.\\
 \item
-  If you dont have your own data you can download the pre-saved \texttt{.rds} object from this Chapter and follow the below steps: \href{./ps_ProjectX_2022July}{ps\_ProjectX\_2022July}.
+  If you dont have your own data you can download the pre-saved \texttt{.rds} object from Chapter \ref{Qiime2R} and follow the below steps: \href{./ps_ProjectX_2022July}{ps\_ProjectX\_2022July}. This object is based on publicly available data from anaerobic sludge of Danish wastewater treatment plants.
 \end{itemize}
 
 \hypertarget{workflow-4}{%
@@ -2594,6 +2594,823 @@ To install KronaTools simply download and unzip the repository of \url{https://g
 \end{Shaded}
 
 Explore the Krona plot in your web browser: \href{./krona-file/krona-file.html}{krona-file}
+
+\hypertarget{phylofactor}{%
+\chapter{Phylofactor analysis}\label{phylofactor}}
+
+\hypertarget{introduction-5}{%
+\section{Introduction}\label{introduction-5}}
+
+In this chapter you will learn how to use one of the main functions from the package phylofactor, as well as analyse and visualise the results.
+
+\href{https://github.com/reptalex/phylofactor}{Phylofactor} is a R package developed by \href{https://github.com/reptalex}{Alex Washburne}, a mathematical biologist. It is a compositional analysis tool that `iteratively identifies the most important clades driving variation in the data through their associations with independent variables' (\citet{Washburne2017}). For me, it is a great way to assess clade-specific treatment effects or environmental associations. In combination with other differential abundance analysis methods it helped me to gain confidence in biological interpretations of microbial community associations to environmental metadata or treatments. I also use it to visualise selected identified clades on a phylogenetic tree.
+
+The package enables the use of different statistical tests, such as twoSample comparisons (i.e.~t-test, Wilcox text, Fisher exact test) or regression modelling of abundances, transformed into isometric log ratios (ILRs) - sometimes called balances - to study treatment effects or environmental associations. It does this for aggregated abundances on edges of a phylogenetic tree, hence includes associations of abundances of whole clades of ASVs.
+
+Check out the papers \href{https://www.biorxiv.org/content/10.1101/235341v2}{Phylofactorization: a graph-partitioning algorithm to identify phylogenetic scales of ecological data} (\citet{Washburne2019a}) and \href{https://peerj.com/articles/2969/}{Phylogenetic factorization of compositional data yields lineage-level associations in microbiome datasets} (\citet{Washburne2017}) to learn more about the algorithms used.
+
+You will need a phylogenic tree for this analysis. For example, in chapter \ref{miseqtoqiime} we have built a phylogenetic tree from ASVs using the insertion tree method with qiime2. This tree was then imported into R and included into a phyloseq object as shown in chapter \ref{Qiime2R}.
+
+For this tutorial we will be using the same phyloseq object and apply the \texttt{PhyloFactor} function of the Phylofactor package. This function is used to assess associations of relative abundances with selected meta-data, assuming a normal distribution (ILRs are normally distributed). It is basically finding variation in ILRs or balances (which are two groups of abundances delineated by an edge in the tree) that respond to treatments or environmental data.
+
+\hypertarget{prerequisites-and-required-files-1}{%
+\subsection{Prerequisites and required files}\label{prerequisites-and-required-files-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf}{Phylofactor tutorial} read\\
+\item
+  Phylofactor package installed\\
+\item
+  A \texttt{phyloseq} object that includes a phylogenetic tree; either read in from a pre-saved \texttt{.rds} file or created as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.\\
+\item
+  If you dont have your own data you can download the pre-saved \texttt{.rds} object from Chapter \ref{Qiime2R} and follow the below steps: \href{./ps_ProjectX_2022July}{ps\_ProjectX\_2022July}. This object was created from publicly available data from anaerobic sludge of Danish wastewater treatment plants.
+\end{itemize}
+
+\hypertarget{custom-functions}{%
+\subsection{Custom functions}\label{custom-functions}}
+
+There are several functions available in phylofactor to review the model outputs and to review which taxa were associated with groups of ASVs/clades that are part of significant edges in each factor.
+
+I also created some custom functions that make it a little easier (for me). They are available to download. I am no coder so the code in the functions may offend you but they worked :). If you want to use these extra functions you can download them into your working directory and load them into your R environment using the \texttt{dget} function (e.g.~\texttt{phyfacsummary\ \textless{}-\ dget("./custom-functions/phyfacsummary.R")}). I usually keep custom functions in a separate folder, here named `custom-functions'.
+
+If you want to learn what the functions do, you can also copy the code out of the function and have a go at running the code yourself.
+
+Custom functions. Right-click to download and add to your working directory:\\
+* \href{./custom-functions/phyfacsummary.R}{phyfacsummary}\\
+* \href{./custom-functions/addILRtophyloseq.R}{addILRtophyloseq}\\
+* \href{./custom-functions/ILR_plotfunction.R}{ILR\_plotfunction}\\
+* \href{./custom-functions/mytreefunctionwithbarplots.R}{mytreefunctionwithbarplots}\\
+* \href{./custom-functions/myprevalencetablefunction}{myprevalencetablefunction}
+
+\hypertarget{workflow-5}{%
+\section{Workflow}\label{workflow-5}}
+
+\hypertarget{packages-and-custom-functions}{%
+\subsection{Packages and custom functions}\label{packages-and-custom-functions}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(phyloseq)}
+\FunctionTok{library}\NormalTok{(ggpubr)       }\CommentTok{\# a handy helper package for ggplots}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{theme\_set}\NormalTok{(}\FunctionTok{theme\_bw}\NormalTok{())  }\CommentTok{\# setting the theme for ggplots}
+\FunctionTok{library}\NormalTok{(colorspace)}
+\FunctionTok{library}\NormalTok{(ggtreeExtra)}
+\FunctionTok{library}\NormalTok{(ggtree)}
+ 
+\DocumentationTok{\#\# phyfacsummary function }
+\CommentTok{\# Function to summaries all phylofactor factors in a meaningful way into a dataframe}
+\CommentTok{\# p adjusted method = Bonferroni}
+\CommentTok{\# Enter the phylofactor file and the phyloseq object to get a dataframe with model results, }
+\CommentTok{\# abundances and taxa info}
+\CommentTok{\# the third function input is \textquotesingle{}4\textquotesingle{} or \textquotesingle{}5\textquotesingle{},  4 is used when the phylofactor }
+\CommentTok{\# model setting was set to \textquotesingle{}F\textquotesingle{}, if \textquotesingle{}var\textquotesingle{} use 5}
+\NormalTok{phyfacsummary }\OtherTok{\textless{}{-}} \FunctionTok{dget}\NormalTok{(}\StringTok{"./custom{-}functions/phyfacsummary.R"}\NormalTok{)}
+
+\DocumentationTok{\#\# addILRtophylose function }
+\CommentTok{\# Function to take a phylofactor file and extract the mean sample ILRs and }
+\CommentTok{\# add those to the phyloseq sample data those can then be used for plotting graphs }
+\CommentTok{\# together with treatment data. }
+\NormalTok{addILRtophyloseq }\OtherTok{\textless{}{-}} \FunctionTok{dget}\NormalTok{(}\StringTok{"./custom{-}functions/addILRtophyloseq.R"}\NormalTok{)}
+
+\DocumentationTok{\#\# ILR\_plotfunction}
+\NormalTok{ILR\_plotfunction }\OtherTok{\textless{}{-}} \FunctionTok{dget}\NormalTok{(}\StringTok{"./custom{-}functions/ILR\_plotfunction.R"}\NormalTok{)}
+
+\DocumentationTok{\#\# mytreefunctionwithbarplots}
+\CommentTok{\# (3) Third and improved tree functions combining phylum colors with grey }
+\CommentTok{\# phylofactor highlights. The grey highlights do not identify the phylofactor }
+\CommentTok{\# on its own but can be used in a post powerpoint. }
+\CommentTok{\# Requires a colour vector \textquotesingle{}treecols\textquotesingle{}}
+\CommentTok{\# Requires a order vector \textquotesingle{}ordervec\textquotesingle{} that includes the names of }
+\CommentTok{\# all phyla to be included into the legend in that order (example shown below). }
+\NormalTok{mytreefunctionwithbarplots }\OtherTok{\textless{}{-}} \FunctionTok{dget}\NormalTok{(}\StringTok{"./custom{-}functions/mytreefunctionwithbarplots.R"}\NormalTok{)}
+
+\DocumentationTok{\#\# Prevalence table function}
+\CommentTok{\# get overview of abundances, mean prevalence is the mean \textquotesingle{}appearance\textquotesingle{} of }
+\CommentTok{\# ASVs of the taxon across all samples}
+\NormalTok{prevalencedf }\OtherTok{\textless{}{-}} \FunctionTok{dget}\NormalTok{(}\StringTok{"./custom{-}functions/myprevalencetablefunction.R"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{load-phyloseq-object-2}{%
+\subsection{Load phyloseq object}\label{load-phyloseq-object-2}}
+
+Do this if you saved a phyloseq object in .rds format before. Otherwise create a phyloseq object as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# reading in a previously saved phyloseq object}
+\NormalTok{ps }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{\textquotesingle{}ps\_ProjectX\_2022July\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\#ps (not run) to get an overview of number of taxa and samples contained in the phyloseq object}
+
+\CommentTok{\# output}
+\CommentTok{\# phyloseq{-}class experiment{-}level object}
+\CommentTok{\# otu\_table()   OTU Table:         [ 4218 taxa and 51 samples ]}
+\CommentTok{\# sample\_data() Sample Data:       [ 51 samples by 15 sample variables ]}
+\CommentTok{\# tax\_table()   Taxonomy Table:    [ 4218 taxa by 7 taxonomic ranks ]}
+\CommentTok{\# phy\_tree()    Phylogenetic Tree: [ 4218 tips and 4217 internal nodes ]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{pre-filtering-1}{%
+\subsection{Pre-filtering}\label{pre-filtering-1}}
+
+Some quality filtering of individual ASVs. This is up to the analyst and aims of the project.
+
+Here it was choosen to remove ASVs with few reads and those ASVs that could not be assigned a Phylum. Use the \texttt{prune\_taxa()} function from phyloseq to filter taxa or the \texttt{prune\_samples()} function to filter selected samples.
+
+The ASV abundances are then agglomerated to Genus level. This makes things a little easier to handle computationally and interpret visually at the end.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Filter any phyla that have not been classified, create a new phyloseq object called ps.phylo}
+\NormalTok{ps.phylo }\OtherTok{=} \FunctionTok{subset\_taxa}\NormalTok{(ps, }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Phylum) }\SpecialCharTok{\&} \SpecialCharTok{!}\NormalTok{Phylum }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{""}\NormalTok{, }\StringTok{"uncharacterized"}\NormalTok{))}
+\NormalTok{ps.phylo }\OtherTok{\textless{}{-}} \FunctionTok{prune\_taxa}\NormalTok{(}\FunctionTok{taxa\_sums}\NormalTok{(ps.phylo)  }\SpecialCharTok{\textgreater{}} \DecValTok{10}\NormalTok{, ps.phylo)}
+
+\CommentTok{\# ps.phylo }
+\CommentTok{\# phyloseq{-}class experiment{-}level object}
+\CommentTok{\# otu\_table()   OTU Table:         [ 3325 taxa and 51 samples ]}
+\CommentTok{\# sample\_data() Sample Data:       [ 51 samples by 15 sample variables ]}
+\CommentTok{\# tax\_table()   Taxonomy Table:    [ 3325 taxa by 7 taxonomic ranks ]}
+\CommentTok{\# phy\_tree()    Phylogenetic Tree: [ 3325 tips and 3324 internal nodes ]}
+
+\CommentTok{\# Option to agglomerate abundances to a certain taxa level }
+\CommentTok{\# (not necessary; increases speed of running PhyloFactor for this tutorial)}
+\NormalTok{ps.phylo }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{tax\_glom}\NormalTok{(ps.phylo, }\AttributeTok{taxrank =} \StringTok{"Genus"}\NormalTok{)  }
+\CommentTok{\# ps.phylo  }
+\CommentTok{\# phyloseq{-}class experiment{-}level object}
+\CommentTok{\# otu\_table()   OTU Table:         [ 525 taxa and 51 samples ]}
+\CommentTok{\# sample\_data() Sample Data:       [ 51 samples by 15 sample variables ]}
+\CommentTok{\# tax\_table()   Taxonomy Table:    [ 525 taxa by 7 taxonomic ranks ]}
+\CommentTok{\# phy\_tree()    Phylogenetic Tree: [ 525 tips and 524 internal nodes ]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{running-phylofactor}{%
+\subsection{Running PhyloFactor}\label{running-phylofactor}}
+
+For this example, the explanatory variable \texttt{Location} is used to regress the response (abundances). This has to be a factor or numeric so check your explanatory beforehand.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# create/extract metadata object from phyloseq object}
+\NormalTok{meta.df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{sample\_data}\NormalTok{(ps.phylo))}
+\CommentTok{\# Extract rownames (Sample IDs)}
+\NormalTok{rnames }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(meta.df)}
+\CommentTok{\# Explanatory variable for model}
+\NormalTok{X }\OtherTok{\textless{}{-}}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{Location}
+\CommentTok{\# check explanatory}
+\FunctionTok{summary}\NormalTok{(X)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Avedoere    Damhusaaen          Egaa   Ejby Moelle  Esbjerg Vest 
+##             5             7             2             3             8 
+##       Fornaes     Hjoerring Mariagerfjord       Randers      Slagelse 
+##             3             1             3             6             5 
+##       Soeholt        Viborg 
+##             3             5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# name the vector data with sample IDs }
+\FunctionTok{names}\NormalTok{(X) }\OtherTok{\textless{}{-}}\NormalTok{ rnames}
+\CommentTok{\# create an OTU table for phylofactor }
+\NormalTok{Data }\OtherTok{=} \FunctionTok{as}\NormalTok{(}\FunctionTok{otu\_table}\NormalTok{(ps.phylo), }\StringTok{"matrix"}\NormalTok{)}
+\NormalTok{Data }\OtherTok{=} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{t}\NormalTok{(Data))}
+\NormalTok{Data }\OtherTok{\textless{}{-}}\NormalTok{ Data[}\FunctionTok{match}\NormalTok{(rnames,}\FunctionTok{row.names}\NormalTok{(Data)),] }
+\NormalTok{Data }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{t}\NormalTok{(Data))}
+\CommentTok{\# create tree object from phyloseq object for phylofactor}
+\NormalTok{tree }\OtherTok{\textless{}{-}} \FunctionTok{phy\_tree}\NormalTok{(ps.phylo) }
+\CommentTok{\# unroot the tree, this is critical for phylofactor to work}
+\NormalTok{tree\_ur }\OtherTok{\textless{}{-}}\NormalTok{ ape}\SpecialCharTok{::}\FunctionTok{unroot}\NormalTok{(tree)}
+\CommentTok{\# check if unrooted}
+\NormalTok{ape}\SpecialCharTok{::}\FunctionTok{is.rooted}\NormalTok{(tree\_ur) }\CommentTok{\# FALSE IS GOOD}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# check that all in order}
+\FunctionTok{all}\NormalTok{(}\FunctionTok{rownames}\NormalTok{(Data) }\SpecialCharTok{==} \FunctionTok{row.names}\NormalTok{(}\FunctionTok{tax\_table}\NormalTok{(ps.phylo))) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{all}\NormalTok{(tree\_ur}\SpecialCharTok{$}\NormalTok{tip.label }\SpecialCharTok{==} \FunctionTok{row.names}\NormalTok{(}\FunctionTok{tax\_table}\NormalTok{(ps.phylo)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Run phylofactor}
+\NormalTok{PF }\OtherTok{\textless{}{-}}\NormalTok{  phylofactor}\SpecialCharTok{::}\FunctionTok{PhyloFactor}\NormalTok{(Data,tree\_ur,X, }
+        \AttributeTok{frmla=}\NormalTok{Data}\SpecialCharTok{\textasciitilde{}}\NormalTok{X,    }\CommentTok{\# Data (ASV abundances) as a response to X (Location)}
+        \AttributeTok{ncores =} \DecValTok{2}\NormalTok{,      }\CommentTok{\# number of cores }
+        \AttributeTok{stop.early =}\NormalTok{ T, }
+        \AttributeTok{transform.fcn=}\NormalTok{log,    }\CommentTok{\# log{-}ratio transform}
+        \AttributeTok{KS.Pthreshold =} \FloatTok{0.01}\NormalTok{, }\CommentTok{\# Kolmogorov Smirnov significance level }
+        \AttributeTok{nfactors =} \DecValTok{5}\NormalTok{, }\CommentTok{\# the first 5 phylofactors only {-} in interest of time }
+        \AttributeTok{choice =} \StringTok{"var"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  1 factor completed in 0.0254 minutes.    Estimated time of completion: 2022-09-27 07:58:24    2 factors completed in 0.0473 minutes.     Estimated time of completion: 2022-09-27 07:58:24    3 factors completed in 0.0691 minutes.     Estimated time of completion: 2022-09-27 07:58:23    4 factors completed in 0.0912 minutes.     Estimated time of completion: 2022-09-27 07:58:23    5 factors completed in 0.112 minutes.     Estimated time of completion: 2022-09-27 07:58:23   
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# saveRDS(PF,\textquotesingle{}pf{-}example.rds\textquotesingle{})  \# save Phylofactor object to .rds file }
+\FunctionTok{rm}\NormalTok{(tree, tree\_ur, Data, X, meta.df) }\CommentTok{\#remove unnecessary objects from R environment}
+
+\CommentTok{\# The KS threshold determines the significance at which the variation }
+\CommentTok{\# (in response to the explanatory) of one edge balance is different enough to the remaining edges }
+\CommentTok{\# to become a factor. If you have a better definition please let me know }
+\CommentTok{\# (on the github discussion page ideally (see Chapter 1)).   }
+\CommentTok{\# If no value is provided to nfactors {-} the algorithm will continue until }
+\CommentTok{\# no edge are found anymore.}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{reviewing-output}{%
+\subsection{Reviewing output}\label{reviewing-output}}
+
+Simply run the phylofactor output object (here \texttt{PF}) to get an overview of the results. You can also access individual data outputs using the \texttt{\$} operator, e.g.~by running \texttt{PF\$factors} you get a full list of all factors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Overview}
+\NormalTok{PF }\CommentTok{\# showing the output of the first 10 factors }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        phylofactor object from function PhyloFactor
+##        --------------------------------------------       
+## Method                    : glm
+## Choice                    : var
+## Formula                   : Data ~ X
+## Number of species         : 525
+## Number of factors         : 5
+## Frac Explained Variance   : 0.0458
+## Largest non-remainder bin : 393
+## Number of singletons      : 4
+## Paraphyletic Remainder    : 130 species
+##                   
+## -------------------------------------------------------------
+## Factor Table:
+##                                 Group1                        Group2    ExpVar
+## Factor 1                           tip 524 member Monophyletic clade 0.0103300
+## Factor 2                           tip 523 member Paraphyletic clade 0.0099537
+## Factor 3 393 member Paraphyletic clade 130 member Monophyletic clade 0.0086014
+## Factor 4                           tip 392 member Paraphyletic clade 0.0085960
+## Factor 5                           tip 391 member Paraphyletic clade 0.0082704
+##               F     Pr(>F)
+## Factor 1 66.413 0.0000e+00
+## Factor 2 18.379 3.8480e-12
+## Factor 3 13.627 3.5753e-10
+## Factor 4 16.545 1.9611e-11
+## Factor 5 24.943 2.7978e-14
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Factors only }
+\CommentTok{\# PF$factors}
+\CommentTok{\#                                 Group1                        Group2      ExpVar        F       Pr(\textgreater{}F)}
+\CommentTok{\# Factor 1                           tip 524 member Monophyletic clade 0.010329782 66.41304 0.000000e+00}
+\CommentTok{\# Factor 2                           tip 523 member Paraphyletic clade 0.009953684 18.37912 3.848033e{-}12}
+\CommentTok{\# Factor 3 393 member Paraphyletic clade 130 member Monophyletic clade 0.008601447 13.62745 3.575326e{-}10}
+\CommentTok{\# Factor 4                           tip 392 member Paraphyletic clade 0.008595997 16.54491 1.961098e{-}11}
+\CommentTok{\# Factor 5                           tip 391 member Paraphyletic clade 0.008270358 24.94341 2.797762e{-}14}
+\end{Highlighting}
+\end{Shaded}
+
+In this case there are five factors. Factor 1,2, 4 and 5 are only one genus each. Factor 3 contains 393 genera in group 1.
+
+Group 1 contains the ASVs/taxa with abundances that are different to the remainder (Group 2).
+
+This can be interpreted as following: For example, the abundances of the genus represented by factor 1 are significantly different among the locations of wastewater treatment plants. Factor 1 also explains most of the variation and has the highest F value, indicating its significance.
+
+The next factors, factor 2, factor 3 etc, were selected by the algorithm from the remainder edges (excluding factor 1, and then excluding factor 2 etc..).
+
+From this output we cannot tell which taxa are involved and in which locations the taxa have low or higher abundances, i.e.~how different they are (+ or -) among the locations.
+
+To look at the ASVs/taxa we require other functions and also create a taxonomy object:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Taxa summaries}
+\CommentTok{\# To create a taxa summary a taxonomy dataframe is needed first, }
+\CommentTok{\# whose first column contains the species in the phylogeny and whose}
+\CommentTok{\# second column contains a semicolon{-}delimited taxonomy. }
+\CommentTok{\# Here, we extract that out of the phyloseq object as following.}
+\NormalTok{taxonomy }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{tax\_table}\NormalTok{(ps.phylo)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{unite}\NormalTok{(Taxon, }\AttributeTok{sep=}\StringTok{";"}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"Kingdom"}\NormalTok{,}\StringTok{"Phylum"}\NormalTok{,}\StringTok{"Class"}\NormalTok{,}\StringTok{"Order"}\NormalTok{,}\StringTok{"Family"}\NormalTok{,}\StringTok{"Genus"}\NormalTok{,}\StringTok{"Species"}\NormalTok{))  }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rownames\_to\_column}\NormalTok{(}\StringTok{"Feature.ID"}\NormalTok{)  }
+ 
+\CommentTok{\# running pf.taxa function from phylofactor}
+\NormalTok{phylofactor}\SpecialCharTok{::}\FunctionTok{pf.taxa}\NormalTok{(PF, taxonomy, }\AttributeTok{factor =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $group1
+## [1] "Bacteria;Acidobacteriota;Thermoanaerobaculia;Thermoanaerobaculales;Thermoanaerobaculaceae;Thermoanaerobaculum"
+## 
+## $group2
+##  [1] "Bacteria;Proteobacteria"                                                                              
+##  [2] "Bacteria;Cyanobacteria"                                                                               
+##  [3] "Bacteria;Campilobacterota"                                                                            
+##  [4] "Bacteria;WPS-2"                                                                                       
+##  [5] "Bacteria;Gemmatimonadota"                                                                             
+##  [6] "Bacteria;Nitrospirota"                                                                                
+##  [7] "Bacteria;Actinobacteriota"                                                                            
+##  [8] "Bacteria;Desulfobacterota"                                                                            
+##  [9] "Bacteria;Sva0485"                                                                                     
+## [10] "Bacteria;Myxococcota"                                                                                 
+## [11] "Bacteria;Bdellovibrionota"                                                                            
+## [12] "Bacteria;SAR324_clade(Marine_group_B)"                                                                
+## [13] "Bacteria;Dependentiae"                                                                                
+## [14] "Bacteria;Chloroflexi"                                                                                 
+## [15] "Bacteria;Fusobacteriota"                                                                              
+## [16] "Bacteria;Firmicutes"                                                                                  
+## [17] "Bacteria;Bacteroidota"                                                                                
+## [18] "Bacteria;Synergistota"                                                                                
+## [19] "Bacteria;Verrucomicrobiota"                                                                           
+## [20] "Bacteria;Spirochaetota"                                                                               
+## [21] "Bacteria;Cloacimonadota"                                                                              
+## [22] "Bacteria;Patescibacteria"                                                                             
+## [23] "Bacteria;Elusimicrobiota"                                                                             
+## [24] "Bacteria;Planctomycetota"                                                                             
+## [25] "Bacteria;Fibrobacterota"                                                                              
+## [26] "Bacteria;WS4"                                                                                         
+## [27] "Bacteria;WS1"                                                                                         
+## [28] "Bacteria;Armatimonadota"                                                                              
+## [29] "Bacteria;Methylomirabilota"                                                                           
+## [30] "Bacteria;Acetothermia"                                                                                
+## [31] "Bacteria;Coprothermobacterota"                                                                        
+## [32] "Bacteria;Thermotogota"                                                                                
+## [33] "Bacteria;Deinococcota"                                                                                
+## [34] "Bacteria;Hydrothermae"                                                                                
+## [35] "Bacteria;Acidobacteriota;Aminicenantia"                                                               
+## [36] "Bacteria;Caldisericota"                                                                               
+## [37] "Bacteria;Caldatribacteriota"                                                                          
+## [38] "Bacteria;Sumerlaeota"                                                                                 
+## [39] "Bacteria;Fermentibacterota"                                                                           
+## [40] "Bacteria;Hydrogenedentes"                                                                             
+## [41] "Bacteria;Latescibacterota"                                                                            
+## [42] "Bacteria;CK-2C2-2"                                                                                    
+## [43] "Bacteria;Zixibacteria"                                                                                
+## [44] "Bacteria;Acidobacteriota;c5LKS83"                                                                     
+## [45] "Bacteria;Acidobacteriota;Thermoanaerobaculia;Thermoanaerobaculales;Thermoanaerobaculaceae;Subgroup_10"
+## [46] "Bacteria;Acidobacteriota;Holophagae"                                                                  
+## [47] "Bacteria;Acidobacteriota;Blastocatellia"                                                              
+## [48] "Bacteria;Acidobacteriota;Acidobacteriae"                                                              
+## [49] "Bacteria;Acidobacteriota;Vicinamibacteria"                                                            
+## [50] "Bacteria;Acidobacteriota;Subgroup_21"                                                                 
+## [51] "Bacteria;Acidobacteriota;Subgroup_18"                                                                 
+## [52] "Bacteria;Marinimicrobia_(SAR406_clade)"
+\end{verbatim}
+
+This output shows that the genus \emph{Thermoanaerobaculum} (Phylum Acidobacteriota) was represented by factor 1 (Group 1) and was significantly different to the remainder (Group 2) between Locations.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# create a summary for a factor}
+\NormalTok{s }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(PF,taxonomy,}\AttributeTok{factor=}\DecValTok{3}\NormalTok{)}
+\NormalTok{s}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        phylofactor object from function PhyloFactor
+##        --------------------------------------------
+## Method                    : glm
+## Algorithm                 : contrast_basis
+## Choice                    : var
+## Formula                   : Data ~ X
+## Factor                    : 3
+## Edges Considered          : 1043
+## 
+##                                 Group1                        Group2
+## Factor 3 393 member Paraphyletic clade 130 member Monophyletic clade
+##               ExpVar        F       Pr(>F)
+## Factor 3 0.008601447 13.62745 3.575326e-10
+## ========================================================================
+## Taxon Tables:
+## Group1:
+##                   Taxon nSpecies signal
+## 1 Bacteria;Bacteroidota       57     NA
+## 2   Bacteria;Firmicutes       89     NA
+## 3  Bacteria;Chloroflexi       34     NA
+##                     .................  37 rows omitted .................
+## ------------------------------------------------------------------------
+## Group2:
+##                       Taxon nSpecies signal
+## 1   Bacteria;Proteobacteria      123     NA
+## 2 Bacteria;Campilobacterota        4     NA
+## 3            Bacteria;WPS-2        1     NA
+##                     .................  1 row omitted .................
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# List all taxa for each group}
+\NormalTok{s}\SpecialCharTok{$}\NormalTok{taxa.split}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $group1
+##  [1] "Bacteria;Gemmatimonadota"              
+##  [2] "Bacteria;Nitrospirota"                 
+##  [3] "Bacteria;Actinobacteriota"             
+##  [4] "Bacteria;Desulfobacterota"             
+##  [5] "Bacteria;Sva0485"                      
+##  [6] "Bacteria;Myxococcota"                  
+##  [7] "Bacteria;Bdellovibrionota"             
+##  [8] "Bacteria;SAR324_clade~Marine_group_B~" 
+##  [9] "Bacteria;Dependentiae"                 
+## [10] "Bacteria;Chloroflexi"                  
+## [11] "Bacteria;Fusobacteriota"               
+## [12] "Bacteria;Firmicutes"                   
+## [13] "Bacteria;Bacteroidota"                 
+## [14] "Bacteria;Synergistota"                 
+## [15] "Bacteria;Verrucomicrobiota"            
+## [16] "Bacteria;Spirochaetota"                
+## [17] "Bacteria;Cloacimonadota"               
+## [18] "Bacteria;Patescibacteria"              
+## [19] "Bacteria;Elusimicrobiota"              
+## [20] "Bacteria;Planctomycetota"              
+## [21] "Bacteria;Fibrobacterota"               
+## [22] "Bacteria;WS4"                          
+## [23] "Bacteria;WS1"                          
+## [24] "Bacteria;Armatimonadota"               
+## [25] "Bacteria;Methylomirabilota"            
+## [26] "Bacteria;Acetothermia"                 
+## [27] "Bacteria;Coprothermobacterota"         
+## [28] "Bacteria;Thermotogota"                 
+## [29] "Bacteria;Deinococcota"                 
+## [30] "Bacteria;Hydrothermae"                 
+## [31] "Bacteria;Acidobacteriota"              
+## [32] "Bacteria;Caldisericota"                
+## [33] "Bacteria;Caldatribacteriota"           
+## [34] "Bacteria;Sumerlaeota"                  
+## [35] "Bacteria;Fermentibacterota"            
+## [36] "Bacteria;Hydrogenedentes"              
+## [37] "Bacteria;Latescibacterota"             
+## [38] "Bacteria;CK-2C2-2"                     
+## [39] "Bacteria;Zixibacteria"                 
+## [40] "Bacteria;Marinimicrobia_~SAR406_clade~"
+## 
+## $group2
+## [1] "Bacteria;Proteobacteria"   "Bacteria;Cyanobacteria"   
+## [3] "Bacteria;Campilobacterota" "Bacteria;WPS-2"
+\end{verbatim}
+
+The default for \texttt{summary}, provided a taxonomy object, is to find the shortest-unique-prefix labels for each species in each group. For example, there are no Proteobacteria or Firmicutes in Group 1.
+
+The summary objects contains other useful data, including all ASVs IDs or the ILRs for each group, which may become handy if you wanted to do some custom filtering and figures of your taxonomy.
+
+There are other summary tools available in the phylofactor package. Check them out in the \href{https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf}{phylofactor tutorial}.
+
+I created a custom function \texttt{phyfacsummary} that helped me to create a dataframe containing all ASVs, including the factors and model results. It includes the fitted values for each explanatory category (in this case the different digester locations), showing how abundances differ between different locations.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Summary tables}
+\CommentTok{\# Following a custom function to provide a dataframe of all ASVs and their phylofactors }
+\CommentTok{\# It requires as input the phylofactor and phyloseq objects. }
+\CommentTok{\# It needs to be exactly the same pholoseq object (contain the ASVs and taxa) }
+\CommentTok{\# that was used prior to running PhyloFactor. }
+\CommentTok{\# The number (5 or 4) indicates which \textasciigrave{}choice\textasciigrave{} (\textquotesingle{}var\textquotesingle{} or \textquotesingle{}F\textquotesingle{}) was provided }
+\CommentTok{\# to the PhyloFactor function. Either \textquotesingle{}var\textquotesingle{} (5) or \textquotesingle{}F\textquotesingle{} (4). Just my poor coding here.   }
+
+\NormalTok{PF\_summary }\OtherTok{\textless{}{-}} \FunctionTok{phyfacsummary}\NormalTok{(PF, ps.phylo, }\DecValTok{5}\NormalTok{)  }
+  
+\FunctionTok{head}\NormalTok{(PF\_summary)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 24
+##   OTU   Kingdom Phylum Class Order Family Genus Species Phylo~1 `Pr(>F)` (Inte~2
+##   <chr> <chr>   <chr>  <chr> <chr> <chr>  <chr> <chr>     <int>    <dbl>   <dbl>
+## 1 59c6~ Bacter~ Acido~ Ther~ Ther~ Therm~ Ther~ NA            1 0          3.85 
+## 2 2a4a~ Bacter~ Chlor~ Anae~ Anae~ Anaer~ ADur~ NA            2 3.85e-12  -0.523
+## 3 ea17~ Bacter~ Gemma~ Gemm~ Gemm~ Gemma~ uncu~ NA            3 3.58e-10   3.63 
+## 4 b3ca~ Bacter~ Nitro~ Nitr~ Nitr~ Nitro~ Nitr~ NA            3 3.58e-10   3.63 
+## 5 085b~ Bacter~ Actin~ Ther~ Gaie~ uncul~ uncu~ NA            3 3.58e-10   3.63 
+## 6 e990~ Bacter~ Actin~ Ther~ Soli~ Solir~ Cone~ NA            3 3.58e-10   3.63 
+## # ... with 13 more variables: XDamhusaaen <dbl>, XEgaa <dbl>,
+## #   `XEjby Moelle` <dbl>, `XEsbjerg Vest` <dbl>, XFornaes <dbl>,
+## #   XHjoerring <dbl>, XMariagerfjord <dbl>, XRanders <dbl>, XSlagelse <dbl>,
+## #   XSoeholt <dbl>, XViborg <dbl>, `Pr(>F)adj.` <dbl>, Abundance <dbl>, and
+## #   abbreviated variable names 1: Phylofactor, 2: `(Intercept)`
+\end{verbatim}
+
+Check out the dataframe in your R environment.
+
+\hypertarget{visualising-factors}{%
+\subsection{Visualising factors}\label{visualising-factors}}
+
+\hypertarget{ilr-boxplots}{%
+\subsubsection{ILR boxplots}\label{ilr-boxplots}}
+
+If the explanatory variable is a factor you can compare the ILRs using boxplots. Customise this to your needs.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# ILR boxplots}
+\CommentTok{\# If needed add another element to this plot. The boxplots of ILRs. }
+\CommentTok{\# Use the custom addILRtophyloseq function and create a new phyloseq object with }
+\CommentTok{\# added ILR results in the sample\_data (for plotting)}
+\NormalTok{ps.ILR }\OtherTok{\textless{}{-}} \FunctionTok{addILRtophyloseq}\NormalTok{(ps.phylo, PF)}
+\CommentTok{\# Quick Check that they have \textquotesingle{}arrived\textquotesingle{}.}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{sample\_data}\NormalTok{(ps.ILR)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          OTU_ID Assay.Type    Bases  BioProject    Bytes
+## sa1 SRR12204258   AMPLICON 13254234 PRJNA645373  9235913
+## sa2 SRR12204269   AMPLICON 24196788 PRJNA645373 16404070
+## sa3 SRR12204280   AMPLICON 15758554 PRJNA645373 10758456
+## sa4 SRR12204287   AMPLICON 20048406 PRJNA645373 13009806
+## sa5 SRR12204288   AMPLICON 37634632 PRJNA645373 24207581
+## sa6 SRR12204289   AMPLICON 43555904 PRJNA645373 27963491
+##                          Organism collection_date          loc Reactor Type
+## sa1 anaerobic digester metagenome        30/11/16  Ejby Moelle      RT <NA>
+## sa2 anaerobic digester metagenome          9/3/16      Soeholt      RT <NA>
+## sa3 anaerobic digester metagenome         17/3/16 Esbjerg Vest    RT1A <NA>
+## sa4 anaerobic digester metagenome         5/12/16       Viborg     RT2   DS
+## sa5 anaerobic digester metagenome         5/12/16       Viborg     RT2   BL
+## sa6 anaerobic digester metagenome         5/12/16       Viborg     RT1   DS
+##                   Purpose Experiment                 lat_lon
+## sa1 reactorfoampotentials SRX8715180 55.398077 N 10.415041 E
+## sa2 reactorfoampotentials SRX8715169  56.175302 N 9.582588 E
+## sa3 reactorfoampotentials SRX8715158  55.488235 N 8.430655 E
+## sa4  foamnofoamcomparison SRX8715151 56.425367 N 9.4527943 E
+## sa5  foamnofoamcomparison SRX8715150 56.425367 N 9.4527943 E
+## sa6  foamnofoamcomparison SRX8715149 56.425367 N 9.4527943 E
+##              ReleaseDate  Sample.Name     Location Phylofactor_1 Phylofactor_2
+## sa1 2021-01-01T00:00:00Z 16SAMP-17236  Ejby Moelle    -0.6074442    5.94063684
+## sa2 2021-01-01T00:00:00Z 16SAMP-17231      Soeholt    -1.1404128    6.12600491
+## sa3 2021-01-01T00:00:00Z 16SAMP-17233 Esbjerg Vest    -0.7420321    1.56133586
+## sa4 2021-01-01T00:00:00Z  MQ170915-14       Viborg     5.0713421   -0.63550964
+## sa5 2021-01-01T00:00:00Z  MQ170915-13       Viborg     5.4619244   -1.09156044
+## sa6 2021-01-01T00:00:00Z  MQ170915-12       Viborg     5.6013748    0.05169486
+##     Phylofactor_3 Phylofactor_4 Phylofactor_5
+## sa1      3.278522     3.6816103     3.7423730
+## sa2      1.238992    -1.1624380    -1.1654072
+## sa3      3.166636     3.6278741     0.6330391
+## sa4      2.590512    -0.7021602    -0.7039537
+## sa5      4.140900    -1.1982694    -1.2013301
+## sa6      2.871972    -1.2413042    -1.2444748
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Notice the Phylofactor columns}
+  
+\DocumentationTok{\#\# Create plotdata}
+\CommentTok{\# Some vectors to filter and change the appearance of the plot}
+\NormalTok{factorvector }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Phylofactor\_1"}\NormalTok{,}\StringTok{"Phylofactor\_2"}\NormalTok{,}
+                  \StringTok{"Phylofactor\_3"}\NormalTok{,}\StringTok{"Phylofactor\_4"}\NormalTok{)}
+\NormalTok{labelvec }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"Phylofactor 1"}\NormalTok{,}\StringTok{"Phylofactor 2"}\NormalTok{,}
+              \StringTok{"Phylofactor 3"}\NormalTok{,}\StringTok{"Phylofactor 4"}\NormalTok{)}
+\CommentTok{\# rearrange the sample data for plotting}
+\NormalTok{plotdata }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{sample\_data}\NormalTok{(ps.ILR)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"Phylofactor"}\NormalTok{), }
+    \AttributeTok{names\_to =} \StringTok{"ILR"}\NormalTok{)}
+\CommentTok{\# create factors of the ILR column}
+\NormalTok{plotdata}\SpecialCharTok{$}\NormalTok{ILR }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(plotdata}\SpecialCharTok{$}\NormalTok{ILR, }\AttributeTok{levels =}\NormalTok{ plotdata[}\DecValTok{1}\SpecialCharTok{:}\NormalTok{PF}\SpecialCharTok{$}\NormalTok{nfactors, ]}\SpecialCharTok{$}\NormalTok{ILR)}
+\CommentTok{\# Select specific factor vectors for plotting using the factorvector to filter}
+\NormalTok{plotdata\_sub }\OtherTok{\textless{}{-}}\NormalTok{ plotdata }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(ILR }\SpecialCharTok{\%in\%}\NormalTok{ factorvector)}
+\CommentTok{\# create factors of the ILR column }
+\NormalTok{plotdata\_sub}\SpecialCharTok{$}\NormalTok{ILR }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(plotdata\_sub}\SpecialCharTok{$}\NormalTok{ILR, }\AttributeTok{levels =}\NormalTok{ plotdata\_sub[}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(plotdata\_sub}\SpecialCharTok{$}\NormalTok{ILR)), ]}\SpecialCharTok{$}\NormalTok{ILR)}
+\CommentTok{\# create ggplot object}
+\NormalTok{pilr }\OtherTok{\textless{}{-}}\NormalTok{ plotdata\_sub }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggboxplot}\NormalTok{(}\AttributeTok{x =} \StringTok{"Location"}\NormalTok{, }\AttributeTok{y =} \StringTok{"value"}\NormalTok{, }
+    \AttributeTok{combine =} \ConstantTok{TRUE}\NormalTok{, }
+    \AttributeTok{facet.by =} \StringTok{"ILR"}\NormalTok{, }
+    \AttributeTok{fill =} \StringTok{"ILR"}\NormalTok{, }
+    \AttributeTok{ncol =} \DecValTok{2}\NormalTok{, }
+    \AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{, }
+    \AttributeTok{ylab =}\NormalTok{ (}\StringTok{"Isometric log ratio (ILR)"}\NormalTok{), }
+    \AttributeTok{panel.labs.font =} \FunctionTok{list}\NormalTok{(}\AttributeTok{size =} \DecValTok{11}\NormalTok{), }
+    \AttributeTok{panel.labs =} \FunctionTok{list}\NormalTok{(}\AttributeTok{ILR =}\NormalTok{ labelvec)) }\SpecialCharTok{+} 
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{position =} \StringTok{"jitter"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# add jitter }
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{) }\SpecialCharTok{+}               \CommentTok{\# do not show legend}
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{, }
+    \AttributeTok{vjust =} \FloatTok{0.5}\NormalTok{), }\AttributeTok{axis.title.x =} \FunctionTok{element\_blank}\NormalTok{(), }\AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{12}\NormalTok{))}
+
+\CommentTok{\# Choose custom colors with + scale\_fill\_manual(values = yourcolvector)}
+\NormalTok{pilr }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/pfviz1-1.pdf}
+
+This visualises the taxa relative abundances (represented by the ILR or balances) of the different `Locations'. For example, the relative abundances of factor 1 (genus \emph{Thermoanaerobaculum}) are highest in Randers and Viborg. It also appears to be the factor with the clearest differentiation between locations, as the ILRs of other factors are more variable with wider boxplots and more outliers.
+
+In the next part we will visualise how the taxa relate to other clades in the phylogenetic tree.
+
+\hypertarget{basic-tree-with-factors-highlighted}{%
+\subsubsection{Basic tree with factors highlighted}\label{basic-tree-with-factors-highlighted}}
+
+Here we are using one of the functions from the phylofactor package. It is only one of several and I encourage you to check out the \href{https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf}{phylofactor tutorial} to explore other visualisation, including heatmaps etc..
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gtree }\OtherTok{\textless{}{-}}\NormalTok{ phylofactor}\SpecialCharTok{::}\FunctionTok{pf.tree}\NormalTok{(PF)}
+\NormalTok{ggtree}\SpecialCharTok{::}\FunctionTok{rotate\_tree}\NormalTok{(gtree}\SpecialCharTok{$}\NormalTok{ggplot,}\SpecialCharTok{{-}}\DecValTok{45}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/pfviz2-1.pdf}
+
+This highlights that factor 3 represents the biggest group of various genera in this case. The green colour represents Group1 and the uncolored part the remainder group (Group 2 or also called `bin'). From the results of the summary function shown earlier in this Workflow, we can check which taxa are in each of the groups. For example, the uncolored group (Group 2) contains Proteobacteria,Cyanobacteria and Campilobacterota.
+
+The other factors, which represent only 1 genus are not visible in this figure because the pixels are simply too small.
+
+I think representing it as a tree also highlights how one can interpret compositional changes in two ways. For example, one interpretation for Group 1 of factor 3, (green coloured) is that is decreased in the locations Formaes and Slagelse (as indicated in the boxplots). Another interpretation is that Group 2 of factor 3 has increased instead. This is important to consider.
+
+\hypertarget{coloured-tree-with-factors-highlighted-in-grey}{%
+\subsubsection{Coloured tree with factors highlighted in grey}\label{coloured-tree-with-factors-highlighted-in-grey}}
+
+Maybe some find it useful to identify the phyla directly in the tree and also get a sense of the abundances of individual tips (which are individual genera here). Do do that we can colour edges of the tree to represent their phylum.
+
+First, prepare a color vector for the tree. There are different ways to do this and often I revert to add colours manually. Here we extract all phyla names from the taxonomy data and create a named color vector for each phylum.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Create color vector}
+\CommentTok{\# Get a dataframe of phyla, and while we are at it we also count how often they appear}
+\NormalTok{taxa.df.phylum }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{tax\_table}\NormalTok{(ps.phylo)}\SpecialCharTok{@}\NormalTok{.Data }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ as.data.frame }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{rownames\_to\_column}\NormalTok{(}\StringTok{"OTUID"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(OTUID, Phylum) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{column\_to\_rownames}\NormalTok{(}\StringTok{"OTUID"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{count}\NormalTok{(Phylum) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(n))}
+\CommentTok{\# set seed differently will change the random sampling of the colours}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\CommentTok{\# randomly sample colours from this colour scheme}
+\NormalTok{treecols }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(colorspace}\SpecialCharTok{::}\FunctionTok{rainbow\_hcl}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(}\FunctionTok{unique}\NormalTok{(taxa.df.phylum))))}
+\CommentTok{\# Other color options}
+\CommentTok{\# treecols \textless{}{-} sample(viridis::turbo(nrow(unique(taxa.df.phylum)), direction = {-}1))}
+\CommentTok{\# treecols \textless{}{-} viridis::rainbow(nrow(unique(taxa.df.phylum)), direction = {-}1)}
+\FunctionTok{names}\NormalTok{(treecols) }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{(taxa.df.phylum}\SpecialCharTok{$}\NormalTok{Phylum)}
+\FunctionTok{rm}\NormalTok{(taxa.df.phylum)}
+\NormalTok{treecols}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Get list of the abundant phyla {-} using the custom function I made available above}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{prevalencedf}\NormalTok{(ps.phylo, Phylum)}
+\CommentTok{\# Choose the 20 most abundant Phyla for the tree}
+\CommentTok{\# This vector will determine the length and order of the phyla shown in the legend}
+\CommentTok{\# change this to your needs. }
+\NormalTok{ordervec }\OtherTok{\textless{}{-}}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Phylum[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{)]  }
+
+\DocumentationTok{\#\# Plot the tree}
+\CommentTok{\# setting the variables}
+\NormalTok{layout }\OtherTok{=} \StringTok{"circular"}
+\NormalTok{branch.length }\OtherTok{=} \StringTok{"none"}
+\NormalTok{metadatacolumn }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}Location\textquotesingle{}}
+\NormalTok{offset.text }\OtherTok{=} \DecValTok{5}
+\NormalTok{pwidth }\OtherTok{=} \FloatTok{0.05}
+\NormalTok{factorvector }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\CommentTok{\# \textquotesingle{}Copy\textquotesingle{} tree object from the phylofactor object into the phyloseq object for plotting}
+\NormalTok{phyloseq}\SpecialCharTok{::}\FunctionTok{phy\_tree}\NormalTok{(ps.phylo) }\OtherTok{\textless{}{-}}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}
+\CommentTok{\# create long dataframe of metadata and select the columns OTU and Abundance}
+\CommentTok{\# then filter only unique rows }
+\NormalTok{melt\_simple }\OtherTok{\textless{}{-}} \FunctionTok{psmelt}\NormalTok{(ps.phylo) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(OTU, Abundance) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{unique}\NormalTok{()}
+\CommentTok{\# Create a phyla list to include into the tree for colouring}
+\NormalTok{taxa.df.phylum }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{tax\_table}\NormalTok{(ps.phylo)}\SpecialCharTok{@}\NormalTok{.Data }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  as.data.frame }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rownames\_to\_column}\NormalTok{(}\StringTok{"OTUID"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(OTUID, Phylum) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{column\_to\_rownames}\NormalTok{(}\StringTok{"OTUID"}\NormalTok{)}
+\NormalTok{phyla.list }\OtherTok{\textless{}{-}} \FunctionTok{split}\NormalTok{(}\FunctionTok{rownames}\NormalTok{(taxa.df.phylum), }
+\NormalTok{                    taxa.df.phylum}\SpecialCharTok{$}\NormalTok{Phylum, }
+                    \AttributeTok{drop =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{tree.df }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{phy\_tree}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree)}
+\NormalTok{ggtree\_gps }\OtherTok{\textless{}{-}}\NormalTok{ ggtree}\SpecialCharTok{::}\FunctionTok{groupOTU}\NormalTok{(tree.df, phyla.list, }\StringTok{"Phylum"}\NormalTok{)}
+\CommentTok{\# gg plotting}
+\NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ ggtree}\SpecialCharTok{::}\FunctionTok{ggtree}\NormalTok{(ggtree\_gps, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ Phylum), }\AttributeTok{layout =}\NormalTok{ layout, }
+        \AttributeTok{branch.length =} \StringTok{"none"}\NormalTok{) }\SpecialCharTok{+} 
+        \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"right"}\NormalTok{) }\SpecialCharTok{+} 
+        \FunctionTok{scale\_colour\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ treecols, }\AttributeTok{limits =}\NormalTok{ ordervec, }
+        \AttributeTok{breaks =}\NormalTok{ ordervec, }
+        \AttributeTok{guide =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{override.aes =} \FunctionTok{list}\NormalTok{(}\AttributeTok{size =} \DecValTok{5}\NormalTok{), }
+        \AttributeTok{keywidth =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{keyheight =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{order =} \DecValTok{1}\NormalTok{))}
+\CommentTok{\# add barplots on the outside, representing relative abundances}
+\NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+}\NormalTok{ ggnewscale}\SpecialCharTok{::}\FunctionTok{new\_scale\_fill}\NormalTok{() }\SpecialCharTok{+} 
+         \FunctionTok{geom\_fruit}\NormalTok{(}\AttributeTok{data =}\NormalTok{ melt\_simple, }
+          \AttributeTok{geom =}\NormalTok{ geom\_bar, }
+          \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ OTU, }\AttributeTok{x =}\NormalTok{ Abundance, }\AttributeTok{group =}\NormalTok{ label, }
+          \AttributeTok{fill =}\NormalTok{ Phylum), }\AttributeTok{pwidth =} \FloatTok{0.38}\NormalTok{, }\AttributeTok{orientation =} \StringTok{"y"}\NormalTok{, }
+          \AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+} 
+          \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ treecols, }
+          \AttributeTok{limits =}\NormalTok{ ordervec, }
+          \AttributeTok{breaks =}\NormalTok{ ordervec)}
+\DocumentationTok{\#\# add phylofactor highlights in grey }
+\NormalTok{factor.map }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Phylofactor =} \DecValTok{1}\SpecialCharTok{:}\NormalTok{PF}\SpecialCharTok{$}\NormalTok{nfactors, }\AttributeTok{group =} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, PF}\SpecialCharTok{$}\NormalTok{nfactors))}
+\ControlFlowTok{if}\NormalTok{ (}\FunctionTok{is.null}\NormalTok{(factorvector)) \{}
+\NormalTok{  factor.map }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Phylofactor =} \DecValTok{1}\SpecialCharTok{:}\NormalTok{PF}\SpecialCharTok{$}\NormalTok{nfactors, }
+                          \AttributeTok{group =} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, PF}\SpecialCharTok{$}\NormalTok{nfactors))}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{  factor.map }\OtherTok{\textless{}{-}}\NormalTok{ factor.map }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{\%in\%}\NormalTok{ factorvector)}
+\NormalTok{  \}}
+\NormalTok{m }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(factor.map)}
+\NormalTok{n }\OtherTok{=}\NormalTok{ ape}\SpecialCharTok{::}\FunctionTok{Ntip}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree)}
+\NormalTok{method }\OtherTok{=} \StringTok{"factors"}
+\NormalTok{nd }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{m) \{}
+  \ControlFlowTok{if}\NormalTok{ (method }\SpecialCharTok{==} \StringTok{"factors"}\NormalTok{) \{}
+\NormalTok{    grp }\OtherTok{\textless{}{-}}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[i,}\DecValTok{1}\NormalTok{]]][[factor.map[i, }\DecValTok{2}\NormalTok{]]]]}
+\NormalTok{  \}}
+  \ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{    grp }\OtherTok{\textless{}{-}}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[GroupList[[i]]]}
+\NormalTok{  \}}
+\NormalTok{  grp }\OtherTok{\textless{}{-}} \FunctionTok{intersect}\NormalTok{(grp, PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label)}
+  \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{length}\NormalTok{(grp) }\SpecialCharTok{\textgreater{}} \DecValTok{0} \SpecialCharTok{\&} \FunctionTok{any}\NormalTok{(}\FunctionTok{setdiff}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label,grp) }\SpecialCharTok{\%in\%}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label)) \{}
+    \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{length}\NormalTok{(grp) }\SpecialCharTok{\textgreater{}} \DecValTok{1}\NormalTok{) \{}
+\NormalTok{      nd }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(nd, tidytree}\SpecialCharTok{::}\FunctionTok{MRCA}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree, grp))}
+\NormalTok{    \}}
+    \ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{      nd }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(nd, }\FunctionTok{match}\NormalTok{(grp, PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label))}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{\}}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(factor.map, }\AttributeTok{node =}\NormalTok{ nd)}
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{Phylofactor }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Phylofactor, }\AttributeTok{levels =}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Phylofactor)}
+\CommentTok{\# add a text label to identify the number and location of the phylofactor}
+\NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+}\NormalTok{ ggtree}\SpecialCharTok{::}\FunctionTok{geom\_hilight}\NormalTok{(}\AttributeTok{data =}\NormalTok{ df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{node =}\NormalTok{ node), }
+          \AttributeTok{fill =} \StringTok{"black"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.3}\NormalTok{)}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ factorvector) \{}
+\NormalTok{  p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+} \FunctionTok{geom\_cladelabel}\NormalTok{(}\AttributeTok{node =} 
+\NormalTok{                 (df }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{==}\NormalTok{  i))}\SpecialCharTok{$}\NormalTok{node, }\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{"PF"}\NormalTok{, }
+\NormalTok{                 (df }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{==}\NormalTok{ i))}\SpecialCharTok{$}\NormalTok{Phylofactor), }\AttributeTok{offset.text =}\NormalTok{ offset.text, }\AttributeTok{hjust =} \StringTok{"center"}\NormalTok{)}
+\NormalTok{  \}}
+\FunctionTok{rm}\NormalTok{(taxa.df.phylum, df)}
+\end{Highlighting}
+\end{Shaded}
+
+All the above steps can also be called with the custom function \texttt{mytreefunctionwithbarplots} which I provided in the intro. This makes for neater code in your probably already busy R studio editor. The following output is identical to the above:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# requires the same ordervector as created above}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{prevalencedf}\NormalTok{(ps.phylo, Phylum)}
+\CommentTok{\# Choose the 20 most abundant Phyla for the tree}
+\CommentTok{\# This vector will determine the length and order of the phyla shown in the legend}
+\CommentTok{\# change this to your needs. }
+\NormalTok{ordervec }\OtherTok{\textless{}{-}}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Phylum[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{)]}
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{mytreefunctionwithbarplots}\NormalTok{(PF, ps.phylo, }
+         \AttributeTok{layout =} \StringTok{"circular"}\NormalTok{,}
+         \AttributeTok{branch.length =} \StringTok{"none"}\NormalTok{,}
+         \AttributeTok{factorvector =}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{),}
+         \AttributeTok{offset.text =} \DecValTok{5}\NormalTok{,}
+         \AttributeTok{pwidth =} \FloatTok{0.05}\NormalTok{)}
+\NormalTok{p}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/coloredtree-1.pdf}
+
+The locations of phylofactor (PF) 1, 2, 4 and 5 are now indicated by a text label. If you zoom into the image you may also notice a grey shading on the tip of the relevant genus.
+
+The text label for PF 3 is aligned with the outside `centre' of the grey shaded circle representing Group 1 of this factor.
+
+The outside bars indicate abundance of the relevant genus.
 
   \bibliography{book.bib,packages.bib}
 

@@ -6,6 +6,7 @@ rmd_files: ["index.Rmd",
             "05_qiimetoR.Rmd",
             "06_diversity.Rmd",
             "07_taxonomic_visualisations.Rmd",
+            "08_phylofactor.Rmd",
             "references.Rmd"]
 output_dir: "docs"
 language:

@@ -1,0 +1,490 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Phylofactor analysis {#phylofactor}
+
+## Introduction  
+
+In this chapter you will learn how to use one of the main functions from the package phylofactor, as well as analyse and visualise the results.  
+  
+[Phylofactor](https://github.com/reptalex/phylofactor) is a R package developed by [Alex Washburne](https://github.com/reptalex), a mathematical biologist. It is a compositional analysis tool that 'iteratively identifies the most important clades driving variation in the data through their associations with independent variables' (@Washburne2017). For me, it is a great way to assess clade-specific treatment effects or environmental associations. In combination with other differential abundance analysis methods it helped me to gain confidence in biological interpretations of microbial community associations to environmental metadata or treatments. I also use it to visualise selected identified clades on a phylogenetic tree.  
+  
+The package enables the use of different statistical tests, such as twoSample comparisons (i.e. t-test, Wilcox text, Fisher exact test) or regression modelling of abundances, transformed into isometric log ratios (ILRs) - sometimes called balances - to study treatment effects or environmental associations. It does this for aggregated abundances on edges of a phylogenetic tree, hence includes associations of abundances of whole clades of ASVs. 
+  
+Check out the papers [Phylofactorization: a graph-partitioning algorithm to identify phylogenetic scales of ecological data](https://www.biorxiv.org/content/10.1101/235341v2) (@Washburne2019a) and [Phylogenetic factorization of compositional data yields lineage-level associations in microbiome datasets](https://peerj.com/articles/2969/) (@Washburne2017) to learn more about the algorithms used.  
+  
+You will need a phylogenic tree for this analysis. For example, in chapter  \@ref(miseqtoqiime) we have built a phylogenetic tree from ASVs using the insertion tree method with qiime2. This tree was then imported into R and included into a phyloseq object as shown in chapter \@ref(Qiime2R).  
+  
+For this tutorial we will be using the same phyloseq object and apply the `PhyloFactor` function of the Phylofactor package. This function is used to assess associations of relative abundances with selected meta-data, assuming a normal distribution (ILRs are normally distributed). It is basically finding variation in ILRs or balances (which are two groups of abundances delineated by an edge in the tree) that respond to treatments or environmental data.   
+  
+### Prerequisites and required files   
+  
+* [Phylofactor tutorial](https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf) read  
+* Phylofactor package installed  
+* A `phyloseq` object that includes a phylogenetic tree; either read in from a pre-saved `.rds` file or created as described in chapter \@ref(Qiime2R) under "Import qiime-files and create a phyloseq object".  
+* If you dont have your own data you can download the pre-saved `.rds` object from Chapter \@ref(Qiime2R) and follow the below steps: [ps_ProjectX_2022July](./ps_ProjectX_2022July). This object was created from publicly available data from anaerobic sludge of Danish wastewater treatment plants.   
+  
+### Custom functions  
+  
+There are several functions available in phylofactor to review the model outputs and to review which taxa were associated with groups of ASVs/clades that are part of significant edges in each factor.  
+  
+I also created some custom functions that make it a little easier (for me). They are available to download. I am no coder so the code in the functions may offend you but they worked :). If you want to use these extra functions you can download them into your working directory and load them into your R environment using the `dget` function (e.g. `phyfacsummary <- dget("./custom-functions/phyfacsummary.R")`). I usually keep custom functions in a separate folder, here named 'custom-functions'.  
+  
+If you want to learn what the functions do, you can also copy the code out of the function and have a go at running the code yourself.  
+    
+Custom functions. Right-click to download and add to your working directory:  
+* [phyfacsummary](./custom-functions/phyfacsummary.R)  
+* [addILRtophyloseq](./custom-functions/addILRtophyloseq.R)  
+* [ILR_plotfunction](./custom-functions/ILR_plotfunction.R)  
+* [mytreefunctionwithbarplots](./custom-functions/mytreefunctionwithbarplots.R)  
+* [myprevalencetablefunction](./custom-functions/myprevalencetablefunction)  
+  
+## Workflow  
+  
+### Packages and custom functions
+```{r 08packages,include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
+library(phyloseq)
+library(ggpubr)       # a handy helper package for ggplots
+library(tidyverse)
+theme_set(theme_bw())  # setting the theme for ggplots
+library(colorspace)
+library(ggtreeExtra)
+library(ggtree)
+ 
+## phyfacsummary function 
+# Function to summaries all phylofactor factors in a meaningful way into a dataframe
+# p adjusted method = Bonferroni
+# Enter the phylofactor file and the phyloseq object to get a dataframe with model results, 
+# abundances and taxa info
+# the third function input is '4' or '5',  4 is used when the phylofactor 
+# model setting was set to 'F', if 'var' use 5
+phyfacsummary <- dget("./custom-functions/phyfacsummary.R")
+
+## addILRtophylose function 
+# Function to take a phylofactor file and extract the mean sample ILRs and 
+# add those to the phyloseq sample data those can then be used for plotting graphs 
+# together with treatment data. 
+addILRtophyloseq <- dget("./custom-functions/addILRtophyloseq.R")
+
+## ILR_plotfunction
+ILR_plotfunction <- dget("./custom-functions/ILR_plotfunction.R")
+
+## mytreefunctionwithbarplots
+# (3) Third and improved tree functions combining phylum colors with grey 
+# phylofactor highlights. The grey highlights do not identify the phylofactor 
+# on its own but can be used in a post powerpoint. 
+# Requires a colour vector 'treecols'
+# Requires a order vector 'ordervec' that includes the names of 
+# all phyla to be included into the legend in that order (example shown below). 
+mytreefunctionwithbarplots <- dget("./custom-functions/mytreefunctionwithbarplots.R")
+
+## Prevalence table function
+# get overview of abundances, mean prevalence is the mean 'appearance' of 
+# ASVs of the taxon across all samples
+prevalencedf <- dget("./custom-functions/myprevalencetablefunction.R")
+  
+```
+  
+### Load phyloseq object  
+  
+Do this if you saved a phyloseq object in .rds format before. Otherwise create a phyloseq object as described in chapter \@ref(Qiime2R) under "Import qiime-files and create a phyloseq object".  
+  
+```{r 08loadps, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
+# reading in a previously saved phyloseq object
+ps <- readRDS('ps_ProjectX_2022July')
+
+#ps (not run) to get an overview of number of taxa and samples contained in the phyloseq object
+
+# output
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 4218 taxa and 51 samples ]
+# sample_data() Sample Data:       [ 51 samples by 15 sample variables ]
+# tax_table()   Taxonomy Table:    [ 4218 taxa by 7 taxonomic ranks ]
+# phy_tree()    Phylogenetic Tree: [ 4218 tips and 4217 internal nodes ]
+```
+  
+### Pre-filtering  
+Some quality filtering of individual ASVs. This is up to the analyst and aims of the project.   
+  
+Here it was choosen to remove ASVs with few reads and those ASVs that could not be assigned a Phylum. Use the `prune_taxa()` function from phyloseq to filter taxa or the `prune_samples()` function to filter selected samples.  
+  
+The ASV abundances are then agglomerated to Genus level. This makes things a little easier to handle computationally and interpret visually at the end.     
+  
+```{r 08filterps, echo=TRUE, message=FALSE, warning=FALSE}
+
+# Filter any phyla that have not been classified, create a new phyloseq object called ps.phylo
+ps.phylo = subset_taxa(ps, !is.na(Phylum) & !Phylum %in% c("", "uncharacterized"))
+ps.phylo <- prune_taxa(taxa_sums(ps.phylo)  > 10, ps.phylo)
+
+# ps.phylo 
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 3325 taxa and 51 samples ]
+# sample_data() Sample Data:       [ 51 samples by 15 sample variables ]
+# tax_table()   Taxonomy Table:    [ 3325 taxa by 7 taxonomic ranks ]
+# phy_tree()    Phylogenetic Tree: [ 3325 tips and 3324 internal nodes ]
+
+# Option to agglomerate abundances to a certain taxa level 
+# (not necessary; increases speed of running PhyloFactor for this tutorial)
+ps.phylo <- phyloseq::tax_glom(ps.phylo, taxrank = "Genus")  
+# ps.phylo  
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 525 taxa and 51 samples ]
+# sample_data() Sample Data:       [ 51 samples by 15 sample variables ]
+# tax_table()   Taxonomy Table:    [ 525 taxa by 7 taxonomic ranks ]
+# phy_tree()    Phylogenetic Tree: [ 525 tips and 524 internal nodes ]
+
+```
+  
+  
+### Running PhyloFactor  
+For this example, the explanatory variable `Location` is used to regress the response (abundances). This has to be a factor or numeric so check your explanatory beforehand.   
+```{r phylofactor, echo=TRUE, message=FALSE, warning=FALSE}
+# create/extract metadata object from phyloseq object
+meta.df <- data.frame(sample_data(ps.phylo))
+# Extract rownames (Sample IDs)
+rnames <- rownames(meta.df)
+# Explanatory variable for model
+X <- meta.df$Location
+# check explanatory
+summary(X)
+# name the vector data with sample IDs 
+names(X) <- rnames
+# create an OTU table for phylofactor 
+Data = as(otu_table(ps.phylo), "matrix")
+Data = as.data.frame(t(Data))
+Data <- Data[match(rnames,row.names(Data)),] 
+Data <- as.data.frame(t(Data))
+# create tree object from phyloseq object for phylofactor
+tree <- phy_tree(ps.phylo) 
+# unroot the tree, this is critical for phylofactor to work
+tree_ur <- ape::unroot(tree)
+# check if unrooted
+ape::is.rooted(tree_ur) # FALSE IS GOOD
+# check that all in order
+all(rownames(Data) == row.names(tax_table(ps.phylo))) 
+all(tree_ur$tip.label == row.names(tax_table(ps.phylo)))
+
+# Run phylofactor
+PF <-  phylofactor::PhyloFactor(Data,tree_ur,X, 
+        frmla=Data~X,    # Data (ASV abundances) as a response to X (Location)
+        ncores = 2,      # number of cores 
+        stop.early = T, 
+        transform.fcn=log,    # log-ratio transform
+        KS.Pthreshold = 0.01, # Kolmogorov Smirnov significance level 
+        nfactors = 5, # the first 5 phylofactors only - in interest of time 
+        choice = "var")
+
+# saveRDS(PF,'pf-example.rds')  # save Phylofactor object to .rds file 
+rm(tree, tree_ur, Data, X, meta.df) #remove unnecessary objects from R environment
+
+# The KS threshold determines the significance at which the variation 
+# (in response to the explanatory) of one edge balance is different enough to the remaining edges 
+# to become a factor. If you have a better definition please let me know 
+# (on the github discussion page ideally (see Chapter 1)).   
+# If no value is provided to nfactors - the algorithm will continue until 
+# no edge are found anymore.
+```
+  
+  
+### Reviewing output  
+    
+Simply run the phylofactor output object (here `PF`) to get an overview of the results. You can also access individual data outputs using the `$` operator, e.g. by running `PF$factors` you get a full list of all factors.  
+  
+```{r pfoutput1, echo=TRUE, message=FALSE, warning=FALSE}
+# Overview
+PF # showing the output of the first 10 factors 
+
+# Factors only 
+# PF$factors
+#                                 Group1                        Group2      ExpVar        F       Pr(>F)
+# Factor 1                           tip 524 member Monophyletic clade 0.010329782 66.41304 0.000000e+00
+# Factor 2                           tip 523 member Paraphyletic clade 0.009953684 18.37912 3.848033e-12
+# Factor 3 393 member Paraphyletic clade 130 member Monophyletic clade 0.008601447 13.62745 3.575326e-10
+# Factor 4                           tip 392 member Paraphyletic clade 0.008595997 16.54491 1.961098e-11
+# Factor 5                           tip 391 member Paraphyletic clade 0.008270358 24.94341 2.797762e-14
+```
+  
+In this case there are five factors. Factor 1,2, 4 and 5 are only one genus each. Factor 3 contains 393 genera in group 1.  
+  
+Group 1 contains the ASVs/taxa with abundances that are different to the remainder (Group 2).  
+  
+This can be interpreted as following: For example, the abundances of the genus represented by factor 1 are significantly different among the locations of wastewater treatment plants. Factor 1 also explains most of the variation and has the highest F value, indicating its significance.  
+  
+The next factors, factor 2, factor 3 etc, were selected by the algorithm from the remainder edges (excluding factor 1, and then excluding factor 2 etc..). 
+  
+From this output we cannot tell which taxa are involved and in which locations the taxa have low or higher abundances, i.e. how different they are (+ or -) among the locations.  
+  
+To look at the ASVs/taxa we require other functions and also create a taxonomy object:  
+  
+```{r pfoutput2, echo=TRUE, message=FALSE, warning=FALSE}
+## Taxa summaries
+# To create a taxa summary a taxonomy dataframe is needed first, 
+# whose first column contains the species in the phylogeny and whose
+# second column contains a semicolon-delimited taxonomy. 
+# Here, we extract that out of the phyloseq object as following.
+taxonomy <- data.frame(tax_table(ps.phylo)) %>%
+  unite(Taxon, sep=";", c("Kingdom","Phylum","Class","Order","Family","Genus","Species"))  %>%
+  rownames_to_column("Feature.ID")  
+ 
+# running pf.taxa function from phylofactor
+phylofactor::pf.taxa(PF, taxonomy, factor = 1)
+```
+  
+This output shows that the genus *Thermoanaerobaculum* (Phylum Acidobacteriota) was represented by factor 1 (Group 1) and was significantly different to the remainder (Group 2) between Locations.   
+  
+```{r pfoutput3, echo=TRUE, message=FALSE, warning=FALSE}
+# create a summary for a factor
+s <- summary(PF,taxonomy,factor=3)
+s
+
+# List all taxa for each group
+s$taxa.split
+```
+  
+The default for `summary`, provided a taxonomy object, is to find the shortest-unique-prefix labels for each species in each group. For example, there are no Proteobacteria or Firmicutes in Group 1.  
+  
+The summary objects contains other useful data, including all ASVs IDs or the ILRs for each group, which may become handy if you wanted to do some custom filtering and figures of your taxonomy.  
+  
+There are other summary tools available in the phylofactor package. Check them out in the [phylofactor tutorial](https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf). 
+  
+I created a custom function `phyfacsummary` that helped me to create a dataframe containing all ASVs, including the factors and model results. It includes the fitted values for each explanatory category (in this case the different digester locations), showing how abundances differ between different locations.  
+  
+```{r pfoutput4, echo=TRUE, message=FALSE, warning=FALSE}
+## Summary tables
+# Following a custom function to provide a dataframe of all ASVs and their phylofactors 
+# It requires as input the phylofactor and phyloseq objects. 
+# It needs to be exactly the same pholoseq object (contain the ASVs and taxa) 
+# that was used prior to running PhyloFactor. 
+# The number (5 or 4) indicates which `choice` ('var' or 'F') was provided 
+# to the PhyloFactor function. Either 'var' (5) or 'F' (4). Just my poor coding here.   
+
+PF_summary <- phyfacsummary(PF, ps.phylo, 5)  
+  
+head(PF_summary)
+```
+  
+Check out the dataframe in your R environment.  
+  
+  
+### Visualising factors   
+ 
+#### ILR boxplots   
+  
+If the explanatory variable is a factor you can compare the ILRs using boxplots. Customise this to your needs.    
+  
+```{r pfviz1, echo=TRUE, message=FALSE, warning=FALSE, fig.asp=1.15, fig.width=5}
+
+## ILR boxplots
+# If needed add another element to this plot. The boxplots of ILRs. 
+# Use the custom addILRtophyloseq function and create a new phyloseq object with 
+# added ILR results in the sample_data (for plotting)
+ps.ILR <- addILRtophyloseq(ps.phylo, PF)
+# Quick Check that they have 'arrived'.
+head(data.frame(sample_data(ps.ILR)))
+# Notice the Phylofactor columns
+  
+## Create plotdata
+# Some vectors to filter and change the appearance of the plot
+factorvector <- c("Phylofactor_1","Phylofactor_2",
+                  "Phylofactor_3","Phylofactor_4")
+labelvec = c("Phylofactor 1","Phylofactor 2",
+              "Phylofactor 3","Phylofactor 4")
+# rearrange the sample data for plotting
+plotdata <- data.frame(sample_data(ps.ILR)) %>% 
+  pivot_longer(cols = starts_with("Phylofactor"), 
+    names_to = "ILR")
+# create factors of the ILR column
+plotdata$ILR <- factor(plotdata$ILR, levels = plotdata[1:PF$nfactors, ]$ILR)
+# Select specific factor vectors for plotting using the factorvector to filter
+plotdata_sub <- plotdata %>% 
+  filter(ILR %in% factorvector)
+# create factors of the ILR column 
+plotdata_sub$ILR <- factor(plotdata_sub$ILR, levels = plotdata_sub[1:length(unique(plotdata_sub$ILR)), ]$ILR)
+# create ggplot object
+pilr <- plotdata_sub %>% 
+  ggboxplot(x = "Location", y = "value", 
+    combine = TRUE, 
+    facet.by = "ILR", 
+    fill = "ILR", 
+    ncol = 2, 
+    alpha = 0.5, 
+    ylab = ("Isometric log ratio (ILR)"), 
+    panel.labs.font = list(size = 11), 
+    panel.labs = list(ILR = labelvec)) + 
+    geom_point(position = "jitter", alpha = 0.5) +  # add jitter 
+    theme(legend.position = "none") +               # do not show legend
+    theme(axis.text.x = element_text(angle = 90, hjust = 1, 
+    vjust = 0.5), axis.title.x = element_blank(), axis.text = element_text(size = 12))
+
+# Choose custom colors with + scale_fill_manual(values = yourcolvector)
+pilr 
+```
+ 
+This visualises the taxa relative abundances (represented by the ILR or balances) of the different 'Locations'. For example, the relative abundances of factor 1 (genus *Thermoanaerobaculum*) are highest in Randers and Viborg. It also appears to be the factor with the clearest differentiation between locations, as the ILRs of other factors are more variable with wider boxplots and more outliers.  
+  
+In the next part we will visualise how the taxa relate to other clades in the phylogenetic tree.  
+  
+#### Basic tree with factors highlighted   
+  
+Here we are using one of the functions from the phylofactor package. It is only one of several and I encourage you to check out the [phylofactor tutorial](https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf) to explore other visualisation, including heatmaps etc..  
+  
+```{r pfviz2, echo=TRUE, message=FALSE, warning=FALSE, fig.asp=1, fig.width=6}
+gtree <- phylofactor::pf.tree(PF)
+ggtree::rotate_tree(gtree$ggplot,-45)
+```
+  
+This highlights that factor 3 represents the biggest group of various genera in this case. The green colour represents Group1 and the uncolored part the remainder group (Group 2 or also called 'bin').  From the results of the summary function shown earlier in this Workflow, we can check which taxa are in each of the groups. For example, the uncolored group (Group 2) contains Proteobacteria,Cyanobacteria and Campilobacterota.  
+  
+The other factors, which represent only 1 genus are not visible in this figure because the pixels are simply too small. 
+   
+I think representing it as a tree also highlights how one can interpret compositional changes in two ways. For example, one interpretation for Group 1 of factor 3, (green coloured) is that is decreased in the locations Formaes and Slagelse (as indicated in the boxplots). Another interpretation is that  Group 2 of factor 3 has increased instead. This is important to consider.  
+  
+#### Coloured tree with factors highlighted in grey  
+  
+Maybe some find it useful to identify the phyla directly in the tree and also get a sense of the abundances of individual tips (which are individual genera here). Do do that we can colour edges of the tree to represent their phylum.  
+  
+First, prepare a color vector for the tree. There are different ways to do this and often I revert to add colours manually. Here we extract all phyla names from the taxonomy data and create a named color vector for each phylum.  
+  
+```{r cols08,  include=TRUE, echo=TRUE, warning=FALSE, message=FALSE, results=FALSE}
+## Create color vector
+# Get a dataframe of phyla, and while we are at it we also count how often they appear
+taxa.df.phylum <- phyloseq::tax_table(ps.phylo)@.Data %>% as.data.frame %>% 
+    rownames_to_column("OTUID") %>%
+    dplyr::select(OTUID, Phylum) %>%
+    column_to_rownames("OTUID") %>% 
+    count(Phylum) %>% 
+    arrange(desc(n))
+# set seed differently will change the random sampling of the colours
+set.seed(1234)
+# randomly sample colours from this colour scheme
+treecols <- sample(colorspace::rainbow_hcl(nrow(unique(taxa.df.phylum))))
+# Other color options
+# treecols <- sample(viridis::turbo(nrow(unique(taxa.df.phylum)), direction = -1))
+# treecols <- viridis::rainbow(nrow(unique(taxa.df.phylum)), direction = -1)
+names(treecols) <- unique(taxa.df.phylum$Phylum)
+rm(taxa.df.phylum)
+treecols
+```
+
+```{r pfviz3, echo=TRUE, message=FALSE, warning=FALSE, fig.asp=1, fig.width=6}
+
+## Get list of the abundant phyla - using the custom function I made available above
+df <- prevalencedf(ps.phylo, Phylum)
+# Choose the 20 most abundant Phyla for the tree
+# This vector will determine the length and order of the phyla shown in the legend
+# change this to your needs. 
+ordervec <- df$Phylum[c(1:20)]  
+
+## Plot the tree
+# setting the variables
+layout = "circular"
+branch.length = "none"
+metadatacolumn <- 'Location'
+offset.text = 5
+pwidth = 0.05
+factorvector = c(1,2,3,4,5)
+# 'Copy' tree object from the phylofactor object into the phyloseq object for plotting
+phyloseq::phy_tree(ps.phylo) <- PF$tree
+# create long dataframe of metadata and select the columns OTU and Abundance
+# then filter only unique rows 
+melt_simple <- psmelt(ps.phylo) %>% 
+  dplyr::select(OTU, Abundance) %>% 
+  unique()
+# Create a phyla list to include into the tree for colouring
+taxa.df.phylum <- phyloseq::tax_table(ps.phylo)@.Data %>% 
+  as.data.frame %>% 
+  rownames_to_column("OTUID") %>% 
+  dplyr::select(OTUID, Phylum) %>% 
+  column_to_rownames("OTUID")
+phyla.list <- split(rownames(taxa.df.phylum), 
+                    taxa.df.phylum$Phylum, 
+                    drop = TRUE)
+tree.df <- phyloseq::phy_tree(PF$tree)
+ggtree_gps <- ggtree::groupOTU(tree.df, phyla.list, "Phylum")
+# gg plotting
+p <- ggtree::ggtree(ggtree_gps, aes(color = Phylum), layout = layout, 
+        branch.length = "none") + 
+        theme(legend.position = "right") + 
+        scale_colour_manual(values = treecols, limits = ordervec, 
+        breaks = ordervec, 
+        guide = guide_legend(override.aes = list(size = 5), 
+        keywidth = 0.2, keyheight = 0.2, order = 1))
+# add barplots on the outside, representing relative abundances
+p <- p + ggnewscale::new_scale_fill() + 
+         geom_fruit(data = melt_simple, 
+          geom = geom_bar, 
+          mapping = aes(y = OTU, x = Abundance, group = label, 
+          fill = Phylum), pwidth = 0.38, orientation = "y", 
+          stat = "identity", show.legend = FALSE) + 
+          scale_fill_manual(values = treecols, 
+          limits = ordervec, 
+          breaks = ordervec)
+## add phylofactor highlights in grey 
+factor.map = data.frame(Phylofactor = 1:PF$nfactors, group = rep(1, PF$nfactors))
+if (is.null(factorvector)) {
+  factor.map = data.frame(Phylofactor = 1:PF$nfactors, 
+                          group = rep(1, PF$nfactors))
+  } else {
+  factor.map <- factor.map %>% 
+    dplyr::filter(Phylofactor %in% factorvector)
+  }
+m <- nrow(factor.map)
+n = ape::Ntip(PF$tree)
+method = "factors"
+nd <- NULL
+for (i in 1:m) {
+  if (method == "factors") {
+    grp <- PF$tree$tip.label[PF$groups[[factor.map[i,1]]][[factor.map[i, 2]]]]
+  }
+  else {
+    grp <- PF$tree$tip.label[GroupList[[i]]]
+  }
+  grp <- intersect(grp, PF$tree$tip.label)
+  if (length(grp) > 0 & any(setdiff(PF$tree$tip.label,grp) %in% PF$tree$tip.label)) {
+    if (length(grp) > 1) {
+      nd <- c(nd, tidytree::MRCA(PF$tree, grp))
+    }
+    else {
+      nd <- c(nd, match(grp, PF$tree$tip.label))
+    }
+  }
+}
+df <- data.frame(factor.map, node = nd)
+df$Phylofactor <- factor(df$Phylofactor, levels = df$Phylofactor)
+# add a text label to identify the number and location of the phylofactor
+p <- p + ggtree::geom_hilight(data = df, aes(node = node), 
+          fill = "black", alpha = 0.3)
+  for (i in factorvector) {
+  p <- p + geom_cladelabel(node = 
+                 (df %>% dplyr::filter(Phylofactor ==  i))$node, label = paste("PF", 
+                 (df %>% dplyr::filter(Phylofactor == i))$Phylofactor), offset.text = offset.text, hjust = "center")
+  }
+rm(taxa.df.phylum, df)
+```
+  
+All the above steps can also be called with the custom function `mytreefunctionwithbarplots` which I provided in the intro. This makes for neater code in your probably already busy R studio editor. The following output is identical to the above: 
+  
+```{r coloredtree, echo=TRUE, message=FALSE, warning=FALSE, fig.asp=0.8, fig.width=10}
+# requires the same ordervector as created above
+df <- prevalencedf(ps.phylo, Phylum)
+# Choose the 20 most abundant Phyla for the tree
+# This vector will determine the length and order of the phyla shown in the legend
+# change this to your needs. 
+ordervec <- df$Phylum[c(1:20)]
+p <- mytreefunctionwithbarplots(PF, ps.phylo, 
+         layout = "circular",
+         branch.length = "none",
+         factorvector =c(1,2,3,4),
+         offset.text = 5,
+         pwidth = 0.05)
+p
+```
+
+The locations of phylofactor (PF) 1, 2, 4 and 5 are now indicated by a text label. If you zoom into the image you may also notice a grey shading on the tip of the relevant genus.  
+  
+The text label for PF 3 is aligned with the outside 'centre' of the grey shaded circle representing Group 1 of this factor.  
+  
+The outside bars indicate abundance of the relevant genus.  
+  
