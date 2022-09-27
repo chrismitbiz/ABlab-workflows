@@ -53,6 +53,7 @@ theme_set(theme_bw())  # setting the theme for ggplots
 library(colorspace)
 library(ggtreeExtra)
 library(ggtree)
+library(ggnewscale)
  
 ## phyfacsummary function 
 # Function to summarise all phylofactor factors in a meaningful way into a dataframe
@@ -429,7 +430,7 @@ m <- nrow(factor.map)
 n = ape::Ntip(PF$tree)
 nd <- NULL
 for (i in 1:m) {
-    grp <- PF$tree$tip.label[PF$groups[[factor.map[3,1]]][[factor.map[3, 2]]]]
+    grp <- PF$tree$tip.label[PF$groups[[factor.map[i,1]]][[factor.map[i, 2]]]]
     grp <- intersect(grp, PF$tree$tip.label)
     nd <- c(nd, tidytree::MRCA(PF$tree, grp))
 }

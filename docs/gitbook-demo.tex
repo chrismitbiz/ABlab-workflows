@@ -2668,6 +2668,7 @@ Custom functions. Download and add to your working directory:
 \FunctionTok{library}\NormalTok{(colorspace)}
 \FunctionTok{library}\NormalTok{(ggtreeExtra)}
 \FunctionTok{library}\NormalTok{(ggtree)}
+\FunctionTok{library}\NormalTok{(ggnewscale)}
  
 \DocumentationTok{\#\# phyfacsummary function }
 \CommentTok{\# Function to summarise all phylofactor factors in a meaningful way into a dataframe}
@@ -2844,7 +2845,7 @@ For this example, the explanatory variable \texttt{Location} is used to regress 
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0256 minutes.    Estimated time of completion: 2022-09-28 08:45:18    2 factors completed in 0.0474 minutes.     Estimated time of completion: 2022-09-28 08:45:17    3 factors completed in 0.0693 minutes.     Estimated time of completion: 2022-09-28 08:45:17    4 factors completed in 0.0914 minutes.     Estimated time of completion: 2022-09-28 08:45:17    5 factors completed in 0.112 minutes.     Estimated time of completion: 2022-09-28 08:45:17   
+##  1 factor completed in 0.037 minutes.    Estimated time of completion: 2022-09-28 09:03:52    2 factors completed in 0.0691 minutes.     Estimated time of completion: 2022-09-28 09:03:52    3 factors completed in 0.101 minutes.     Estimated time of completion: 2022-09-28 09:03:51    4 factors completed in 0.133 minutes.     Estimated time of completion: 2022-09-28 09:03:51    5 factors completed in 0.163 minutes.     Estimated time of completion: 2022-09-28 09:03:51   
 \end{verbatim}
 
 \begin{Shaded}
@@ -3356,7 +3357,7 @@ First, prepare a color vector for the tree. There are different ways to do this 
 \NormalTok{n }\OtherTok{=}\NormalTok{ ape}\SpecialCharTok{::}\FunctionTok{Ntip}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree)}
 \NormalTok{nd }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{m) \{}
-\NormalTok{    grp }\OtherTok{\textless{}{-}}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{]]][[factor.map[}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{]]]]}
+\NormalTok{    grp }\OtherTok{\textless{}{-}}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[i,}\DecValTok{1}\NormalTok{]]][[factor.map[i, }\DecValTok{2}\NormalTok{]]]]}
 \NormalTok{    grp }\OtherTok{\textless{}{-}} \FunctionTok{intersect}\NormalTok{(grp, PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label)}
 \NormalTok{    nd }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(nd, tidytree}\SpecialCharTok{::}\FunctionTok{MRCA}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree, grp))}
 \NormalTok{\}}
