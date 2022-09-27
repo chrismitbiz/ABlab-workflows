@@ -512,8 +512,7 @@ tax.names <- data.frame( Taxa = c(data.frame(tax_table(ps.phylo))[PF$tree$tip.la
                            data.frame(tax_table(ps.phylo))[PF$tree$tip.label
                            [PF$groups[[factor.map[4,1]]][[factor.map[4, 2]]]],]$Family,
                            data.frame(tax_table(ps.phylo))[PF$tree$tip.label
-                           [PF$groups[[factor.map[5,1]]][[factor.map[5, 2]]]],]$Genus))
-
+                           [PF$groups[[factor.map[5,1]]][[factor.map[5, 2]]]],]$Genus) )
 # get node labels and add to factor.map
 m <- nrow(factor.map)
 nd <- NULL
@@ -525,15 +524,37 @@ for (i in 1:m) {
 factor.map <- data.frame(factor.map, node = nd)
 
 # add taxon annotations using the df
-for (i in 1:nrow(tax.names)) {
 p <- p + geom_cladelabel(node = 
-                 (factor.map %>% dplyr::filter(Phylofactor ==  i))$node, 
-                 label = paste('italic(', tax.names[i,],')'), 
-                 offset.text = 25, 
+                 (factor.map %>% dplyr::filter(Phylofactor ==  1))$node, 
+                 label = paste('italic(', tax.names[1,],')'), 
+                 offset.text = 20, 
                  hjust = "center",
                  fontsize = 3,
                  parse = TRUE)
-}
+
+p <- p + geom_cladelabel(node = 
+                 (factor.map %>% dplyr::filter(Phylofactor == 2))$node, 
+                 label = paste('italic(', tax.names[2,],')'), 
+                 offset.text = 10, 
+                 hjust = "center",
+                 fontsize = 3,
+                 parse = TRUE)
+
+p <- p + geom_cladelabel(node = 
+                 (factor.map %>% dplyr::filter(Phylofactor == 4))$node, 
+                 label = paste('italic(', tax.names[3,],')'), 
+                 offset.text = 10, 
+                 hjust = "center",
+                 fontsize = 3,
+                 parse = TRUE)
+
+p <- p + geom_cladelabel(node = 
+                 (factor.map %>% dplyr::filter(Phylofactor == 5))$node, 
+                 label = paste('italic(', tax.names[4,],')'), 
+                 offset.text = 20, 
+                 hjust = "center",
+                 fontsize = 3,
+                 parse = TRUE)
 p
 ```
   
