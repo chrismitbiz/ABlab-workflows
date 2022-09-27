@@ -453,9 +453,9 @@ for (i in 1:m) {
 }
 df <- data.frame(factor.map, node = nd)
 df$Phylofactor <- factor(df$Phylofactor, levels = df$Phylofactor)
-# add a text label to identify the number and location of the phylofactor
 p <- p + ggtree::geom_hilight(data = df, aes(node = node), 
           fill = "black", alpha = 0.3)
+# add a text label to identify the number and location of the phylofactor
   for (i in factorvector) {
   p <- p + geom_cladelabel(node = 
                  (df %>% dplyr::filter(Phylofactor ==  i))$node, label = paste("PF", 

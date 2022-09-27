@@ -2842,7 +2842,7 @@ For this example, the explanatory variable \texttt{Location} is used to regress 
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0254 minutes.    Estimated time of completion: 2022-09-27 11:41:30    2 factors completed in 0.0472 minutes.     Estimated time of completion: 2022-09-27 11:41:30    3 factors completed in 0.0689 minutes.     Estimated time of completion: 2022-09-27 11:41:29    4 factors completed in 0.0909 minutes.     Estimated time of completion: 2022-09-27 11:41:29    5 factors completed in 0.111 minutes.     Estimated time of completion: 2022-09-27 11:41:29   
+##  1 factor completed in 0.0256 minutes.    Estimated time of completion: 2022-09-27 12:14:00    2 factors completed in 0.0475 minutes.     Estimated time of completion: 2022-09-27 12:13:59    3 factors completed in 0.0694 minutes.     Estimated time of completion: 2022-09-27 12:13:59    4 factors completed in 0.0917 minutes.     Estimated time of completion: 2022-09-27 12:13:59    5 factors completed in 0.112 minutes.     Estimated time of completion: 2022-09-27 12:13:59   
 \end{verbatim}
 
 \begin{Shaded}
@@ -3380,9 +3380,9 @@ First, prepare a color vector for the tree. There are different ways to do this 
 \NormalTok{\}}
 \NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(factor.map, }\AttributeTok{node =}\NormalTok{ nd)}
 \NormalTok{df}\SpecialCharTok{$}\NormalTok{Phylofactor }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Phylofactor, }\AttributeTok{levels =}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Phylofactor)}
-\CommentTok{\# add a text label to identify the number and location of the phylofactor}
 \NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+}\NormalTok{ ggtree}\SpecialCharTok{::}\FunctionTok{geom\_hilight}\NormalTok{(}\AttributeTok{data =}\NormalTok{ df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{node =}\NormalTok{ node), }
           \AttributeTok{fill =} \StringTok{"black"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.3}\NormalTok{)}
+\CommentTok{\# add a text label to identify the number and location of the phylofactor}
   \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ factorvector) \{}
 \NormalTok{  p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+} \FunctionTok{geom\_cladelabel}\NormalTok{(}\AttributeTok{node =} 
 \NormalTok{                 (df }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{==}\NormalTok{  i))}\SpecialCharTok{$}\NormalTok{node, }\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{"PF"}\NormalTok{, }
