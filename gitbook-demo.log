@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.17)  27 SEP 2022 16:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.17)  27 SEP 2022 20:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1787,8 +1787,8 @@ Overfull \hbox (32.9989pt too wide) in paragraph at lines 2785--2785
  []
 
 [93]
-Overfull \hbox (2159.24272pt too wide) in paragraph at lines 2846--2846
-[]\T1/lmtt/m/n/10 ##  1 factor completed in 0.0255 minutes.    Estimated time of completion: 2022-09-27 16:46:55    2 factors completed in 0.0475 minutes.     Estimated time of completion: 2022-09-27 16:46:55    3 factors completed in 0.0694 minutes.     Estimated time of completion: 2022-09-27 16:46:55    4 factors completed in 0.0916 minutes.     Estimated time of completion: 2022-09-27 16:46:54    5 factors completed in 0.112 minutes.     Estimated time of completion: 2022-09-27 16:46:54[] 
+Overfull \hbox (2148.74275pt too wide) in paragraph at lines 2846--2846
+[]\T1/lmtt/m/n/10 ##  1 factor completed in 0.0371 minutes.    Estimated time of completion: 2022-09-27 20:30:18    2 factors completed in 0.0692 minutes.     Estimated time of completion: 2022-09-27 20:30:17    3 factors completed in 0.101 minutes.     Estimated time of completion: 2022-09-27 20:30:17    4 factors completed in 0.133 minutes.     Estimated time of completion: 2022-09-27 20:30:17    5 factors completed in 0.163 minutes.     Estimated time of completion: 2022-09-27 20:30:16[] 
  []
 
 [94]
@@ -2034,36 +2034,33 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <gitbook-demo_files/figure-latex/coloredtree2-1.pdf, id=1082, 603.25375pt x 372.39125pt>
 File: gitbook-demo_files/figure-latex/coloredtree2-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/coloredtree2-1.pdf>
-Package pdftex.def Info: gitbook-demo_files/figure-latex/coloredtree2-1.pdf  used on input line 3443.
+Package pdftex.def Info: gitbook-demo_files/figure-latex/coloredtree2-1.pdf  used on input line 3444.
 (pdftex.def)             Requested size: 344.99962pt x 212.9698pt.
 [109 <./gitbook-demo_files/figure-latex/coloredtree2-1.pdf>]
-<gitbook-demo_files/figure-latex/coloredtree3-1.pdf, id=1099, 670.505pt x 280.04625pt>
+<gitbook-demo_files/figure-latex/coloredtree3-1.pdf, id=1099, 670.505pt x 332.24126pt>
 File: gitbook-demo_files/figure-latex/coloredtree3-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/coloredtree3-1.pdf>
-Package pdftex.def Info: gitbook-demo_files/figure-latex/coloredtree3-1.pdf  used on input line 3503.
-(pdftex.def)             Requested size: 344.99165pt x 144.0908pt.
+Package pdftex.def Info: gitbook-demo_files/figure-latex/coloredtree3-1.pdf  used on input line 3487.
+(pdftex.def)             Requested size: 344.99165pt x 170.94646pt.
+(./gitbook-demo.bbl [110 <./gitbook-demo_files/figure-latex/coloredtree3-1.pdf>]) [111
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[110] (./gitbook-demo.bbl [111 <./gitbook-demo_files/figure-latex/coloredtree3-1.pdf>] [112
-
-]) [113] (./gitbook-demo.aux)
+] (./gitbook-demo.aux)
 Package rerunfilecheck Info: File `gitbook-demo.out' has not changed.
 (rerunfilecheck)             Checksum: 333C5D5E882730CBD5208BA8C3225A96;3183.
  ) 
 Here is how much of TeX's memory you used:
- 13939 strings out of 479983
- 224944 string characters out of 5886474
+ 13937 strings out of 479983
+ 224928 string characters out of 5886474
  542311 words of memory out of 5000000
  31509 multiletter control sequences out of 15000+600000
  539527 words of font info for 82 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,9n,77p,1491b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on gitbook-demo.pdf (113 pages, 4077286 bytes).
+Output written on gitbook-demo.pdf (111 pages, 4076937 bytes).
 PDF statistics:
- 1276 PDF objects out of 1440 (max. 8388607)
- 1030 compressed objects within 11 object streams
- 317 named destinations out of 1000 (max. 500000)
+ 1268 PDF objects out of 1440 (max. 8388607)
+ 1024 compressed objects within 11 object streams
+ 315 named destinations out of 1000 (max. 500000)
  370 words of extra memory for PDF output out of 10000 (max. 10000000)
 
