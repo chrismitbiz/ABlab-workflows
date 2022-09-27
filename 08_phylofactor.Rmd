@@ -423,33 +423,13 @@ p <- p + ggnewscale::new_scale_fill() +
           breaks = ordervec)
 ## add phylofactor highlights in grey 
 factor.map = data.frame(Phylofactor = 1:PF$nfactors, group = rep(1, PF$nfactors))
-if (is.null(factorvector)) {
-  factor.map = data.frame(Phylofactor = 1:PF$nfactors, 
-                          group = rep(1, PF$nfactors))
-  } else {
-  factor.map <- factor.map %>% 
-    dplyr::filter(Phylofactor %in% factorvector)
-  }
 m <- nrow(factor.map)
 n = ape::Ntip(PF$tree)
-method = "factors"
 nd <- NULL
 for (i in 1:m) {
-  if (method == "factors") {
     grp <- PF$tree$tip.label[PF$groups[[factor.map[i,1]]][[factor.map[i, 2]]]]
-  }
-  else {
-    grp <- PF$tree$tip.label[GroupList[[i]]]
-  }
-  grp <- intersect(grp, PF$tree$tip.label)
-  if (length(grp) > 0 & any(setdiff(PF$tree$tip.label,grp) %in% PF$tree$tip.label)) {
-    if (length(grp) > 1) {
+    grp <- intersect(grp, PF$tree$tip.label)
       nd <- c(nd, tidytree::MRCA(PF$tree, grp))
-    }
-    else {
-      nd <- c(nd, match(grp, PF$tree$tip.label))
-    }
-  }
 }
 df <- data.frame(factor.map, node = nd)
 df$Phylofactor <- factor(df$Phylofactor, levels = df$Phylofactor)
@@ -457,14 +437,14 @@ p <- p + ggtree::geom_hilight(data = df, aes(node = node),
           fill = "black", alpha = 0.3)
 # Add a text label to identify the number and location of the phylofactor
   for (i in factorvector) {
-  p <- p + geom_cladelabel(node = 
+p <- p + geom_cladelabel(node = 
                  (df %>% dplyr::filter(Phylofactor ==  i))$node, label = paste("PF", 
                  (df %>% dplyr::filter(Phylofactor == i))$Phylofactor), 
                  offset.text = offset.text, 
                  hjust = "center")
   }
 rm(taxa.df.phylum, df,factor.map)
-  
+
 ```
   
 All the above steps can also be called with the custom function `mytreefunctionwithbarplots` which I provided in the intro. This makes for neater code in your probably already busy R studio editor. The following output is identical to the above: 
@@ -518,11 +498,11 @@ p
 ```
   
   
-And maybe manually add genus names of important factors to the figure too:
+And maybe manually add family or genus names of important factors to the figure too:
 ```{r coloredtree3, echo=TRUE, message=FALSE, warning=FALSE, fig.asp=0.8, fig.width=10}
 # A small df to map the factors and groups
 factor.map = data.frame(Phylofactor = 1:PF$nfactors, group = rep(1, PF$nfactors))
-# Then get tip labels of selected factors and groups and use as index to the taxonomy to get genus name
+# Then get tip labels of selected factors and groups and use as index to the # taxonomy to get taxon names
 # Factor 1
 taxon1 <-data.frame(tax_table(ps.phylo))[PF$tree$tip.label[PF$groups[[factor.map[1,1]]][[factor.map[1, 2]]]],]$Genus 
 # Factor 2
@@ -532,27 +512,13 @@ taxon4 <- data.frame(tax_table(ps.phylo))[PF$tree$tip.label[PF$groups[[factor.ma
 # Factor 5
 taxon5 <- data.frame(tax_table(ps.phylo))[PF$tree$tip.label[PF$groups[[factor.map[5,1]]][[factor.map[5, 2]]]],]$Genus
 
-
 # get node labels and add to factor.map
 m <- nrow(factor.map)
-n = ape::Ntip(PF$tree)
 nd <- NULL
 for (i in 1:m) {
-  if (method == "factors") {
     grp <- PF$tree$tip.label[PF$groups[[factor.map[i,1]]][[factor.map[i, 2]]]]
-  }
-  else {
-    grp <- PF$tree$tip.label[GroupList[[i]]]
-  }
-  grp <- intersect(grp, PF$tree$tip.label)
-  if (length(grp) > 0 & any(setdiff(PF$tree$tip.label,grp) %in% PF$tree$tip.label)) {
-    if (length(grp) > 1) {
+    grp <- intersect(grp, PF$tree$tip.label)
       nd <- c(nd, tidytree::MRCA(PF$tree, grp))
-    }
-    else {
-      nd <- c(nd, match(grp, PF$tree$tip.label))
-    }
-  }
 }
 factor.map <- data.frame(factor.map, node = nd)
 

@@ -2842,7 +2842,7 @@ For this example, the explanatory variable \texttt{Location} is used to regress 
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0253 minutes.    Estimated time of completion: 2022-09-27 16:22:56    2 factors completed in 0.0472 minutes.     Estimated time of completion: 2022-09-27 16:22:56    3 factors completed in 0.0689 minutes.     Estimated time of completion: 2022-09-27 16:22:55    4 factors completed in 0.0908 minutes.     Estimated time of completion: 2022-09-27 16:22:55    5 factors completed in 0.111 minutes.     Estimated time of completion: 2022-09-27 16:22:55   
+##  1 factor completed in 0.0255 minutes.    Estimated time of completion: 2022-09-27 16:46:55    2 factors completed in 0.0475 minutes.     Estimated time of completion: 2022-09-27 16:46:55    3 factors completed in 0.0694 minutes.     Estimated time of completion: 2022-09-27 16:46:55    4 factors completed in 0.0916 minutes.     Estimated time of completion: 2022-09-27 16:46:54    5 factors completed in 0.112 minutes.     Estimated time of completion: 2022-09-27 16:46:54   
 \end{verbatim}
 
 \begin{Shaded}
@@ -3350,33 +3350,13 @@ First, prepare a color vector for the tree. There are different ways to do this 
           \AttributeTok{breaks =}\NormalTok{ ordervec)}
 \DocumentationTok{\#\# add phylofactor highlights in grey }
 \NormalTok{factor.map }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Phylofactor =} \DecValTok{1}\SpecialCharTok{:}\NormalTok{PF}\SpecialCharTok{$}\NormalTok{nfactors, }\AttributeTok{group =} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, PF}\SpecialCharTok{$}\NormalTok{nfactors))}
-\ControlFlowTok{if}\NormalTok{ (}\FunctionTok{is.null}\NormalTok{(factorvector)) \{}
-\NormalTok{  factor.map }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Phylofactor =} \DecValTok{1}\SpecialCharTok{:}\NormalTok{PF}\SpecialCharTok{$}\NormalTok{nfactors, }
-                          \AttributeTok{group =} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, PF}\SpecialCharTok{$}\NormalTok{nfactors))}
-\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
-\NormalTok{  factor.map }\OtherTok{\textless{}{-}}\NormalTok{ factor.map }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{\%in\%}\NormalTok{ factorvector)}
-\NormalTok{  \}}
 \NormalTok{m }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(factor.map)}
 \NormalTok{n }\OtherTok{=}\NormalTok{ ape}\SpecialCharTok{::}\FunctionTok{Ntip}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree)}
-\NormalTok{method }\OtherTok{=} \StringTok{"factors"}
 \NormalTok{nd }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{m) \{}
-  \ControlFlowTok{if}\NormalTok{ (method }\SpecialCharTok{==} \StringTok{"factors"}\NormalTok{) \{}
 \NormalTok{    grp }\OtherTok{\textless{}{-}}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[i,}\DecValTok{1}\NormalTok{]]][[factor.map[i, }\DecValTok{2}\NormalTok{]]]]}
-\NormalTok{  \}}
-  \ControlFlowTok{else}\NormalTok{ \{}
-\NormalTok{    grp }\OtherTok{\textless{}{-}}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[GroupList[[i]]]}
-\NormalTok{  \}}
-\NormalTok{  grp }\OtherTok{\textless{}{-}} \FunctionTok{intersect}\NormalTok{(grp, PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label)}
-  \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{length}\NormalTok{(grp) }\SpecialCharTok{\textgreater{}} \DecValTok{0} \SpecialCharTok{\&} \FunctionTok{any}\NormalTok{(}\FunctionTok{setdiff}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label,grp) }\SpecialCharTok{\%in\%}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label)) \{}
-    \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{length}\NormalTok{(grp) }\SpecialCharTok{\textgreater{}} \DecValTok{1}\NormalTok{) \{}
+\NormalTok{    grp }\OtherTok{\textless{}{-}} \FunctionTok{intersect}\NormalTok{(grp, PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label)}
 \NormalTok{      nd }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(nd, tidytree}\SpecialCharTok{::}\FunctionTok{MRCA}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree, grp))}
-\NormalTok{    \}}
-    \ControlFlowTok{else}\NormalTok{ \{}
-\NormalTok{      nd }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(nd, }\FunctionTok{match}\NormalTok{(grp, PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label))}
-\NormalTok{    \}}
-\NormalTok{  \}}
 \NormalTok{\}}
 \NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(factor.map, }\AttributeTok{node =}\NormalTok{ nd)}
 \NormalTok{df}\SpecialCharTok{$}\NormalTok{Phylofactor }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Phylofactor, }\AttributeTok{levels =}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Phylofactor)}
@@ -3384,7 +3364,7 @@ First, prepare a color vector for the tree. There are different ways to do this 
           \AttributeTok{fill =} \StringTok{"black"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.3}\NormalTok{)}
 \CommentTok{\# Add a text label to identify the number and location of the phylofactor}
   \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ factorvector) \{}
-\NormalTok{  p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+} \FunctionTok{geom\_cladelabel}\NormalTok{(}\AttributeTok{node =} 
+\NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+} \FunctionTok{geom\_cladelabel}\NormalTok{(}\AttributeTok{node =} 
 \NormalTok{                 (df }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{==}\NormalTok{  i))}\SpecialCharTok{$}\NormalTok{node, }\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{"PF"}\NormalTok{, }
 \NormalTok{                 (df }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{==}\NormalTok{ i))}\SpecialCharTok{$}\NormalTok{Phylofactor), }
                  \AttributeTok{offset.text =}\NormalTok{ offset.text, }
@@ -3462,13 +3442,13 @@ There are too many colours here and it is difficult to differentiate the differe
 
 \includegraphics{gitbook-demo_files/figure-latex/coloredtree2-1.pdf}
 
-And maybe manually add genus names of important factors to the figure too:
+And maybe manually add family or genus names of important factors to the figure too:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# A small df to map the factors and groups}
 \NormalTok{factor.map }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Phylofactor =} \DecValTok{1}\SpecialCharTok{:}\NormalTok{PF}\SpecialCharTok{$}\NormalTok{nfactors, }\AttributeTok{group =} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, PF}\SpecialCharTok{$}\NormalTok{nfactors))}
-\CommentTok{\# Then get tip labels of selected factors and groups and use as index to the taxonomy to get genus name}
+\CommentTok{\# Then get tip labels of selected factors and groups and use as index to the \# taxonomy to get taxon names}
 \CommentTok{\# Factor 1}
 \NormalTok{taxon1 }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{tax\_table}\NormalTok{(ps.phylo))[PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]]][[factor.map[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{]]]],]}\SpecialCharTok{$}\NormalTok{Genus }
 \CommentTok{\# Factor 2}
@@ -3478,27 +3458,13 @@ And maybe manually add genus names of important factors to the figure too:
 \CommentTok{\# Factor 5}
 \NormalTok{taxon5 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{tax\_table}\NormalTok{(ps.phylo))[PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[}\DecValTok{5}\NormalTok{,}\DecValTok{1}\NormalTok{]]][[factor.map[}\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{]]]],]}\SpecialCharTok{$}\NormalTok{Genus}
 
-
 \CommentTok{\# get node labels and add to factor.map}
 \NormalTok{m }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(factor.map)}
-\NormalTok{n }\OtherTok{=}\NormalTok{ ape}\SpecialCharTok{::}\FunctionTok{Ntip}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree)}
 \NormalTok{nd }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{m) \{}
-  \ControlFlowTok{if}\NormalTok{ (method }\SpecialCharTok{==} \StringTok{"factors"}\NormalTok{) \{}
 \NormalTok{    grp }\OtherTok{\textless{}{-}}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[i,}\DecValTok{1}\NormalTok{]]][[factor.map[i, }\DecValTok{2}\NormalTok{]]]]}
-\NormalTok{  \}}
-  \ControlFlowTok{else}\NormalTok{ \{}
-\NormalTok{    grp }\OtherTok{\textless{}{-}}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[GroupList[[i]]]}
-\NormalTok{  \}}
-\NormalTok{  grp }\OtherTok{\textless{}{-}} \FunctionTok{intersect}\NormalTok{(grp, PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label)}
-  \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{length}\NormalTok{(grp) }\SpecialCharTok{\textgreater{}} \DecValTok{0} \SpecialCharTok{\&} \FunctionTok{any}\NormalTok{(}\FunctionTok{setdiff}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label,grp) }\SpecialCharTok{\%in\%}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label)) \{}
-    \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{length}\NormalTok{(grp) }\SpecialCharTok{\textgreater{}} \DecValTok{1}\NormalTok{) \{}
+\NormalTok{    grp }\OtherTok{\textless{}{-}} \FunctionTok{intersect}\NormalTok{(grp, PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label)}
 \NormalTok{      nd }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(nd, tidytree}\SpecialCharTok{::}\FunctionTok{MRCA}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree, grp))}
-\NormalTok{    \}}
-    \ControlFlowTok{else}\NormalTok{ \{}
-\NormalTok{      nd }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(nd, }\FunctionTok{match}\NormalTok{(grp, PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label))}
-\NormalTok{    \}}
-\NormalTok{  \}}
 \NormalTok{\}}
 \NormalTok{factor.map }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(factor.map, }\AttributeTok{node =}\NormalTok{ nd)}
 
