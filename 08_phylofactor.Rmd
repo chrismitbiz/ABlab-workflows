@@ -96,7 +96,7 @@ Do this if you saved a phyloseq object in .rds format before. Otherwise create a
 ps <- readRDS('ps_ProjectX_2022July')
 
 #ps (not run) to get an overview of number of taxa and samples contained in the phyloseq object
-
+df <- data.frame(sample_data(ps))
 # output
 # phyloseq-class experiment-level object
 # otu_table()   OTU Table:         [ 4218 taxa and 51 samples ]
@@ -455,7 +455,7 @@ df <- data.frame(factor.map, node = nd)
 df$Phylofactor <- factor(df$Phylofactor, levels = df$Phylofactor)
 p <- p + ggtree::geom_hilight(data = df, aes(node = node), 
           fill = "black", alpha = 0.3)
-# add a text label to identify the number and location of the phylofactor
+# Add a text label to identify the number and location of the phylofactor
   for (i in factorvector) {
   p <- p + geom_cladelabel(node = 
                  (df %>% dplyr::filter(Phylofactor ==  i))$node, label = paste("PF", 
@@ -463,7 +463,7 @@ p <- p + ggtree::geom_hilight(data = df, aes(node = node),
                  offset.text = offset.text, 
                  hjust = "center")
   }
-rm(taxa.df.phylum, df)
+rm(taxa.df.phylum, df,factor.map)
   
 ```
   
@@ -515,6 +515,77 @@ p <- mytreefunctionwithbarplots(PF, ps.phylo,
          offset.text = 5,
          pwidth = 0.05)
 p
+```
+  
+  
+And maybe manually add genus names of important factors to the figure too:
+```{r coloredtree3, echo=TRUE, message=FALSE, warning=FALSE, fig.asp=0.8, fig.width=10}
+# A small df to map the factors and groups
+factor.map = data.frame(Phylofactor = 1:PF$nfactors, group = rep(1, PF$nfactors))
+# Then get tip labels of selected factors and groups and use as index to the taxonomy to get genus name
+# Factor 1
+taxon1 <-data.frame(tax_table(ps.phylo))[PF$tree$tip.label[PF$groups[[factor.map[1,1]]][[factor.map[1, 2]]]],]$Genus 
+# Factor 2
+taxon2 <- data.frame(tax_table(ps.phylo))[PF$tree$tip.label[PF$groups[[factor.map[2,1]]][[factor.map[2, 2]]]],]$Family
+# Factor 4
+taxon4 <- data.frame(tax_table(ps.phylo))[PF$tree$tip.label[PF$groups[[factor.map[4,1]]][[factor.map[4, 2]]]],]$Family
+# Factor 5
+taxon5 <- data.frame(tax_table(ps.phylo))[PF$tree$tip.label[PF$groups[[factor.map[5,1]]][[factor.map[5, 2]]]],]$Genus
+
+
+# get node labels and add to factor.map
+m <- nrow(factor.map)
+n = ape::Ntip(PF$tree)
+nd <- NULL
+for (i in 1:m) {
+  if (method == "factors") {
+    grp <- PF$tree$tip.label[PF$groups[[factor.map[i,1]]][[factor.map[i, 2]]]]
+  }
+  else {
+    grp <- PF$tree$tip.label[GroupList[[i]]]
+  }
+  grp <- intersect(grp, PF$tree$tip.label)
+  if (length(grp) > 0 & any(setdiff(PF$tree$tip.label,grp) %in% PF$tree$tip.label)) {
+    if (length(grp) > 1) {
+      nd <- c(nd, tidytree::MRCA(PF$tree, grp))
+    }
+    else {
+      nd <- c(nd, match(grp, PF$tree$tip.label))
+    }
+  }
+}
+factor.map <- data.frame(factor.map, node = nd)
+
+# add node labels to the nodes
+p + geom_cladelabel(node = 
+                 (factor.map %>% dplyr::filter(Phylofactor ==  1))$node, 
+                 label = paste('italic(', taxon1,')'), 
+                 offset.text = 25, 
+                 hjust = "center",
+                 fontsize = 3,
+                 parse = TRUE) + 
+   geom_cladelabel(node = 
+                 (factor.map %>% dplyr::filter(Phylofactor ==  2))$node, 
+                 label = paste('italic(', taxon2,')'), 
+                 offset.text = 10, 
+                 hjust = "center",
+                 fontsize = 3,
+                 parse = TRUE) + 
+   geom_cladelabel(node = 
+                 (factor.map %>% dplyr::filter(Phylofactor ==  4))$node, 
+                 label = paste('italic(', taxon4,')'), 
+                 offset.text = 10, 
+                 hjust = "center",
+                 fontsize = 3,
+                 parse = TRUE) + 
+   geom_cladelabel(node = 
+                 (factor.map %>% dplyr::filter(Phylofactor ==  5))$node, 
+                 label = paste('italic(', taxon5,')'), 
+                 offset.text = 20, 
+                 hjust = "center",
+                 fontsize = 3,
+                 parse = TRUE)
+  
 ```
   
 Now its a little easier to identify the who is who. This is just another way to explore your phylogeny and how they relate to the phylofactors.   

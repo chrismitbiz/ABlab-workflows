@@ -2713,7 +2713,7 @@ Do this if you saved a phyloseq object in .rds format before. Otherwise create a
 \NormalTok{ps }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{\textquotesingle{}ps\_ProjectX\_2022July\textquotesingle{}}\NormalTok{)}
 
 \CommentTok{\#ps (not run) to get an overview of number of taxa and samples contained in the phyloseq object}
-
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{sample\_data}\NormalTok{(ps))}
 \CommentTok{\# output}
 \CommentTok{\# phyloseq{-}class experiment{-}level object}
 \CommentTok{\# otu\_table()   OTU Table:         [ 4218 taxa and 51 samples ]}
@@ -2842,7 +2842,7 @@ For this example, the explanatory variable \texttt{Location} is used to regress 
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0257 minutes.    Estimated time of completion: 2022-09-27 12:43:08    2 factors completed in 0.0474 minutes.     Estimated time of completion: 2022-09-27 12:43:08    3 factors completed in 0.0694 minutes.     Estimated time of completion: 2022-09-27 12:43:08    4 factors completed in 0.0919 minutes.     Estimated time of completion: 2022-09-27 12:43:08    5 factors completed in 0.112 minutes.     Estimated time of completion: 2022-09-27 12:43:07   
+##  1 factor completed in 0.0253 minutes.    Estimated time of completion: 2022-09-27 16:22:56    2 factors completed in 0.0472 minutes.     Estimated time of completion: 2022-09-27 16:22:56    3 factors completed in 0.0689 minutes.     Estimated time of completion: 2022-09-27 16:22:55    4 factors completed in 0.0908 minutes.     Estimated time of completion: 2022-09-27 16:22:55    5 factors completed in 0.111 minutes.     Estimated time of completion: 2022-09-27 16:22:55   
 \end{verbatim}
 
 \begin{Shaded}
@@ -3382,7 +3382,7 @@ First, prepare a color vector for the tree. There are different ways to do this 
 \NormalTok{df}\SpecialCharTok{$}\NormalTok{Phylofactor }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Phylofactor, }\AttributeTok{levels =}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Phylofactor)}
 \NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+}\NormalTok{ ggtree}\SpecialCharTok{::}\FunctionTok{geom\_hilight}\NormalTok{(}\AttributeTok{data =}\NormalTok{ df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{node =}\NormalTok{ node), }
           \AttributeTok{fill =} \StringTok{"black"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.3}\NormalTok{)}
-\CommentTok{\# add a text label to identify the number and location of the phylofactor}
+\CommentTok{\# Add a text label to identify the number and location of the phylofactor}
   \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ factorvector) \{}
 \NormalTok{  p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+} \FunctionTok{geom\_cladelabel}\NormalTok{(}\AttributeTok{node =} 
 \NormalTok{                 (df }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{==}\NormalTok{  i))}\SpecialCharTok{$}\NormalTok{node, }\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{"PF"}\NormalTok{, }
@@ -3390,7 +3390,7 @@ First, prepare a color vector for the tree. There are different ways to do this 
                  \AttributeTok{offset.text =}\NormalTok{ offset.text, }
                  \AttributeTok{hjust =} \StringTok{"center"}\NormalTok{)}
 \NormalTok{  \}}
-\FunctionTok{rm}\NormalTok{(taxa.df.phylum, df)}
+\FunctionTok{rm}\NormalTok{(taxa.df.phylum, df,factor.map)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3461,6 +3461,80 @@ There are too many colours here and it is difficult to differentiate the differe
 \end{Shaded}
 
 \includegraphics{gitbook-demo_files/figure-latex/coloredtree2-1.pdf}
+
+And maybe manually add genus names of important factors to the figure too:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# A small df to map the factors and groups}
+\NormalTok{factor.map }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Phylofactor =} \DecValTok{1}\SpecialCharTok{:}\NormalTok{PF}\SpecialCharTok{$}\NormalTok{nfactors, }\AttributeTok{group =} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, PF}\SpecialCharTok{$}\NormalTok{nfactors))}
+\CommentTok{\# Then get tip labels of selected factors and groups and use as index to the taxonomy to get genus name}
+\CommentTok{\# Factor 1}
+\NormalTok{taxon1 }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{tax\_table}\NormalTok{(ps.phylo))[PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]]][[factor.map[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{]]]],]}\SpecialCharTok{$}\NormalTok{Genus }
+\CommentTok{\# Factor 2}
+\NormalTok{taxon2 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{tax\_table}\NormalTok{(ps.phylo))[PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]]][[factor.map[}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{]]]],]}\SpecialCharTok{$}\NormalTok{Family}
+\CommentTok{\# Factor 4}
+\NormalTok{taxon4 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{tax\_table}\NormalTok{(ps.phylo))[PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{]]][[factor.map[}\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{]]]],]}\SpecialCharTok{$}\NormalTok{Family}
+\CommentTok{\# Factor 5}
+\NormalTok{taxon5 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{tax\_table}\NormalTok{(ps.phylo))[PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[}\DecValTok{5}\NormalTok{,}\DecValTok{1}\NormalTok{]]][[factor.map[}\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{]]]],]}\SpecialCharTok{$}\NormalTok{Genus}
+
+
+\CommentTok{\# get node labels and add to factor.map}
+\NormalTok{m }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(factor.map)}
+\NormalTok{n }\OtherTok{=}\NormalTok{ ape}\SpecialCharTok{::}\FunctionTok{Ntip}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree)}
+\NormalTok{nd }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{m) \{}
+  \ControlFlowTok{if}\NormalTok{ (method }\SpecialCharTok{==} \StringTok{"factors"}\NormalTok{) \{}
+\NormalTok{    grp }\OtherTok{\textless{}{-}}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[i,}\DecValTok{1}\NormalTok{]]][[factor.map[i, }\DecValTok{2}\NormalTok{]]]]}
+\NormalTok{  \}}
+  \ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{    grp }\OtherTok{\textless{}{-}}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[GroupList[[i]]]}
+\NormalTok{  \}}
+\NormalTok{  grp }\OtherTok{\textless{}{-}} \FunctionTok{intersect}\NormalTok{(grp, PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label)}
+  \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{length}\NormalTok{(grp) }\SpecialCharTok{\textgreater{}} \DecValTok{0} \SpecialCharTok{\&} \FunctionTok{any}\NormalTok{(}\FunctionTok{setdiff}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label,grp) }\SpecialCharTok{\%in\%}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label)) \{}
+    \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{length}\NormalTok{(grp) }\SpecialCharTok{\textgreater{}} \DecValTok{1}\NormalTok{) \{}
+\NormalTok{      nd }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(nd, tidytree}\SpecialCharTok{::}\FunctionTok{MRCA}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree, grp))}
+\NormalTok{    \}}
+    \ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{      nd }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(nd, }\FunctionTok{match}\NormalTok{(grp, PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label))}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{\}}
+\NormalTok{factor.map }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(factor.map, }\AttributeTok{node =}\NormalTok{ nd)}
+
+\CommentTok{\# add node labels to the nodes}
+\NormalTok{p }\SpecialCharTok{+} \FunctionTok{geom\_cladelabel}\NormalTok{(}\AttributeTok{node =} 
+\NormalTok{                 (factor.map }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{==}  \DecValTok{1}\NormalTok{))}\SpecialCharTok{$}\NormalTok{node, }
+                 \AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}italic(\textquotesingle{}}\NormalTok{, taxon1,}\StringTok{\textquotesingle{})\textquotesingle{}}\NormalTok{), }
+                 \AttributeTok{offset.text =} \DecValTok{25}\NormalTok{, }
+                 \AttributeTok{hjust =} \StringTok{"center"}\NormalTok{,}
+                 \AttributeTok{fontsize =} \DecValTok{3}\NormalTok{,}
+                 \AttributeTok{parse =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+} 
+   \FunctionTok{geom\_cladelabel}\NormalTok{(}\AttributeTok{node =} 
+\NormalTok{                 (factor.map }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{==}  \DecValTok{2}\NormalTok{))}\SpecialCharTok{$}\NormalTok{node, }
+                 \AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}italic(\textquotesingle{}}\NormalTok{, taxon2,}\StringTok{\textquotesingle{})\textquotesingle{}}\NormalTok{), }
+                 \AttributeTok{offset.text =} \DecValTok{10}\NormalTok{, }
+                 \AttributeTok{hjust =} \StringTok{"center"}\NormalTok{,}
+                 \AttributeTok{fontsize =} \DecValTok{3}\NormalTok{,}
+                 \AttributeTok{parse =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+} 
+   \FunctionTok{geom\_cladelabel}\NormalTok{(}\AttributeTok{node =} 
+\NormalTok{                 (factor.map }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{==}  \DecValTok{4}\NormalTok{))}\SpecialCharTok{$}\NormalTok{node, }
+                 \AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}italic(\textquotesingle{}}\NormalTok{, taxon4,}\StringTok{\textquotesingle{})\textquotesingle{}}\NormalTok{), }
+                 \AttributeTok{offset.text =} \DecValTok{10}\NormalTok{, }
+                 \AttributeTok{hjust =} \StringTok{"center"}\NormalTok{,}
+                 \AttributeTok{fontsize =} \DecValTok{3}\NormalTok{,}
+                 \AttributeTok{parse =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+} 
+   \FunctionTok{geom\_cladelabel}\NormalTok{(}\AttributeTok{node =} 
+\NormalTok{                 (factor.map }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{==}  \DecValTok{5}\NormalTok{))}\SpecialCharTok{$}\NormalTok{node, }
+                 \AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}italic(\textquotesingle{}}\NormalTok{, taxon5,}\StringTok{\textquotesingle{})\textquotesingle{}}\NormalTok{), }
+                 \AttributeTok{offset.text =} \DecValTok{20}\NormalTok{, }
+                 \AttributeTok{hjust =} \StringTok{"center"}\NormalTok{,}
+                 \AttributeTok{fontsize =} \DecValTok{3}\NormalTok{,}
+                 \AttributeTok{parse =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/coloredtree3-1.pdf}
 
 Now its a little easier to identify the who is who. This is just another way to explore your phylogeny and how they relate to the phylofactors.
 
