@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.17)  27 SEP 2022 12:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.17)  27 SEP 2022 12:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1788,7 +1788,7 @@ Overfull \hbox (32.9989pt too wide) in paragraph at lines 2785--2785
 
 [93]
 Overfull \hbox (2159.24272pt too wide) in paragraph at lines 2846--2846
-[]\T1/lmtt/m/n/10 ##  1 factor completed in 0.0256 minutes.    Estimated time of completion: 2022-09-27 12:14:00    2 factors completed in 0.0475 minutes.     Estimated time of completion: 2022-09-27 12:13:59    3 factors completed in 0.0694 minutes.     Estimated time of completion: 2022-09-27 12:13:59    4 factors completed in 0.0917 minutes.     Estimated time of completion: 2022-09-27 12:13:59    5 factors completed in 0.112 minutes.     Estimated time of completion: 2022-09-27 12:13:59[] 
+[]\T1/lmtt/m/n/10 ##  1 factor completed in 0.0257 minutes.    Estimated time of completion: 2022-09-27 12:43:08    2 factors completed in 0.0474 minutes.     Estimated time of completion: 2022-09-27 12:43:08    3 factors completed in 0.0694 minutes.     Estimated time of completion: 2022-09-27 12:43:08    4 factors completed in 0.0919 minutes.     Estimated time of completion: 2022-09-27 12:43:08    5 factors completed in 0.112 minutes.     Estimated time of completion: 2022-09-27 12:43:07[] 
  []
 
 [94]
@@ -2045,14 +2045,14 @@ Package rerunfilecheck Info: File `gitbook-demo.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  13930 strings out of 479983
- 224545 string characters out of 5886474
- 544145 words of memory out of 5000000
+ 224555 string characters out of 5886474
+ 544150 words of memory out of 5000000
  31503 multiletter control sequences out of 15000+600000
  539527 words of font info for 82 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,9n,77p,1491b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on gitbook-demo.pdf (111 pages, 3928914 bytes).
+Output written on gitbook-demo.pdf (111 pages, 3928900 bytes).
 PDF statistics:
  1255 PDF objects out of 1440 (max. 8388607)
  1014 compressed objects within 11 object streams

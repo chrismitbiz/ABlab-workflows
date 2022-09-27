@@ -44,7 +44,7 @@ Custom functions. Download and add to your working directory:
   
 ## Workflow  
   
-### Packages and custom functions
+### Load packages and custom functions
 ```{r 08packages,include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
 library(phyloseq)
 library(ggpubr)       # a handy helper package for ggplots
@@ -76,7 +76,7 @@ ILR_plotfunction <- dget("./custom-functions/ILR_plotfunction.R")
 # Tree functions combining phylum colors with grey 
 # phylofactor highlights. 
 # Requires a colour vector 'treecols'
-# Requires a order vector 'ordervec' that includes the names of 
+# Requires an order vector 'ordervec' that includes the names of 
 # all phyla to be included into the legend in that order (example shown below). 
 mytreefunctionwithbarplots <- dget("./custom-functions/mytreefunctionwithbarplots.R")
 
