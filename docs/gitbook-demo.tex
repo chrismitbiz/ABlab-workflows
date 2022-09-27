@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-09-27}
+\date{2022-09-28}
 
 \begin{document}
 \maketitle
@@ -2713,13 +2713,15 @@ Do this if you saved a phyloseq object in .rds format before. Otherwise create a
 \NormalTok{ps }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{\textquotesingle{}ps\_ProjectX\_2022July\textquotesingle{}}\NormalTok{)}
 
 \CommentTok{\#ps (not run) to get an overview of number of taxa and samples contained in the phyloseq object}
-\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{sample\_data}\NormalTok{(ps))}
-\CommentTok{\# output}
+
 \CommentTok{\# phyloseq{-}class experiment{-}level object}
 \CommentTok{\# otu\_table()   OTU Table:         [ 4218 taxa and 51 samples ]}
 \CommentTok{\# sample\_data() Sample Data:       [ 51 samples by 15 sample variables ]}
 \CommentTok{\# tax\_table()   Taxonomy Table:    [ 4218 taxa by 7 taxonomic ranks ]}
 \CommentTok{\# phy\_tree()    Phylogenetic Tree: [ 4218 tips and 4217 internal nodes ]}
+
+\CommentTok{\# check metadata if needed}
+\CommentTok{\# df \textless{}{-} data.frame(sample\_data(ps))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2842,7 +2844,7 @@ For this example, the explanatory variable \texttt{Location} is used to regress 
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0379 minutes.    Estimated time of completion: 2022-09-27 20:59:21    2 factors completed in 0.0701 minutes.     Estimated time of completion: 2022-09-27 20:59:20    3 factors completed in 0.102 minutes.     Estimated time of completion: 2022-09-27 20:59:20    4 factors completed in 0.135 minutes.     Estimated time of completion: 2022-09-27 20:59:20    5 factors completed in 0.165 minutes.     Estimated time of completion: 2022-09-27 20:59:20   
+##  1 factor completed in 0.0256 minutes.    Estimated time of completion: 2022-09-28 08:45:18    2 factors completed in 0.0474 minutes.     Estimated time of completion: 2022-09-28 08:45:17    3 factors completed in 0.0693 minutes.     Estimated time of completion: 2022-09-28 08:45:17    4 factors completed in 0.0914 minutes.     Estimated time of completion: 2022-09-28 08:45:17    5 factors completed in 0.112 minutes.     Estimated time of completion: 2022-09-28 08:45:17   
 \end{verbatim}
 
 \begin{Shaded}

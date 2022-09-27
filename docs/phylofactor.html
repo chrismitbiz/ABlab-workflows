@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2022-09-27" />
+<meta name="date" content="2022-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -399,13 +399,15 @@ div.csl-indent {
 <span id="cb70-2"><a href="phylofactor.html#cb70-2" aria-hidden="true" tabindex="-1"></a>ps <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&#39;ps_ProjectX_2022July&#39;</span>)</span>
 <span id="cb70-3"><a href="phylofactor.html#cb70-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-4"><a href="phylofactor.html#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ps (not run) to get an overview of number of taxa and samples contained in the phyloseq object</span></span>
-<span id="cb70-5"><a href="phylofactor.html#cb70-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">sample_data</span>(ps))</span>
-<span id="cb70-6"><a href="phylofactor.html#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="co"># output</span></span>
-<span id="cb70-7"><a href="phylofactor.html#cb70-7" aria-hidden="true" tabindex="-1"></a><span class="co"># phyloseq-class experiment-level object</span></span>
-<span id="cb70-8"><a href="phylofactor.html#cb70-8" aria-hidden="true" tabindex="-1"></a><span class="co"># otu_table()   OTU Table:         [ 4218 taxa and 51 samples ]</span></span>
-<span id="cb70-9"><a href="phylofactor.html#cb70-9" aria-hidden="true" tabindex="-1"></a><span class="co"># sample_data() Sample Data:       [ 51 samples by 15 sample variables ]</span></span>
-<span id="cb70-10"><a href="phylofactor.html#cb70-10" aria-hidden="true" tabindex="-1"></a><span class="co"># tax_table()   Taxonomy Table:    [ 4218 taxa by 7 taxonomic ranks ]</span></span>
-<span id="cb70-11"><a href="phylofactor.html#cb70-11" aria-hidden="true" tabindex="-1"></a><span class="co"># phy_tree()    Phylogenetic Tree: [ 4218 tips and 4217 internal nodes ]</span></span></code></pre></div>
+<span id="cb70-5"><a href="phylofactor.html#cb70-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-6"><a href="phylofactor.html#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="co"># phyloseq-class experiment-level object</span></span>
+<span id="cb70-7"><a href="phylofactor.html#cb70-7" aria-hidden="true" tabindex="-1"></a><span class="co"># otu_table()   OTU Table:         [ 4218 taxa and 51 samples ]</span></span>
+<span id="cb70-8"><a href="phylofactor.html#cb70-8" aria-hidden="true" tabindex="-1"></a><span class="co"># sample_data() Sample Data:       [ 51 samples by 15 sample variables ]</span></span>
+<span id="cb70-9"><a href="phylofactor.html#cb70-9" aria-hidden="true" tabindex="-1"></a><span class="co"># tax_table()   Taxonomy Table:    [ 4218 taxa by 7 taxonomic ranks ]</span></span>
+<span id="cb70-10"><a href="phylofactor.html#cb70-10" aria-hidden="true" tabindex="-1"></a><span class="co"># phy_tree()    Phylogenetic Tree: [ 4218 tips and 4217 internal nodes ]</span></span>
+<span id="cb70-11"><a href="phylofactor.html#cb70-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-12"><a href="phylofactor.html#cb70-12" aria-hidden="true" tabindex="-1"></a><span class="co"># check metadata if needed</span></span>
+<span id="cb70-13"><a href="phylofactor.html#cb70-13" aria-hidden="true" tabindex="-1"></a><span class="co"># df &lt;- data.frame(sample_data(ps))</span></span></code></pre></div>
 </div>
 <div id="pre-filtering-1" class="section level3 hasAnchor" number="8.2.3">
 <h3><span class="header-section-number">8.2.3</span> Pre-filtering<a href="phylofactor.html#pre-filtering-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -479,15 +481,15 @@ div.csl-indent {
 <span id="cb80-8"><a href="phylofactor.html#cb80-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">nfactors =</span> <span class="dv">5</span>, <span class="co"># the first 5 phylofactors only - in interest of time </span></span>
 <span id="cb80-9"><a href="phylofactor.html#cb80-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>)</span></code></pre></div>
 <pre><code>## 
- 1 factor completed in 0.0376 minutes.    Estimated time of completion: 2022-09-27 20:57:31   
+ 1 factor completed in 0.0278 minutes.    Estimated time of completion: 2022-09-28 08:44:07   
 
- 2 factors completed in 0.0698 minutes.     Estimated time of completion: 2022-09-27 20:57:30   
+ 2 factors completed in 0.0497 minutes.     Estimated time of completion: 2022-09-28 08:44:06   
 
- 3 factors completed in 0.102 minutes.     Estimated time of completion: 2022-09-27 20:57:30   
+ 3 factors completed in 0.0715 minutes.     Estimated time of completion: 2022-09-28 08:44:06   
 
- 4 factors completed in 0.134 minutes.     Estimated time of completion: 2022-09-27 20:57:30   
+ 4 factors completed in 0.0937 minutes.     Estimated time of completion: 2022-09-28 08:44:06   
 
- 5 factors completed in 0.165 minutes.     Estimated time of completion: 2022-09-27 20:57:29   </code></pre>
+ 5 factors completed in 0.114 minutes.     Estimated time of completion: 2022-09-28 08:44:06   </code></pre>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="phylofactor.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># saveRDS(PF,&#39;pf-example.rds&#39;)  # save Phylofactor object to .rds file </span></span>
 <span id="cb82-2"><a href="phylofactor.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(tree, tree_ur, Data, X, meta.df) <span class="co">#remove unnecessary objects from R environment</span></span>
 <span id="cb82-3"><a href="phylofactor.html#cb82-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1013,8 +1015,7 @@ div.csl-indent {
 <span id="cb104-52"><a href="phylofactor.html#cb104-52" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hjust =</span> <span class="st">&quot;center&quot;</span>,</span>
 <span id="cb104-53"><a href="phylofactor.html#cb104-53" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fontsize =</span> <span class="dv">3</span>,</span>
 <span id="cb104-54"><a href="phylofactor.html#cb104-54" aria-hidden="true" tabindex="-1"></a>                 <span class="at">parse =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb104-55"><a href="phylofactor.html#cb104-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-56"><a href="phylofactor.html#cb104-56" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<span id="cb104-55"><a href="phylofactor.html#cb104-55" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
 <p><img src="gitbook-demo_files/figure-html/coloredtree3-1.png" width="960" /></p>
 <p>Now its a little easier to identify the who is who. This is just another way to explore your phylogeny and how they relate to the phylofactors.</p>
 

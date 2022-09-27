@@ -96,13 +96,15 @@ Do this if you saved a phyloseq object in .rds format before. Otherwise create a
 ps <- readRDS('ps_ProjectX_2022July')
 
 #ps (not run) to get an overview of number of taxa and samples contained in the phyloseq object
-df <- data.frame(sample_data(ps))
-# output
+
 # phyloseq-class experiment-level object
 # otu_table()   OTU Table:         [ 4218 taxa and 51 samples ]
 # sample_data() Sample Data:       [ 51 samples by 15 sample variables ]
 # tax_table()   Taxonomy Table:    [ 4218 taxa by 7 taxonomic ranks ]
 # phy_tree()    Phylogenetic Tree: [ 4218 tips and 4217 internal nodes ]
+
+# check metadata if needed
+# df <- data.frame(sample_data(ps))
 ```
   
 ### Pre-filtering  
