@@ -2611,7 +2611,7 @@ Check out the papers \href{https://www.biorxiv.org/content/10.1101/235341v2}{Phy
 
 You will need a phylogenic tree for this analysis. For example, in chapter \ref{miseqtoqiime} we have built a phylogenetic tree from ASVs using the insertion tree method with qiime2. This tree was then imported into R and included into a phyloseq object as shown in chapter \ref{Qiime2R}.
 
-For this tutorial we will be using the same phyloseq object and apply the \texttt{PhyloFactor} function of the Phylofactor package. This function is used to assess associations of relative abundances with selected meta-data, assuming a normal distribution (ILRs are normally distributed). It is basically finding variation in ILRs or balances (which are two groups of abundances delineated by an edge in the tree) that respond to treatments or environmental data.
+For this tutorial we will be using the same phyloseq object and apply the \texttt{PhyloFactor} function of the Phylofactor package. This function is used to assess associations of relative abundances with selected metadata, assuming a normal distribution (ILRs are normally distributed). It is basically finding variation in ILRs or balances (which are two groups of abundances delineated by an edge in the tree) that respond to treatments or environmental data.
 
 \hypertarget{prerequisites-and-required-files-1}{%
 \subsection{Prerequisites and required files}\label{prerequisites-and-required-files-1}}
@@ -2670,7 +2670,7 @@ Custom functions. Download and add to your working directory:
 \FunctionTok{library}\NormalTok{(ggtree)}
  
 \DocumentationTok{\#\# phyfacsummary function }
-\CommentTok{\# Function to summaries all phylofactor factors in a meaningful way into a dataframe}
+\CommentTok{\# Function to summarise all phylofactor factors in a meaningful way into a dataframe}
 \CommentTok{\# p adjusted method = Bonferroni}
 \CommentTok{\# Enter the phylofactor file and the phyloseq object to get a dataframe with model results, }
 \CommentTok{\# abundances and taxa info}
@@ -2678,7 +2678,7 @@ Custom functions. Download and add to your working directory:
 \CommentTok{\# model setting was set to \textquotesingle{}F\textquotesingle{}, if \textquotesingle{}var\textquotesingle{} use 5}
 \NormalTok{phyfacsummary }\OtherTok{\textless{}{-}} \FunctionTok{dget}\NormalTok{(}\StringTok{"./custom{-}functions/phyfacsummary.R"}\NormalTok{)}
 
-\DocumentationTok{\#\# addILRtophylose function }
+\DocumentationTok{\#\# addILRtophyloseq function }
 \CommentTok{\# Function to take a phylofactor file and extract the mean sample ILRs and }
 \CommentTok{\# add those to the phyloseq sample data those can then be used for plotting graphs }
 \CommentTok{\# together with treatment data. }
@@ -2688,9 +2688,8 @@ Custom functions. Download and add to your working directory:
 \NormalTok{ILR\_plotfunction }\OtherTok{\textless{}{-}} \FunctionTok{dget}\NormalTok{(}\StringTok{"./custom{-}functions/ILR\_plotfunction.R"}\NormalTok{)}
 
 \DocumentationTok{\#\# mytreefunctionwithbarplots}
-\CommentTok{\# (3) Third and improved tree functions combining phylum colors with grey }
-\CommentTok{\# phylofactor highlights. The grey highlights do not identify the phylofactor }
-\CommentTok{\# on its own but can be used in a post powerpoint. }
+\CommentTok{\# Tree functions combining phylum colors with grey }
+\CommentTok{\# phylofactor highlights. }
 \CommentTok{\# Requires a colour vector \textquotesingle{}treecols\textquotesingle{}}
 \CommentTok{\# Requires a order vector \textquotesingle{}ordervec\textquotesingle{} that includes the names of }
 \CommentTok{\# all phyla to be included into the legend in that order (example shown below). }
@@ -2789,7 +2788,7 @@ For this example, the explanatory variable \texttt{Location} is used to regress 
 \begin{Highlighting}[]
 \CommentTok{\# name the vector data with sample IDs }
 \FunctionTok{names}\NormalTok{(X) }\OtherTok{\textless{}{-}}\NormalTok{ rnames}
-\CommentTok{\# create an OTU table for phylofactor }
+\CommentTok{\# create an ASV table for phylofactor }
 \NormalTok{Data }\OtherTok{=} \FunctionTok{as}\NormalTok{(}\FunctionTok{otu\_table}\NormalTok{(ps.phylo), }\StringTok{"matrix"}\NormalTok{)}
 \NormalTok{Data }\OtherTok{=} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{t}\NormalTok{(Data))}
 \NormalTok{Data }\OtherTok{\textless{}{-}}\NormalTok{ Data[}\FunctionTok{match}\NormalTok{(rnames,}\FunctionTok{row.names}\NormalTok{(Data)),] }
@@ -2843,7 +2842,7 @@ For this example, the explanatory variable \texttt{Location} is used to regress 
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0252 minutes.    Estimated time of completion: 2022-09-27 09:15:37    2 factors completed in 0.0471 minutes.     Estimated time of completion: 2022-09-27 09:15:36    3 factors completed in 0.0689 minutes.     Estimated time of completion: 2022-09-27 09:15:36    4 factors completed in 0.091 minutes.     Estimated time of completion: 2022-09-27 09:15:36    5 factors completed in 0.111 minutes.     Estimated time of completion: 2022-09-27 09:15:36   
+##  1 factor completed in 0.0254 minutes.    Estimated time of completion: 2022-09-27 11:41:30    2 factors completed in 0.0472 minutes.     Estimated time of completion: 2022-09-27 11:41:30    3 factors completed in 0.0689 minutes.     Estimated time of completion: 2022-09-27 11:41:29    4 factors completed in 0.0909 minutes.     Estimated time of completion: 2022-09-27 11:41:29    5 factors completed in 0.111 minutes.     Estimated time of completion: 2022-09-27 11:41:29   
 \end{verbatim}
 
 \begin{Shaded}
@@ -3387,7 +3386,9 @@ First, prepare a color vector for the tree. There are different ways to do this 
   \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ factorvector) \{}
 \NormalTok{  p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+} \FunctionTok{geom\_cladelabel}\NormalTok{(}\AttributeTok{node =} 
 \NormalTok{                 (df }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{==}\NormalTok{  i))}\SpecialCharTok{$}\NormalTok{node, }\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{"PF"}\NormalTok{, }
-\NormalTok{                 (df }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{==}\NormalTok{ i))}\SpecialCharTok{$}\NormalTok{Phylofactor), }\AttributeTok{offset.text =}\NormalTok{ offset.text, }\AttributeTok{hjust =} \StringTok{"center"}\NormalTok{)}
+\NormalTok{                 (df }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{==}\NormalTok{ i))}\SpecialCharTok{$}\NormalTok{Phylofactor), }
+                 \AttributeTok{offset.text =}\NormalTok{ offset.text, }
+                 \AttributeTok{hjust =} \StringTok{"center"}\NormalTok{)}
 \NormalTok{  \}}
 \FunctionTok{rm}\NormalTok{(taxa.df.phylum, df)}
 \end{Highlighting}
@@ -3438,9 +3439,9 @@ There are too many colours here and it is difficult to differentiate the differe
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# check which taxa are involved for other factors}
-\CommentTok{\# summary(PF,taxonomy,factor=1) \# Acidobacteriota}
-\CommentTok{\# summary(PF,taxonomy,factor=2) \# Chloroflexi}
-\CommentTok{\# summary(PF,taxonomy,factor=4) \# Bacteroidota}
+\CommentTok{\# summary(PF,taxonomy,factor=1) \# Acidobacteriota;Thermoanaerobaculum}
+\CommentTok{\# summary(PF,taxonomy,factor=2) \# Chloroflexi;Anaerolineaceae;ADurb.Bin120}
+\CommentTok{\# summary(PF,taxonomy,factor=4) \# Bacteroidota;Rikenellaceae;DMER64 }
 \CommentTok{\# summary(PF,taxonomy,factor=5) \# Fermentibacterota}
 
 \CommentTok{\# create ordervec}

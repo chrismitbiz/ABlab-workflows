@@ -17,7 +17,7 @@ Check out the papers [Phylofactorization: a graph-partitioning algorithm to iden
   
 You will need a phylogenic tree for this analysis. For example, in chapter  \@ref(miseqtoqiime) we have built a phylogenetic tree from ASVs using the insertion tree method with qiime2. This tree was then imported into R and included into a phyloseq object as shown in chapter \@ref(Qiime2R).  
   
-For this tutorial we will be using the same phyloseq object and apply the `PhyloFactor` function of the Phylofactor package. This function is used to assess associations of relative abundances with selected meta-data, assuming a normal distribution (ILRs are normally distributed). It is basically finding variation in ILRs or balances (which are two groups of abundances delineated by an edge in the tree) that respond to treatments or environmental data.   
+For this tutorial we will be using the same phyloseq object and apply the `PhyloFactor` function of the Phylofactor package. This function is used to assess associations of relative abundances with selected metadata, assuming a normal distribution (ILRs are normally distributed). It is basically finding variation in ILRs or balances (which are two groups of abundances delineated by an edge in the tree) that respond to treatments or environmental data.   
   
 ### Prerequisites and required files   
   
@@ -55,7 +55,7 @@ library(ggtreeExtra)
 library(ggtree)
  
 ## phyfacsummary function 
-# Function to summaries all phylofactor factors in a meaningful way into a dataframe
+# Function to summarise all phylofactor factors in a meaningful way into a dataframe
 # p adjusted method = Bonferroni
 # Enter the phylofactor file and the phyloseq object to get a dataframe with model results, 
 # abundances and taxa info
@@ -63,7 +63,7 @@ library(ggtree)
 # model setting was set to 'F', if 'var' use 5
 phyfacsummary <- dget("./custom-functions/phyfacsummary.R")
 
-## addILRtophylose function 
+## addILRtophyloseq function 
 # Function to take a phylofactor file and extract the mean sample ILRs and 
 # add those to the phyloseq sample data those can then be used for plotting graphs 
 # together with treatment data. 
@@ -73,9 +73,8 @@ addILRtophyloseq <- dget("./custom-functions/addILRtophyloseq.R")
 ILR_plotfunction <- dget("./custom-functions/ILR_plotfunction.R")
 
 ## mytreefunctionwithbarplots
-# (3) Third and improved tree functions combining phylum colors with grey 
-# phylofactor highlights. The grey highlights do not identify the phylofactor 
-# on its own but can be used in a post powerpoint. 
+# Tree functions combining phylum colors with grey 
+# phylofactor highlights. 
 # Requires a colour vector 'treecols'
 # Requires a order vector 'ordervec' that includes the names of 
 # all phyla to be included into the legend in that order (example shown below). 
@@ -152,7 +151,7 @@ X <- meta.df$Location
 summary(X)
 # name the vector data with sample IDs 
 names(X) <- rnames
-# create an OTU table for phylofactor 
+# create an ASV table for phylofactor 
 Data = as(otu_table(ps.phylo), "matrix")
 Data = as.data.frame(t(Data))
 Data <- Data[match(rnames,row.names(Data)),] 
@@ -460,9 +459,12 @@ p <- p + ggtree::geom_hilight(data = df, aes(node = node),
   for (i in factorvector) {
   p <- p + geom_cladelabel(node = 
                  (df %>% dplyr::filter(Phylofactor ==  i))$node, label = paste("PF", 
-                 (df %>% dplyr::filter(Phylofactor == i))$Phylofactor), offset.text = offset.text, hjust = "center")
+                 (df %>% dplyr::filter(Phylofactor == i))$Phylofactor), 
+                 offset.text = offset.text, 
+                 hjust = "center")
   }
 rm(taxa.df.phylum, df)
+  
 ```
   
 All the above steps can also be called with the custom function `mytreefunctionwithbarplots` which I provided in the intro. This makes for neater code in your probably already busy R studio editor. The following output is identical to the above: 
@@ -495,9 +497,9 @@ There are too many colours here and it is difficult to differentiate the differe
 # check which phyla to highlight in tree
 s$taxa.split$group2 # this is the summary for factor 3 create above
 # check which taxa are involved for other factors
-# summary(PF,taxonomy,factor=1) # Acidobacteriota
-# summary(PF,taxonomy,factor=2) # Chloroflexi
-# summary(PF,taxonomy,factor=4) # Bacteroidota
+# summary(PF,taxonomy,factor=1) # Acidobacteriota;Thermoanaerobaculum
+# summary(PF,taxonomy,factor=2) # Chloroflexi;Anaerolineaceae;ADurb.Bin120
+# summary(PF,taxonomy,factor=4) # Bacteroidota;Rikenellaceae;DMER64 
 # summary(PF,taxonomy,factor=5) # Fermentibacterota
 
 # create ordervec
