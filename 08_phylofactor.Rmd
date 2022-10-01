@@ -36,7 +36,7 @@ There are several functions available in phylofactor to review the model outputs
   
 I also created some custom functions that make it a little easier (for me). They are available to download. I am no coder so the code in the functions may offend you but they worked :). If you want to use these extra functions you can download them into your working directory and load them into your R environment using the `dget` function (e.g. `phyfacsummary <- dget("./custom-functions/phyfacsummary.R")`). I usually keep custom functions in a separate folder, here named 'custom-functions'.  
   
-If you want to learn what the functions do, you can also copy the code out of the function and have a go at running the code yourself.  
+If you want to learn what the functions do and customise them further, you can also copy the code out of the function and have a go at running the code yourself.  
     
 Custom functions. Download and add to your working directory:  
   

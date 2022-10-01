@@ -18,20 +18,20 @@ Furthermore, beta diversity, i.e. four different type of ordinations are plotted
   
 The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: https://sites.google.com/site/mb3gustame/home, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter \@ref(gettingstarted) under "Workflows from other lab groups". 
   
-As mentioned in Chapter \@ref(gettingstarted), prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying - this paper explains the process: [Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities](https://www.nature.com/articles/s41598-021-01636-1) (@Cameron2021).   
+As mentioned in Chapter \@ref(gettingstarted), prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying - this paper explains the process: [Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities](https://www.nature.com/articles/s41598-021-01636-1){target="_blank"} (@Cameron2021).   
 We will follow the recommendations from the authors of this paper to resample without replacement.  
   
-Note that rarefying is generally not recommended for statistical inferences in differential abundance analyses due to the loss of statistical power. Learn why here: [Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531) (@McMurdie2014). 
+Note that rarefying is generally not recommended for statistical inferences in differential abundance analyses due to the loss of statistical power. Learn why here: [Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531){target="_blank"} (@McMurdie2014). 
         
 Other normalisation methods (see Chapter \@ref(gettingstarted)) are also possible and it is up to you, the analyst, to understand and decide on the appropriate methods. 
 
-My preference is to use centred-log ratios (Aitchison distances). Aitchison distances are used in the workflow below for the PCA and RDA. The compositional approach and centred log-ratios are further discussed in the paper [Microbiome Datasets Are Compositional: And This Is Not Optional](https://doi.org/10.3389/fmicb.2017.02224) (@Gloor2017).   
+My preference is to use centred-log ratios (Aitchison distances). Aitchison distances are used in the workflow below for the PCA and RDA. The compositional approach and centred log-ratios are further discussed in the paper [Microbiome Datasets Are Compositional: And This Is Not Optional](https://doi.org/10.3389/fmicb.2017.02224){target="_blank"} (@Gloor2017).   
 In fact, comparing the results after applying different types of normalisation methods, dissimilarities or distances may complement your analysis and help in interpretation of data.    
   
 ### Required files   
     
 * A `phyloseq` object; either read in from a pre-saved `.rds` file or created as described in chapter \@ref(Qiime2R) under "Import qiime-files and create a phyloseq object".  
-* If you dont have your own data you can download the pre-saved `.rds` object from this Chapter and follow the below steps: [ps_ProjectX_2022July](./ps_ProjectX_2022July).    
+* If you dont have your own data you can download the pre-saved `.rds` object from this Chapter and follow the below steps: [ps_ProjectX_2022July](./ps_ProjectX_2022July){target="_blank"}.    
    
 Time to get started...  
   

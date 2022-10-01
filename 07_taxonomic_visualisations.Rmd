@@ -229,7 +229,7 @@ prevalancedf %>%
   
 On macOS or Linux, a more interactive way to explore the various levels of the taxonomy in your data is to use Krona charts.   
   
-All you need is [KronaTools](https://github.com/marbl/Krona/wiki/KronaTools) and the R package `psadd`.  
+All you need is [KronaTools](https://github.com/marbl/Krona/wiki/KronaTools){target="_blank"} and the R package `psadd`.  
   
 To install KronaTools simply download and unzip the repository of https://github.com/marbl/Krona (The green "Code" button) and execute the `install.pl` file as described in the Installation Wiki at https://github.com/marbl/Krona/wiki/Installing. Once installed you can run the following:    
   

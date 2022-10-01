@@ -24,7 +24,7 @@ This GitBook contains workflows for students who want to get started with sequen
   
 One of the biggest hurdles for students that embark on sequencing environmental DNA for the first time, is the effort that is required to understand the various coding languages, file types and formats, packages or platforms that are involved (think Unix, Linux, Slurm, Qiime, R, RMarkdown, python, conda, ggplot, docker, GitHub, data instances...) before they even can start looking at exploring the data for biological meaning and producing publishable output. 
 
-For example, this GitBook is made in [Rstudio](https://rstudio.com), using the [`rmarkdown` markup language](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf), rendered using the [`bookdown` package](https://bookdown.org/yihui/bookdown/get-started.html), and hosted on [GitHub](https://github.com/). It took me at least five years before I was ready to create and host this content for students. And even then I needed this awesome [Bookdown template](https://cjvanlissa.github.io/gitbook-demo/index.html) from Dr. Caspar van Lissa to get started with Bookdown. So it is really helpful to have something to start with. 
+For example, this GitBook is made in [Rstudio](https://rstudio.com){target="_blank"}, using the [`rmarkdown` markup language](https://rmarkdown.rstudio.com/){target="_blank"}, rendered using the [`bookdown` package](https://bookdown.org/yihui/bookdown/get-started.html){target="_blank"}, and hosted on [GitHub](https://github.com/){target="_blank"}. It took me at least five years before I was ready to create and host this content for students. And even then I needed this awesome [Bookdown template](https://cjvanlissa.github.io/gitbook-demo/index.html){target="_blank"} from Dr. Caspar van Lissa to get started with Bookdown. So it is really helpful to have something to start with. 
 
 It was not easy to get over the initial hurdles for me too, so I thought I'd try to compile my workflows. This may help students to get a head start but also helps to scrutinise my approach in the hope that others can point me to better ways of doing things. 
 
@@ -34,6 +34,6 @@ Everyone is at a different level in the journey to exploring microbial diversity
 
 **Get in touch**  
   
-We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne. Email me or comment on the discussion section of the [GitHub repository](https://github.com/chrismitbiz/ABlab-workflows/discussions/) for this GitBook. You will need to get a GitHub account to join the discussion. Its free. 
+We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne. Email me or comment on the discussion section of the [GitHub repository](https://github.com/chrismitbiz/ABlab-workflows/discussions/){target="_blank"} for this GitBook. You will need to get a GitHub account to join the discussion. Its free. 
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.

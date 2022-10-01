@@ -156,7 +156,7 @@ This GitBook contains workflows for students who want to get started with sequen
 
 One of the biggest hurdles for students that embark on sequencing environmental DNA for the first time, is the effort that is required to understand the various coding languages, file types and formats, packages or platforms that are involved (think Unix, Linux, Slurm, Qiime, R, RMarkdown, python, conda, ggplot, docker, GitHub, data instances\ldots) before they even can start looking at exploring the data for biological meaning and producing publishable output.
 
-For example, this GitBook is made in \href{https://rstudio.com}{Rstudio}, using the \href{https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf}{\texttt{rmarkdown} markup language}, rendered using the \href{https://bookdown.org/yihui/bookdown/get-started.html}{\texttt{bookdown} package}, and hosted on \href{https://github.com/}{GitHub}. It took me at least five years before I was ready to create and host this content for students. And even then I needed this awesome \href{https://cjvanlissa.github.io/gitbook-demo/index.html}{Bookdown template} from Dr.~Caspar van Lissa to get started with Bookdown. So it is really helpful to have something to start with.
+For example, this GitBook is made in \href{https://rstudio.com}{Rstudio}, using the \href{https://rmarkdown.rstudio.com/}{\texttt{rmarkdown} markup language}, rendered using the \href{https://bookdown.org/yihui/bookdown/get-started.html}{\texttt{bookdown} package}, and hosted on \href{https://github.com/}{GitHub}. It took me at least five years before I was ready to create and host this content for students. And even then I needed this awesome \href{https://cjvanlissa.github.io/gitbook-demo/index.html}{Bookdown template} from Dr.~Caspar van Lissa to get started with Bookdown. So it is really helpful to have something to start with.
 
 It was not easy to get over the initial hurdles for me too, so I thought I'd try to compile my workflows. This may help students to get a head start but also helps to scrutinise my approach in the hope that others can point me to better ways of doing things.
 
@@ -2641,7 +2641,7 @@ There are several functions available in phylofactor to review the model outputs
 
 I also created some custom functions that make it a little easier (for me). They are available to download. I am no coder so the code in the functions may offend you but they worked :). If you want to use these extra functions you can download them into your working directory and load them into your R environment using the \texttt{dget} function (e.g.~\texttt{phyfacsummary\ \textless{}-\ dget("./custom-functions/phyfacsummary.R")}). I usually keep custom functions in a separate folder, here named `custom-functions'.
 
-If you want to learn what the functions do, you can also copy the code out of the function and have a go at running the code yourself.
+If you want to learn what the functions do and customise them further, you can also copy the code out of the function and have a go at running the code yourself.
 
 Custom functions. Download and add to your working directory:
 
@@ -2855,7 +2855,7 @@ Here, we run the \texttt{PhyloFactor} function with \texttt{choice\ =\ "var"}.
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0262 minutes.    Estimated time of completion: 2022-10-02 09:46:24    2 factors completed in 0.0485 minutes.     Estimated time of completion: 2022-10-02 09:46:23    3 factors completed in 0.0712 minutes.     Estimated time of completion: 2022-10-02 09:46:22    4 factors completed in 0.0947 minutes.     Estimated time of completion: 2022-10-02 09:46:22    5 factors completed in 0.116 minutes.     Estimated time of completion: 2022-10-02 09:46:22    6 factors completed in 0.137 minutes.     Estimated time of completion: 2022-10-02 09:46:22    7 factors completed in 0.159 minutes.     Estimated time of completion: 2022-10-02 09:46:22    8 factors completed in 0.18 minutes.     Estimated time of completion: 2022-10-02 09:46:22    9 factors completed in 0.201 minutes.     Estimated time of completion: 2022-10-02 09:46:21    10 factors completed in 0.223 minutes.     Estimated time of completion: 2022-10-02 09:46:21    11 factors completed in 0.245 minutes.     Estimated time of completion: 2022-10-02 09:46:21    12 factors completed in 0.267 minutes.     Estimated time of completion: 2022-10-02 09:46:21    13 factors completed in 0.288 minutes.     Estimated time of completion: 2022-10-02 09:46:21   
+##  1 factor completed in 0.0262 minutes.    Estimated time of completion: 2022-10-02 10:07:02    2 factors completed in 0.0487 minutes.     Estimated time of completion: 2022-10-02 10:07:00    3 factors completed in 0.071 minutes.     Estimated time of completion: 2022-10-02 10:07:00    4 factors completed in 0.0941 minutes.     Estimated time of completion: 2022-10-02 10:06:59    5 factors completed in 0.115 minutes.     Estimated time of completion: 2022-10-02 10:06:59    6 factors completed in 0.137 minutes.     Estimated time of completion: 2022-10-02 10:06:59    7 factors completed in 0.158 minutes.     Estimated time of completion: 2022-10-02 10:06:59    8 factors completed in 0.179 minutes.     Estimated time of completion: 2022-10-02 10:06:59    9 factors completed in 0.201 minutes.     Estimated time of completion: 2022-10-02 10:06:58    10 factors completed in 0.223 minutes.     Estimated time of completion: 2022-10-02 10:06:58    11 factors completed in 0.245 minutes.     Estimated time of completion: 2022-10-02 10:06:58    12 factors completed in 0.266 minutes.     Estimated time of completion: 2022-10-02 10:06:58    13 factors completed in 0.288 minutes.     Estimated time of completion: 2022-10-02 10:06:58   
 \end{verbatim}
 
 \begin{Shaded}
@@ -3285,6 +3285,12 @@ If the explanatory variable is a factor you can compare the ILRs using boxplots.
 \end{Shaded}
 
 \includegraphics{gitbook-demo_files/figure-latex/pfviz1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Alternatively you can use the custom function \textasciigrave{}ILR\_plotfunction.R\textasciigrave{} to get  the same output}
+\end{Highlighting}
+\end{Shaded}
 
 This visualises the taxa relative abundances (represented by the ILR or balances) of the different `Locations'. For example, the relative abundances of factor 1 (genus \emph{Thermoanaerobaculum}) are highest in Randers and Viborg. It also appears to be the factor with the clearest differentiation between locations, as the ILRs of other factors are more variable with wider boxplots and more outliers.
 

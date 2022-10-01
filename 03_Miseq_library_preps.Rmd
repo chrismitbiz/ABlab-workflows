@@ -102,7 +102,7 @@ Repeat any samples that failed, i.e. that do not show any bands, and ensure you 
 ### Normalisation of indexed amplicons
   
 After you finished all PCR work it is time to do another round of Qubitting and normalisation of all samples into a new 96-well plate. The final pool should be 4 nM but we prefer to normalise DNA to a higher concentration first, say 10 nM, then pool and then dilute the pool to 4 nM afterwards.  
-We are using a very handy excel sheet, which was kindly developed and provided by [Sarah Knowler](https://scholars.latrobe.edu.au/sknowler) at La Trobe University to prepare and assist in normalisations, converting from ng/µl to nM using the formula:  
+We are using a very handy excel sheet, which was kindly developed and provided by [Sarah Knowler](https://scholars.latrobe.edu.au/sknowler){target="_blank"} at La Trobe University to prepare and assist in normalisations, converting from ng/µl to nM using the formula:  
   
 $$ concentrations~(ng/µl)  \over 660 g/mol~x~average~library~size$$
 Contact us if you would like to get a copy of this very handy library preparation excel sheet.   
