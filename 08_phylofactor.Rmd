@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 # Phylofactor analysis {#phylofactor}
-![](./img/phylofactor2.png)
+![](./img/phylofactor.png)
   
 ## Introduction   
   
@@ -24,7 +24,7 @@ The visualisations of the trees relies on ggplot (@Wickham2016a) and ggtree (@Yu
    
 ### Prerequisites and required files   
   
-* Some basic skills in manipulating data with the packages`dplyr`, `ggplot` and other packages in the `tidyverse`.  
+* Maybe some basic skills in manipulating data with the packages`dplyr`, `ggplot` and other packages in the `tidyverse` but not essential.  
 * [Phylofactor tutorial](https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf) read  
 * All required packages, including phylofactor, installed.  
 * A `phyloseq` object that includes a phylogenetic tree; either read in from a pre-saved `.rds` file or created as described in chapter \@ref(Qiime2R) under "Import qiime-files and create a phyloseq object".  
@@ -671,13 +671,13 @@ p.pf3 <- plotdata %>%
                     labels = labelvec) +
   theme(axis.text.x=element_blank(),
         legend.position = "right") +
-  guides(fill = guide_legend(ncol = 2, byrow = TRUE)) +
+  guides(fill = guide_legend(ncol = 2, byrow = FALSE)) +
   labs(title = "Phylofactor 3 (Group 1)", subtitle = "Number of Genera") 
-
-
 # Combine plots
 ggpubr::ggarrange(ggarrange(p, p.ILR, nrow = 1),
                   p.pf3, nrow = 2)
+# save figure 
+# ggsave("./img/phylofactor.png", height=9, width=9, units='in', dpi=600)
 ```
   
 Hopefully, this was helpful. Please send me any comments on the discussion section of the [GitHub repository](https://github.com/chrismitbiz/ABlab-workflows/discussions/) for this GitBook. You will need to get a GitHub account to join the discussion. Its free.  

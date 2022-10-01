@@ -2598,7 +2598,7 @@ Explore the Krona plot in your web browser: \href{./krona-file/krona-file.html}{
 \hypertarget{phylofactor}{%
 \chapter{Phylofactor analysis}\label{phylofactor}}
 
-\includegraphics{./img/phylofactor2.png}
+\includegraphics{./img/phylofactor.png}
 
 \hypertarget{introduction-5}{%
 \section{Introduction}\label{introduction-5}}
@@ -2623,7 +2623,7 @@ The visualisations of the trees relies on ggplot (\citet{Wickham2016a}) and ggtr
 \begin{itemize}
 \tightlist
 \item
-  Some basic skills in manipulating data with the packages\texttt{dplyr}, \texttt{ggplot} and other packages in the \texttt{tidyverse}.\\
+  Maybe some basic skills in manipulating data with the packages\texttt{dplyr}, \texttt{ggplot} and other packages in the \texttt{tidyverse} but not essential.\\
 \item
   \href{https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf}{Phylofactor tutorial} read\\
 \item
@@ -2852,7 +2852,7 @@ For this example, the explanatory variable \texttt{Location} is used to regress 
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0283 minutes.    Estimated time of completion: 2022-10-01 18:11:43    2 factors completed in 0.0508 minutes.     Estimated time of completion: 2022-10-01 18:11:41    3 factors completed in 0.0733 minutes.     Estimated time of completion: 2022-10-01 18:11:40    4 factors completed in 0.096 minutes.     Estimated time of completion: 2022-10-01 18:11:40    5 factors completed in 0.117 minutes.     Estimated time of completion: 2022-10-01 18:11:39    6 factors completed in 0.137 minutes.     Estimated time of completion: 2022-10-01 18:11:39    7 factors completed in 0.158 minutes.     Estimated time of completion: 2022-10-01 18:11:38    8 factors completed in 0.179 minutes.     Estimated time of completion: 2022-10-01 18:11:38    9 factors completed in 0.2 minutes.     Estimated time of completion: 2022-10-01 18:11:38    10 factors completed in 0.22 minutes.     Estimated time of completion: 2022-10-01 18:11:38    11 factors completed in 0.242 minutes.     Estimated time of completion: 2022-10-01 18:11:38    12 factors completed in 0.263 minutes.     Estimated time of completion: 2022-10-01 18:11:38    13 factors completed in 0.283 minutes.     Estimated time of completion: 2022-10-01 18:11:38   
+##  1 factor completed in 0.0381 minutes.    Estimated time of completion: 2022-10-01 18:45:08    2 factors completed in 0.0704 minutes.     Estimated time of completion: 2022-10-01 18:45:06    3 factors completed in 0.103 minutes.     Estimated time of completion: 2022-10-01 18:45:05    4 factors completed in 0.135 minutes.     Estimated time of completion: 2022-10-01 18:45:05    5 factors completed in 0.165 minutes.     Estimated time of completion: 2022-10-01 18:45:04    6 factors completed in 0.196 minutes.     Estimated time of completion: 2022-10-01 18:45:04    7 factors completed in 0.226 minutes.     Estimated time of completion: 2022-10-01 18:45:04    8 factors completed in 0.256 minutes.     Estimated time of completion: 2022-10-01 18:45:04    9 factors completed in 0.287 minutes.     Estimated time of completion: 2022-10-01 18:45:03    10 factors completed in 0.317 minutes.     Estimated time of completion: 2022-10-01 18:45:03    11 factors completed in 0.349 minutes.     Estimated time of completion: 2022-10-01 18:45:03    12 factors completed in 0.379 minutes.     Estimated time of completion: 2022-10-01 18:45:03    13 factors completed in 0.409 minutes.     Estimated time of completion: 2022-10-01 18:45:03   
 \end{verbatim}
 
 \begin{Shaded}
@@ -3659,10 +3659,8 @@ Perhaps you want to see the relative abundances of group 1 in Phylofactor 3 (The
                     \AttributeTok{labels =}\NormalTok{ labelvec) }\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x=}\FunctionTok{element\_blank}\NormalTok{(),}
         \AttributeTok{legend.position =} \StringTok{"right"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{ncol =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{ncol =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{FALSE}\NormalTok{)) }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Phylofactor 3 (Group 1)"}\NormalTok{, }\AttributeTok{subtitle =} \StringTok{"Number of Genera"}\NormalTok{) }
-
-
 \CommentTok{\# Combine plots}
 \NormalTok{ggpubr}\SpecialCharTok{::}\FunctionTok{ggarrange}\NormalTok{(}\FunctionTok{ggarrange}\NormalTok{(p, p.ILR, }\AttributeTok{nrow =} \DecValTok{1}\NormalTok{),}
 \NormalTok{                  p.pf3, }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{)}
@@ -3670,6 +3668,13 @@ Perhaps you want to see the relative abundances of group 1 in Phylofactor 3 (The
 \end{Shaded}
 
 \includegraphics{gitbook-demo_files/figure-latex/taxafiltering-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# save figure }
+\CommentTok{\# ggsave("./img/phylofactor.png", height=9, width=9, units=\textquotesingle{}in\textquotesingle{}, dpi=600)}
+\end{Highlighting}
+\end{Shaded}
 
 Hopefully, this was helpful. Please send me any comments on the discussion section of the \href{https://github.com/chrismitbiz/ABlab-workflows/discussions/}{GitHub repository} for this GitBook. You will need to get a GitHub account to join the discussion. Its free.
 
