@@ -10,11 +10,11 @@ editor_options:
   
 In this chapter you will learn how to use one of the main functions from the package phylofactor, as well as analyse and visualise the results. The main aims are to understand more about phylofactor and learn about data manipulation using dplyr and visulisations using ggplot and ggtree.    
   
-[Phylofactor](https://github.com/reptalex/phylofactor) is a package developed by [Alex Washburne](https://github.com/reptalex), a mathematical biologist. It is a compositional analysis tool that 'iteratively identifies the most important clades driving variation in the data through their associations with independent variables' (@Washburne2017). For me, it is a great way to assess clade-specific treatment effects or environmental associations. In combination with other differential abundance analysis methods it helped me to gain confidence in biological interpretations of microbial community associations to environmental metadata or treatments. I also use it to visualise selected identified clades on a phylogenetic tree.  
+[Phylofactor](https://github.com/reptalex/phylofactor){target="_blank"} is a package developed by [Alex Washburne](https://github.com/reptalex){target="_blank"}, a mathematical biologist. It is a compositional analysis tool that 'iteratively identifies the most important clades driving variation in the data through their associations with independent variables' (@Washburne2017). For me, it is a great way to assess clade-specific treatment effects or environmental associations. In combination with other differential abundance analysis methods it helped me to gain confidence in biological interpretations of microbial community associations to environmental metadata or treatments. I also use it to visualise selected identified clades on a phylogenetic tree.  
   
 The package enables the use of different statistical tests, such as twoSample comparisons (i.e. t-test, Wilcox text, Fisher exact test) or regression modelling of abundances, transformed into isometric log ratios (ILRs) - sometimes called balances - to study treatment effects or environmental associations. It does this for aggregated abundances on edges of a phylogenetic tree, hence includes associations of abundances of whole clades of ASVs. 
   
-Check out the papers [Phylofactorization: a graph-partitioning algorithm to identify phylogenetic scales of ecological data](https://www.biorxiv.org/content/10.1101/235341v2) (@Washburne2019a) and [Phylogenetic factorization of compositional data yields lineage-level associations in microbiome datasets](https://peerj.com/articles/2969/) (@Washburne2017) to learn more about the algorithms used.  
+Check out the papers [Phylofactorization: a graph-partitioning algorithm to identify phylogenetic scales of ecological data](https://www.biorxiv.org/content/10.1101/235341v2){target="_blank"} (@Washburne2019a) and [Phylogenetic factorization of compositional data yields lineage-level associations in microbiome datasets](https://peerj.com/articles/2969/){target="_blank"} (@Washburne2017) to learn more about the algorithms used.  
   
 You will need a phylogenic tree for this analysis. For example, in chapter  \@ref(miseqtoqiime) we have built a phylogenetic tree from ASVs using the insertion tree method with qiime2. This tree was then imported into R and included into a phyloseq object as shown in chapter \@ref(Qiime2R).  
   
@@ -25,7 +25,7 @@ The visualisations of the trees relies on ggplot (@Wickham2016a) and ggtree (@Yu
 ### Prerequisites and required files   
   
 * Maybe some basic skills in manipulating data with the packages`dplyr`, `ggplot` and other packages in the `tidyverse` but not essential.  
-* [Phylofactor tutorial](https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf) read  
+* [Phylofactor tutorial](https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf){target="_blank"} read  
 * All required packages, including phylofactor, installed.  
 * A `phyloseq` object that includes a phylogenetic tree; either read in from a pre-saved `.rds` file or created as described in chapter \@ref(Qiime2R) under "Import qiime-files and create a phyloseq object".  
 * If you dont have your own data you can download the pre-saved `.rds` object from Chapter \@ref(Qiime2R) and follow the below steps: [ps_ProjectX_2022July](./ps_ProjectX_2022July). This object was created from publicly available data from anaerobic sludge of Danish wastewater treatment plants.   
@@ -75,7 +75,6 @@ phyfacsummary <- dget("./custom-functions/phyfacsummary.R")
 addILRtophyloseq <- dget("./custom-functions/addILRtophyloseq.R")
 
 ## ILR_plotfunction
-#Example on how to use it shown below
 ILR_plotfunction <- dget("./custom-functions/ILR_plotfunction.R")
 
 ## mytreefunctionwithbarplots
@@ -147,7 +146,11 @@ ps.phylo <- phyloseq::tax_glom(ps.phylo, taxrank = "Genus")
   
   
 ### Running PhyloFactor  
-For this example, the explanatory variable `Location` is used to regress the response (abundances). This has to be a factor or numeric so check your explanatory beforehand.   
+For this example, the explanatory variable `Location` is used to regress the response (abundances). This has to be a factor or numeric so check your explanatory beforehand.  
+  
+You can choose between `choice = "var"` or `choice = "F"`. This is explained a bit in the [tutorial](https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf){target="_blank"}.  Alex Washburn has answered my question on this topic on the phylofactor GitHub repo [here](https://github.com/reptalex/phylofactor/issues/39){target="_blank"}. He commented: "*I would use "var" to study differences in community composition (big changes in abundance!) whereas I always use "F" if I'm looking for bioindicator lineages (high signal/noise ratio).*". For `choice = "var"` the regression function 'finds' the most explained variation for each edge, while for `choice = "F"` it finds the highest F-ratio (explained/unexplained variance). This is fundamental stuff and look this up separately if you want to learn more about what that means. I am also not a 100% on top of the math behind the stat myself.  
+  
+Here, we run the `PhyloFactor` function with `choice = "var"`.  
 ```{r phylofactor, echo=TRUE, message=FALSE, warning=FALSE}
 # create/extract metadata object from phyloseq object
 meta.df <- data.frame(sample_data(ps.phylo))
@@ -194,8 +197,7 @@ rm(tree, tree_ur, Data, X, meta.df) #remove unnecessary objects from R environme
 # If no value is provided to nfactors - the algorithm will continue until 
 # no edge are found anymore.
 ```
-  
-  
+ 
 ### Reviewing output  
     
 Simply run the phylofactor output object (here `PF`) to get an overview of the results. You can also access individual data outputs using the `$` operator, e.g. by running `PF$factors` you get a full list of all factors.  
@@ -335,6 +337,7 @@ pilr <- plotdata_sub %>%
 
 # Choose custom colors with + scale_fill_manual(values = yourcolvector)
 pilr 
+# Alternatively you can use the custom function `ILR_plotfunction.R` to get  the same output
 ```
  
 This visualises the taxa relative abundances (represented by the ILR or balances) of the different 'Locations'. For example, the relative abundances of factor 1 (genus *Thermoanaerobaculum*) are highest in Randers and Viborg. It also appears to be the factor with the clearest differentiation between locations, as the ILRs of other factors are more variable with wider boxplots and more outliers.  

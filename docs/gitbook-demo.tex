@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-10-01}
+\date{2022-10-02}
 
 \begin{document}
 \maketitle
@@ -2692,7 +2692,6 @@ Custom functions. Download and add to your working directory:
 \NormalTok{addILRtophyloseq }\OtherTok{\textless{}{-}} \FunctionTok{dget}\NormalTok{(}\StringTok{"./custom{-}functions/addILRtophyloseq.R"}\NormalTok{)}
 
 \DocumentationTok{\#\# ILR\_plotfunction}
-\CommentTok{\#Example on how to use it shown below}
 \NormalTok{ILR\_plotfunction }\OtherTok{\textless{}{-}} \FunctionTok{dget}\NormalTok{(}\StringTok{"./custom{-}functions/ILR\_plotfunction.R"}\NormalTok{)}
 
 \DocumentationTok{\#\# mytreefunctionwithbarplots}
@@ -2771,6 +2770,10 @@ The ASV abundances are then agglomerated to Genus level. This makes things a lit
 \subsection{Running PhyloFactor}\label{running-phylofactor}}
 
 For this example, the explanatory variable \texttt{Location} is used to regress the response (abundances). This has to be a factor or numeric so check your explanatory beforehand.
+
+You can choose between \texttt{choice\ =\ "var"} or \texttt{choice\ =\ "F"}. This is explained a bit in the \href{https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf}{tutorial}. Alex Washburn has answered my question on this topic on the phylofactor GitHub repo \href{https://github.com/reptalex/phylofactor/issues/39}{here}. He commented: ``\emph{I would use ''var'' to study differences in community composition (big changes in abundance!) whereas I always use ''F'' if I'm looking for bioindicator lineages (high signal/noise ratio).}''. For \texttt{choice\ =\ "var"} the regression function `finds' the most explained variation for each edge, while for \texttt{choice\ =\ "F"} it finds the highest F-ratio (explained/unexplained variance). This is fundamental stuff and look this up separately if you want to learn more about what that means. I am also not a 100\% on top of the math behind the stat myself.
+
+Here, we run the \texttt{PhyloFactor} function with \texttt{choice\ =\ "var"}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2852,7 +2855,7 @@ For this example, the explanatory variable \texttt{Location} is used to regress 
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0381 minutes.    Estimated time of completion: 2022-10-01 18:45:08    2 factors completed in 0.0704 minutes.     Estimated time of completion: 2022-10-01 18:45:06    3 factors completed in 0.103 minutes.     Estimated time of completion: 2022-10-01 18:45:05    4 factors completed in 0.135 minutes.     Estimated time of completion: 2022-10-01 18:45:05    5 factors completed in 0.165 minutes.     Estimated time of completion: 2022-10-01 18:45:04    6 factors completed in 0.196 minutes.     Estimated time of completion: 2022-10-01 18:45:04    7 factors completed in 0.226 minutes.     Estimated time of completion: 2022-10-01 18:45:04    8 factors completed in 0.256 minutes.     Estimated time of completion: 2022-10-01 18:45:04    9 factors completed in 0.287 minutes.     Estimated time of completion: 2022-10-01 18:45:03    10 factors completed in 0.317 minutes.     Estimated time of completion: 2022-10-01 18:45:03    11 factors completed in 0.349 minutes.     Estimated time of completion: 2022-10-01 18:45:03    12 factors completed in 0.379 minutes.     Estimated time of completion: 2022-10-01 18:45:03    13 factors completed in 0.409 minutes.     Estimated time of completion: 2022-10-01 18:45:03   
+##  1 factor completed in 0.0262 minutes.    Estimated time of completion: 2022-10-02 09:46:24    2 factors completed in 0.0485 minutes.     Estimated time of completion: 2022-10-02 09:46:23    3 factors completed in 0.0712 minutes.     Estimated time of completion: 2022-10-02 09:46:22    4 factors completed in 0.0947 minutes.     Estimated time of completion: 2022-10-02 09:46:22    5 factors completed in 0.116 minutes.     Estimated time of completion: 2022-10-02 09:46:22    6 factors completed in 0.137 minutes.     Estimated time of completion: 2022-10-02 09:46:22    7 factors completed in 0.159 minutes.     Estimated time of completion: 2022-10-02 09:46:22    8 factors completed in 0.18 minutes.     Estimated time of completion: 2022-10-02 09:46:22    9 factors completed in 0.201 minutes.     Estimated time of completion: 2022-10-02 09:46:21    10 factors completed in 0.223 minutes.     Estimated time of completion: 2022-10-02 09:46:21    11 factors completed in 0.245 minutes.     Estimated time of completion: 2022-10-02 09:46:21    12 factors completed in 0.267 minutes.     Estimated time of completion: 2022-10-02 09:46:21    13 factors completed in 0.288 minutes.     Estimated time of completion: 2022-10-02 09:46:21   
 \end{verbatim}
 
 \begin{Shaded}

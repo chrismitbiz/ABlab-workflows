@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2022-10-01" />
+<meta name="date" content="2022-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -314,9 +314,9 @@ div.csl-indent {
 <div id="introduction-5" class="section level2 hasAnchor" number="8.1">
 <h2><span class="header-section-number">8.1</span> Introduction<a href="phylofactor.html#introduction-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this chapter you will learn how to use one of the main functions from the package phylofactor, as well as analyse and visualise the results. The main aims are to understand more about phylofactor and learn about data manipulation using dplyr and visulisations using ggplot and ggtree.</p>
-<p><a href="https://github.com/reptalex/phylofactor">Phylofactor</a> is a package developed by <a href="https://github.com/reptalex">Alex Washburne</a>, a mathematical biologist. It is a compositional analysis tool that ‘iteratively identifies the most important clades driving variation in the data through their associations with independent variables’ (<span class="citation">Washburne et al. (<a href="#ref-Washburne2017" role="doc-biblioref">2017</a>)</span>). For me, it is a great way to assess clade-specific treatment effects or environmental associations. In combination with other differential abundance analysis methods it helped me to gain confidence in biological interpretations of microbial community associations to environmental metadata or treatments. I also use it to visualise selected identified clades on a phylogenetic tree.</p>
+<p><a href="https://github.com/reptalex/phylofactor" target="_blank">Phylofactor</a> is a package developed by <a href="https://github.com/reptalex" target="_blank">Alex Washburne</a>, a mathematical biologist. It is a compositional analysis tool that ‘iteratively identifies the most important clades driving variation in the data through their associations with independent variables’ (<span class="citation">Washburne et al. (<a href="#ref-Washburne2017" role="doc-biblioref">2017</a>)</span>). For me, it is a great way to assess clade-specific treatment effects or environmental associations. In combination with other differential abundance analysis methods it helped me to gain confidence in biological interpretations of microbial community associations to environmental metadata or treatments. I also use it to visualise selected identified clades on a phylogenetic tree.</p>
 <p>The package enables the use of different statistical tests, such as twoSample comparisons (i.e. t-test, Wilcox text, Fisher exact test) or regression modelling of abundances, transformed into isometric log ratios (ILRs) - sometimes called balances - to study treatment effects or environmental associations. It does this for aggregated abundances on edges of a phylogenetic tree, hence includes associations of abundances of whole clades of ASVs.</p>
-<p>Check out the papers <a href="https://www.biorxiv.org/content/10.1101/235341v2">Phylofactorization: a graph-partitioning algorithm to identify phylogenetic scales of ecological data</a> (<span class="citation">Washburne et al. (<a href="#ref-Washburne2019a" role="doc-biblioref">2019</a>)</span>) and <a href="https://peerj.com/articles/2969/">Phylogenetic factorization of compositional data yields lineage-level associations in microbiome datasets</a> (<span class="citation">Washburne et al. (<a href="#ref-Washburne2017" role="doc-biblioref">2017</a>)</span>) to learn more about the algorithms used.</p>
+<p>Check out the papers <a href="https://www.biorxiv.org/content/10.1101/235341v2" target="_blank">Phylofactorization: a graph-partitioning algorithm to identify phylogenetic scales of ecological data</a> (<span class="citation">Washburne et al. (<a href="#ref-Washburne2019a" role="doc-biblioref">2019</a>)</span>) and <a href="https://peerj.com/articles/2969/" target="_blank">Phylogenetic factorization of compositional data yields lineage-level associations in microbiome datasets</a> (<span class="citation">Washburne et al. (<a href="#ref-Washburne2017" role="doc-biblioref">2017</a>)</span>) to learn more about the algorithms used.</p>
 <p>You will need a phylogenic tree for this analysis. For example, in chapter <a href="miseqtoqiime.html#miseqtoqiime">4</a> we have built a phylogenetic tree from ASVs using the insertion tree method with qiime2. This tree was then imported into R and included into a phyloseq object as shown in chapter <a href="Qiime2R.html#Qiime2R">5</a>.</p>
 <p>For this tutorial we will be using the same phyloseq object and apply the <code>PhyloFactor</code> function of the Phylofactor package. This function is used to assess associations of relative abundances with selected metadata, assuming a normal distribution (ILRs are normally distributed). It is basically finding variation in ILRs or balances (which are two groups of abundances delineated by an edge in the tree) that respond to treatments or environmental data.</p>
 <p>The visualisations of the trees relies on ggplot (<span class="citation">Wickham, Chang, and Wickham (<a href="#ref-Wickham2016a" role="doc-biblioref">2016</a>)</span>) and ggtree (<span class="citation">Yu et al. (<a href="#ref-Yu2017" role="doc-biblioref">2017</a>)</span>).</p>
@@ -325,7 +325,7 @@ div.csl-indent {
 <ul>
 <li>Maybe some basic skills in manipulating data with the packages<code>dplyr</code>, <code>ggplot</code> and other packages in the <code>tidyverse</code> but not essential.<br />
 </li>
-<li><a href="https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf">Phylofactor tutorial</a> read<br />
+<li><a href="https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf" target="_blank">Phylofactor tutorial</a> read<br />
 </li>
 <li>All required packages, including phylofactor, installed.<br />
 </li>
@@ -382,21 +382,20 @@ div.csl-indent {
 <span id="cb69-23"><a href="phylofactor.html#cb69-23" aria-hidden="true" tabindex="-1"></a>addILRtophyloseq <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/addILRtophyloseq.R&quot;</span>)</span>
 <span id="cb69-24"><a href="phylofactor.html#cb69-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-25"><a href="phylofactor.html#cb69-25" aria-hidden="true" tabindex="-1"></a><span class="do">## ILR_plotfunction</span></span>
-<span id="cb69-26"><a href="phylofactor.html#cb69-26" aria-hidden="true" tabindex="-1"></a><span class="co">#Example on how to use it shown below</span></span>
-<span id="cb69-27"><a href="phylofactor.html#cb69-27" aria-hidden="true" tabindex="-1"></a>ILR_plotfunction <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/ILR_plotfunction.R&quot;</span>)</span>
-<span id="cb69-28"><a href="phylofactor.html#cb69-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-29"><a href="phylofactor.html#cb69-29" aria-hidden="true" tabindex="-1"></a><span class="do">## mytreefunctionwithbarplots</span></span>
-<span id="cb69-30"><a href="phylofactor.html#cb69-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Tree functions combining phylum colors with grey </span></span>
-<span id="cb69-31"><a href="phylofactor.html#cb69-31" aria-hidden="true" tabindex="-1"></a><span class="co"># phylofactor highlights. </span></span>
-<span id="cb69-32"><a href="phylofactor.html#cb69-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Requires a colour vector &#39;treecols&#39;</span></span>
-<span id="cb69-33"><a href="phylofactor.html#cb69-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Requires an order vector &#39;ordervec&#39; that includes the names of </span></span>
-<span id="cb69-34"><a href="phylofactor.html#cb69-34" aria-hidden="true" tabindex="-1"></a><span class="co"># all phyla to be included into the legend in that order (example shown below). </span></span>
-<span id="cb69-35"><a href="phylofactor.html#cb69-35" aria-hidden="true" tabindex="-1"></a>mytreefunctionwithbarplots <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/mytreefunctionwithbarplots.R&quot;</span>)</span>
-<span id="cb69-36"><a href="phylofactor.html#cb69-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-37"><a href="phylofactor.html#cb69-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Prevalence table function</span></span>
-<span id="cb69-38"><a href="phylofactor.html#cb69-38" aria-hidden="true" tabindex="-1"></a><span class="co"># get overview of abundances, mean prevalence is the mean &#39;appearance&#39; of </span></span>
-<span id="cb69-39"><a href="phylofactor.html#cb69-39" aria-hidden="true" tabindex="-1"></a><span class="co"># ASVs of the taxon across all samples</span></span>
-<span id="cb69-40"><a href="phylofactor.html#cb69-40" aria-hidden="true" tabindex="-1"></a>prevalencedf <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/myprevalencetablefunction.R&quot;</span>)</span></code></pre></div>
+<span id="cb69-26"><a href="phylofactor.html#cb69-26" aria-hidden="true" tabindex="-1"></a>ILR_plotfunction <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/ILR_plotfunction.R&quot;</span>)</span>
+<span id="cb69-27"><a href="phylofactor.html#cb69-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-28"><a href="phylofactor.html#cb69-28" aria-hidden="true" tabindex="-1"></a><span class="do">## mytreefunctionwithbarplots</span></span>
+<span id="cb69-29"><a href="phylofactor.html#cb69-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Tree functions combining phylum colors with grey </span></span>
+<span id="cb69-30"><a href="phylofactor.html#cb69-30" aria-hidden="true" tabindex="-1"></a><span class="co"># phylofactor highlights. </span></span>
+<span id="cb69-31"><a href="phylofactor.html#cb69-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Requires a colour vector &#39;treecols&#39;</span></span>
+<span id="cb69-32"><a href="phylofactor.html#cb69-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Requires an order vector &#39;ordervec&#39; that includes the names of </span></span>
+<span id="cb69-33"><a href="phylofactor.html#cb69-33" aria-hidden="true" tabindex="-1"></a><span class="co"># all phyla to be included into the legend in that order (example shown below). </span></span>
+<span id="cb69-34"><a href="phylofactor.html#cb69-34" aria-hidden="true" tabindex="-1"></a>mytreefunctionwithbarplots <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/mytreefunctionwithbarplots.R&quot;</span>)</span>
+<span id="cb69-35"><a href="phylofactor.html#cb69-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-36"><a href="phylofactor.html#cb69-36" aria-hidden="true" tabindex="-1"></a><span class="do">## Prevalence table function</span></span>
+<span id="cb69-37"><a href="phylofactor.html#cb69-37" aria-hidden="true" tabindex="-1"></a><span class="co"># get overview of abundances, mean prevalence is the mean &#39;appearance&#39; of </span></span>
+<span id="cb69-38"><a href="phylofactor.html#cb69-38" aria-hidden="true" tabindex="-1"></a><span class="co"># ASVs of the taxon across all samples</span></span>
+<span id="cb69-39"><a href="phylofactor.html#cb69-39" aria-hidden="true" tabindex="-1"></a>prevalencedf <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/myprevalencetablefunction.R&quot;</span>)</span></code></pre></div>
 </div>
 <div id="load-phyloseq-object-2" class="section level3 hasAnchor" number="8.2.2">
 <h3><span class="header-section-number">8.2.2</span> Load phyloseq object<a href="phylofactor.html#load-phyloseq-object-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -444,6 +443,8 @@ div.csl-indent {
 <div id="running-phylofactor" class="section level3 hasAnchor" number="8.2.4">
 <h3><span class="header-section-number">8.2.4</span> Running PhyloFactor<a href="phylofactor.html#running-phylofactor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For this example, the explanatory variable <code>Location</code> is used to regress the response (abundances). This has to be a factor or numeric so check your explanatory beforehand.</p>
+<p>You can choose between <code>choice = "var"</code> or <code>choice = "F"</code>. This is explained a bit in the <a href="https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf" target="_blank">tutorial</a>. Alex Washburn has answered my question on this topic on the phylofactor GitHub repo <a href="https://github.com/reptalex/phylofactor/issues/39" target="_blank">here</a>. He commented: “<em>I would use ”var” to study differences in community composition (big changes in abundance!) whereas I always use ”F” if I’m looking for bioindicator lineages (high signal/noise ratio).</em>”. For <code>choice = "var"</code> the regression function ‘finds’ the most explained variation for each edge, while for <code>choice = "F"</code> it finds the highest F-ratio (explained/unexplained variance). This is fundamental stuff and look this up separately if you want to learn more about what that means. I am also not a 100% on top of the math behind the stat myself.</p>
+<p>Here, we run the <code>PhyloFactor</code> function with <code>choice = "var"</code>.</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="phylofactor.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create/extract metadata object from phyloseq object</span></span>
 <span id="cb72-2"><a href="phylofactor.html#cb72-2" aria-hidden="true" tabindex="-1"></a>meta.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">sample_data</span>(ps.phylo))</span>
 <span id="cb72-3"><a href="phylofactor.html#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract rownames (Sample IDs)</span></span>
@@ -487,31 +488,31 @@ div.csl-indent {
 <span id="cb80-8"><a href="phylofactor.html#cb80-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">nfactors =</span> <span class="dv">13</span>, <span class="co"># the first 13 phylofactors only - in interest of time </span></span>
 <span id="cb80-9"><a href="phylofactor.html#cb80-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>)</span></code></pre></div>
 <pre><code>## 
- 1 factor completed in 0.0382 minutes.    Estimated time of completion: 2022-10-01 18:43:13   
+ 1 factor completed in 0.0283 minutes.    Estimated time of completion: 2022-10-02 09:45:08   
 
- 2 factors completed in 0.0704 minutes.     Estimated time of completion: 2022-10-01 18:43:10   
+ 2 factors completed in 0.0516 minutes.     Estimated time of completion: 2022-10-02 09:45:06   
 
- 3 factors completed in 0.103 minutes.     Estimated time of completion: 2022-10-01 18:43:09   
+ 3 factors completed in 0.0761 minutes.     Estimated time of completion: 2022-10-02 09:45:05   
 
- 4 factors completed in 0.135 minutes.     Estimated time of completion: 2022-10-01 18:43:09   
+ 4 factors completed in 0.1 minutes.     Estimated time of completion: 2022-10-02 09:45:05   
 
- 5 factors completed in 0.165 minutes.     Estimated time of completion: 2022-10-01 18:43:09   
+ 5 factors completed in 0.122 minutes.     Estimated time of completion: 2022-10-02 09:45:05   
 
- 6 factors completed in 0.195 minutes.     Estimated time of completion: 2022-10-01 18:43:08   
+ 6 factors completed in 0.144 minutes.     Estimated time of completion: 2022-10-02 09:45:04   
 
- 7 factors completed in 0.226 minutes.     Estimated time of completion: 2022-10-01 18:43:08   
+ 7 factors completed in 0.166 minutes.     Estimated time of completion: 2022-10-02 09:45:04   
 
- 8 factors completed in 0.256 minutes.     Estimated time of completion: 2022-10-01 18:43:08   
+ 8 factors completed in 0.189 minutes.     Estimated time of completion: 2022-10-02 09:45:04   
 
- 9 factors completed in 0.287 minutes.     Estimated time of completion: 2022-10-01 18:43:08   
+ 9 factors completed in 0.211 minutes.     Estimated time of completion: 2022-10-02 09:45:04   
 
- 10 factors completed in 0.317 minutes.     Estimated time of completion: 2022-10-01 18:43:08   
+ 10 factors completed in 0.233 minutes.     Estimated time of completion: 2022-10-02 09:45:04   
 
- 11 factors completed in 0.349 minutes.     Estimated time of completion: 2022-10-01 18:43:08   
+ 11 factors completed in 0.256 minutes.     Estimated time of completion: 2022-10-02 09:45:04   
 
- 12 factors completed in 0.379 minutes.     Estimated time of completion: 2022-10-01 18:43:07   
+ 12 factors completed in 0.278 minutes.     Estimated time of completion: 2022-10-02 09:45:04   
 
- 13 factors completed in 0.409 minutes.     Estimated time of completion: 2022-10-01 18:43:07   </code></pre>
+ 13 factors completed in 0.299 minutes.     Estimated time of completion: 2022-10-02 09:45:04   </code></pre>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="phylofactor.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># saveRDS(PF,&#39;pf-example.rds&#39;)  # save Phylofactor object to .rds file </span></span>
 <span id="cb82-2"><a href="phylofactor.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(tree, tree_ur, Data, X, meta.df) <span class="co">#remove unnecessary objects from R environment</span></span>
 <span id="cb82-3"><a href="phylofactor.html#cb82-3" aria-hidden="true" tabindex="-1"></a></span>
