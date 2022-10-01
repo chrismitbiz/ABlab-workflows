@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-09-28}
+\date{2022-10-01}
 
 \begin{document}
 \maketitle
@@ -2598,10 +2598,12 @@ Explore the Krona plot in your web browser: \href{./krona-file/krona-file.html}{
 \hypertarget{phylofactor}{%
 \chapter{Phylofactor analysis}\label{phylofactor}}
 
+\includegraphics{./img/phylofactor2.png}
+
 \hypertarget{introduction-5}{%
 \section{Introduction}\label{introduction-5}}
 
-In this chapter you will learn how to use one of the main functions from the package phylofactor, as well as analyse and visualise the results.
+In this chapter you will learn how to use one of the main functions from the package phylofactor, as well as analyse and visualise the results. The main aims are to understand more about phylofactor and learn about data manipulation using dplyr and visulisations using ggplot and ggtree.
 
 \href{https://github.com/reptalex/phylofactor}{Phylofactor} is a package developed by \href{https://github.com/reptalex}{Alex Washburne}, a mathematical biologist. It is a compositional analysis tool that `iteratively identifies the most important clades driving variation in the data through their associations with independent variables' (\citet{Washburne2017}). For me, it is a great way to assess clade-specific treatment effects or environmental associations. In combination with other differential abundance analysis methods it helped me to gain confidence in biological interpretations of microbial community associations to environmental metadata or treatments. I also use it to visualise selected identified clades on a phylogenetic tree.
 
@@ -2613,15 +2615,19 @@ You will need a phylogenic tree for this analysis. For example, in chapter \ref{
 
 For this tutorial we will be using the same phyloseq object and apply the \texttt{PhyloFactor} function of the Phylofactor package. This function is used to assess associations of relative abundances with selected metadata, assuming a normal distribution (ILRs are normally distributed). It is basically finding variation in ILRs or balances (which are two groups of abundances delineated by an edge in the tree) that respond to treatments or environmental data.
 
+The visualisations of the trees relies on ggplot (\citet{Wickham2016a}) and ggtree (\citet{Yu2017}).
+
 \hypertarget{prerequisites-and-required-files-1}{%
 \subsection{Prerequisites and required files}\label{prerequisites-and-required-files-1}}
 
 \begin{itemize}
 \tightlist
 \item
+  Some basic skills in manipulating data with the packages\texttt{dplyr}, \texttt{ggplot} and other packages in the \texttt{tidyverse}.\\
+\item
   \href{https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf}{Phylofactor tutorial} read\\
 \item
-  Phylofactor package installed\\
+  All required packages, including phylofactor, installed.\\
 \item
   A \texttt{phyloseq} object that includes a phylogenetic tree; either read in from a pre-saved \texttt{.rds} file or created as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.\\
 \item
@@ -2686,6 +2692,7 @@ Custom functions. Download and add to your working directory:
 \NormalTok{addILRtophyloseq }\OtherTok{\textless{}{-}} \FunctionTok{dget}\NormalTok{(}\StringTok{"./custom{-}functions/addILRtophyloseq.R"}\NormalTok{)}
 
 \DocumentationTok{\#\# ILR\_plotfunction}
+\CommentTok{\#Example on how to use it shown below}
 \NormalTok{ILR\_plotfunction }\OtherTok{\textless{}{-}} \FunctionTok{dget}\NormalTok{(}\StringTok{"./custom{-}functions/ILR\_plotfunction.R"}\NormalTok{)}
 
 \DocumentationTok{\#\# mytreefunctionwithbarplots}
@@ -2839,13 +2846,13 @@ For this example, the explanatory variable \texttt{Location} is used to regress 
         \AttributeTok{stop.early =}\NormalTok{ T, }
         \AttributeTok{transform.fcn=}\NormalTok{log,    }\CommentTok{\# log{-}ratio transform}
         \AttributeTok{KS.Pthreshold =} \FloatTok{0.01}\NormalTok{, }\CommentTok{\# Kolmogorov Smirnov significance level }
-        \AttributeTok{nfactors =} \DecValTok{5}\NormalTok{, }\CommentTok{\# the first 5 phylofactors only {-} in interest of time }
+        \AttributeTok{nfactors =} \DecValTok{13}\NormalTok{, }\CommentTok{\# the first 13 phylofactors only {-} in interest of time }
         \AttributeTok{choice =} \StringTok{"var"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.037 minutes.    Estimated time of completion: 2022-09-28 09:03:52    2 factors completed in 0.0691 minutes.     Estimated time of completion: 2022-09-28 09:03:52    3 factors completed in 0.101 minutes.     Estimated time of completion: 2022-09-28 09:03:51    4 factors completed in 0.133 minutes.     Estimated time of completion: 2022-09-28 09:03:51    5 factors completed in 0.163 minutes.     Estimated time of completion: 2022-09-28 09:03:51   
+##  1 factor completed in 0.0283 minutes.    Estimated time of completion: 2022-10-01 18:11:43    2 factors completed in 0.0508 minutes.     Estimated time of completion: 2022-10-01 18:11:41    3 factors completed in 0.0733 minutes.     Estimated time of completion: 2022-10-01 18:11:40    4 factors completed in 0.096 minutes.     Estimated time of completion: 2022-10-01 18:11:40    5 factors completed in 0.117 minutes.     Estimated time of completion: 2022-10-01 18:11:39    6 factors completed in 0.137 minutes.     Estimated time of completion: 2022-10-01 18:11:39    7 factors completed in 0.158 minutes.     Estimated time of completion: 2022-10-01 18:11:38    8 factors completed in 0.179 minutes.     Estimated time of completion: 2022-10-01 18:11:38    9 factors completed in 0.2 minutes.     Estimated time of completion: 2022-10-01 18:11:38    10 factors completed in 0.22 minutes.     Estimated time of completion: 2022-10-01 18:11:38    11 factors completed in 0.242 minutes.     Estimated time of completion: 2022-10-01 18:11:38    12 factors completed in 0.263 minutes.     Estimated time of completion: 2022-10-01 18:11:38    13 factors completed in 0.283 minutes.     Estimated time of completion: 2022-10-01 18:11:38   
 \end{verbatim}
 
 \begin{Shaded}
@@ -2881,26 +2888,36 @@ Simply run the phylofactor output object (here \texttt{PF}) to get an overview o
 ## Choice                    : var
 ## Formula                   : Data ~ X
 ## Number of species         : 525
-## Number of factors         : 5
-## Frac Explained Variance   : 0.0458
+## Number of factors         : 13
+## Frac Explained Variance   : 0.0976
 ## Largest non-remainder bin : 393
-## Number of singletons      : 4
+## Number of singletons      : 10
 ## Paraphyletic Remainder    : 130 species
 ##                   
 ## -------------------------------------------------------------
 ## Factor Table:
-##                                 Group1                        Group2    ExpVar
-## Factor 1                           tip 524 member Monophyletic clade 0.0103300
-## Factor 2                           tip 523 member Paraphyletic clade 0.0099537
-## Factor 3 393 member Paraphyletic clade 130 member Monophyletic clade 0.0086014
-## Factor 4                           tip 392 member Paraphyletic clade 0.0085960
-## Factor 5                           tip 391 member Paraphyletic clade 0.0082704
-##               F     Pr(>F)
-## Factor 1 66.413 0.0000e+00
-## Factor 2 18.379 3.8480e-12
-## Factor 3 13.627 3.5753e-10
-## Factor 4 16.545 1.9611e-11
-## Factor 5 24.943 2.7978e-14
+##                                  Group1                        Group2    ExpVar
+## Factor 1                            tip 524 member Monophyletic clade 0.0103300
+## Factor 2                            tip 523 member Paraphyletic clade 0.0099537
+## Factor 3  393 member Paraphyletic clade 130 member Monophyletic clade 0.0086014
+## Factor 4                            tip 392 member Paraphyletic clade 0.0085960
+## Factor 5                            tip 391 member Paraphyletic clade 0.0082704
+## Factor 6                            tip 390 member Paraphyletic clade 0.0074320
+## Factor 7                            tip 389 member Paraphyletic clade 0.0071634
+## Factor 8                            tip 388 member Paraphyletic clade 0.0068817
+## Factor 9                            tip 387 member Paraphyletic clade 0.0062989
+## Factor 10                           tip 386 member Paraphyletic clade 0.0062942
+##                 F     Pr(>F)
+## Factor 1  66.4130 0.0000e+00
+## Factor 2  18.3790 3.8480e-12
+## Factor 3  13.6270 3.5753e-10
+## Factor 4  16.5450 1.9611e-11
+## Factor 5  24.9430 2.7978e-14
+## Factor 6  40.3430 0.0000e+00
+## Factor 7  34.4080 1.1102e-16
+## Factor 8  26.0110 1.3989e-14
+## Factor 9  13.2550 5.3516e-10
+## Factor 10  9.6703 4.2019e-08
 \end{verbatim}
 
 \begin{Shaded}
@@ -2913,6 +2930,14 @@ Simply run the phylofactor output object (here \texttt{PF}) to get an overview o
 \CommentTok{\# Factor 3 393 member Paraphyletic clade 130 member Monophyletic clade 0.008601447 13.62745 3.575326e{-}10}
 \CommentTok{\# Factor 4                           tip 392 member Paraphyletic clade 0.008595997 16.54491 1.961098e{-}11}
 \CommentTok{\# Factor 5                           tip 391 member Paraphyletic clade 0.008270358 24.94341 2.797762e{-}14}
+\CommentTok{\# Factor 6                            tip 390 member Paraphyletic clade 0.007431980 40.343182 0.000000e+00}
+\CommentTok{\# Factor 7                            tip 389 member Paraphyletic clade 0.007163353 34.408383 1.110223e{-}16}
+\CommentTok{\# Factor 8                            tip 388 member Paraphyletic clade 0.006881666 26.011227 1.398881e{-}14}
+\CommentTok{\# Factor 9                            tip 387 member Paraphyletic clade 0.006298899 13.254861 5.351608e{-}10}
+\CommentTok{\# Factor 10                           tip 386 member Paraphyletic clade 0.006294165  9.670307 4.201923e{-}08}
+\CommentTok{\# Factor 11   7 member Monophyletic clade 379 member Paraphyletic clade 0.006190757  7.694410 7.482782e{-}07}
+\CommentTok{\# Factor 12                           tip 378 member Paraphyletic clade 0.005834903 49.443443 0.000000e+00}
+\CommentTok{\# Factor 13  14 member Monophyletic clade 364 member Paraphyletic clade 0.005749476 10.785867 9.736689e{-}09}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3007,7 +3032,7 @@ This output shows that the genus \emph{Thermoanaerobaculum} (Phylum Acidobacteri
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# create a summary for a factor}
+\CommentTok{\# create a summary for a factor, this time for factor 3}
 \NormalTok{s }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(PF,taxonomy,}\AttributeTok{factor=}\DecValTok{3}\NormalTok{)}
 \NormalTok{s}
 \end{Highlighting}
@@ -3116,9 +3141,7 @@ I created a custom function \texttt{phyfacsummary} that helped me to create a da
 \CommentTok{\# that was used prior to running PhyloFactor. }
 \CommentTok{\# The number (5 or 4) indicates which \textasciigrave{}choice\textasciigrave{} (\textquotesingle{}var\textquotesingle{} or \textquotesingle{}F\textquotesingle{}) was provided }
 \CommentTok{\# to the PhyloFactor function. Either \textquotesingle{}var\textquotesingle{} (5) or \textquotesingle{}F\textquotesingle{} (4). Just my poor coding here.   }
-
 \NormalTok{PF\_summary }\OtherTok{\textless{}{-}} \FunctionTok{phyfacsummary}\NormalTok{(PF, ps.phylo, }\DecValTok{5}\NormalTok{)  }
-  
 \FunctionTok{head}\NormalTok{(PF\_summary)}
 \end{Highlighting}
 \end{Shaded}
@@ -3184,20 +3207,34 @@ If the explanatory variable is a factor you can compare the ILRs using boxplots.
 ## sa4  foamnofoamcomparison SRX8715151 56.425367 N 9.4527943 E
 ## sa5  foamnofoamcomparison SRX8715150 56.425367 N 9.4527943 E
 ## sa6  foamnofoamcomparison SRX8715149 56.425367 N 9.4527943 E
-##              ReleaseDate  Sample.Name     Location Phylofactor_1 Phylofactor_2
+##              ReleaseDate  Sample.Name     Location Phylofactor.1 Phylofactor.2
 ## sa1 2021-01-01T00:00:00Z 16SAMP-17236  Ejby Moelle    -0.6074442    5.94063684
 ## sa2 2021-01-01T00:00:00Z 16SAMP-17231      Soeholt    -1.1404128    6.12600491
 ## sa3 2021-01-01T00:00:00Z 16SAMP-17233 Esbjerg Vest    -0.7420321    1.56133586
 ## sa4 2021-01-01T00:00:00Z  MQ170915-14       Viborg     5.0713421   -0.63550964
 ## sa5 2021-01-01T00:00:00Z  MQ170915-13       Viborg     5.4619244   -1.09156044
 ## sa6 2021-01-01T00:00:00Z  MQ170915-12       Viborg     5.6013748    0.05169486
-##     Phylofactor_3 Phylofactor_4 Phylofactor_5
-## sa1      3.278522     3.6816103     3.7423730
-## sa2      1.238992    -1.1624380    -1.1654072
-## sa3      3.166636     3.6278741     0.6330391
-## sa4      2.590512    -0.7021602    -0.7039537
-## sa5      4.140900    -1.1982694    -1.2013301
-## sa6      2.871972    -1.2413042    -1.2444748
+##     Phylofactor.3 Phylofactor.4 Phylofactor.5 Phylofactor.6 Phylofactor.7
+## sa1      3.278522     3.6816103     3.7423730     3.8698905     2.7458575
+## sa2      1.238992    -1.1624380    -1.1654072    -1.1683916     0.2420341
+## sa3      3.166636     3.6278741     0.6330391    -0.8095717    -0.8116502
+## sa4      2.590512    -0.7021602    -0.7039537    -0.7057564    -0.7075684
+## sa5      4.140900    -1.1982694    -1.2013301    -1.2044065    -1.2074987
+## sa6      2.871972    -1.2413042    -1.2444748    -1.2476617    -1.2508649
+##     Phylofactor.8 Phylofactor.9 Phylofactor.10 Phylofactor.11 Phylofactor.12
+## sa1     3.1473369     3.5218658     4.53504042      4.2858832      2.8287836
+## sa2    -1.1707730     5.5491698    -0.72811872      1.0431161     -1.1541523
+## sa3     0.8719747    -0.8114947     4.58174994     -2.1378950      2.0158630
+## sa4     3.4297811    -0.7005523    -0.70236488     -0.5835734     -0.7082458
+## sa5     3.1914016    -1.2023855    -1.20549651     -1.0232323      1.2331789
+## sa6     3.7348844    -1.2444628     0.06025997      0.8704741      0.6733841
+##     Phylofactor.13
+## sa1    -0.31245968
+## sa2     2.45252778
+## sa3     0.03305495
+## sa4    -0.86096730
+## sa5    -2.09845816
+## sa6    -0.69080729
 \end{verbatim}
 
 \begin{Shaded}
@@ -3206,10 +3243,12 @@ If the explanatory variable is a factor you can compare the ILRs using boxplots.
   
 \DocumentationTok{\#\# Create plotdata}
 \CommentTok{\# Some vectors to filter and change the appearance of the plot}
-\NormalTok{factorvector }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Phylofactor\_1"}\NormalTok{,}\StringTok{"Phylofactor\_2"}\NormalTok{,}
-                  \StringTok{"Phylofactor\_3"}\NormalTok{,}\StringTok{"Phylofactor\_4"}\NormalTok{)}
+\NormalTok{factorvector }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Phylofactor.1"}\NormalTok{,}\StringTok{"Phylofactor.2"}\NormalTok{,}
+                  \StringTok{"Phylofactor.3"}\NormalTok{,}\StringTok{"Phylofactor.4"}\NormalTok{,}
+                  \StringTok{"Phylofactor.11"}\NormalTok{,}\StringTok{"Phylofactor.13"}\NormalTok{)}
 \NormalTok{labelvec }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"Phylofactor 1"}\NormalTok{,}\StringTok{"Phylofactor 2"}\NormalTok{,}
-              \StringTok{"Phylofactor 3"}\NormalTok{,}\StringTok{"Phylofactor 4"}\NormalTok{)}
+              \StringTok{"Phylofactor 3"}\NormalTok{,}\StringTok{"Phylofactor 4"}\NormalTok{,}
+             \StringTok{"Phylofactor 11"}\NormalTok{,}\StringTok{"Phylofactor 13"}\NormalTok{)}
 \CommentTok{\# rearrange the sample data for plotting}
 \NormalTok{plotdata }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{sample\_data}\NormalTok{(ps.ILR)) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"Phylofactor"}\NormalTok{), }
@@ -3262,14 +3301,14 @@ Here we are using one of the functions from the phylofactor package. It is only 
 
 \includegraphics{gitbook-demo_files/figure-latex/pfviz2-1.pdf}
 
-This highlights that factor 3 represents the biggest group of various genera in this case. The green colour represents Group1 and the uncolored part the remainder group (Group 2 or also called `bin'). From the results of the summary function shown earlier in this Workflow, we can check which taxa are in each of the groups. For example, the uncolored group (Group 2) contains Proteobacteria,Cyanobacteria and Campilobacterota.
+This highlights that factor 3 represents the biggest group of various genera in this case. The purple colour represents Group1 and the uncolored part the remainder group (Group 2 or also called `bin'). From the results of the summary function shown earlier in this Workflow, we can check which taxa are in each of the groups. For example, the uncolored group (Group 2) contains Proteobacteria,Cyanobacteria and Campilobacterota.
 
 The other factors, which represent only 1 genus are not visible in this figure because the pixels are simply too small.
 
 I think representing it as a tree also highlights how one can interpret compositional changes in two ways. For example, one interpretation for Group 1 of factor 3, (green coloured) is that is decreased in the locations Formaes and Slagelse (as indicated in the boxplots). Another interpretation is that Group 2 of factor 3 has increased instead. This is important to consider.
 
-\hypertarget{coloured-tree-with-factors-highlighted-in-grey}{%
-\subsubsection{Coloured tree with factors highlighted in grey}\label{coloured-tree-with-factors-highlighted-in-grey}}
+\hypertarget{coloured-trees-with-factors-highlighted-in-grey}{%
+\subsubsection{Coloured trees with factors highlighted in grey}\label{coloured-trees-with-factors-highlighted-in-grey}}
 
 Maybe some find it useful to identify the phyla directly in the tree and also get a sense of the abundances of individual tips (which are individual genera here). Do do that we can colour edges of the tree to represent their phylum.
 
@@ -3278,19 +3317,14 @@ First, prepare a color vector for the tree. There are different ways to do this 
 \begin{Shaded}
 \begin{Highlighting}[]
 \DocumentationTok{\#\# Create color vector}
-\CommentTok{\# Get a dataframe of phyla, and while we are at it we also count how often they appear}
-\NormalTok{taxa.df.phylum }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{tax\_table}\NormalTok{(ps.phylo)}\SpecialCharTok{@}\NormalTok{.Data }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ as.data.frame }\SpecialCharTok{\%\textgreater{}\%} 
-    \FunctionTok{rownames\_to\_column}\NormalTok{(}\StringTok{"OTUID"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(OTUID, Phylum) }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{column\_to\_rownames}\NormalTok{(}\StringTok{"OTUID"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-    \FunctionTok{count}\NormalTok{(Phylum) }\SpecialCharTok{\%\textgreater{}\%} 
-    \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(n))}
+\CommentTok{\# use custom prevalence table function and select phyloseq object and phylum{-}level}
+\NormalTok{taxa.df.phylum }\OtherTok{\textless{}{-}} \FunctionTok{prevalencedf}\NormalTok{(ps.phylo, Phylum)}
 \CommentTok{\# set seed differently will change the random sampling of the colours}
-\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
 \CommentTok{\# randomly sample colours from this colour scheme}
-\NormalTok{treecols }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(colorspace}\SpecialCharTok{::}\FunctionTok{rainbow\_hcl}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(}\FunctionTok{unique}\NormalTok{(taxa.df.phylum))))}
+\CommentTok{\#treecols \textless{}{-} sample(colorspace::rainbow\_hcl(nrow(unique(taxa.df.phylum))))}
 \CommentTok{\# Other color options}
-\CommentTok{\# treecols \textless{}{-} sample(viridis::turbo(nrow(unique(taxa.df.phylum)), direction = {-}1))}
+\NormalTok{treecols }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(viridis}\SpecialCharTok{::}\FunctionTok{turbo}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(}\FunctionTok{unique}\NormalTok{(taxa.df.phylum)), }\AttributeTok{direction =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{begin =} \DecValTok{0}\NormalTok{, }\AttributeTok{end =} \DecValTok{1}\NormalTok{))}
 \CommentTok{\# treecols \textless{}{-} viridis::rainbow(nrow(unique(taxa.df.phylum)), direction = {-}1)}
 \FunctionTok{names}\NormalTok{(treecols) }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{(taxa.df.phylum}\SpecialCharTok{$}\NormalTok{Phylum)}
 \FunctionTok{rm}\NormalTok{(taxa.df.phylum)}
@@ -3300,13 +3334,18 @@ First, prepare a color vector for the tree. There are different ways to do this 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# Get list of the abundant phyla {-} using the custom function I made available above}
-\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{prevalencedf}\NormalTok{(ps.phylo, Phylum)}
-\CommentTok{\# Choose the 20 most abundant Phyla for the tree}
+\CommentTok{\# Use custom prevalence table function and select phyloseq object and phylum{-}level}
+\NormalTok{taxa.df.phylum }\OtherTok{\textless{}{-}} \FunctionTok{prevalencedf}\NormalTok{(ps.phylo, Phylum)}
+\CommentTok{\# Choose the phyla with highest ASV counts}
 \CommentTok{\# This vector will determine the length and order of the phyla shown in the legend}
 \CommentTok{\# change this to your needs. }
-\NormalTok{ordervec }\OtherTok{\textless{}{-}}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Phylum[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{)]  }
-
+\CommentTok{\# In this case we fiter n \textgreater{} 3 and create a vector of the Phylum column}
+\NormalTok{ordervec }\OtherTok{\textless{}{-}}\NormalTok{ (taxa.df.phylum }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{            dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(n }\SpecialCharTok{\textgreater{}} \DecValTok{3}\NormalTok{))}\SpecialCharTok{$}\NormalTok{Phylum}
+\CommentTok{\# You could also create a custom vector. For example: }
+\CommentTok{\#ordervec \textless{}{-} c("Proteobacteria" ,  "Firmicutes" , "Actinobacteriota",}
+\CommentTok{\#              "Bacteroidota",  "Chloroflexi",  "Acidobacteriota")}
+  
 \DocumentationTok{\#\# Plot the tree}
 \CommentTok{\# setting the variables}
 \NormalTok{layout }\OtherTok{=} \StringTok{"circular"}
@@ -3314,7 +3353,7 @@ First, prepare a color vector for the tree. There are different ways to do this 
 \NormalTok{metadatacolumn }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}Location\textquotesingle{}}
 \NormalTok{offset.text }\OtherTok{=} \DecValTok{5}
 \NormalTok{pwidth }\OtherTok{=} \FloatTok{0.05}
-\NormalTok{factorvector }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\NormalTok{factorvector }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{13}\NormalTok{)  }\CommentTok{\# choose which factors to highlight}
 \CommentTok{\# \textquotesingle{}Copy\textquotesingle{} tree object from the phylofactor object into the phyloseq object for plotting}
 \NormalTok{phyloseq}\SpecialCharTok{::}\FunctionTok{phy\_tree}\NormalTok{(ps.phylo) }\OtherTok{\textless{}{-}}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}
 \CommentTok{\# create long dataframe of metadata and select the columns OTU and Abundance}
@@ -3335,7 +3374,7 @@ First, prepare a color vector for the tree. There are different ways to do this 
 \NormalTok{ggtree\_gps }\OtherTok{\textless{}{-}}\NormalTok{ ggtree}\SpecialCharTok{::}\FunctionTok{groupOTU}\NormalTok{(tree.df, phyla.list, }\StringTok{"Phylum"}\NormalTok{)}
 \CommentTok{\# gg plotting}
 \NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ ggtree}\SpecialCharTok{::}\FunctionTok{ggtree}\NormalTok{(ggtree\_gps, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ Phylum), }\AttributeTok{layout =}\NormalTok{ layout, }
-        \AttributeTok{branch.length =} \StringTok{"none"}\NormalTok{) }\SpecialCharTok{+} 
+        \AttributeTok{branch.length =}\NormalTok{ branch.length) }\SpecialCharTok{+} 
         \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"right"}\NormalTok{) }\SpecialCharTok{+} 
         \FunctionTok{scale\_colour\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ treecols, }\AttributeTok{limits =}\NormalTok{ ordervec, }
         \AttributeTok{breaks =}\NormalTok{ ordervec, }
@@ -3382,26 +3421,37 @@ All the above steps can also be called with the custom function \texttt{mytreefu
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# requires the same ordervector as created above}
-\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{prevalencedf}\NormalTok{(ps.phylo, Phylum)}
-\CommentTok{\# Choose the 20 most abundant Phyla for the tree}
-\CommentTok{\# This vector will determine the length and order of the phyla shown in the legend}
+\CommentTok{\# Use custom prevalence table function and select phyloseq object and phylum{-}level}
 \CommentTok{\# change this to your needs. }
-\NormalTok{ordervec }\OtherTok{\textless{}{-}}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Phylum[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{)]}
+\NormalTok{taxa.df.phylum }\OtherTok{\textless{}{-}} \FunctionTok{prevalencedf}\NormalTok{(ps.phylo, Phylum)}
+\NormalTok{ordervec }\OtherTok{\textless{}{-}}\NormalTok{ (taxa.df.phylum }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{            dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(n }\SpecialCharTok{\textgreater{}} \DecValTok{3}\NormalTok{))}\SpecialCharTok{$}\NormalTok{Phylum}
+\CommentTok{\# If you prefer number of ASVs per each Phylum to be shown in legend:}
+\CommentTok{\# create a label vector to change the names in the legend. Needs to be in correct order. }
+\NormalTok{labelvec }\OtherTok{\textless{}{-}}\NormalTok{ (taxa.df.phylum }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{            dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(n }\SpecialCharTok{\textgreater{}} \DecValTok{3}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+            \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Phylum =} \FunctionTok{paste0}\NormalTok{(Phylum, }\StringTok{" ("}\NormalTok{, n, }\StringTok{")"}\NormalTok{)))}\SpecialCharTok{$}\NormalTok{Phylum}
 \NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{mytreefunctionwithbarplots}\NormalTok{(PF, ps.phylo, }
          \AttributeTok{layout =} \StringTok{"circular"}\NormalTok{,}
          \AttributeTok{branch.length =} \StringTok{"none"}\NormalTok{,}
-         \AttributeTok{factorvector =}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{),}
+         \AttributeTok{factorvector =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{13}\NormalTok{),}
          \AttributeTok{offset.text =} \DecValTok{5}\NormalTok{,}
-         \AttributeTok{pwidth =} \FloatTok{0.05}\NormalTok{)}
+         \AttributeTok{pwidth =} \FloatTok{0.05}\NormalTok{) }\SpecialCharTok{+} 
+          \FunctionTok{scale\_colour\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ treecols, }
+                              \AttributeTok{limits =}\NormalTok{ ordervec,}
+                              \AttributeTok{label =}\NormalTok{ labelvec) }\SpecialCharTok{+}
+    \FunctionTok{guides}\NormalTok{(}\AttributeTok{colour =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{override.aes =} \FunctionTok{list}\NormalTok{(}\AttributeTok{size =} \DecValTok{5}\NormalTok{), }
+                               \AttributeTok{keywidth =} \FloatTok{0.2}\NormalTok{, }
+                                \AttributeTok{keyheight =} \FloatTok{0.2}\NormalTok{))}
 \NormalTok{p}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{gitbook-demo_files/figure-latex/coloredtree-1.pdf}
 
-The locations of phylofactor (PF) 1, 2, 4 and 5 are now indicated by a text label. If you zoom into the image you may also notice a grey shading on the tip of the relevant genus.
+The locations of the selected phylofactors (PF) are now indicated by a text label. If you zoom into the image you may also notice a grey shading on the tip of the relevant genus.
 
-The text label for PF 3 is aligned with the outside `centre' of the grey shaded circle representing Group 1 of this factor.
+The text label for the large PF 3 is aligned with the outside `centre' of the grey shaded circle representing Group 1 of this factor. This is a little confusing here. Ideally this label should go inside the grey shaded area for clarity.
 
 The outside bars indicate abundance of the relevant genus.
 
@@ -3426,25 +3476,26 @@ There are too many colours here and it is difficult to differentiate the differe
 \CommentTok{\# summary(PF,taxonomy,factor=2) \# Chloroflexi;Anaerolineaceae;ADurb.Bin120}
 \CommentTok{\# summary(PF,taxonomy,factor=4) \# Bacteroidota;Rikenellaceae;DMER64 }
 \CommentTok{\# summary(PF,taxonomy,factor=5) \# Fermentibacterota}
+\CommentTok{\#s \textless{}{-} summary(PF,taxonomy,factor=11) \# Actinobacteriota;Propionibacteriaceae}
+\CommentTok{\#s \textless{}{-} summary(PF,taxonomy,factor=13) \# Various Firmicutes}
+\CommentTok{\# s$taxa.split$group1}
 
 \CommentTok{\# create ordervec}
 \NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{prevalencedf}\NormalTok{(ps.phylo, Phylum)}
 \NormalTok{ordervec }\OtherTok{\textless{}{-}}\NormalTok{ (df }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylum }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Proteobacteria"}\NormalTok{, }\StringTok{"Cyanobacteria"}\NormalTok{, }\StringTok{"Campilobacterota"}\NormalTok{, }\StringTok{"WPS{-}2"}\NormalTok{,}
-                              \StringTok{"Acidobacteriota"}\NormalTok{,}\StringTok{"Chloroflexi"}\NormalTok{, }\StringTok{"Bacteroidota"}\NormalTok{, }\StringTok{"Fermentibacterota"}\NormalTok{)))}\SpecialCharTok{$}\NormalTok{Phylum}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylum }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Proteobacteria"}\NormalTok{, }\StringTok{"Firmicutes"}\NormalTok{, }\StringTok{"Cyanobacteria"}\NormalTok{, }
+                              \StringTok{"Campilobacterota"}\NormalTok{,  }\StringTok{"WPS{-}2"}\NormalTok{, }\StringTok{"Acidobacteriota"}\NormalTok{,}
+                              \StringTok{"Actinobacteriota"}\NormalTok{, }\StringTok{"Chloroflexi"}\NormalTok{, }\StringTok{"Bacteroidota"}\NormalTok{, }\StringTok{"Fermentibacterota"}\NormalTok{)))}\SpecialCharTok{$}\NormalTok{Phylum}
 \CommentTok{\# plot tree}
 \CommentTok{\# Requires a vector called \textquotesingle{}treecols\textquotesingle{}}
 \NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{mytreefunctionwithbarplots}\NormalTok{(PF, ps.phylo, }
          \AttributeTok{layout =} \StringTok{"circular"}\NormalTok{,}
          \AttributeTok{branch.length =} \StringTok{"none"}\NormalTok{,}
-         \AttributeTok{factorvector =}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{),}
+         \AttributeTok{factorvector =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{13}\NormalTok{),}
          \AttributeTok{offset.text =} \DecValTok{5}\NormalTok{,}
          \AttributeTok{pwidth =} \FloatTok{0.05}\NormalTok{)}
-\NormalTok{p}
 \end{Highlighting}
 \end{Shaded}
-
-\includegraphics{gitbook-demo_files/figure-latex/coloredtree2-1.pdf}
 
 And maybe manually add family or genus names of important factors to the figure too:
 
@@ -3453,7 +3504,8 @@ And maybe manually add family or genus names of important factors to the figure 
 \CommentTok{\# A small df to map the factors and groups}
 \NormalTok{factor.map }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Phylofactor =} \DecValTok{1}\SpecialCharTok{:}\NormalTok{PF}\SpecialCharTok{$}\NormalTok{nfactors, }\AttributeTok{group =} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, PF}\SpecialCharTok{$}\NormalTok{nfactors))}
 \CommentTok{\# Then get tip labels of selected factors and groups and use as index to the \# taxonomy to get taxon names}
-\CommentTok{\# Create a df of taxa names for annotation}
+\CommentTok{\# Create a df of taxa names for annotation {-} make sure that each taxon appears only once}
+\CommentTok{\# here the aim is to show the first common taxon level for each phylofactor}
 \NormalTok{tax.names }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{( }\AttributeTok{Taxa =} \FunctionTok{c}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{tax\_table}\NormalTok{(ps.phylo))[PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label}
 \NormalTok{                           [PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]]][[factor.map[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{]]]],]}\SpecialCharTok{$}\NormalTok{Genus,}
                            \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{tax\_table}\NormalTok{(ps.phylo))[PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label}
@@ -3461,7 +3513,10 @@ And maybe manually add family or genus names of important factors to the figure 
                            \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{tax\_table}\NormalTok{(ps.phylo))[PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label}
 \NormalTok{                           [PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{]]][[factor.map[}\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{]]]],]}\SpecialCharTok{$}\NormalTok{Family,}
                            \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{tax\_table}\NormalTok{(ps.phylo))[PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label}
-\NormalTok{                           [PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[}\DecValTok{5}\NormalTok{,}\DecValTok{1}\NormalTok{]]][[factor.map[}\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{]]]],]}\SpecialCharTok{$}\NormalTok{Genus) )}
+\NormalTok{                           [PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[}\DecValTok{5}\NormalTok{,}\DecValTok{1}\NormalTok{]]][[factor.map[}\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{]]]],]}\SpecialCharTok{$}\NormalTok{Genus,}
+                           \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{tax\_table}\NormalTok{(ps.phylo))[PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label}
+\NormalTok{                           [PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[}\DecValTok{11}\NormalTok{,}\DecValTok{1}\NormalTok{]]][[factor.map[}\DecValTok{11}\NormalTok{, }\DecValTok{2}\NormalTok{]]]],]}\SpecialCharTok{$}\NormalTok{Family) ) }\SpecialCharTok{\%\textgreater{}\%} 
+                      \FunctionTok{unique}\NormalTok{()}
 \CommentTok{\# get node labels and add to factor.map}
 \NormalTok{m }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(factor.map)}
 \NormalTok{nd }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
@@ -3498,9 +3553,9 @@ And maybe manually add family or genus names of important factors to the figure 
                  \AttributeTok{parse =} \ConstantTok{TRUE}\NormalTok{)}
 
 \NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+} \FunctionTok{geom\_cladelabel}\NormalTok{(}\AttributeTok{node =} 
-\NormalTok{                 (factor.map }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{==} \DecValTok{5}\NormalTok{))}\SpecialCharTok{$}\NormalTok{node, }
+\NormalTok{                 (factor.map }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Phylofactor }\SpecialCharTok{==} \DecValTok{11}\NormalTok{))}\SpecialCharTok{$}\NormalTok{node, }
                  \AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}italic(\textquotesingle{}}\NormalTok{, tax.names[}\DecValTok{4}\NormalTok{,],}\StringTok{\textquotesingle{})\textquotesingle{}}\NormalTok{), }
-                 \AttributeTok{offset.text =} \DecValTok{20}\NormalTok{, }
+                 \AttributeTok{offset.text =} \DecValTok{10}\NormalTok{, }
                  \AttributeTok{hjust =} \StringTok{"center"}\NormalTok{,}
                  \AttributeTok{fontsize =} \DecValTok{3}\NormalTok{,}
                  \AttributeTok{parse =} \ConstantTok{TRUE}\NormalTok{)}
@@ -3511,6 +3566,112 @@ And maybe manually add family or genus names of important factors to the figure 
 \includegraphics{gitbook-demo_files/figure-latex/coloredtree3-1.pdf}
 
 Now its a little easier to identify the who is who. This is just another way to explore your phylogeny and how they relate to the phylofactors.
+
+\hypertarget{black-tree-with-factors-highlighted-in-colour}{%
+\subsubsection{Black tree with factors highlighted in colour}\label{black-tree-with-factors-highlighted-in-colour}}
+
+Alternatively highlight only the factors and explore the taxonomy represented by them in separate plots.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{layout }\OtherTok{=} \StringTok{"circular"}
+\NormalTok{factor.map }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{PF=}\DecValTok{1}\SpecialCharTok{:}\NormalTok{PF}\SpecialCharTok{$}\NormalTok{nfactors, }
+                        \AttributeTok{group =} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, PF}\SpecialCharTok{$}\NormalTok{nfactors),}
+                        \AttributeTok{Phylofactor =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"Phylofactor."}\NormalTok{,}\DecValTok{1}\SpecialCharTok{:}\NormalTok{PF}\SpecialCharTok{$}\NormalTok{nfactors))}
+\CommentTok{\# Use this colour vector for the factor highlights and the boxplots}
+\NormalTok{cols }\OtherTok{\textless{}{-}}\NormalTok{ viridis}\SpecialCharTok{::}\FunctionTok{viridis}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(factor.map), }\AttributeTok{direction =} \DecValTok{1}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(cols) }\OtherTok{\textless{}{-}}\NormalTok{ factor.map}\SpecialCharTok{$}\NormalTok{Phylofactor}
+
+\NormalTok{m }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(factor.map)}
+\NormalTok{n }\OtherTok{=}\NormalTok{ ape}\SpecialCharTok{::}\FunctionTok{Ntip}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree)}
+\NormalTok{nd }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{m) \{}
+\NormalTok{  grp }\OtherTok{\textless{}{-}}\NormalTok{ PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label[PF}\SpecialCharTok{$}\NormalTok{groups[[factor.map[i,}\DecValTok{1}\NormalTok{]]][[factor.map[i,}\DecValTok{2}\NormalTok{]]]]}
+\NormalTok{  grp }\OtherTok{\textless{}{-}} \FunctionTok{intersect}\NormalTok{(grp, PF}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{tip.label)}
+\NormalTok{  nd }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(nd, tidytree}\SpecialCharTok{::}\FunctionTok{MRCA}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree, grp))}
+\NormalTok{\}}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(factor.map, }\AttributeTok{node =}\NormalTok{ nd)}
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{Phylofactor }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Phylofactor, }
+                         \AttributeTok{levels =}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Phylofactor)}
+\NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ ggtree}\SpecialCharTok{::}\FunctionTok{ggtree}\NormalTok{(PF}\SpecialCharTok{$}\NormalTok{tree,}
+                    \AttributeTok{layout=}\NormalTok{layout, }
+                    \FunctionTok{aes}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.3}\NormalTok{)) }\SpecialCharTok{+}
+\NormalTok{  ggtree}\SpecialCharTok{::}\FunctionTok{geom\_hilight}\NormalTok{(}\AttributeTok{data =}\NormalTok{ df, }
+                    \FunctionTok{aes}\NormalTok{(}\AttributeTok{node =}\NormalTok{ node, }
+                    \AttributeTok{fill =}\NormalTok{ Phylofactor)) }\SpecialCharTok{+} 
+      \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cols,}
+                    \AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Phylofactor.3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Phylofactor.11\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Phylofactor.13\textquotesingle{}}\NormalTok{),}
+                    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Phylofactor 3\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}Phylofactor 11\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}Phylofactor 13\textquotesingle{}}\NormalTok{) ) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.title =} \FunctionTok{element\_blank}\NormalTok{(), }
+        \AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{alpha =} \StringTok{"none"}\NormalTok{)}
+\NormalTok{p}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/colouredtree4-1.pdf}
+
+Combine the tree with boxplots to show the differences in abundances.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Use the custom addILRtophyloseq function and create a new phyloseq object with }
+\CommentTok{\# added ILR results in the sample\_data (for plotting)}
+\NormalTok{ps.ILR }\OtherTok{\textless{}{-}} \FunctionTok{addILRtophyloseq}\NormalTok{(ps.phylo, PF)}
+\NormalTok{p.ILR }\OtherTok{\textless{}{-}} \FunctionTok{ILR\_plotfunction}\NormalTok{(ps.ILR,}
+                \AttributeTok{factorvector =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Phylofactor.3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Phylofactor.11\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Phylofactor.13\textquotesingle{}}\NormalTok{),  }\CommentTok{\# choose factors }
+                \AttributeTok{explanatory =} \StringTok{"Location"}\NormalTok{,  }\CommentTok{\# metadata used in model}
+                \AttributeTok{labelvec =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Phylofactor 3\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}Phylofactor 11\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}Phylofactor 13\textquotesingle{}}\NormalTok{),}
+                \AttributeTok{ncol =} \DecValTok{2}\NormalTok{)  }\SpecialCharTok{+} \CommentTok{\# of the facets (if more than one facet) }
+          \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cols)}
+\CommentTok{\# Combine plots}
+\NormalTok{ggpubr}\SpecialCharTok{::}\FunctionTok{ggarrange}\NormalTok{(p, p.ILR, }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/ILRplotcombined-1.pdf}
+
+Perhaps you want to see the relative abundances of group 1 in Phylofactor 3 (The purple colored clades). To do that you will need to filter all ASVs that are represented by Group1 in Phylofactor 3 and then create a plot for them separately.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create summary for factor 3}
+\NormalTok{s }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(PF,taxonomy,}\AttributeTok{factor=}\DecValTok{3}\NormalTok{) }
+\CommentTok{\# extract ASV IDs for group 1}
+\NormalTok{s.ids }\OtherTok{\textless{}{-}}\NormalTok{ s}\SpecialCharTok{$}\NormalTok{species.list}\SpecialCharTok{$}\NormalTok{Group1}
+\CommentTok{\# subset ps object}
+\NormalTok{my\_subset }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(}\FunctionTok{otu\_table}\NormalTok{(ps.phylo), }\FunctionTok{rownames}\NormalTok{(}\FunctionTok{otu\_table}\NormalTok{(ps.phylo)) }\SpecialCharTok{\%in\%}\NormalTok{ s.ids)}
+\NormalTok{new\_physeq }\OtherTok{\textless{}{-}} \FunctionTok{merge\_phyloseq}\NormalTok{(my\_subset, }\FunctionTok{tax\_table}\NormalTok{(ps.phylo), }\FunctionTok{sample\_data}\NormalTok{(ps.phylo))}
+\CommentTok{\# Use custom function to get prevalance table on Phylum level}
+\NormalTok{plotdata }\OtherTok{\textless{}{-}} \FunctionTok{prevalencedf}\NormalTok{(new\_physeq, Phylum)}
+\NormalTok{plotdata}\SpecialCharTok{$}\NormalTok{Phylum }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(plotdata}\SpecialCharTok{$}\NormalTok{Phylum, }\AttributeTok{levels =}\NormalTok{ plotdata}\SpecialCharTok{$}\NormalTok{Phylum)}
+\CommentTok{\# create the order vectors, determining the Phyla names present in legend and their order}
+\NormalTok{ordervec }\OtherTok{\textless{}{-}}\NormalTok{ (plotdata }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(n }\SpecialCharTok{\textgreater{}} \DecValTok{2}\NormalTok{))}\SpecialCharTok{$}\NormalTok{Phylum }
+\CommentTok{\# Legend labels, has to be same length as ordervec}
+\NormalTok{labelvec }\OtherTok{\textless{}{-}}\NormalTok{ (plotdata }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{            dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(n }\SpecialCharTok{\textgreater{}} \DecValTok{2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+            \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Phylum =} \FunctionTok{paste0}\NormalTok{(Phylum, }\StringTok{" ("}\NormalTok{, n, }\StringTok{")"}\NormalTok{)))}\SpecialCharTok{$}\NormalTok{Phylum}
+\CommentTok{\# colors from the tree colours {-} to align with tree figure if necessary}
+\NormalTok{p.pf3 }\OtherTok{\textless{}{-}}\NormalTok{ plotdata }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  ggpubr}\SpecialCharTok{::}\FunctionTok{ggpie}\NormalTok{(}\StringTok{"n"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"Phylum"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ treecols, }
+                    \AttributeTok{breaks =}\NormalTok{ ordervec,}
+                    \AttributeTok{labels =}\NormalTok{ labelvec) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x=}\FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{legend.position =} \StringTok{"right"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{ncol =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Phylofactor 3 (Group 1)"}\NormalTok{, }\AttributeTok{subtitle =} \StringTok{"Number of Genera"}\NormalTok{) }
+
+
+\CommentTok{\# Combine plots}
+\NormalTok{ggpubr}\SpecialCharTok{::}\FunctionTok{ggarrange}\NormalTok{(}\FunctionTok{ggarrange}\NormalTok{(p, p.ILR, }\AttributeTok{nrow =} \DecValTok{1}\NormalTok{),}
+\NormalTok{                  p.pf3, }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{gitbook-demo_files/figure-latex/taxafiltering-1.pdf}
+
+Hopefully, this was helpful. Please send me any comments on the discussion section of the \href{https://github.com/chrismitbiz/ABlab-workflows/discussions/}{GitHub repository} for this GitBook. You will need to get a GitHub account to join the discussion. Its free.
 
   \bibliography{book.bib,packages.bib}
 

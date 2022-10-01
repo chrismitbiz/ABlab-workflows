@@ -8,7 +8,7 @@ function(ps.ILR,
 # Extract plot data and pivot longer by ILR factors
 plotdata <- data.frame(sample_data(ps.ILR)) %>%
   pivot_longer(cols = starts_with("Phylofactor"), names_to = "ILR")
-# Make ILRs levelled factors so they appear in right order
+# Make ILRs leveled factors so they appear in right order
 plotdata$ILR <- factor(plotdata$ILR, levels = plotdata[1:PF$nfactors,]$ILR)
 # Create colours (same as the pylofactors above) and name color vector by ILR name
 # the name of the vector are required so ggpolot automatically allocated each colour to the right ILR

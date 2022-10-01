@@ -8,14 +8,19 @@ phyfacsummary <- function(phylofactorfile, phyloseqobject, Var_or_F) {
   datalist = list()
   factornumber <- nrow(phylofactorfile$factors)
   taxadf <- as.data.frame(tax_table(phyloseqobject)@.Data)
-  taxadf <- unite(taxadf, taxonomy, sep = ";", remove = TRUE, na.rm = FALSE) %>% rownames_to_column("OTU")
-  otudf <- data.frame(Abundance = rowSums(as.data.frame(otu_table(phyloseqobject)@.Data))) %>% rownames_to_column("OTU")
+  taxadf <- unite(taxadf, taxonomy, sep = ";", remove = TRUE, na.rm = FALSE) %>%
+    rownames_to_column("OTU")
+  otudf <- data.frame(Abundance = rowSums(as.data.frame(otu_table(phyloseqobject)@.Data))) %>%
+    rownames_to_column("OTU")
+
   for (i in 1:factornumber) {
     smry <- phylofactor::pf.summary(phylofactorfile, taxadf,  factor=i)
     td <- phylofactor::pf.tidy(smry)
-    factorsgroup <- data.frame(smry$group1) %>% dplyr::select(IDs.otuIDs,IDs.TaxaIDs) %>% 
-      dplyr::rename(OTU = IDs.otuIDs) %>% dplyr::rename(Taxa_ID = IDs.TaxaIDs) %>% 
-      mutate(Phylofactor = i) %>% 
+    factorsgroup <- data.frame(smry$group1) %>%
+      dplyr::select(IDs.otuIDs,IDs.TaxaIDs) %>%
+      dplyr::rename(OTU = IDs.otuIDs) %>%
+      dplyr::rename(Taxa_ID = IDs.TaxaIDs) %>%
+      mutate(Phylofactor = i) %>%
       mutate('Pr(>F)' = phylofactorfile$factors[[i,Var_or_F]] )
       ncoefs <- nrow(data.frame(td$Coefficients))
         for(c in 1:ncoefs) {                                   # Head of for-loop
@@ -25,8 +30,8 @@ phyfacsummary <- function(phylofactorfile, phyloseqobject, Var_or_F) {
           }
   datalist[[i]] <- factorsgroup
   }
-  
-phylofactorsummary <- dplyr::bind_rows(datalist) 
+
+phylofactorsummary <- dplyr::bind_rows(datalist)
   phylofactorsummary$`Pr(>F)adj.` <- p.adjust(phylofactorsummary$`Pr(>F)`, "fdr")
   return(phylofactorsummary %>% left_join(otudf, by = "OTU") %>% as_tibble() %>% separate(Taxa_ID, sep=";", c("Kingdom","Phylum","Class","Order","Family","Genus","Species")))
 }

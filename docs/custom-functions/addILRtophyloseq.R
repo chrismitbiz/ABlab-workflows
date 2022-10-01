@@ -15,7 +15,7 @@ function(phyloseqobject, phylofactorobject) {
     smry <- phylofactor::pf.summary(phylofactorobject, taxadf,  factor=i)
     ilr.df <- data.frame(mean.ilr = smry$ilr) %>% rownames_to_column("OTU_ID")
     meta.df <- meta.df %>% left_join(ilr.df, by = "OTU_ID")
-    names(meta.df)[ncol(meta.df)] <- paste0("Phylofactor_", i)
+    names(meta.df)[ncol(meta.df)] <- paste0("Phylofactor ", i)
   }
   # re-import metadata into phyloseq object
   phyloseqobject@sam_data <- phyloseq::sample_data(meta.df)
