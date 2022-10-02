@@ -340,7 +340,7 @@ This visualises the taxa relative abundances (represented by the ILR or balances
   
 In the next part we will visualise how the taxa relate to other clades in the phylogenetic tree.  
   
-#### Basic tree with factors highlighted   
+#### Basic tree with factors highlighted in colour   
   
 Here we are using one of the functions from the phylofactor package. It is only one of several and I encourage you to check out the [phylofactor tutorial](https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf) to explore other visualisation, including heatmaps etc..  
   
@@ -353,7 +353,7 @@ This highlights that factor 3 represents the biggest group of various genera in 
   
 The other factors, which represent only 1 genus are not visible in this figure because the pixels are simply too small. 
    
-I think representing it as a tree also highlights how one can interpret compositional changes in two ways. For example, one interpretation for Group 1 of factor 3, (green coloured) is that is decreased in the locations Formaes and Slagelse (as indicated in the boxplots). Another interpretation is that  Group 2 of factor 3 has increased instead. This is important to consider.  
+I think representing it as a tree also highlights how one can interpret compositional changes in two ways. For example, one interpretation for Group 1 of factor 3, (purple coloured) is that is decreased in the locations Formaes and Slagelse (as indicated in the boxplots). Another interpretation is that  Group 2 of factor 3 has increased instead. This is important to consider.  
   
 #### Coloured trees with factors highlighted in grey  
   
@@ -590,7 +590,7 @@ p
   
 Now its a little easier to identify the who is who. This is just another way to explore your phylogeny and how they relate to the phylofactors.   
   
-#### Black tree with factors highlighted in colour  
+#### Basic tree with factors highlighted in colour v.02  
   
 Alternatively highlight only the factors and explore the taxonomy represented by them in separate plots.  
   
