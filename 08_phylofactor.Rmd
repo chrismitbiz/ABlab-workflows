@@ -644,7 +644,7 @@ p.ILR <- ILR_plotfunction(ps.ILR,
 ggpubr::ggarrange(p, p.ILR, ncol = 2)
 ```
   
-Perhaps you want to see the relative abundances of group 1 in Phylofactor 3 (The purple colored clades). To do that you will need to filter all ASVs that are represented by Group1 in Phylofactor 3 and then create a plot for them separately. 
+Additionally you may want to see the number of genera in the phylofactor of group 1 in Phylofactor 3 (The purple colored clades). To do that you will need to filter all ASVs that are represented by Group1 in Phylofactor 3 and then create a plot for them separately. 
 ```{r taxafiltering, warning=FALSE, message=FALSE, fig.asp=1, fig.width=8}
 # Create summary for factor 3
 s <- summary(PF,taxonomy,factor=3) 
