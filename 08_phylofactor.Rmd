@@ -224,13 +224,9 @@ PF # showing the output of the first 10 factors
 # Factor 13  14 member Monophyletic clade 364 member Paraphyletic clade 0.005749476 10.785867 9.736689e-09
 ```
   
-In this case there are five factors. Factor 1,2, 4 and 5 are only one genus each. Factor 3 contains 393 genera in group 1.  
+In this case there are 13 factors. Most factors are one tip-level (genus-level because we agglomerated abundance to this this taxon-level). Factor 3 contains 393 genera in group 1 and 130 genera in the remaining group (Group 2). Factor 11 and 13 also contain multiple genera in Group 1. Importantly, the ILRs/balances that became factors after Factor 3 are based only on abundances in the large Group 1  of Factor 3. Hence the balances of Factor 11, for example, can be seen as a sub-balance of Factor 3. The balance of Group 1 and 2 of Factor 11 are within Group 1 of Factor 3. This will become clearer once we visualise this.  
   
-Group 1 contains the ASVs/taxa with abundances that are different to the remainder (Group 2).  
-  
-This can be interpreted as following: For example, the abundances of the genus represented by factor 1 are significantly different among the locations of wastewater treatment plants. Factor 1 also explains most of the variation and has the highest F value, indicating its significance.  
-  
-The next factors, factor 2, factor 3 etc, were selected by the algorithm from the remainder edges (excluding factor 1, and then excluding factor 2 etc..). 
+Group 1 contains the ASVs/taxa with abundances that are different to the remainder (Group 2). This can be interpreted as following: For example, the abundances of the genus represented by factor 1 are significantly different among the locations of wastewater treatment plants. Factor 1 also explains most of the variation and has the highest F value, indicating its significance.  
   
 From this output we cannot tell which taxa are involved and in which locations the taxa have low or higher abundances, i.e. how different they are (+ or -) among the locations.  
   

@@ -488,31 +488,31 @@ div.csl-indent {
 <span id="cb80-8"><a href="phylofactor.html#cb80-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">nfactors =</span> <span class="dv">13</span>, <span class="co"># the first 13 phylofactors only - in interest of time </span></span>
 <span id="cb80-9"><a href="phylofactor.html#cb80-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>)</span></code></pre></div>
 <pre><code>## 
- 1 factor completed in 0.0258 minutes.    Estimated time of completion: 2022-10-02 10:05:45   
+ 1 factor completed in 0.0376 minutes.    Estimated time of completion: 2022-10-02 11:22:21   
 
- 2 factors completed in 0.0484 minutes.     Estimated time of completion: 2022-10-02 10:05:44   
+ 2 factors completed in 0.07 minutes.     Estimated time of completion: 2022-10-02 11:22:19   
 
- 3 factors completed in 0.0708 minutes.     Estimated time of completion: 2022-10-02 10:05:43   
+ 3 factors completed in 0.102 minutes.     Estimated time of completion: 2022-10-02 11:22:18   
 
- 4 factors completed in 0.094 minutes.     Estimated time of completion: 2022-10-02 10:05:43   
+ 4 factors completed in 0.134 minutes.     Estimated time of completion: 2022-10-02 11:22:18   
 
- 5 factors completed in 0.115 minutes.     Estimated time of completion: 2022-10-02 10:05:43   
+ 5 factors completed in 0.165 minutes.     Estimated time of completion: 2022-10-02 11:22:18   
 
- 6 factors completed in 0.136 minutes.     Estimated time of completion: 2022-10-02 10:05:42   
+ 6 factors completed in 0.195 minutes.     Estimated time of completion: 2022-10-02 11:22:17   
 
- 7 factors completed in 0.157 minutes.     Estimated time of completion: 2022-10-02 10:05:42   
+ 7 factors completed in 0.226 minutes.     Estimated time of completion: 2022-10-02 11:22:17   
 
- 8 factors completed in 0.179 minutes.     Estimated time of completion: 2022-10-02 10:05:42   
+ 8 factors completed in 0.256 minutes.     Estimated time of completion: 2022-10-02 11:22:17   
 
- 9 factors completed in 0.2 minutes.     Estimated time of completion: 2022-10-02 10:05:42   
+ 9 factors completed in 0.287 minutes.     Estimated time of completion: 2022-10-02 11:22:17   
 
- 10 factors completed in 0.221 minutes.     Estimated time of completion: 2022-10-02 10:05:42   
+ 10 factors completed in 0.317 minutes.     Estimated time of completion: 2022-10-02 11:22:17   
 
- 11 factors completed in 0.243 minutes.     Estimated time of completion: 2022-10-02 10:05:42   
+ 11 factors completed in 0.349 minutes.     Estimated time of completion: 2022-10-02 11:22:17   
 
- 12 factors completed in 0.265 minutes.     Estimated time of completion: 2022-10-02 10:05:42   
+ 12 factors completed in 0.379 minutes.     Estimated time of completion: 2022-10-02 11:22:16   
 
- 13 factors completed in 0.286 minutes.     Estimated time of completion: 2022-10-02 10:05:42   </code></pre>
+ 13 factors completed in 0.41 minutes.     Estimated time of completion: 2022-10-02 11:22:16   </code></pre>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="phylofactor.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># saveRDS(PF,&#39;pf-example.rds&#39;)  # save Phylofactor object to .rds file </span></span>
 <span id="cb82-2"><a href="phylofactor.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(tree, tree_ur, Data, X, meta.df) <span class="co">#remove unnecessary objects from R environment</span></span>
 <span id="cb82-3"><a href="phylofactor.html#cb82-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -580,10 +580,8 @@ div.csl-indent {
 <span id="cb85-14"><a href="phylofactor.html#cb85-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Factor 11   7 member Monophyletic clade 379 member Paraphyletic clade 0.006190757  7.694410 7.482782e-07</span></span>
 <span id="cb85-15"><a href="phylofactor.html#cb85-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Factor 12                           tip 378 member Paraphyletic clade 0.005834903 49.443443 0.000000e+00</span></span>
 <span id="cb85-16"><a href="phylofactor.html#cb85-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Factor 13  14 member Monophyletic clade 364 member Paraphyletic clade 0.005749476 10.785867 9.736689e-09</span></span></code></pre></div>
-<p>In this case there are five factors. Factor 1,2, 4 and 5 are only one genus each. Factor 3 contains 393 genera in group 1.</p>
-<p>Group 1 contains the ASVs/taxa with abundances that are different to the remainder (Group 2).</p>
-<p>This can be interpreted as following: For example, the abundances of the genus represented by factor 1 are significantly different among the locations of wastewater treatment plants. Factor 1 also explains most of the variation and has the highest F value, indicating its significance.</p>
-<p>The next factors, factor 2, factor 3 etc, were selected by the algorithm from the remainder edges (excluding factor 1, and then excluding factor 2 etc..).</p>
+<p>In this case there are 13 factors. Most factors are one tip-level (genus-level because we agglomerated abundance to this this taxon-level). Factor 3 contains 393 genera in group 1 and 130 genera in the remaining group (Group 2). Factor 11 and 13 also contain multiple genera in Group 1. Importantly, the ILRs/balances that became factors after Factor 3 are based only on abundances in the large Group 1 of Factor 3. Hence the balances of Factor 11, for example, can be seen as a sub-balance of Factor 3. The balance of Group 1 and 2 of Factor 11 are within Group 1 of Factor 3. This will become clearer once we visualise this.</p>
+<p>Group 1 contains the ASVs/taxa with abundances that are different to the remainder (Group 2). This can be interpreted as following: For example, the abundances of the genus represented by factor 1 are significantly different among the locations of wastewater treatment plants. Factor 1 also explains most of the variation and has the highest F value, indicating its significance.</p>
 <p>From this output we cannot tell which taxa are involved and in which locations the taxa have low or higher abundances, i.e. how different they are (+ or -) among the locations.</p>
 <p>To look at the ASVs/taxa we require other functions and also create a taxonomy object:</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="phylofactor.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Taxa summaries</span></span>
