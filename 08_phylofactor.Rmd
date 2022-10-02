@@ -256,7 +256,7 @@ s
 s$taxa.split
 ```
   
-The default for `summary`, provided a taxonomy object, is to find the shortest-unique-prefix labels for each species in each group. For example, there are no Proteobacteria or Firmicutes in Group 1.  
+The default for `summary`, provided a taxonomy object, is to find the shortest-unique-prefix labels for each species in each group. For example, there are no Proteobacteria, Cyanobacteria or Campilobacteria in Group 1.  
   
 The summary objects contains other useful data, including all ASVs IDs or the ILRs for each group, which may become handy if you wanted to do some custom filtering and figures of your taxonomy.  
   
@@ -494,7 +494,7 @@ The text label for the large PF 3 is aligned with the outside 'centre' of the gr
   
 The outside bars indicate abundance of the relevant genus.  
   
-There are too many colours here and it is difficult to differentiate the different phyla. One solution for that is to create custom colours and order the legend in order of appearance of the phyla (using the `ordervec` vector). Alternatively, you can just add colour for selected phyla that you want to highlight (again using the `ordervec` vector). For example, from the summary results above we may want to highlight only the phyla in Group 2 of factor 3 (the remainder bin from Factor 3) and perhaps include the phyla from PF 1, 2, 4 and 5.  
+There are too many colours here and it is difficult to differentiate the different phyla. One solution for that is to create custom colours and order the legend in order of appearance of the phyla (using the `ordervec` vector). Alternatively, you can just add colour for selected phyla that you want to highlight (again using the `ordervec` vector). For example, from the summary results above we may want to highlight only the phyla that were part of the phylofactors. And perhaps include the phyla in Group 2 of factor 3 (the remainder bin from Factor 3).  
   
 ```{r coloredtree2, echo=TRUE, message=FALSE, warning=FALSE, fig.asp=0.8, fig.width=10}
 # check which phyla to highlight in tree
@@ -594,7 +594,7 @@ Now its a little easier to identify the who is who. This is just another way to 
   
 Alternatively highlight only the factors and explore the taxonomy represented by them in separate plots.  
   
-```{r colouredtree4, echo=TRUE, message=FALSE}
+```{r blacktree4, echo=TRUE, message=FALSE}
 layout = "circular"
 factor.map = data.frame(PF=1:PF$nfactors, 
                         group = rep(1, PF$nfactors),

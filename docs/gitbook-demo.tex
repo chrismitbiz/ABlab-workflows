@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-10-02}
+\date{2022-10-03}
 
 \begin{document}
 \maketitle
@@ -2855,7 +2855,7 @@ Here, we run the \texttt{PhyloFactor} function with \texttt{choice\ =\ "var"}.
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0376 minutes.    Estimated time of completion: 2022-10-02 17:43:29    2 factors completed in 0.0695 minutes.     Estimated time of completion: 2022-10-02 17:43:26    3 factors completed in 0.102 minutes.     Estimated time of completion: 2022-10-02 17:43:26    4 factors completed in 0.134 minutes.     Estimated time of completion: 2022-10-02 17:43:25    5 factors completed in 0.164 minutes.     Estimated time of completion: 2022-10-02 17:43:25    6 factors completed in 0.195 minutes.     Estimated time of completion: 2022-10-02 17:43:25    7 factors completed in 0.226 minutes.     Estimated time of completion: 2022-10-02 17:43:24    8 factors completed in 0.258 minutes.     Estimated time of completion: 2022-10-02 17:43:24    9 factors completed in 0.294 minutes.     Estimated time of completion: 2022-10-02 17:43:25    10 factors completed in 0.327 minutes.     Estimated time of completion: 2022-10-02 17:43:25    11 factors completed in 0.361 minutes.     Estimated time of completion: 2022-10-02 17:43:25    12 factors completed in 0.394 minutes.     Estimated time of completion: 2022-10-02 17:43:25    13 factors completed in 0.427 minutes.     Estimated time of completion: 2022-10-02 17:43:25   
+##  1 factor completed in 0.027 minutes.    Estimated time of completion: 2022-10-03 06:37:44    2 factors completed in 0.0491 minutes.     Estimated time of completion: 2022-10-03 06:37:43    3 factors completed in 0.0722 minutes.     Estimated time of completion: 2022-10-03 06:37:42    4 factors completed in 0.0952 minutes.     Estimated time of completion: 2022-10-03 06:37:42    5 factors completed in 0.116 minutes.     Estimated time of completion: 2022-10-03 06:37:41    6 factors completed in 0.136 minutes.     Estimated time of completion: 2022-10-03 06:37:41    7 factors completed in 0.158 minutes.     Estimated time of completion: 2022-10-03 06:37:41    8 factors completed in 0.179 minutes.     Estimated time of completion: 2022-10-03 06:37:41    9 factors completed in 0.2 minutes.     Estimated time of completion: 2022-10-03 06:37:41    10 factors completed in 0.222 minutes.     Estimated time of completion: 2022-10-03 06:37:41    11 factors completed in 0.244 minutes.     Estimated time of completion: 2022-10-03 06:37:41    12 factors completed in 0.265 minutes.     Estimated time of completion: 2022-10-03 06:37:41    13 factors completed in 0.286 minutes.     Estimated time of completion: 2022-10-03 06:37:41   
 \end{verbatim}
 
 \begin{Shaded}
@@ -3123,7 +3123,7 @@ This output shows that the genus \emph{Thermoanaerobaculum} (Phylum Acidobacteri
 ## [3] "Bacteria;Campilobacterota" "Bacteria;WPS-2"
 \end{verbatim}
 
-The default for \texttt{summary}, provided a taxonomy object, is to find the shortest-unique-prefix labels for each species in each group. For example, there are no Proteobacteria or Firmicutes in Group 1.
+The default for \texttt{summary}, provided a taxonomy object, is to find the shortest-unique-prefix labels for each species in each group. For example, there are no Proteobacteria, Cyanobacteria or Campilobacteria in Group 1.
 
 The summary objects contains other useful data, including all ASVs IDs or the ILRs for each group, which may become handy if you wanted to do some custom filtering and figures of your taxonomy.
 
@@ -3460,7 +3460,7 @@ The text label for the large PF 3 is aligned with the outside `centre' of the gr
 
 The outside bars indicate abundance of the relevant genus.
 
-There are too many colours here and it is difficult to differentiate the different phyla. One solution for that is to create custom colours and order the legend in order of appearance of the phyla (using the \texttt{ordervec} vector). Alternatively, you can just add colour for selected phyla that you want to highlight (again using the \texttt{ordervec} vector). For example, from the summary results above we may want to highlight only the phyla in Group 2 of factor 3 (the remainder bin from Factor 3) and perhaps include the phyla from PF 1, 2, 4 and 5.
+There are too many colours here and it is difficult to differentiate the different phyla. One solution for that is to create custom colours and order the legend in order of appearance of the phyla (using the \texttt{ordervec} vector). Alternatively, you can just add colour for selected phyla that you want to highlight (again using the \texttt{ordervec} vector). For example, from the summary results above we may want to highlight only the phyla that were part of the phylofactors. And perhaps include the phyla in Group 2 of factor 3 (the remainder bin from Factor 3).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3614,7 +3614,7 @@ Alternatively highlight only the factors and explore the taxonomy represented by
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{gitbook-demo_files/figure-latex/colouredtree4-1.pdf}
+\includegraphics{gitbook-demo_files/figure-latex/blacktree4-1.pdf}
 
 Combine the tree with boxplots to show the differences in abundances.
 
