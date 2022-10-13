@@ -34,6 +34,9 @@ Everyone is at a different level in the journey to exploring microbial diversity
 
 **Get in touch**  
   
-We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne. Email me or comment on the discussion section of the [GitHub repository](https://github.com/chrismitbiz/ABlab-workflows/discussions/){target="_blank"} for this GitBook. You will need to get a GitHub account to join the discussion. Its free. 
-
+We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne. Email me or comment on the discussion section of the [GitHub repository](https://github.com/chrismitbiz/ABlab-workflows/discussions/){target="_blank"} for this GitBook. You will need to get a GitHub account to join the discussion. Its free.  
+  
+More about my PhD research can be found here: https://clean-dirt-digests.netlify.app.  
+  
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
