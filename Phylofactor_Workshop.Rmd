@@ -1,0 +1,224 @@
+---
+title: "R Notebook"
+output: html_notebook
+editor_options: 
+  chunk_output_type: console
+---
+
+## Loading packages
+
+```{r}
+# For workshop
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#  install.packages("BiocManager")
+#devtools::install_github("hadley/devtools")
+#devtools::install_github('reptalex/phylofactor')
+# BiocManager::install(c("Biostrings","ggtree","phyloseq", "microbiome",
+#                       "escamero/mirlyn", "ggtreeExtra"))
+#install.packages(c("tidyverse", "ggpubr", "vegan",
+#                   "devtools","remotes", "colorspace"))
+
+library(phyloseq)
+library(ggpubr)       # a handy helper package for ggplots
+library(tidyverse)
+theme_set(theme_bw())  # setting the theme for ggplots
+library(colorspace)
+library(ggtreeExtra)
+library(ggtree)
+library(ggnewscale)
+ 
+## phyfacsummary function 
+# Function to summarise all phylofactor factors in a meaningful way into a dataframe
+# p adjusted method = Bonferroni
+# Enter the phylofactor file and the phyloseq object to get a dataframe with model results, 
+# abundances and taxa info
+# the third function input is '4' or '5',  4 is used when the phylofactor 
+# model setting was set to 'F', if 'var' use 5
+phyfacsummary <- dget("./custom-functions/phyfacsummary.R")
+
+## addILRtophyloseq function 
+# Function to take a phylofactor file and extract the mean sample ILRs and 
+# add those to the phyloseq sample data those can then be used for plotting graphs 
+# together with treatment data. 
+addILRtophyloseq <- dget("./custom-functions/addILRtophyloseq.R")
+
+## ILR_plotfunction
+ILR_plotfunction <- dget("./custom-functions/ILR_plotfunction.R")
+
+## mytreefunctionwithbarplots
+# Tree functions combining phylum colors with grey 
+# phylofactor highlights. 
+# Requires a colour vector 'treecols'
+# Requires an order vector 'ordervec' that includes the names of 
+# all phyla to be included into the legend in that order (example shown below). 
+mytreefunctionwithbarplots <- dget("./custom-functions/mytreefunctionwithbarplots.R")
+
+## Prevalence table function
+# get overview of abundances, mean prevalence is the mean 'appearance' of 
+# ASVs of the taxon across all samples
+prevalencedf <- dget("./custom-functions/myprevalencetablefunction.R")
+```
+
+## Loading ps object
+
+```{r}
+# reading in a previously saved phyloseq object
+ps <- readRDS('ps_ProjectX_2022July')
+
+#ps (not run) to get an overview of number of taxa and samples contained in the phyloseq object
+
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 4218 taxa and 51 samples ]
+# sample_data() Sample Data:       [ 51 samples by 15 sample variables ]
+# tax_table()   Taxonomy Table:    [ 4218 taxa by 7 taxonomic ranks ]
+# phy_tree()    Phylogenetic Tree: [ 4218 tips and 4217 internal nodes ]
+
+# check metadata if needed
+# df <- data.frame(sample_data(ps))
+```
+
+
+## Prefiltering
+
+```{r}
+# Filter any phyla that have not been classified, create a new phyloseq object called ps.phylo
+ps.phylo = subset_taxa(ps, !is.na(Phylum) & !Phylum %in% c("", "uncharacterized"))
+ps.phylo <- prune_taxa(taxa_sums(ps.phylo)  > 10, ps.phylo)
+
+# ps.phylo 
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 3325 taxa and 51 samples ]
+# sample_data() Sample Data:       [ 51 samples by 15 sample variables ]
+# tax_table()   Taxonomy Table:    [ 3325 taxa by 7 taxonomic ranks ]
+# phy_tree()    Phylogenetic Tree: [ 3325 tips and 3324 internal nodes ]
+
+# Option to agglomerate abundances to a certain taxa level 
+# (not necessary; increases speed of running PhyloFactor for this tutorial)
+ps.phylo <- phyloseq::tax_glom(ps.phylo, taxrank = "Genus")  
+# ps.phylo  
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 525 taxa and 51 samples ]
+# sample_data() Sample Data:       [ 51 samples by 15 sample variables ]
+# tax_table()   Taxonomy Table:    [ 525 taxa by 7 taxonomic ranks ]
+# phy_tree()    Phylogenetic Tree: [ 525 tips and 524 internal nodes ]
+```
+
+## Running phylofactor
+```{r}
+# create/extract metadata object from phyloseq object
+meta.df <- data.frame(sample_data(ps.phylo))
+# Extract rownames (Sample IDs)
+rnames <- rownames(meta.df)
+# Explanatory variable for model
+X <- meta.df$Location
+# check explanatory
+summary(X)
+# name the vector data with sample IDs 
+names(X) <- rnames
+# create an ASV table for phylofactor 
+Data = as(phyloseq::otu_table(ps.phylo), "matrix")
+Data = as.data.frame(Data)
+# create tree object from phyloseq object for phylofactor
+tree <- phy_tree(ps.phylo) 
+# unroot the tree, this is critical for phylofactor to work
+tree_ur <- ape::unroot(tree)
+# check if unrooted
+ape::is.rooted(tree_ur) # FALSE IS GOOD
+
+# check that all in order
+all(rownames(Data) == row.names(tax_table(ps.phylo))) 
+all(tree_ur$tip.label == row.names(tax_table(ps.phylo)))
+# Run phylofactor
+PF <-  phylofactor::PhyloFactor(Data,tree_ur,X, 
+        frmla=Data~X,    # Data (ASV abundances) as a response to X (Location)
+        ncores = 2,      # number of cores 
+        stop.early = T, 
+        transform.fcn=log,    # log-ratio transform
+        KS.Pthreshold = 0.01, # Kolmogorov Smirnov significance level 
+        nfactors = 13, # the first 13 phylofactors only - in interest of time 
+        choice = "var")
+rm(tree, tree_ur, Data, X, meta.df)
+
+```
+
+
+```{r}
+# Overview
+PF # showing the output of the first 10 factors 
+## Taxa summaries
+# To create a taxa summary a taxonomy dataframe is needed first, 
+# whose first column contains the species in the phylogeny and whose
+# second column contains a semicolon-delimited taxonomy. 
+# Here, we extract that out of the phyloseq object as following.
+taxonomy <- data.frame(tax_table(ps.phylo)) %>%
+  unite(Taxon, sep=";", c("Kingdom","Phylum","Class","Order","Family","Genus","Species"))  %>%
+  rownames_to_column("Feature.ID")  
+ 
+# running pf.taxa function from phylofactor
+phylofactor::pf.taxa(PF, taxonomy, factor = 1)
+
+```
+
+
+```{r}
+## Summary tables
+# Following a custom function to provide a dataframe of all ASVs and their phylofactors 
+# It requires as input the phylofactor and phyloseq objects. 
+# It needs to be exactly the same pholoseq object (contain the ASVs and taxa) 
+# that was used prior to running PhyloFactor. 
+# The number (5 or 4) indicates which `choice` ('var' or 'F') was provided 
+# to the PhyloFactor function. Either 'var' (5) or 'F' (4). Just my poor coding here.   
+PF_summary <- phyfacsummary(PF, ps.phylo, 5)  
+head(PF_summary)
+```
+
+```{r}
+## ILR boxplots
+# If needed add another element to this plot. The boxplots of ILRs. 
+# Use the custom addILRtophyloseq function and create a new phyloseq object with 
+# added ILR results in the sample_data (for plotting)
+ps.ILR <- addILRtophyloseq(ps.phylo, PF)
+# Quick Check that they have 'arrived'.
+head(data.frame(sample_data(ps.ILR)))
+
+# Notice the Phylofactor columns
+  
+## Create plotdata
+# Some vectors to filter and change the appearance of the plot
+factorvector <- c("Phylofactor.1","Phylofactor.2",
+                  "Phylofactor.3","Phylofactor.4",
+                  "Phylofactor.11","Phylofactor.13")
+labelvec = c("Phylofactor 1","Phylofactor 2",
+              "Phylofactor 3","Phylofactor 4",
+             "Phylofactor 11","Phylofactor 13")
+# rearrange the sample data for plotting
+plotdata <- data.frame(sample_data(ps.ILR)) %>% 
+  pivot_longer(cols = starts_with("Phylofactor"), 
+    names_to = "ILR")
+# create factors of the ILR column
+plotdata$ILR <- factor(plotdata$ILR, levels = plotdata[1:PF$nfactors, ]$ILR)
+# Select specific factor vectors for plotting using the factorvector to filter
+plotdata_sub <- plotdata %>% 
+  filter(ILR %in% factorvector)
+# create factors of the ILR column 
+plotdata_sub$ILR <- factor(plotdata_sub$ILR, levels = plotdata_sub[1:length(unique(plotdata_sub$ILR)), ]$ILR)
+# create ggplot object
+pilr <- plotdata_sub %>% 
+  ggboxplot(x = "Location", y = "value", 
+    combine = TRUE, 
+    facet.by = "ILR", 
+    fill = "ILR", 
+    ncol = 2, 
+    alpha = 0.5, 
+    ylab = ("Isometric log ratio (ILR)"), 
+    panel.labs.font = list(size = 11), 
+    panel.labs = list(ILR = labelvec)) + 
+    geom_point(position = "jitter", alpha = 0.5) +  # add jitter 
+    theme(legend.position = "none") +               # do not show legend
+    theme(axis.text.x = element_text(angle = 90, hjust = 1, 
+    vjust = 0.5), axis.title.x = element_blank(), axis.text = element_text(size = 12))
+
+# Choose custom colors with + scale_fill_manual(values = yourcolvector)
+pilr 
+```
+

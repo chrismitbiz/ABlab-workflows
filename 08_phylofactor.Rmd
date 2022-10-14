@@ -179,9 +179,7 @@ summary(X)
 names(X) <- rnames
 # create an ASV table for phylofactor 
 Data = as(otu_table(ps.phylo), "matrix")
-Data = as.data.frame(t(Data))
-Data <- Data[match(rnames,row.names(Data)),] 
-Data <- as.data.frame(t(Data))
+Data = as.data.frame(Data)
 # create tree object from phyloseq object for phylofactor
 tree <- phy_tree(ps.phylo) 
 # unroot the tree, this is critical for phylofactor to work

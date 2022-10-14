@@ -62,7 +62,7 @@ library(ggtreeExtra)
 library(ggtree)
 library(ggnewscale)
  
-## phyfacsummary function 
+k## phyfacsummary function 
 # Function to summarise all phylofactor factors in a meaningful way into a dataframe
 # p adjusted method = Bonferroni
 # Enter the phylofactor file and the phyloseq object to get a dataframe with model results, 
