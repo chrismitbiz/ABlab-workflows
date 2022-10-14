@@ -53,6 +53,16 @@ Custom functions. Download and add to your working directory:
 ### Load packages and custom functions
 
 ```{r 08packages,include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
+# install packages
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#   install.packages("BiocManager")
+# devtools::install_github("hadley/devtools")
+# devtools::install_github('reptalex/phylofactor')
+# BiocManager::install(c("Biostrings","ggtree","phyloseq", "microbiome",
+#                        "escamero/mirlyn", "ggtreeExtra"))
+# install.packages(c("tidyverse", "ggpubr", "vegan",
+#                   "devtools","remotes", "colorspace"))
+
 library(phyloseq)
 library(ggpubr)       # a handy helper package for ggplots
 library(tidyverse)

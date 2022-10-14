@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-10-13}
+\date{2022-10-14}
 
 \begin{document}
 \maketitle
@@ -2669,6 +2669,16 @@ Custom functions. Download and add to your working directory:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# install packages}
+\CommentTok{\# if (!requireNamespace("BiocManager", quietly = TRUE))}
+\CommentTok{\#   install.packages("BiocManager")}
+\CommentTok{\# devtools::install\_github("hadley/devtools")}
+\CommentTok{\# devtools::install\_github(\textquotesingle{}reptalex/phylofactor\textquotesingle{})}
+\CommentTok{\# BiocManager::install(c("Biostrings","ggtree","phyloseq", "microbiome",}
+\CommentTok{\#                        "escamero/mirlyn", "ggtreeExtra"))}
+\CommentTok{\# install.packages(c("tidyverse", "ggpubr", "vegan",}
+\CommentTok{\#                   "devtools","remotes", "colorspace"))}
+
 \FunctionTok{library}\NormalTok{(phyloseq)}
 \FunctionTok{library}\NormalTok{(ggpubr)       }\CommentTok{\# a handy helper package for ggplots}
 \FunctionTok{library}\NormalTok{(tidyverse)}
@@ -2857,7 +2867,7 @@ Here, we run the \texttt{PhyloFactor} function with \texttt{choice\ =\ "var"}.
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.037 minutes.    Estimated time of completion: 2022-10-13 17:35:56    2 factors completed in 0.0693 minutes.     Estimated time of completion: 2022-10-13 17:35:54    3 factors completed in 0.101 minutes.     Estimated time of completion: 2022-10-13 17:35:54    4 factors completed in 0.134 minutes.     Estimated time of completion: 2022-10-13 17:35:53    5 factors completed in 0.177 minutes.     Estimated time of completion: 2022-10-13 17:35:55    6 factors completed in 0.216 minutes.     Estimated time of completion: 2022-10-13 17:35:55    7 factors completed in 0.247 minutes.     Estimated time of completion: 2022-10-13 17:35:55    8 factors completed in 0.277 minutes.     Estimated time of completion: 2022-10-13 17:35:54    9 factors completed in 0.308 minutes.     Estimated time of completion: 2022-10-13 17:35:54    10 factors completed in 0.338 minutes.     Estimated time of completion: 2022-10-13 17:35:54    11 factors completed in 0.37 minutes.     Estimated time of completion: 2022-10-13 17:35:53    12 factors completed in 0.4 minutes.     Estimated time of completion: 2022-10-13 17:35:53    13 factors completed in 0.43 minutes.     Estimated time of completion: 2022-10-13 17:35:53   
+##  1 factor completed in 0.0447 minutes.    Estimated time of completion: 2022-10-14 11:54:45    2 factors completed in 0.0856 minutes.     Estimated time of completion: 2022-10-14 11:54:44    3 factors completed in 0.126 minutes.     Estimated time of completion: 2022-10-14 11:54:43    4 factors completed in 0.167 minutes.     Estimated time of completion: 2022-10-14 11:54:43    5 factors completed in 0.203 minutes.     Estimated time of completion: 2022-10-14 11:54:42    6 factors completed in 0.238 minutes.     Estimated time of completion: 2022-10-14 11:54:41    7 factors completed in 0.272 minutes.     Estimated time of completion: 2022-10-14 11:54:41    8 factors completed in 0.305 minutes.     Estimated time of completion: 2022-10-14 11:54:40    9 factors completed in 0.339 minutes.     Estimated time of completion: 2022-10-14 11:54:40    10 factors completed in 0.373 minutes.     Estimated time of completion: 2022-10-14 11:54:40    11 factors completed in 0.412 minutes.     Estimated time of completion: 2022-10-14 11:54:40    12 factors completed in 0.446 minutes.     Estimated time of completion: 2022-10-14 11:54:40    13 factors completed in 0.483 minutes.     Estimated time of completion: 2022-10-14 11:54:39   
 \end{verbatim}
 
 \begin{Shaded}
