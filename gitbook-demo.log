@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.17)  15 OCT 2022 14:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.17)  15 OCT 2022 15:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1800,8 +1800,8 @@ Overfull \hbox (32.9989pt too wide) in paragraph at lines 2810--2810
  []
 
 
-Overfull \hbox (6154.48111pt too wide) in paragraph at lines 2869--2869
-[]\T1/lmtt/m/n/10 ##  1 factor completed in 0.0262 minutes.    Estimated time of completion: 2022-10-15 14:44:33    2 factors completed in 0.049 minutes.     Estimated time of completion: 2022-10-15 14:44:31    3 factors completed in 0.071 minutes.     Estimated time of completion: 2022-10-15 14:44:31    4 factors completed in 0.0931 minutes.     Estimated time of completion: 2022-10-15 14:44:30    5 factors completed in 0.114 minutes.     Estimated time of completion: 2022-10-15 14:44:30    6 factors completed in 0.134 minutes.     Estimated time of completion: 2022-10-15 14:44:30    7 factors completed in 0.155 minutes.     Estimated time of completion: 2022-10-15 14:44:30    8 factors completed in 0.176 minutes.     Estimated time of completion: 2022-10-15 14:44:29    9 factors completed in 0.197 minutes.     Estimated time of completion: 2022-10-15 14:44:29    10 factors completed in 0.218 minutes.     Estimated time of completion: 2022-10-15 14:44:29    11 factors completed in 0.24 minutes.     Estimated time of completion: 2022-10-15 14:44:29    12 factors completed in 0.261 minutes.     Estimated time of completion: 2022-10-15 14:44:29    13 factors completed in 0.282 minutes.     Estimated time of completion: 2022-10-15 14:44:29[] 
+Overfull \hbox (6170.23106pt too wide) in paragraph at lines 2869--2869
+[]\T1/lmtt/m/n/10 ##  1 factor completed in 0.0257 minutes.    Estimated time of completion: 2022-10-15 15:00:43    2 factors completed in 0.0476 minutes.     Estimated time of completion: 2022-10-15 15:00:42    3 factors completed in 0.0696 minutes.     Estimated time of completion: 2022-10-15 15:00:41    4 factors completed in 0.0917 minutes.     Estimated time of completion: 2022-10-15 15:00:41    5 factors completed in 0.112 minutes.     Estimated time of completion: 2022-10-15 15:00:41    6 factors completed in 0.133 minutes.     Estimated time of completion: 2022-10-15 15:00:40    7 factors completed in 0.153 minutes.     Estimated time of completion: 2022-10-15 15:00:40    8 factors completed in 0.174 minutes.     Estimated time of completion: 2022-10-15 15:00:40    9 factors completed in 0.195 minutes.     Estimated time of completion: 2022-10-15 15:00:40    10 factors completed in 0.215 minutes.     Estimated time of completion: 2022-10-15 15:00:40    11 factors completed in 0.237 minutes.     Estimated time of completion: 2022-10-15 15:00:40    12 factors completed in 0.257 minutes.     Estimated time of completion: 2022-10-15 15:00:40    13 factors completed in 0.278 minutes.     Estimated time of completion: 2022-10-15 15:00:40[] 
  []
 
 [95]
@@ -2100,7 +2100,7 @@ Overfull \hbox (69.7488pt too wide) in paragraph at lines 3247--3247
  []
 
 [103]
-<gitbook-demo_files/figure-latex/pfviz1-1.pdf, id=1038, 355.3275pt x 403.5075pt>
+<gitbook-demo_files/figure-latex/pfviz1-1.pdf, id=1039, 355.3275pt x 403.5075pt>
 File: gitbook-demo_files/figure-latex/pfviz1-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/pfviz1-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/pfviz1-1.pdf  used on input line 3293.
@@ -2109,7 +2109,7 @@ Package pdftex.def Info: gitbook-demo_files/figure-latex/pfviz1-1.pdf  used on i
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [104] [105 <./gitbook-demo_files/figure-latex/pfviz1-1.pdf>]
-<gitbook-demo_files/figure-latex/pfviz2-1.pdf, id=1060, 288.07625pt x 336.25626pt>
+<gitbook-demo_files/figure-latex/pfviz2-1.pdf, id=1061, 288.07625pt x 336.25626pt>
 File: gitbook-demo_files/figure-latex/pfviz2-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/pfviz2-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/pfviz2-1.pdf  used on input line 3317.
@@ -2128,13 +2128,13 @@ Overfull \hbox (59.29414pt too wide) in paragraph at lines 3434--3435
  []
 
 [109]
-<gitbook-demo_files/figure-latex/coloredtree-1.pdf, id=1087, 620.3175pt x 394.47375pt>
+<gitbook-demo_files/figure-latex/coloredtree-1.pdf, id=1088, 620.3175pt x 394.47375pt>
 File: gitbook-demo_files/figure-latex/coloredtree-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/coloredtree-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/coloredtree-1.pdf  used on input line 3465.
 (pdftex.def)             Requested size: 344.99965pt x 219.39297pt.
 [110 <./gitbook-demo_files/figure-latex/coloredtree-1.pdf>] [111]
-<gitbook-demo_files/figure-latex/coloredtree3-1.pdf, id=1107, 670.505pt x 334.24875pt>
+<gitbook-demo_files/figure-latex/coloredtree3-1.pdf, id=1108, 670.505pt x 334.24875pt>
 File: gitbook-demo_files/figure-latex/coloredtree3-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/coloredtree3-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/coloredtree3-1.pdf  used on input line 3581.
@@ -2143,19 +2143,19 @@ Package pdftex.def Info: gitbook-demo_files/figure-latex/coloredtree3-1.pdf  use
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [112] [113 <./gitbook-demo_files/figure-latex/coloredtree3-1.pdf>]
-<gitbook-demo_files/figure-latex/blacktree4-1.pdf, id=1130, 245.91875pt x 279.0425pt>
+<gitbook-demo_files/figure-latex/blacktree4-1.pdf, id=1131, 245.91875pt x 279.0425pt>
 File: gitbook-demo_files/figure-latex/blacktree4-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/blacktree4-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/blacktree4-1.pdf  used on input line 3627.
 (pdftex.def)             Requested size: 245.92563pt x 279.05032pt.
 [114 <./gitbook-demo_files/figure-latex/blacktree4-1.pdf>]
-<gitbook-demo_files/figure-latex/ILRplotcombined-1.pdf, id=1145, 659.46375pt x 349.305pt>
+<gitbook-demo_files/figure-latex/ILRplotcombined-1.pdf, id=1146, 659.46375pt x 349.305pt>
 File: gitbook-demo_files/figure-latex/ILRplotcombined-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/ILRplotcombined-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/ILRplotcombined-1.pdf  used on input line 3647.
 (pdftex.def)             Requested size: 345.00607pt x 182.74294pt.
 [115 <./gitbook-demo_files/figure-latex/ILRplotcombined-1.pdf>]
-<gitbook-demo_files/figure-latex/taxafiltering-1.pdf, id=1163, 548.0475pt x 541.02126pt>
+<gitbook-demo_files/figure-latex/taxafiltering-1.pdf, id=1164, 548.0475pt x 541.02126pt>
 File: gitbook-demo_files/figure-latex/taxafiltering-1.pdf Graphic file (type pdf)
 <use gitbook-demo_files/figure-latex/taxafiltering-1.pdf>
 Package pdftex.def Info: gitbook-demo_files/figure-latex/taxafiltering-1.pdf  used on input line 3685.
@@ -2175,10 +2175,10 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  72i,9n,77p,1491b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on gitbook-demo.pdf (118 pages, 5834521 bytes).
+Output written on gitbook-demo.pdf (118 pages, 5834550 bytes).
 PDF statistics:
- 1340 PDF objects out of 1440 (max. 8388607)
- 1081 compressed objects within 11 object streams
+ 1341 PDF objects out of 1440 (max. 8388607)
+ 1082 compressed objects within 11 object streams
  326 named destinations out of 1000 (max. 500000)
  385 words of extra memory for PDF output out of 10000 (max. 10000000)
 
