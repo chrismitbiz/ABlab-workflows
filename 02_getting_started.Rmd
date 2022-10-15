@@ -96,7 +96,7 @@ Example of normalisation methods:
 * edgeR-trimmed mean of M values (TMM)  
 * DESeq-variance stabilizing transformation (VS)  
   
-There are others. Check out this link to learn more about the different types of normalisation methods: [MicrobiomeAnalyst: FAQs, What are the various normalization methods and which method should I choose?](https://www.microbiomeanalyst.ca/MicrobiomeAnalyst/docs/FaqView.xhtml#norm2){target="_blank"}.  
+There are others. Check out this link to learn more about the different types of normalisation methods: [MicrobiomeAnalyst: FAQs, What are the various normalization methods and which method should I choose?](https://www.omicsforum.ca/t/what-are-the-various-normalization-methods-and-which-method-should-i-choose/494){target="_blank"}.  
   
 Rarefying data is one of the more contested methods. We acknowledge that **rarefying data** (i.e. the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus **not recommended for differential abundance analyses**. Check out this well cited paper here to learn why: [Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531){target="_blank"} (@McMurdie2014).  
   

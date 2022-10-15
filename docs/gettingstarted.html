@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2022-10-14" />
+<meta name="date" content="2022-10-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -389,7 +389,7 @@ qiime --help  </code></pre>
 </li>
 <li>DESeq-variance stabilizing transformation (VS)</li>
 </ul>
-<p>There are others. Check out this link to learn more about the different types of normalisation methods: <a href="https://www.microbiomeanalyst.ca/MicrobiomeAnalyst/docs/FaqView.xhtml#norm2" target="_blank">MicrobiomeAnalyst: FAQs, What are the various normalization methods and which method should I choose?</a>.</p>
+<p>There are others. Check out this link to learn more about the different types of normalisation methods: <a href="https://www.omicsforum.ca/t/what-are-the-various-normalization-methods-and-which-method-should-i-choose/494" target="_blank">MicrobiomeAnalyst: FAQs, What are the various normalization methods and which method should I choose?</a>.</p>
 <p>Rarefying data is one of the more contested methods. We acknowledge that <strong>rarefying data</strong> (i.e. the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus <strong>not recommended for differential abundance analyses</strong>. Check out this well cited paper here to learn why: <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531" target="_blank">Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible</a> (<span class="citation">McMurdie and Holmes (<a href="#ref-McMurdie2014" role="doc-biblioref">2014</a>)</span>).</p>
 <p>However, rarefying still “<em>outperformed all the other normalization methods for producing accurate BC (Bray-Curtis) dissimilarities and subsequent PCoAs and PERMANOVAs.</em>” Paper here: <a href="https://doi.org/10.1111/2041-210X.13115" target="_blank">Methods for normalizing microbiome data: An ecological perspective</a> (<span class="citation">McKnight et al. (<a href="#ref-McKnight2019a" role="doc-biblioref">2019</a>)</span>).</p>
 <p>For our workflows we may <strong>rarefy data</strong> before creating <strong>alpha diversity</strong> indices (Shannon, Simpsons etc) and <strong>beta diversity</strong> indices (Bray-Curtis dissimilarities).</p>
