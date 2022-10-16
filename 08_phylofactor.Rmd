@@ -16,7 +16,7 @@ In this chapter you will learn how to use one of the main functions from the pac
 
 The package enables the use of different statistical tests, such as twoSample comparisons (i.e. t-test, Wilcox text, Fisher exact test) or regression modelling of abundances, transformed into isometric log ratios (ILRs) - sometimes called balances - to study treatment effects or environmental associations. It does this for aggregated abundances on edges of a phylogenetic tree, hence includes associations of abundances of whole clades of ASVs.
 
-Check out the papers [Phylofactorization: a graph-partitioning algorithm to identify phylogenetic scales of ecological data](https://www.biorxiv.org/content/10.1101/235341v2){target="_blank"} (@Washburne2019a) and [Phylogenetic factorization of compositional data yields lineage-level associations in microbiome datasets](https://peerj.com/articles/2969/){target="_blank"} (@Washburne2017) to learn more about the algorithms used. Here also a great [Phylofactor tutorial](https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf){target="_blank"}  
+Check out the papers [Phylofactorization: a graph-partitioning algorithm to identify phylogenetic scales of ecological data](https://www.biorxiv.org/content/10.1101/235341v2){target="_blank"} (@Washburne2019a) and [Phylogenetic factorization of compositional data yields lineage-level associations in microbiome datasets](https://peerj.com/articles/2969/){target="_blank"} (@Washburne2017) to learn more about the algorithms used. Here also a great [Phylofactor tutorial](https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf){target="_blank"}.  
   
 You will need a phylogenic tree for this analysis. For example, in chapter \@ref(miseqtoqiime) we have built a phylogenetic tree from ASVs using the insertion tree method with qiime2. This tree was then imported into R and included into a phyloseq object as shown in chapter \@ref(Qiime2R).
 
@@ -194,11 +194,11 @@ all(tree_ur$tip.label == row.names(tax_table(ps.phylo)))
 PF <-  phylofactor::PhyloFactor(Data,tree_ur,X, 
         frmla=Data~X,    # Data (ASV abundances) as a response to X (Location)
         ncores = 2,      # number of cores 
-        stop.early = T, 
+        stop.early = NULL, 
         transform.fcn=log,    # log-ratio transform
         KS.Pthreshold = 0.01, # Kolmogorov Smirnov significance level 
         nfactors = 13, # the first 13 phylofactors only - in interest of time 
-        choice = "var")
+        choice = "var")  # see notes above
 
 # saveRDS(PF,'pf-example.rds')  # save Phylofactor object to .rds file 
 rm(tree, tree_ur, Data, X, meta.df) #remove unnecessary objects from R environment

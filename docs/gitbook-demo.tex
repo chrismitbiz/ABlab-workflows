@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-10-15}
+\date{2022-10-16}
 
 \begin{document}
 \maketitle
@@ -2611,7 +2611,7 @@ In this chapter you will learn how to use one of the main functions from the pac
 
 The package enables the use of different statistical tests, such as twoSample comparisons (i.e.~t-test, Wilcox text, Fisher exact test) or regression modelling of abundances, transformed into isometric log ratios (ILRs) - sometimes called balances - to study treatment effects or environmental associations. It does this for aggregated abundances on edges of a phylogenetic tree, hence includes associations of abundances of whole clades of ASVs.
 
-Check out the papers \href{https://www.biorxiv.org/content/10.1101/235341v2}{Phylofactorization: a graph-partitioning algorithm to identify phylogenetic scales of ecological data} (\citet{Washburne2019a}) and \href{https://peerj.com/articles/2969/}{Phylogenetic factorization of compositional data yields lineage-level associations in microbiome datasets} (\citet{Washburne2017}) to learn more about the algorithms used. Here also a great \href{https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf}{Phylofactor tutorial}
+Check out the papers \href{https://www.biorxiv.org/content/10.1101/235341v2}{Phylofactorization: a graph-partitioning algorithm to identify phylogenetic scales of ecological data} (\citet{Washburne2019a}) and \href{https://peerj.com/articles/2969/}{Phylogenetic factorization of compositional data yields lineage-level associations in microbiome datasets} (\citet{Washburne2017}) to learn more about the algorithms used. Here also a great \href{https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf}{Phylofactor tutorial}.
 
 You will need a phylogenic tree for this analysis. For example, in chapter \ref{miseqtoqiime} we have built a phylogenetic tree from ASVs using the insertion tree method with qiime2. This tree was then imported into R and included into a phyloseq object as shown in chapter \ref{Qiime2R}.
 
@@ -2856,16 +2856,16 @@ Here, we run the \texttt{PhyloFactor} function with \texttt{choice\ =\ "var"}.
 \NormalTok{PF }\OtherTok{\textless{}{-}}\NormalTok{  phylofactor}\SpecialCharTok{::}\FunctionTok{PhyloFactor}\NormalTok{(Data,tree\_ur,X, }
         \AttributeTok{frmla=}\NormalTok{Data}\SpecialCharTok{\textasciitilde{}}\NormalTok{X,    }\CommentTok{\# Data (ASV abundances) as a response to X (Location)}
         \AttributeTok{ncores =} \DecValTok{2}\NormalTok{,      }\CommentTok{\# number of cores }
-        \AttributeTok{stop.early =}\NormalTok{ T, }
+        \AttributeTok{stop.early =} \ConstantTok{NULL}\NormalTok{, }
         \AttributeTok{transform.fcn=}\NormalTok{log,    }\CommentTok{\# log{-}ratio transform}
         \AttributeTok{KS.Pthreshold =} \FloatTok{0.01}\NormalTok{, }\CommentTok{\# Kolmogorov Smirnov significance level }
         \AttributeTok{nfactors =} \DecValTok{13}\NormalTok{, }\CommentTok{\# the first 13 phylofactors only {-} in interest of time }
-        \AttributeTok{choice =} \StringTok{"var"}\NormalTok{)}
+        \AttributeTok{choice =} \StringTok{"var"}\NormalTok{)  }\CommentTok{\# see notes above}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0257 minutes.    Estimated time of completion: 2022-10-15 15:00:43    2 factors completed in 0.0476 minutes.     Estimated time of completion: 2022-10-15 15:00:42    3 factors completed in 0.0696 minutes.     Estimated time of completion: 2022-10-15 15:00:41    4 factors completed in 0.0917 minutes.     Estimated time of completion: 2022-10-15 15:00:41    5 factors completed in 0.112 minutes.     Estimated time of completion: 2022-10-15 15:00:41    6 factors completed in 0.133 minutes.     Estimated time of completion: 2022-10-15 15:00:40    7 factors completed in 0.153 minutes.     Estimated time of completion: 2022-10-15 15:00:40    8 factors completed in 0.174 minutes.     Estimated time of completion: 2022-10-15 15:00:40    9 factors completed in 0.195 minutes.     Estimated time of completion: 2022-10-15 15:00:40    10 factors completed in 0.215 minutes.     Estimated time of completion: 2022-10-15 15:00:40    11 factors completed in 0.237 minutes.     Estimated time of completion: 2022-10-15 15:00:40    12 factors completed in 0.257 minutes.     Estimated time of completion: 2022-10-15 15:00:40    13 factors completed in 0.278 minutes.     Estimated time of completion: 2022-10-15 15:00:40   
+##  1 factor completed in 0.0251 minutes.    Estimated time of completion: 2022-10-16 11:38:09    2 factors completed in 0.0469 minutes.     Estimated time of completion: 2022-10-16 11:38:08    3 factors completed in 0.0697 minutes.     Estimated time of completion: 2022-10-16 11:38:07    4 factors completed in 0.0922 minutes.     Estimated time of completion: 2022-10-16 11:38:07    5 factors completed in 0.114 minutes.     Estimated time of completion: 2022-10-16 11:38:07    6 factors completed in 0.134 minutes.     Estimated time of completion: 2022-10-16 11:38:07    7 factors completed in 0.155 minutes.     Estimated time of completion: 2022-10-16 11:38:07    8 factors completed in 0.176 minutes.     Estimated time of completion: 2022-10-16 11:38:06    9 factors completed in 0.196 minutes.     Estimated time of completion: 2022-10-16 11:38:06    10 factors completed in 0.217 minutes.     Estimated time of completion: 2022-10-16 11:38:06    11 factors completed in 0.238 minutes.     Estimated time of completion: 2022-10-16 11:38:06    12 factors completed in 0.258 minutes.     Estimated time of completion: 2022-10-16 11:38:06    13 factors completed in 0.279 minutes.     Estimated time of completion: 2022-10-16 11:38:06   
 \end{verbatim}
 
 \begin{Shaded}
