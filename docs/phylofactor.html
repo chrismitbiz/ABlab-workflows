@@ -365,7 +365,7 @@ div.csl-indent {
 <span id="cb69-6"><a href="phylofactor.html#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="co"># BiocManager::install(c(&quot;Biostrings&quot;,&quot;ggtree&quot;,&quot;phyloseq&quot;, &quot;microbiome&quot;,</span></span>
 <span id="cb69-7"><a href="phylofactor.html#cb69-7" aria-hidden="true" tabindex="-1"></a><span class="co">#                        &quot;escamero/mirlyn&quot;, &quot;ggtreeExtra&quot;))</span></span>
 <span id="cb69-8"><a href="phylofactor.html#cb69-8" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(c(&quot;tidyverse&quot;, &quot;ggpubr&quot;, &quot;vegan&quot;,</span></span>
-<span id="cb69-9"><a href="phylofactor.html#cb69-9" aria-hidden="true" tabindex="-1"></a><span class="co">#                   &quot;devtools&quot;,&quot;remotes&quot;, &quot;colorspace&quot;))</span></span>
+<span id="cb69-9"><a href="phylofactor.html#cb69-9" aria-hidden="true" tabindex="-1"></a><span class="co">#                   &quot;devtools&quot;,&quot;remotes&quot;, &quot;colorspace&quot;, &quot;ape&quot;))</span></span>
 <span id="cb69-10"><a href="phylofactor.html#cb69-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-11"><a href="phylofactor.html#cb69-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phyloseq)</span>
 <span id="cb69-12"><a href="phylofactor.html#cb69-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)       <span class="co"># a handy helper package for ggplots</span></span>
@@ -375,37 +375,38 @@ div.csl-indent {
 <span id="cb69-16"><a href="phylofactor.html#cb69-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtreeExtra)</span>
 <span id="cb69-17"><a href="phylofactor.html#cb69-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtree)</span>
 <span id="cb69-18"><a href="phylofactor.html#cb69-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggnewscale)</span>
-<span id="cb69-19"><a href="phylofactor.html#cb69-19" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb69-20"><a href="phylofactor.html#cb69-20" aria-hidden="true" tabindex="-1"></a><span class="do">## phyfacsummary function </span></span>
-<span id="cb69-21"><a href="phylofactor.html#cb69-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to summarise all phylofactor factors in a meaningful way into a dataframe</span></span>
-<span id="cb69-22"><a href="phylofactor.html#cb69-22" aria-hidden="true" tabindex="-1"></a><span class="co"># p adjusted method = Bonferroni</span></span>
-<span id="cb69-23"><a href="phylofactor.html#cb69-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter the phylofactor file and the phyloseq object to get a dataframe with model results, </span></span>
-<span id="cb69-24"><a href="phylofactor.html#cb69-24" aria-hidden="true" tabindex="-1"></a><span class="co"># abundances and taxa info</span></span>
-<span id="cb69-25"><a href="phylofactor.html#cb69-25" aria-hidden="true" tabindex="-1"></a><span class="co"># the third function input is &#39;4&#39; or &#39;5&#39;,  4 is used when the phylofactor </span></span>
-<span id="cb69-26"><a href="phylofactor.html#cb69-26" aria-hidden="true" tabindex="-1"></a><span class="co"># model setting was set to &#39;F&#39;, if &#39;var&#39; use 5</span></span>
-<span id="cb69-27"><a href="phylofactor.html#cb69-27" aria-hidden="true" tabindex="-1"></a>phyfacsummary <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/phyfacsummary.R&quot;</span>)</span>
-<span id="cb69-28"><a href="phylofactor.html#cb69-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-29"><a href="phylofactor.html#cb69-29" aria-hidden="true" tabindex="-1"></a><span class="do">## addILRtophyloseq function </span></span>
-<span id="cb69-30"><a href="phylofactor.html#cb69-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to take a phylofactor file and extract the mean sample ILRs and </span></span>
-<span id="cb69-31"><a href="phylofactor.html#cb69-31" aria-hidden="true" tabindex="-1"></a><span class="co"># add those to the phyloseq sample data those can then be used for plotting graphs </span></span>
-<span id="cb69-32"><a href="phylofactor.html#cb69-32" aria-hidden="true" tabindex="-1"></a><span class="co"># together with treatment data. </span></span>
-<span id="cb69-33"><a href="phylofactor.html#cb69-33" aria-hidden="true" tabindex="-1"></a>addILRtophyloseq <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/addILRtophyloseq.R&quot;</span>)</span>
-<span id="cb69-34"><a href="phylofactor.html#cb69-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-35"><a href="phylofactor.html#cb69-35" aria-hidden="true" tabindex="-1"></a><span class="do">## ILR_plotfunction</span></span>
-<span id="cb69-36"><a href="phylofactor.html#cb69-36" aria-hidden="true" tabindex="-1"></a>ILR_plotfunction <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/ILR_plotfunction.R&quot;</span>)</span>
-<span id="cb69-37"><a href="phylofactor.html#cb69-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-38"><a href="phylofactor.html#cb69-38" aria-hidden="true" tabindex="-1"></a><span class="do">## mytreefunctionwithbarplots</span></span>
-<span id="cb69-39"><a href="phylofactor.html#cb69-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Tree functions combining phylum colors with grey </span></span>
-<span id="cb69-40"><a href="phylofactor.html#cb69-40" aria-hidden="true" tabindex="-1"></a><span class="co"># phylofactor highlights. </span></span>
-<span id="cb69-41"><a href="phylofactor.html#cb69-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Requires a colour vector &#39;treecols&#39;</span></span>
-<span id="cb69-42"><a href="phylofactor.html#cb69-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Requires an order vector &#39;ordervec&#39; that includes the names of </span></span>
-<span id="cb69-43"><a href="phylofactor.html#cb69-43" aria-hidden="true" tabindex="-1"></a><span class="co"># all phyla to be included into the legend in that order (example shown below). </span></span>
-<span id="cb69-44"><a href="phylofactor.html#cb69-44" aria-hidden="true" tabindex="-1"></a>mytreefunctionwithbarplots <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/mytreefunctionwithbarplots.R&quot;</span>)</span>
-<span id="cb69-45"><a href="phylofactor.html#cb69-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-46"><a href="phylofactor.html#cb69-46" aria-hidden="true" tabindex="-1"></a><span class="do">## Prevalence table function</span></span>
-<span id="cb69-47"><a href="phylofactor.html#cb69-47" aria-hidden="true" tabindex="-1"></a><span class="co"># get overview of abundances, mean prevalence is the mean &#39;appearance&#39; of </span></span>
-<span id="cb69-48"><a href="phylofactor.html#cb69-48" aria-hidden="true" tabindex="-1"></a><span class="co"># ASVs of the taxon across all samples</span></span>
-<span id="cb69-49"><a href="phylofactor.html#cb69-49" aria-hidden="true" tabindex="-1"></a>prevalencedf <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/myprevalencetablefunction.R&quot;</span>)</span></code></pre></div>
+<span id="cb69-19"><a href="phylofactor.html#cb69-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
+<span id="cb69-20"><a href="phylofactor.html#cb69-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-21"><a href="phylofactor.html#cb69-21" aria-hidden="true" tabindex="-1"></a><span class="do">## phyfacsummary function </span></span>
+<span id="cb69-22"><a href="phylofactor.html#cb69-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to summarise all phylofactor factors in a meaningful way into a dataframe</span></span>
+<span id="cb69-23"><a href="phylofactor.html#cb69-23" aria-hidden="true" tabindex="-1"></a><span class="co"># p adjusted method = Bonferroni</span></span>
+<span id="cb69-24"><a href="phylofactor.html#cb69-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter the phylofactor file and the phyloseq object to get a dataframe with model results, </span></span>
+<span id="cb69-25"><a href="phylofactor.html#cb69-25" aria-hidden="true" tabindex="-1"></a><span class="co"># abundances and taxa info</span></span>
+<span id="cb69-26"><a href="phylofactor.html#cb69-26" aria-hidden="true" tabindex="-1"></a><span class="co"># the third function input is &#39;4&#39; or &#39;5&#39;,  4 is used when the phylofactor </span></span>
+<span id="cb69-27"><a href="phylofactor.html#cb69-27" aria-hidden="true" tabindex="-1"></a><span class="co"># model setting was set to &#39;F&#39;, if &#39;var&#39; use 5</span></span>
+<span id="cb69-28"><a href="phylofactor.html#cb69-28" aria-hidden="true" tabindex="-1"></a>phyfacsummary <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/phyfacsummary.R&quot;</span>)</span>
+<span id="cb69-29"><a href="phylofactor.html#cb69-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-30"><a href="phylofactor.html#cb69-30" aria-hidden="true" tabindex="-1"></a><span class="do">## addILRtophyloseq function </span></span>
+<span id="cb69-31"><a href="phylofactor.html#cb69-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to take a phylofactor file and extract the mean sample ILRs and </span></span>
+<span id="cb69-32"><a href="phylofactor.html#cb69-32" aria-hidden="true" tabindex="-1"></a><span class="co"># add those to the phyloseq sample data those can then be used for plotting graphs </span></span>
+<span id="cb69-33"><a href="phylofactor.html#cb69-33" aria-hidden="true" tabindex="-1"></a><span class="co"># together with treatment data. </span></span>
+<span id="cb69-34"><a href="phylofactor.html#cb69-34" aria-hidden="true" tabindex="-1"></a>addILRtophyloseq <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/addILRtophyloseq.R&quot;</span>)</span>
+<span id="cb69-35"><a href="phylofactor.html#cb69-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-36"><a href="phylofactor.html#cb69-36" aria-hidden="true" tabindex="-1"></a><span class="do">## ILR_plotfunction</span></span>
+<span id="cb69-37"><a href="phylofactor.html#cb69-37" aria-hidden="true" tabindex="-1"></a>ILR_plotfunction <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/ILR_plotfunction.R&quot;</span>)</span>
+<span id="cb69-38"><a href="phylofactor.html#cb69-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-39"><a href="phylofactor.html#cb69-39" aria-hidden="true" tabindex="-1"></a><span class="do">## mytreefunctionwithbarplots</span></span>
+<span id="cb69-40"><a href="phylofactor.html#cb69-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Tree functions combining phylum colors with grey </span></span>
+<span id="cb69-41"><a href="phylofactor.html#cb69-41" aria-hidden="true" tabindex="-1"></a><span class="co"># phylofactor highlights. </span></span>
+<span id="cb69-42"><a href="phylofactor.html#cb69-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Requires a colour vector &#39;treecols&#39;</span></span>
+<span id="cb69-43"><a href="phylofactor.html#cb69-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Requires an order vector &#39;ordervec&#39; that includes the names of </span></span>
+<span id="cb69-44"><a href="phylofactor.html#cb69-44" aria-hidden="true" tabindex="-1"></a><span class="co"># all phyla to be included into the legend in that order (example shown below). </span></span>
+<span id="cb69-45"><a href="phylofactor.html#cb69-45" aria-hidden="true" tabindex="-1"></a>mytreefunctionwithbarplots <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/mytreefunctionwithbarplots.R&quot;</span>)</span>
+<span id="cb69-46"><a href="phylofactor.html#cb69-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-47"><a href="phylofactor.html#cb69-47" aria-hidden="true" tabindex="-1"></a><span class="do">## Prevalence table function</span></span>
+<span id="cb69-48"><a href="phylofactor.html#cb69-48" aria-hidden="true" tabindex="-1"></a><span class="co"># get overview of abundances, mean prevalence is the mean &#39;appearance&#39; of </span></span>
+<span id="cb69-49"><a href="phylofactor.html#cb69-49" aria-hidden="true" tabindex="-1"></a><span class="co"># ASVs of the taxon across all samples</span></span>
+<span id="cb69-50"><a href="phylofactor.html#cb69-50" aria-hidden="true" tabindex="-1"></a>prevalencedf <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/myprevalencetablefunction.R&quot;</span>)</span></code></pre></div>
 </div>
 <div id="load-phyloseq-object-2" class="section level3 hasAnchor" number="8.2.2">
 <h3><span class="header-section-number">8.2.2</span> Load phyloseq object<a href="phylofactor.html#load-phyloseq-object-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -488,7 +489,7 @@ div.csl-indent {
 <pre><code>## [1] TRUE</code></pre>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="phylofactor.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run phylofactor</span></span>
 <span id="cb80-2"><a href="phylofactor.html#cb80-2" aria-hidden="true" tabindex="-1"></a>PF <span class="ot">&lt;-</span>  phylofactor<span class="sc">::</span><span class="fu">PhyloFactor</span>(Data,tree_ur,X, </span>
-<span id="cb80-3"><a href="phylofactor.html#cb80-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">frmla=</span>Data<span class="sc">~</span>X,    <span class="co"># Data (ASV abundances) as a response to X (Location)</span></span>
+<span id="cb80-3"><a href="phylofactor.html#cb80-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">frmla=</span>Data<span class="sc">~</span> X,    <span class="co"># Data (ASV abundances) as a response to X (Location)</span></span>
 <span id="cb80-4"><a href="phylofactor.html#cb80-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">ncores =</span> <span class="dv">2</span>,      <span class="co"># number of cores </span></span>
 <span id="cb80-5"><a href="phylofactor.html#cb80-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">stop.early =</span> <span class="cn">NULL</span>, </span>
 <span id="cb80-6"><a href="phylofactor.html#cb80-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">transform.fcn=</span>log,    <span class="co"># log-ratio transform</span></span>
@@ -496,31 +497,31 @@ div.csl-indent {
 <span id="cb80-8"><a href="phylofactor.html#cb80-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">nfactors =</span> <span class="dv">13</span>, <span class="co"># the first 13 phylofactors only - in interest of time </span></span>
 <span id="cb80-9"><a href="phylofactor.html#cb80-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>)  <span class="co"># see notes above</span></span></code></pre></div>
 <pre><code>## 
- 1 factor completed in 0.0284 minutes.    Estimated time of completion: 2022-10-16 11:36:54   
+ 1 factor completed in 0.0253 minutes.    Estimated time of completion: 2022-10-16 18:04:53   
 
- 2 factors completed in 0.0517 minutes.     Estimated time of completion: 2022-10-16 11:36:52   
+ 2 factors completed in 0.0471 minutes.     Estimated time of completion: 2022-10-16 18:04:52   
 
- 3 factors completed in 0.0736 minutes.     Estimated time of completion: 2022-10-16 11:36:51   
+ 3 factors completed in 0.0687 minutes.     Estimated time of completion: 2022-10-16 18:04:51   
 
- 4 factors completed in 0.096 minutes.     Estimated time of completion: 2022-10-16 11:36:50   
+ 4 factors completed in 0.0907 minutes.     Estimated time of completion: 2022-10-16 18:04:51   
 
- 5 factors completed in 0.117 minutes.     Estimated time of completion: 2022-10-16 11:36:50   
+ 5 factors completed in 0.111 minutes.     Estimated time of completion: 2022-10-16 18:04:51   
 
- 6 factors completed in 0.138 minutes.     Estimated time of completion: 2022-10-16 11:36:50   
+ 6 factors completed in 0.131 minutes.     Estimated time of completion: 2022-10-16 18:04:50   
 
- 7 factors completed in 0.159 minutes.     Estimated time of completion: 2022-10-16 11:36:49   
+ 7 factors completed in 0.152 minutes.     Estimated time of completion: 2022-10-16 18:04:50   
 
- 8 factors completed in 0.18 minutes.     Estimated time of completion: 2022-10-16 11:36:49   
+ 8 factors completed in 0.172 minutes.     Estimated time of completion: 2022-10-16 18:04:50   
 
- 9 factors completed in 0.201 minutes.     Estimated time of completion: 2022-10-16 11:36:49   
+ 9 factors completed in 0.193 minutes.     Estimated time of completion: 2022-10-16 18:04:50   
 
- 10 factors completed in 0.222 minutes.     Estimated time of completion: 2022-10-16 11:36:49   
+ 10 factors completed in 0.213 minutes.     Estimated time of completion: 2022-10-16 18:04:50   
 
- 11 factors completed in 0.244 minutes.     Estimated time of completion: 2022-10-16 11:36:49   
+ 11 factors completed in 0.235 minutes.     Estimated time of completion: 2022-10-16 18:04:50   
 
- 12 factors completed in 0.264 minutes.     Estimated time of completion: 2022-10-16 11:36:49   
+ 12 factors completed in 0.255 minutes.     Estimated time of completion: 2022-10-16 18:04:50   
 
- 13 factors completed in 0.285 minutes.     Estimated time of completion: 2022-10-16 11:36:49   </code></pre>
+ 13 factors completed in 0.275 minutes.     Estimated time of completion: 2022-10-16 18:04:50   </code></pre>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="phylofactor.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># saveRDS(PF,&#39;pf-example.rds&#39;)  # save Phylofactor object to .rds file </span></span>
 <span id="cb82-2"><a href="phylofactor.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(tree, tree_ur, Data, X, meta.df) <span class="co">#remove unnecessary objects from R environment</span></span>
 <span id="cb82-3"><a href="phylofactor.html#cb82-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -842,31 +843,29 @@ div.csl-indent {
 <span id="cb96-12"><a href="phylofactor.html#cb96-12" aria-hidden="true" tabindex="-1"></a>plotdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">sample_data</span>(ps.ILR)) <span class="sc">%&gt;%</span> </span>
 <span id="cb96-13"><a href="phylofactor.html#cb96-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;Phylofactor&quot;</span>), </span>
 <span id="cb96-14"><a href="phylofactor.html#cb96-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">&quot;ILR&quot;</span>)</span>
-<span id="cb96-15"><a href="phylofactor.html#cb96-15" aria-hidden="true" tabindex="-1"></a><span class="co"># create factors of the ILR column</span></span>
-<span id="cb96-16"><a href="phylofactor.html#cb96-16" aria-hidden="true" tabindex="-1"></a>plotdata<span class="sc">$</span>ILR <span class="ot">&lt;-</span> <span class="fu">factor</span>(plotdata<span class="sc">$</span>ILR, <span class="at">levels =</span> plotdata[<span class="dv">1</span><span class="sc">:</span>PF<span class="sc">$</span>nfactors, ]<span class="sc">$</span>ILR)</span>
-<span id="cb96-17"><a href="phylofactor.html#cb96-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Select specific factor vectors for plotting using the factorvector to filter</span></span>
-<span id="cb96-18"><a href="phylofactor.html#cb96-18" aria-hidden="true" tabindex="-1"></a>plotdata_sub <span class="ot">&lt;-</span> plotdata <span class="sc">%&gt;%</span> </span>
-<span id="cb96-19"><a href="phylofactor.html#cb96-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ILR <span class="sc">%in%</span> factorvector)</span>
-<span id="cb96-20"><a href="phylofactor.html#cb96-20" aria-hidden="true" tabindex="-1"></a><span class="co"># create factors of the ILR column </span></span>
-<span id="cb96-21"><a href="phylofactor.html#cb96-21" aria-hidden="true" tabindex="-1"></a>plotdata_sub<span class="sc">$</span>ILR <span class="ot">&lt;-</span> <span class="fu">factor</span>(plotdata_sub<span class="sc">$</span>ILR, <span class="at">levels =</span> plotdata_sub[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(<span class="fu">unique</span>(plotdata_sub<span class="sc">$</span>ILR)), ]<span class="sc">$</span>ILR)</span>
-<span id="cb96-22"><a href="phylofactor.html#cb96-22" aria-hidden="true" tabindex="-1"></a><span class="co"># create ggplot object</span></span>
-<span id="cb96-23"><a href="phylofactor.html#cb96-23" aria-hidden="true" tabindex="-1"></a>pilr <span class="ot">&lt;-</span> plotdata_sub <span class="sc">%&gt;%</span> </span>
-<span id="cb96-24"><a href="phylofactor.html#cb96-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggboxplot</span>(<span class="at">x =</span> <span class="st">&quot;Location&quot;</span>, <span class="at">y =</span> <span class="st">&quot;value&quot;</span>, </span>
-<span id="cb96-25"><a href="phylofactor.html#cb96-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">combine =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb96-26"><a href="phylofactor.html#cb96-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet.by =</span> <span class="st">&quot;ILR&quot;</span>, </span>
-<span id="cb96-27"><a href="phylofactor.html#cb96-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;ILR&quot;</span>, </span>
-<span id="cb96-28"><a href="phylofactor.html#cb96-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">2</span>, </span>
-<span id="cb96-29"><a href="phylofactor.html#cb96-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.5</span>, </span>
-<span id="cb96-30"><a href="phylofactor.html#cb96-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> (<span class="st">&quot;Isometric log ratio (ILR)&quot;</span>), </span>
-<span id="cb96-31"><a href="phylofactor.html#cb96-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.labs.font =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">11</span>), </span>
-<span id="cb96-32"><a href="phylofactor.html#cb96-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.labs =</span> <span class="fu">list</span>(<span class="at">ILR =</span> labelvec)) <span class="sc">+</span> </span>
-<span id="cb96-33"><a href="phylofactor.html#cb96-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span>  <span class="co"># add jitter </span></span>
-<span id="cb96-34"><a href="phylofactor.html#cb96-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span>               <span class="co"># do not show legend</span></span>
-<span id="cb96-35"><a href="phylofactor.html#cb96-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>, </span>
-<span id="cb96-36"><a href="phylofactor.html#cb96-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">0.5</span>), <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(), <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>))</span>
-<span id="cb96-37"><a href="phylofactor.html#cb96-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-38"><a href="phylofactor.html#cb96-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose custom colors with + scale_fill_manual(values = yourcolvector)</span></span>
-<span id="cb96-39"><a href="phylofactor.html#cb96-39" aria-hidden="true" tabindex="-1"></a>pilr </span></code></pre></div>
+<span id="cb96-15"><a href="phylofactor.html#cb96-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Select specific factor vectors for plotting using the factorvector to filter</span></span>
+<span id="cb96-16"><a href="phylofactor.html#cb96-16" aria-hidden="true" tabindex="-1"></a>plotdata_sub <span class="ot">&lt;-</span> plotdata <span class="sc">%&gt;%</span> </span>
+<span id="cb96-17"><a href="phylofactor.html#cb96-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ILR <span class="sc">%in%</span> factorvector)</span>
+<span id="cb96-18"><a href="phylofactor.html#cb96-18" aria-hidden="true" tabindex="-1"></a><span class="co"># create factors of the ILR column </span></span>
+<span id="cb96-19"><a href="phylofactor.html#cb96-19" aria-hidden="true" tabindex="-1"></a>plotdata_sub<span class="sc">$</span>ILR <span class="ot">&lt;-</span> <span class="fu">factor</span>(plotdata_sub<span class="sc">$</span>ILR, <span class="at">levels =</span> plotdata_sub[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(<span class="fu">unique</span>(plotdata_sub<span class="sc">$</span>ILR)), ]<span class="sc">$</span>ILR)</span>
+<span id="cb96-20"><a href="phylofactor.html#cb96-20" aria-hidden="true" tabindex="-1"></a><span class="co"># create ggplot object</span></span>
+<span id="cb96-21"><a href="phylofactor.html#cb96-21" aria-hidden="true" tabindex="-1"></a>pilr <span class="ot">&lt;-</span> plotdata_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb96-22"><a href="phylofactor.html#cb96-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggboxplot</span>(<span class="at">x =</span> <span class="st">&quot;Location&quot;</span>, <span class="at">y =</span> <span class="st">&quot;value&quot;</span>, </span>
+<span id="cb96-23"><a href="phylofactor.html#cb96-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">combine =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb96-24"><a href="phylofactor.html#cb96-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet.by =</span> <span class="st">&quot;ILR&quot;</span>, </span>
+<span id="cb96-25"><a href="phylofactor.html#cb96-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;ILR&quot;</span>, </span>
+<span id="cb96-26"><a href="phylofactor.html#cb96-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">2</span>, </span>
+<span id="cb96-27"><a href="phylofactor.html#cb96-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.5</span>, </span>
+<span id="cb96-28"><a href="phylofactor.html#cb96-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> (<span class="st">&quot;Isometric log ratio (ILR)&quot;</span>), </span>
+<span id="cb96-29"><a href="phylofactor.html#cb96-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.labs.font =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">11</span>), </span>
+<span id="cb96-30"><a href="phylofactor.html#cb96-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.labs =</span> <span class="fu">list</span>(<span class="at">ILR =</span> labelvec)) <span class="sc">+</span> </span>
+<span id="cb96-31"><a href="phylofactor.html#cb96-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span>  <span class="co"># add jitter </span></span>
+<span id="cb96-32"><a href="phylofactor.html#cb96-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span>               <span class="co"># do not show legend</span></span>
+<span id="cb96-33"><a href="phylofactor.html#cb96-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>, </span>
+<span id="cb96-34"><a href="phylofactor.html#cb96-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">0.5</span>), <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(), <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>))</span>
+<span id="cb96-35"><a href="phylofactor.html#cb96-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-36"><a href="phylofactor.html#cb96-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose custom colors with + scale_fill_manual(values = yourcolvector)</span></span>
+<span id="cb96-37"><a href="phylofactor.html#cb96-37" aria-hidden="true" tabindex="-1"></a>pilr </span></code></pre></div>
 <p><img src="gitbook-demo_files/figure-html/pfviz1-1.png" width="480" /></p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="phylofactor.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively you can use the custom function `ILR_plotfunction.R` to get  the same output</span></span></code></pre></div>
 <p>This visualises the taxa relative abundances (represented by the ILR or balances) of the different ‘Locations’. For example, the relative abundances of factor 1 (genus <em>Thermoanaerobaculum</em>) are highest in Randers and Viborg. It also appears to be the factor with the clearest differentiation between locations, as the ILRs of other factors are more variable with wider boxplots and more outliers.</p>
@@ -899,85 +898,87 @@ div.csl-indent {
 <span id="cb99-11"><a href="phylofactor.html#cb99-11" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(treecols) <span class="ot">&lt;-</span> <span class="fu">unique</span>(taxa.df.phylum<span class="sc">$</span>Phylum)</span>
 <span id="cb99-12"><a href="phylofactor.html#cb99-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(taxa.df.phylum)</span>
 <span id="cb99-13"><a href="phylofactor.html#cb99-13" aria-hidden="true" tabindex="-1"></a>treecols</span></code></pre></div>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="phylofactor.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use custom prevalence table function and select phyloseq object and phylum-level</span></span>
-<span id="cb100-2"><a href="phylofactor.html#cb100-2" aria-hidden="true" tabindex="-1"></a>taxa.df.phylum <span class="ot">&lt;-</span> <span class="fu">prevalencedf</span>(ps.phylo, Phylum)</span>
-<span id="cb100-3"><a href="phylofactor.html#cb100-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose the phyla with highest ASV counts</span></span>
-<span id="cb100-4"><a href="phylofactor.html#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="co"># This vector will determine the length and order of the phyla shown in the legend</span></span>
-<span id="cb100-5"><a href="phylofactor.html#cb100-5" aria-hidden="true" tabindex="-1"></a><span class="co"># change this to your needs. </span></span>
-<span id="cb100-6"><a href="phylofactor.html#cb100-6" aria-hidden="true" tabindex="-1"></a><span class="co"># In this case we fiter n &gt; 3 and create a vector of the Phylum column</span></span>
-<span id="cb100-7"><a href="phylofactor.html#cb100-7" aria-hidden="true" tabindex="-1"></a>ordervec <span class="ot">&lt;-</span> (taxa.df.phylum <span class="sc">%&gt;%</span> </span>
-<span id="cb100-8"><a href="phylofactor.html#cb100-8" aria-hidden="true" tabindex="-1"></a>            dplyr<span class="sc">::</span><span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">3</span>))<span class="sc">$</span>Phylum</span>
-<span id="cb100-9"><a href="phylofactor.html#cb100-9" aria-hidden="true" tabindex="-1"></a><span class="co"># You could also create a custom vector. For example: </span></span>
-<span id="cb100-10"><a href="phylofactor.html#cb100-10" aria-hidden="true" tabindex="-1"></a><span class="co">#ordervec &lt;- c(&quot;Proteobacteria&quot; ,  &quot;Firmicutes&quot; , &quot;Actinobacteriota&quot;,</span></span>
-<span id="cb100-11"><a href="phylofactor.html#cb100-11" aria-hidden="true" tabindex="-1"></a><span class="co">#              &quot;Bacteroidota&quot;,  &quot;Chloroflexi&quot;,  &quot;Acidobacteriota&quot;)</span></span>
-<span id="cb100-12"><a href="phylofactor.html#cb100-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb100-13"><a href="phylofactor.html#cb100-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Plot the tree</span></span>
-<span id="cb100-14"><a href="phylofactor.html#cb100-14" aria-hidden="true" tabindex="-1"></a><span class="co"># setting the variables</span></span>
-<span id="cb100-15"><a href="phylofactor.html#cb100-15" aria-hidden="true" tabindex="-1"></a>layout <span class="ot">=</span> <span class="st">&quot;circular&quot;</span></span>
-<span id="cb100-16"><a href="phylofactor.html#cb100-16" aria-hidden="true" tabindex="-1"></a>branch.length <span class="ot">=</span> <span class="st">&quot;none&quot;</span></span>
-<span id="cb100-17"><a href="phylofactor.html#cb100-17" aria-hidden="true" tabindex="-1"></a>metadatacolumn <span class="ot">&lt;-</span> <span class="st">&#39;Location&#39;</span></span>
-<span id="cb100-18"><a href="phylofactor.html#cb100-18" aria-hidden="true" tabindex="-1"></a>offset.text <span class="ot">=</span> <span class="dv">5</span></span>
-<span id="cb100-19"><a href="phylofactor.html#cb100-19" aria-hidden="true" tabindex="-1"></a>pwidth <span class="ot">=</span> <span class="fl">0.05</span></span>
-<span id="cb100-20"><a href="phylofactor.html#cb100-20" aria-hidden="true" tabindex="-1"></a>factorvector <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>, <span class="dv">11</span>, <span class="dv">13</span>)  <span class="co"># choose which factors to highlight</span></span>
-<span id="cb100-21"><a href="phylofactor.html#cb100-21" aria-hidden="true" tabindex="-1"></a><span class="co"># &#39;Copy&#39; tree object from the phylofactor object into the phyloseq object for plotting</span></span>
-<span id="cb100-22"><a href="phylofactor.html#cb100-22" aria-hidden="true" tabindex="-1"></a>phyloseq<span class="sc">::</span><span class="fu">phy_tree</span>(ps.phylo) <span class="ot">&lt;-</span> PF<span class="sc">$</span>tree</span>
-<span id="cb100-23"><a href="phylofactor.html#cb100-23" aria-hidden="true" tabindex="-1"></a><span class="co"># create long dataframe of metadata and select the columns OTU and Abundance</span></span>
-<span id="cb100-24"><a href="phylofactor.html#cb100-24" aria-hidden="true" tabindex="-1"></a><span class="co"># then filter only unique rows </span></span>
-<span id="cb100-25"><a href="phylofactor.html#cb100-25" aria-hidden="true" tabindex="-1"></a>melt_simple <span class="ot">&lt;-</span> <span class="fu">psmelt</span>(ps.phylo) <span class="sc">%&gt;%</span> </span>
-<span id="cb100-26"><a href="phylofactor.html#cb100-26" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(OTU, Abundance) <span class="sc">%&gt;%</span> </span>
-<span id="cb100-27"><a href="phylofactor.html#cb100-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
-<span id="cb100-28"><a href="phylofactor.html#cb100-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a phyla list to include into the tree for colouring</span></span>
-<span id="cb100-29"><a href="phylofactor.html#cb100-29" aria-hidden="true" tabindex="-1"></a>taxa.df.phylum <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">tax_table</span>(ps.phylo)<span class="sc">@</span>.Data <span class="sc">%&gt;%</span> </span>
-<span id="cb100-30"><a href="phylofactor.html#cb100-30" aria-hidden="true" tabindex="-1"></a>  as.data.frame <span class="sc">%&gt;%</span> </span>
-<span id="cb100-31"><a href="phylofactor.html#cb100-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">&quot;OTUID&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb100-32"><a href="phylofactor.html#cb100-32" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(OTUID, Phylum) <span class="sc">%&gt;%</span> </span>
-<span id="cb100-33"><a href="phylofactor.html#cb100-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;OTUID&quot;</span>)</span>
-<span id="cb100-34"><a href="phylofactor.html#cb100-34" aria-hidden="true" tabindex="-1"></a>phyla.list <span class="ot">&lt;-</span> <span class="fu">split</span>(<span class="fu">rownames</span>(taxa.df.phylum), </span>
-<span id="cb100-35"><a href="phylofactor.html#cb100-35" aria-hidden="true" tabindex="-1"></a>                    taxa.df.phylum<span class="sc">$</span>Phylum, </span>
-<span id="cb100-36"><a href="phylofactor.html#cb100-36" aria-hidden="true" tabindex="-1"></a>                    <span class="at">drop =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb100-37"><a href="phylofactor.html#cb100-37" aria-hidden="true" tabindex="-1"></a>tree.df <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">phy_tree</span>(PF<span class="sc">$</span>tree)</span>
-<span id="cb100-38"><a href="phylofactor.html#cb100-38" aria-hidden="true" tabindex="-1"></a>ggtree_gps <span class="ot">&lt;-</span> ggtree<span class="sc">::</span><span class="fu">groupOTU</span>(tree.df, phyla.list, <span class="st">&quot;Phylum&quot;</span>)</span>
-<span id="cb100-39"><a href="phylofactor.html#cb100-39" aria-hidden="true" tabindex="-1"></a><span class="co"># gg plotting</span></span>
-<span id="cb100-40"><a href="phylofactor.html#cb100-40" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> ggtree<span class="sc">::</span><span class="fu">ggtree</span>(ggtree_gps, <span class="fu">aes</span>(<span class="at">color =</span> Phylum), <span class="at">layout =</span> layout, </span>
-<span id="cb100-41"><a href="phylofactor.html#cb100-41" aria-hidden="true" tabindex="-1"></a>        <span class="at">branch.length =</span> branch.length) <span class="sc">+</span> </span>
-<span id="cb100-42"><a href="phylofactor.html#cb100-42" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb100-43"><a href="phylofactor.html#cb100-43" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> treecols, <span class="at">limits =</span> ordervec, </span>
-<span id="cb100-44"><a href="phylofactor.html#cb100-44" aria-hidden="true" tabindex="-1"></a>        <span class="at">breaks =</span> ordervec, </span>
-<span id="cb100-45"><a href="phylofactor.html#cb100-45" aria-hidden="true" tabindex="-1"></a>        <span class="at">guide =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>), </span>
-<span id="cb100-46"><a href="phylofactor.html#cb100-46" aria-hidden="true" tabindex="-1"></a>        <span class="at">keywidth =</span> <span class="fl">0.2</span>, <span class="at">keyheight =</span> <span class="fl">0.2</span>, <span class="at">order =</span> <span class="dv">1</span>))</span>
-<span id="cb100-47"><a href="phylofactor.html#cb100-47" aria-hidden="true" tabindex="-1"></a><span class="co"># add barplots on the outside, representing relative abundances</span></span>
-<span id="cb100-48"><a href="phylofactor.html#cb100-48" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggnewscale<span class="sc">::</span><span class="fu">new_scale_fill</span>() <span class="sc">+</span> </span>
-<span id="cb100-49"><a href="phylofactor.html#cb100-49" aria-hidden="true" tabindex="-1"></a>         <span class="fu">geom_fruit</span>(<span class="at">data =</span> melt_simple, </span>
-<span id="cb100-50"><a href="phylofactor.html#cb100-50" aria-hidden="true" tabindex="-1"></a>          <span class="at">geom =</span> geom_bar, </span>
-<span id="cb100-51"><a href="phylofactor.html#cb100-51" aria-hidden="true" tabindex="-1"></a>          <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> OTU, <span class="at">x =</span> Abundance, <span class="at">group =</span> label, </span>
-<span id="cb100-52"><a href="phylofactor.html#cb100-52" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill =</span> Phylum), <span class="at">pwidth =</span> <span class="fl">0.38</span>, <span class="at">orientation =</span> <span class="st">&quot;y&quot;</span>, </span>
-<span id="cb100-53"><a href="phylofactor.html#cb100-53" aria-hidden="true" tabindex="-1"></a>          <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb100-54"><a href="phylofactor.html#cb100-54" aria-hidden="true" tabindex="-1"></a>          <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> treecols, </span>
-<span id="cb100-55"><a href="phylofactor.html#cb100-55" aria-hidden="true" tabindex="-1"></a>          <span class="at">limits =</span> ordervec, </span>
-<span id="cb100-56"><a href="phylofactor.html#cb100-56" aria-hidden="true" tabindex="-1"></a>          <span class="at">breaks =</span> ordervec)</span>
-<span id="cb100-57"><a href="phylofactor.html#cb100-57" aria-hidden="true" tabindex="-1"></a><span class="do">## add phylofactor highlights in grey </span></span>
-<span id="cb100-58"><a href="phylofactor.html#cb100-58" aria-hidden="true" tabindex="-1"></a>factor.map <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Phylofactor =</span> <span class="dv">1</span><span class="sc">:</span>PF<span class="sc">$</span>nfactors, <span class="at">group =</span> <span class="fu">rep</span>(<span class="dv">1</span>, PF<span class="sc">$</span>nfactors))</span>
-<span id="cb100-59"><a href="phylofactor.html#cb100-59" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">nrow</span>(factor.map)</span>
-<span id="cb100-60"><a href="phylofactor.html#cb100-60" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> ape<span class="sc">::</span><span class="fu">Ntip</span>(PF<span class="sc">$</span>tree)</span>
-<span id="cb100-61"><a href="phylofactor.html#cb100-61" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb100-62"><a href="phylofactor.html#cb100-62" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m) {</span>
-<span id="cb100-63"><a href="phylofactor.html#cb100-63" aria-hidden="true" tabindex="-1"></a>    grp <span class="ot">&lt;-</span> PF<span class="sc">$</span>tree<span class="sc">$</span>tip.label[PF<span class="sc">$</span>groups[[factor.map[i,<span class="dv">1</span>]]][[factor.map[i, <span class="dv">2</span>]]]]</span>
-<span id="cb100-64"><a href="phylofactor.html#cb100-64" aria-hidden="true" tabindex="-1"></a>    grp <span class="ot">&lt;-</span> <span class="fu">intersect</span>(grp, PF<span class="sc">$</span>tree<span class="sc">$</span>tip.label)</span>
-<span id="cb100-65"><a href="phylofactor.html#cb100-65" aria-hidden="true" tabindex="-1"></a>    nd <span class="ot">&lt;-</span> <span class="fu">c</span>(nd, tidytree<span class="sc">::</span><span class="fu">MRCA</span>(PF<span class="sc">$</span>tree, grp))</span>
-<span id="cb100-66"><a href="phylofactor.html#cb100-66" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb100-67"><a href="phylofactor.html#cb100-67" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(factor.map, <span class="at">node =</span> nd)</span>
-<span id="cb100-68"><a href="phylofactor.html#cb100-68" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Phylofactor <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>Phylofactor, <span class="at">levels =</span> df<span class="sc">$</span>Phylofactor)</span>
-<span id="cb100-69"><a href="phylofactor.html#cb100-69" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggtree<span class="sc">::</span><span class="fu">geom_hilight</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">node =</span> node), </span>
-<span id="cb100-70"><a href="phylofactor.html#cb100-70" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill =</span> <span class="st">&quot;black&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>)</span>
-<span id="cb100-71"><a href="phylofactor.html#cb100-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a text label to identify the number and location of the phylofactor</span></span>
-<span id="cb100-72"><a href="phylofactor.html#cb100-72" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> factorvector) {</span>
-<span id="cb100-73"><a href="phylofactor.html#cb100-73" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_cladelabel</span>(<span class="at">node =</span> </span>
-<span id="cb100-74"><a href="phylofactor.html#cb100-74" aria-hidden="true" tabindex="-1"></a>                 (df <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Phylofactor <span class="sc">==</span>  i))<span class="sc">$</span>node, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;PF&quot;</span>, </span>
-<span id="cb100-75"><a href="phylofactor.html#cb100-75" aria-hidden="true" tabindex="-1"></a>                 (df <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Phylofactor <span class="sc">==</span> i))<span class="sc">$</span>Phylofactor), </span>
-<span id="cb100-76"><a href="phylofactor.html#cb100-76" aria-hidden="true" tabindex="-1"></a>                 <span class="at">offset.text =</span> offset.text, </span>
-<span id="cb100-77"><a href="phylofactor.html#cb100-77" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hjust =</span> <span class="st">&quot;center&quot;</span>)</span>
-<span id="cb100-78"><a href="phylofactor.html#cb100-78" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb100-79"><a href="phylofactor.html#cb100-79" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(taxa.df.phylum, df,factor.map)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="phylofactor.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Skip this and do the next code chunk if you just want to use the custom function</span></span>
+<span id="cb100-2"><a href="phylofactor.html#cb100-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-3"><a href="phylofactor.html#cb100-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Use custom prevalence table function and select phyloseq object and phylum-level</span></span>
+<span id="cb100-4"><a href="phylofactor.html#cb100-4" aria-hidden="true" tabindex="-1"></a>taxa.df.phylum <span class="ot">&lt;-</span> <span class="fu">prevalencedf</span>(ps.phylo, Phylum)</span>
+<span id="cb100-5"><a href="phylofactor.html#cb100-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose the phyla with highest ASV counts</span></span>
+<span id="cb100-6"><a href="phylofactor.html#cb100-6" aria-hidden="true" tabindex="-1"></a><span class="co"># This vector will determine the length and order of the phyla shown in the legend</span></span>
+<span id="cb100-7"><a href="phylofactor.html#cb100-7" aria-hidden="true" tabindex="-1"></a><span class="co"># change this to your needs. </span></span>
+<span id="cb100-8"><a href="phylofactor.html#cb100-8" aria-hidden="true" tabindex="-1"></a><span class="co"># In this case we fiter n &gt; 3 and create a vector of the Phylum column</span></span>
+<span id="cb100-9"><a href="phylofactor.html#cb100-9" aria-hidden="true" tabindex="-1"></a>ordervec <span class="ot">&lt;-</span> (taxa.df.phylum <span class="sc">%&gt;%</span> </span>
+<span id="cb100-10"><a href="phylofactor.html#cb100-10" aria-hidden="true" tabindex="-1"></a>            dplyr<span class="sc">::</span><span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">3</span>))<span class="sc">$</span>Phylum</span>
+<span id="cb100-11"><a href="phylofactor.html#cb100-11" aria-hidden="true" tabindex="-1"></a><span class="co"># You could also create a custom vector. For example: </span></span>
+<span id="cb100-12"><a href="phylofactor.html#cb100-12" aria-hidden="true" tabindex="-1"></a><span class="co">#ordervec &lt;- c(&quot;Proteobacteria&quot; ,  &quot;Firmicutes&quot; , &quot;Actinobacteriota&quot;,</span></span>
+<span id="cb100-13"><a href="phylofactor.html#cb100-13" aria-hidden="true" tabindex="-1"></a><span class="co">#              &quot;Bacteroidota&quot;,  &quot;Chloroflexi&quot;,  &quot;Acidobacteriota&quot;)</span></span>
+<span id="cb100-14"><a href="phylofactor.html#cb100-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb100-15"><a href="phylofactor.html#cb100-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Plot the tree</span></span>
+<span id="cb100-16"><a href="phylofactor.html#cb100-16" aria-hidden="true" tabindex="-1"></a><span class="co"># setting the variables</span></span>
+<span id="cb100-17"><a href="phylofactor.html#cb100-17" aria-hidden="true" tabindex="-1"></a>layout <span class="ot">=</span> <span class="st">&quot;circular&quot;</span></span>
+<span id="cb100-18"><a href="phylofactor.html#cb100-18" aria-hidden="true" tabindex="-1"></a>branch.length <span class="ot">=</span> <span class="st">&quot;none&quot;</span></span>
+<span id="cb100-19"><a href="phylofactor.html#cb100-19" aria-hidden="true" tabindex="-1"></a>metadatacolumn <span class="ot">&lt;-</span> <span class="st">&#39;Location&#39;</span></span>
+<span id="cb100-20"><a href="phylofactor.html#cb100-20" aria-hidden="true" tabindex="-1"></a>offset.text <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb100-21"><a href="phylofactor.html#cb100-21" aria-hidden="true" tabindex="-1"></a>pwidth <span class="ot">=</span> <span class="fl">0.05</span></span>
+<span id="cb100-22"><a href="phylofactor.html#cb100-22" aria-hidden="true" tabindex="-1"></a>factorvector <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>, <span class="dv">11</span>, <span class="dv">13</span>)  <span class="co"># choose which factors to highlight</span></span>
+<span id="cb100-23"><a href="phylofactor.html#cb100-23" aria-hidden="true" tabindex="-1"></a><span class="co"># &#39;Copy&#39; tree object from the phylofactor object into the phyloseq object for plotting</span></span>
+<span id="cb100-24"><a href="phylofactor.html#cb100-24" aria-hidden="true" tabindex="-1"></a>phyloseq<span class="sc">::</span><span class="fu">phy_tree</span>(ps.phylo) <span class="ot">&lt;-</span> PF<span class="sc">$</span>tree</span>
+<span id="cb100-25"><a href="phylofactor.html#cb100-25" aria-hidden="true" tabindex="-1"></a><span class="co"># create long dataframe of metadata and select the columns OTU and Abundance</span></span>
+<span id="cb100-26"><a href="phylofactor.html#cb100-26" aria-hidden="true" tabindex="-1"></a><span class="co"># then filter only unique rows </span></span>
+<span id="cb100-27"><a href="phylofactor.html#cb100-27" aria-hidden="true" tabindex="-1"></a>melt_simple <span class="ot">&lt;-</span> <span class="fu">psmelt</span>(ps.phylo) <span class="sc">%&gt;%</span> </span>
+<span id="cb100-28"><a href="phylofactor.html#cb100-28" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(OTU, Abundance) <span class="sc">%&gt;%</span> </span>
+<span id="cb100-29"><a href="phylofactor.html#cb100-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb100-30"><a href="phylofactor.html#cb100-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a phyla list to include into the tree for colouring</span></span>
+<span id="cb100-31"><a href="phylofactor.html#cb100-31" aria-hidden="true" tabindex="-1"></a>taxa.df.phylum <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">tax_table</span>(ps.phylo)<span class="sc">@</span>.Data <span class="sc">%&gt;%</span> </span>
+<span id="cb100-32"><a href="phylofactor.html#cb100-32" aria-hidden="true" tabindex="-1"></a>  as.data.frame <span class="sc">%&gt;%</span> </span>
+<span id="cb100-33"><a href="phylofactor.html#cb100-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">&quot;OTUID&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb100-34"><a href="phylofactor.html#cb100-34" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(OTUID, Phylum) <span class="sc">%&gt;%</span> </span>
+<span id="cb100-35"><a href="phylofactor.html#cb100-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;OTUID&quot;</span>)</span>
+<span id="cb100-36"><a href="phylofactor.html#cb100-36" aria-hidden="true" tabindex="-1"></a>phyla.list <span class="ot">&lt;-</span> <span class="fu">split</span>(<span class="fu">rownames</span>(taxa.df.phylum), </span>
+<span id="cb100-37"><a href="phylofactor.html#cb100-37" aria-hidden="true" tabindex="-1"></a>                    taxa.df.phylum<span class="sc">$</span>Phylum, </span>
+<span id="cb100-38"><a href="phylofactor.html#cb100-38" aria-hidden="true" tabindex="-1"></a>                    <span class="at">drop =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb100-39"><a href="phylofactor.html#cb100-39" aria-hidden="true" tabindex="-1"></a>tree.df <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">phy_tree</span>(PF<span class="sc">$</span>tree)</span>
+<span id="cb100-40"><a href="phylofactor.html#cb100-40" aria-hidden="true" tabindex="-1"></a>ggtree_gps <span class="ot">&lt;-</span> ggtree<span class="sc">::</span><span class="fu">groupOTU</span>(tree.df, phyla.list, <span class="st">&quot;Phylum&quot;</span>)</span>
+<span id="cb100-41"><a href="phylofactor.html#cb100-41" aria-hidden="true" tabindex="-1"></a><span class="co"># gg plotting</span></span>
+<span id="cb100-42"><a href="phylofactor.html#cb100-42" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> ggtree<span class="sc">::</span><span class="fu">ggtree</span>(ggtree_gps, <span class="fu">aes</span>(<span class="at">color =</span> Phylum), <span class="at">layout =</span> layout, </span>
+<span id="cb100-43"><a href="phylofactor.html#cb100-43" aria-hidden="true" tabindex="-1"></a>        <span class="at">branch.length =</span> branch.length) <span class="sc">+</span> </span>
+<span id="cb100-44"><a href="phylofactor.html#cb100-44" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb100-45"><a href="phylofactor.html#cb100-45" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> treecols, <span class="at">limits =</span> ordervec, </span>
+<span id="cb100-46"><a href="phylofactor.html#cb100-46" aria-hidden="true" tabindex="-1"></a>        <span class="at">breaks =</span> ordervec, </span>
+<span id="cb100-47"><a href="phylofactor.html#cb100-47" aria-hidden="true" tabindex="-1"></a>        <span class="at">guide =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>), </span>
+<span id="cb100-48"><a href="phylofactor.html#cb100-48" aria-hidden="true" tabindex="-1"></a>        <span class="at">keywidth =</span> <span class="fl">0.2</span>, <span class="at">keyheight =</span> <span class="fl">0.2</span>, <span class="at">order =</span> <span class="dv">1</span>))</span>
+<span id="cb100-49"><a href="phylofactor.html#cb100-49" aria-hidden="true" tabindex="-1"></a><span class="co"># add barplots on the outside, representing relative abundances</span></span>
+<span id="cb100-50"><a href="phylofactor.html#cb100-50" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggnewscale<span class="sc">::</span><span class="fu">new_scale_fill</span>() <span class="sc">+</span> </span>
+<span id="cb100-51"><a href="phylofactor.html#cb100-51" aria-hidden="true" tabindex="-1"></a>         <span class="fu">geom_fruit</span>(<span class="at">data =</span> melt_simple, </span>
+<span id="cb100-52"><a href="phylofactor.html#cb100-52" aria-hidden="true" tabindex="-1"></a>          <span class="at">geom =</span> geom_bar, </span>
+<span id="cb100-53"><a href="phylofactor.html#cb100-53" aria-hidden="true" tabindex="-1"></a>          <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> OTU, <span class="at">x =</span> Abundance, <span class="at">group =</span> label, </span>
+<span id="cb100-54"><a href="phylofactor.html#cb100-54" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill =</span> Phylum), <span class="at">pwidth =</span> <span class="fl">0.38</span>, <span class="at">orientation =</span> <span class="st">&quot;y&quot;</span>, </span>
+<span id="cb100-55"><a href="phylofactor.html#cb100-55" aria-hidden="true" tabindex="-1"></a>          <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb100-56"><a href="phylofactor.html#cb100-56" aria-hidden="true" tabindex="-1"></a>          <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> treecols, </span>
+<span id="cb100-57"><a href="phylofactor.html#cb100-57" aria-hidden="true" tabindex="-1"></a>          <span class="at">limits =</span> ordervec, </span>
+<span id="cb100-58"><a href="phylofactor.html#cb100-58" aria-hidden="true" tabindex="-1"></a>          <span class="at">breaks =</span> ordervec)</span>
+<span id="cb100-59"><a href="phylofactor.html#cb100-59" aria-hidden="true" tabindex="-1"></a><span class="do">## add phylofactor highlights in grey </span></span>
+<span id="cb100-60"><a href="phylofactor.html#cb100-60" aria-hidden="true" tabindex="-1"></a>factor.map <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Phylofactor =</span> <span class="dv">1</span><span class="sc">:</span>PF<span class="sc">$</span>nfactors, <span class="at">group =</span> <span class="fu">rep</span>(<span class="dv">1</span>, PF<span class="sc">$</span>nfactors))</span>
+<span id="cb100-61"><a href="phylofactor.html#cb100-61" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">nrow</span>(factor.map)</span>
+<span id="cb100-62"><a href="phylofactor.html#cb100-62" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> ape<span class="sc">::</span><span class="fu">Ntip</span>(PF<span class="sc">$</span>tree)</span>
+<span id="cb100-63"><a href="phylofactor.html#cb100-63" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb100-64"><a href="phylofactor.html#cb100-64" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m) {</span>
+<span id="cb100-65"><a href="phylofactor.html#cb100-65" aria-hidden="true" tabindex="-1"></a>    grp <span class="ot">&lt;-</span> PF<span class="sc">$</span>tree<span class="sc">$</span>tip.label[PF<span class="sc">$</span>groups[[factor.map[i,<span class="dv">1</span>]]][[factor.map[i, <span class="dv">2</span>]]]]</span>
+<span id="cb100-66"><a href="phylofactor.html#cb100-66" aria-hidden="true" tabindex="-1"></a>    grp <span class="ot">&lt;-</span> <span class="fu">intersect</span>(grp, PF<span class="sc">$</span>tree<span class="sc">$</span>tip.label)</span>
+<span id="cb100-67"><a href="phylofactor.html#cb100-67" aria-hidden="true" tabindex="-1"></a>    nd <span class="ot">&lt;-</span> <span class="fu">c</span>(nd, tidytree<span class="sc">::</span><span class="fu">MRCA</span>(PF<span class="sc">$</span>tree, grp))</span>
+<span id="cb100-68"><a href="phylofactor.html#cb100-68" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb100-69"><a href="phylofactor.html#cb100-69" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(factor.map, <span class="at">node =</span> nd)</span>
+<span id="cb100-70"><a href="phylofactor.html#cb100-70" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Phylofactor <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>Phylofactor, <span class="at">levels =</span> df<span class="sc">$</span>Phylofactor)</span>
+<span id="cb100-71"><a href="phylofactor.html#cb100-71" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggtree<span class="sc">::</span><span class="fu">geom_hilight</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">node =</span> node), </span>
+<span id="cb100-72"><a href="phylofactor.html#cb100-72" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill =</span> <span class="st">&quot;black&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>)</span>
+<span id="cb100-73"><a href="phylofactor.html#cb100-73" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a text label to identify the number and location of the phylofactor</span></span>
+<span id="cb100-74"><a href="phylofactor.html#cb100-74" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> factorvector) {</span>
+<span id="cb100-75"><a href="phylofactor.html#cb100-75" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_cladelabel</span>(<span class="at">node =</span> </span>
+<span id="cb100-76"><a href="phylofactor.html#cb100-76" aria-hidden="true" tabindex="-1"></a>                 (df <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Phylofactor <span class="sc">==</span>  i))<span class="sc">$</span>node, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;PF&quot;</span>, </span>
+<span id="cb100-77"><a href="phylofactor.html#cb100-77" aria-hidden="true" tabindex="-1"></a>                 (df <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Phylofactor <span class="sc">==</span> i))<span class="sc">$</span>Phylofactor), </span>
+<span id="cb100-78"><a href="phylofactor.html#cb100-78" aria-hidden="true" tabindex="-1"></a>                 <span class="at">offset.text =</span> offset.text, </span>
+<span id="cb100-79"><a href="phylofactor.html#cb100-79" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hjust =</span> <span class="st">&quot;center&quot;</span>)</span>
+<span id="cb100-80"><a href="phylofactor.html#cb100-80" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb100-81"><a href="phylofactor.html#cb100-81" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(taxa.df.phylum, df,factor.map)</span></code></pre></div>
 <p>All the above steps can also be called with the custom function <code>mytreefunctionwithbarplots</code> which I provided in the intro. This makes for neater code in your probably already busy R studio editor. The following output is identical to the above:</p>
 <div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="phylofactor.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># requires the same ordervector as created above</span></span>
 <span id="cb101-2"><a href="phylofactor.html#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Use custom prevalence table function and select phyloseq object and phylum-level</span></span>
@@ -1043,58 +1044,62 @@ div.csl-indent {
 <span id="cb105-5"><a href="phylofactor.html#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="co"># here the aim is to show the first common taxon level for each phylofactor</span></span>
 <span id="cb105-6"><a href="phylofactor.html#cb105-6" aria-hidden="true" tabindex="-1"></a>tax.names <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">Taxa =</span> <span class="fu">c</span>(<span class="fu">data.frame</span>(<span class="fu">tax_table</span>(ps.phylo))[PF<span class="sc">$</span>tree<span class="sc">$</span>tip.label</span>
 <span id="cb105-7"><a href="phylofactor.html#cb105-7" aria-hidden="true" tabindex="-1"></a>                           [PF<span class="sc">$</span>groups[[factor.map[<span class="dv">1</span>,<span class="dv">1</span>]]][[factor.map[<span class="dv">1</span>, <span class="dv">2</span>]]]],]<span class="sc">$</span>Genus,</span>
-<span id="cb105-8"><a href="phylofactor.html#cb105-8" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">data.frame</span>(<span class="fu">tax_table</span>(ps.phylo))[PF<span class="sc">$</span>tree<span class="sc">$</span>tip.label</span>
-<span id="cb105-9"><a href="phylofactor.html#cb105-9" aria-hidden="true" tabindex="-1"></a>                           [PF<span class="sc">$</span>groups[[factor.map[<span class="dv">2</span>,<span class="dv">1</span>]]][[factor.map[<span class="dv">2</span>, <span class="dv">2</span>]]]],]<span class="sc">$</span>Family,</span>
-<span id="cb105-10"><a href="phylofactor.html#cb105-10" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">data.frame</span>(<span class="fu">tax_table</span>(ps.phylo))[PF<span class="sc">$</span>tree<span class="sc">$</span>tip.label</span>
-<span id="cb105-11"><a href="phylofactor.html#cb105-11" aria-hidden="true" tabindex="-1"></a>                           [PF<span class="sc">$</span>groups[[factor.map[<span class="dv">4</span>,<span class="dv">1</span>]]][[factor.map[<span class="dv">4</span>, <span class="dv">2</span>]]]],]<span class="sc">$</span>Family,</span>
+<span id="cb105-8"><a href="phylofactor.html#cb105-8" aria-hidden="true" tabindex="-1"></a>                           </span>
+<span id="cb105-9"><a href="phylofactor.html#cb105-9" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">data.frame</span>(<span class="fu">tax_table</span>(ps.phylo))[PF<span class="sc">$</span>tree<span class="sc">$</span>tip.label</span>
+<span id="cb105-10"><a href="phylofactor.html#cb105-10" aria-hidden="true" tabindex="-1"></a>                           [PF<span class="sc">$</span>groups[[factor.map[<span class="dv">2</span>,<span class="dv">1</span>]]][[factor.map[<span class="dv">2</span>, <span class="dv">2</span>]]]],]<span class="sc">$</span>Family,</span>
+<span id="cb105-11"><a href="phylofactor.html#cb105-11" aria-hidden="true" tabindex="-1"></a>                           </span>
 <span id="cb105-12"><a href="phylofactor.html#cb105-12" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">data.frame</span>(<span class="fu">tax_table</span>(ps.phylo))[PF<span class="sc">$</span>tree<span class="sc">$</span>tip.label</span>
-<span id="cb105-13"><a href="phylofactor.html#cb105-13" aria-hidden="true" tabindex="-1"></a>                           [PF<span class="sc">$</span>groups[[factor.map[<span class="dv">5</span>,<span class="dv">1</span>]]][[factor.map[<span class="dv">5</span>, <span class="dv">2</span>]]]],]<span class="sc">$</span>Genus,</span>
-<span id="cb105-14"><a href="phylofactor.html#cb105-14" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">data.frame</span>(<span class="fu">tax_table</span>(ps.phylo))[PF<span class="sc">$</span>tree<span class="sc">$</span>tip.label</span>
-<span id="cb105-15"><a href="phylofactor.html#cb105-15" aria-hidden="true" tabindex="-1"></a>                           [PF<span class="sc">$</span>groups[[factor.map[<span class="dv">11</span>,<span class="dv">1</span>]]][[factor.map[<span class="dv">11</span>, <span class="dv">2</span>]]]],]<span class="sc">$</span>Family) ) <span class="sc">%&gt;%</span> </span>
-<span id="cb105-16"><a href="phylofactor.html#cb105-16" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">unique</span>()</span>
-<span id="cb105-17"><a href="phylofactor.html#cb105-17" aria-hidden="true" tabindex="-1"></a><span class="co"># get node labels and add to factor.map</span></span>
-<span id="cb105-18"><a href="phylofactor.html#cb105-18" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">nrow</span>(factor.map)</span>
-<span id="cb105-19"><a href="phylofactor.html#cb105-19" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb105-20"><a href="phylofactor.html#cb105-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m) {</span>
-<span id="cb105-21"><a href="phylofactor.html#cb105-21" aria-hidden="true" tabindex="-1"></a>    grp <span class="ot">&lt;-</span> PF<span class="sc">$</span>tree<span class="sc">$</span>tip.label[PF<span class="sc">$</span>groups[[factor.map[i,<span class="dv">1</span>]]][[factor.map[i, <span class="dv">2</span>]]]]</span>
-<span id="cb105-22"><a href="phylofactor.html#cb105-22" aria-hidden="true" tabindex="-1"></a>    grp <span class="ot">&lt;-</span> <span class="fu">intersect</span>(grp, PF<span class="sc">$</span>tree<span class="sc">$</span>tip.label)</span>
-<span id="cb105-23"><a href="phylofactor.html#cb105-23" aria-hidden="true" tabindex="-1"></a>      nd <span class="ot">&lt;-</span> <span class="fu">c</span>(nd, tidytree<span class="sc">::</span><span class="fu">MRCA</span>(PF<span class="sc">$</span>tree, grp))</span>
-<span id="cb105-24"><a href="phylofactor.html#cb105-24" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb105-25"><a href="phylofactor.html#cb105-25" aria-hidden="true" tabindex="-1"></a>factor.map <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(factor.map, <span class="at">node =</span> nd)</span>
-<span id="cb105-26"><a href="phylofactor.html#cb105-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-27"><a href="phylofactor.html#cb105-27" aria-hidden="true" tabindex="-1"></a><span class="co"># add taxon annotations using the df</span></span>
-<span id="cb105-28"><a href="phylofactor.html#cb105-28" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_cladelabel</span>(<span class="at">node =</span> </span>
-<span id="cb105-29"><a href="phylofactor.html#cb105-29" aria-hidden="true" tabindex="-1"></a>                 (factor.map <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Phylofactor <span class="sc">==</span>  <span class="dv">1</span>))<span class="sc">$</span>node, </span>
-<span id="cb105-30"><a href="phylofactor.html#cb105-30" aria-hidden="true" tabindex="-1"></a>                 <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&#39;italic(&#39;</span>, tax.names[<span class="dv">1</span>,],<span class="st">&#39;)&#39;</span>), </span>
-<span id="cb105-31"><a href="phylofactor.html#cb105-31" aria-hidden="true" tabindex="-1"></a>                 <span class="at">offset.text =</span> <span class="dv">20</span>, </span>
-<span id="cb105-32"><a href="phylofactor.html#cb105-32" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hjust =</span> <span class="st">&quot;center&quot;</span>,</span>
-<span id="cb105-33"><a href="phylofactor.html#cb105-33" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fontsize =</span> <span class="dv">3</span>,</span>
-<span id="cb105-34"><a href="phylofactor.html#cb105-34" aria-hidden="true" tabindex="-1"></a>                 <span class="at">parse =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb105-35"><a href="phylofactor.html#cb105-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-36"><a href="phylofactor.html#cb105-36" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_cladelabel</span>(<span class="at">node =</span> </span>
-<span id="cb105-37"><a href="phylofactor.html#cb105-37" aria-hidden="true" tabindex="-1"></a>                 (factor.map <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Phylofactor <span class="sc">==</span> <span class="dv">2</span>))<span class="sc">$</span>node, </span>
-<span id="cb105-38"><a href="phylofactor.html#cb105-38" aria-hidden="true" tabindex="-1"></a>                 <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&#39;italic(&#39;</span>, tax.names[<span class="dv">2</span>,],<span class="st">&#39;)&#39;</span>), </span>
-<span id="cb105-39"><a href="phylofactor.html#cb105-39" aria-hidden="true" tabindex="-1"></a>                 <span class="at">offset.text =</span> <span class="dv">10</span>, </span>
-<span id="cb105-40"><a href="phylofactor.html#cb105-40" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hjust =</span> <span class="st">&quot;center&quot;</span>,</span>
-<span id="cb105-41"><a href="phylofactor.html#cb105-41" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fontsize =</span> <span class="dv">3</span>,</span>
-<span id="cb105-42"><a href="phylofactor.html#cb105-42" aria-hidden="true" tabindex="-1"></a>                 <span class="at">parse =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb105-43"><a href="phylofactor.html#cb105-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-44"><a href="phylofactor.html#cb105-44" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_cladelabel</span>(<span class="at">node =</span> </span>
-<span id="cb105-45"><a href="phylofactor.html#cb105-45" aria-hidden="true" tabindex="-1"></a>                 (factor.map <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Phylofactor <span class="sc">==</span> <span class="dv">4</span>))<span class="sc">$</span>node, </span>
-<span id="cb105-46"><a href="phylofactor.html#cb105-46" aria-hidden="true" tabindex="-1"></a>                 <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&#39;italic(&#39;</span>, tax.names[<span class="dv">3</span>,],<span class="st">&#39;)&#39;</span>), </span>
-<span id="cb105-47"><a href="phylofactor.html#cb105-47" aria-hidden="true" tabindex="-1"></a>                 <span class="at">offset.text =</span> <span class="dv">10</span>, </span>
-<span id="cb105-48"><a href="phylofactor.html#cb105-48" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hjust =</span> <span class="st">&quot;center&quot;</span>,</span>
-<span id="cb105-49"><a href="phylofactor.html#cb105-49" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fontsize =</span> <span class="dv">3</span>,</span>
-<span id="cb105-50"><a href="phylofactor.html#cb105-50" aria-hidden="true" tabindex="-1"></a>                 <span class="at">parse =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb105-51"><a href="phylofactor.html#cb105-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-52"><a href="phylofactor.html#cb105-52" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_cladelabel</span>(<span class="at">node =</span> </span>
-<span id="cb105-53"><a href="phylofactor.html#cb105-53" aria-hidden="true" tabindex="-1"></a>                 (factor.map <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Phylofactor <span class="sc">==</span> <span class="dv">11</span>))<span class="sc">$</span>node, </span>
-<span id="cb105-54"><a href="phylofactor.html#cb105-54" aria-hidden="true" tabindex="-1"></a>                 <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&#39;italic(&#39;</span>, tax.names[<span class="dv">4</span>,],<span class="st">&#39;)&#39;</span>), </span>
-<span id="cb105-55"><a href="phylofactor.html#cb105-55" aria-hidden="true" tabindex="-1"></a>                 <span class="at">offset.text =</span> <span class="dv">10</span>, </span>
-<span id="cb105-56"><a href="phylofactor.html#cb105-56" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hjust =</span> <span class="st">&quot;center&quot;</span>,</span>
-<span id="cb105-57"><a href="phylofactor.html#cb105-57" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fontsize =</span> <span class="dv">3</span>,</span>
-<span id="cb105-58"><a href="phylofactor.html#cb105-58" aria-hidden="true" tabindex="-1"></a>                 <span class="at">parse =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb105-59"><a href="phylofactor.html#cb105-59" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<span id="cb105-13"><a href="phylofactor.html#cb105-13" aria-hidden="true" tabindex="-1"></a>                           [PF<span class="sc">$</span>groups[[factor.map[<span class="dv">4</span>,<span class="dv">1</span>]]][[factor.map[<span class="dv">4</span>, <span class="dv">2</span>]]]],]<span class="sc">$</span>Family,</span>
+<span id="cb105-14"><a href="phylofactor.html#cb105-14" aria-hidden="true" tabindex="-1"></a>                           </span>
+<span id="cb105-15"><a href="phylofactor.html#cb105-15" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">data.frame</span>(<span class="fu">tax_table</span>(ps.phylo))[PF<span class="sc">$</span>tree<span class="sc">$</span>tip.label</span>
+<span id="cb105-16"><a href="phylofactor.html#cb105-16" aria-hidden="true" tabindex="-1"></a>                           [PF<span class="sc">$</span>groups[[factor.map[<span class="dv">5</span>,<span class="dv">1</span>]]][[factor.map[<span class="dv">5</span>, <span class="dv">2</span>]]]],]<span class="sc">$</span>Genus,</span>
+<span id="cb105-17"><a href="phylofactor.html#cb105-17" aria-hidden="true" tabindex="-1"></a>                           </span>
+<span id="cb105-18"><a href="phylofactor.html#cb105-18" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">data.frame</span>(<span class="fu">tax_table</span>(ps.phylo))[PF<span class="sc">$</span>tree<span class="sc">$</span>tip.label</span>
+<span id="cb105-19"><a href="phylofactor.html#cb105-19" aria-hidden="true" tabindex="-1"></a>                           [PF<span class="sc">$</span>groups[[factor.map[<span class="dv">11</span>,<span class="dv">1</span>]]][[factor.map[<span class="dv">11</span>, <span class="dv">2</span>]]]],]<span class="sc">$</span>Family) ) <span class="sc">%&gt;%</span> </span>
+<span id="cb105-20"><a href="phylofactor.html#cb105-20" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">unique</span>()</span>
+<span id="cb105-21"><a href="phylofactor.html#cb105-21" aria-hidden="true" tabindex="-1"></a><span class="co"># get node labels and add to factor.map</span></span>
+<span id="cb105-22"><a href="phylofactor.html#cb105-22" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">nrow</span>(factor.map)</span>
+<span id="cb105-23"><a href="phylofactor.html#cb105-23" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb105-24"><a href="phylofactor.html#cb105-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m) {</span>
+<span id="cb105-25"><a href="phylofactor.html#cb105-25" aria-hidden="true" tabindex="-1"></a>    grp <span class="ot">&lt;-</span> PF<span class="sc">$</span>tree<span class="sc">$</span>tip.label[PF<span class="sc">$</span>groups[[factor.map[i,<span class="dv">1</span>]]][[factor.map[i, <span class="dv">2</span>]]]]</span>
+<span id="cb105-26"><a href="phylofactor.html#cb105-26" aria-hidden="true" tabindex="-1"></a>    grp <span class="ot">&lt;-</span> <span class="fu">intersect</span>(grp, PF<span class="sc">$</span>tree<span class="sc">$</span>tip.label)</span>
+<span id="cb105-27"><a href="phylofactor.html#cb105-27" aria-hidden="true" tabindex="-1"></a>      nd <span class="ot">&lt;-</span> <span class="fu">c</span>(nd, tidytree<span class="sc">::</span><span class="fu">MRCA</span>(PF<span class="sc">$</span>tree, grp))</span>
+<span id="cb105-28"><a href="phylofactor.html#cb105-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb105-29"><a href="phylofactor.html#cb105-29" aria-hidden="true" tabindex="-1"></a>factor.map <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(factor.map, <span class="at">node =</span> nd)</span>
+<span id="cb105-30"><a href="phylofactor.html#cb105-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-31"><a href="phylofactor.html#cb105-31" aria-hidden="true" tabindex="-1"></a><span class="co"># add taxon annotations using the df</span></span>
+<span id="cb105-32"><a href="phylofactor.html#cb105-32" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_cladelabel</span>(<span class="at">node =</span> </span>
+<span id="cb105-33"><a href="phylofactor.html#cb105-33" aria-hidden="true" tabindex="-1"></a>                 (factor.map <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Phylofactor <span class="sc">==</span>  <span class="dv">1</span>))<span class="sc">$</span>node, </span>
+<span id="cb105-34"><a href="phylofactor.html#cb105-34" aria-hidden="true" tabindex="-1"></a>                 <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&#39;italic(&#39;</span>, tax.names[<span class="dv">1</span>,],<span class="st">&#39;)&#39;</span>), </span>
+<span id="cb105-35"><a href="phylofactor.html#cb105-35" aria-hidden="true" tabindex="-1"></a>                 <span class="at">offset.text =</span> <span class="dv">20</span>, </span>
+<span id="cb105-36"><a href="phylofactor.html#cb105-36" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hjust =</span> <span class="st">&quot;center&quot;</span>,</span>
+<span id="cb105-37"><a href="phylofactor.html#cb105-37" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fontsize =</span> <span class="dv">3</span>,</span>
+<span id="cb105-38"><a href="phylofactor.html#cb105-38" aria-hidden="true" tabindex="-1"></a>                 <span class="at">parse =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb105-39"><a href="phylofactor.html#cb105-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-40"><a href="phylofactor.html#cb105-40" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_cladelabel</span>(<span class="at">node =</span> </span>
+<span id="cb105-41"><a href="phylofactor.html#cb105-41" aria-hidden="true" tabindex="-1"></a>                 (factor.map <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Phylofactor <span class="sc">==</span> <span class="dv">2</span>))<span class="sc">$</span>node, </span>
+<span id="cb105-42"><a href="phylofactor.html#cb105-42" aria-hidden="true" tabindex="-1"></a>                 <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&#39;italic(&#39;</span>, tax.names[<span class="dv">2</span>,],<span class="st">&#39;)&#39;</span>), </span>
+<span id="cb105-43"><a href="phylofactor.html#cb105-43" aria-hidden="true" tabindex="-1"></a>                 <span class="at">offset.text =</span> <span class="dv">10</span>, </span>
+<span id="cb105-44"><a href="phylofactor.html#cb105-44" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hjust =</span> <span class="st">&quot;center&quot;</span>,</span>
+<span id="cb105-45"><a href="phylofactor.html#cb105-45" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fontsize =</span> <span class="dv">3</span>,</span>
+<span id="cb105-46"><a href="phylofactor.html#cb105-46" aria-hidden="true" tabindex="-1"></a>                 <span class="at">parse =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb105-47"><a href="phylofactor.html#cb105-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-48"><a href="phylofactor.html#cb105-48" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_cladelabel</span>(<span class="at">node =</span> </span>
+<span id="cb105-49"><a href="phylofactor.html#cb105-49" aria-hidden="true" tabindex="-1"></a>                 (factor.map <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Phylofactor <span class="sc">==</span> <span class="dv">4</span>))<span class="sc">$</span>node, </span>
+<span id="cb105-50"><a href="phylofactor.html#cb105-50" aria-hidden="true" tabindex="-1"></a>                 <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&#39;italic(&#39;</span>, tax.names[<span class="dv">3</span>,],<span class="st">&#39;)&#39;</span>), </span>
+<span id="cb105-51"><a href="phylofactor.html#cb105-51" aria-hidden="true" tabindex="-1"></a>                 <span class="at">offset.text =</span> <span class="dv">10</span>, </span>
+<span id="cb105-52"><a href="phylofactor.html#cb105-52" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hjust =</span> <span class="st">&quot;center&quot;</span>,</span>
+<span id="cb105-53"><a href="phylofactor.html#cb105-53" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fontsize =</span> <span class="dv">3</span>,</span>
+<span id="cb105-54"><a href="phylofactor.html#cb105-54" aria-hidden="true" tabindex="-1"></a>                 <span class="at">parse =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb105-55"><a href="phylofactor.html#cb105-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-56"><a href="phylofactor.html#cb105-56" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_cladelabel</span>(<span class="at">node =</span> </span>
+<span id="cb105-57"><a href="phylofactor.html#cb105-57" aria-hidden="true" tabindex="-1"></a>                 (factor.map <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Phylofactor <span class="sc">==</span> <span class="dv">11</span>))<span class="sc">$</span>node, </span>
+<span id="cb105-58"><a href="phylofactor.html#cb105-58" aria-hidden="true" tabindex="-1"></a>                 <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&#39;italic(&#39;</span>, tax.names[<span class="dv">4</span>,],<span class="st">&#39;)&#39;</span>), </span>
+<span id="cb105-59"><a href="phylofactor.html#cb105-59" aria-hidden="true" tabindex="-1"></a>                 <span class="at">offset.text =</span> <span class="dv">10</span>, </span>
+<span id="cb105-60"><a href="phylofactor.html#cb105-60" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hjust =</span> <span class="st">&quot;center&quot;</span>,</span>
+<span id="cb105-61"><a href="phylofactor.html#cb105-61" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fontsize =</span> <span class="dv">3</span>,</span>
+<span id="cb105-62"><a href="phylofactor.html#cb105-62" aria-hidden="true" tabindex="-1"></a>                 <span class="at">parse =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb105-63"><a href="phylofactor.html#cb105-63" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
 <p><img src="gitbook-demo_files/figure-html/coloredtree3-1.png" width="960" /></p>
 <p>Now its a little easier to identify the who is who. This is just another way to explore your phylogeny and how they relate to the phylofactors.</p>
 </div>
@@ -1123,7 +1128,7 @@ div.csl-indent {
 <span id="cb106-20"><a href="phylofactor.html#cb106-20" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> ggtree<span class="sc">::</span><span class="fu">ggtree</span>(PF<span class="sc">$</span>tree,</span>
 <span id="cb106-21"><a href="phylofactor.html#cb106-21" aria-hidden="true" tabindex="-1"></a>                    <span class="at">layout=</span>layout, </span>
 <span id="cb106-22"><a href="phylofactor.html#cb106-22" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">aes</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)) <span class="sc">+</span></span>
-<span id="cb106-23"><a href="phylofactor.html#cb106-23" aria-hidden="true" tabindex="-1"></a>  ggtree<span class="sc">::</span><span class="fu">geom_hilight</span>(<span class="at">data =</span> df, </span>
+<span id="cb106-23"><a href="phylofactor.html#cb106-23" aria-hidden="true" tabindex="-1"></a>      ggtree<span class="sc">::</span><span class="fu">geom_hilight</span>(<span class="at">data =</span> df, </span>
 <span id="cb106-24"><a href="phylofactor.html#cb106-24" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">aes</span>(<span class="at">node =</span> node, </span>
 <span id="cb106-25"><a href="phylofactor.html#cb106-25" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fill =</span> Phylofactor)) <span class="sc">+</span> </span>
 <span id="cb106-26"><a href="phylofactor.html#cb106-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cols,</span>
@@ -1165,18 +1170,19 @@ div.csl-indent {
 <span id="cb108-15"><a href="phylofactor.html#cb108-15" aria-hidden="true" tabindex="-1"></a>            dplyr<span class="sc">::</span><span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb108-16"><a href="phylofactor.html#cb108-16" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">Phylum =</span> <span class="fu">paste0</span>(Phylum, <span class="st">&quot; (&quot;</span>, n, <span class="st">&quot;)&quot;</span>)))<span class="sc">$</span>Phylum</span>
 <span id="cb108-17"><a href="phylofactor.html#cb108-17" aria-hidden="true" tabindex="-1"></a><span class="co"># colors from the tree colours - to align with tree figure if necessary</span></span>
-<span id="cb108-18"><a href="phylofactor.html#cb108-18" aria-hidden="true" tabindex="-1"></a>p.pf3 <span class="ot">&lt;-</span> plotdata <span class="sc">%&gt;%</span> </span>
-<span id="cb108-19"><a href="phylofactor.html#cb108-19" aria-hidden="true" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">ggpie</span>(<span class="st">&quot;n&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;Phylum&quot;</span>) <span class="sc">+</span></span>
-<span id="cb108-20"><a href="phylofactor.html#cb108-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> treecols, </span>
-<span id="cb108-21"><a href="phylofactor.html#cb108-21" aria-hidden="true" tabindex="-1"></a>                    <span class="at">breaks =</span> ordervec,</span>
-<span id="cb108-22"><a href="phylofactor.html#cb108-22" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> labelvec) <span class="sc">+</span></span>
-<span id="cb108-23"><a href="phylofactor.html#cb108-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_blank</span>(),</span>
-<span id="cb108-24"><a href="phylofactor.html#cb108-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>) <span class="sc">+</span></span>
-<span id="cb108-25"><a href="phylofactor.html#cb108-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">FALSE</span>)) <span class="sc">+</span></span>
-<span id="cb108-26"><a href="phylofactor.html#cb108-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Phylofactor 3 (Group 1)&quot;</span>, <span class="at">subtitle =</span> <span class="st">&quot;Number of Genera&quot;</span>) </span>
-<span id="cb108-27"><a href="phylofactor.html#cb108-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine plots</span></span>
-<span id="cb108-28"><a href="phylofactor.html#cb108-28" aria-hidden="true" tabindex="-1"></a>ggpubr<span class="sc">::</span><span class="fu">ggarrange</span>(<span class="fu">ggarrange</span>(p, p.ILR, <span class="at">nrow =</span> <span class="dv">1</span>),</span>
-<span id="cb108-29"><a href="phylofactor.html#cb108-29" aria-hidden="true" tabindex="-1"></a>                  p.pf3, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code></pre></div>
+<span id="cb108-18"><a href="phylofactor.html#cb108-18" aria-hidden="true" tabindex="-1"></a><span class="co"># ploting HOW MANY GENERA are present in each phylum</span></span>
+<span id="cb108-19"><a href="phylofactor.html#cb108-19" aria-hidden="true" tabindex="-1"></a>p.pf3 <span class="ot">&lt;-</span> plotdata <span class="sc">%&gt;%</span> </span>
+<span id="cb108-20"><a href="phylofactor.html#cb108-20" aria-hidden="true" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">ggpie</span>(<span class="st">&quot;n&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;Phylum&quot;</span>) <span class="sc">+</span></span>
+<span id="cb108-21"><a href="phylofactor.html#cb108-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> treecols, </span>
+<span id="cb108-22"><a href="phylofactor.html#cb108-22" aria-hidden="true" tabindex="-1"></a>                    <span class="at">breaks =</span> ordervec,</span>
+<span id="cb108-23"><a href="phylofactor.html#cb108-23" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> labelvec) <span class="sc">+</span></span>
+<span id="cb108-24"><a href="phylofactor.html#cb108-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb108-25"><a href="phylofactor.html#cb108-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>) <span class="sc">+</span></span>
+<span id="cb108-26"><a href="phylofactor.html#cb108-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">FALSE</span>)) <span class="sc">+</span></span>
+<span id="cb108-27"><a href="phylofactor.html#cb108-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Phylofactor 3 (Group 1)&quot;</span>, <span class="at">subtitle =</span> <span class="st">&quot;Number of Genera&quot;</span>) </span>
+<span id="cb108-28"><a href="phylofactor.html#cb108-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine plots</span></span>
+<span id="cb108-29"><a href="phylofactor.html#cb108-29" aria-hidden="true" tabindex="-1"></a>ggpubr<span class="sc">::</span><span class="fu">ggarrange</span>(<span class="fu">ggarrange</span>(p, p.ILR, <span class="at">nrow =</span> <span class="dv">1</span>),</span>
+<span id="cb108-30"><a href="phylofactor.html#cb108-30" aria-hidden="true" tabindex="-1"></a>                  p.pf3, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="gitbook-demo_files/figure-html/taxafiltering-1.png" width="768" /></p>
 <div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="phylofactor.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save figure </span></span>
 <span id="cb109-2"><a href="phylofactor.html#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ggsave(&quot;./img/phylofactor.png&quot;, height=9, width=9, units=&#39;in&#39;, dpi=600)</span></span></code></pre></div>

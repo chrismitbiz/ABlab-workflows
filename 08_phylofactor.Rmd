@@ -61,7 +61,7 @@ Custom functions. Download and add to your working directory:
 # BiocManager::install(c("Biostrings","ggtree","phyloseq", "microbiome",
 #                        "escamero/mirlyn", "ggtreeExtra"))
 # install.packages(c("tidyverse", "ggpubr", "vegan",
-#                   "devtools","remotes", "colorspace"))
+#                   "devtools","remotes", "colorspace", "ape"))
 
 library(phyloseq)
 library(ggpubr)       # a handy helper package for ggplots
@@ -71,7 +71,8 @@ library(colorspace)
 library(ggtreeExtra)
 library(ggtree)
 library(ggnewscale)
- 
+library(ape)
+
 ## phyfacsummary function 
 # Function to summarise all phylofactor factors in a meaningful way into a dataframe
 # p adjusted method = Bonferroni
@@ -192,7 +193,7 @@ all(tree_ur$tip.label == row.names(tax_table(ps.phylo)))
 
 # Run phylofactor
 PF <-  phylofactor::PhyloFactor(Data,tree_ur,X, 
-        frmla=Data~X,    # Data (ASV abundances) as a response to X (Location)
+        frmla=Data~ X,    # Data (ASV abundances) as a response to X (Location)
         ncores = 2,      # number of cores 
         stop.early = NULL, 
         transform.fcn=log,    # log-ratio transform
@@ -320,8 +321,6 @@ labelvec = c("Phylofactor 1","Phylofactor 2",
 plotdata <- data.frame(sample_data(ps.ILR)) %>% 
   pivot_longer(cols = starts_with("Phylofactor"), 
     names_to = "ILR")
-# create factors of the ILR column
-plotdata$ILR <- factor(plotdata$ILR, levels = plotdata[1:PF$nfactors, ]$ILR)
 # Select specific factor vectors for plotting using the factorvector to filter
 plotdata_sub <- plotdata %>% 
   filter(ILR %in% factorvector)
@@ -390,6 +389,8 @@ treecols
 ```
 
 ```{r coloredtreecode, echo=TRUE, message=FALSE, warning=FALSE, fig.asp=1, fig.width=6}
+# Skip this and do the next code chunk if you just want to use the custom function
+
 # Use custom prevalence table function and select phyloseq object and phylum-level
 taxa.df.phylum <- prevalencedf(ps.phylo, Phylum)
 # Choose the phyla with highest ASV counts
@@ -546,12 +547,16 @@ factor.map = data.frame(Phylofactor = 1:PF$nfactors, group = rep(1, PF$nfactors)
 # here the aim is to show the first common taxon level for each phylofactor
 tax.names <- data.frame( Taxa = c(data.frame(tax_table(ps.phylo))[PF$tree$tip.label
                            [PF$groups[[factor.map[1,1]]][[factor.map[1, 2]]]],]$Genus,
+                           
                            data.frame(tax_table(ps.phylo))[PF$tree$tip.label
                            [PF$groups[[factor.map[2,1]]][[factor.map[2, 2]]]],]$Family,
+                           
                            data.frame(tax_table(ps.phylo))[PF$tree$tip.label
                            [PF$groups[[factor.map[4,1]]][[factor.map[4, 2]]]],]$Family,
+                           
                            data.frame(tax_table(ps.phylo))[PF$tree$tip.label
                            [PF$groups[[factor.map[5,1]]][[factor.map[5, 2]]]],]$Genus,
+                           
                            data.frame(tax_table(ps.phylo))[PF$tree$tip.label
                            [PF$groups[[factor.map[11,1]]][[factor.map[11, 2]]]],]$Family) ) %>% 
                       unique()
@@ -629,7 +634,7 @@ df$Phylofactor <- factor(df$Phylofactor,
 p <- ggtree::ggtree(PF$tree,
                     layout=layout, 
                     aes(alpha = 0.3)) +
-  ggtree::geom_hilight(data = df, 
+      ggtree::geom_hilight(data = df, 
                     aes(node = node, 
                     fill = Phylofactor)) + 
       scale_fill_manual(values = cols,
@@ -677,6 +682,7 @@ labelvec <- (plotdata %>%
             dplyr::filter(n > 2) %>% 
             mutate(Phylum = paste0(Phylum, " (", n, ")")))$Phylum
 # colors from the tree colours - to align with tree figure if necessary
+# ploting HOW MANY GENERA are present in each phylum
 p.pf3 <- plotdata %>% 
   ggpubr::ggpie("n", fill = "Phylum") +
   scale_fill_manual(values = treecols, 
