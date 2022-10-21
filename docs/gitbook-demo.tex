@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-10-16}
+\date{2022-10-21}
 
 \begin{document}
 \maketitle
@@ -1031,13 +1031,11 @@ In the previous chapter, we used a \texttt{samplesheet.tsv} to visualise and sum
 \NormalTok{metadata }\OtherTok{\textless{}{-}} \FunctionTok{read\_tsv}\NormalTok{(}\StringTok{"qiimefiles/samplesheet.tsv"}\NormalTok{)  }\CommentTok{\# lets call the R object \textquotesingle{}metadata\textquotesingle{} to reflect its purpose }
 \CommentTok{\# Inspect the metadata object. The second row is qiime{-}specific information and has to be removed. }
 
-\NormalTok{metadata2 }\OtherTok{\textless{}{-}}\NormalTok{ metadata[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(metadata)),] }\SpecialCharTok{\%\textgreater{}\%}     \CommentTok{\# remove the top row and convert characters to factors}
-  \FunctionTok{rownames\_to\_column}\NormalTok{(}\StringTok{"spl"}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# this just adds the rownames to a column and calles in "spl"}
+\NormalTok{metadata2 }\OtherTok{\textless{}{-}}\NormalTok{ metadata[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(metadata)),] }\SpecialCharTok{\%\textgreater{}\%}     \CommentTok{\# remove the top row (q2:types..etc)and convert characters to factors}
   \FunctionTok{mutate\_all}\NormalTok{(type.convert) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{mutate\_if}\NormalTok{(is.factor, as.character) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# reformatting columns to avoid any problems with factors at this stage}
-  \FunctionTok{column\_to\_rownames}\NormalTok{(}\StringTok{"spl"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# this puts the column "spl" back into rownames}
-  \FunctionTok{as\_tibble}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{column\_to\_rownames}\NormalTok{(}\StringTok{"\#SampleID"}\NormalTok{)}
+   \FunctionTok{as\_tibble}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{column\_to\_rownames}\NormalTok{(}\StringTok{"\#SampleID"}\NormalTok{)  }\CommentTok{\# this puts the column "\#SampleID" as rownames}
 
 \CommentTok{\# str(metadata2)  \# use the \textasciigrave{}str\textasciigrave{} command to inspect the data}
 
@@ -1235,9 +1233,11 @@ I typically use the rarefaction curve to check if there are samples that need re
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vegan}\SpecialCharTok{::}\FunctionTok{rarecurve}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{otu\_table}\NormalTok{(ps.flt)), }
-                 \AttributeTok{step=}\DecValTok{200}\NormalTok{, }\AttributeTok{sample =} \FunctionTok{min}\NormalTok{(}\FunctionTok{colSums}\NormalTok{(}\FunctionTok{otu\_table}\NormalTok{(ps.flt))), }
-                 \AttributeTok{label =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Sample Size after filtering"}\NormalTok{) }
+\NormalTok{vegan}\SpecialCharTok{::}\FunctionTok{rarecurve}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{otu\_table}\NormalTok{(ps.flt))), }
+                 \AttributeTok{step=}\DecValTok{200}\NormalTok{, }
+                 \AttributeTok{sample =} \FunctionTok{min}\NormalTok{(}\FunctionTok{colSums}\NormalTok{(}\FunctionTok{otu\_table}\NormalTok{(ps.flt))), }
+                 \AttributeTok{label =} \ConstantTok{FALSE}\NormalTok{, }
+                 \AttributeTok{xlab =} \StringTok{"Sample Size after filtering"}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -2866,7 +2866,7 @@ Here, we run the \texttt{PhyloFactor} function with \texttt{choice\ =\ "var"}.
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0251 minutes.    Estimated time of completion: 2022-10-16 18:06:08    2 factors completed in 0.0469 minutes.     Estimated time of completion: 2022-10-16 18:06:07    3 factors completed in 0.0687 minutes.     Estimated time of completion: 2022-10-16 18:06:06    4 factors completed in 0.0907 minutes.     Estimated time of completion: 2022-10-16 18:06:06    5 factors completed in 0.111 minutes.     Estimated time of completion: 2022-10-16 18:06:06    6 factors completed in 0.131 minutes.     Estimated time of completion: 2022-10-16 18:06:05    7 factors completed in 0.152 minutes.     Estimated time of completion: 2022-10-16 18:06:05    8 factors completed in 0.172 minutes.     Estimated time of completion: 2022-10-16 18:06:05    9 factors completed in 0.193 minutes.     Estimated time of completion: 2022-10-16 18:06:05    10 factors completed in 0.214 minutes.     Estimated time of completion: 2022-10-16 18:06:05    11 factors completed in 0.235 minutes.     Estimated time of completion: 2022-10-16 18:06:05    12 factors completed in 0.255 minutes.     Estimated time of completion: 2022-10-16 18:06:05    13 factors completed in 0.276 minutes.     Estimated time of completion: 2022-10-16 18:06:05   
+##  1 factor completed in 0.0256 minutes.    Estimated time of completion: 2022-10-21 17:42:17    2 factors completed in 0.0476 minutes.     Estimated time of completion: 2022-10-21 17:42:16    3 factors completed in 0.0696 minutes.     Estimated time of completion: 2022-10-21 17:42:16    4 factors completed in 0.0916 minutes.     Estimated time of completion: 2022-10-21 17:42:15    5 factors completed in 0.112 minutes.     Estimated time of completion: 2022-10-21 17:42:15    6 factors completed in 0.133 minutes.     Estimated time of completion: 2022-10-21 17:42:15    7 factors completed in 0.153 minutes.     Estimated time of completion: 2022-10-21 17:42:15    8 factors completed in 0.174 minutes.     Estimated time of completion: 2022-10-21 17:42:14    9 factors completed in 0.194 minutes.     Estimated time of completion: 2022-10-21 17:42:14    10 factors completed in 0.215 minutes.     Estimated time of completion: 2022-10-21 17:42:14    11 factors completed in 0.236 minutes.     Estimated time of completion: 2022-10-21 17:42:14    12 factors completed in 0.257 minutes.     Estimated time of completion: 2022-10-21 17:42:14    13 factors completed in 0.277 minutes.     Estimated time of completion: 2022-10-21 17:42:14   
 \end{verbatim}
 
 \begin{Shaded}

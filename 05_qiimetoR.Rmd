@@ -79,13 +79,11 @@ In the previous chapter, we used a `samplesheet.tsv` to visualise and summarise 
 metadata <- read_tsv("qiimefiles/samplesheet.tsv")  # lets call the R object 'metadata' to reflect its purpose 
 # Inspect the metadata object. The second row is qiime-specific information and has to be removed. 
 
-metadata2 <- metadata[c(2:nrow(metadata)),] %>%     # remove the top row and convert characters to factors
-  rownames_to_column("spl")%>% # this just adds the rownames to a column and calles in "spl"
+metadata2 <- metadata[c(2:nrow(metadata)),] %>%     # remove the top row (q2:types..etc)and convert characters to factors
   mutate_all(type.convert) %>%
   mutate_if(is.factor, as.character) %>%  # reformatting columns to avoid any problems with factors at this stage
-  column_to_rownames("spl") %>%  # this puts the column "spl" back into rownames
-  as_tibble() %>% 
-  column_to_rownames("#SampleID")
+   as_tibble() %>% 
+  column_to_rownames("#SampleID")  # this puts the column "#SampleID" as rownames
 
 # str(metadata2)  # use the `str` command to inspect the data
 
@@ -167,7 +165,6 @@ saveRDS(ps, file = "ps_ProjectX_2022July")
 
 # to load the file back into your R environment:
 # ps <- readRDS(file = "ps_ProjectX_2022July")
-
 ```
    
 ### Initial filtering    
@@ -260,12 +257,12 @@ The curve shows you the number of 'Species' (i.e. ASVs) on the y axis and the to
 I typically use the rarefaction curve to check if there are samples that need removing before establishing alpha diversity metrics. In this example, the vertical line helps identify the sample with lowest number of reads. We can check that by running `min(colSums(otu_table(ps.flt)))`, which tells us that they are 9690 reads in the sample with lowest reads. If this sample is kept in and we measure subsequent alpha diversity metrics, where each of the sample-reads are randomly resampled to the lowest read-number (here 9690), then we may not capture the diversity of samples with higher richness. The grey horizontal lines indicate how much richness we may lose if we include the sample with lowest number of reads (the difference between grey horizontal line and the curve of each sample at the highest number of reads on x-axis).    
   
    \
-```{r rarefaction, include=TRUE, echo=TRUE,warning=FALSE, message=FALSE}
-
-vegan::rarecurve(t(otu_table(ps.flt)), 
-                 step=200, sample = min(colSums(otu_table(ps.flt))), 
-                 label = FALSE, xlab = "Sample Size after filtering") 
-
+```{r rarefaction, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
+vegan::rarecurve(data.frame(t(otu_table(ps.flt))), 
+                 step=200, 
+                 sample = min(colSums(otu_table(ps.flt))), 
+                 label = FALSE, 
+                 xlab = "Sample Size after filtering") 
 # show the lowest and highest number of sample reads.  
 max(colSums(otu_table(ps.flt)))
 min(colSums(otu_table(ps.flt)))

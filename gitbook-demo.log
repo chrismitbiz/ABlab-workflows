@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.17)  16 OCT 2022 18:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.17)  21 OCT 2022 17:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1005,33 +1005,33 @@ LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 1
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1056.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1054.
 
 LaTeX Font Warning: Font shape `T1/lmtt/bx/it' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/sl' tried instead on input line 1056.
+(Font)              Font shape `T1/lmtt/b/sl' tried instead on input line 1054.
 
 
-Underfull \vbox (badness 10000) detected at line 1096
+Underfull \vbox (badness 10000) detected at line 1094
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1096
+Underfull \vbox (badness 10000) detected at line 1094
  []
 
 [48]
-Underfull \hbox (badness 10000) in paragraph at lines 1113--1114
+Underfull \hbox (badness 10000) in paragraph at lines 1111--1112
 
  []
 
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1116.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1114.
 [49] [50]
-Underfull \hbox (badness 10000) in paragraph at lines 1189--1190
+Underfull \hbox (badness 10000) in paragraph at lines 1187--1188
 
  []
 
 [51]
-Underfull \hbox (badness 10000) in paragraph at lines 1234--1235
+Underfull \hbox (badness 10000) in paragraph at lines 1232--1233
 
  []
 
@@ -1801,7 +1801,7 @@ Overfull \hbox (32.9989pt too wide) in paragraph at lines 2811--2811
 
 
 Overfull \hbox (6170.23106pt too wide) in paragraph at lines 2870--2870
-[]\T1/lmtt/m/n/10 ##  1 factor completed in 0.0251 minutes.    Estimated time of completion: 2022-10-16 18:06:08    2 factors completed in 0.0469 minutes.     Estimated time of completion: 2022-10-16 18:06:07    3 factors completed in 0.0687 minutes.     Estimated time of completion: 2022-10-16 18:06:06    4 factors completed in 0.0907 minutes.     Estimated time of completion: 2022-10-16 18:06:06    5 factors completed in 0.111 minutes.     Estimated time of completion: 2022-10-16 18:06:06    6 factors completed in 0.131 minutes.     Estimated time of completion: 2022-10-16 18:06:05    7 factors completed in 0.152 minutes.     Estimated time of completion: 2022-10-16 18:06:05    8 factors completed in 0.172 minutes.     Estimated time of completion: 2022-10-16 18:06:05    9 factors completed in 0.193 minutes.     Estimated time of completion: 2022-10-16 18:06:05    10 factors completed in 0.214 minutes.     Estimated time of completion: 2022-10-16 18:06:05    11 factors completed in 0.235 minutes.     Estimated time of completion: 2022-10-16 18:06:05    12 factors completed in 0.255 minutes.     Estimated time of completion: 2022-10-16 18:06:05    13 factors completed in 0.276 minutes.     Estimated time of completion: 2022-10-16 18:06:05[] 
+[]\T1/lmtt/m/n/10 ##  1 factor completed in 0.0256 minutes.    Estimated time of completion: 2022-10-21 17:42:17    2 factors completed in 0.0476 minutes.     Estimated time of completion: 2022-10-21 17:42:16    3 factors completed in 0.0696 minutes.     Estimated time of completion: 2022-10-21 17:42:16    4 factors completed in 0.0916 minutes.     Estimated time of completion: 2022-10-21 17:42:15    5 factors completed in 0.112 minutes.     Estimated time of completion: 2022-10-21 17:42:15    6 factors completed in 0.133 minutes.     Estimated time of completion: 2022-10-21 17:42:15    7 factors completed in 0.153 minutes.     Estimated time of completion: 2022-10-21 17:42:15    8 factors completed in 0.174 minutes.     Estimated time of completion: 2022-10-21 17:42:14    9 factors completed in 0.194 minutes.     Estimated time of completion: 2022-10-21 17:42:14    10 factors completed in 0.215 minutes.     Estimated time of completion: 2022-10-21 17:42:14    11 factors completed in 0.236 minutes.     Estimated time of completion: 2022-10-21 17:42:14    12 factors completed in 0.257 minutes.     Estimated time of completion: 2022-10-21 17:42:14    13 factors completed in 0.277 minutes.     Estimated time of completion: 2022-10-21 17:42:14[] 
  []
 
 [95]
@@ -2180,7 +2180,7 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  72i,9n,77p,1491b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/christiankrohn/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on gitbook-demo.pdf (120 pages, 5835424 bytes).
+Output written on gitbook-demo.pdf (120 pages, 5835098 bytes).
 PDF statistics:
  1349 PDF objects out of 1440 (max. 8388607)
  1088 compressed objects within 11 object streams
