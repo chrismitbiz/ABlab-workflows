@@ -242,7 +242,7 @@ ps.flt  = subset_taxa(ps , !is.na(Phylum) & !Phylum %in% c(""))
 ntaxa(ps.flt) / ntaxa(ps)
 
 ps.flt  = subset_taxa(ps , !is.na(Genus) & !Genus %in% c(""))
-# percent of phyla identified
+# percent of genera identified
 ntaxa(ps.flt) / ntaxa(ps)
   
 ```
