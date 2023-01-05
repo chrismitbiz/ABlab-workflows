@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Plotting diversity | Workflows for processing microbial amplicon sequences</title>
+  <title>Chapter 7 Plotting diversity | Workflows for processing microbial amplicon sequences</title>
   <meta name="description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Plotting diversity | Workflows for processing microbial amplicon sequences" />
+  <meta property="og:title" content="Chapter 7 Plotting diversity | Workflows for processing microbial amplicon sequences" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
   <meta name="github-repo" content="chrismitbiz/ABlab-workflows" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Plotting diversity | Workflows for processing microbial amplicon sequences" />
+  <meta name="twitter:title" content="Chapter 7 Plotting diversity | Workflows for processing microbial amplicon sequences" />
   
   <meta name="twitter:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2022-10-22" />
+<meta name="date" content="2023-01-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -161,130 +161,146 @@ div.csl-indent {
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this GitBook</a></li>
-<li class="chapter" data-level="2" data-path="gettingstarted.html"><a href="gettingstarted.html"><i class="fa fa-check"></i><b>2</b> Getting started</a>
+<li class="chapter" data-level="2" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html"><i class="fa fa-check"></i><b>2</b> Some fundamentals by Dr Jen Wood</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="gettingstarted.html"><a href="gettingstarted.html#general-requirements"><i class="fa fa-check"></i><b>2.1</b> General requirements</a>
+<li class="chapter" data-level="2.1" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#alpha-diversity"><i class="fa fa-check"></i><b>2.1</b> Alpha diversity</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="gettingstarted.html"><a href="gettingstarted.html#access-to-computational-resources"><i class="fa fa-check"></i><b>2.1.1</b> Access to computational resources</a></li>
-<li class="chapter" data-level="2.1.2" data-path="gettingstarted.html"><a href="gettingstarted.html#file-storage"><i class="fa fa-check"></i><b>2.1.2</b> File storage</a></li>
-<li class="chapter" data-level="2.1.3" data-path="gettingstarted.html"><a href="gettingstarted.html#command-line"><i class="fa fa-check"></i><b>2.1.3</b> Command Line</a></li>
-<li class="chapter" data-level="2.1.4" data-path="gettingstarted.html"><a href="gettingstarted.html#data-storage-browser"><i class="fa fa-check"></i><b>2.1.4</b> Data storage browser</a></li>
-<li class="chapter" data-level="2.1.5" data-path="gettingstarted.html"><a href="gettingstarted.html#r-and-r-studio"><i class="fa fa-check"></i><b>2.1.5</b> R and R studio</a></li>
-<li class="chapter" data-level="2.1.6" data-path="gettingstarted.html"><a href="gettingstarted.html#environment-managers"><i class="fa fa-check"></i><b>2.1.6</b> Environment managers</a></li>
-<li class="chapter" data-level="2.1.7" data-path="gettingstarted.html"><a href="gettingstarted.html#explore-the-help-functions"><i class="fa fa-check"></i><b>2.1.7</b> Explore the help functions</a></li>
-<li class="chapter" data-level="2.1.8" data-path="gettingstarted.html"><a href="gettingstarted.html#github-account"><i class="fa fa-check"></i><b>2.1.8</b> GitHub account</a></li>
+<li class="chapter" data-level="2.1.1" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#richness"><i class="fa fa-check"></i><b>2.1.1</b> Richness</a></li>
+<li class="chapter" data-level="2.1.2" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#evenness"><i class="fa fa-check"></i><b>2.1.2</b> Evenness</a></li>
+<li class="chapter" data-level="2.1.3" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#exercise"><i class="fa fa-check"></i><b>2.1.3</b> Exercise</a></li>
+<li class="chapter" data-level="2.1.4" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#shannon-weiner-diversity"><i class="fa fa-check"></i><b>2.1.4</b> Shannon-Weiner Diversity</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="gettingstarted.html"><a href="gettingstarted.html#a-note-on-rarefying-normalising"><i class="fa fa-check"></i><b>2.2</b> A note on rarefying (normalising)</a></li>
-<li class="chapter" data-level="2.3" data-path="gettingstarted.html"><a href="gettingstarted.html#workflows-from-other-lab-groups"><i class="fa fa-check"></i><b>2.3</b> Workflows from other lab groups</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html"><i class="fa fa-check"></i><b>3</b> Miseq library preps</a>
+<li class="chapter" data-level="2.2" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#beta-diversity"><i class="fa fa-check"></i><b>2.2</b> Beta diversity</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#overview"><i class="fa fa-check"></i><b>3.1.1</b> Overview</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#workflow"><i class="fa fa-check"></i><b>3.2</b> Workflow</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-extraction"><i class="fa fa-check"></i><b>3.2.1</b> DNA extraction</a></li>
-<li class="chapter" data-level="3.2.2" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-quality-and-concentration"><i class="fa fa-check"></i><b>3.2.2</b> DNA quality and concentration</a></li>
-<li class="chapter" data-level="3.2.3" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-normalisation"><i class="fa fa-check"></i><b>3.2.3</b> DNA normalisation</a></li>
-<li class="chapter" data-level="3.2.4" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#first-and-second-pcr---amplicon-pcr-and-indexing-pcr"><i class="fa fa-check"></i><b>3.2.4</b> First and second PCR - Amplicon PCR and Indexing PCR</a></li>
-<li class="chapter" data-level="3.2.5" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#normalisation-of-indexed-amplicons"><i class="fa fa-check"></i><b>3.2.5</b> Normalisation of indexed amplicons</a></li>
-<li class="chapter" data-level="3.2.6" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#pooling"><i class="fa fa-check"></i><b>3.2.6</b> Pooling</a></li>
-<li class="chapter" data-level="3.2.7" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#denaturing-of-pool-and-loading-of-the-miseq"><i class="fa fa-check"></i><b>3.2.7</b> Denaturing of pool and loading of the Miseq</a></li>
-<li class="chapter" data-level="3.2.8" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#consumables"><i class="fa fa-check"></i><b>3.2.8</b> Consumables</a></li>
+<li class="chapter" data-level="2.2.1" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#species-replacement"><i class="fa fa-check"></i><b>2.2.1</b> Species replacement</a></li>
+<li class="chapter" data-level="2.2.2" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#species-nestedness"><i class="fa fa-check"></i><b>2.2.2</b> Species nestedness</a></li>
+<li class="chapter" data-level="2.2.3" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#beta-diversity-analysis-workflow"><i class="fa fa-check"></i><b>2.2.3</b> Beta diversity analysis workflow</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html"><i class="fa fa-check"></i><b>4</b> From BaseSpace to Qiime2 and DADA2</a>
+<li class="chapter" data-level="3" data-path="gettingstarted.html"><a href="gettingstarted.html"><i class="fa fa-check"></i><b>3</b> Getting started</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a>
+<li class="chapter" data-level="3.1" data-path="gettingstarted.html"><a href="gettingstarted.html#before-you-can-analyse"><i class="fa fa-check"></i><b>3.1</b> Before you can analyse</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#prerequisites-and-required-files"><i class="fa fa-check"></i><b>4.1.1</b> Prerequisites and required files</a></li>
+<li class="chapter" data-level="3.1.1" data-path="gettingstarted.html"><a href="gettingstarted.html#get-access-to-computational-resources"><i class="fa fa-check"></i><b>3.1.1</b> Get access to computational resources</a></li>
+<li class="chapter" data-level="3.1.2" data-path="gettingstarted.html"><a href="gettingstarted.html#get-file-storage"><i class="fa fa-check"></i><b>3.1.2</b> Get file storage</a></li>
+<li class="chapter" data-level="3.1.3" data-path="gettingstarted.html"><a href="gettingstarted.html#learn-some-basic-command-line"><i class="fa fa-check"></i><b>3.1.3</b> Learn some basic command Line</a></li>
+<li class="chapter" data-level="3.1.4" data-path="gettingstarted.html"><a href="gettingstarted.html#get-a-data-storage-browser"><i class="fa fa-check"></i><b>3.1.4</b> Get a data storage browser</a></li>
+<li class="chapter" data-level="3.1.5" data-path="gettingstarted.html"><a href="gettingstarted.html#get-r-and-r-studio"><i class="fa fa-check"></i><b>3.1.5</b> Get R and R studio</a></li>
+<li class="chapter" data-level="3.1.6" data-path="gettingstarted.html"><a href="gettingstarted.html#know-what-environment-managers-are"><i class="fa fa-check"></i><b>3.1.6</b> Know what environment managers are</a></li>
+<li class="chapter" data-level="3.1.7" data-path="gettingstarted.html"><a href="gettingstarted.html#explore-the-help-functions"><i class="fa fa-check"></i><b>3.1.7</b> Explore the help functions</a></li>
+<li class="chapter" data-level="3.1.8" data-path="gettingstarted.html"><a href="gettingstarted.html#get-a-github-account"><i class="fa fa-check"></i><b>3.1.8</b> Get a GitHub account</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#workflow-1"><i class="fa fa-check"></i><b>4.2</b> Workflow</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#download-fastq-files"><i class="fa fa-check"></i><b>4.2.1</b> Download FASTQ files</a></li>
-<li class="chapter" data-level="4.2.2" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#paired-end-manifest-import-step-1"><i class="fa fa-check"></i><b>4.2.2</b> Paired end manifest import (Step 1)</a></li>
-<li class="chapter" data-level="4.2.3" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#cutadapt-step-2"><i class="fa fa-check"></i><b>4.2.3</b> Cutadapt (Step 2)</a></li>
-<li class="chapter" data-level="4.2.4" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#read-quality-assessment"><i class="fa fa-check"></i><b>4.2.4</b> Read quality assessment</a></li>
-<li class="chapter" data-level="4.2.5" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#denoise-paired-end-sequences-with-dada2-step-3"><i class="fa fa-check"></i><b>4.2.5</b> Denoise paired end sequences with dada2 (Step 3)</a></li>
-<li class="chapter" data-level="4.2.6" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#taxonomic-classifier-and-assignment-step-4"><i class="fa fa-check"></i><b>4.2.6</b> Taxonomic classifier and assignment (Step 4)</a></li>
-<li class="chapter" data-level="4.2.7" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#build-phylogenetic-tree-step-5"><i class="fa fa-check"></i><b>4.2.7</b> Build phylogenetic tree (Step 5)</a></li>
-<li class="chapter" data-level="4.2.8" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#all-steps-combined"><i class="fa fa-check"></i><b>4.2.8</b> All steps combined</a></li>
+<li class="chapter" data-level="3.2" data-path="gettingstarted.html"><a href="gettingstarted.html#a-note-on-rarefying-normalising"><i class="fa fa-check"></i><b>3.2</b> A note on rarefying (normalising)</a></li>
+<li class="chapter" data-level="3.3" data-path="gettingstarted.html"><a href="gettingstarted.html#workflows-from-other-lab-groups"><i class="fa fa-check"></i><b>3.3</b> Workflows from other lab groups</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html"><i class="fa fa-check"></i><b>4</b> Miseq library preps</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#overview"><i class="fa fa-check"></i><b>4.1.1</b> Overview</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="Qiime2R.html"><a href="Qiime2R.html"><i class="fa fa-check"></i><b>5</b> From Qiime2 into R - Initial diagnostics</a>
+<li class="chapter" data-level="4.2" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#workflow"><i class="fa fa-check"></i><b>4.2</b> Workflow</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="Qiime2R.html"><a href="Qiime2R.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
-<li class="chapter" data-level="5.2" data-path="Qiime2R.html"><a href="Qiime2R.html#workflow-2"><i class="fa fa-check"></i><b>5.2</b> Workflow</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="Qiime2R.html"><a href="Qiime2R.html#packages"><i class="fa fa-check"></i><b>5.2.1</b> Packages</a></li>
-<li class="chapter" data-level="5.2.2" data-path="Qiime2R.html"><a href="Qiime2R.html#import-qiime-files-and-create-a-phyloseq-object"><i class="fa fa-check"></i><b>5.2.2</b> Import qiime-files and create a phyloseq object</a></li>
-<li class="chapter" data-level="5.2.3" data-path="Qiime2R.html"><a href="Qiime2R.html#save-the-ps-object-as-an-.rds-file-into-your-working-directory"><i class="fa fa-check"></i><b>5.2.3</b> Save the <code>ps</code> object as an <code>.rds</code> file into your working directory</a></li>
-<li class="chapter" data-level="5.2.4" data-path="Qiime2R.html"><a href="Qiime2R.html#initial-filtering"><i class="fa fa-check"></i><b>5.2.4</b> Initial filtering</a></li>
-<li class="chapter" data-level="5.2.5" data-path="Qiime2R.html"><a href="Qiime2R.html#proportion-of-asvs-identified"><i class="fa fa-check"></i><b>5.2.5</b> Proportion of ASVs identified</a></li>
-<li class="chapter" data-level="5.2.6" data-path="Qiime2R.html"><a href="Qiime2R.html#rarefaction-curve"><i class="fa fa-check"></i><b>5.2.6</b> Rarefaction curve</a></li>
-<li class="chapter" data-level="5.2.7" data-path="Qiime2R.html"><a href="Qiime2R.html#prevalence-table"><i class="fa fa-check"></i><b>5.2.7</b> Prevalence table</a></li>
-<li class="chapter" data-level="5.2.8" data-path="Qiime2R.html"><a href="Qiime2R.html#export-asv-and-taxa-tables-to-excel"><i class="fa fa-check"></i><b>5.2.8</b> Export ASV and taxa tables to Excel</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="plottingdiversity.html"><a href="plottingdiversity.html"><i class="fa fa-check"></i><b>6</b> Plotting diversity</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#required-files"><i class="fa fa-check"></i><b>6.1.1</b> Required files</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="plottingdiversity.html"><a href="plottingdiversity.html#workflow-3"><i class="fa fa-check"></i><b>6.2</b> Workflow</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#packages-1"><i class="fa fa-check"></i><b>6.2.1</b> Packages</a></li>
-<li class="chapter" data-level="6.2.2" data-path="plottingdiversity.html"><a href="plottingdiversity.html#load-phyloseq-object"><i class="fa fa-check"></i><b>6.2.2</b> Load phyloseq object</a></li>
-<li class="chapter" data-level="6.2.3" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pre-filter-rarefy-and-calculate-diversity"><i class="fa fa-check"></i><b>6.2.3</b> Pre-filter, rarefy and calculate diversity</a></li>
-<li class="chapter" data-level="6.2.4" data-path="plottingdiversity.html"><a href="plottingdiversity.html#colors"><i class="fa fa-check"></i><b>6.2.4</b> Colors</a></li>
-<li class="chapter" data-level="6.2.5" data-path="plottingdiversity.html"><a href="plottingdiversity.html#richness"><i class="fa fa-check"></i><b>6.2.5</b> Richness</a></li>
-<li class="chapter" data-level="6.2.6" data-path="plottingdiversity.html"><a href="plottingdiversity.html#shannon"><i class="fa fa-check"></i><b>6.2.6</b> Shannon</a></li>
-<li class="chapter" data-level="6.2.7" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pielous-evenness"><i class="fa fa-check"></i><b>6.2.7</b> Pielou’s evenness</a></li>
-<li class="chapter" data-level="6.2.8" data-path="plottingdiversity.html"><a href="plottingdiversity.html#combined-plotting"><i class="fa fa-check"></i><b>6.2.8</b> Combined plotting</a></li>
-<li class="chapter" data-level="6.2.9" data-path="plottingdiversity.html"><a href="plottingdiversity.html#nmds"><i class="fa fa-check"></i><b>6.2.9</b> NMDS</a></li>
-<li class="chapter" data-level="6.2.10" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pca"><i class="fa fa-check"></i><b>6.2.10</b> PCA</a></li>
-<li class="chapter" data-level="6.2.11" data-path="plottingdiversity.html"><a href="plottingdiversity.html#rda"><i class="fa fa-check"></i><b>6.2.11</b> RDA</a></li>
-<li class="chapter" data-level="6.2.12" data-path="plottingdiversity.html"><a href="plottingdiversity.html#unweighted-unifrac"><i class="fa fa-check"></i><b>6.2.12</b> Unweighted uniFrac</a></li>
-<li class="chapter" data-level="6.2.13" data-path="plottingdiversity.html"><a href="plottingdiversity.html#combined-plotting-1"><i class="fa fa-check"></i><b>6.2.13</b> Combined plotting</a></li>
-<li class="chapter" data-level="6.2.14" data-path="plottingdiversity.html"><a href="plottingdiversity.html#save-plots-to-png-and-pdf"><i class="fa fa-check"></i><b>6.2.14</b> Save plots to png and pdf</a></li>
+<li class="chapter" data-level="4.2.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-extraction"><i class="fa fa-check"></i><b>4.2.1</b> DNA extraction</a></li>
+<li class="chapter" data-level="4.2.2" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-quality-and-concentration"><i class="fa fa-check"></i><b>4.2.2</b> DNA quality and concentration</a></li>
+<li class="chapter" data-level="4.2.3" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-normalisation"><i class="fa fa-check"></i><b>4.2.3</b> DNA normalisation</a></li>
+<li class="chapter" data-level="4.2.4" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#first-and-second-pcr---amplicon-pcr-and-indexing-pcr"><i class="fa fa-check"></i><b>4.2.4</b> First and second PCR - Amplicon PCR and Indexing PCR</a></li>
+<li class="chapter" data-level="4.2.5" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#normalisation-of-indexed-amplicons"><i class="fa fa-check"></i><b>4.2.5</b> Normalisation of indexed amplicons</a></li>
+<li class="chapter" data-level="4.2.6" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#pooling"><i class="fa fa-check"></i><b>4.2.6</b> Pooling</a></li>
+<li class="chapter" data-level="4.2.7" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#denaturing-of-pool-and-loading-of-the-miseq"><i class="fa fa-check"></i><b>4.2.7</b> Denaturing of pool and loading of the Miseq</a></li>
+<li class="chapter" data-level="4.2.8" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#consumables"><i class="fa fa-check"></i><b>4.2.8</b> Consumables</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="plottingtaxa.html"><a href="plottingtaxa.html"><i class="fa fa-check"></i><b>7</b> Plotting taxonomy</a>
+<li class="chapter" data-level="5" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html"><i class="fa fa-check"></i><b>5</b> From BaseSpace to Qiime2 and DADA2</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#introduction-4"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
+<li class="chapter" data-level="5.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#introduction-1"><i class="fa fa-check"></i><b>5.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#required-files-or-objects"><i class="fa fa-check"></i><b>7.1.1</b> Required files or objects</a></li>
+<li class="chapter" data-level="5.1.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#prerequisites-and-required-files"><i class="fa fa-check"></i><b>5.1.1</b> Prerequisites and required files</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="plottingtaxa.html"><a href="plottingtaxa.html#workflow-4"><i class="fa fa-check"></i><b>7.2</b> Workflow</a>
+<li class="chapter" data-level="5.2" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#workflow-1"><i class="fa fa-check"></i><b>5.2</b> Workflow</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#packages-2"><i class="fa fa-check"></i><b>7.2.1</b> Packages</a></li>
-<li class="chapter" data-level="7.2.2" data-path="plottingtaxa.html"><a href="plottingtaxa.html#load-phyloseq-object-1"><i class="fa fa-check"></i><b>7.2.2</b> Load phyloseq object</a></li>
-<li class="chapter" data-level="7.2.3" data-path="plottingtaxa.html"><a href="plottingtaxa.html#check-metadata-contained-in-the-phyloseq-object."><i class="fa fa-check"></i><b>7.2.3</b> Check metadata contained in the phyloseq object.</a></li>
-<li class="chapter" data-level="7.2.4" data-path="plottingtaxa.html"><a href="plottingtaxa.html#colors-1"><i class="fa fa-check"></i><b>7.2.4</b> Colors</a></li>
-<li class="chapter" data-level="7.2.5" data-path="plottingtaxa.html"><a href="plottingtaxa.html#pre-filtering"><i class="fa fa-check"></i><b>7.2.5</b> Pre-filtering</a></li>
-<li class="chapter" data-level="7.2.6" data-path="plottingtaxa.html"><a href="plottingtaxa.html#analysis-and-plotting"><i class="fa fa-check"></i><b>7.2.6</b> Analysis and plotting</a></li>
-<li class="chapter" data-level="7.2.7" data-path="plottingtaxa.html"><a href="plottingtaxa.html#prevalance-table"><i class="fa fa-check"></i><b>7.2.7</b> Prevalance table</a></li>
-<li class="chapter" data-level="7.2.8" data-path="plottingtaxa.html"><a href="plottingtaxa.html#krona-charts"><i class="fa fa-check"></i><b>7.2.8</b> Krona charts</a></li>
+<li class="chapter" data-level="5.2.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#download-fastq-files"><i class="fa fa-check"></i><b>5.2.1</b> Download FASTQ files</a></li>
+<li class="chapter" data-level="5.2.2" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#paired-end-manifest-import-step-1"><i class="fa fa-check"></i><b>5.2.2</b> Paired end manifest import (Step 1)</a></li>
+<li class="chapter" data-level="5.2.3" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#cutadapt-step-2"><i class="fa fa-check"></i><b>5.2.3</b> Cutadapt (Step 2)</a></li>
+<li class="chapter" data-level="5.2.4" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#read-quality-assessment"><i class="fa fa-check"></i><b>5.2.4</b> Read quality assessment</a></li>
+<li class="chapter" data-level="5.2.5" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#denoise-paired-end-sequences-with-dada2-step-3"><i class="fa fa-check"></i><b>5.2.5</b> Denoise paired end sequences with dada2 (Step 3)</a></li>
+<li class="chapter" data-level="5.2.6" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#taxonomic-classifier-and-assignment-step-4"><i class="fa fa-check"></i><b>5.2.6</b> Taxonomic classifier and assignment (Step 4)</a></li>
+<li class="chapter" data-level="5.2.7" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#build-phylogenetic-tree-step-5"><i class="fa fa-check"></i><b>5.2.7</b> Build phylogenetic tree (Step 5)</a></li>
+<li class="chapter" data-level="5.2.8" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#all-steps-combined"><i class="fa fa-check"></i><b>5.2.8</b> All steps combined</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="phylofactor.html"><a href="phylofactor.html"><i class="fa fa-check"></i><b>8</b> Phylofactor analysis</a>
+<li class="chapter" data-level="6" data-path="Qiime2R.html"><a href="Qiime2R.html"><i class="fa fa-check"></i><b>6</b> From Qiime2 into R - Initial diagnostics</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="phylofactor.html"><a href="phylofactor.html#introduction-5"><i class="fa fa-check"></i><b>8.1</b> Introduction</a>
+<li class="chapter" data-level="6.1" data-path="Qiime2R.html"><a href="Qiime2R.html#introduction-2"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="Qiime2R.html"><a href="Qiime2R.html#workflow-2"><i class="fa fa-check"></i><b>6.2</b> Workflow</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="phylofactor.html"><a href="phylofactor.html#prerequisites-and-required-files-1"><i class="fa fa-check"></i><b>8.1.1</b> Prerequisites and required files</a></li>
-<li class="chapter" data-level="8.1.2" data-path="phylofactor.html"><a href="phylofactor.html#custom-functions"><i class="fa fa-check"></i><b>8.1.2</b> Custom functions</a></li>
+<li class="chapter" data-level="6.2.1" data-path="Qiime2R.html"><a href="Qiime2R.html#packages"><i class="fa fa-check"></i><b>6.2.1</b> Packages</a></li>
+<li class="chapter" data-level="6.2.2" data-path="Qiime2R.html"><a href="Qiime2R.html#import-qiime-files-and-create-a-phyloseq-object"><i class="fa fa-check"></i><b>6.2.2</b> Import qiime-files and create a phyloseq object</a></li>
+<li class="chapter" data-level="6.2.3" data-path="Qiime2R.html"><a href="Qiime2R.html#save-the-ps-object-as-an-.rds-file-into-your-working-directory"><i class="fa fa-check"></i><b>6.2.3</b> Save the <code>ps</code> object as an <code>.rds</code> file into your working directory</a></li>
+<li class="chapter" data-level="6.2.4" data-path="Qiime2R.html"><a href="Qiime2R.html#initial-filtering"><i class="fa fa-check"></i><b>6.2.4</b> Initial filtering</a></li>
+<li class="chapter" data-level="6.2.5" data-path="Qiime2R.html"><a href="Qiime2R.html#proportion-of-asvs-identified"><i class="fa fa-check"></i><b>6.2.5</b> Proportion of ASVs identified</a></li>
+<li class="chapter" data-level="6.2.6" data-path="Qiime2R.html"><a href="Qiime2R.html#rarefaction-curve"><i class="fa fa-check"></i><b>6.2.6</b> Rarefaction curve</a></li>
+<li class="chapter" data-level="6.2.7" data-path="Qiime2R.html"><a href="Qiime2R.html#prevalence-table"><i class="fa fa-check"></i><b>6.2.7</b> Prevalence table</a></li>
+<li class="chapter" data-level="6.2.8" data-path="Qiime2R.html"><a href="Qiime2R.html#export-asv-and-taxa-tables-to-excel"><i class="fa fa-check"></i><b>6.2.8</b> Export ASV and taxa tables to Excel</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="phylofactor.html"><a href="phylofactor.html#workflow-5"><i class="fa fa-check"></i><b>8.2</b> Workflow</a>
+</ul></li>
+<li class="chapter" data-level="7" data-path="plottingdiversity.html"><a href="plottingdiversity.html"><i class="fa fa-check"></i><b>7</b> Plotting diversity</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="phylofactor.html"><a href="phylofactor.html#load-packages-and-custom-functions"><i class="fa fa-check"></i><b>8.2.1</b> Load packages and custom functions</a></li>
-<li class="chapter" data-level="8.2.2" data-path="phylofactor.html"><a href="phylofactor.html#load-phyloseq-object-2"><i class="fa fa-check"></i><b>8.2.2</b> Load phyloseq object</a></li>
-<li class="chapter" data-level="8.2.3" data-path="phylofactor.html"><a href="phylofactor.html#pre-filtering-1"><i class="fa fa-check"></i><b>8.2.3</b> Pre-filtering</a></li>
-<li class="chapter" data-level="8.2.4" data-path="phylofactor.html"><a href="phylofactor.html#running-phylofactor"><i class="fa fa-check"></i><b>8.2.4</b> Running PhyloFactor</a></li>
-<li class="chapter" data-level="8.2.5" data-path="phylofactor.html"><a href="phylofactor.html#reviewing-output"><i class="fa fa-check"></i><b>8.2.5</b> Reviewing output</a></li>
-<li class="chapter" data-level="8.2.6" data-path="phylofactor.html"><a href="phylofactor.html#visualising-factors"><i class="fa fa-check"></i><b>8.2.6</b> Visualising factors</a></li>
+<li class="chapter" data-level="7.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#required-files"><i class="fa fa-check"></i><b>7.1.1</b> Required files</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="plottingdiversity.html"><a href="plottingdiversity.html#workflow-3"><i class="fa fa-check"></i><b>7.2</b> Workflow</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#packages-1"><i class="fa fa-check"></i><b>7.2.1</b> Packages</a></li>
+<li class="chapter" data-level="7.2.2" data-path="plottingdiversity.html"><a href="plottingdiversity.html#load-phyloseq-object"><i class="fa fa-check"></i><b>7.2.2</b> Load phyloseq object</a></li>
+<li class="chapter" data-level="7.2.3" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pre-filter-rarefy-and-calculate-diversity"><i class="fa fa-check"></i><b>7.2.3</b> Pre-filter, rarefy and calculate diversity</a></li>
+<li class="chapter" data-level="7.2.4" data-path="plottingdiversity.html"><a href="plottingdiversity.html#colors"><i class="fa fa-check"></i><b>7.2.4</b> Colors</a></li>
+<li class="chapter" data-level="7.2.5" data-path="plottingdiversity.html"><a href="plottingdiversity.html#richness-1"><i class="fa fa-check"></i><b>7.2.5</b> Richness</a></li>
+<li class="chapter" data-level="7.2.6" data-path="plottingdiversity.html"><a href="plottingdiversity.html#shannon"><i class="fa fa-check"></i><b>7.2.6</b> Shannon</a></li>
+<li class="chapter" data-level="7.2.7" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pielous-evenness"><i class="fa fa-check"></i><b>7.2.7</b> Pielou’s evenness</a></li>
+<li class="chapter" data-level="7.2.8" data-path="plottingdiversity.html"><a href="plottingdiversity.html#combined-plotting"><i class="fa fa-check"></i><b>7.2.8</b> Combined plotting</a></li>
+<li class="chapter" data-level="7.2.9" data-path="plottingdiversity.html"><a href="plottingdiversity.html#nmds"><i class="fa fa-check"></i><b>7.2.9</b> NMDS</a></li>
+<li class="chapter" data-level="7.2.10" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pca"><i class="fa fa-check"></i><b>7.2.10</b> PCA</a></li>
+<li class="chapter" data-level="7.2.11" data-path="plottingdiversity.html"><a href="plottingdiversity.html#rda"><i class="fa fa-check"></i><b>7.2.11</b> RDA</a></li>
+<li class="chapter" data-level="7.2.12" data-path="plottingdiversity.html"><a href="plottingdiversity.html#unweighted-unifrac"><i class="fa fa-check"></i><b>7.2.12</b> Unweighted uniFrac</a></li>
+<li class="chapter" data-level="7.2.13" data-path="plottingdiversity.html"><a href="plottingdiversity.html#combined-plotting-1"><i class="fa fa-check"></i><b>7.2.13</b> Combined plotting</a></li>
+<li class="chapter" data-level="7.2.14" data-path="plottingdiversity.html"><a href="plottingdiversity.html#save-plots-to-png-and-pdf"><i class="fa fa-check"></i><b>7.2.14</b> Save plots to png and pdf</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="plottingtaxa.html"><a href="plottingtaxa.html"><i class="fa fa-check"></i><b>8</b> Plotting taxonomy</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#introduction-4"><i class="fa fa-check"></i><b>8.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#required-files-or-objects"><i class="fa fa-check"></i><b>8.1.1</b> Required files or objects</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="plottingtaxa.html"><a href="plottingtaxa.html#workflow-4"><i class="fa fa-check"></i><b>8.2</b> Workflow</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#packages-2"><i class="fa fa-check"></i><b>8.2.1</b> Packages</a></li>
+<li class="chapter" data-level="8.2.2" data-path="plottingtaxa.html"><a href="plottingtaxa.html#load-phyloseq-object-1"><i class="fa fa-check"></i><b>8.2.2</b> Load phyloseq object</a></li>
+<li class="chapter" data-level="8.2.3" data-path="plottingtaxa.html"><a href="plottingtaxa.html#check-metadata-contained-in-the-phyloseq-object."><i class="fa fa-check"></i><b>8.2.3</b> Check metadata contained in the phyloseq object.</a></li>
+<li class="chapter" data-level="8.2.4" data-path="plottingtaxa.html"><a href="plottingtaxa.html#colors-1"><i class="fa fa-check"></i><b>8.2.4</b> Colors</a></li>
+<li class="chapter" data-level="8.2.5" data-path="plottingtaxa.html"><a href="plottingtaxa.html#pre-filtering"><i class="fa fa-check"></i><b>8.2.5</b> Pre-filtering</a></li>
+<li class="chapter" data-level="8.2.6" data-path="plottingtaxa.html"><a href="plottingtaxa.html#analysis-and-plotting"><i class="fa fa-check"></i><b>8.2.6</b> Analysis and plotting</a></li>
+<li class="chapter" data-level="8.2.7" data-path="plottingtaxa.html"><a href="plottingtaxa.html#prevalance-table"><i class="fa fa-check"></i><b>8.2.7</b> Prevalance table</a></li>
+<li class="chapter" data-level="8.2.8" data-path="plottingtaxa.html"><a href="plottingtaxa.html#krona-charts"><i class="fa fa-check"></i><b>8.2.8</b> Krona charts</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="phylofactor.html"><a href="phylofactor.html"><i class="fa fa-check"></i><b>9</b> Phylofactor analysis</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="phylofactor.html"><a href="phylofactor.html#introduction-5"><i class="fa fa-check"></i><b>9.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="phylofactor.html"><a href="phylofactor.html#prerequisites-and-required-files-1"><i class="fa fa-check"></i><b>9.1.1</b> Prerequisites and required files</a></li>
+<li class="chapter" data-level="9.1.2" data-path="phylofactor.html"><a href="phylofactor.html#custom-functions"><i class="fa fa-check"></i><b>9.1.2</b> Custom functions</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="phylofactor.html"><a href="phylofactor.html#workflow-5"><i class="fa fa-check"></i><b>9.2</b> Workflow</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="phylofactor.html"><a href="phylofactor.html#load-packages-and-custom-functions"><i class="fa fa-check"></i><b>9.2.1</b> Load packages and custom functions</a></li>
+<li class="chapter" data-level="9.2.2" data-path="phylofactor.html"><a href="phylofactor.html#load-phyloseq-object-2"><i class="fa fa-check"></i><b>9.2.2</b> Load phyloseq object</a></li>
+<li class="chapter" data-level="9.2.3" data-path="phylofactor.html"><a href="phylofactor.html#pre-filtering-1"><i class="fa fa-check"></i><b>9.2.3</b> Pre-filtering</a></li>
+<li class="chapter" data-level="9.2.4" data-path="phylofactor.html"><a href="phylofactor.html#running-phylofactor"><i class="fa fa-check"></i><b>9.2.4</b> Running PhyloFactor</a></li>
+<li class="chapter" data-level="9.2.5" data-path="phylofactor.html"><a href="phylofactor.html#reviewing-output"><i class="fa fa-check"></i><b>9.2.5</b> Reviewing output</a></li>
+<li class="chapter" data-level="9.2.6" data-path="phylofactor.html"><a href="phylofactor.html#visualising-factors"><i class="fa fa-check"></i><b>9.2.6</b> Visualising factors</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -308,35 +324,35 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="plottingdiversity" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Plotting diversity<a href="plottingdiversity.html#plottingdiversity" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="plottingdiversity" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Plotting diversity<a href="plottingdiversity.html#plottingdiversity" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><img src="img/nmds-1.png" /></p>
 <p>Some visualisations of alpha and beta diversity.</p>
-<div id="introduction-3" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Introduction<a href="plottingdiversity.html#introduction-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="introduction-3" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Introduction<a href="plottingdiversity.html#introduction-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This chapter introduces you to a basic workflow for plotting alpha and beta diversity using phyloseq and ggplot. It provides examples for loading the phyloseq object from a previously saved .rds file, then how to calculate and include alpha diversity metrics into the sample_data of the phyloseq object, and finally how to plot some of these metrics, individually or combined.</p>
 <p>Furthermore, beta diversity, i.e. four different type of ordinations are plotted. The examples, include non-metric dimensional scaling on Bray-Curtis dissimilaries, Principal Component Analysis (Aitchison distance), Redundancy Analysis ( Aitchison) and a Principal Coordinate Analysis on unweighted uniFrac distances.</p>
-<p>The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: <a href="https://sites.google.com/site/mb3gustame/home" class="uri">https://sites.google.com/site/mb3gustame/home</a>, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter <a href="gettingstarted.html#gettingstarted">2</a> under “Workflows from other lab groups”.</p>
-<p>As mentioned in Chapter <a href="gettingstarted.html#gettingstarted">2</a>, prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying - this paper explains the process: <a href="https://www.nature.com/articles/s41598-021-01636-1" target="_blank">Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities</a> (<span class="citation">Cameron et al. (<a href="#ref-Cameron2021" role="doc-biblioref">2021</a>)</span>).<br />
+<p>The stats behind the individual metrics are not discussed. If you want to learn more about the various options to analyse your amplicon-derived diversity, perhaps start here: <a href="https://sites.google.com/site/mb3gustame/home" class="uri">https://sites.google.com/site/mb3gustame/home</a>, the GUide to STatistical Analysis in Microbial Ecology (GUSTA ME). This is one of many other useful links and resources. Some others are listed in chapter <a href="gettingstarted.html#gettingstarted">3</a> under “Workflows from other lab groups”.</p>
+<p>As mentioned in Chapter <a href="gettingstarted.html#gettingstarted">3</a>, prior to establishing alpha diversity indices, as well as Bray-Curtis dissimilarities, we will stick to rarefying sequences to a specific library size (library size = sum of sequence counts of a sample) to normalise the data and prevent bias due to library size. Usually, this is done using the smallest library size of all samples. If you want to learn more about rarefying - this paper explains the process: <a href="https://www.nature.com/articles/s41598-021-01636-1" target="_blank">Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities</a> (<span class="citation">Cameron et al. (<a href="#ref-Cameron2021" role="doc-biblioref">2021</a>)</span>).<br />
 We will follow the recommendations from the authors of this paper to resample without replacement.</p>
 <p>Note that rarefying is generally not recommended for statistical inferences in differential abundance analyses due to the loss of statistical power. Learn why here: <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531" target="_blank">Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible</a> (<span class="citation">McMurdie and Holmes (<a href="#ref-McMurdie2014" role="doc-biblioref">2014</a>)</span>).</p>
-<p>Other normalisation methods (see Chapter <a href="gettingstarted.html#gettingstarted">2</a>) are also possible and it is up to you, the analyst, to understand and decide on the appropriate methods.</p>
+<p>Other normalisation methods (see Chapter <a href="gettingstarted.html#gettingstarted">3</a>) are also possible and it is up to you, the analyst, to understand and decide on the appropriate methods.</p>
 <p>My preference is to use centred-log ratios (Aitchison distances). Aitchison distances are used in the workflow below for the PCA and RDA. The compositional approach and centred log-ratios are further discussed in the paper <a href="https://doi.org/10.3389/fmicb.2017.02224" target="_blank">Microbiome Datasets Are Compositional: And This Is Not Optional</a> (<span class="citation">Gloor et al. (<a href="#ref-Gloor2017" role="doc-biblioref">2017</a>)</span>).<br />
 In fact, comparing the results after applying different types of normalisation methods, dissimilarities or distances may complement your analysis and help in interpretation of data.</p>
-<div id="required-files" class="section level3 hasAnchor" number="6.1.1">
-<h3><span class="header-section-number">6.1.1</span> Required files<a href="plottingdiversity.html#required-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="required-files" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Required files<a href="plottingdiversity.html#required-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>A <code>phyloseq</code> object; either read in from a pre-saved <code>.rds</code> file or created as described in chapter <a href="Qiime2R.html#Qiime2R">5</a> under “Import qiime-files and create a phyloseq object”.<br />
+<li>A <code>phyloseq</code> object; either read in from a pre-saved <code>.rds</code> file or created as described in chapter <a href="Qiime2R.html#Qiime2R">6</a> under “Import qiime-files and create a phyloseq object”.<br />
 </li>
 <li>If you dont have your own data you can download the pre-saved <code>.rds</code> object from this Chapter and follow the below steps: <a href="./ps_ProjectX_2022July" target="_blank">ps_ProjectX_2022July</a>.</li>
 </ul>
 <p>Time to get started…</p>
 </div>
 </div>
-<div id="workflow-3" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Workflow<a href="plottingdiversity.html#workflow-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="packages-1" class="section level3 hasAnchor" number="6.2.1">
-<h3><span class="header-section-number">6.2.1</span> Packages<a href="plottingdiversity.html#packages-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="workflow-3" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Workflow<a href="plottingdiversity.html#workflow-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="packages-1" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Packages<a href="plottingdiversity.html#packages-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Install the following packages if not already.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="plottingdiversity.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># BiocManager::install(&quot;microbiome&quot;) If needed</span></span>
 <span id="cb30-2"><a href="plottingdiversity.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phyloseq)</span>
@@ -348,9 +364,9 @@ In fact, comparing the results after applying different types of normalisation m
 <p><br />
 </p>
 </div>
-<div id="load-phyloseq-object" class="section level3 hasAnchor" number="6.2.2">
-<h3><span class="header-section-number">6.2.2</span> Load phyloseq object<a href="plottingdiversity.html#load-phyloseq-object" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>For detail on how to create a phyloseq object please see chapter <a href="Qiime2R.html#Qiime2R">5</a>.</p>
+<div id="load-phyloseq-object" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Load phyloseq object<a href="plottingdiversity.html#load-phyloseq-object" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For detail on how to create a phyloseq object please see chapter <a href="Qiime2R.html#Qiime2R">6</a>.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="plottingdiversity.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reading in a previously saved phyloseq object</span></span>
 <span id="cb31-2"><a href="plottingdiversity.html#cb31-2" aria-hidden="true" tabindex="-1"></a>ps <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&#39;ps_ProjectX_2022July&#39;</span>)</span>
 <span id="cb31-3"><a href="plottingdiversity.html#cb31-3" aria-hidden="true" tabindex="-1"></a>ps  <span class="co"># get an overview of number of taxa and samples contained in the phyloseq object</span></span></code></pre></div>
@@ -384,8 +400,8 @@ In fact, comparing the results after applying different types of normalisation m
 <p><br />
 </p>
 </div>
-<div id="pre-filter-rarefy-and-calculate-diversity" class="section level3 hasAnchor" number="6.2.3">
-<h3><span class="header-section-number">6.2.3</span> Pre-filter, rarefy and calculate diversity<a href="plottingdiversity.html#pre-filter-rarefy-and-calculate-diversity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="pre-filter-rarefy-and-calculate-diversity" class="section level3 hasAnchor" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> Pre-filter, rarefy and calculate diversity<a href="plottingdiversity.html#pre-filter-rarefy-and-calculate-diversity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now the diversity indices can be calculated and added to the metadata of the phyloseq object for plotting. First, the abundances are pre-filtered (as shown in the previous chapter), then the ASV abundances are randomly resampled with <code>phyloseq::rarefy_even_depth</code>, such that all samples have the same number of ASVs.<br />
 The diversity indices are then calculated with <code>phyloseq::estimate_richness</code> based on these evenly resampled abundances. The dataframe that is created containing the range of indices is then added to the existing metadata of the phyloseq for plotting.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="plottingdiversity.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># some additional quality filtering - repeating steps from previous chapter. </span></span>
@@ -476,8 +492,8 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 ##  $ Fisher         : num  27.4 72 46.1 50.2 81 ...
 ##  $ pielou_ev      : num  0.834 0.825 0.861 0.857 0.843 ...</code></pre>
 </div>
-<div id="colors" class="section level3 hasAnchor" number="6.2.4">
-<h3><span class="header-section-number">6.2.4</span> Colors<a href="plottingdiversity.html#colors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="colors" class="section level3 hasAnchor" number="7.2.4">
+<h3><span class="header-section-number">7.2.4</span> Colors<a href="plottingdiversity.html#colors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="plottingdiversity.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can check Hex codes with help of https://htmlcolorcodes.com/</span></span>
 <span id="cb43-2"><a href="plottingdiversity.html#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-3"><a href="plottingdiversity.html#cb43-3" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#F9E79F&quot;</span>, <span class="st">&quot;#FDEBD0&quot;</span>, <span class="st">&quot;#F6DDCC&quot;</span>,  <span class="st">&quot;#E5E8E8&quot;</span>, <span class="st">&quot;#CCD1D1&quot;</span>, <span class="st">&quot;#AAB7B8&quot;</span>, </span>
@@ -496,8 +512,8 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 ##      Avedoere     Hjoerring 
 ##     &quot;#8E44AD&quot;     &quot;#E74C3C&quot;</code></pre>
 </div>
-<div id="richness" class="section level3 hasAnchor" number="6.2.5">
-<h3><span class="header-section-number">6.2.5</span> Richness<a href="plottingdiversity.html#richness" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="richness-1" class="section level3 hasAnchor" number="7.2.5">
+<h3><span class="header-section-number">7.2.5</span> Richness<a href="plottingdiversity.html#richness-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="plottingdiversity.html#cb45-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(phyloseq<span class="sc">::</span><span class="fu">sample_data</span>(ps.flt)) <span class="sc">%&gt;%</span></span>
 <span id="cb45-2"><a href="plottingdiversity.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">ggboxplot</span>(., <span class="at">x =</span> <span class="st">&quot;Location&quot;</span>, </span>
 <span id="cb45-3"><a href="plottingdiversity.html#cb45-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">y =</span> <span class="st">&quot;Observed&quot;</span>, </span>
@@ -516,8 +532,8 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb45-16"><a href="plottingdiversity.html#cb45-16" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div>
 <p><img src="gitbook-demo_files/figure-html/richness-1.png" width="672" /></p>
 </div>
-<div id="shannon" class="section level3 hasAnchor" number="6.2.6">
-<h3><span class="header-section-number">6.2.6</span> Shannon<a href="plottingdiversity.html#shannon" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="shannon" class="section level3 hasAnchor" number="7.2.6">
+<h3><span class="header-section-number">7.2.6</span> Shannon<a href="plottingdiversity.html#shannon" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="plottingdiversity.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Shannon</span></span>
 <span id="cb46-2"><a href="plottingdiversity.html#cb46-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(phyloseq<span class="sc">::</span><span class="fu">sample_data</span>(ps.flt)) <span class="sc">%&gt;%</span></span>
 <span id="cb46-3"><a href="plottingdiversity.html#cb46-3" aria-hidden="true" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">ggboxplot</span>(., <span class="at">x =</span> <span class="st">&quot;Location&quot;</span>, </span>
@@ -537,8 +553,8 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb46-17"><a href="plottingdiversity.html#cb46-17" aria-hidden="true" tabindex="-1"></a>p2</span></code></pre></div>
 <p><img src="gitbook-demo_files/figure-html/shannon-1.png" width="672" /></p>
 </div>
-<div id="pielous-evenness" class="section level3 hasAnchor" number="6.2.7">
-<h3><span class="header-section-number">6.2.7</span> Pielou’s evenness<a href="plottingdiversity.html#pielous-evenness" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="pielous-evenness" class="section level3 hasAnchor" number="7.2.7">
+<h3><span class="header-section-number">7.2.7</span> Pielou’s evenness<a href="plottingdiversity.html#pielous-evenness" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="plottingdiversity.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pielou</span></span>
 <span id="cb47-2"><a href="plottingdiversity.html#cb47-2" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(phyloseq<span class="sc">::</span><span class="fu">sample_data</span>(ps.flt)) <span class="sc">%&gt;%</span></span>
 <span id="cb47-3"><a href="plottingdiversity.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">ggboxplot</span>(., <span class="at">x =</span> <span class="st">&quot;Location&quot;</span>, </span>
@@ -558,8 +574,8 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb47-17"><a href="plottingdiversity.html#cb47-17" aria-hidden="true" tabindex="-1"></a>p3</span></code></pre></div>
 <p><img src="gitbook-demo_files/figure-html/pielou-1.png" width="672" /></p>
 </div>
-<div id="combined-plotting" class="section level3 hasAnchor" number="6.2.8">
-<h3><span class="header-section-number">6.2.8</span> Combined plotting<a href="plottingdiversity.html#combined-plotting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="combined-plotting" class="section level3 hasAnchor" number="7.2.8">
+<h3><span class="header-section-number">7.2.8</span> Combined plotting<a href="plottingdiversity.html#combined-plotting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="plottingdiversity.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pdf(NULL)</span></span>
 <span id="cb48-2"><a href="plottingdiversity.html#cb48-2" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> ggpubr<span class="sc">::</span><span class="fu">ggarrange</span>(p1, p2, p3, <span class="at">common.legend =</span> <span class="cn">TRUE</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">legend =</span> <span class="st">&#39;top&#39;</span>)</span>
 <span id="cb48-3"><a href="plottingdiversity.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co">#x = dev.off()</span></span>
@@ -568,8 +584,8 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <p><br />
 </p>
 </div>
-<div id="nmds" class="section level3 hasAnchor" number="6.2.9">
-<h3><span class="header-section-number">6.2.9</span> NMDS<a href="plottingdiversity.html#nmds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="nmds" class="section level3 hasAnchor" number="7.2.9">
+<h3><span class="header-section-number">7.2.9</span> NMDS<a href="plottingdiversity.html#nmds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="plottingdiversity.html#cb49-1" aria-hidden="true" tabindex="-1"></a>physeqNMDS <span class="ot">&lt;-</span>  ps_rare  <span class="co"># We are using the rarefied abundances as explained in the intro </span></span>
 <span id="cb49-2"><a href="plottingdiversity.html#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb49-3"><a href="plottingdiversity.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ordination</span></span>
@@ -596,8 +612,8 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb49-24"><a href="plottingdiversity.html#cb49-24" aria-hidden="true" tabindex="-1"></a>NMDSplot</span></code></pre></div>
 <p><img src="gitbook-demo_files/figure-html/nmds-1.png" width="576" /></p>
 </div>
-<div id="pca" class="section level3 hasAnchor" number="6.2.10">
-<h3><span class="header-section-number">6.2.10</span> PCA<a href="plottingdiversity.html#pca" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="pca" class="section level3 hasAnchor" number="7.2.10">
+<h3><span class="header-section-number">7.2.10</span> PCA<a href="plottingdiversity.html#pca" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="plottingdiversity.html#cb50-1" aria-hidden="true" tabindex="-1"></a>physeqPCA <span class="ot">&lt;-</span>  ps.flt  <span class="co"># just to keep it separate.</span></span>
 <span id="cb50-2"><a href="plottingdiversity.html#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-3"><a href="plottingdiversity.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co"># normalisation and transform using the microbiome package</span></span>
@@ -628,8 +644,8 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <p><br />
 </p>
 </div>
-<div id="rda" class="section level3 hasAnchor" number="6.2.11">
-<h3><span class="header-section-number">6.2.11</span> RDA<a href="plottingdiversity.html#rda" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="rda" class="section level3 hasAnchor" number="7.2.11">
+<h3><span class="header-section-number">7.2.11</span> RDA<a href="plottingdiversity.html#rda" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="plottingdiversity.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PERCENT FILTERVALUE FOR ALL RDAs</span></span>
 <span id="cb51-2"><a href="plottingdiversity.html#cb51-2" aria-hidden="true" tabindex="-1"></a>pcnt <span class="ot">&lt;-</span> <span class="fl">0.25</span></span>
 <span id="cb51-3"><a href="plottingdiversity.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co"># FORMULA FOR ALL RDAs</span></span>
@@ -721,8 +737,8 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <p><br />
 </p>
 </div>
-<div id="unweighted-unifrac" class="section level3 hasAnchor" number="6.2.12">
-<h3><span class="header-section-number">6.2.12</span> Unweighted uniFrac<a href="plottingdiversity.html#unweighted-unifrac" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="unweighted-unifrac" class="section level3 hasAnchor" number="7.2.12">
+<h3><span class="header-section-number">7.2.12</span> Unweighted uniFrac<a href="plottingdiversity.html#unweighted-unifrac" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>UniFrac distances are derived from phylogenetic distances between ASVs, which means that a phylogenetic tree needs to be included into the phyloseq object.</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="plottingdiversity.html#cb53-1" aria-hidden="true" tabindex="-1"></a>physeqPcOA <span class="ot">&lt;-</span>  ps.flt  <span class="co"># just to keep it separate.</span></span>
 <span id="cb53-2"><a href="plottingdiversity.html#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -746,8 +762,8 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb53-20"><a href="plottingdiversity.html#cb53-20" aria-hidden="true" tabindex="-1"></a>PCOAplot</span></code></pre></div>
 <p><img src="gitbook-demo_files/figure-html/unifrac-1.png" width="576" /></p>
 </div>
-<div id="combined-plotting-1" class="section level3 hasAnchor" number="6.2.13">
-<h3><span class="header-section-number">6.2.13</span> Combined plotting<a href="plottingdiversity.html#combined-plotting-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="combined-plotting-1" class="section level3 hasAnchor" number="7.2.13">
+<h3><span class="header-section-number">7.2.13</span> Combined plotting<a href="plottingdiversity.html#combined-plotting-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="plottingdiversity.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pdf(NULL)</span></span>
 <span id="cb54-2"><a href="plottingdiversity.html#cb54-2" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">&lt;-</span> ggpubr<span class="sc">::</span><span class="fu">ggarrange</span>(NMDSplot, PCAplot, RDAplot, PCOAplot,</span>
 <span id="cb54-3"><a href="plottingdiversity.html#cb54-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">common.legend =</span> <span class="cn">TRUE</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">legend =</span> <span class="st">&#39;top&#39;</span>)</span>
@@ -757,8 +773,8 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <p><br />
 </p>
 </div>
-<div id="save-plots-to-png-and-pdf" class="section level3 hasAnchor" number="6.2.14">
-<h3><span class="header-section-number">6.2.14</span> Save plots to png and pdf<a href="plottingdiversity.html#save-plots-to-png-and-pdf" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="save-plots-to-png-and-pdf" class="section level3 hasAnchor" number="7.2.14">
+<h3><span class="header-section-number">7.2.14</span> Save plots to png and pdf<a href="plottingdiversity.html#save-plots-to-png-and-pdf" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="plottingdiversity.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># either as png or pdf</span></span>
 <span id="cb55-2"><a href="plottingdiversity.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;alphadiversity.png&quot;</span>, <span class="at">plot =</span> (g1), <span class="at">height=</span><span class="dv">4</span>, <span class="at">width=</span><span class="dv">10</span>, <span class="at">units=</span><span class="st">&#39;in&#39;</span>, <span class="at">dpi=</span><span class="dv">600</span>)</span>
 <span id="cb55-3"><a href="plottingdiversity.html#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;alphadiversity.pdf&quot;</span>, <span class="at">plot =</span> (g1), <span class="at">height=</span><span class="dv">4</span>, <span class="at">width=</span><span class="dv">10</span>, <span class="at">units=</span><span class="st">&#39;in&#39;</span>, <span class="at">dpi=</span><span class="dv">600</span>)</span>

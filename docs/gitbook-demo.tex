@@ -138,7 +138,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2022-10-22}
+\date{2023-01-05}
 
 \begin{document}
 \maketitle
@@ -150,7 +150,7 @@
 \hypertarget{about}{%
 \chapter{About this GitBook}\label{about}}
 
-\includegraphics{./img/data.jpeg}
+\includegraphics{./img/vectorstock_23650232.jpg}
 
 This GitBook contains workflows for students who want to get started with sequencing microbial amplicons on a Miseq instrument and then process and analyse ASV-based data. It is a compilation of workflows that I have gotten accustomed to during my PhD at La Trobe University with help of many amazing students and colleagues over the years. But it is by no means comprehensive.
 
@@ -168,21 +168,373 @@ Everyone is at a different level in the journey to exploring microbial diversity
 
 We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne. Email me or comment on the discussion section of the \href{https://github.com/chrismitbiz/ABlab-workflows/discussions/}{GitHub repository} for this GitBook. You will need to get a GitHub account to join the discussion. Its free.
 
-More about my PhD research can be found here: \url{https://clean-dirt-digests.netlify.app}.
+More about my PhD research can be found here: \url{https://clean-dirt-digests.netlify.app}.\\
+\includegraphics[width=1.5625in,height=\textheight]{./img/avatar.jpg}
 
 This work is licensed under a Creative Commons Attribution 4.0 International License.
+
+\hypertarget{some-fundamentals-by-dr-jen-wood}{%
+\chapter{Some fundamentals by Dr Jen Wood}\label{some-fundamentals-by-dr-jen-wood}}
+
+\textbf{An introduction to alpha and beta diversity analysis and the pitfalls you need to know}
+
+By \href{https://jenwoodmicro.wordpress.com}{Dr Jen WOOD} \textbar{} Microbial community ecologist\\
+\includegraphics{./img/JW.jpg}
+
+\textbf{Microbial Diversity, how do you describe it?}
+
+\begin{itemize}
+\item
+  How many species (ASVs/ESVs) are there?
+\item
+  Which species are common and which are rare?
+\item
+  How many species do two communities share?
+\item
+  How many species do two communities have different?
+\item
+  Do two communities share the same common and rare species?
+\end{itemize}
+
+\textbf{Some terms and their synonyms}
+
+\begin{itemize}
+\item
+  Community = Microbial composition in each sample
+\item
+  Species = Operational Taxonomic Unit (OTU) = Amplicon Sequence Variant (ASV) = Exact Sequence Variant (ESV)
+\item
+  Individual = Read = Sequence read
+\end{itemize}
+
+\hypertarget{alpha-diversity}{%
+\section{Alpha diversity}\label{alpha-diversity}}
+
+\textbf{Definition}: Alpha diversity~is the~diversity~of each site (local species pool).
+
+Common metrics such as Shannon-Wiener, Simpson diversity are affected by species \textbf{richness} and community \textbf{evenness}
+
+\hypertarget{richness}{%
+\subsection{Richness}\label{richness}}
+
+Number of species (ASVs/ESVs) in a community.\\
+The more species rich a community is the more diverse that community is.
+
+\begin{itemize}
+\item
+  \textbf{Not} affected by the number of INDIVIDUALS (READS/ABUNDANCE).
+\item
+  \textbf{Not} affected by taxonomy
+\end{itemize}
+
+\hfill\break
+
+Two lakes with identical species richness of 5\\
+Just one is more crowded than the other\\
+\includegraphics{./img/pond_richness.png}
+
+\hfill\break
+
+Two communities with an identical OTU richness of 4 but with NO species in common \includegraphics{./img/animals_richness.png}\\
+
+\hypertarget{evenness}{%
+\subsection{Evenness}\label{evenness}}
+
+How evenly individuals are distributed among the species in a community.\\
+The more even a community is the more diverse that community is.
+
+\begin{itemize}
+\item
+  \textbf{IS} affected by the number of individuals (Reads/Abundance).
+\item
+  \textbf{Not} affected by taxonomy\\
+\end{itemize}
+
+Examples of how the number of individuals can be distributed among the species in a given community:\\
+
+\includegraphics{./img/animals_evenness.png}
+
+\hfill\break
+
+\hypertarget{exercise}{%
+\subsection{Exercise}\label{exercise}}
+
+For each pair of communities - which is more diverse and why?
+
+\includegraphics[width=5.72917in,height=\textheight]{./img/petri.png}
+
+\hfill\break
+
+\textbf{Answers}\\
+From the top:
+
+\begin{itemize}
+\tightlist
+\item
+  A is more diverse because species distribution is more even.
+\item
+  A is more diverse because of it greater species richness.
+\item
+  None are more diverse. Both pairs have the same richness and evenness.
+\end{itemize}
+
+In general MORE richness = MORE diversity\\
+And MORE evenness = MORE diversity
+
+\hypertarget{shannon-weiner-diversity}{%
+\subsection{Shannon-Weiner Diversity}\label{shannon-weiner-diversity}}
+
+The Richness and Evenness of a community contribute to its Diversity.\\
+This is a score that can be calculated a number of ways.\\
+The Shannon-Weiner equation below is one of the most commonly used.
+
+\includegraphics[width=3.64583in,height=\textheight]{./img/SW-formula.png}
+
+\hfill\break
+
+For this pair of communities - which is more diverse and why?
+
+\includegraphics[width=5.72917in,height=\textheight]{./img/petri2.png}
+
+\hfill\break
+
+\textbf{Example 1}\\
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2326}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.3140}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0698}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0930}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1395}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1512}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\centering
+Species(i)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Number of individuals (p)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+pi
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Ln(pi)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+pi*Ln(pi)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+-pi*Ln(pi)
+\end{minipage} \\
+\midrule()
+\endhead
+Geobacter spp. & 52 & 0.84 & -0.18 & -0.15 & 0.15 \\
+Desulfovibrio spp. & 7 & 0.11 & -2.18 & -0.25 & 0.25 \\
+Clostridium spp. & 2 & 0.03 & -3.43 & -0.11 & 0.11 \\
+Sum: & 62 & & & & 0.51 \\
+\bottomrule()
+\end{longtable}
+
+\hfill\break
+
+\textbf{Example 2}\\
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2326}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.3140}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0698}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0930}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1395}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1512}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\centering
+Species
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Number of individuals (p)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+pi
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Ln(pi)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+pi*Ln(pi)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+-pi*Ln(pi)
+\end{minipage} \\
+\midrule()
+\endhead
+Geobacter spp. & 23 & 0.37 & -0.99 & -0.37 & 0.37 \\
+Desulfovibrio spp. & 27 & 0.44 & -0.83 & -0.36 & 0.36 \\
+Clostridium spp. & 12 & 0.19 & -1.64 & -0.32 & 0.32 \\
+Sum: & 62 & & & & 1.05 \\
+\bottomrule()
+\end{longtable}
+
+\hfill\break
+
+\hypertarget{beta-diversity}{%
+\section{Beta diversity}\label{beta-diversity}}
+
+\textbf{Definition}: The variation in species composition among sites.
+
+Common metrics: (dis)similarity indices such as Bray-Curtis (BC), Unifrac, Aitchison\\
+Affected by \textbf{number} of ASVs/ESVs in common, number of ASVs/ESVs not in common and similarity of shared ASV/ESV \textbf{abundances} between plots (When data is abundance weighted and not binary transformed)\\
+
+\hfill\break
+E.g. Bray-Curtis dissimilarity:\\
+\includegraphics[width=1.5625in,height=\textheight]{./img/BC.jpg}\\
+
+Where:\\
+i \& j are the two sites,\\
+S\textsubscript{i} is the total number of specimens counted on site i,\\
+S\textsubscript{j} is the total number of specimens counted on site j,\\
+C\textsubscript{ij} is the sum of only the lesser counts for each species found in both sites.\\
+\strut \\
+
+Two communities with identical richness, diversity and biomass can still be a bit dissimilar.\\
+\includegraphics[width=5.72917in,height=\textheight]{./img/betatank.png}\\
+
+\hfill\break
+Two communities with identical richness, diversity and biomass can be highly dissimilar.~ \includegraphics[width=5.72917in,height=\textheight]{./img/betatank2.png}\\
+
+\hfill\break
+Changes in beta diversity may not track with changes in alpha diversity. The variation in species composition among sites can arise from \textbf{species replacement} (i.e.~community turnover) due to the tendency of species to replace each other over an ecological gradient.\\
+It can also come from \textbf{species differences} (i.e.~community nestedness) due to one community having more species present than another.
+
+\hfill\break
+
+\hypertarget{species-replacement}{%
+\subsection{Species replacement}\label{species-replacement}}
+
+\includegraphics[width=5.72917in,height=\textheight]{./img/betatank_replace.png}\\
+
+\hypertarget{species-nestedness}{%
+\subsection{Species nestedness}\label{species-nestedness}}
+
+\includegraphics[width=5.72917in,height=\textheight]{./img/betatank_nest.png}\\
+
+~
+
+\hypertarget{beta-diversity-analysis-workflow}{%
+\subsection{Beta diversity analysis workflow}\label{beta-diversity-analysis-workflow}}
+
+\includegraphics{./img/betaworkflow.png}\\
+
+\textbf{Visualisations}
+
+\includegraphics{./img/betaviz.png}\\
+
+\hypertarget{nmnds-and-pcoa}{%
+\subsubsection{NMNDs and PCoA}\label{nmnds-and-pcoa}}
+
+Exactly the same data in an NMDS and in a PCoA using Bray-Curtis metric: what's the difference?
+
+\includegraphics{./img/beta_nmdspcoa.png}
+
+\hfill\break
+
+\textbf{NMDS: non-Metric Multidimensional Scaling}
+
+\includegraphics[width=3.125in,height=\textheight]{./img/beta_ordination.png}\\
+
+\textbf{Process}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  A half matrix containing the dissimilarity scores between each pair of samples is calculated.\\
+\item
+  The dissimilarity relationship between all the samples can be explained in n-dimensional space. Where n = number of samples -1.\\
+\item
+  The computer iteratively tries to project this multidimensional relationship space into 2D. If it can do this and preserve the relationships, stress \textless{} 0.2. If it can't do this stress \textgreater{} 0.2 and the ordination is basically random collection of dots.
+\end{enumerate}
+
+\textbf{Interpretation}\\
+The closer two points are in 2D space the more similar they are. i.e.~we looking at grouping.
+
+Axes are arbitrary.
+
+Valid if Kruskal stress values \textless{} 0.2.
+
+\textbf{Pros:} lets the data ``speak for itself''. Way the ordination is drawn is completely analogous to the way ANOSIM/PERMANOVA stats are generated.
+
+\textbf{Cons:} ordinations are not always valid.\\
+
+\textbf{PCoA: Principal Coordinates analysis}
+
+\includegraphics[width=3.125in,height=\textheight]{./img/beta_pcoa.png}\\
+
+\textbf{Process}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  A half matrix containing the dissimilarity scores between each pair of samples in calculated and `placed' in n-dimensional space.\\
+\item
+  An axis is draw through the data in the dimension that has the largest variation.\\
+\item
+  Data is projected onto this axis.\\
+\item
+  The process is repeated for the direction through the data that has the second greatest amount of variation so the data are now projected onto these two new axis, the PCoA axis.
+\end{enumerate}
+
+\textbf{Interpretation}\\
+Order of data along axis correspond to largest variation in data set.
+
+Percentage of variation in the `data cloud'.
+
+\textbf{Pros:} Always valid - no stress values; may correlate treatment effect to a tangible level of variation in the data.
+
+\textbf{Cons:} Axis don't always explain lots of variation; communities that have ASV/ESV values that introduce large amounts of variation strongly influence the ordination, making patterns of other communities less visible; may need to remove these communities.\\
+
+\hypertarget{binary-transform}{%
+\subsubsection{Binary transform}\label{binary-transform}}
+
+Tells us about the influence of rare members and abundance on beta-diversity scores. Binary transformation helps determine why a community is (dis)similar.
+
+\includegraphics[width=4.16667in,height=\textheight]{./img/binarytrans1.png}\\
+\includegraphics[width=4.16667in,height=\textheight]{./img/binarytrans2.png}\\
+
+\textbf{Example1:} Communities that share dominate species appear highly similar. What happen when we binary transform?
+
+\includegraphics[width=5.72917in,height=\textheight]{./img/binarytranstank1.png}\\
+
+\includegraphics[width=5.72917in,height=\textheight]{./img/binarytranstank2.png}\\
+
+\textbf{Example2:} The communities with identical richness and biomass are \textgreater50\% dissimilar due dominant species turnover. What happens when we binary transform?
+
+\includegraphics[width=5.72917in,height=\textheight]{./img/binarytranstank3.png}\\
+
+\includegraphics[width=5.72917in,height=\textheight]{./img/binarytranstank4.png}\\
+
+\hypertarget{testing-beta-diversity-permanova}{%
+\subsubsection{Testing Beta diversity: Permanova}\label{testing-beta-diversity-permanova}}
+
+\begin{itemize}
+\item
+  A non-parametric alternative to MANOVA (also called NPMANOVA)
+\item
+  Generates a pseudo-F stat and F table with p values (like an ANOVA)
+\item
+  Test hypothesis that there is no difference in group centriods
+\end{itemize}
+
+\includegraphics[width=4.16667in,height=\textheight]{./img/permanova.png}\\
+
+PERMANOVA is not done on the output of an ordination but rather on the underlying distance matrices.
+
+\includegraphics[width=4.16667in,height=\textheight]{./img/permaprocess.png}\\
+
+Beta dispersion describes the spread of a set of points around a centroid.
+
+PERMANOVA can be sensitive to difference in beta-dispersion (so test for this too).
+
+\includegraphics[width=4.16667in,height=\textheight]{./img/dispersion.png}\\
 
 \hypertarget{gettingstarted}{%
 \chapter{Getting started}\label{gettingstarted}}
 
-Prerequisites will be listed in each sub chapter separately.
-Following a few general comments:
+\hypertarget{before-you-can-analyse}{%
+\section{Before you can analyse}\label{before-you-can-analyse}}
 
-\hypertarget{general-requirements}{%
-\section{General requirements}\label{general-requirements}}
-
-\hypertarget{access-to-computational-resources}{%
-\subsection{Access to computational resources}\label{access-to-computational-resources}}
+\hypertarget{get-access-to-computational-resources}{%
+\subsection{Get access to computational resources}\label{get-access-to-computational-resources}}
 
 To process data you will need a personal computer or online computational resources with sufficient number of CPUs, working memory and storage. If you want to run most of the processing on a personal computer then I'd recommend a minimum of \textbf{4 CPUs, 16 Gb RAM and 500 Gb storage}. However, please note that some alignment tasks require more RAM, hence some of the steps (e.g.~taxonomic classifications) may require a more powerful resource. The advantage of using a personal computer is that you can frequently update the latest packages without relying on a university administrator to do that for you. Furthermore, with a personal computer you wont need to share with others, making it easier to run the packages without a workload manager.
 
@@ -196,25 +548,25 @@ In addition, there is the awesome \href{https://usegalaxy.org.au/}{Galaxy Austra
 
 This workbook will be based on using the Nectar Research cloud.
 
-\hypertarget{file-storage}{%
-\subsection{File storage}\label{file-storage}}
+\hypertarget{get-file-storage}{%
+\subsection{Get file storage}\label{get-file-storage}}
 
 Working with sequencing data may require you do handle large amounts of data. From experience, a run of a 600µl pool (6-10pM) of amplicons in 2x301 Miseq cycles may produce around 10-20 Gb of FASTQ files. \href{https://sapac.support.illumina.com/bulletins/2018/01/approximate-sizes-of-sequencing-run-output-folders.html}{Much more} can be expected for NextSeq runs or for long-read sequencing.
 
 Once a Miseq run has finished it is typically available to download from the \href{https://basespace.illumina.com/dashboard}{Illumina Basespace} account. After a few runs, the data can accumulate quickly. Hence, \textbf{persistent storage space} may be required. With an Illumina Basespace account you get 1 TB of storage and you can keep a copy of the FASTQ file on your account. However, Basespace may delete your data if the account has been inactive for more than 6 months. But you will get reminder emails and all you need to do is to log in every now and then so Illumina wont delete your data. Alternatively, data can be upload onto a public repository for persistent storage, such as the \href{https://www.ncbi.nlm.nih.gov/sra}{Sequence Reads Archives}. If you have access to a research cloud or commercial computational resources then you may store data on those. Personally, I prefer a 1TB solid state harddrive.
 
-\hypertarget{command-line}{%
-\subsection{Command Line}\label{command-line}}
+\hypertarget{learn-some-basic-command-line}{%
+\subsection{Learn some basic command Line}\label{learn-some-basic-command-line}}
 
 Many of the tools used are managed through command line. Cloud servers are also accessed through command line. That means there is no graphical user interphase and all commands, including installation and running of packages are done through lines of codes on a simple window interphase. This window is called Terminal (Mac, Linux) or Command Prompt application (Windows). There are lots of online sources to help you get started with command line. One example here: \url{https://towardsdatascience.com/a-quick-guide-to-using-command-line-terminal-96815b97b955}
 
-\hypertarget{data-storage-browser}{%
-\subsection{Data storage browser}\label{data-storage-browser}}
+\hypertarget{get-a-data-storage-browser}{%
+\subsection{Get a data storage browser}\label{get-a-data-storage-browser}}
 
 To upload, download, move, rename files on any cloud computer or high performance computer (HPC) at your institution, you will also require a cloud storage browser, such as \href{https://docs.cyberduck.io/}{Cyberduck} (Mac) or \href{https://www.putty.org/}{PuTTY} (Windows).
 
-\hypertarget{r-and-r-studio}{%
-\subsection{R and R studio}\label{r-and-r-studio}}
+\hypertarget{get-r-and-r-studio}{%
+\subsection{Get R and R studio}\label{get-r-and-r-studio}}
 
 R has become an essential research language. If you want to progress in research it is almost inevitable for you to learn. Just do it. :). Perhaps start here if you dont know where else to start: \url{https://education.rstudio.com/learn/beginner/}. It lists some great step-by-step tutorials on how to install R and Rstudio and then explains the basics.
 
@@ -222,8 +574,8 @@ If you are like me, then you simply copy and paste code from other sites and see
 
 At the same time you will want to do short courses (eg. from edX \href{https://www.edx.org/course/data-science-r-basics}{Data Science: R Basics}) that delve a little deeper into different data structures such as data frames, matrices, lists and the syntax to arrange stuff. Over time you understand what different lines of code mean and can trouble shoot when things don't work. And things often don't work. You will get used to troubleshooting code :).
 
-\hypertarget{environment-managers}{%
-\subsection{Environment managers}\label{environment-managers}}
+\hypertarget{know-what-environment-managers-are}{%
+\subsection{Know what environment managers are}\label{know-what-environment-managers-are}}
 
 Package and environment managers are extremely useful for your workflows. They help to install and run software packages such as qiime2, into individual `environments' independent of your operating system. The environment manager is installed once and from there you use it to install individual packages. The most commonly used environment manager is Conda. Learn more about it here: \url{https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html}
 
@@ -261,39 +613,49 @@ For example looking for \texttt{phyloseq} in the Help window gives this:\\
 
 \includegraphics{./img/helpR.png}
 
-\hypertarget{github-account}{%
-\subsection{GitHub account}\label{github-account}}
+\hypertarget{get-a-github-account}{%
+\subsection{Get a GitHub account}\label{get-a-github-account}}
 
 This GitBook, including all its files, is hosted on one of my GitHub repositories (\url{https://github.com/chrismitbiz/ABlab-workflows}). If you have any comments you can ask a question on the Discussion Page of this repository. You require a GitHub account to do that. It is free.
 
 \hypertarget{a-note-on-rarefying-normalising}{%
 \section{A note on rarefying (normalising)}\label{a-note-on-rarefying-normalising}}
 
+By Dr Jen Wood and Dr Chris Krohn:\\
+Data normalisation is necessary because it is very difficult to collect exactly the same number of sequence reads for each sample. There is an arbitrary total read depth imposed by the instrument, which is a major confounder for distance or dissimilarity calculations and multivariate ordinations derived from these distances.
+
 Various data normalisation methods exist and opinions on their applicability diverge.
 
 Example of normalisation methods:
 
 \begin{itemize}
-\tightlist
 \item
-  Rarefying data\\
+  Rarefying data
 \item
   Transformation into relative abundances
 \item
   Transformation into centered log-ratios
 \item
-  Cumulative Sum Scaling (CSS)\\
+  Cumulative Sum Scaling (CSS)
 \item
-  Upper Quantile (UQ)\\
+  Upper Quantile (UQ)
 \item
-  edgeR-trimmed mean of M values (TMM)\\
+  edgeR-trimmed mean of M values (TMM)
 \item
   DESeq-variance stabilizing transformation (VS)
 \end{itemize}
 
 There are others. Check out this link to learn more about the different types of normalisation methods: \href{https://www.omicsforum.ca/t/what-are-the-various-normalization-methods-and-which-method-should-i-choose/494}{MicrobiomeAnalyst: FAQs, What are the various normalization methods and which method should I choose?}.
 
-Rarefying data is one of the more contested methods. We acknowledge that \textbf{rarefying data} (i.e.~the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus \textbf{not recommended for differential abundance analyses}. Check out this well cited paper here to learn why: \href{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531}{Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible} (\citet{McMurdie2014}).
+Rarefying data is one of the more contested methods. Rarefying aims to reduce bias introduced by variable library sizes. Rarefying involves choosing a threshold of reads to which to normalize all your samples to (e.g.~20,000, min sample read depth).
+
+Samples that fall below the threshold will be removed from your analysis. The goal is to choose a threshold that keeps the most reads whilst also retaining the most samples.
+
+\includegraphics[width=3.125in,height=\textheight]{./img/rary.png}
+
+We acknowledge that \textbf{rarefying data} (i.e.~the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus \textbf{not recommended for differential abundance analyses}. Check out this well cited paper here to learn why: \href{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531}{Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible} (\citet{McMurdie2014}).
+
+\includegraphics[width=5.9375in,height=\textheight]{./img/rary2.png}
 
 However, rarefying still ``\emph{outperformed all the other normalization methods for producing accurate BC (Bray-Curtis) dissimilarities and subsequent PCoAs and PERMANOVAs.}'' Paper here: \href{https://doi.org/10.1111/2041-210X.13115}{Methods for normalizing microbiome data: An ecological perspective} (\citet{McKnight2019a}).
 
@@ -590,7 +952,7 @@ In this chapter you will learn how to process the FASTQ files that are generated
 
 \texttt{Qiimeimportmanifest.tsv} - A tab separated file with three columns where the first column is the sample ID (The exact same ID that was used in the manifest file for loading the Miseq). The second and third columns are the absolute paths to the forward and reverse FASTQ files, respectively. If you are working on a cloud computer then the FASTQ files should be uploaded to that, and the path needs to contain the full path to the relevant folder, including the full name of the file itself. If you process those files on your local drive then the paths need to change to your local folder containing the FASTQ files. In the below example table, the files are located on a Linux cloud computer (Nectar Research Cloud).
 
-It might take some time to compile the import manifest. Each file path has to exact. However, in case you made a mistake in the file names etc, Qiime is generally pretty good at reporting where the error occured.
+It might take some time to compile the import manifest. Each file path has to be exact. However, in case you made a mistake in the file names etc, Qiime is generally pretty good at reporting where the error occured.
 
 \begin{table}
 
@@ -1851,8 +2213,8 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
 ##     "#8E44AD"     "#E74C3C"
 \end{verbatim}
 
-\hypertarget{richness}{%
-\subsection{Richness}\label{richness}}
+\hypertarget{richness-1}{%
+\subsection{Richness}\label{richness-1}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2866,7 +3228,7 @@ Here, we run the \texttt{PhyloFactor} function with \texttt{choice\ =\ "var"}.
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0255 minutes.    Estimated time of completion: 2022-10-22 09:15:41    2 factors completed in 0.0472 minutes.     Estimated time of completion: 2022-10-22 09:15:40    3 factors completed in 0.0693 minutes.     Estimated time of completion: 2022-10-22 09:15:39    4 factors completed in 0.0924 minutes.     Estimated time of completion: 2022-10-22 09:15:39    5 factors completed in 0.114 minutes.     Estimated time of completion: 2022-10-22 09:15:39    6 factors completed in 0.134 minutes.     Estimated time of completion: 2022-10-22 09:15:39    7 factors completed in 0.155 minutes.     Estimated time of completion: 2022-10-22 09:15:39    8 factors completed in 0.176 minutes.     Estimated time of completion: 2022-10-22 09:15:39    9 factors completed in 0.199 minutes.     Estimated time of completion: 2022-10-22 09:15:39    10 factors completed in 0.22 minutes.     Estimated time of completion: 2022-10-22 09:15:39    11 factors completed in 0.242 minutes.     Estimated time of completion: 2022-10-22 09:15:39    12 factors completed in 0.262 minutes.     Estimated time of completion: 2022-10-22 09:15:38    13 factors completed in 0.283 minutes.     Estimated time of completion: 2022-10-22 09:15:38   
+##  1 factor completed in 0.0398 minutes.    Estimated time of completion: 2023-01-05 17:05:28    2 factors completed in 0.0739 minutes.     Estimated time of completion: 2023-01-05 17:05:25    3 factors completed in 0.107 minutes.     Estimated time of completion: 2023-01-05 17:05:24    4 factors completed in 0.141 minutes.     Estimated time of completion: 2023-01-05 17:05:24    5 factors completed in 0.171 minutes.     Estimated time of completion: 2023-01-05 17:05:23    6 factors completed in 0.202 minutes.     Estimated time of completion: 2023-01-05 17:05:23    7 factors completed in 0.233 minutes.     Estimated time of completion: 2023-01-05 17:05:23    8 factors completed in 0.264 minutes.     Estimated time of completion: 2023-01-05 17:05:22    9 factors completed in 0.295 minutes.     Estimated time of completion: 2023-01-05 17:05:22    10 factors completed in 0.326 minutes.     Estimated time of completion: 2023-01-05 17:05:22    11 factors completed in 0.359 minutes.     Estimated time of completion: 2023-01-05 17:05:22    12 factors completed in 0.39 minutes.     Estimated time of completion: 2023-01-05 17:05:22    13 factors completed in 0.421 minutes.     Estimated time of completion: 2023-01-05 17:05:22   
 \end{verbatim}
 
 \begin{Shaded}

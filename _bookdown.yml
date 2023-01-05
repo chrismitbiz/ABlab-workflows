@@ -1,5 +1,6 @@
 book_filename: "gitbook-demo"
 rmd_files: ["index.Rmd",
+            "02.1_jenwood.Rmd",
             "02_getting_started.Rmd",
             "03_Miseq_library_preps.Rmd",
             "04_From_Miseq_to_Qiime.Rmd",

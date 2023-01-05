@@ -1,4 +1,4 @@
---- 
+---
 title: "Workflows for processing microbial amplicon sequences"
 author: "[Christian Krohn, PhD, RMIT University](https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian)"
 date: "`r Sys.Date()`"
@@ -16,27 +16,28 @@ biblio-style: apalike
 ---
 
 <!--"Using GitBooks to create Open course materials"-->
+
 # About this GitBook {#about}
 
-![](./img/data.jpeg)
+![](./img/vectorstock_23650232.jpg)
 
 This GitBook contains workflows for students who want to get started with sequencing microbial amplicons on a Miseq instrument and then process and analyse ASV-based data. It is a compilation of workflows that I have gotten accustomed to during my PhD at La Trobe University with help of many amazing students and colleagues over the years. But it is by no means comprehensive.
-  
-One of the biggest hurdles for students that embark on sequencing environmental DNA for the first time, is the effort that is required to understand the various coding languages, file types and formats, packages or platforms that are involved (think Unix, Linux, Slurm, Qiime, R, RMarkdown, python, conda, ggplot, docker, GitHub, data instances...) before they even can start looking at exploring the data for biological meaning and producing publishable output. 
 
-For example, this GitBook is made in [Rstudio](https://rstudio.com){target="_blank"}, using the [`rmarkdown` markup language](https://rmarkdown.rstudio.com/){target="_blank"}, rendered using the [`bookdown` package](https://bookdown.org/yihui/bookdown/get-started.html){target="_blank"}, and hosted on [GitHub](https://github.com/){target="_blank"}. It took me at least five years before I was ready to create and host this content for students. And even then I needed this awesome [Bookdown template](https://cjvanlissa.github.io/gitbook-demo/index.html){target="_blank"} from Dr. Caspar van Lissa to get started with Bookdown. So it is really helpful to have something to start with. 
+One of the biggest hurdles for students that embark on sequencing environmental DNA for the first time, is the effort that is required to understand the various coding languages, file types and formats, packages or platforms that are involved (think Unix, Linux, Slurm, Qiime, R, RMarkdown, python, conda, ggplot, docker, GitHub, data instances...) before they even can start looking at exploring the data for biological meaning and producing publishable output.
 
-It was not easy to get over the initial hurdles for me too, so I thought I'd try to compile my workflows. This may help students to get a head start but also helps to scrutinise my approach in the hope that others can point me to better ways of doing things. 
+For example, this GitBook is made in [Rstudio](https://rstudio.com){target="_blank"}, using the [`rmarkdown` markup language](https://rmarkdown.rstudio.com/){target="_blank"}, rendered using the [`bookdown` package](https://bookdown.org/yihui/bookdown/get-started.html){target="_blank"}, and hosted on [GitHub](https://github.com/){target="_blank"}. It took me at least five years before I was ready to create and host this content for students. And even then I needed this awesome [Bookdown template](https://cjvanlissa.github.io/gitbook-demo/index.html){target="_blank"} from Dr. Caspar van Lissa to get started with Bookdown. So it is really helpful to have something to start with.
+
+It was not easy to get over the initial hurdles for me too, so I thought I'd try to compile my workflows. This may help students to get a head start but also helps to scrutinise my approach in the hope that others can point me to better ways of doing things.
 
 **Browse to your level**
 
-Everyone is at a different level in the journey to exploring microbial diversity. Some have absolutely no idea where to start and others have created their first phylogentic trees with ggtree or similar. The most important prerequisites are patience and persistence... :). Just  explore the different chapters and see where it takes you. In fact you will be amazed how much you can achieve with mininal coding knowledge. 
+Everyone is at a different level in the journey to exploring microbial diversity. Some have absolutely no idea where to start and others have created their first phylogentic trees with ggtree or similar. The most important prerequisites are patience and persistence... :). Just explore the different chapters and see where it takes you. In fact you will be amazed how much you can achieve with mininal coding knowledge.
 
-**Get in touch**  
-  
-We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne. Email me or comment on the discussion section of the [GitHub repository](https://github.com/chrismitbiz/ABlab-workflows/discussions/){target="_blank"} for this GitBook. You will need to get a GitHub account to join the discussion. Its free.  
-  
-More about my PhD research can be found here: https://clean-dirt-digests.netlify.app.  
-  
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+**Get in touch**
 
+We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne. Email me or comment on the discussion section of the [GitHub repository](https://github.com/chrismitbiz/ABlab-workflows/discussions/){target="_blank"} for this GitBook. You will need to get a GitHub account to join the discussion. Its free.
+
+More about my PhD research can be found here: <https://clean-dirt-digests.netlify.app>.\
+![](./img/avatar.jpg){width="150"}
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.

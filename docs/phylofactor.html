@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Phylofactor analysis | Workflows for processing microbial amplicon sequences</title>
+  <title>Chapter 9 Phylofactor analysis | Workflows for processing microbial amplicon sequences</title>
   <meta name="description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Phylofactor analysis | Workflows for processing microbial amplicon sequences" />
+  <meta property="og:title" content="Chapter 9 Phylofactor analysis | Workflows for processing microbial amplicon sequences" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
   <meta name="github-repo" content="chrismitbiz/ABlab-workflows" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Phylofactor analysis | Workflows for processing microbial amplicon sequences" />
+  <meta name="twitter:title" content="Chapter 9 Phylofactor analysis | Workflows for processing microbial amplicon sequences" />
   
   <meta name="twitter:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2022-10-22" />
+<meta name="date" content="2023-01-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -161,130 +161,146 @@ div.csl-indent {
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this GitBook</a></li>
-<li class="chapter" data-level="2" data-path="gettingstarted.html"><a href="gettingstarted.html"><i class="fa fa-check"></i><b>2</b> Getting started</a>
+<li class="chapter" data-level="2" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html"><i class="fa fa-check"></i><b>2</b> Some fundamentals by Dr Jen Wood</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="gettingstarted.html"><a href="gettingstarted.html#general-requirements"><i class="fa fa-check"></i><b>2.1</b> General requirements</a>
+<li class="chapter" data-level="2.1" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#alpha-diversity"><i class="fa fa-check"></i><b>2.1</b> Alpha diversity</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="gettingstarted.html"><a href="gettingstarted.html#access-to-computational-resources"><i class="fa fa-check"></i><b>2.1.1</b> Access to computational resources</a></li>
-<li class="chapter" data-level="2.1.2" data-path="gettingstarted.html"><a href="gettingstarted.html#file-storage"><i class="fa fa-check"></i><b>2.1.2</b> File storage</a></li>
-<li class="chapter" data-level="2.1.3" data-path="gettingstarted.html"><a href="gettingstarted.html#command-line"><i class="fa fa-check"></i><b>2.1.3</b> Command Line</a></li>
-<li class="chapter" data-level="2.1.4" data-path="gettingstarted.html"><a href="gettingstarted.html#data-storage-browser"><i class="fa fa-check"></i><b>2.1.4</b> Data storage browser</a></li>
-<li class="chapter" data-level="2.1.5" data-path="gettingstarted.html"><a href="gettingstarted.html#r-and-r-studio"><i class="fa fa-check"></i><b>2.1.5</b> R and R studio</a></li>
-<li class="chapter" data-level="2.1.6" data-path="gettingstarted.html"><a href="gettingstarted.html#environment-managers"><i class="fa fa-check"></i><b>2.1.6</b> Environment managers</a></li>
-<li class="chapter" data-level="2.1.7" data-path="gettingstarted.html"><a href="gettingstarted.html#explore-the-help-functions"><i class="fa fa-check"></i><b>2.1.7</b> Explore the help functions</a></li>
-<li class="chapter" data-level="2.1.8" data-path="gettingstarted.html"><a href="gettingstarted.html#github-account"><i class="fa fa-check"></i><b>2.1.8</b> GitHub account</a></li>
+<li class="chapter" data-level="2.1.1" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#richness"><i class="fa fa-check"></i><b>2.1.1</b> Richness</a></li>
+<li class="chapter" data-level="2.1.2" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#evenness"><i class="fa fa-check"></i><b>2.1.2</b> Evenness</a></li>
+<li class="chapter" data-level="2.1.3" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#exercise"><i class="fa fa-check"></i><b>2.1.3</b> Exercise</a></li>
+<li class="chapter" data-level="2.1.4" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#shannon-weiner-diversity"><i class="fa fa-check"></i><b>2.1.4</b> Shannon-Weiner Diversity</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="gettingstarted.html"><a href="gettingstarted.html#a-note-on-rarefying-normalising"><i class="fa fa-check"></i><b>2.2</b> A note on rarefying (normalising)</a></li>
-<li class="chapter" data-level="2.3" data-path="gettingstarted.html"><a href="gettingstarted.html#workflows-from-other-lab-groups"><i class="fa fa-check"></i><b>2.3</b> Workflows from other lab groups</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html"><i class="fa fa-check"></i><b>3</b> Miseq library preps</a>
+<li class="chapter" data-level="2.2" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#beta-diversity"><i class="fa fa-check"></i><b>2.2</b> Beta diversity</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#overview"><i class="fa fa-check"></i><b>3.1.1</b> Overview</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#workflow"><i class="fa fa-check"></i><b>3.2</b> Workflow</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-extraction"><i class="fa fa-check"></i><b>3.2.1</b> DNA extraction</a></li>
-<li class="chapter" data-level="3.2.2" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-quality-and-concentration"><i class="fa fa-check"></i><b>3.2.2</b> DNA quality and concentration</a></li>
-<li class="chapter" data-level="3.2.3" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-normalisation"><i class="fa fa-check"></i><b>3.2.3</b> DNA normalisation</a></li>
-<li class="chapter" data-level="3.2.4" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#first-and-second-pcr---amplicon-pcr-and-indexing-pcr"><i class="fa fa-check"></i><b>3.2.4</b> First and second PCR - Amplicon PCR and Indexing PCR</a></li>
-<li class="chapter" data-level="3.2.5" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#normalisation-of-indexed-amplicons"><i class="fa fa-check"></i><b>3.2.5</b> Normalisation of indexed amplicons</a></li>
-<li class="chapter" data-level="3.2.6" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#pooling"><i class="fa fa-check"></i><b>3.2.6</b> Pooling</a></li>
-<li class="chapter" data-level="3.2.7" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#denaturing-of-pool-and-loading-of-the-miseq"><i class="fa fa-check"></i><b>3.2.7</b> Denaturing of pool and loading of the Miseq</a></li>
-<li class="chapter" data-level="3.2.8" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#consumables"><i class="fa fa-check"></i><b>3.2.8</b> Consumables</a></li>
+<li class="chapter" data-level="2.2.1" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#species-replacement"><i class="fa fa-check"></i><b>2.2.1</b> Species replacement</a></li>
+<li class="chapter" data-level="2.2.2" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#species-nestedness"><i class="fa fa-check"></i><b>2.2.2</b> Species nestedness</a></li>
+<li class="chapter" data-level="2.2.3" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#beta-diversity-analysis-workflow"><i class="fa fa-check"></i><b>2.2.3</b> Beta diversity analysis workflow</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html"><i class="fa fa-check"></i><b>4</b> From BaseSpace to Qiime2 and DADA2</a>
+<li class="chapter" data-level="3" data-path="gettingstarted.html"><a href="gettingstarted.html"><i class="fa fa-check"></i><b>3</b> Getting started</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a>
+<li class="chapter" data-level="3.1" data-path="gettingstarted.html"><a href="gettingstarted.html#before-you-can-analyse"><i class="fa fa-check"></i><b>3.1</b> Before you can analyse</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#prerequisites-and-required-files"><i class="fa fa-check"></i><b>4.1.1</b> Prerequisites and required files</a></li>
+<li class="chapter" data-level="3.1.1" data-path="gettingstarted.html"><a href="gettingstarted.html#get-access-to-computational-resources"><i class="fa fa-check"></i><b>3.1.1</b> Get access to computational resources</a></li>
+<li class="chapter" data-level="3.1.2" data-path="gettingstarted.html"><a href="gettingstarted.html#get-file-storage"><i class="fa fa-check"></i><b>3.1.2</b> Get file storage</a></li>
+<li class="chapter" data-level="3.1.3" data-path="gettingstarted.html"><a href="gettingstarted.html#learn-some-basic-command-line"><i class="fa fa-check"></i><b>3.1.3</b> Learn some basic command Line</a></li>
+<li class="chapter" data-level="3.1.4" data-path="gettingstarted.html"><a href="gettingstarted.html#get-a-data-storage-browser"><i class="fa fa-check"></i><b>3.1.4</b> Get a data storage browser</a></li>
+<li class="chapter" data-level="3.1.5" data-path="gettingstarted.html"><a href="gettingstarted.html#get-r-and-r-studio"><i class="fa fa-check"></i><b>3.1.5</b> Get R and R studio</a></li>
+<li class="chapter" data-level="3.1.6" data-path="gettingstarted.html"><a href="gettingstarted.html#know-what-environment-managers-are"><i class="fa fa-check"></i><b>3.1.6</b> Know what environment managers are</a></li>
+<li class="chapter" data-level="3.1.7" data-path="gettingstarted.html"><a href="gettingstarted.html#explore-the-help-functions"><i class="fa fa-check"></i><b>3.1.7</b> Explore the help functions</a></li>
+<li class="chapter" data-level="3.1.8" data-path="gettingstarted.html"><a href="gettingstarted.html#get-a-github-account"><i class="fa fa-check"></i><b>3.1.8</b> Get a GitHub account</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#workflow-1"><i class="fa fa-check"></i><b>4.2</b> Workflow</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#download-fastq-files"><i class="fa fa-check"></i><b>4.2.1</b> Download FASTQ files</a></li>
-<li class="chapter" data-level="4.2.2" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#paired-end-manifest-import-step-1"><i class="fa fa-check"></i><b>4.2.2</b> Paired end manifest import (Step 1)</a></li>
-<li class="chapter" data-level="4.2.3" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#cutadapt-step-2"><i class="fa fa-check"></i><b>4.2.3</b> Cutadapt (Step 2)</a></li>
-<li class="chapter" data-level="4.2.4" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#read-quality-assessment"><i class="fa fa-check"></i><b>4.2.4</b> Read quality assessment</a></li>
-<li class="chapter" data-level="4.2.5" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#denoise-paired-end-sequences-with-dada2-step-3"><i class="fa fa-check"></i><b>4.2.5</b> Denoise paired end sequences with dada2 (Step 3)</a></li>
-<li class="chapter" data-level="4.2.6" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#taxonomic-classifier-and-assignment-step-4"><i class="fa fa-check"></i><b>4.2.6</b> Taxonomic classifier and assignment (Step 4)</a></li>
-<li class="chapter" data-level="4.2.7" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#build-phylogenetic-tree-step-5"><i class="fa fa-check"></i><b>4.2.7</b> Build phylogenetic tree (Step 5)</a></li>
-<li class="chapter" data-level="4.2.8" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#all-steps-combined"><i class="fa fa-check"></i><b>4.2.8</b> All steps combined</a></li>
+<li class="chapter" data-level="3.2" data-path="gettingstarted.html"><a href="gettingstarted.html#a-note-on-rarefying-normalising"><i class="fa fa-check"></i><b>3.2</b> A note on rarefying (normalising)</a></li>
+<li class="chapter" data-level="3.3" data-path="gettingstarted.html"><a href="gettingstarted.html#workflows-from-other-lab-groups"><i class="fa fa-check"></i><b>3.3</b> Workflows from other lab groups</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html"><i class="fa fa-check"></i><b>4</b> Miseq library preps</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#overview"><i class="fa fa-check"></i><b>4.1.1</b> Overview</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="Qiime2R.html"><a href="Qiime2R.html"><i class="fa fa-check"></i><b>5</b> From Qiime2 into R - Initial diagnostics</a>
+<li class="chapter" data-level="4.2" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#workflow"><i class="fa fa-check"></i><b>4.2</b> Workflow</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="Qiime2R.html"><a href="Qiime2R.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
-<li class="chapter" data-level="5.2" data-path="Qiime2R.html"><a href="Qiime2R.html#workflow-2"><i class="fa fa-check"></i><b>5.2</b> Workflow</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="Qiime2R.html"><a href="Qiime2R.html#packages"><i class="fa fa-check"></i><b>5.2.1</b> Packages</a></li>
-<li class="chapter" data-level="5.2.2" data-path="Qiime2R.html"><a href="Qiime2R.html#import-qiime-files-and-create-a-phyloseq-object"><i class="fa fa-check"></i><b>5.2.2</b> Import qiime-files and create a phyloseq object</a></li>
-<li class="chapter" data-level="5.2.3" data-path="Qiime2R.html"><a href="Qiime2R.html#save-the-ps-object-as-an-.rds-file-into-your-working-directory"><i class="fa fa-check"></i><b>5.2.3</b> Save the <code>ps</code> object as an <code>.rds</code> file into your working directory</a></li>
-<li class="chapter" data-level="5.2.4" data-path="Qiime2R.html"><a href="Qiime2R.html#initial-filtering"><i class="fa fa-check"></i><b>5.2.4</b> Initial filtering</a></li>
-<li class="chapter" data-level="5.2.5" data-path="Qiime2R.html"><a href="Qiime2R.html#proportion-of-asvs-identified"><i class="fa fa-check"></i><b>5.2.5</b> Proportion of ASVs identified</a></li>
-<li class="chapter" data-level="5.2.6" data-path="Qiime2R.html"><a href="Qiime2R.html#rarefaction-curve"><i class="fa fa-check"></i><b>5.2.6</b> Rarefaction curve</a></li>
-<li class="chapter" data-level="5.2.7" data-path="Qiime2R.html"><a href="Qiime2R.html#prevalence-table"><i class="fa fa-check"></i><b>5.2.7</b> Prevalence table</a></li>
-<li class="chapter" data-level="5.2.8" data-path="Qiime2R.html"><a href="Qiime2R.html#export-asv-and-taxa-tables-to-excel"><i class="fa fa-check"></i><b>5.2.8</b> Export ASV and taxa tables to Excel</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="plottingdiversity.html"><a href="plottingdiversity.html"><i class="fa fa-check"></i><b>6</b> Plotting diversity</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#required-files"><i class="fa fa-check"></i><b>6.1.1</b> Required files</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="plottingdiversity.html"><a href="plottingdiversity.html#workflow-3"><i class="fa fa-check"></i><b>6.2</b> Workflow</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#packages-1"><i class="fa fa-check"></i><b>6.2.1</b> Packages</a></li>
-<li class="chapter" data-level="6.2.2" data-path="plottingdiversity.html"><a href="plottingdiversity.html#load-phyloseq-object"><i class="fa fa-check"></i><b>6.2.2</b> Load phyloseq object</a></li>
-<li class="chapter" data-level="6.2.3" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pre-filter-rarefy-and-calculate-diversity"><i class="fa fa-check"></i><b>6.2.3</b> Pre-filter, rarefy and calculate diversity</a></li>
-<li class="chapter" data-level="6.2.4" data-path="plottingdiversity.html"><a href="plottingdiversity.html#colors"><i class="fa fa-check"></i><b>6.2.4</b> Colors</a></li>
-<li class="chapter" data-level="6.2.5" data-path="plottingdiversity.html"><a href="plottingdiversity.html#richness"><i class="fa fa-check"></i><b>6.2.5</b> Richness</a></li>
-<li class="chapter" data-level="6.2.6" data-path="plottingdiversity.html"><a href="plottingdiversity.html#shannon"><i class="fa fa-check"></i><b>6.2.6</b> Shannon</a></li>
-<li class="chapter" data-level="6.2.7" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pielous-evenness"><i class="fa fa-check"></i><b>6.2.7</b> Pielou’s evenness</a></li>
-<li class="chapter" data-level="6.2.8" data-path="plottingdiversity.html"><a href="plottingdiversity.html#combined-plotting"><i class="fa fa-check"></i><b>6.2.8</b> Combined plotting</a></li>
-<li class="chapter" data-level="6.2.9" data-path="plottingdiversity.html"><a href="plottingdiversity.html#nmds"><i class="fa fa-check"></i><b>6.2.9</b> NMDS</a></li>
-<li class="chapter" data-level="6.2.10" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pca"><i class="fa fa-check"></i><b>6.2.10</b> PCA</a></li>
-<li class="chapter" data-level="6.2.11" data-path="plottingdiversity.html"><a href="plottingdiversity.html#rda"><i class="fa fa-check"></i><b>6.2.11</b> RDA</a></li>
-<li class="chapter" data-level="6.2.12" data-path="plottingdiversity.html"><a href="plottingdiversity.html#unweighted-unifrac"><i class="fa fa-check"></i><b>6.2.12</b> Unweighted uniFrac</a></li>
-<li class="chapter" data-level="6.2.13" data-path="plottingdiversity.html"><a href="plottingdiversity.html#combined-plotting-1"><i class="fa fa-check"></i><b>6.2.13</b> Combined plotting</a></li>
-<li class="chapter" data-level="6.2.14" data-path="plottingdiversity.html"><a href="plottingdiversity.html#save-plots-to-png-and-pdf"><i class="fa fa-check"></i><b>6.2.14</b> Save plots to png and pdf</a></li>
+<li class="chapter" data-level="4.2.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-extraction"><i class="fa fa-check"></i><b>4.2.1</b> DNA extraction</a></li>
+<li class="chapter" data-level="4.2.2" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-quality-and-concentration"><i class="fa fa-check"></i><b>4.2.2</b> DNA quality and concentration</a></li>
+<li class="chapter" data-level="4.2.3" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-normalisation"><i class="fa fa-check"></i><b>4.2.3</b> DNA normalisation</a></li>
+<li class="chapter" data-level="4.2.4" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#first-and-second-pcr---amplicon-pcr-and-indexing-pcr"><i class="fa fa-check"></i><b>4.2.4</b> First and second PCR - Amplicon PCR and Indexing PCR</a></li>
+<li class="chapter" data-level="4.2.5" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#normalisation-of-indexed-amplicons"><i class="fa fa-check"></i><b>4.2.5</b> Normalisation of indexed amplicons</a></li>
+<li class="chapter" data-level="4.2.6" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#pooling"><i class="fa fa-check"></i><b>4.2.6</b> Pooling</a></li>
+<li class="chapter" data-level="4.2.7" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#denaturing-of-pool-and-loading-of-the-miseq"><i class="fa fa-check"></i><b>4.2.7</b> Denaturing of pool and loading of the Miseq</a></li>
+<li class="chapter" data-level="4.2.8" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#consumables"><i class="fa fa-check"></i><b>4.2.8</b> Consumables</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="plottingtaxa.html"><a href="plottingtaxa.html"><i class="fa fa-check"></i><b>7</b> Plotting taxonomy</a>
+<li class="chapter" data-level="5" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html"><i class="fa fa-check"></i><b>5</b> From BaseSpace to Qiime2 and DADA2</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#introduction-4"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
+<li class="chapter" data-level="5.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#introduction-1"><i class="fa fa-check"></i><b>5.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#required-files-or-objects"><i class="fa fa-check"></i><b>7.1.1</b> Required files or objects</a></li>
+<li class="chapter" data-level="5.1.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#prerequisites-and-required-files"><i class="fa fa-check"></i><b>5.1.1</b> Prerequisites and required files</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="plottingtaxa.html"><a href="plottingtaxa.html#workflow-4"><i class="fa fa-check"></i><b>7.2</b> Workflow</a>
+<li class="chapter" data-level="5.2" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#workflow-1"><i class="fa fa-check"></i><b>5.2</b> Workflow</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#packages-2"><i class="fa fa-check"></i><b>7.2.1</b> Packages</a></li>
-<li class="chapter" data-level="7.2.2" data-path="plottingtaxa.html"><a href="plottingtaxa.html#load-phyloseq-object-1"><i class="fa fa-check"></i><b>7.2.2</b> Load phyloseq object</a></li>
-<li class="chapter" data-level="7.2.3" data-path="plottingtaxa.html"><a href="plottingtaxa.html#check-metadata-contained-in-the-phyloseq-object."><i class="fa fa-check"></i><b>7.2.3</b> Check metadata contained in the phyloseq object.</a></li>
-<li class="chapter" data-level="7.2.4" data-path="plottingtaxa.html"><a href="plottingtaxa.html#colors-1"><i class="fa fa-check"></i><b>7.2.4</b> Colors</a></li>
-<li class="chapter" data-level="7.2.5" data-path="plottingtaxa.html"><a href="plottingtaxa.html#pre-filtering"><i class="fa fa-check"></i><b>7.2.5</b> Pre-filtering</a></li>
-<li class="chapter" data-level="7.2.6" data-path="plottingtaxa.html"><a href="plottingtaxa.html#analysis-and-plotting"><i class="fa fa-check"></i><b>7.2.6</b> Analysis and plotting</a></li>
-<li class="chapter" data-level="7.2.7" data-path="plottingtaxa.html"><a href="plottingtaxa.html#prevalance-table"><i class="fa fa-check"></i><b>7.2.7</b> Prevalance table</a></li>
-<li class="chapter" data-level="7.2.8" data-path="plottingtaxa.html"><a href="plottingtaxa.html#krona-charts"><i class="fa fa-check"></i><b>7.2.8</b> Krona charts</a></li>
+<li class="chapter" data-level="5.2.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#download-fastq-files"><i class="fa fa-check"></i><b>5.2.1</b> Download FASTQ files</a></li>
+<li class="chapter" data-level="5.2.2" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#paired-end-manifest-import-step-1"><i class="fa fa-check"></i><b>5.2.2</b> Paired end manifest import (Step 1)</a></li>
+<li class="chapter" data-level="5.2.3" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#cutadapt-step-2"><i class="fa fa-check"></i><b>5.2.3</b> Cutadapt (Step 2)</a></li>
+<li class="chapter" data-level="5.2.4" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#read-quality-assessment"><i class="fa fa-check"></i><b>5.2.4</b> Read quality assessment</a></li>
+<li class="chapter" data-level="5.2.5" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#denoise-paired-end-sequences-with-dada2-step-3"><i class="fa fa-check"></i><b>5.2.5</b> Denoise paired end sequences with dada2 (Step 3)</a></li>
+<li class="chapter" data-level="5.2.6" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#taxonomic-classifier-and-assignment-step-4"><i class="fa fa-check"></i><b>5.2.6</b> Taxonomic classifier and assignment (Step 4)</a></li>
+<li class="chapter" data-level="5.2.7" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#build-phylogenetic-tree-step-5"><i class="fa fa-check"></i><b>5.2.7</b> Build phylogenetic tree (Step 5)</a></li>
+<li class="chapter" data-level="5.2.8" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#all-steps-combined"><i class="fa fa-check"></i><b>5.2.8</b> All steps combined</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="phylofactor.html"><a href="phylofactor.html"><i class="fa fa-check"></i><b>8</b> Phylofactor analysis</a>
+<li class="chapter" data-level="6" data-path="Qiime2R.html"><a href="Qiime2R.html"><i class="fa fa-check"></i><b>6</b> From Qiime2 into R - Initial diagnostics</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="phylofactor.html"><a href="phylofactor.html#introduction-5"><i class="fa fa-check"></i><b>8.1</b> Introduction</a>
+<li class="chapter" data-level="6.1" data-path="Qiime2R.html"><a href="Qiime2R.html#introduction-2"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="Qiime2R.html"><a href="Qiime2R.html#workflow-2"><i class="fa fa-check"></i><b>6.2</b> Workflow</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="phylofactor.html"><a href="phylofactor.html#prerequisites-and-required-files-1"><i class="fa fa-check"></i><b>8.1.1</b> Prerequisites and required files</a></li>
-<li class="chapter" data-level="8.1.2" data-path="phylofactor.html"><a href="phylofactor.html#custom-functions"><i class="fa fa-check"></i><b>8.1.2</b> Custom functions</a></li>
+<li class="chapter" data-level="6.2.1" data-path="Qiime2R.html"><a href="Qiime2R.html#packages"><i class="fa fa-check"></i><b>6.2.1</b> Packages</a></li>
+<li class="chapter" data-level="6.2.2" data-path="Qiime2R.html"><a href="Qiime2R.html#import-qiime-files-and-create-a-phyloseq-object"><i class="fa fa-check"></i><b>6.2.2</b> Import qiime-files and create a phyloseq object</a></li>
+<li class="chapter" data-level="6.2.3" data-path="Qiime2R.html"><a href="Qiime2R.html#save-the-ps-object-as-an-.rds-file-into-your-working-directory"><i class="fa fa-check"></i><b>6.2.3</b> Save the <code>ps</code> object as an <code>.rds</code> file into your working directory</a></li>
+<li class="chapter" data-level="6.2.4" data-path="Qiime2R.html"><a href="Qiime2R.html#initial-filtering"><i class="fa fa-check"></i><b>6.2.4</b> Initial filtering</a></li>
+<li class="chapter" data-level="6.2.5" data-path="Qiime2R.html"><a href="Qiime2R.html#proportion-of-asvs-identified"><i class="fa fa-check"></i><b>6.2.5</b> Proportion of ASVs identified</a></li>
+<li class="chapter" data-level="6.2.6" data-path="Qiime2R.html"><a href="Qiime2R.html#rarefaction-curve"><i class="fa fa-check"></i><b>6.2.6</b> Rarefaction curve</a></li>
+<li class="chapter" data-level="6.2.7" data-path="Qiime2R.html"><a href="Qiime2R.html#prevalence-table"><i class="fa fa-check"></i><b>6.2.7</b> Prevalence table</a></li>
+<li class="chapter" data-level="6.2.8" data-path="Qiime2R.html"><a href="Qiime2R.html#export-asv-and-taxa-tables-to-excel"><i class="fa fa-check"></i><b>6.2.8</b> Export ASV and taxa tables to Excel</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="phylofactor.html"><a href="phylofactor.html#workflow-5"><i class="fa fa-check"></i><b>8.2</b> Workflow</a>
+</ul></li>
+<li class="chapter" data-level="7" data-path="plottingdiversity.html"><a href="plottingdiversity.html"><i class="fa fa-check"></i><b>7</b> Plotting diversity</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="phylofactor.html"><a href="phylofactor.html#load-packages-and-custom-functions"><i class="fa fa-check"></i><b>8.2.1</b> Load packages and custom functions</a></li>
-<li class="chapter" data-level="8.2.2" data-path="phylofactor.html"><a href="phylofactor.html#load-phyloseq-object-2"><i class="fa fa-check"></i><b>8.2.2</b> Load phyloseq object</a></li>
-<li class="chapter" data-level="8.2.3" data-path="phylofactor.html"><a href="phylofactor.html#pre-filtering-1"><i class="fa fa-check"></i><b>8.2.3</b> Pre-filtering</a></li>
-<li class="chapter" data-level="8.2.4" data-path="phylofactor.html"><a href="phylofactor.html#running-phylofactor"><i class="fa fa-check"></i><b>8.2.4</b> Running PhyloFactor</a></li>
-<li class="chapter" data-level="8.2.5" data-path="phylofactor.html"><a href="phylofactor.html#reviewing-output"><i class="fa fa-check"></i><b>8.2.5</b> Reviewing output</a></li>
-<li class="chapter" data-level="8.2.6" data-path="phylofactor.html"><a href="phylofactor.html#visualising-factors"><i class="fa fa-check"></i><b>8.2.6</b> Visualising factors</a></li>
+<li class="chapter" data-level="7.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#required-files"><i class="fa fa-check"></i><b>7.1.1</b> Required files</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="plottingdiversity.html"><a href="plottingdiversity.html#workflow-3"><i class="fa fa-check"></i><b>7.2</b> Workflow</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#packages-1"><i class="fa fa-check"></i><b>7.2.1</b> Packages</a></li>
+<li class="chapter" data-level="7.2.2" data-path="plottingdiversity.html"><a href="plottingdiversity.html#load-phyloseq-object"><i class="fa fa-check"></i><b>7.2.2</b> Load phyloseq object</a></li>
+<li class="chapter" data-level="7.2.3" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pre-filter-rarefy-and-calculate-diversity"><i class="fa fa-check"></i><b>7.2.3</b> Pre-filter, rarefy and calculate diversity</a></li>
+<li class="chapter" data-level="7.2.4" data-path="plottingdiversity.html"><a href="plottingdiversity.html#colors"><i class="fa fa-check"></i><b>7.2.4</b> Colors</a></li>
+<li class="chapter" data-level="7.2.5" data-path="plottingdiversity.html"><a href="plottingdiversity.html#richness-1"><i class="fa fa-check"></i><b>7.2.5</b> Richness</a></li>
+<li class="chapter" data-level="7.2.6" data-path="plottingdiversity.html"><a href="plottingdiversity.html#shannon"><i class="fa fa-check"></i><b>7.2.6</b> Shannon</a></li>
+<li class="chapter" data-level="7.2.7" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pielous-evenness"><i class="fa fa-check"></i><b>7.2.7</b> Pielou’s evenness</a></li>
+<li class="chapter" data-level="7.2.8" data-path="plottingdiversity.html"><a href="plottingdiversity.html#combined-plotting"><i class="fa fa-check"></i><b>7.2.8</b> Combined plotting</a></li>
+<li class="chapter" data-level="7.2.9" data-path="plottingdiversity.html"><a href="plottingdiversity.html#nmds"><i class="fa fa-check"></i><b>7.2.9</b> NMDS</a></li>
+<li class="chapter" data-level="7.2.10" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pca"><i class="fa fa-check"></i><b>7.2.10</b> PCA</a></li>
+<li class="chapter" data-level="7.2.11" data-path="plottingdiversity.html"><a href="plottingdiversity.html#rda"><i class="fa fa-check"></i><b>7.2.11</b> RDA</a></li>
+<li class="chapter" data-level="7.2.12" data-path="plottingdiversity.html"><a href="plottingdiversity.html#unweighted-unifrac"><i class="fa fa-check"></i><b>7.2.12</b> Unweighted uniFrac</a></li>
+<li class="chapter" data-level="7.2.13" data-path="plottingdiversity.html"><a href="plottingdiversity.html#combined-plotting-1"><i class="fa fa-check"></i><b>7.2.13</b> Combined plotting</a></li>
+<li class="chapter" data-level="7.2.14" data-path="plottingdiversity.html"><a href="plottingdiversity.html#save-plots-to-png-and-pdf"><i class="fa fa-check"></i><b>7.2.14</b> Save plots to png and pdf</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="plottingtaxa.html"><a href="plottingtaxa.html"><i class="fa fa-check"></i><b>8</b> Plotting taxonomy</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#introduction-4"><i class="fa fa-check"></i><b>8.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#required-files-or-objects"><i class="fa fa-check"></i><b>8.1.1</b> Required files or objects</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="plottingtaxa.html"><a href="plottingtaxa.html#workflow-4"><i class="fa fa-check"></i><b>8.2</b> Workflow</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#packages-2"><i class="fa fa-check"></i><b>8.2.1</b> Packages</a></li>
+<li class="chapter" data-level="8.2.2" data-path="plottingtaxa.html"><a href="plottingtaxa.html#load-phyloseq-object-1"><i class="fa fa-check"></i><b>8.2.2</b> Load phyloseq object</a></li>
+<li class="chapter" data-level="8.2.3" data-path="plottingtaxa.html"><a href="plottingtaxa.html#check-metadata-contained-in-the-phyloseq-object."><i class="fa fa-check"></i><b>8.2.3</b> Check metadata contained in the phyloseq object.</a></li>
+<li class="chapter" data-level="8.2.4" data-path="plottingtaxa.html"><a href="plottingtaxa.html#colors-1"><i class="fa fa-check"></i><b>8.2.4</b> Colors</a></li>
+<li class="chapter" data-level="8.2.5" data-path="plottingtaxa.html"><a href="plottingtaxa.html#pre-filtering"><i class="fa fa-check"></i><b>8.2.5</b> Pre-filtering</a></li>
+<li class="chapter" data-level="8.2.6" data-path="plottingtaxa.html"><a href="plottingtaxa.html#analysis-and-plotting"><i class="fa fa-check"></i><b>8.2.6</b> Analysis and plotting</a></li>
+<li class="chapter" data-level="8.2.7" data-path="plottingtaxa.html"><a href="plottingtaxa.html#prevalance-table"><i class="fa fa-check"></i><b>8.2.7</b> Prevalance table</a></li>
+<li class="chapter" data-level="8.2.8" data-path="plottingtaxa.html"><a href="plottingtaxa.html#krona-charts"><i class="fa fa-check"></i><b>8.2.8</b> Krona charts</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="phylofactor.html"><a href="phylofactor.html"><i class="fa fa-check"></i><b>9</b> Phylofactor analysis</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="phylofactor.html"><a href="phylofactor.html#introduction-5"><i class="fa fa-check"></i><b>9.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="phylofactor.html"><a href="phylofactor.html#prerequisites-and-required-files-1"><i class="fa fa-check"></i><b>9.1.1</b> Prerequisites and required files</a></li>
+<li class="chapter" data-level="9.1.2" data-path="phylofactor.html"><a href="phylofactor.html#custom-functions"><i class="fa fa-check"></i><b>9.1.2</b> Custom functions</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="phylofactor.html"><a href="phylofactor.html#workflow-5"><i class="fa fa-check"></i><b>9.2</b> Workflow</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="phylofactor.html"><a href="phylofactor.html#load-packages-and-custom-functions"><i class="fa fa-check"></i><b>9.2.1</b> Load packages and custom functions</a></li>
+<li class="chapter" data-level="9.2.2" data-path="phylofactor.html"><a href="phylofactor.html#load-phyloseq-object-2"><i class="fa fa-check"></i><b>9.2.2</b> Load phyloseq object</a></li>
+<li class="chapter" data-level="9.2.3" data-path="phylofactor.html"><a href="phylofactor.html#pre-filtering-1"><i class="fa fa-check"></i><b>9.2.3</b> Pre-filtering</a></li>
+<li class="chapter" data-level="9.2.4" data-path="phylofactor.html"><a href="phylofactor.html#running-phylofactor"><i class="fa fa-check"></i><b>9.2.4</b> Running PhyloFactor</a></li>
+<li class="chapter" data-level="9.2.5" data-path="phylofactor.html"><a href="phylofactor.html#reviewing-output"><i class="fa fa-check"></i><b>9.2.5</b> Reviewing output</a></li>
+<li class="chapter" data-level="9.2.6" data-path="phylofactor.html"><a href="phylofactor.html#visualising-factors"><i class="fa fa-check"></i><b>9.2.6</b> Visualising factors</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -308,20 +324,20 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="phylofactor" class="section level1 hasAnchor" number="8">
-<h1><span class="header-section-number">Chapter 8</span> Phylofactor analysis<a href="phylofactor.html#phylofactor" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="phylofactor" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Phylofactor analysis<a href="phylofactor.html#phylofactor" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><img src="img/phylofactor.png" /></p>
-<div id="introduction-5" class="section level2 hasAnchor" number="8.1">
-<h2><span class="header-section-number">8.1</span> Introduction<a href="phylofactor.html#introduction-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="introduction-5" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Introduction<a href="phylofactor.html#introduction-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this chapter you will learn how to use one of the main functions from the package phylofactor, as well as analyse and visualise the results. The main aims are to understand more about phylofactor and learn about data manipulation using dplyr and visulisations using ggplot and ggtree.</p>
 <p><a href="https://github.com/reptalex/phylofactor" target="_blank">Phylofactor</a> is a package developed by <a href="https://github.com/reptalex" target="_blank">Alex Washburne</a>, a mathematical biologist. It is a compositional analysis tool that ‘iteratively identifies the most important clades driving variation in the data through their associations with independent variables’ (<span class="citation">Washburne et al. (<a href="#ref-Washburne2017" role="doc-biblioref">2017</a>)</span>). For me, it is a great way to assess clade-specific treatment effects or environmental associations. In combination with other differential abundance analysis methods it helped me to gain confidence in biological interpretations of microbial community associations to environmental metadata or treatments. I also use it to visualise selected identified clades on a phylogenetic tree.</p>
 <p>The package enables the use of different statistical tests, such as twoSample comparisons (i.e. t-test, Wilcox text, Fisher exact test) or regression modelling of abundances, transformed into isometric log ratios (ILRs) - sometimes called balances - to study treatment effects or environmental associations. It does this for aggregated abundances on edges of a phylogenetic tree, hence includes associations of abundances of whole clades of ASVs.</p>
 <p>Check out the papers <a href="https://www.biorxiv.org/content/10.1101/235341v2" target="_blank">Phylofactorization: a graph-partitioning algorithm to identify phylogenetic scales of ecological data</a> (<span class="citation">Washburne et al. (<a href="#ref-Washburne2019a" role="doc-biblioref">2019</a>)</span>) and <a href="https://peerj.com/articles/2969/" target="_blank">Phylogenetic factorization of compositional data yields lineage-level associations in microbiome datasets</a> (<span class="citation">Washburne et al. (<a href="#ref-Washburne2017" role="doc-biblioref">2017</a>)</span>) to learn more about the algorithms used. Here also a great <a href="https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf" target="_blank">Phylofactor tutorial</a>.</p>
-<p>You will need a phylogenic tree for this analysis. For example, in chapter <a href="miseqtoqiime.html#miseqtoqiime">4</a> we have built a phylogenetic tree from ASVs using the insertion tree method with qiime2. This tree was then imported into R and included into a phyloseq object as shown in chapter <a href="Qiime2R.html#Qiime2R">5</a>.</p>
+<p>You will need a phylogenic tree for this analysis. For example, in chapter <a href="miseqtoqiime.html#miseqtoqiime">5</a> we have built a phylogenetic tree from ASVs using the insertion tree method with qiime2. This tree was then imported into R and included into a phyloseq object as shown in chapter <a href="Qiime2R.html#Qiime2R">6</a>.</p>
 <p>For this tutorial we will be using the same phyloseq object and apply the <code>PhyloFactor</code> function of the Phylofactor package. This function is used to assess associations of relative abundances with selected metadata, assuming a normal distribution (ILRs are normally distributed). It is basically finding variation in ILRs or balances (which are two groups of abundances delineated by an edge in the tree) that respond to treatments or environmental data.</p>
 <p>The visualisations of the trees relies on ggplot (<span class="citation">Wickham, Chang, and Wickham (<a href="#ref-Wickham2016a" role="doc-biblioref">2016</a>)</span>) and ggtree (<span class="citation">Yu et al. (<a href="#ref-Yu2017" role="doc-biblioref">2017</a>)</span>).</p>
-<div id="prerequisites-and-required-files-1" class="section level3 hasAnchor" number="8.1.1">
-<h3><span class="header-section-number">8.1.1</span> Prerequisites and required files<a href="phylofactor.html#prerequisites-and-required-files-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="prerequisites-and-required-files-1" class="section level3 hasAnchor" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> Prerequisites and required files<a href="phylofactor.html#prerequisites-and-required-files-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Maybe some basic skills in manipulating data with the packages<code>dplyr</code>, <code>ggplot</code> and other packages in the <code>tidyverse</code> but not essential.<br />
 </li>
@@ -329,13 +345,13 @@ div.csl-indent {
 </li>
 <li>All required packages, including phylofactor, installed.<br />
 </li>
-<li>A <code>phyloseq</code> object that includes a phylogenetic tree; either read in from a pre-saved <code>.rds</code> file or created as described in chapter <a href="Qiime2R.html#Qiime2R">5</a> under “Import qiime-files and create a phyloseq object”.<br />
+<li>A <code>phyloseq</code> object that includes a phylogenetic tree; either read in from a pre-saved <code>.rds</code> file or created as described in chapter <a href="Qiime2R.html#Qiime2R">6</a> under “Import qiime-files and create a phyloseq object”.<br />
 </li>
-<li>If you dont have your own data you can download the pre-saved <code>.rds</code> object from Chapter <a href="Qiime2R.html#Qiime2R">5</a> and follow the below steps: <a href="./ps_ProjectX_2022July">ps_ProjectX_2022July</a>. This object was created from publicly available data from anaerobic sludge of Danish wastewater treatment plants.</li>
+<li>If you dont have your own data you can download the pre-saved <code>.rds</code> object from Chapter <a href="Qiime2R.html#Qiime2R">6</a> and follow the below steps: <a href="./ps_ProjectX_2022July">ps_ProjectX_2022July</a>. This object was created from publicly available data from anaerobic sludge of Danish wastewater treatment plants.</li>
 </ul>
 </div>
-<div id="custom-functions" class="section level3 hasAnchor" number="8.1.2">
-<h3><span class="header-section-number">8.1.2</span> Custom functions<a href="phylofactor.html#custom-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="custom-functions" class="section level3 hasAnchor" number="9.1.2">
+<h3><span class="header-section-number">9.1.2</span> Custom functions<a href="phylofactor.html#custom-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There are several functions available in phylofactor to review the model outputs and to review which taxa were associated with groups of ASVs/clades that are part of significant edges in each factor.</p>
 <p>I also created some custom functions that make it a little easier (for me). They are available to download. I am no coder so the code in the functions may offend you but they worked :). If you want to use these extra functions you can download them into your working directory and load them into your R environment using the <code>dget</code> function (e.g. <code>phyfacsummary &lt;- dget("./custom-functions/phyfacsummary.R")</code>). I usually keep custom functions in a separate folder, here named ‘custom-functions’.</p>
 <p>If you want to learn what the functions do and customise them further, you can also copy the code out of the function and have a go at running the code yourself.</p>
@@ -353,10 +369,10 @@ div.csl-indent {
 </ul>
 </div>
 </div>
-<div id="workflow-5" class="section level2 hasAnchor" number="8.2">
-<h2><span class="header-section-number">8.2</span> Workflow<a href="phylofactor.html#workflow-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="load-packages-and-custom-functions" class="section level3 hasAnchor" number="8.2.1">
-<h3><span class="header-section-number">8.2.1</span> Load packages and custom functions<a href="phylofactor.html#load-packages-and-custom-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="workflow-5" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Workflow<a href="phylofactor.html#workflow-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="load-packages-and-custom-functions" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Load packages and custom functions<a href="phylofactor.html#load-packages-and-custom-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="phylofactor.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install packages</span></span>
 <span id="cb69-2"><a href="phylofactor.html#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="co"># if (!requireNamespace(&quot;BiocManager&quot;, quietly = TRUE))</span></span>
 <span id="cb69-3"><a href="phylofactor.html#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   install.packages(&quot;BiocManager&quot;)</span></span>
@@ -408,9 +424,9 @@ div.csl-indent {
 <span id="cb69-49"><a href="phylofactor.html#cb69-49" aria-hidden="true" tabindex="-1"></a><span class="co"># ASVs of the taxon across all samples</span></span>
 <span id="cb69-50"><a href="phylofactor.html#cb69-50" aria-hidden="true" tabindex="-1"></a>prevalencedf <span class="ot">&lt;-</span> <span class="fu">dget</span>(<span class="st">&quot;./custom-functions/myprevalencetablefunction.R&quot;</span>)</span></code></pre></div>
 </div>
-<div id="load-phyloseq-object-2" class="section level3 hasAnchor" number="8.2.2">
-<h3><span class="header-section-number">8.2.2</span> Load phyloseq object<a href="phylofactor.html#load-phyloseq-object-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Do this if you saved a phyloseq object in .rds format before. Otherwise create a phyloseq object as described in chapter <a href="Qiime2R.html#Qiime2R">5</a> under “Import qiime-files and create a phyloseq object”.</p>
+<div id="load-phyloseq-object-2" class="section level3 hasAnchor" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Load phyloseq object<a href="phylofactor.html#load-phyloseq-object-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Do this if you saved a phyloseq object in .rds format before. Otherwise create a phyloseq object as described in chapter <a href="Qiime2R.html#Qiime2R">6</a> under “Import qiime-files and create a phyloseq object”.</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="phylofactor.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reading in a previously saved phyloseq object</span></span>
 <span id="cb70-2"><a href="phylofactor.html#cb70-2" aria-hidden="true" tabindex="-1"></a>ps <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&#39;ps_ProjectX_2022July&#39;</span>)</span>
 <span id="cb70-3"><a href="phylofactor.html#cb70-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -425,8 +441,8 @@ div.csl-indent {
 <span id="cb70-12"><a href="phylofactor.html#cb70-12" aria-hidden="true" tabindex="-1"></a><span class="co"># check metadata if needed</span></span>
 <span id="cb70-13"><a href="phylofactor.html#cb70-13" aria-hidden="true" tabindex="-1"></a><span class="co"># df &lt;- data.frame(sample_data(ps))</span></span></code></pre></div>
 </div>
-<div id="pre-filtering-1" class="section level3 hasAnchor" number="8.2.3">
-<h3><span class="header-section-number">8.2.3</span> Pre-filtering<a href="phylofactor.html#pre-filtering-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="pre-filtering-1" class="section level3 hasAnchor" number="9.2.3">
+<h3><span class="header-section-number">9.2.3</span> Pre-filtering<a href="phylofactor.html#pre-filtering-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Some quality filtering of individual ASVs. This is up to the analyst and aims of the project.</p>
 <p>Here it was choosen to remove ASVs with few reads and those ASVs that could not be assigned a Phylum. Use the <code>prune_taxa()</code> function from phyloseq to filter taxa or the <code>prune_samples()</code> function to filter selected samples.</p>
 <p>The ASV abundances are then agglomerated to Genus level. This makes things a little easier to handle computationally and interpret visually at the end.</p>
@@ -451,8 +467,8 @@ div.csl-indent {
 <span id="cb71-19"><a href="phylofactor.html#cb71-19" aria-hidden="true" tabindex="-1"></a><span class="co"># tax_table()   Taxonomy Table:    [ 525 taxa by 7 taxonomic ranks ]</span></span>
 <span id="cb71-20"><a href="phylofactor.html#cb71-20" aria-hidden="true" tabindex="-1"></a><span class="co"># phy_tree()    Phylogenetic Tree: [ 525 tips and 524 internal nodes ]</span></span></code></pre></div>
 </div>
-<div id="running-phylofactor" class="section level3 hasAnchor" number="8.2.4">
-<h3><span class="header-section-number">8.2.4</span> Running PhyloFactor<a href="phylofactor.html#running-phylofactor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="running-phylofactor" class="section level3 hasAnchor" number="9.2.4">
+<h3><span class="header-section-number">9.2.4</span> Running PhyloFactor<a href="phylofactor.html#running-phylofactor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For this example, the explanatory variable <code>Location</code> is used to regress the response (abundances). This has to be a factor or numeric so check your explanatory beforehand.</p>
 <p>You can choose between <code>choice = "var"</code> or <code>choice = "F"</code>. This is explained a bit in the <a href="https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf" target="_blank">tutorial</a>. Alex Washburn has answered my question on this topic on the phylofactor GitHub repo <a href="https://github.com/reptalex/phylofactor/issues/39" target="_blank">here</a>. He commented: “<em>I would use ”var” to study differences in community composition (big changes in abundance!) whereas I always use ”F” if I’m looking for bioindicator lineages (high signal/noise ratio).</em>”. For <code>choice = "var"</code> the regression function ‘finds’ the most explained variation for each edge, while for <code>choice = "F"</code> it finds the highest F-ratio (explained/unexplained variance). This is fundamental stuff and look this up separately if you want to learn more about what that means. I am also not a 100% on top of the math behind the stat myself.</p>
 <p>Here, we run the <code>PhyloFactor</code> function with <code>choice = "var"</code>.</p>
@@ -497,31 +513,31 @@ div.csl-indent {
 <span id="cb80-8"><a href="phylofactor.html#cb80-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">nfactors =</span> <span class="dv">13</span>, <span class="co"># the first 13 phylofactors only - in interest of time </span></span>
 <span id="cb80-9"><a href="phylofactor.html#cb80-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>)  <span class="co"># see notes above</span></span></code></pre></div>
 <pre><code>## 
- 1 factor completed in 0.0257 minutes.    Estimated time of completion: 2022-10-22 09:14:24   
+ 1 factor completed in 0.0383 minutes.    Estimated time of completion: 2023-01-05 17:03:20   
 
- 2 factors completed in 0.0475 minutes.     Estimated time of completion: 2022-10-22 09:14:22   
+ 2 factors completed in 0.0724 minutes.     Estimated time of completion: 2023-01-05 17:03:19   
 
- 3 factors completed in 0.0693 minutes.     Estimated time of completion: 2022-10-22 09:14:22   
+ 3 factors completed in 0.106 minutes.     Estimated time of completion: 2023-01-05 17:03:18   
 
- 4 factors completed in 0.0912 minutes.     Estimated time of completion: 2022-10-22 09:14:21   
+ 4 factors completed in 0.153 minutes.     Estimated time of completion: 2023-01-05 17:03:20   
 
- 5 factors completed in 0.112 minutes.     Estimated time of completion: 2022-10-22 09:14:21   
+ 5 factors completed in 0.19 minutes.     Estimated time of completion: 2023-01-05 17:03:20   
 
- 6 factors completed in 0.132 minutes.     Estimated time of completion: 2022-10-22 09:14:21   
+ 6 factors completed in 0.228 minutes.     Estimated time of completion: 2023-01-05 17:03:20   
 
- 7 factors completed in 0.153 minutes.     Estimated time of completion: 2022-10-22 09:14:21   
+ 7 factors completed in 0.265 minutes.     Estimated time of completion: 2023-01-05 17:03:20   
 
- 8 factors completed in 0.173 minutes.     Estimated time of completion: 2022-10-22 09:14:21   
+ 8 factors completed in 0.306 minutes.     Estimated time of completion: 2023-01-05 17:03:20   
 
- 9 factors completed in 0.194 minutes.     Estimated time of completion: 2022-10-22 09:14:20   
+ 9 factors completed in 0.341 minutes.     Estimated time of completion: 2023-01-05 17:03:20   
 
- 10 factors completed in 0.214 minutes.     Estimated time of completion: 2022-10-22 09:14:20   
+ 10 factors completed in 0.379 minutes.     Estimated time of completion: 2023-01-05 17:03:20   
 
- 11 factors completed in 0.236 minutes.     Estimated time of completion: 2022-10-22 09:14:20   
+ 11 factors completed in 0.417 minutes.     Estimated time of completion: 2023-01-05 17:03:20   
 
- 12 factors completed in 0.256 minutes.     Estimated time of completion: 2022-10-22 09:14:20   
+ 12 factors completed in 0.463 minutes.     Estimated time of completion: 2023-01-05 17:03:21   
 
- 13 factors completed in 0.276 minutes.     Estimated time of completion: 2022-10-22 09:14:20   </code></pre>
+ 13 factors completed in 0.519 minutes.     Estimated time of completion: 2023-01-05 17:03:22   </code></pre>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="phylofactor.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># saveRDS(PF,&#39;pf-example.rds&#39;)  # save Phylofactor object to .rds file </span></span>
 <span id="cb82-2"><a href="phylofactor.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(tree, tree_ur, Data, X, meta.df) <span class="co">#remove unnecessary objects from R environment</span></span>
 <span id="cb82-3"><a href="phylofactor.html#cb82-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -532,8 +548,8 @@ div.csl-indent {
 <span id="cb82-8"><a href="phylofactor.html#cb82-8" aria-hidden="true" tabindex="-1"></a><span class="co"># If no value is provided to nfactors - the algorithm will continue until </span></span>
 <span id="cb82-9"><a href="phylofactor.html#cb82-9" aria-hidden="true" tabindex="-1"></a><span class="co"># no edge are found anymore.</span></span></code></pre></div>
 </div>
-<div id="reviewing-output" class="section level3 hasAnchor" number="8.2.5">
-<h3><span class="header-section-number">8.2.5</span> Reviewing output<a href="phylofactor.html#reviewing-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="reviewing-output" class="section level3 hasAnchor" number="9.2.5">
+<h3><span class="header-section-number">9.2.5</span> Reviewing output<a href="phylofactor.html#reviewing-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Simply run the phylofactor output object (here <code>PF</code>) to get an overview of the results. You can also access individual data outputs using the <code>$</code> operator, e.g. by running <code>PF$factors</code> you get a full list of all factors.</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="phylofactor.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Overview</span></span>
 <span id="cb83-2"><a href="phylofactor.html#cb83-2" aria-hidden="true" tabindex="-1"></a>PF <span class="co"># showing the output of the first 10 factors </span></span></code></pre></div>
@@ -768,10 +784,10 @@ div.csl-indent {
 ## #   abbreviated variable names ¹​Phylofactor, ²​`(Intercept)`</code></pre>
 <p>Check out the dataframe in your R environment.</p>
 </div>
-<div id="visualising-factors" class="section level3 hasAnchor" number="8.2.6">
-<h3><span class="header-section-number">8.2.6</span> Visualising factors<a href="phylofactor.html#visualising-factors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="ilr-boxplots" class="section level4 hasAnchor" number="8.2.6.1">
-<h4><span class="header-section-number">8.2.6.1</span> ILR boxplots<a href="phylofactor.html#ilr-boxplots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="visualising-factors" class="section level3 hasAnchor" number="9.2.6">
+<h3><span class="header-section-number">9.2.6</span> Visualising factors<a href="phylofactor.html#visualising-factors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="ilr-boxplots" class="section level4 hasAnchor" number="9.2.6.1">
+<h4><span class="header-section-number">9.2.6.1</span> ILR boxplots<a href="phylofactor.html#ilr-boxplots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>If the explanatory variable is a factor you can compare the ILRs using boxplots. Customise this to your needs.</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="phylofactor.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="do">## ILR boxplots</span></span>
 <span id="cb94-2"><a href="phylofactor.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="co"># If needed add another element to this plot. The boxplots of ILRs. </span></span>
@@ -871,8 +887,8 @@ div.csl-indent {
 <p>This visualises the taxa relative abundances (represented by the ILR or balances) of the different ‘Locations’. For example, the relative abundances of factor 1 (genus <em>Thermoanaerobaculum</em>) are highest in Randers and Viborg. It also appears to be the factor with the clearest differentiation between locations, as the ILRs of other factors are more variable with wider boxplots and more outliers.</p>
 <p>In the next part we will visualise how the taxa relate to other clades in the phylogenetic tree.</p>
 </div>
-<div id="basic-tree-with-factors-highlighted-in-colour" class="section level4 hasAnchor" number="8.2.6.2">
-<h4><span class="header-section-number">8.2.6.2</span> Basic tree with factors highlighted in colour<a href="phylofactor.html#basic-tree-with-factors-highlighted-in-colour" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="basic-tree-with-factors-highlighted-in-colour" class="section level4 hasAnchor" number="9.2.6.2">
+<h4><span class="header-section-number">9.2.6.2</span> Basic tree with factors highlighted in colour<a href="phylofactor.html#basic-tree-with-factors-highlighted-in-colour" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Here we are using one of the functions from the phylofactor package. It is only one of several and I encourage you to check out the <a href="https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf">phylofactor tutorial</a> to explore other visualisation, including heatmaps etc..</p>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="phylofactor.html#cb98-1" aria-hidden="true" tabindex="-1"></a>gtree <span class="ot">&lt;-</span> phylofactor<span class="sc">::</span><span class="fu">pf.tree</span>(PF)</span>
 <span id="cb98-2"><a href="phylofactor.html#cb98-2" aria-hidden="true" tabindex="-1"></a>ggtree<span class="sc">::</span><span class="fu">rotate_tree</span>(gtree<span class="sc">$</span>ggplot,<span class="sc">-</span><span class="dv">45</span>)</span></code></pre></div>
@@ -881,8 +897,8 @@ div.csl-indent {
 <p>The other factors, which represent only 1 genus are not visible in this figure because the pixels are simply too small.</p>
 <p>I think representing it as a tree also highlights how one can interpret compositional changes in two ways. For example, one interpretation for Group 1 of factor 3, (purple coloured) is that is decreased in the locations Formaes and Slagelse (as indicated in the boxplots). Another interpretation is that Group 2 of factor 3 has increased instead. This is important to consider.</p>
 </div>
-<div id="coloured-trees-with-factors-highlighted-in-grey" class="section level4 hasAnchor" number="8.2.6.3">
-<h4><span class="header-section-number">8.2.6.3</span> Coloured trees with factors highlighted in grey<a href="phylofactor.html#coloured-trees-with-factors-highlighted-in-grey" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="coloured-trees-with-factors-highlighted-in-grey" class="section level4 hasAnchor" number="9.2.6.3">
+<h4><span class="header-section-number">9.2.6.3</span> Coloured trees with factors highlighted in grey<a href="phylofactor.html#coloured-trees-with-factors-highlighted-in-grey" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Maybe some find it useful to identify the phyla directly in the tree and also get a sense of the abundances of individual tips (which are individual genera here). Do do that we can colour edges of the tree to represent their phylum.</p>
 <p>First, prepare a color vector for the tree. There are different ways to do this and often I revert to add colours manually. Here we extract all phyla names from the taxonomy data and create a named color vector for each phylum.</p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="phylofactor.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create color vector</span></span>
@@ -1103,8 +1119,8 @@ div.csl-indent {
 <p><img src="gitbook-demo_files/figure-html/coloredtree3-1.png" width="960" /></p>
 <p>Now its a little easier to identify the who is who. This is just another way to explore your phylogeny and how they relate to the phylofactors.</p>
 </div>
-<div id="basic-tree-with-factors-highlighted-in-colour-v.02" class="section level4 hasAnchor" number="8.2.6.4">
-<h4><span class="header-section-number">8.2.6.4</span> Basic tree with factors highlighted in colour v.02<a href="phylofactor.html#basic-tree-with-factors-highlighted-in-colour-v.02" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="basic-tree-with-factors-highlighted-in-colour-v.02" class="section level4 hasAnchor" number="9.2.6.4">
+<h4><span class="header-section-number">9.2.6.4</span> Basic tree with factors highlighted in colour v.02<a href="phylofactor.html#basic-tree-with-factors-highlighted-in-colour-v.02" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Alternatively highlight only the factors and explore the taxonomy represented by them in separate plots.</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="phylofactor.html#cb106-1" aria-hidden="true" tabindex="-1"></a>layout <span class="ot">=</span> <span class="st">&quot;circular&quot;</span></span>
 <span id="cb106-2"><a href="phylofactor.html#cb106-2" aria-hidden="true" tabindex="-1"></a>factor.map <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">PF=</span><span class="dv">1</span><span class="sc">:</span>PF<span class="sc">$</span>nfactors, </span>

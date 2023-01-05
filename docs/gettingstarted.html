@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Getting started | Workflows for processing microbial amplicon sequences</title>
+  <title>Chapter 3 Getting started | Workflows for processing microbial amplicon sequences</title>
   <meta name="description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Getting started | Workflows for processing microbial amplicon sequences" />
+  <meta property="og:title" content="Chapter 3 Getting started | Workflows for processing microbial amplicon sequences" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
   <meta name="github-repo" content="chrismitbiz/ABlab-workflows" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Getting started | Workflows for processing microbial amplicon sequences" />
+  <meta name="twitter:title" content="Chapter 3 Getting started | Workflows for processing microbial amplicon sequences" />
   
   <meta name="twitter:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
   
@@ -23,14 +23,14 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2022-10-22" />
+<meta name="date" content="2023-01-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
+<link rel="prev" href="some-fundamentals-by-dr-jen-wood.html"/>
 <link rel="next" href="miseq-library-preps.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -161,130 +161,146 @@ div.csl-indent {
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this GitBook</a></li>
-<li class="chapter" data-level="2" data-path="gettingstarted.html"><a href="gettingstarted.html"><i class="fa fa-check"></i><b>2</b> Getting started</a>
+<li class="chapter" data-level="2" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html"><i class="fa fa-check"></i><b>2</b> Some fundamentals by Dr Jen Wood</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="gettingstarted.html"><a href="gettingstarted.html#general-requirements"><i class="fa fa-check"></i><b>2.1</b> General requirements</a>
+<li class="chapter" data-level="2.1" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#alpha-diversity"><i class="fa fa-check"></i><b>2.1</b> Alpha diversity</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="gettingstarted.html"><a href="gettingstarted.html#access-to-computational-resources"><i class="fa fa-check"></i><b>2.1.1</b> Access to computational resources</a></li>
-<li class="chapter" data-level="2.1.2" data-path="gettingstarted.html"><a href="gettingstarted.html#file-storage"><i class="fa fa-check"></i><b>2.1.2</b> File storage</a></li>
-<li class="chapter" data-level="2.1.3" data-path="gettingstarted.html"><a href="gettingstarted.html#command-line"><i class="fa fa-check"></i><b>2.1.3</b> Command Line</a></li>
-<li class="chapter" data-level="2.1.4" data-path="gettingstarted.html"><a href="gettingstarted.html#data-storage-browser"><i class="fa fa-check"></i><b>2.1.4</b> Data storage browser</a></li>
-<li class="chapter" data-level="2.1.5" data-path="gettingstarted.html"><a href="gettingstarted.html#r-and-r-studio"><i class="fa fa-check"></i><b>2.1.5</b> R and R studio</a></li>
-<li class="chapter" data-level="2.1.6" data-path="gettingstarted.html"><a href="gettingstarted.html#environment-managers"><i class="fa fa-check"></i><b>2.1.6</b> Environment managers</a></li>
-<li class="chapter" data-level="2.1.7" data-path="gettingstarted.html"><a href="gettingstarted.html#explore-the-help-functions"><i class="fa fa-check"></i><b>2.1.7</b> Explore the help functions</a></li>
-<li class="chapter" data-level="2.1.8" data-path="gettingstarted.html"><a href="gettingstarted.html#github-account"><i class="fa fa-check"></i><b>2.1.8</b> GitHub account</a></li>
+<li class="chapter" data-level="2.1.1" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#richness"><i class="fa fa-check"></i><b>2.1.1</b> Richness</a></li>
+<li class="chapter" data-level="2.1.2" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#evenness"><i class="fa fa-check"></i><b>2.1.2</b> Evenness</a></li>
+<li class="chapter" data-level="2.1.3" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#exercise"><i class="fa fa-check"></i><b>2.1.3</b> Exercise</a></li>
+<li class="chapter" data-level="2.1.4" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#shannon-weiner-diversity"><i class="fa fa-check"></i><b>2.1.4</b> Shannon-Weiner Diversity</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="gettingstarted.html"><a href="gettingstarted.html#a-note-on-rarefying-normalising"><i class="fa fa-check"></i><b>2.2</b> A note on rarefying (normalising)</a></li>
-<li class="chapter" data-level="2.3" data-path="gettingstarted.html"><a href="gettingstarted.html#workflows-from-other-lab-groups"><i class="fa fa-check"></i><b>2.3</b> Workflows from other lab groups</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html"><i class="fa fa-check"></i><b>3</b> Miseq library preps</a>
+<li class="chapter" data-level="2.2" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#beta-diversity"><i class="fa fa-check"></i><b>2.2</b> Beta diversity</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#overview"><i class="fa fa-check"></i><b>3.1.1</b> Overview</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#workflow"><i class="fa fa-check"></i><b>3.2</b> Workflow</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-extraction"><i class="fa fa-check"></i><b>3.2.1</b> DNA extraction</a></li>
-<li class="chapter" data-level="3.2.2" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-quality-and-concentration"><i class="fa fa-check"></i><b>3.2.2</b> DNA quality and concentration</a></li>
-<li class="chapter" data-level="3.2.3" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-normalisation"><i class="fa fa-check"></i><b>3.2.3</b> DNA normalisation</a></li>
-<li class="chapter" data-level="3.2.4" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#first-and-second-pcr---amplicon-pcr-and-indexing-pcr"><i class="fa fa-check"></i><b>3.2.4</b> First and second PCR - Amplicon PCR and Indexing PCR</a></li>
-<li class="chapter" data-level="3.2.5" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#normalisation-of-indexed-amplicons"><i class="fa fa-check"></i><b>3.2.5</b> Normalisation of indexed amplicons</a></li>
-<li class="chapter" data-level="3.2.6" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#pooling"><i class="fa fa-check"></i><b>3.2.6</b> Pooling</a></li>
-<li class="chapter" data-level="3.2.7" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#denaturing-of-pool-and-loading-of-the-miseq"><i class="fa fa-check"></i><b>3.2.7</b> Denaturing of pool and loading of the Miseq</a></li>
-<li class="chapter" data-level="3.2.8" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#consumables"><i class="fa fa-check"></i><b>3.2.8</b> Consumables</a></li>
+<li class="chapter" data-level="2.2.1" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#species-replacement"><i class="fa fa-check"></i><b>2.2.1</b> Species replacement</a></li>
+<li class="chapter" data-level="2.2.2" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#species-nestedness"><i class="fa fa-check"></i><b>2.2.2</b> Species nestedness</a></li>
+<li class="chapter" data-level="2.2.3" data-path="some-fundamentals-by-dr-jen-wood.html"><a href="some-fundamentals-by-dr-jen-wood.html#beta-diversity-analysis-workflow"><i class="fa fa-check"></i><b>2.2.3</b> Beta diversity analysis workflow</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html"><i class="fa fa-check"></i><b>4</b> From BaseSpace to Qiime2 and DADA2</a>
+<li class="chapter" data-level="3" data-path="gettingstarted.html"><a href="gettingstarted.html"><i class="fa fa-check"></i><b>3</b> Getting started</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a>
+<li class="chapter" data-level="3.1" data-path="gettingstarted.html"><a href="gettingstarted.html#before-you-can-analyse"><i class="fa fa-check"></i><b>3.1</b> Before you can analyse</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#prerequisites-and-required-files"><i class="fa fa-check"></i><b>4.1.1</b> Prerequisites and required files</a></li>
+<li class="chapter" data-level="3.1.1" data-path="gettingstarted.html"><a href="gettingstarted.html#get-access-to-computational-resources"><i class="fa fa-check"></i><b>3.1.1</b> Get access to computational resources</a></li>
+<li class="chapter" data-level="3.1.2" data-path="gettingstarted.html"><a href="gettingstarted.html#get-file-storage"><i class="fa fa-check"></i><b>3.1.2</b> Get file storage</a></li>
+<li class="chapter" data-level="3.1.3" data-path="gettingstarted.html"><a href="gettingstarted.html#learn-some-basic-command-line"><i class="fa fa-check"></i><b>3.1.3</b> Learn some basic command Line</a></li>
+<li class="chapter" data-level="3.1.4" data-path="gettingstarted.html"><a href="gettingstarted.html#get-a-data-storage-browser"><i class="fa fa-check"></i><b>3.1.4</b> Get a data storage browser</a></li>
+<li class="chapter" data-level="3.1.5" data-path="gettingstarted.html"><a href="gettingstarted.html#get-r-and-r-studio"><i class="fa fa-check"></i><b>3.1.5</b> Get R and R studio</a></li>
+<li class="chapter" data-level="3.1.6" data-path="gettingstarted.html"><a href="gettingstarted.html#know-what-environment-managers-are"><i class="fa fa-check"></i><b>3.1.6</b> Know what environment managers are</a></li>
+<li class="chapter" data-level="3.1.7" data-path="gettingstarted.html"><a href="gettingstarted.html#explore-the-help-functions"><i class="fa fa-check"></i><b>3.1.7</b> Explore the help functions</a></li>
+<li class="chapter" data-level="3.1.8" data-path="gettingstarted.html"><a href="gettingstarted.html#get-a-github-account"><i class="fa fa-check"></i><b>3.1.8</b> Get a GitHub account</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#workflow-1"><i class="fa fa-check"></i><b>4.2</b> Workflow</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#download-fastq-files"><i class="fa fa-check"></i><b>4.2.1</b> Download FASTQ files</a></li>
-<li class="chapter" data-level="4.2.2" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#paired-end-manifest-import-step-1"><i class="fa fa-check"></i><b>4.2.2</b> Paired end manifest import (Step 1)</a></li>
-<li class="chapter" data-level="4.2.3" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#cutadapt-step-2"><i class="fa fa-check"></i><b>4.2.3</b> Cutadapt (Step 2)</a></li>
-<li class="chapter" data-level="4.2.4" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#read-quality-assessment"><i class="fa fa-check"></i><b>4.2.4</b> Read quality assessment</a></li>
-<li class="chapter" data-level="4.2.5" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#denoise-paired-end-sequences-with-dada2-step-3"><i class="fa fa-check"></i><b>4.2.5</b> Denoise paired end sequences with dada2 (Step 3)</a></li>
-<li class="chapter" data-level="4.2.6" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#taxonomic-classifier-and-assignment-step-4"><i class="fa fa-check"></i><b>4.2.6</b> Taxonomic classifier and assignment (Step 4)</a></li>
-<li class="chapter" data-level="4.2.7" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#build-phylogenetic-tree-step-5"><i class="fa fa-check"></i><b>4.2.7</b> Build phylogenetic tree (Step 5)</a></li>
-<li class="chapter" data-level="4.2.8" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#all-steps-combined"><i class="fa fa-check"></i><b>4.2.8</b> All steps combined</a></li>
+<li class="chapter" data-level="3.2" data-path="gettingstarted.html"><a href="gettingstarted.html#a-note-on-rarefying-normalising"><i class="fa fa-check"></i><b>3.2</b> A note on rarefying (normalising)</a></li>
+<li class="chapter" data-level="3.3" data-path="gettingstarted.html"><a href="gettingstarted.html#workflows-from-other-lab-groups"><i class="fa fa-check"></i><b>3.3</b> Workflows from other lab groups</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html"><i class="fa fa-check"></i><b>4</b> Miseq library preps</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#overview"><i class="fa fa-check"></i><b>4.1.1</b> Overview</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="Qiime2R.html"><a href="Qiime2R.html"><i class="fa fa-check"></i><b>5</b> From Qiime2 into R - Initial diagnostics</a>
+<li class="chapter" data-level="4.2" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#workflow"><i class="fa fa-check"></i><b>4.2</b> Workflow</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="Qiime2R.html"><a href="Qiime2R.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
-<li class="chapter" data-level="5.2" data-path="Qiime2R.html"><a href="Qiime2R.html#workflow-2"><i class="fa fa-check"></i><b>5.2</b> Workflow</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="Qiime2R.html"><a href="Qiime2R.html#packages"><i class="fa fa-check"></i><b>5.2.1</b> Packages</a></li>
-<li class="chapter" data-level="5.2.2" data-path="Qiime2R.html"><a href="Qiime2R.html#import-qiime-files-and-create-a-phyloseq-object"><i class="fa fa-check"></i><b>5.2.2</b> Import qiime-files and create a phyloseq object</a></li>
-<li class="chapter" data-level="5.2.3" data-path="Qiime2R.html"><a href="Qiime2R.html#save-the-ps-object-as-an-.rds-file-into-your-working-directory"><i class="fa fa-check"></i><b>5.2.3</b> Save the <code>ps</code> object as an <code>.rds</code> file into your working directory</a></li>
-<li class="chapter" data-level="5.2.4" data-path="Qiime2R.html"><a href="Qiime2R.html#initial-filtering"><i class="fa fa-check"></i><b>5.2.4</b> Initial filtering</a></li>
-<li class="chapter" data-level="5.2.5" data-path="Qiime2R.html"><a href="Qiime2R.html#proportion-of-asvs-identified"><i class="fa fa-check"></i><b>5.2.5</b> Proportion of ASVs identified</a></li>
-<li class="chapter" data-level="5.2.6" data-path="Qiime2R.html"><a href="Qiime2R.html#rarefaction-curve"><i class="fa fa-check"></i><b>5.2.6</b> Rarefaction curve</a></li>
-<li class="chapter" data-level="5.2.7" data-path="Qiime2R.html"><a href="Qiime2R.html#prevalence-table"><i class="fa fa-check"></i><b>5.2.7</b> Prevalence table</a></li>
-<li class="chapter" data-level="5.2.8" data-path="Qiime2R.html"><a href="Qiime2R.html#export-asv-and-taxa-tables-to-excel"><i class="fa fa-check"></i><b>5.2.8</b> Export ASV and taxa tables to Excel</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="plottingdiversity.html"><a href="plottingdiversity.html"><i class="fa fa-check"></i><b>6</b> Plotting diversity</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#required-files"><i class="fa fa-check"></i><b>6.1.1</b> Required files</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="plottingdiversity.html"><a href="plottingdiversity.html#workflow-3"><i class="fa fa-check"></i><b>6.2</b> Workflow</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#packages-1"><i class="fa fa-check"></i><b>6.2.1</b> Packages</a></li>
-<li class="chapter" data-level="6.2.2" data-path="plottingdiversity.html"><a href="plottingdiversity.html#load-phyloseq-object"><i class="fa fa-check"></i><b>6.2.2</b> Load phyloseq object</a></li>
-<li class="chapter" data-level="6.2.3" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pre-filter-rarefy-and-calculate-diversity"><i class="fa fa-check"></i><b>6.2.3</b> Pre-filter, rarefy and calculate diversity</a></li>
-<li class="chapter" data-level="6.2.4" data-path="plottingdiversity.html"><a href="plottingdiversity.html#colors"><i class="fa fa-check"></i><b>6.2.4</b> Colors</a></li>
-<li class="chapter" data-level="6.2.5" data-path="plottingdiversity.html"><a href="plottingdiversity.html#richness"><i class="fa fa-check"></i><b>6.2.5</b> Richness</a></li>
-<li class="chapter" data-level="6.2.6" data-path="plottingdiversity.html"><a href="plottingdiversity.html#shannon"><i class="fa fa-check"></i><b>6.2.6</b> Shannon</a></li>
-<li class="chapter" data-level="6.2.7" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pielous-evenness"><i class="fa fa-check"></i><b>6.2.7</b> Pielou’s evenness</a></li>
-<li class="chapter" data-level="6.2.8" data-path="plottingdiversity.html"><a href="plottingdiversity.html#combined-plotting"><i class="fa fa-check"></i><b>6.2.8</b> Combined plotting</a></li>
-<li class="chapter" data-level="6.2.9" data-path="plottingdiversity.html"><a href="plottingdiversity.html#nmds"><i class="fa fa-check"></i><b>6.2.9</b> NMDS</a></li>
-<li class="chapter" data-level="6.2.10" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pca"><i class="fa fa-check"></i><b>6.2.10</b> PCA</a></li>
-<li class="chapter" data-level="6.2.11" data-path="plottingdiversity.html"><a href="plottingdiversity.html#rda"><i class="fa fa-check"></i><b>6.2.11</b> RDA</a></li>
-<li class="chapter" data-level="6.2.12" data-path="plottingdiversity.html"><a href="plottingdiversity.html#unweighted-unifrac"><i class="fa fa-check"></i><b>6.2.12</b> Unweighted uniFrac</a></li>
-<li class="chapter" data-level="6.2.13" data-path="plottingdiversity.html"><a href="plottingdiversity.html#combined-plotting-1"><i class="fa fa-check"></i><b>6.2.13</b> Combined plotting</a></li>
-<li class="chapter" data-level="6.2.14" data-path="plottingdiversity.html"><a href="plottingdiversity.html#save-plots-to-png-and-pdf"><i class="fa fa-check"></i><b>6.2.14</b> Save plots to png and pdf</a></li>
+<li class="chapter" data-level="4.2.1" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-extraction"><i class="fa fa-check"></i><b>4.2.1</b> DNA extraction</a></li>
+<li class="chapter" data-level="4.2.2" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-quality-and-concentration"><i class="fa fa-check"></i><b>4.2.2</b> DNA quality and concentration</a></li>
+<li class="chapter" data-level="4.2.3" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#dna-normalisation"><i class="fa fa-check"></i><b>4.2.3</b> DNA normalisation</a></li>
+<li class="chapter" data-level="4.2.4" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#first-and-second-pcr---amplicon-pcr-and-indexing-pcr"><i class="fa fa-check"></i><b>4.2.4</b> First and second PCR - Amplicon PCR and Indexing PCR</a></li>
+<li class="chapter" data-level="4.2.5" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#normalisation-of-indexed-amplicons"><i class="fa fa-check"></i><b>4.2.5</b> Normalisation of indexed amplicons</a></li>
+<li class="chapter" data-level="4.2.6" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#pooling"><i class="fa fa-check"></i><b>4.2.6</b> Pooling</a></li>
+<li class="chapter" data-level="4.2.7" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#denaturing-of-pool-and-loading-of-the-miseq"><i class="fa fa-check"></i><b>4.2.7</b> Denaturing of pool and loading of the Miseq</a></li>
+<li class="chapter" data-level="4.2.8" data-path="miseq-library-preps.html"><a href="miseq-library-preps.html#consumables"><i class="fa fa-check"></i><b>4.2.8</b> Consumables</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="plottingtaxa.html"><a href="plottingtaxa.html"><i class="fa fa-check"></i><b>7</b> Plotting taxonomy</a>
+<li class="chapter" data-level="5" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html"><i class="fa fa-check"></i><b>5</b> From BaseSpace to Qiime2 and DADA2</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#introduction-4"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
+<li class="chapter" data-level="5.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#introduction-1"><i class="fa fa-check"></i><b>5.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#required-files-or-objects"><i class="fa fa-check"></i><b>7.1.1</b> Required files or objects</a></li>
+<li class="chapter" data-level="5.1.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#prerequisites-and-required-files"><i class="fa fa-check"></i><b>5.1.1</b> Prerequisites and required files</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="plottingtaxa.html"><a href="plottingtaxa.html#workflow-4"><i class="fa fa-check"></i><b>7.2</b> Workflow</a>
+<li class="chapter" data-level="5.2" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#workflow-1"><i class="fa fa-check"></i><b>5.2</b> Workflow</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#packages-2"><i class="fa fa-check"></i><b>7.2.1</b> Packages</a></li>
-<li class="chapter" data-level="7.2.2" data-path="plottingtaxa.html"><a href="plottingtaxa.html#load-phyloseq-object-1"><i class="fa fa-check"></i><b>7.2.2</b> Load phyloseq object</a></li>
-<li class="chapter" data-level="7.2.3" data-path="plottingtaxa.html"><a href="plottingtaxa.html#check-metadata-contained-in-the-phyloseq-object."><i class="fa fa-check"></i><b>7.2.3</b> Check metadata contained in the phyloseq object.</a></li>
-<li class="chapter" data-level="7.2.4" data-path="plottingtaxa.html"><a href="plottingtaxa.html#colors-1"><i class="fa fa-check"></i><b>7.2.4</b> Colors</a></li>
-<li class="chapter" data-level="7.2.5" data-path="plottingtaxa.html"><a href="plottingtaxa.html#pre-filtering"><i class="fa fa-check"></i><b>7.2.5</b> Pre-filtering</a></li>
-<li class="chapter" data-level="7.2.6" data-path="plottingtaxa.html"><a href="plottingtaxa.html#analysis-and-plotting"><i class="fa fa-check"></i><b>7.2.6</b> Analysis and plotting</a></li>
-<li class="chapter" data-level="7.2.7" data-path="plottingtaxa.html"><a href="plottingtaxa.html#prevalance-table"><i class="fa fa-check"></i><b>7.2.7</b> Prevalance table</a></li>
-<li class="chapter" data-level="7.2.8" data-path="plottingtaxa.html"><a href="plottingtaxa.html#krona-charts"><i class="fa fa-check"></i><b>7.2.8</b> Krona charts</a></li>
+<li class="chapter" data-level="5.2.1" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#download-fastq-files"><i class="fa fa-check"></i><b>5.2.1</b> Download FASTQ files</a></li>
+<li class="chapter" data-level="5.2.2" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#paired-end-manifest-import-step-1"><i class="fa fa-check"></i><b>5.2.2</b> Paired end manifest import (Step 1)</a></li>
+<li class="chapter" data-level="5.2.3" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#cutadapt-step-2"><i class="fa fa-check"></i><b>5.2.3</b> Cutadapt (Step 2)</a></li>
+<li class="chapter" data-level="5.2.4" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#read-quality-assessment"><i class="fa fa-check"></i><b>5.2.4</b> Read quality assessment</a></li>
+<li class="chapter" data-level="5.2.5" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#denoise-paired-end-sequences-with-dada2-step-3"><i class="fa fa-check"></i><b>5.2.5</b> Denoise paired end sequences with dada2 (Step 3)</a></li>
+<li class="chapter" data-level="5.2.6" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#taxonomic-classifier-and-assignment-step-4"><i class="fa fa-check"></i><b>5.2.6</b> Taxonomic classifier and assignment (Step 4)</a></li>
+<li class="chapter" data-level="5.2.7" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#build-phylogenetic-tree-step-5"><i class="fa fa-check"></i><b>5.2.7</b> Build phylogenetic tree (Step 5)</a></li>
+<li class="chapter" data-level="5.2.8" data-path="miseqtoqiime.html"><a href="miseqtoqiime.html#all-steps-combined"><i class="fa fa-check"></i><b>5.2.8</b> All steps combined</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="phylofactor.html"><a href="phylofactor.html"><i class="fa fa-check"></i><b>8</b> Phylofactor analysis</a>
+<li class="chapter" data-level="6" data-path="Qiime2R.html"><a href="Qiime2R.html"><i class="fa fa-check"></i><b>6</b> From Qiime2 into R - Initial diagnostics</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="phylofactor.html"><a href="phylofactor.html#introduction-5"><i class="fa fa-check"></i><b>8.1</b> Introduction</a>
+<li class="chapter" data-level="6.1" data-path="Qiime2R.html"><a href="Qiime2R.html#introduction-2"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="Qiime2R.html"><a href="Qiime2R.html#workflow-2"><i class="fa fa-check"></i><b>6.2</b> Workflow</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="phylofactor.html"><a href="phylofactor.html#prerequisites-and-required-files-1"><i class="fa fa-check"></i><b>8.1.1</b> Prerequisites and required files</a></li>
-<li class="chapter" data-level="8.1.2" data-path="phylofactor.html"><a href="phylofactor.html#custom-functions"><i class="fa fa-check"></i><b>8.1.2</b> Custom functions</a></li>
+<li class="chapter" data-level="6.2.1" data-path="Qiime2R.html"><a href="Qiime2R.html#packages"><i class="fa fa-check"></i><b>6.2.1</b> Packages</a></li>
+<li class="chapter" data-level="6.2.2" data-path="Qiime2R.html"><a href="Qiime2R.html#import-qiime-files-and-create-a-phyloseq-object"><i class="fa fa-check"></i><b>6.2.2</b> Import qiime-files and create a phyloseq object</a></li>
+<li class="chapter" data-level="6.2.3" data-path="Qiime2R.html"><a href="Qiime2R.html#save-the-ps-object-as-an-.rds-file-into-your-working-directory"><i class="fa fa-check"></i><b>6.2.3</b> Save the <code>ps</code> object as an <code>.rds</code> file into your working directory</a></li>
+<li class="chapter" data-level="6.2.4" data-path="Qiime2R.html"><a href="Qiime2R.html#initial-filtering"><i class="fa fa-check"></i><b>6.2.4</b> Initial filtering</a></li>
+<li class="chapter" data-level="6.2.5" data-path="Qiime2R.html"><a href="Qiime2R.html#proportion-of-asvs-identified"><i class="fa fa-check"></i><b>6.2.5</b> Proportion of ASVs identified</a></li>
+<li class="chapter" data-level="6.2.6" data-path="Qiime2R.html"><a href="Qiime2R.html#rarefaction-curve"><i class="fa fa-check"></i><b>6.2.6</b> Rarefaction curve</a></li>
+<li class="chapter" data-level="6.2.7" data-path="Qiime2R.html"><a href="Qiime2R.html#prevalence-table"><i class="fa fa-check"></i><b>6.2.7</b> Prevalence table</a></li>
+<li class="chapter" data-level="6.2.8" data-path="Qiime2R.html"><a href="Qiime2R.html#export-asv-and-taxa-tables-to-excel"><i class="fa fa-check"></i><b>6.2.8</b> Export ASV and taxa tables to Excel</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="phylofactor.html"><a href="phylofactor.html#workflow-5"><i class="fa fa-check"></i><b>8.2</b> Workflow</a>
+</ul></li>
+<li class="chapter" data-level="7" data-path="plottingdiversity.html"><a href="plottingdiversity.html"><i class="fa fa-check"></i><b>7</b> Plotting diversity</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="phylofactor.html"><a href="phylofactor.html#load-packages-and-custom-functions"><i class="fa fa-check"></i><b>8.2.1</b> Load packages and custom functions</a></li>
-<li class="chapter" data-level="8.2.2" data-path="phylofactor.html"><a href="phylofactor.html#load-phyloseq-object-2"><i class="fa fa-check"></i><b>8.2.2</b> Load phyloseq object</a></li>
-<li class="chapter" data-level="8.2.3" data-path="phylofactor.html"><a href="phylofactor.html#pre-filtering-1"><i class="fa fa-check"></i><b>8.2.3</b> Pre-filtering</a></li>
-<li class="chapter" data-level="8.2.4" data-path="phylofactor.html"><a href="phylofactor.html#running-phylofactor"><i class="fa fa-check"></i><b>8.2.4</b> Running PhyloFactor</a></li>
-<li class="chapter" data-level="8.2.5" data-path="phylofactor.html"><a href="phylofactor.html#reviewing-output"><i class="fa fa-check"></i><b>8.2.5</b> Reviewing output</a></li>
-<li class="chapter" data-level="8.2.6" data-path="phylofactor.html"><a href="phylofactor.html#visualising-factors"><i class="fa fa-check"></i><b>8.2.6</b> Visualising factors</a></li>
+<li class="chapter" data-level="7.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#required-files"><i class="fa fa-check"></i><b>7.1.1</b> Required files</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="plottingdiversity.html"><a href="plottingdiversity.html#workflow-3"><i class="fa fa-check"></i><b>7.2</b> Workflow</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="plottingdiversity.html"><a href="plottingdiversity.html#packages-1"><i class="fa fa-check"></i><b>7.2.1</b> Packages</a></li>
+<li class="chapter" data-level="7.2.2" data-path="plottingdiversity.html"><a href="plottingdiversity.html#load-phyloseq-object"><i class="fa fa-check"></i><b>7.2.2</b> Load phyloseq object</a></li>
+<li class="chapter" data-level="7.2.3" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pre-filter-rarefy-and-calculate-diversity"><i class="fa fa-check"></i><b>7.2.3</b> Pre-filter, rarefy and calculate diversity</a></li>
+<li class="chapter" data-level="7.2.4" data-path="plottingdiversity.html"><a href="plottingdiversity.html#colors"><i class="fa fa-check"></i><b>7.2.4</b> Colors</a></li>
+<li class="chapter" data-level="7.2.5" data-path="plottingdiversity.html"><a href="plottingdiversity.html#richness-1"><i class="fa fa-check"></i><b>7.2.5</b> Richness</a></li>
+<li class="chapter" data-level="7.2.6" data-path="plottingdiversity.html"><a href="plottingdiversity.html#shannon"><i class="fa fa-check"></i><b>7.2.6</b> Shannon</a></li>
+<li class="chapter" data-level="7.2.7" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pielous-evenness"><i class="fa fa-check"></i><b>7.2.7</b> Pielou’s evenness</a></li>
+<li class="chapter" data-level="7.2.8" data-path="plottingdiversity.html"><a href="plottingdiversity.html#combined-plotting"><i class="fa fa-check"></i><b>7.2.8</b> Combined plotting</a></li>
+<li class="chapter" data-level="7.2.9" data-path="plottingdiversity.html"><a href="plottingdiversity.html#nmds"><i class="fa fa-check"></i><b>7.2.9</b> NMDS</a></li>
+<li class="chapter" data-level="7.2.10" data-path="plottingdiversity.html"><a href="plottingdiversity.html#pca"><i class="fa fa-check"></i><b>7.2.10</b> PCA</a></li>
+<li class="chapter" data-level="7.2.11" data-path="plottingdiversity.html"><a href="plottingdiversity.html#rda"><i class="fa fa-check"></i><b>7.2.11</b> RDA</a></li>
+<li class="chapter" data-level="7.2.12" data-path="plottingdiversity.html"><a href="plottingdiversity.html#unweighted-unifrac"><i class="fa fa-check"></i><b>7.2.12</b> Unweighted uniFrac</a></li>
+<li class="chapter" data-level="7.2.13" data-path="plottingdiversity.html"><a href="plottingdiversity.html#combined-plotting-1"><i class="fa fa-check"></i><b>7.2.13</b> Combined plotting</a></li>
+<li class="chapter" data-level="7.2.14" data-path="plottingdiversity.html"><a href="plottingdiversity.html#save-plots-to-png-and-pdf"><i class="fa fa-check"></i><b>7.2.14</b> Save plots to png and pdf</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="plottingtaxa.html"><a href="plottingtaxa.html"><i class="fa fa-check"></i><b>8</b> Plotting taxonomy</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#introduction-4"><i class="fa fa-check"></i><b>8.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#required-files-or-objects"><i class="fa fa-check"></i><b>8.1.1</b> Required files or objects</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="plottingtaxa.html"><a href="plottingtaxa.html#workflow-4"><i class="fa fa-check"></i><b>8.2</b> Workflow</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="plottingtaxa.html"><a href="plottingtaxa.html#packages-2"><i class="fa fa-check"></i><b>8.2.1</b> Packages</a></li>
+<li class="chapter" data-level="8.2.2" data-path="plottingtaxa.html"><a href="plottingtaxa.html#load-phyloseq-object-1"><i class="fa fa-check"></i><b>8.2.2</b> Load phyloseq object</a></li>
+<li class="chapter" data-level="8.2.3" data-path="plottingtaxa.html"><a href="plottingtaxa.html#check-metadata-contained-in-the-phyloseq-object."><i class="fa fa-check"></i><b>8.2.3</b> Check metadata contained in the phyloseq object.</a></li>
+<li class="chapter" data-level="8.2.4" data-path="plottingtaxa.html"><a href="plottingtaxa.html#colors-1"><i class="fa fa-check"></i><b>8.2.4</b> Colors</a></li>
+<li class="chapter" data-level="8.2.5" data-path="plottingtaxa.html"><a href="plottingtaxa.html#pre-filtering"><i class="fa fa-check"></i><b>8.2.5</b> Pre-filtering</a></li>
+<li class="chapter" data-level="8.2.6" data-path="plottingtaxa.html"><a href="plottingtaxa.html#analysis-and-plotting"><i class="fa fa-check"></i><b>8.2.6</b> Analysis and plotting</a></li>
+<li class="chapter" data-level="8.2.7" data-path="plottingtaxa.html"><a href="plottingtaxa.html#prevalance-table"><i class="fa fa-check"></i><b>8.2.7</b> Prevalance table</a></li>
+<li class="chapter" data-level="8.2.8" data-path="plottingtaxa.html"><a href="plottingtaxa.html#krona-charts"><i class="fa fa-check"></i><b>8.2.8</b> Krona charts</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="phylofactor.html"><a href="phylofactor.html"><i class="fa fa-check"></i><b>9</b> Phylofactor analysis</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="phylofactor.html"><a href="phylofactor.html#introduction-5"><i class="fa fa-check"></i><b>9.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="phylofactor.html"><a href="phylofactor.html#prerequisites-and-required-files-1"><i class="fa fa-check"></i><b>9.1.1</b> Prerequisites and required files</a></li>
+<li class="chapter" data-level="9.1.2" data-path="phylofactor.html"><a href="phylofactor.html#custom-functions"><i class="fa fa-check"></i><b>9.1.2</b> Custom functions</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="phylofactor.html"><a href="phylofactor.html#workflow-5"><i class="fa fa-check"></i><b>9.2</b> Workflow</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="phylofactor.html"><a href="phylofactor.html#load-packages-and-custom-functions"><i class="fa fa-check"></i><b>9.2.1</b> Load packages and custom functions</a></li>
+<li class="chapter" data-level="9.2.2" data-path="phylofactor.html"><a href="phylofactor.html#load-phyloseq-object-2"><i class="fa fa-check"></i><b>9.2.2</b> Load phyloseq object</a></li>
+<li class="chapter" data-level="9.2.3" data-path="phylofactor.html"><a href="phylofactor.html#pre-filtering-1"><i class="fa fa-check"></i><b>9.2.3</b> Pre-filtering</a></li>
+<li class="chapter" data-level="9.2.4" data-path="phylofactor.html"><a href="phylofactor.html#running-phylofactor"><i class="fa fa-check"></i><b>9.2.4</b> Running PhyloFactor</a></li>
+<li class="chapter" data-level="9.2.5" data-path="phylofactor.html"><a href="phylofactor.html#reviewing-output"><i class="fa fa-check"></i><b>9.2.5</b> Reviewing output</a></li>
+<li class="chapter" data-level="9.2.6" data-path="phylofactor.html"><a href="phylofactor.html#visualising-factors"><i class="fa fa-check"></i><b>9.2.6</b> Visualising factors</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -308,14 +324,12 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="gettingstarted" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Getting started<a href="gettingstarted.html#gettingstarted" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Prerequisites will be listed in each sub chapter separately.
-Following a few general comments:</p>
-<div id="general-requirements" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> General requirements<a href="gettingstarted.html#general-requirements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="access-to-computational-resources" class="section level3 hasAnchor" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> Access to computational resources<a href="gettingstarted.html#access-to-computational-resources" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="gettingstarted" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Getting started<a href="gettingstarted.html#gettingstarted" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="before-you-can-analyse" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Before you can analyse<a href="gettingstarted.html#before-you-can-analyse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="get-access-to-computational-resources" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Get access to computational resources<a href="gettingstarted.html#get-access-to-computational-resources" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To process data you will need a personal computer or online computational resources with sufficient number of CPUs, working memory and storage. If you want to run most of the processing on a personal computer then I’d recommend a minimum of <strong>4 CPUs, 16 Gb RAM and 500 Gb storage</strong>. However, please note that some alignment tasks require more RAM, hence some of the steps (e.g. taxonomic classifications) may require a more powerful resource. The advantage of using a personal computer is that you can frequently update the latest packages without relying on a university administrator to do that for you. Furthermore, with a personal computer you wont need to share with others, making it easier to run the packages without a workload manager.</p>
 <p>Some university may provide their own access to a high performance computer (HPC) for staff and students and likely have certain packages pre-installed. In such cases a batch workload manger such as Slurm may be used, to manage multiple users trying to run computationally heavy jobs. This works fine too but its a bit of a hassle and I would use such an HPC only if really necessary, i.e. smaller jobs on my personal computer and bigger jobs on the HPC.</p>
 <p>In Australia the <a href="https://ardc.edu.au/services/nectar-research-cloud/" target="_blank">ARDC Nectar Research Cloud</a> provides free computational resources to students and staff at Universities. This is basically like providing access to an online Linux computer with complete freedom to install any packages as if it was your own. If you are a student you can <a href="https://dashboard.rc.nectar.org.au/" target="_blank">create a trial account</a> with your student email address (Using your ID only; without the student.edu.au) and check out how it all works, albeit with limited resources. The Nectar service also provides <a href="https://tutorials.rc.nectar.org.au/" target="_blank">tuturials for starters</a>. However, to get serious with Nectar, you have to request more resources, which is a fairly straight-forward process. Check out the <a href="https://support.ehelp.edu.au/support/solutions/articles/6000068044-managing-an-allocation" target="_blank">eligibilities</a> and chat to your supervisor if you are interested.</p>
@@ -323,27 +337,27 @@ Following a few general comments:</p>
 <p>In addition, there is the awesome <a href="https://usegalaxy.org.au/" target="_blank">Galaxy Australia platform</a>, which is an open web-based resource that also contains many tutorials and workflows specific to bioinformatics. Definitely worth checking that out too.</p>
 <p>This workbook will be based on using the Nectar Research cloud.</p>
 </div>
-<div id="file-storage" class="section level3 hasAnchor" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> File storage<a href="gettingstarted.html#file-storage" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="get-file-storage" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Get file storage<a href="gettingstarted.html#get-file-storage" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Working with sequencing data may require you do handle large amounts of data. From experience, a run of a 600µl pool (6-10pM) of amplicons in 2x301 Miseq cycles may produce around 10-20 Gb of FASTQ files. <a href="https://sapac.support.illumina.com/bulletins/2018/01/approximate-sizes-of-sequencing-run-output-folders.html" target="_blank">Much more</a> can be expected for NextSeq runs or for long-read sequencing.</p>
 <p>Once a Miseq run has finished it is typically available to download from the <a href="https://basespace.illumina.com/dashboard" target="_blank">Illumina Basespace</a> account. After a few runs, the data can accumulate quickly. Hence, <strong>persistent storage space</strong> may be required. With an Illumina Basespace account you get 1 TB of storage and you can keep a copy of the FASTQ file on your account. However, Basespace may delete your data if the account has been inactive for more than 6 months. But you will get reminder emails and all you need to do is to log in every now and then so Illumina wont delete your data. Alternatively, data can be upload onto a public repository for persistent storage, such as the <a href="https://www.ncbi.nlm.nih.gov/sra" target="_blank">Sequence Reads Archives</a>. If you have access to a research cloud or commercial computational resources then you may store data on those. Personally, I prefer a 1TB solid state harddrive.</p>
 </div>
-<div id="command-line" class="section level3 hasAnchor" number="2.1.3">
-<h3><span class="header-section-number">2.1.3</span> Command Line<a href="gettingstarted.html#command-line" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="learn-some-basic-command-line" class="section level3 hasAnchor" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> Learn some basic command Line<a href="gettingstarted.html#learn-some-basic-command-line" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Many of the tools used are managed through command line. Cloud servers are also accessed through command line. That means there is no graphical user interphase and all commands, including installation and running of packages are done through lines of codes on a simple window interphase. This window is called Terminal (Mac, Linux) or Command Prompt application (Windows). There are lots of online sources to help you get started with command line. One example here: <a href="https://towardsdatascience.com/a-quick-guide-to-using-command-line-terminal-96815b97b955" class="uri">https://towardsdatascience.com/a-quick-guide-to-using-command-line-terminal-96815b97b955</a></p>
 </div>
-<div id="data-storage-browser" class="section level3 hasAnchor" number="2.1.4">
-<h3><span class="header-section-number">2.1.4</span> Data storage browser<a href="gettingstarted.html#data-storage-browser" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="get-a-data-storage-browser" class="section level3 hasAnchor" number="3.1.4">
+<h3><span class="header-section-number">3.1.4</span> Get a data storage browser<a href="gettingstarted.html#get-a-data-storage-browser" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To upload, download, move, rename files on any cloud computer or high performance computer (HPC) at your institution, you will also require a cloud storage browser, such as <a href="https://docs.cyberduck.io/" target="_blank">Cyberduck</a> (Mac) or <a href="https://www.putty.org/" target="_blank">PuTTY</a> (Windows).</p>
 </div>
-<div id="r-and-r-studio" class="section level3 hasAnchor" number="2.1.5">
-<h3><span class="header-section-number">2.1.5</span> R and R studio<a href="gettingstarted.html#r-and-r-studio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="get-r-and-r-studio" class="section level3 hasAnchor" number="3.1.5">
+<h3><span class="header-section-number">3.1.5</span> Get R and R studio<a href="gettingstarted.html#get-r-and-r-studio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>R has become an essential research language. If you want to progress in research it is almost inevitable for you to learn. Just do it. :). Perhaps start here if you dont know where else to start: <a href="https://education.rstudio.com/learn/beginner/" class="uri">https://education.rstudio.com/learn/beginner/</a>. It lists some great step-by-step tutorials on how to install R and Rstudio and then explains the basics.</p>
 <p>If you are like me, then you simply copy and paste code from other sites and see what happens. This book should provide you with the required information to enable you to follow the workflows. In case you get stuck, you can either chat to me directly or write on the GitHub Discussion Page for this GitBook (<a href="(https://github.com/chrismitbiz/ABlab-workflows/discussions/)">chrismitbiz/ABlab-workflows/discussions/</a>).</p>
 <p>At the same time you will want to do short courses (eg. from edX <a href="https://www.edx.org/course/data-science-r-basics" target="_blank">Data Science: R Basics</a>) that delve a little deeper into different data structures such as data frames, matrices, lists and the syntax to arrange stuff. Over time you understand what different lines of code mean and can trouble shoot when things don’t work. And things often don’t work. You will get used to troubleshooting code :).</p>
 </div>
-<div id="environment-managers" class="section level3 hasAnchor" number="2.1.6">
-<h3><span class="header-section-number">2.1.6</span> Environment managers<a href="gettingstarted.html#environment-managers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="know-what-environment-managers-are" class="section level3 hasAnchor" number="3.1.6">
+<h3><span class="header-section-number">3.1.6</span> Know what environment managers are<a href="gettingstarted.html#know-what-environment-managers-are" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Package and environment managers are extremely useful for your workflows. They help to install and run software packages such as qiime2, into individual ‘environments’ independent of your operating system. The environment manager is installed once and from there you use it to install individual packages. The most commonly used environment manager is Conda. Learn more about it here: <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html" class="uri">https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html</a></p>
 <p>Conda can be installed by either installing Anaconda or Miniconda. Boths works the same way. Anaconda requires 5 Gb of discspace and installs everything you can possibly need, while Miniconda is just the raw bones and lets you install things one by one.</p>
 <p>Most of the commands to manage environments are done in command line using a terminal. There is also a graphical installer that makes handling the environments a little more visual. That would be my go to. Learn more here: www.anaconda.com.</p>
@@ -352,8 +366,8 @@ Following a few general comments:</p>
 </p>
 <p>There are several other environment managers. We are also using <a href="https://www.docker.com/" target="_blank">Docker</a> in our work but the learning curve is a bit steeper so we wont get into it here.</p>
 </div>
-<div id="explore-the-help-functions" class="section level3 hasAnchor" number="2.1.7">
-<h3><span class="header-section-number">2.1.7</span> Explore the help functions<a href="gettingstarted.html#explore-the-help-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="explore-the-help-functions" class="section level3 hasAnchor" number="3.1.7">
+<h3><span class="header-section-number">3.1.7</span> Explore the help functions<a href="gettingstarted.html#explore-the-help-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Packages such as qiime2 have great resources to help you understand how to run any of the available commands. For example if you dont know what input parameters are available for the qiime command<br />
 <code>qiime feature-classifier classify-sklearn</code>, you can simply enter this command into your Terminal (with the qiime environment activated, if it is installed with Conda) and add a <code>--help</code> at the end: <code>qiime feature-classifier classify-sklearn --help</code>.</p>
 <p>Or you just want to know what other commands qiime has in its repertoire, you can run <code>qiime --help</code>.</p>
@@ -367,36 +381,38 @@ qiime --help  </code></pre>
 <img src="img/helpR1.png" /></p>
 <p><img src="img/helpR.png" /></p>
 </div>
-<div id="github-account" class="section level3 hasAnchor" number="2.1.8">
-<h3><span class="header-section-number">2.1.8</span> GitHub account<a href="gettingstarted.html#github-account" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="get-a-github-account" class="section level3 hasAnchor" number="3.1.8">
+<h3><span class="header-section-number">3.1.8</span> Get a GitHub account<a href="gettingstarted.html#get-a-github-account" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This GitBook, including all its files, is hosted on one of my GitHub repositories (<a href="https://github.com/chrismitbiz/ABlab-workflows" class="uri">https://github.com/chrismitbiz/ABlab-workflows</a>). If you have any comments you can ask a question on the Discussion Page of this repository. You require a GitHub account to do that. It is free.</p>
 </div>
 </div>
-<div id="a-note-on-rarefying-normalising" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> A note on rarefying (normalising)<a href="gettingstarted.html#a-note-on-rarefying-normalising" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="a-note-on-rarefying-normalising" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> A note on rarefying (normalising)<a href="gettingstarted.html#a-note-on-rarefying-normalising" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>By Dr Jen Wood and Dr Chris Krohn:<br />
+Data normalisation is necessary because it is very difficult to collect exactly the same number of sequence reads for each sample. There is an arbitrary total read depth imposed by the instrument, which is a major confounder for distance or dissimilarity calculations and multivariate ordinations derived from these distances.</p>
 <p>Various data normalisation methods exist and opinions on their applicability diverge.</p>
 <p>Example of normalisation methods:</p>
 <ul>
-<li>Rarefying data<br />
-</li>
-<li>Transformation into relative abundances</li>
-<li>Transformation into centered log-ratios</li>
-<li>Cumulative Sum Scaling (CSS)<br />
-</li>
-<li>Upper Quantile (UQ)<br />
-</li>
-<li>edgeR-trimmed mean of M values (TMM)<br />
-</li>
-<li>DESeq-variance stabilizing transformation (VS)</li>
+<li><p>Rarefying data</p></li>
+<li><p>Transformation into relative abundances</p></li>
+<li><p>Transformation into centered log-ratios</p></li>
+<li><p>Cumulative Sum Scaling (CSS)</p></li>
+<li><p>Upper Quantile (UQ)</p></li>
+<li><p>edgeR-trimmed mean of M values (TMM)</p></li>
+<li><p>DESeq-variance stabilizing transformation (VS)</p></li>
 </ul>
 <p>There are others. Check out this link to learn more about the different types of normalisation methods: <a href="https://www.omicsforum.ca/t/what-are-the-various-normalization-methods-and-which-method-should-i-choose/494" target="_blank">MicrobiomeAnalyst: FAQs, What are the various normalization methods and which method should I choose?</a>.</p>
-<p>Rarefying data is one of the more contested methods. We acknowledge that <strong>rarefying data</strong> (i.e. the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus <strong>not recommended for differential abundance analyses</strong>. Check out this well cited paper here to learn why: <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531" target="_blank">Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible</a> (<span class="citation">McMurdie and Holmes (<a href="#ref-McMurdie2014" role="doc-biblioref">2014</a>)</span>).</p>
+<p>Rarefying data is one of the more contested methods. Rarefying aims to reduce bias introduced by variable library sizes. Rarefying involves choosing a threshold of reads to which to normalize all your samples to (e.g. 20,000, min sample read depth).</p>
+<p>Samples that fall below the threshold will be removed from your analysis. The goal is to choose a threshold that keeps the most reads whilst also retaining the most samples.</p>
+<p><img src="img/rary.png" width="300" /></p>
+<p>We acknowledge that <strong>rarefying data</strong> (i.e. the random subsampling of abundances to usually the smallest library size) results in loss of data and statistical power and is thus <strong>not recommended for differential abundance analyses</strong>. Check out this well cited paper here to learn why: <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531" target="_blank">Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible</a> (<span class="citation">McMurdie and Holmes (<a href="#ref-McMurdie2014" role="doc-biblioref">2014</a>)</span>).</p>
+<p><img src="img/rary2.png" width="570" /></p>
 <p>However, rarefying still “<em>outperformed all the other normalization methods for producing accurate BC (Bray-Curtis) dissimilarities and subsequent PCoAs and PERMANOVAs.</em>” Paper here: <a href="https://doi.org/10.1111/2041-210X.13115" target="_blank">Methods for normalizing microbiome data: An ecological perspective</a> (<span class="citation">McKnight et al. (<a href="#ref-McKnight2019a" role="doc-biblioref">2019</a>)</span>).</p>
 <p>For our workflows we may <strong>rarefy data</strong> before creating <strong>alpha diversity</strong> indices (Shannon, Simpsons etc) and <strong>beta diversity</strong> indices (Bray-Curtis dissimilarities).</p>
 <p>Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use <strong>centred-log ratios</strong> (Aitchison distances). The <strong>compositional approach</strong> and centred log-ratios are further discussed in the paper <a href="https://doi.org/10.3389/fmicb.2017.02224" target="_blank">Microbiome Datasets Are Compositional: And This Is Not Optional</a> (<span class="citation">Gloor et al. (<a href="#ref-Gloor2017" role="doc-biblioref">2017</a>)</span>). This type of transformation requires the removal of some of the rare ASVs to remove as many zeros from the abundance table as reasonable.</p>
 </div>
-<div id="workflows-from-other-lab-groups" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Workflows from other lab groups<a href="gettingstarted.html#workflows-from-other-lab-groups" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="workflows-from-other-lab-groups" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Workflows from other lab groups<a href="gettingstarted.html#workflows-from-other-lab-groups" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The following review “<em>should serve as a starting point for considering what options are available</em>”: <a href="https://www.frontiersin.org/articles/10.3389/fmicb.2017.01561/full" target="_blank">Analysing microbial community composition through amplicon sequencing: from sampling to hypothesis testing</a> (<span class="citation">Hugerth and Andersson (<a href="#ref-Hugerth2017a" role="doc-biblioref">2017</a>)</span>).</p>
 <p>Furthermore, searching for “amplicon-sequencing” under “Topics” on GitHub gave 37 results.</p>
 <ul>
@@ -435,7 +451,7 @@ McMurdie, Paul J, and Susan Holmes. 2014. <span>“<span class="nocase">Waste no
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="some-fundamentals-by-dr-jen-wood.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="miseq-library-preps.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
