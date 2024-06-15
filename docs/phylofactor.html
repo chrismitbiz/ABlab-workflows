@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Phylofactor analysis | Workflows for processing microbial amplicon sequences</title>
-  <meta name="description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
+  <title>Chapter 9 Phylofactor analysis | Beginner’s guide to Miseq sequencing and processing of short-read microbial (16S) amplicon sequences</title>
+  <meta name="description" content="This GitBook contains library preparation and bioinformatic workflows from DNA extraction, to processing of fastQ files generated with a Miseq instrument, to visualisation of microbial amplicon-sequences with various packages within Qiime2 and R Studio." />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Phylofactor analysis | Workflows for processing microbial amplicon sequences" />
+  <meta property="og:title" content="Chapter 9 Phylofactor analysis | Beginner’s guide to Miseq sequencing and processing of short-read microbial (16S) amplicon sequences" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
+  <meta property="og:description" content="This GitBook contains library preparation and bioinformatic workflows from DNA extraction, to processing of fastQ files generated with a Miseq instrument, to visualisation of microbial amplicon-sequences with various packages within Qiime2 and R Studio." />
   <meta name="github-repo" content="chrismitbiz/ABlab-workflows" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Phylofactor analysis | Workflows for processing microbial amplicon sequences" />
+  <meta name="twitter:title" content="Chapter 9 Phylofactor analysis | Beginner’s guide to Miseq sequencing and processing of short-read microbial (16S) amplicon sequences" />
   
-  <meta name="twitter:description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
+  <meta name="twitter:description" content="This GitBook contains library preparation and bioinformatic workflows from DNA extraction, to processing of fastQ files generated with a Miseq instrument, to visualisation of microbial amplicon-sequences with various packages within Qiime2 and R Studio." />
   
 
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
@@ -321,7 +321,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Workflows for processing microbial amplicon sequences</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Beginner’s guide to Miseq sequencing and processing of short-read microbial (16S) amplicon sequences</a>
           </h1>
         </div>
 
@@ -517,7 +517,7 @@ div.csl-indent {
 <span id="cb80-7"><a href="phylofactor.html#cb80-7" tabindex="-1"></a>        <span class="at">KS.Pthreshold =</span> <span class="fl">0.01</span>, <span class="co"># Kolmogorov Smirnov significance level </span></span>
 <span id="cb80-8"><a href="phylofactor.html#cb80-8" tabindex="-1"></a>        <span class="at">nfactors =</span> <span class="dv">13</span>, <span class="co"># the first 13 phylofactors only - in interest of time </span></span>
 <span id="cb80-9"><a href="phylofactor.html#cb80-9" tabindex="-1"></a>        <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>)  <span class="co"># see notes above</span></span></code></pre></div>
-<pre><code>##  1 factor completed in 0.0266 minutes.    Estimated time of completion: 2024-06-15 17:43:53.323011    2 factors completed in 0.0499 minutes.     Estimated time of completion: 2024-06-15 17:43:52.028821    3 factors completed in 0.0745 minutes.     Estimated time of completion: 2024-06-15 17:43:51.941587    4 factors completed in 0.0961 minutes.     Estimated time of completion: 2024-06-15 17:43:51.330731    5 factors completed in 0.118 minutes.     Estimated time of completion: 2024-06-15 17:43:51.03316    6 factors completed in 0.14 minutes.     Estimated time of completion: 2024-06-15 17:43:50.846407    7 factors completed in 0.163 minutes.     Estimated time of completion: 2024-06-15 17:43:50.730549    8 factors completed in 0.185 minutes.     Estimated time of completion: 2024-06-15 17:43:50.600835    9 factors completed in 0.207 minutes.     Estimated time of completion: 2024-06-15 17:43:50.566451    10 factors completed in 0.229 minutes.     Estimated time of completion: 2024-06-15 17:43:50.456789    11 factors completed in 0.251 minutes.     Estimated time of completion: 2024-06-15 17:43:50.369293    12 factors completed in 0.273 minutes.     Estimated time of completion: 2024-06-15 17:43:50.299087    13 factors completed in 0.294 minutes.     Estimated time of completion: 2024-06-15 17:43:50.246614   </code></pre>
+<pre><code>##  1 factor completed in 0.0268 minutes.    Estimated time of completion: 2024-06-15 18:06:55.605585    2 factors completed in 0.0499 minutes.     Estimated time of completion: 2024-06-15 18:06:54.214942    3 factors completed in 0.0744 minutes.     Estimated time of completion: 2024-06-15 18:06:54.074284    4 factors completed in 0.096 minutes.     Estimated time of completion: 2024-06-15 18:06:53.458104    5 factors completed in 0.118 minutes.     Estimated time of completion: 2024-06-15 18:06:53.116178    6 factors completed in 0.14 minutes.     Estimated time of completion: 2024-06-15 18:06:52.89264    7 factors completed in 0.162 minutes.     Estimated time of completion: 2024-06-15 18:06:52.753053    8 factors completed in 0.184 minutes.     Estimated time of completion: 2024-06-15 18:06:52.640738    9 factors completed in 0.206 minutes.     Estimated time of completion: 2024-06-15 18:06:52.617839    10 factors completed in 0.228 minutes.     Estimated time of completion: 2024-06-15 18:06:52.516203    11 factors completed in 0.25 minutes.     Estimated time of completion: 2024-06-15 18:06:52.441527    12 factors completed in 0.271 minutes.     Estimated time of completion: 2024-06-15 18:06:52.377719    13 factors completed in 0.293 minutes.     Estimated time of completion: 2024-06-15 18:06:52.334005   </code></pre>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="phylofactor.html#cb82-1" tabindex="-1"></a><span class="co"># saveRDS(PF,&#39;pf-example.rds&#39;)  # save Phylofactor object to .rds file </span></span>
 <span id="cb82-2"><a href="phylofactor.html#cb82-2" tabindex="-1"></a><span class="fu">rm</span>(tree, tree_ur, Data, X, meta.df) <span class="co">#remove unnecessary objects from R environment</span></span>
 <span id="cb82-3"><a href="phylofactor.html#cb82-3" tabindex="-1"></a></span>
