@@ -535,7 +535,7 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb45-14"><a href="plottingdiversity.html#cb45-14" tabindex="-1"></a><span class="co">#        axis.ticks.x=element_blank()) +</span></span>
 <span id="cb45-15"><a href="plottingdiversity.html#cb45-15" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">stat_compare_means</span>(<span class="at">method =</span> <span class="st">&quot;kruskal&quot;</span>,<span class="at">label.x =</span> <span class="dv">2</span>)</span>
 <span id="cb45-16"><a href="plottingdiversity.html#cb45-16" tabindex="-1"></a>p1</span></code></pre></div>
-<p><img src="gitbook-demo_files/figure-html/richness-1.png" width="672" /></p>
+<p><img src="ABlab16Sworkflow_files/figure-html/richness-1.png" width="672" /></p>
 </div>
 <div id="shannon" class="section level3 hasAnchor" number="7.2.6">
 <h3><span class="header-section-number">7.2.6</span> Shannon<a href="plottingdiversity.html#shannon" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -556,7 +556,7 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb46-15"><a href="plottingdiversity.html#cb46-15" tabindex="-1"></a><span class="co">#        axis.ticks.x=element_blank()) +</span></span>
 <span id="cb46-16"><a href="plottingdiversity.html#cb46-16" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">stat_compare_means</span>(<span class="at">method =</span> <span class="st">&quot;kruskal&quot;</span>,<span class="at">label.x =</span> <span class="dv">2</span>)</span>
 <span id="cb46-17"><a href="plottingdiversity.html#cb46-17" tabindex="-1"></a>p2</span></code></pre></div>
-<p><img src="gitbook-demo_files/figure-html/shannon-1.png" width="672" /></p>
+<p><img src="ABlab16Sworkflow_files/figure-html/shannon-1.png" width="672" /></p>
 </div>
 <div id="pielous-evenness" class="section level3 hasAnchor" number="7.2.7">
 <h3><span class="header-section-number">7.2.7</span> Pielou’s evenness<a href="plottingdiversity.html#pielous-evenness" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -577,7 +577,7 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb47-15"><a href="plottingdiversity.html#cb47-15" tabindex="-1"></a><span class="co">#        axis.ticks.x=element_blank()) +</span></span>
 <span id="cb47-16"><a href="plottingdiversity.html#cb47-16" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">stat_compare_means</span>(<span class="at">method =</span> <span class="st">&quot;kruskal&quot;</span>,<span class="at">label.x =</span> <span class="dv">2</span>)</span>
 <span id="cb47-17"><a href="plottingdiversity.html#cb47-17" tabindex="-1"></a>p3</span></code></pre></div>
-<p><img src="gitbook-demo_files/figure-html/pielou-1.png" width="672" /></p>
+<p><img src="ABlab16Sworkflow_files/figure-html/pielou-1.png" width="672" /></p>
 </div>
 <div id="combined-plotting" class="section level3 hasAnchor" number="7.2.8">
 <h3><span class="header-section-number">7.2.8</span> Combined plotting<a href="plottingdiversity.html#combined-plotting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -585,7 +585,7 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb48-2"><a href="plottingdiversity.html#cb48-2" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> ggpubr<span class="sc">::</span><span class="fu">ggarrange</span>(p1, p2, p3, <span class="at">common.legend =</span> <span class="cn">TRUE</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">legend =</span> <span class="st">&#39;top&#39;</span>)</span>
 <span id="cb48-3"><a href="plottingdiversity.html#cb48-3" tabindex="-1"></a><span class="co">#x = dev.off()</span></span>
 <span id="cb48-4"><a href="plottingdiversity.html#cb48-4" tabindex="-1"></a>g1</span></code></pre></div>
-<p><img src="gitbook-demo_files/figure-html/plot-1.png" width="960" /></p>
+<p><img src="ABlab16Sworkflow_files/figure-html/plot-1.png" width="960" /></p>
 <p><br />
 </p>
 </div>
@@ -615,7 +615,7 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb49-22"><a href="plottingdiversity.html#cb49-22" tabindex="-1"></a>            <span class="at">size =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span><span class="st">&quot;Pielou Evenness&quot;</span>) ) <span class="co"># change the legend title for `size`.</span></span>
 <span id="cb49-23"><a href="plottingdiversity.html#cb49-23" tabindex="-1"></a></span>
 <span id="cb49-24"><a href="plottingdiversity.html#cb49-24" tabindex="-1"></a>NMDSplot</span></code></pre></div>
-<p><img src="gitbook-demo_files/figure-html/nmds-1.png" width="576" /></p>
+<p><img src="ABlab16Sworkflow_files/figure-html/nmds-1.png" width="576" /></p>
 </div>
 <div id="pca" class="section level3 hasAnchor" number="7.2.10">
 <h3><span class="header-section-number">7.2.10</span> PCA<a href="plottingdiversity.html#pca" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -645,7 +645,7 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb50-24"><a href="plottingdiversity.html#cb50-24" tabindex="-1"></a>            <span class="at">size =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span><span class="st">&quot;Pielou Evenness&quot;</span>) ) </span>
 <span id="cb50-25"><a href="plottingdiversity.html#cb50-25" tabindex="-1"></a></span>
 <span id="cb50-26"><a href="plottingdiversity.html#cb50-26" tabindex="-1"></a>PCAplot</span></code></pre></div>
-<p><img src="gitbook-demo_files/figure-html/PCA-1.png" width="576" /></p>
+<p><img src="ABlab16Sworkflow_files/figure-html/PCA-1.png" width="576" /></p>
 <p><br />
 </p>
 </div>
@@ -735,7 +735,7 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb51-82"><a href="plottingdiversity.html#cb51-82" tabindex="-1"></a></span>
 <span id="cb51-83"><a href="plottingdiversity.html#cb51-83" tabindex="-1"></a></span>
 <span id="cb51-84"><a href="plottingdiversity.html#cb51-84" tabindex="-1"></a>RDAplot</span></code></pre></div>
-<p><img src="gitbook-demo_files/figure-html/rda-1.png" width="576" /></p>
+<p><img src="ABlab16Sworkflow_files/figure-html/rda-1.png" width="576" /></p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="plottingdiversity.html#cb52-1" tabindex="-1"></a><span class="co"># save figure for publication</span></span>
 <span id="cb52-2"><a href="plottingdiversity.html#cb52-2" tabindex="-1"></a><span class="co"># ggsave(&quot;RDA.png&quot;, height=6, width=7.5, units=&#39;in&#39;, dpi=600)</span></span>
 <span id="cb52-3"><a href="plottingdiversity.html#cb52-3" tabindex="-1"></a><span class="co">#knitr::include_graphics(&quot;./RDA.png&quot;)</span></span></code></pre></div>
@@ -765,7 +765,7 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb53-18"><a href="plottingdiversity.html#cb53-18" tabindex="-1"></a>     <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cols)</span>
 <span id="cb53-19"><a href="plottingdiversity.html#cb53-19" tabindex="-1"></a></span>
 <span id="cb53-20"><a href="plottingdiversity.html#cb53-20" tabindex="-1"></a>PCOAplot</span></code></pre></div>
-<p><img src="gitbook-demo_files/figure-html/unifrac-1.png" width="576" /></p>
+<p><img src="ABlab16Sworkflow_files/figure-html/unifrac-1.png" width="576" /></p>
 </div>
 <div id="combined-plotting-1" class="section level3 hasAnchor" number="7.2.13">
 <h3><span class="header-section-number">7.2.13</span> Combined plotting<a href="plottingdiversity.html#combined-plotting-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -774,7 +774,7 @@ The diversity indices are then calculated with <code>phyloseq::estimate_richness
 <span id="cb54-3"><a href="plottingdiversity.html#cb54-3" tabindex="-1"></a>                        <span class="at">common.legend =</span> <span class="cn">TRUE</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">legend =</span> <span class="st">&#39;top&#39;</span>)</span>
 <span id="cb54-4"><a href="plottingdiversity.html#cb54-4" tabindex="-1"></a><span class="co">#x = dev.off()</span></span>
 <span id="cb54-5"><a href="plottingdiversity.html#cb54-5" tabindex="-1"></a>g2</span></code></pre></div>
-<p><img src="gitbook-demo_files/figure-html/plotbeta-1.png" width="960" /></p>
+<p><img src="ABlab16Sworkflow_files/figure-html/plotbeta-1.png" width="960" /></p>
 <p><br />
 </p>
 </div>
@@ -852,7 +852,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["gitbook-demo.pdf"],
+"download": ["ABlab16Sworkflow.pdf"],
 "search": {
 "engine": "fuse",
 "options": null

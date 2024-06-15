@@ -1,4 +1,4 @@
-book_filename: "gitbook-demo"
+book_filename: "ABlab16Sworkflow"
 rmd_files: ["index.Rmd",
             "02.1_jenwood.Rmd",
             "02_getting_started.Rmd",
