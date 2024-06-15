@@ -108,7 +108,7 @@ For this pair of communities - which is more diverse and why?
 **Example 1**\
 
 |     Species(i)     | Number of individuals (p) |  pi  | Ln(pi) | pi\*Ln(pi) | -pi\*Ln(pi) |
-|:------------------:|:-------------------------:|:----:|:------:|:----------:|:-----------:|
+|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|
 |   Geobacter spp.   |            52             | 0.84 | -0.18  |   -0.15    |    0.15     |
 | Desulfovibrio spp. |             7             | 0.11 | -2.18  |   -0.25    |    0.25     |
 |  Clostridium spp.  |             2             | 0.03 | -3.43  |   -0.11    |    0.11     |
@@ -119,7 +119,7 @@ For this pair of communities - which is more diverse and why?
 **Example 2**\
 
 |      Species       | Number of individuals (p) |  pi  | Ln(pi) | pi\*Ln(pi) | -pi\*Ln(pi) |
-|:------------------:|:-------------------------:|:----:|:------:|:----------:|:-----------:|
+|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|
 |   Geobacter spp.   |            23             | 0.37 | -0.99  |   -0.37    |    0.37     |
 | Desulfovibrio spp. |            27             | 0.44 | -0.83  |   -0.36    |    0.36     |
 |  Clostridium spp.  |            12             | 0.19 | -1.64  |   -0.32    |    0.32     |
@@ -261,4 +261,4 @@ Beta dispersion describes the spread of a set of points around a centroid.
 
 PERMANOVA can be sensitive to difference in beta-dispersion (so test for this too).
 
-![](./img/dispersion.png){width="400"}\
+![](./img/dispersion.png){width="500"}\

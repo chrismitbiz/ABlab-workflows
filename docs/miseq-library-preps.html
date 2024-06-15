@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Miseq library preps | Workflows for processing microbial amplicon sequences</title>
   <meta name="description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Miseq library preps | Workflows for processing microbial amplicon sequences" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2023-01-05" />
+<meta name="date" content="2024-06-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -58,7 +58,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -122,10 +122,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 <style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -349,9 +354,9 @@ Preparation</a> protocol from Illumina with 10-30% Phix. <strong>Download it, st
 <h2><span class="header-section-number">4.2</span> Workflow<a href="miseq-library-preps.html#workflow" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="dna-extraction" class="section level3 hasAnchor" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> DNA extraction<a href="miseq-library-preps.html#dna-extraction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="figure">
-<img src="img/dna.jpeg" alt="" />
-<p class="caption">“DNA extracts”</p>
+<div class="float">
+<img src="img/dna.jpeg" alt="“DNA extracts”" />
+<div class="figcaption">“DNA extracts”</div>
 </div>
 <p>We commonly extract DNA from soils or from wastewater sludges using the <em>DNeasy Powersoil Pro Kit</em> (Qiagen) for both, soil and sludge. It results in high quality DNA and includes a bead beating step to make sure the gram positive cells are sufficiently broken up. Although, I don’t have evidence for that. In fact, please let us know on the <a href="https://github.com/chrismitbiz/ABlab-workflows/discussions">GitHub Discussion Page</a> for this GitBook if you have any comments on that as we are always looking for ways to improve things.</p>
 <p>Soil</p>
@@ -381,9 +386,9 @@ Preparation</a> protocol from Illumina with 10-30% Phix. <strong>Download it, st
 <li>High Sensitivity (HS) Kit for quantifying the pool at the end.</li>
 </ul></li>
 </ul>
-<div class="figure">
-<img src="img/qubit.png" alt="" />
-<p class="caption">“The ready-mix working solution for Qubit, which includes dye and buffer. No preparation/premixing required.”</p>
+<div class="float">
+<img src="img/qubit.png" alt="“The ready-mix working solution for Qubit, which includes dye and buffer. No preparation/premixing required.”" />
+<div class="figcaption">“The ready-mix working solution for Qubit, which includes dye and buffer. No preparation/premixing required.”</div>
 </div>
 </div>
 <div id="dna-normalisation" class="section level3 hasAnchor" number="4.2.3">
@@ -461,9 +466,9 @@ Contact us if you would like to get a copy of this very handy library preparatio
 </ul>
 <p><br />
 </p>
-<div class="figure">
-<img src="img/manifestfile.png" alt="" />
-<p class="caption">“Example of a manifest file”</p>
+<div class="float">
+<img src="img/manifestfile.png" alt="“Example of a manifest file”" />
+<div class="figcaption">“Example of a manifest file”</div>
 </div>
 </div>
 <div id="consumables" class="section level3 hasAnchor" number="4.2.8">

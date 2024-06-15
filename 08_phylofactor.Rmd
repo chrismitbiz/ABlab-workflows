@@ -210,6 +210,7 @@ rm(tree, tree_ur, Data, X, meta.df) #remove unnecessary objects from R environme
 # (on the github discussion page ideally (see Chapter 1)).   
 # If no value is provided to nfactors - the algorithm will continue until 
 # no edge are found anymore.
+
 ```
 
 ### Reviewing output

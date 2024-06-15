@@ -66,8 +66,10 @@ Or you just want to know what other commands qiime has in its repertoire, you ca
 
 For example, this
 
-    conda activate qiime2-2022.2  
-    qiime --help  
+```         
+conda activate qiime2-2022.2  
+qiime --help  
+```
 
 Gives\
 ![](./img/qiimehelp.png)

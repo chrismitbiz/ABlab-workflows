@@ -26,7 +26,6 @@ plotdata_sub %>%
             combine = TRUE, facet.by = "ILR",
             fill = "ILR", ncol = ncol, alpha = 0.5,
             ylab = ("Isometric log ratio (ILR)"),
-            xlab = expression(CO[2]),
             panel.labs.font = list(size = 11),
             panel.labs = list(ILR = labelvec) )  +
   geom_point(position = "jitter", alpha = 0.5) +
@@ -35,6 +34,8 @@ plotdata_sub %>%
                                    hjust = 1,
                                    vjust = 0.5),
         axis.title.x = element_blank(),
-        axis.text = element_text(size = 12) )
+        axis.text = element_text(size = 12) ) +
+  xlab(bquote(CO[2]) )
+
 
 }

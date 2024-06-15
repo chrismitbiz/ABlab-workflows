@@ -5,16 +5,19 @@
 \documentclass[
 ]{book}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -44,13 +47,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -58,7 +61,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -67,7 +70,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -127,9 +130,9 @@
 \fi
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={Workflows for processing microbial amplicon sequences},
   pdfauthor={Christian Krohn, PhD, RMIT University},
@@ -138,7 +141,7 @@
 
 \title{Workflows for processing microbial amplicon sequences}
 \author{\href{https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian}{Christian Krohn, PhD, RMIT University}}
-\date{2023-01-05}
+\date{2024-06-15}
 
 \begin{document}
 \maketitle
@@ -147,8 +150,7 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\hypertarget{about}{%
-\chapter{About this GitBook}\label{about}}
+\chapter{About this GitBook}\label{about}
 
 \includegraphics{./img/vectorstock_23650232.jpg}
 
@@ -166,15 +168,22 @@ Everyone is at a different level in the journey to exploring microbial diversity
 
 \textbf{Get in touch}
 
-We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne. Email me or comment on the discussion section of the \href{https://github.com/chrismitbiz/ABlab-workflows/discussions/}{GitHub repository} for this GitBook. You will need to get a GitHub account to join the discussion. Its free.
+We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne and are part of the Industry-led \href{https://www.transformingbiosolids.org.au}{Biosolids Training Centre}. Email me or comment on the discussion section of the \href{https://github.com/chrismitbiz/ABlab-workflows/discussions/}{GitHub repository} for this GitBook. You will need to get a GitHub account to join the discussion. Its free.
 
-More about my PhD research can be found here: \url{https://clean-dirt-digests.netlify.app}.\\
+More about me and my PhD research can be found here: \url{https://clean-dirt-digests.netlify.app}.\\
+Follow me on \href{https://twitter.com/CleanDirtChris}{Twitter} or \href{https://www.linkedin.com/in/christian-krohn-54904855}{LinkedIn}. ~
 \includegraphics[width=1.5625in,height=\textheight]{./img/avatar.jpg}
+
+Bio:\\
+Dr Chris Krohn is an early career researcher whose interests could be summed up with: ``Environmental sequencing, microbial ecology, chlorinated pollutants, organic matter, wastewater, anaerobic digestion, and how everything connects''.
+
+In 2021 I joined the ARC Biosolids Training Centre at RMIT (www.transformingbiosolids.org.au), where we help water utilities to improve circular resource management by getting more renewable biogas and carbon/fertiliser values out of our municipal biosolids (essentially our poo). In project 1C of the Centre I develop metagenomic (DNA-based) methods to monitor the microbiome of anaerobic digestion, an important microbial treatment process for wastewater. I believe DNA-based diagnoses of wastewater sludges will help the water/biosolids sector improve resource recoveries and risk management.
+
+Before that, after a career in one of the most fast-cycled and short-sighted manufacturing industries that took me from Germany to Vietnam and Hong Kong/Shenzhen, I decided to hit the switch and start thinking long-term and circular. Ten back-to-uni years later, in 2021 I finished a PhD in Soil Science at La Trobe Uni where I sequenced soil DNA and explored if and how soil biology was involved in the degradation of extremely persistent legacy pesticides that contaminate agricultural surface soils since several decades.\\
 
 This work is licensed under a Creative Commons Attribution 4.0 International License.
 
-\hypertarget{some-fundamentals-by-dr-jen-wood}{%
-\chapter{Some fundamentals by Dr Jen Wood}\label{some-fundamentals-by-dr-jen-wood}}
+\chapter{Some fundamentals by Dr Jen Wood}\label{some-fundamentals-by-dr-jen-wood}
 
 \textbf{An introduction to alpha and beta diversity analysis and the pitfalls you need to know}
 
@@ -207,15 +216,13 @@ By \href{https://jenwoodmicro.wordpress.com}{Dr Jen WOOD} \textbar{} Microbial c
   Individual = Read = Sequence read
 \end{itemize}
 
-\hypertarget{alpha-diversity}{%
-\section{Alpha diversity}\label{alpha-diversity}}
+\section{Alpha diversity}\label{alpha-diversity}
 
 \textbf{Definition}: Alpha diversity~is the~diversity~of each site (local species pool).
 
 Common metrics such as Shannon-Wiener, Simpson diversity are affected by species \textbf{richness} and community \textbf{evenness}
 
-\hypertarget{richness}{%
-\subsection{Richness}\label{richness}}
+\subsection{Richness}\label{richness}
 
 Number of species (ASVs/ESVs) in a community.\\
 The more species rich a community is the more diverse that community is.
@@ -237,8 +244,7 @@ Just one is more crowded than the other\\
 
 Two communities with an identical OTU richness of 4 but with NO species in common \includegraphics{./img/animals_richness.png}\\
 
-\hypertarget{evenness}{%
-\subsection{Evenness}\label{evenness}}
+\subsection{Evenness}\label{evenness}
 
 How evenly individuals are distributed among the species in a community.\\
 The more even a community is the more diverse that community is.
@@ -256,8 +262,7 @@ Examples of how the number of individuals can be distributed among the species i
 
 \hfill\break
 
-\hypertarget{exercise}{%
-\subsection{Exercise}\label{exercise}}
+\subsection{Exercise}\label{exercise}
 
 For each pair of communities - which is more diverse and why?
 
@@ -281,8 +286,7 @@ From the top:
 In general MORE richness = MORE diversity\\
 And MORE evenness = MORE diversity
 
-\hypertarget{shannon-weiner-diversity}{%
-\subsection{Shannon-Weiner Diversity}\label{shannon-weiner-diversity}}
+\subsection{Shannon-Weiner Diversity}\label{shannon-weiner-diversity}
 
 The Richness and Evenness of a community contribute to its Diversity.\\
 This is a score that can be calculated a number of ways.\\
@@ -301,13 +305,13 @@ For this pair of communities - which is more diverse and why?
 \textbf{Example 1}\\
 
 \begin{longtable}[]{@{}
-  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2326}}
-  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.3140}}
-  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0698}}
-  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0930}}
-  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1395}}
-  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1512}}@{}}
-\toprule()
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}@{}}
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Species(i)
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -321,13 +325,14 @@ pi*Ln(pi)
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 -pi*Ln(pi)
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Geobacter spp. & 52 & 0.84 & -0.18 & -0.15 & 0.15 \\
 Desulfovibrio spp. & 7 & 0.11 & -2.18 & -0.25 & 0.25 \\
 Clostridium spp. & 2 & 0.03 & -3.43 & -0.11 & 0.11 \\
 Sum: & 62 & & & & 0.51 \\
-\bottomrule()
 \end{longtable}
 
 \hfill\break
@@ -335,13 +340,13 @@ Sum: & 62 & & & & 0.51 \\
 \textbf{Example 2}\\
 
 \begin{longtable}[]{@{}
-  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2326}}
-  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.3140}}
-  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0698}}
-  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0930}}
-  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1395}}
-  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1512}}@{}}
-\toprule()
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}@{}}
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Species
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -355,19 +360,19 @@ pi*Ln(pi)
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 -pi*Ln(pi)
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Geobacter spp. & 23 & 0.37 & -0.99 & -0.37 & 0.37 \\
 Desulfovibrio spp. & 27 & 0.44 & -0.83 & -0.36 & 0.36 \\
 Clostridium spp. & 12 & 0.19 & -1.64 & -0.32 & 0.32 \\
 Sum: & 62 & & & & 1.05 \\
-\bottomrule()
 \end{longtable}
 
 \hfill\break
 
-\hypertarget{beta-diversity}{%
-\section{Beta diversity}\label{beta-diversity}}
+\section{Beta diversity}\label{beta-diversity}
 
 \textbf{Definition}: The variation in species composition among sites.
 
@@ -397,20 +402,17 @@ It can also come from \textbf{species differences} (i.e.~community nestedness) d
 
 \hfill\break
 
-\hypertarget{species-replacement}{%
-\subsection{Species replacement}\label{species-replacement}}
+\subsection{Species replacement}\label{species-replacement}
 
 \includegraphics[width=5.72917in,height=\textheight]{./img/betatank_replace.png}\\
 
-\hypertarget{species-nestedness}{%
-\subsection{Species nestedness}\label{species-nestedness}}
+\subsection{Species nestedness}\label{species-nestedness}
 
 \includegraphics[width=5.72917in,height=\textheight]{./img/betatank_nest.png}\\
 
 ~
 
-\hypertarget{beta-diversity-analysis-workflow}{%
-\subsection{Beta diversity analysis workflow}\label{beta-diversity-analysis-workflow}}
+\subsection{Beta diversity analysis workflow}\label{beta-diversity-analysis-workflow}
 
 \includegraphics{./img/betaworkflow.png}\\
 
@@ -418,8 +420,7 @@ It can also come from \textbf{species differences} (i.e.~community nestedness) d
 
 \includegraphics{./img/betaviz.png}\\
 
-\hypertarget{nmnds-and-pcoa}{%
-\subsubsection{NMNDs and PCoA}\label{nmnds-and-pcoa}}
+\subsubsection{NMNDs and PCoA}\label{nmnds-and-pcoa}
 
 Exactly the same data in an NMDS and in a PCoA using Bray-Curtis metric: what's the difference?
 
@@ -483,8 +484,7 @@ Percentage of variation in the `data cloud'.
 
 \textbf{Cons:} Axis don't always explain lots of variation; communities that have ASV/ESV values that introduce large amounts of variation strongly influence the ordination, making patterns of other communities less visible; may need to remove these communities.\\
 
-\hypertarget{binary-transform}{%
-\subsubsection{Binary transform}\label{binary-transform}}
+\subsubsection{Binary transform}\label{binary-transform}
 
 Tells us about the influence of rare members and abundance on beta-diversity scores. Binary transformation helps determine why a community is (dis)similar.
 
@@ -503,8 +503,7 @@ Tells us about the influence of rare members and abundance on beta-diversity sco
 
 \includegraphics[width=5.72917in,height=\textheight]{./img/binarytranstank4.png}\\
 
-\hypertarget{testing-beta-diversity-permanova}{%
-\subsubsection{Testing Beta diversity: Permanova}\label{testing-beta-diversity-permanova}}
+\subsubsection{Testing Beta diversity: Permanova}\label{testing-beta-diversity-permanova}
 
 \begin{itemize}
 \item
@@ -525,16 +524,13 @@ Beta dispersion describes the spread of a set of points around a centroid.
 
 PERMANOVA can be sensitive to difference in beta-dispersion (so test for this too).
 
-\includegraphics[width=4.16667in,height=\textheight]{./img/dispersion.png}\\
+\includegraphics[width=5.20833in,height=\textheight]{./img/dispersion.png}\\
 
-\hypertarget{gettingstarted}{%
-\chapter{Getting started}\label{gettingstarted}}
+\chapter{Getting started}\label{gettingstarted}
 
-\hypertarget{before-you-can-analyse}{%
-\section{Before you can analyse}\label{before-you-can-analyse}}
+\section{Before you can analyse}\label{before-you-can-analyse}
 
-\hypertarget{get-access-to-computational-resources}{%
-\subsection{Get access to computational resources}\label{get-access-to-computational-resources}}
+\subsection{Get access to computational resources}\label{get-access-to-computational-resources}
 
 To process data you will need a personal computer or online computational resources with sufficient number of CPUs, working memory and storage. If you want to run most of the processing on a personal computer then I'd recommend a minimum of \textbf{4 CPUs, 16 Gb RAM and 500 Gb storage}. However, please note that some alignment tasks require more RAM, hence some of the steps (e.g.~taxonomic classifications) may require a more powerful resource. The advantage of using a personal computer is that you can frequently update the latest packages without relying on a university administrator to do that for you. Furthermore, with a personal computer you wont need to share with others, making it easier to run the packages without a workload manager.
 
@@ -548,25 +544,21 @@ In addition, there is the awesome \href{https://usegalaxy.org.au/}{Galaxy Austra
 
 This workbook will be based on using the Nectar Research cloud.
 
-\hypertarget{get-file-storage}{%
-\subsection{Get file storage}\label{get-file-storage}}
+\subsection{Get file storage}\label{get-file-storage}
 
 Working with sequencing data may require you do handle large amounts of data. From experience, a run of a 600µl pool (6-10pM) of amplicons in 2x301 Miseq cycles may produce around 10-20 Gb of FASTQ files. \href{https://sapac.support.illumina.com/bulletins/2018/01/approximate-sizes-of-sequencing-run-output-folders.html}{Much more} can be expected for NextSeq runs or for long-read sequencing.
 
 Once a Miseq run has finished it is typically available to download from the \href{https://basespace.illumina.com/dashboard}{Illumina Basespace} account. After a few runs, the data can accumulate quickly. Hence, \textbf{persistent storage space} may be required. With an Illumina Basespace account you get 1 TB of storage and you can keep a copy of the FASTQ file on your account. However, Basespace may delete your data if the account has been inactive for more than 6 months. But you will get reminder emails and all you need to do is to log in every now and then so Illumina wont delete your data. Alternatively, data can be upload onto a public repository for persistent storage, such as the \href{https://www.ncbi.nlm.nih.gov/sra}{Sequence Reads Archives}. If you have access to a research cloud or commercial computational resources then you may store data on those. Personally, I prefer a 1TB solid state harddrive.
 
-\hypertarget{learn-some-basic-command-line}{%
-\subsection{Learn some basic command Line}\label{learn-some-basic-command-line}}
+\subsection{Learn some basic command Line}\label{learn-some-basic-command-line}
 
 Many of the tools used are managed through command line. Cloud servers are also accessed through command line. That means there is no graphical user interphase and all commands, including installation and running of packages are done through lines of codes on a simple window interphase. This window is called Terminal (Mac, Linux) or Command Prompt application (Windows). There are lots of online sources to help you get started with command line. One example here: \url{https://towardsdatascience.com/a-quick-guide-to-using-command-line-terminal-96815b97b955}
 
-\hypertarget{get-a-data-storage-browser}{%
-\subsection{Get a data storage browser}\label{get-a-data-storage-browser}}
+\subsection{Get a data storage browser}\label{get-a-data-storage-browser}
 
 To upload, download, move, rename files on any cloud computer or high performance computer (HPC) at your institution, you will also require a cloud storage browser, such as \href{https://docs.cyberduck.io/}{Cyberduck} (Mac) or \href{https://www.putty.org/}{PuTTY} (Windows).
 
-\hypertarget{get-r-and-r-studio}{%
-\subsection{Get R and R studio}\label{get-r-and-r-studio}}
+\subsection{Get R and R studio}\label{get-r-and-r-studio}
 
 R has become an essential research language. If you want to progress in research it is almost inevitable for you to learn. Just do it. :). Perhaps start here if you dont know where else to start: \url{https://education.rstudio.com/learn/beginner/}. It lists some great step-by-step tutorials on how to install R and Rstudio and then explains the basics.
 
@@ -574,8 +566,7 @@ If you are like me, then you simply copy and paste code from other sites and see
 
 At the same time you will want to do short courses (eg. from edX \href{https://www.edx.org/course/data-science-r-basics}{Data Science: R Basics}) that delve a little deeper into different data structures such as data frames, matrices, lists and the syntax to arrange stuff. Over time you understand what different lines of code mean and can trouble shoot when things don't work. And things often don't work. You will get used to troubleshooting code :).
 
-\hypertarget{know-what-environment-managers-are}{%
-\subsection{Know what environment managers are}\label{know-what-environment-managers-are}}
+\subsection{Know what environment managers are}\label{know-what-environment-managers-are}
 
 Package and environment managers are extremely useful for your workflows. They help to install and run software packages such as qiime2, into individual `environments' independent of your operating system. The environment manager is installed once and from there you use it to install individual packages. The most commonly used environment manager is Conda. Learn more about it here: \url{https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html}
 
@@ -588,8 +579,7 @@ Once conda installed you can always check what environments are installed with t
 
 There are several other environment managers. We are also using \href{https://www.docker.com/}{Docker} in our work but the learning curve is a bit steeper so we wont get into it here.
 
-\hypertarget{explore-the-help-functions}{%
-\subsection{Explore the help functions}\label{explore-the-help-functions}}
+\subsection{Explore the help functions}\label{explore-the-help-functions}
 
 Packages such as qiime2 have great resources to help you understand how to run any of the available commands. For example if you dont know what input parameters are available for the qiime command\\
 \texttt{qiime\ feature-classifier\ classify-sklearn}, you can simply enter this command into your Terminal (with the qiime environment activated, if it is installed with Conda) and add a \texttt{-\/-help} at the end: \texttt{qiime\ feature-classifier\ classify-sklearn\ -\/-help}.
@@ -613,13 +603,11 @@ For example looking for \texttt{phyloseq} in the Help window gives this:\\
 
 \includegraphics{./img/helpR.png}
 
-\hypertarget{get-a-github-account}{%
-\subsection{Get a GitHub account}\label{get-a-github-account}}
+\subsection{Get a GitHub account}\label{get-a-github-account}
 
 This GitBook, including all its files, is hosted on one of my GitHub repositories (\url{https://github.com/chrismitbiz/ABlab-workflows}). If you have any comments you can ask a question on the Discussion Page of this repository. You require a GitHub account to do that. It is free.
 
-\hypertarget{a-note-on-rarefying-normalising}{%
-\section{A note on rarefying (normalising)}\label{a-note-on-rarefying-normalising}}
+\section{A note on rarefying (normalising)}\label{a-note-on-rarefying-normalising}
 
 By Dr Jen Wood and Dr Chris Krohn:\\
 Data normalisation is necessary because it is very difficult to collect exactly the same number of sequence reads for each sample. There is an arbitrary total read depth imposed by the instrument, which is a major confounder for distance or dissimilarity calculations and multivariate ordinations derived from these distances.
@@ -663,8 +651,7 @@ For our workflows we may \textbf{rarefy data} before creating \textbf{alpha dive
 
 Other types of normalisation methods should be considered for differential abundance analyses. My preference is to use \textbf{centred-log ratios} (Aitchison distances). The \textbf{compositional approach} and centred log-ratios are further discussed in the paper \href{https://doi.org/10.3389/fmicb.2017.02224}{Microbiome Datasets Are Compositional: And This Is Not Optional} (\citet{Gloor2017}). This type of transformation requires the removal of some of the rare ASVs to remove as many zeros from the abundance table as reasonable.
 
-\hypertarget{workflows-from-other-lab-groups}{%
-\section{Workflows from other lab groups}\label{workflows-from-other-lab-groups}}
+\section{Workflows from other lab groups}\label{workflows-from-other-lab-groups}
 
 The following review ``\emph{should serve as a starting point for considering what options are available}'': \href{https://www.frontiersin.org/articles/10.3389/fmicb.2017.01561/full}{Analysing microbial community composition through amplicon sequencing: from sampling to hypothesis testing} (\citet{Hugerth2017a}).
 
@@ -685,19 +672,16 @@ Furthermore, searching for ``amplicon-sequencing'' under ``Topics'' on GitHub ga
   \href{https://kasperskytte.github.io/ampvis2/articles/ampvis2.html}{Ampviz2} is an R-package to visualise and analyse 16S rRNA amplicon data. It is always more convenient to have packages that have the details and optics worked out for you. Like phyloseq, the ampviz2 package combines different tables from data (E.g. otu table, taxonomic table, phylogenetic tree, sample data etc) and then provides different functions to apply to that combined object to visualise the data.
 \end{itemize}
 
-\hypertarget{miseq-library-preps}{%
-\chapter{Miseq library preps}\label{miseq-library-preps}}
+\chapter{Miseq library preps}\label{miseq-library-preps}
 
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+\section{Introduction}\label{introduction}
 
 \textbf{Some info on getting your run ready}
 
 In our lab we usually prepare a 6-10 pM pool of libraries following the \href{https://sapac.support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/16s/16s-metagenomic-library-prep-guide-15044223-b.pdf}{16S Metagenomic Sequencing Library
 Preparation} protocol from Illumina with 10-30\% Phix. \textbf{Download it, study it and refer to it throughout your labwork}. This protocol is not limited to 16S amplicons. You can use it for fungal (e.g.~ITS) amplicons too. In the last section there are also valuable tips for pre‐PCR and post‐PCR lab procedures. There is also some additional Illumina guidance here: \url{https://sapac.support.illumina.com/downloads/16s_metagenomic_sequencing_library_preparation.html}
 
-\hypertarget{overview}{%
-\subsection{Overview}\label{overview}}
+\subsection{Overview}\label{overview}
 
 The protocol encompasses the following steps (copied out of the protocol):
 \includegraphics{./img/16Slibraryprotocolworkflow.png}
@@ -715,11 +699,9 @@ After all steps in the above protocol are completed, the Miseq will be loaded wi
 Throughout the 56 hours run you can check how things are tracking either on the BaseSpace website or the BaseSpace phone app. Understanding different QC metrics will help identifying potential problems with the pool or the instrument. It is important to note that this is a bit of a nerve-wrecking moment in the process, as it remains unclear until the metrics come through after around the 21st cycle, whether or not the run will be successful.\\
 \strut \\
 
-\hypertarget{workflow}{%
-\section{Workflow}\label{workflow}}
+\section{Workflow}\label{workflow}
 
-\hypertarget{dna-extraction}{%
-\subsection{DNA extraction}\label{dna-extraction}}
+\subsection{DNA extraction}\label{dna-extraction}
 
 \begin{figure}
 \centering
@@ -752,8 +734,7 @@ Sludge
   \strut \\
 \end{itemize}
 
-\hypertarget{dna-quality-and-concentration}{%
-\subsection{DNA quality and concentration}\label{dna-quality-and-concentration}}
+\subsection{DNA quality and concentration}\label{dna-quality-and-concentration}
 
 Once you have extracted DNA it is necessary to confirm its quality and concentration.
 
@@ -779,8 +760,7 @@ Once you have extracted DNA it is necessary to confirm its quality and concentra
 \caption{``The ready-mix working solution for Qubit, which includes dye and buffer. No preparation/premixing required.''}
 \end{figure}
 
-\hypertarget{dna-normalisation}{%
-\subsection{DNA normalisation}\label{dna-normalisation}}
+\subsection{DNA normalisation}\label{dna-normalisation}
 
 The next step is to normalise all DNA extracts to 5 ng/µl.
 
@@ -794,8 +774,7 @@ The next step is to normalise all DNA extracts to 5 ng/µl.
   \strut \\
 \end{itemize}
 
-\hypertarget{first-and-second-pcr---amplicon-pcr-and-indexing-pcr}{%
-\subsection{First and second PCR - Amplicon PCR and Indexing PCR}\label{first-and-second-pcr---amplicon-pcr-and-indexing-pcr}}
+\subsection{First and second PCR - Amplicon PCR and Indexing PCR}\label{first-and-second-pcr---amplicon-pcr-and-indexing-pcr}
 
 Follow the \href{https://sapac.support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/16s/16s-metagenomic-library-prep-guide-15044223-b.pdf}{16S Metagenomic Sequencing Library
 Preparation} Guide. Include a negative control and sequence that as well. This allows you to assess background and cross contamination. The whole workflow is best done in 96-well plates, using multi-channel pipettes to avoid indexing mistakes across wells.
@@ -825,8 +804,7 @@ Repeat any samples that failed, i.e.~that do not show any bands, and ensure you 
 
 \hfill\break
 
-\hypertarget{normalisation-of-indexed-amplicons}{%
-\subsection{Normalisation of indexed amplicons}\label{normalisation-of-indexed-amplicons}}
+\subsection{Normalisation of indexed amplicons}\label{normalisation-of-indexed-amplicons}
 
 After you finished all PCR work it is time to do another round of Qubitting and normalisation of all samples into a new 96-well plate. The final pool should be 4 nM but we prefer to normalise DNA to a higher concentration first, say 10 nM, then pool and then dilute the pool to 4 nM afterwards.\\
 We are using a very handy excel sheet, which was kindly developed and provided by \href{https://scholars.latrobe.edu.au/sknowler}{Sarah Knowler} at La Trobe University to prepare and assist in normalisations, converting from ng/µl to nM using the formula:
@@ -837,8 +815,7 @@ Contact us if you would like to get a copy of this very handy library preparatio
 Some more information here: \url{https://support.illumina.com/content/dam/illumina-support/documents/documentation/system_documentation/miseq/miseq-denature-dilute-libraries-guide-15039740-10.pdf}. There's also a pooling calculator here \url{https://support.illumina.com/help/pooling-calculator/pooling-calculator.htm} which may be helpful with your calculations.\\
 \strut \\
 
-\hypertarget{pooling}{%
-\subsection{Pooling}\label{pooling}}
+\subsection{Pooling}\label{pooling}
 
 \begin{itemize}
 \item
@@ -855,8 +832,7 @@ Some more information here: \url{https://support.illumina.com/content/dam/illumi
   \hfill\break
 \end{itemize}
 
-\hypertarget{denaturing-of-pool-and-loading-of-the-miseq}{%
-\subsection{Denaturing of pool and loading of the Miseq}\label{denaturing-of-pool-and-loading-of-the-miseq}}
+\subsection{Denaturing of pool and loading of the Miseq}\label{denaturing-of-pool-and-loading-of-the-miseq}
 
 Now you are almost ready load the Miseq. The last steps are done right before you plan to load the instrument. First the pool DNA needs to be denatured and diluted further to your preferred loading concentration (6 - 10 pM) before it is mixed with PhiX. The final concentrations impact on cluster densities. That means you get more data with higher concentrations but that is at the expense of potential errors during sequencing at high cluster densities. We recommend to aim for a cluster density of around 900-1000 K/mm\textsuperscript{2}, which may be achieved with a concentration of around 7-8 pM.
 
@@ -885,8 +861,7 @@ The key for the final steps are that..
 \caption{``Example of a manifest file''}
 \end{figure}
 
-\hypertarget{consumables}{%
-\subsection{Consumables}\label{consumables}}
+\subsection{Consumables}\label{consumables}
 
 All consumables and equipment required for the 16S Miseq library prep protocol are available from page 21 of the above mentioned \href{https://sapac.support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/16s/16s-metagenomic-library-prep-guide-15044223-b.pdf}{16S Metagenomic Sequencing Library
 Preparation} Guide.\\
@@ -923,16 +898,13 @@ Optical Plate Seals & V7840 & Promega & For PCR\\
 \end{tabular}
 \end{table}
 
-\hypertarget{miseqtoqiime}{%
-\chapter{From BaseSpace to Qiime2 and DADA2}\label{miseqtoqiime}}
+\chapter{From BaseSpace to Qiime2 and DADA2}\label{miseqtoqiime}
 
-\hypertarget{introduction-1}{%
-\section{Introduction}\label{introduction-1}}
+\section{Introduction}\label{introduction-1}
 
 In this chapter you will learn how to process the FASTQ files that are generated from an amplicon sequencing run on a Miseq instrument. We are using Qiime2. Please also refer to the extensive documentation and tutorials available at \url{https://qiime2.org}. You can learn almost everything there.
 
-\hypertarget{prerequisites-and-required-files}{%
-\subsection{Prerequisites and required files}\label{prerequisites-and-required-files}}
+\subsection{Prerequisites and required files}\label{prerequisites-and-required-files}
 
 \begin{itemize}
 \tightlist
@@ -955,7 +927,7 @@ In this chapter you will learn how to process the FASTQ files that are generated
 It might take some time to compile the import manifest. Each file path has to be exact. However, in case you made a mistake in the file names etc, Qiime is generally pretty good at reporting where the error occured.
 
 \begin{table}
-
+\centering
 \caption{\label{tab:qiimeimport}Example of a qiime import manifest.tsv file}
 \centering
 \fontsize{10}{12}\selectfont
@@ -983,25 +955,25 @@ PT-06 & /pvol/Sequences/20220622\_PrimerTrial\_RMIT/PT-06\_S6\_L001\_R1\_001.fas
 \texttt{samplesheet.tsv} - file containing sample metadata. This file should contain all other environmental measurements you may have done on each sample (pH, EC\ldots), which you want to relate to microbial taxonomy and composition. The same file and format will be used to import metadata into the R package Phyloseq later too.
 
 \begin{table}
-
+\centering
 \caption{\label{tab:metadata}Example of a samplesheet.tsv file}
 \centering
 \fontsize{10}{12}\selectfont
-\begin{tabular}[t]{l|l|l|l|l|l|l}
+\begin{tabular}[t]{l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l}
 \hline
-\#SampleID & \#Sludge & WWTP & SludgeType & PMA\_treat & Rep\_bio & Sludgecollection\\
+\#SampleID & \#Sludge & \#SampleID2 & \#SampleID3 & WWTP & Digester & SludgeType & \#Primer & PrimerName & PMA\_treat & \#ExtractionID & Rep\_bio & Rep\_tech & \#SludgeSplID & Sludgecollection & SampleRequestID & \#UniqueID2\\
 \hline
-\#q2:types & categorical & categorical & categorical & categorical & numeric & categorical\\
+\#q2:types & categorical & categorical & categorical & categorical & categorical & categorical & numeric & categorical & categorical & categorical & numeric & numeric & categorical & categorical & categorical & categorical\\
 \hline
-PT-01 & 1 & ETP5 & Meso & NoPMA & 1 & 9/5/2022\\
+PT-01 & 1 & ARCSR\_02\_Meso\_01 & ARCSR\_02\_Meso\_01V4\_UNoPMA & ETP5 & ETP5 & Meso & 1 & V4\_U & NoPMA & ARCSR\_02\_Meso\_01 & 1 & 1 & NA & 9/5/2022 & ARCSR\_02 & PT\_001\\
 \hline
-PT-02 & 1 & ETP5 & Meso & NoPMA & 2 & 9/5/2022\\
+PT-02 & 1 & ARCSR\_02\_Meso\_02 & ARCSR\_02\_Meso\_02V4\_UNoPMA & ETP5 & ETP5 & Meso & 1 & V4\_U & NoPMA & ARCSR\_02\_Meso\_02 & 2 & 1 & NA & 9/5/2022 & ARCSR\_02 & PT\_002\\
 \hline
-PT-03 & 1 & ETP5 & Meso & NoPMA & 3 & 9/5/2022\\
+PT-03 & 1 & ARCSR\_02\_Meso\_03 & ARCSR\_02\_Meso\_03V4\_UNoPMA & ETP5 & ETP5 & Meso & 1 & V4\_U & NoPMA & ARCSR\_02\_Meso\_03 & 3 & 1 & NA & 9/5/2022 & ARCSR\_02 & PT\_003\\
 \hline
-PT-04 & 1 & ETP5 & Meso & NoPMA & 4 & 9/5/2022\\
+PT-04 & 1 & ARCSR\_02\_Meso\_04 & ARCSR\_02\_Meso\_04V4\_UNoPMA & ETP5 & ETP5 & Meso & 1 & V4\_U & NoPMA & ARCSR\_02\_Meso\_04 & 4 & 1 & NA & 9/5/2022 & ARCSR\_02 & PT\_004\\
 \hline
-PT-05 & 1 & ETP5 & Meso & NoPMA & 5 & 9/5/2022\\
+PT-05 & 1 & ARCSR\_02\_Meso\_05 & ARCSR\_02\_Meso\_05V4\_UNoPMA & ETP5 & ETP5 & Meso & 1 & V4\_U & NoPMA & ARCSR\_02\_Meso\_05 & 5 & 1 & NA & 9/5/2022 & ARCSR\_02 & PT\_005\\
 \hline
 \end{tabular}
 \end{table}
@@ -1046,11 +1018,9 @@ echo "Finished at: $(date)"
 
 Slurm and \texttt{sbatch} are not needed if you manage your own computer or your `own' cloud computer. In the example below we are using a Linux cloud computer, provided by the Nectar Research Cloud so we dont need Slurm.
 
-\hypertarget{workflow-1}{%
-\section{Workflow}\label{workflow-1}}
+\section{Workflow}\label{workflow-1}
 
-\hypertarget{download-fastq-files}{%
-\subsection{Download FASTQ files}\label{download-fastq-files}}
+\subsection{Download FASTQ files}\label{download-fastq-files}
 
 In this example, Fastq files were produced from sequencing 16SrRNA marker genes on an Illumina Miseq instrument. If you ran your own library on your own BaseSpace account, the files should be available to download from that BaseSpace account. If the run was created by another user, that person can invite you to the run, which gives you access to download the files too.
 
@@ -1062,8 +1032,7 @@ Log in to BaseSpace and into your project. Go to files, run and download FastQ. 
 
 The FASTQ files will come in separate folders for each sample. It is necessary to move all files into just ONE folder. That folder will then be used to import the sequences into a qiime object (described below).
 
-\hypertarget{paired-end-manifest-import-step-1}{%
-\subsection{Paired end manifest import (Step 1)}\label{paired-end-manifest-import-step-1}}
+\subsection{Paired end manifest import (Step 1)}\label{paired-end-manifest-import-step-1}
 
 Go to the folder that contains all the FASTQ files (all files in one folder). I.e. in Unix/Linux use \texttt{cd\ path/to/folder/} to navigate to it. The scriptfile.txt should also be located here. The following qiime command that will look for the files and then create a qiime object using the sequences found in each FASTQ file. The \texttt{-\/-output-path} instructs qiime where to place and how to name the output file, here demux-paired-end.qza is placed into the same directory.\\
 Remove any \# in front of your code (already removed in the below example) and execute the scriptfile.txt with \texttt{sh\ scriptfile.txt} (or \texttt{sbatch\ scriptfile.txt} in case you are using Slurm).
@@ -1077,8 +1046,7 @@ qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' \
 
 \hfill\break
 
-\hypertarget{cutadapt-step-2}{%
-\subsection{Cutadapt (Step 2)}\label{cutadapt-step-2}}
+\subsection{Cutadapt (Step 2)}\label{cutadapt-step-2}
 
 If all goes well you should now have a demux-paired-end.qza file in the same directory as your FASTQ files , which contains all your sequences. You could move demux-paired-end.qza to another folder and continue all other steps there if you wish. The FASTQ files are not needed anymore. Dont forget to move your script file to where it is most convenient for executing the commands. If you moved the demux-paired-end.qza to another folder it is probably easiest to also move the script file that the same directory (or create a second script file containing the remaining commands).
 
@@ -1096,8 +1064,7 @@ qiime cutadapt trim-paired \
 
 \hfill\break
 
-\hypertarget{read-quality-assessment}{%
-\subsection{Read quality assessment}\label{read-quality-assessment}}
+\subsection{Read quality assessment}\label{read-quality-assessment}
 
 \textbf{Visualise the output with a .qzv file}
 
@@ -1139,8 +1106,7 @@ So, for example, if we picked \texttt{-\/-p-trunc-len-f\ 272} and \texttt{-\/-p-
 
 In cases where the quality of the reverse reads is very poor, or the amplicon is too long for pairing to work, it is also acceptable to import, trim and denoise only the forward reads. The V4 primer of this example, is nice and short at 292 basepairs, so is great for pairing even at lower reverse-read qualities.
 
-\hypertarget{denoise-paired-end-sequences-with-dada2-step-3}{%
-\subsection{Denoise paired end sequences with dada2 (Step 3)}\label{denoise-paired-end-sequences-with-dada2-step-3}}
+\subsection{Denoise paired end sequences with dada2 (Step 3)}\label{denoise-paired-end-sequences-with-dada2-step-3}
 
 Once the trimming and max-ee parameters are decided, it is time to run the DADA2 function. This may take a while, depending on total number of samples.
 
@@ -1179,8 +1145,7 @@ qiime feature-table summarize \
 
 \hfill\break
 
-\hypertarget{taxonomic-classifier-and-assignment-step-4}{%
-\subsection{Taxonomic classifier and assignment (Step 4)}\label{taxonomic-classifier-and-assignment-step-4}}
+\subsection{Taxonomic classifier and assignment (Step 4)}\label{taxonomic-classifier-and-assignment-step-4}
 
 The next step is to assign taxonomies to the sequences in the denoised sample sequences. Here, we use a pre-trained classifier that is based on the Silva database. This pre-trained classifier is available on the data resource page of Qiime (Most current link at the time of writing: \url{https://docs.qiime2.org/2022.2/data-resources}).
 
@@ -1206,8 +1171,7 @@ qiime metadata tabulate \
 
 \hfill\break
 
-\hypertarget{build-phylogenetic-tree-step-5}{%
-\subsection{Build phylogenetic tree (Step 5)}\label{build-phylogenetic-tree-step-5}}
+\subsection{Build phylogenetic tree (Step 5)}\label{build-phylogenetic-tree-step-5}
 
 The next step is not essential but really good to have. Creating a phylogenetic tree from the amplicon sequences.
 
@@ -1238,8 +1202,7 @@ Everything else including further quality filtering happens with \texttt{phylose
 
 This will be covered in the next chapter.
 
-\hypertarget{all-steps-combined}{%
-\subsection{All steps combined}\label{all-steps-combined}}
+\subsection{All steps combined}\label{all-steps-combined}
 
 Copy and paste this into your script file if needed.
 
@@ -1305,11 +1268,9 @@ qiime fragment-insertion filter-features \
 Qiime2 reference:\\
 Bolyen E, Rideout JR, Dillon MR, Bokulich NA, Abnet CC, Al-Ghalith GA, Alexander H, Alm EJ, Arumugam M, Asnicar F, Bai Y, Bisanz JE, Bittinger K, Brejnrod A, Brislawn CJ, Brown CT, Callahan BJ, Caraballo-Rodríguez AM, Chase J, Cope EK, Da Silva R, Diener C, Dorrestein PC, Douglas GM, Durall DM, Duvallet C, Edwardson CF, Ernst M, Estaki M, Fouquier J, Gauglitz JM, Gibbons SM, Gibson DL, Gonzalez A, Gorlick K, Guo J, Hillmann B, Holmes S, Holste H, Huttenhower C, Huttley GA, Janssen S, Jarmusch AK, Jiang L, Kaehler BD, Kang KB, Keefe CR, Keim P, Kelley ST, Knights D, Koester I, Kosciolek T, Kreps J, Langille MGI, Lee J, Ley R, Liu YX, Loftfield E, Lozupone C, Maher M, Marotz C, Martin BD, McDonald D, McIver LJ, Melnik AV, Metcalf JL, Morgan SC, Morton JT, Naimey AT, Navas-Molina JA, Nothias LF, Orchanian SB, Pearson T, Peoples SL, Petras D, Preuss ML, Pruesse E, Rasmussen LB, Rivers A, Robeson MS, Rosenthal P, Segata N, Shaffer M, Shiffer A, Sinha R, Song SJ, Spear JR, Swafford AD, Thompson LR, Torres PJ, Trinh P, Tripathi A, Turnbaugh PJ, Ul-Hasan S, van der Hooft JJJ, Vargas F, Vázquez-Baeza Y, Vogtmann E, von Hippel M, Walters W, Wan Y, Wang M, Warren J, Weber KC, Williamson CHD, Willis AD, Xu ZZ, Zaneveld JR, Zhang Y, Zhu Q, Knight R, and Caporaso JG. 2019. Reproducible, interactive, scalable and extensible microbiome data science using QIIME 2. Nature Biotechnology 37: 852--857. \url{https://doi.org/10.1038/s41587-019-0209-9}
 
-\hypertarget{Qiime2R}{%
-\chapter{From Qiime2 into R - Initial diagnostics}\label{Qiime2R}}
+\chapter{From Qiime2 into R - Initial diagnostics}\label{Qiime2R}
 
-\hypertarget{introduction-2}{%
-\section{Introduction}\label{introduction-2}}
+\section{Introduction}\label{introduction-2}
 
 In this chapter you will learn how to import Qiime2-produced ASV tables, taxonomy tables and tree files into R. For this exercise we will us publicly available FastQ files that were generated by a research group in Denmark. The files are available in the Sequence Read Archives (SRA) under accession number PRJNA645373.\\
 Reference: {[}1{]} C. Jiang, S.J. McIlroy, R. Qi, F. Petriglieri, E. Yashiro, Z. Kondrotaite, P.H. Nielsen, Identification of microorganisms responsible for foam formation in mesophilic anaerobic digesters treating surplus activated sludge, Water Res. 191 (2021) 116779. \url{https://doi.org/10.1016/j.watres.2020.116779}.
@@ -1349,11 +1310,9 @@ Now let's work in R!
   \hfill\break
 \end{itemize}
 
-\hypertarget{workflow-2}{%
-\section{Workflow}\label{workflow-2}}
+\section{Workflow}\label{workflow-2}
 
-\hypertarget{packages}{%
-\subsection{Packages}\label{packages}}
+\subsection{Packages}\label{packages}
 
 First install the required packages. Some packages are stored on `remote' repositories such as GitHub, hence before you can install them you need helper packages such as \texttt{remotes}. Other packages, such as \texttt{phyloseq} are managed by BioConductor project. They provide their own package manager package for R called \texttt{BiocManager}, which helps to install from the same release.
 
@@ -1380,8 +1339,7 @@ Once the packages are installed, load them into your working space.
 
 \hfill\break
 
-\hypertarget{import-qiime-files-and-create-a-phyloseq-object}{%
-\subsection{Import qiime-files and create a phyloseq object}\label{import-qiime-files-and-create-a-phyloseq-object}}
+\subsection{Import qiime-files and create a phyloseq object}\label{import-qiime-files-and-create-a-phyloseq-object}
 
 Now that packages are loaded we can import the Qiime2 \texttt{.qza} and the \texttt{.tsv} files. The aim is to import everything as R objects, which are then combined into one phyloseq object. Once we have a phyloseq object, any filtering and visualisations can be run from the one object.
 
@@ -1472,8 +1430,7 @@ If you wish, you can access each individual data set from the ps object with fun
 
 \hfill\break
 
-\hypertarget{save-the-ps-object-as-an-.rds-file-into-your-working-directory}{%
-\subsection{\texorpdfstring{Save the \texttt{ps} object as an \texttt{.rds} file into your working directory}{Save the ps object as an .rds file into your working directory}}\label{save-the-ps-object-as-an-.rds-file-into-your-working-directory}}
+\subsection{\texorpdfstring{Save the \texttt{ps} object as an \texttt{.rds} file into your working directory}{Save the ps object as an .rds file into your working directory}}\label{save-the-ps-object-as-an-.rds-file-into-your-working-directory}
 
 Optional\\
 This step allows you to save and store the R object as a RDS file and load it back into any future R environment, should you require it. This would be helpful if your workflow is separated into different Rscripts and you want to just load in the RDS file instead of having to import qiime files and create the phyloseq object every time.
@@ -1487,8 +1444,7 @@ This step allows you to save and store the R object as a RDS file and load it ba
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{initial-filtering}{%
-\subsection{Initial filtering}\label{initial-filtering}}
+\subsection{Initial filtering}\label{initial-filtering}
 
 Keep the orginal \texttt{ps} object unchanged. Create new objects for subsequent filtering steps.
 
@@ -1548,8 +1504,7 @@ Then filter out any phyla that came up as uncharacterized and taxa that came up 
 
 \hfill\break
 
-\hypertarget{proportion-of-asvs-identified}{%
-\subsection{Proportion of ASVs identified}\label{proportion-of-asvs-identified}}
+\subsection{Proportion of ASVs identified}\label{proportion-of-asvs-identified}
 
 Check what proportion of ASVs could be identified on phylum and genus-level. This is best done with the handy phyloseq function \texttt{ntaxa()}, which gives the number of taxa present in the phyloseq object.
 
@@ -1582,8 +1537,7 @@ It is also an indicator of how well the database you have been using (e.g.~Silva
 ## [1] 0.940256
 \end{verbatim}
 
-\hypertarget{rarefaction-curve}{%
-\subsection{Rarefaction curve}\label{rarefaction-curve}}
+\subsection{Rarefaction curve}\label{rarefaction-curve}
 
 Check if you cover enough depth for diversity analyses. Some samples may have low species richness, including a negative or samples that failed during PCR for example. The rarefaction curve will help assess which samples you may have to exclude from subsequent diversity calculations. It also provides a general view if samples cover enough of the potential richness (Number of ASVs).
 
@@ -1646,8 +1600,7 @@ In this example, we are keeping the sample with lowest reads. No further filteri
 
 \hfill\break
 
-\hypertarget{prevalence-table}{%
-\subsection{Prevalence table}\label{prevalence-table}}
+\subsection{Prevalence table}\label{prevalence-table}
 
 Create a prevalence table to get an overview of phyla with low to high prevalence.
 
@@ -1916,8 +1869,7 @@ MBNT15 & 1.0 & 2 & 0.0 & 100.0\\
 \endgroup{}
 \end{table}
 
-\hypertarget{export-asv-and-taxa-tables-to-excel}{%
-\subsection{Export ASV and taxa tables to Excel}\label{export-asv-and-taxa-tables-to-excel}}
+\subsection{Export ASV and taxa tables to Excel}\label{export-asv-and-taxa-tables-to-excel}
 
 This might be useful if you would like to share your abundance and taxa tables with someone that does not use R.
 
@@ -1944,15 +1896,13 @@ This might be useful if you would like to share your abundance and taxa tables w
 \textbf{Note:}\\
 This code is an amalgamation from various sources. Apart from putting it together into this workflow I do not take credit for it.
 
-\hypertarget{plottingdiversity}{%
-\chapter{Plotting diversity}\label{plottingdiversity}}
+\chapter{Plotting diversity}\label{plottingdiversity}
 
 \includegraphics{./img/nmds-1.png}
 
 Some visualisations of alpha and beta diversity.
 
-\hypertarget{introduction-3}{%
-\section{Introduction}\label{introduction-3}}
+\section{Introduction}\label{introduction-3}
 
 This chapter introduces you to a basic workflow for plotting alpha and beta diversity using phyloseq and ggplot. It provides examples for loading the phyloseq object from a previously saved .rds file, then how to calculate and include alpha diversity metrics into the sample\_data of the phyloseq object, and finally how to plot some of these metrics, individually or combined.
 
@@ -1970,8 +1920,7 @@ Other normalisation methods (see Chapter \ref{gettingstarted}) are also possible
 My preference is to use centred-log ratios (Aitchison distances). Aitchison distances are used in the workflow below for the PCA and RDA. The compositional approach and centred log-ratios are further discussed in the paper \href{https://doi.org/10.3389/fmicb.2017.02224}{Microbiome Datasets Are Compositional: And This Is Not Optional} (\citet{Gloor2017}).\\
 In fact, comparing the results after applying different types of normalisation methods, dissimilarities or distances may complement your analysis and help in interpretation of data.
 
-\hypertarget{required-files}{%
-\subsection{Required files}\label{required-files}}
+\subsection{Required files}\label{required-files}
 
 \begin{itemize}
 \tightlist
@@ -1983,11 +1932,9 @@ In fact, comparing the results after applying different types of normalisation m
 
 Time to get started\ldots{}
 
-\hypertarget{workflow-3}{%
-\section{Workflow}\label{workflow-3}}
+\section{Workflow}\label{workflow-3}
 
-\hypertarget{packages-1}{%
-\subsection{Packages}\label{packages-1}}
+\subsection{Packages}\label{packages-1}
 
 Install the following packages if not already.
 
@@ -2005,8 +1952,7 @@ Install the following packages if not already.
 
 \hfill\break
 
-\hypertarget{load-phyloseq-object}{%
-\subsection{Load phyloseq object}\label{load-phyloseq-object}}
+\subsection{Load phyloseq object}\label{load-phyloseq-object}
 
 For detail on how to create a phyloseq object please see chapter \ref{Qiime2R}.
 
@@ -2060,8 +2006,7 @@ There are 15 columns containing some character (chr), factor or integer (int) va
 
 \hfill\break
 
-\hypertarget{pre-filter-rarefy-and-calculate-diversity}{%
-\subsection{Pre-filter, rarefy and calculate diversity}\label{pre-filter-rarefy-and-calculate-diversity}}
+\subsection{Pre-filter, rarefy and calculate diversity}\label{pre-filter-rarefy-and-calculate-diversity}
 
 Now the diversity indices can be calculated and added to the metadata of the phyloseq object for plotting. First, the abundances are pre-filtered (as shown in the previous chapter), then the ASV abundances are randomly resampled with \texttt{phyloseq::rarefy\_even\_depth}, such that all samples have the same number of ASVs.\\
 The diversity indices are then calculated with \texttt{phyloseq::estimate\_richness} based on these evenly resampled abundances. The dataframe that is created containing the range of indices is then added to the existing metadata of the phyloseq for plotting.
@@ -2185,8 +2130,7 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
 ##  $ pielou_ev      : num  0.834 0.825 0.861 0.857 0.843 ...
 \end{verbatim}
 
-\hypertarget{colors}{%
-\subsection{Colors}\label{colors}}
+\subsection{Colors}\label{colors}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2213,8 +2157,7 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
 ##     "#8E44AD"     "#E74C3C"
 \end{verbatim}
 
-\hypertarget{richness-1}{%
-\subsection{Richness}\label{richness-1}}
+\subsection{Richness}\label{richness-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2239,8 +2182,7 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
 
 \includegraphics{gitbook-demo_files/figure-latex/richness-1.pdf}
 
-\hypertarget{shannon}{%
-\subsection{Shannon}\label{shannon}}
+\subsection{Shannon}\label{shannon}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2266,8 +2208,7 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
 
 \includegraphics{gitbook-demo_files/figure-latex/shannon-1.pdf}
 
-\hypertarget{pielous-evenness}{%
-\subsection{Pielou's evenness}\label{pielous-evenness}}
+\subsection{Pielou's evenness}\label{pielous-evenness}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2293,8 +2234,7 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
 
 \includegraphics{gitbook-demo_files/figure-latex/pielou-1.pdf}
 
-\hypertarget{combined-plotting}{%
-\subsection{Combined plotting}\label{combined-plotting}}
+\subsection{Combined plotting}\label{combined-plotting}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2309,8 +2249,7 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
 
 \hfill\break
 
-\hypertarget{nmds}{%
-\subsection{NMDS}\label{nmds}}
+\subsection{NMDS}\label{nmds}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2343,8 +2282,7 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
 
 \includegraphics{gitbook-demo_files/figure-latex/nmds-1.pdf}
 
-\hypertarget{pca}{%
-\subsection{PCA}\label{pca}}
+\subsection{PCA}\label{pca}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2381,8 +2319,7 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
 
 \hfill\break
 
-\hypertarget{rda}{%
-\subsection{RDA}\label{rda}}
+\subsection{RDA}\label{rda}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2485,8 +2422,7 @@ The diversity indices are then calculated with \texttt{phyloseq::estimate\_richn
 
 \hfill\break
 
-\hypertarget{unweighted-unifrac}{%
-\subsection{Unweighted uniFrac}\label{unweighted-unifrac}}
+\subsection{Unweighted uniFrac}\label{unweighted-unifrac}
 
 UniFrac distances are derived from phylogenetic distances between ASVs, which means that a phylogenetic tree needs to be included into the phyloseq object.
 
@@ -2517,8 +2453,7 @@ UniFrac distances are derived from phylogenetic distances between ASVs, which me
 
 \includegraphics{gitbook-demo_files/figure-latex/unifrac-1.pdf}
 
-\hypertarget{combined-plotting-1}{%
-\subsection{Combined plotting}\label{combined-plotting-1}}
+\subsection{Combined plotting}\label{combined-plotting-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2534,8 +2469,7 @@ UniFrac distances are derived from phylogenetic distances between ASVs, which me
 
 \hfill\break
 
-\hypertarget{save-plots-to-png-and-pdf}{%
-\subsection{Save plots to png and pdf}\label{save-plots-to-png-and-pdf}}
+\subsection{Save plots to png and pdf}\label{save-plots-to-png-and-pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2551,18 +2485,15 @@ UniFrac distances are derived from phylogenetic distances between ASVs, which me
 \textbf{Note:}
 This code is an amalgamation from various sources. Apart from putting it together into a pipeline I do not take credit for it.
 
-\hypertarget{plottingtaxa}{%
-\chapter{Plotting taxonomy}\label{plottingtaxa}}
+\chapter{Plotting taxonomy}\label{plottingtaxa}
 
 \includegraphics{./img/phylumplot.png}
 
-\hypertarget{introduction-4}{%
-\section{Introduction}\label{introduction-4}}
+\section{Introduction}\label{introduction-4}
 
 In this chapter you will learn how to plot a custom taxa barplot to compare relative abundances between different sets of samples or treatments.
 
-\hypertarget{required-files-or-objects}{%
-\subsection{Required files or objects}\label{required-files-or-objects}}
+\subsection{Required files or objects}\label{required-files-or-objects}
 
 \begin{itemize}
 \tightlist
@@ -2572,11 +2503,9 @@ In this chapter you will learn how to plot a custom taxa barplot to compare rela
   If you dont have your own data you can download the pre-saved \texttt{.rds} object from Chapter \ref{Qiime2R} and follow the below steps: \href{./ps_ProjectX_2022July}{ps\_ProjectX\_2022July}. This object is based on publicly available data from anaerobic sludge of Danish wastewater treatment plants.
 \end{itemize}
 
-\hypertarget{workflow-4}{%
-\section{Workflow}\label{workflow-4}}
+\section{Workflow}\label{workflow-4}
 
-\hypertarget{packages-2}{%
-\subsection{Packages}\label{packages-2}}
+\subsection{Packages}\label{packages-2}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2588,8 +2517,7 @@ In this chapter you will learn how to plot a custom taxa barplot to compare rela
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{load-phyloseq-object-1}{%
-\subsection{Load phyloseq object}\label{load-phyloseq-object-1}}
+\subsection{Load phyloseq object}\label{load-phyloseq-object-1}
 
 Do this if you saved a phyloseq object in .rds format before. Otherwise create a phyloseq object as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.
 
@@ -2609,8 +2537,7 @@ Do this if you saved a phyloseq object in .rds format before. Otherwise create a
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{check-metadata-contained-in-the-phyloseq-object.}{%
-\subsection{Check metadata contained in the phyloseq object.}\label{check-metadata-contained-in-the-phyloseq-object.}}
+\subsection{Check metadata contained in the phyloseq object.}\label{check-metadata-contained-in-the-phyloseq-object.}
 
 Now lets check which columns in the metadata contain factors. Factors enable you to determine the order of categorical data, such as treatments, in the ggplots. Learn more about factors here: \url{https://swcarpentry.github.io/r-novice-inflammation/12-supp-factors/index.html}.
 
@@ -2643,8 +2570,7 @@ In this case, the columns \texttt{Reactor} and \texttt{Location} contain factors
 ##  $ Location       : Factor w/ 12 levels "Avedoere","Damhusaaen",..: 4 11 5 12 12 12 12 2 11 11 ...
 \end{verbatim}
 
-\hypertarget{colors-1}{%
-\subsection{Colors}\label{colors-1}}
+\subsection{Colors}\label{colors-1}
 
 Before you create ggplots to compare taxonomic compositions between samples and treatments it is helpful to create a named color vector that will apply to all your plots and ensures that each taxonomic name is a specific color across all your plots.
 
@@ -2737,8 +2663,7 @@ First create a vector of all possible taxonomic names that could be included in 
 ##                     "#E493B4"                     "#E494AD"
 \end{verbatim}
 
-\hypertarget{pre-filtering}{%
-\subsection{Pre-filtering}\label{pre-filtering}}
+\subsection{Pre-filtering}\label{pre-filtering}
 
 Some arbitrary quality filtering of individual ASVs. For example, here we choose to remove ASVs that have very few reads (i.e.~less than 5 counts). Use the \texttt{prune\_taxa()} function from phyloseq to filter taxa or the \texttt{prune\_samples()} function to filter selected samples.
 
@@ -2769,8 +2694,7 @@ Some arbitrary quality filtering of individual ASVs. For example, here we choose
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{analysis-and-plotting}{%
-\subsection{Analysis and plotting}\label{analysis-and-plotting}}
+\subsection{Analysis and plotting}\label{analysis-and-plotting}
 
 Create stacked barplot comparing relative abundances of the normalised phyloseq object.
 
@@ -2857,8 +2781,7 @@ Finally, the abundances of this long abundance table are summarised into the fac
 
 \includegraphics{gitbook-demo_files/figure-latex/Phylumplots-1.pdf}
 
-\hypertarget{prevalance-table}{%
-\subsection{Prevalance table}\label{prevalance-table}}
+\subsection{Prevalance table}\label{prevalance-table}
 
 A prevalence table may assist in getting an overview of the abundances. The mean prevalence is the average number of times that the taxon appears across all samples.
 
@@ -2933,8 +2856,7 @@ A prevalence table may assist in getting an overview of the abundances. The mean
 ## 45                  Deinococcota        1.000000              11
 \end{verbatim}
 
-\hypertarget{krona-charts}{%
-\subsection{Krona charts}\label{krona-charts}}
+\subsection{Krona charts}\label{krona-charts}
 
 On macOS or Linux, a more interactive way to explore the various levels of the taxonomy in your data is to use Krona charts.
 
@@ -2959,13 +2881,11 @@ To install KronaTools simply download and unzip the repository of \url{https://g
 
 Explore the Krona plot in your web browser: \href{./krona-file/krona-file.html}{krona-file}
 
-\hypertarget{phylofactor}{%
-\chapter{Phylofactor analysis}\label{phylofactor}}
+\chapter{Phylofactor analysis}\label{phylofactor}
 
 \includegraphics{./img/phylofactor.png}
 
-\hypertarget{introduction-5}{%
-\section{Introduction}\label{introduction-5}}
+\section{Introduction}\label{introduction-5}
 
 In this chapter you will learn how to use one of the main functions from the package phylofactor, as well as analyse and visualise the results. The main aims are to understand more about phylofactor and learn about data manipulation using dplyr and visulisations using ggplot and ggtree.
 
@@ -2981,8 +2901,7 @@ For this tutorial we will be using the same phyloseq object and apply the \textt
 
 The visualisations of the trees relies on ggplot (\citet{Wickham2016a}) and ggtree (\citet{Yu2017}).
 
-\hypertarget{prerequisites-and-required-files-1}{%
-\subsection{Prerequisites and required files}\label{prerequisites-and-required-files-1}}
+\subsection{Prerequisites and required files}\label{prerequisites-and-required-files-1}
 
 \begin{itemize}
 \tightlist
@@ -2998,8 +2917,7 @@ The visualisations of the trees relies on ggplot (\citet{Wickham2016a}) and ggtr
   If you dont have your own data you can download the pre-saved \texttt{.rds} object from Chapter \ref{Qiime2R} and follow the below steps: \href{./ps_ProjectX_2022July}{ps\_ProjectX\_2022July}. This object was created from publicly available data from anaerobic sludge of Danish wastewater treatment plants.
 \end{itemize}
 
-\hypertarget{custom-functions}{%
-\subsection{Custom functions}\label{custom-functions}}
+\subsection{Custom functions}\label{custom-functions}
 
 There are several functions available in phylofactor to review the model outputs and to review which taxa were associated with groups of ASVs/clades that are part of significant edges in each factor.
 
@@ -3023,11 +2941,9 @@ Custom functions. Download and add to your working directory:
   \href{./custom-functions/myprevalencetablefunction.R}{myprevalencetablefunction}
 \end{itemize}
 
-\hypertarget{workflow-5}{%
-\section{Workflow}\label{workflow-5}}
+\section{Workflow}\label{workflow-5}
 
-\hypertarget{load-packages-and-custom-functions}{%
-\subsection{Load packages and custom functions}\label{load-packages-and-custom-functions}}
+\subsection{Load packages and custom functions}\label{load-packages-and-custom-functions}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3084,8 +3000,7 @@ Custom functions. Download and add to your working directory:
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{load-phyloseq-object-2}{%
-\subsection{Load phyloseq object}\label{load-phyloseq-object-2}}
+\subsection{Load phyloseq object}\label{load-phyloseq-object-2}
 
 Do this if you saved a phyloseq object in .rds format before. Otherwise create a phyloseq object as described in chapter \ref{Qiime2R} under ``Import qiime-files and create a phyloseq object''.
 
@@ -3107,8 +3022,7 @@ Do this if you saved a phyloseq object in .rds format before. Otherwise create a
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{pre-filtering-1}{%
-\subsection{Pre-filtering}\label{pre-filtering-1}}
+\subsection{Pre-filtering}\label{pre-filtering-1}
 
 Some quality filtering of individual ASVs. This is up to the analyst and aims of the project.
 
@@ -3141,8 +3055,7 @@ The ASV abundances are then agglomerated to Genus level. This makes things a lit
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{running-phylofactor}{%
-\subsection{Running PhyloFactor}\label{running-phylofactor}}
+\subsection{Running PhyloFactor}\label{running-phylofactor}
 
 For this example, the explanatory variable \texttt{Location} is used to regress the response (abundances). This has to be a factor or numeric so check your explanatory beforehand.
 
@@ -3228,7 +3141,7 @@ Here, we run the \texttt{PhyloFactor} function with \texttt{choice\ =\ "var"}.
 \end{Shaded}
 
 \begin{verbatim}
-##  1 factor completed in 0.0398 minutes.    Estimated time of completion: 2023-01-05 17:05:28    2 factors completed in 0.0739 minutes.     Estimated time of completion: 2023-01-05 17:05:25    3 factors completed in 0.107 minutes.     Estimated time of completion: 2023-01-05 17:05:24    4 factors completed in 0.141 minutes.     Estimated time of completion: 2023-01-05 17:05:24    5 factors completed in 0.171 minutes.     Estimated time of completion: 2023-01-05 17:05:23    6 factors completed in 0.202 minutes.     Estimated time of completion: 2023-01-05 17:05:23    7 factors completed in 0.233 minutes.     Estimated time of completion: 2023-01-05 17:05:23    8 factors completed in 0.264 minutes.     Estimated time of completion: 2023-01-05 17:05:22    9 factors completed in 0.295 minutes.     Estimated time of completion: 2023-01-05 17:05:22    10 factors completed in 0.326 minutes.     Estimated time of completion: 2023-01-05 17:05:22    11 factors completed in 0.359 minutes.     Estimated time of completion: 2023-01-05 17:05:22    12 factors completed in 0.39 minutes.     Estimated time of completion: 2023-01-05 17:05:22    13 factors completed in 0.421 minutes.     Estimated time of completion: 2023-01-05 17:05:22   
+##  1 factor completed in 0.0265 minutes.    Estimated time of completion: 2024-06-15 17:28:13.432745    2 factors completed in 0.0498 minutes.     Estimated time of completion: 2024-06-15 17:28:12.162302    3 factors completed in 0.0743 minutes.     Estimated time of completion: 2024-06-15 17:28:12.061945    4 factors completed in 0.0959 minutes.     Estimated time of completion: 2024-06-15 17:28:11.458193    5 factors completed in 0.118 minutes.     Estimated time of completion: 2024-06-15 17:28:11.118063    6 factors completed in 0.14 minutes.     Estimated time of completion: 2024-06-15 17:28:10.896659    7 factors completed in 0.161 minutes.     Estimated time of completion: 2024-06-15 17:28:10.743209    8 factors completed in 0.183 minutes.     Estimated time of completion: 2024-06-15 17:28:10.638717    9 factors completed in 0.206 minutes.     Estimated time of completion: 2024-06-15 17:28:10.618049    10 factors completed in 0.228 minutes.     Estimated time of completion: 2024-06-15 17:28:10.522542    11 factors completed in 0.249 minutes.     Estimated time of completion: 2024-06-15 17:28:10.441335    12 factors completed in 0.271 minutes.     Estimated time of completion: 2024-06-15 17:28:10.379978    13 factors completed in 0.293 minutes.     Estimated time of completion: 2024-06-15 17:28:10.333079   
 \end{verbatim}
 
 \begin{Shaded}
@@ -3245,8 +3158,7 @@ Here, we run the \texttt{PhyloFactor} function with \texttt{choice\ =\ "var"}.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{reviewing-output}{%
-\subsection{Reviewing output}\label{reviewing-output}}
+\subsection{Reviewing output}\label{reviewing-output}
 
 Simply run the phylofactor output object (here \texttt{PF}) to get an overview of the results. You can also access individual data outputs using the \texttt{\$} operator, e.g.~by running \texttt{PF\$factors} you get a full list of all factors.
 
@@ -3520,28 +3432,25 @@ I created a custom function \texttt{phyfacsummary} that helped me to create a da
 
 \begin{verbatim}
 ## # A tibble: 6 x 24
-##   OTU   Kingdom Phylum Class Order Family Genus Species Phylo~1 `Pr(>F)` (Inte~2
-##   <chr> <chr>   <chr>  <chr> <chr> <chr>  <chr> <chr>     <int>    <dbl>   <dbl>
-## 1 59c6~ Bacter~ Acido~ Ther~ Ther~ Therm~ Ther~ NA            1 0          3.85 
-## 2 2a4a~ Bacter~ Chlor~ Anae~ Anae~ Anaer~ ADur~ NA            2 3.85e-12  -0.523
-## 3 ea17~ Bacter~ Gemma~ Gemm~ Gemm~ Gemma~ uncu~ NA            3 3.58e-10   3.63 
-## 4 b3ca~ Bacter~ Nitro~ Nitr~ Nitr~ Nitro~ Nitr~ NA            3 3.58e-10   3.63 
-## 5 085b~ Bacter~ Actin~ Ther~ Gaie~ uncul~ uncu~ NA            3 3.58e-10   3.63 
-## 6 e990~ Bacter~ Actin~ Ther~ Soli~ Solir~ Cone~ NA            3 3.58e-10   3.63 
-## # ... with 13 more variables: XDamhusaaen <dbl>, XEgaa <dbl>,
+##   OTU       Kingdom Phylum Class Order Family Genus Species Phylofactor `Pr(>F)`
+##   <chr>     <chr>   <chr>  <chr> <chr> <chr>  <chr> <chr>         <int>    <dbl>
+## 1 59c631a4~ Bacter~ Acido~ Ther~ Ther~ Therm~ Ther~ NA                1 0       
+## 2 2a4a6962~ Bacter~ Chlor~ Anae~ Anae~ Anaer~ ADur~ NA                2 3.85e-12
+## 3 ea179ab2~ Bacter~ Gemma~ Gemm~ Gemm~ Gemma~ uncu~ NA                3 3.58e-10
+## 4 b3ca4e33~ Bacter~ Nitro~ Nitr~ Nitr~ Nitro~ Nitr~ NA                3 3.58e-10
+## 5 085bb15a~ Bacter~ Actin~ Ther~ Gaie~ uncul~ uncu~ NA                3 3.58e-10
+## 6 e990f0dd~ Bacter~ Actin~ Ther~ Soli~ Solir~ Cone~ NA                3 3.58e-10
+## # i 14 more variables: `(Intercept)` <dbl>, XDamhusaaen <dbl>, XEgaa <dbl>,
 ## #   `XEjby Moelle` <dbl>, `XEsbjerg Vest` <dbl>, XFornaes <dbl>,
 ## #   XHjoerring <dbl>, XMariagerfjord <dbl>, XRanders <dbl>, XSlagelse <dbl>,
-## #   XSoeholt <dbl>, XViborg <dbl>, `Pr(>F)adj.` <dbl>, Abundance <dbl>, and
-## #   abbreviated variable names 1: Phylofactor, 2: `(Intercept)`
+## #   XSoeholt <dbl>, XViborg <dbl>, `Pr(>F)adj.` <dbl>, Abundance <dbl>
 \end{verbatim}
 
 Check out the dataframe in your R environment.
 
-\hypertarget{visualising-factors}{%
-\subsection{Visualising factors}\label{visualising-factors}}
+\subsection{Visualising factors}\label{visualising-factors}
 
-\hypertarget{ilr-boxplots}{%
-\subsubsection{ILR boxplots}\label{ilr-boxplots}}
+\subsubsection{ILR boxplots}\label{ilr-boxplots}
 
 If the explanatory variable is a factor you can compare the ILRs using boxplots. Customise this to your needs.
 
@@ -3663,8 +3572,7 @@ This visualises the taxa relative abundances (represented by the ILR or balances
 
 In the next part we will visualise how the taxa relate to other clades in the phylogenetic tree.
 
-\hypertarget{basic-tree-with-factors-highlighted-in-colour}{%
-\subsubsection{Basic tree with factors highlighted in colour}\label{basic-tree-with-factors-highlighted-in-colour}}
+\subsubsection{Basic tree with factors highlighted in colour}\label{basic-tree-with-factors-highlighted-in-colour}
 
 Here we are using one of the functions from the phylofactor package. It is only one of several and I encourage you to check out the \href{https://docs.wixstatic.com/ugd/0119a1_099ae20df8424af9a38585dcebc0d45a.pdf}{phylofactor tutorial} to explore other visualisation, including heatmaps etc..
 
@@ -3683,8 +3591,7 @@ The other factors, which represent only 1 genus are not visible in this figure b
 
 I think representing it as a tree also highlights how one can interpret compositional changes in two ways. For example, one interpretation for Group 1 of factor 3, (purple coloured) is that is decreased in the locations Formaes and Slagelse (as indicated in the boxplots). Another interpretation is that Group 2 of factor 3 has increased instead. This is important to consider.
 
-\hypertarget{coloured-trees-with-factors-highlighted-in-grey}{%
-\subsubsection{Coloured trees with factors highlighted in grey}\label{coloured-trees-with-factors-highlighted-in-grey}}
+\subsubsection{Coloured trees with factors highlighted in grey}\label{coloured-trees-with-factors-highlighted-in-grey}
 
 Maybe some find it useful to identify the phyla directly in the tree and also get a sense of the abundances of individual tips (which are individual genera here). Do do that we can colour edges of the tree to represent their phylum.
 
@@ -3949,8 +3856,7 @@ And maybe manually add family or genus names of important factors to the figure 
 
 Now its a little easier to identify the who is who. This is just another way to explore your phylogeny and how they relate to the phylofactors.
 
-\hypertarget{basic-tree-with-factors-highlighted-in-colour-v.02}{%
-\subsubsection{Basic tree with factors highlighted in colour v.02}\label{basic-tree-with-factors-highlighted-in-colour-v.02}}
+\subsubsection{Basic tree with factors highlighted in colour v.02}\label{basic-tree-with-factors-highlighted-in-colour-v.02}
 
 Alternatively highlight only the factors and explore the taxonomy represented by them in separate plots.
 

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 From BaseSpace to Qiime2 and DADA2 | Workflows for processing microbial amplicon sequences</title>
   <meta name="description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 From BaseSpace to Qiime2 and DADA2 | Workflows for processing microbial amplicon sequences" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2023-01-05" />
+<meta name="date" content="2024-06-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -58,7 +58,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -122,10 +122,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 <style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -347,7 +352,7 @@ div.csl-indent {
 <p>It might take some time to compile the import manifest. Each file path has to be exact. However, in case you made a mistake in the file names etc, Qiime is generally pretty good at reporting where the error occured.</p>
 <table class="table table-condensed" style="font-size: 10px; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:qiimeimport">Table 5.1: </span>Example of a qiime import manifest.tsv file
+<span id="tab:qiimeimport">Table 5.1: </span><span id="tab:qiimeimport">Table 5.2: </span>Example of a qiime import manifest.tsv file
 </caption>
 <thead>
 <tr>
@@ -436,7 +441,7 @@ PT-06
 <p><code>samplesheet.tsv</code> - file containing sample metadata. This file should contain all other environmental measurements you may have done on each sample (pH, EC…), which you want to relate to microbial taxonomy and composition. The same file and format will be used to import metadata into the R package Phyloseq later too.</p>
 <table class="table table-condensed" style="font-size: 10px; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:metadata">Table 5.2: </span>Example of a samplesheet.tsv file
+<span id="tab:metadata">Table 5.3: </span><span id="tab:metadata">Table 5.4: </span>Example of a samplesheet.tsv file
 </caption>
 <thead>
 <tr>
@@ -447,19 +452,49 @@ PT-06
 #Sludge
 </th>
 <th style="text-align:left;">
+#SampleID2
+</th>
+<th style="text-align:left;">
+#SampleID3
+</th>
+<th style="text-align:left;">
 WWTP
+</th>
+<th style="text-align:left;">
+Digester
 </th>
 <th style="text-align:left;">
 SludgeType
 </th>
 <th style="text-align:left;">
+#Primer
+</th>
+<th style="text-align:left;">
+PrimerName
+</th>
+<th style="text-align:left;">
 PMA_treat
+</th>
+<th style="text-align:left;">
+#ExtractionID
 </th>
 <th style="text-align:left;">
 Rep_bio
 </th>
 <th style="text-align:left;">
+Rep_tech
+</th>
+<th style="text-align:left;">
+#SludgeSplID
+</th>
+<th style="text-align:left;">
 Sludgecollection
+</th>
+<th style="text-align:left;">
+SampleRequestID
+</th>
+<th style="text-align:left;">
+#UniqueID2
 </th>
 </tr>
 </thead>
@@ -481,7 +516,37 @@ categorical
 categorical
 </td>
 <td style="text-align:left;">
+categorical
+</td>
+<td style="text-align:left;">
+categorical
+</td>
+<td style="text-align:left;">
 numeric
+</td>
+<td style="text-align:left;">
+categorical
+</td>
+<td style="text-align:left;">
+categorical
+</td>
+<td style="text-align:left;">
+categorical
+</td>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+categorical
+</td>
+<td style="text-align:left;">
+categorical
+</td>
+<td style="text-align:left;">
+categorical
 </td>
 <td style="text-align:left;">
 categorical
@@ -495,19 +560,49 @@ PT-01
 1
 </td>
 <td style="text-align:left;">
+ARCSR_02_Meso_01
+</td>
+<td style="text-align:left;">
+ARCSR_02_Meso_01V4_UNoPMA
+</td>
+<td style="text-align:left;">
+ETP5
+</td>
+<td style="text-align:left;">
 ETP5
 </td>
 <td style="text-align:left;">
 Meso
 </td>
 <td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+V4_U
+</td>
+<td style="text-align:left;">
 NoPMA
+</td>
+<td style="text-align:left;">
+ARCSR_02_Meso_01
 </td>
 <td style="text-align:left;">
 1
 </td>
 <td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 9/5/2022
+</td>
+<td style="text-align:left;">
+ARCSR_02
+</td>
+<td style="text-align:left;">
+PT_001
 </td>
 </tr>
 <tr>
@@ -518,19 +613,49 @@ PT-02
 1
 </td>
 <td style="text-align:left;">
+ARCSR_02_Meso_02
+</td>
+<td style="text-align:left;">
+ARCSR_02_Meso_02V4_UNoPMA
+</td>
+<td style="text-align:left;">
+ETP5
+</td>
+<td style="text-align:left;">
 ETP5
 </td>
 <td style="text-align:left;">
 Meso
 </td>
 <td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+V4_U
+</td>
+<td style="text-align:left;">
 NoPMA
+</td>
+<td style="text-align:left;">
+ARCSR_02_Meso_02
 </td>
 <td style="text-align:left;">
 2
 </td>
 <td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 9/5/2022
+</td>
+<td style="text-align:left;">
+ARCSR_02
+</td>
+<td style="text-align:left;">
+PT_002
 </td>
 </tr>
 <tr>
@@ -541,19 +666,49 @@ PT-03
 1
 </td>
 <td style="text-align:left;">
+ARCSR_02_Meso_03
+</td>
+<td style="text-align:left;">
+ARCSR_02_Meso_03V4_UNoPMA
+</td>
+<td style="text-align:left;">
+ETP5
+</td>
+<td style="text-align:left;">
 ETP5
 </td>
 <td style="text-align:left;">
 Meso
 </td>
 <td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+V4_U
+</td>
+<td style="text-align:left;">
 NoPMA
+</td>
+<td style="text-align:left;">
+ARCSR_02_Meso_03
 </td>
 <td style="text-align:left;">
 3
 </td>
 <td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 9/5/2022
+</td>
+<td style="text-align:left;">
+ARCSR_02
+</td>
+<td style="text-align:left;">
+PT_003
 </td>
 </tr>
 <tr>
@@ -564,19 +719,49 @@ PT-04
 1
 </td>
 <td style="text-align:left;">
+ARCSR_02_Meso_04
+</td>
+<td style="text-align:left;">
+ARCSR_02_Meso_04V4_UNoPMA
+</td>
+<td style="text-align:left;">
+ETP5
+</td>
+<td style="text-align:left;">
 ETP5
 </td>
 <td style="text-align:left;">
 Meso
 </td>
 <td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+V4_U
+</td>
+<td style="text-align:left;">
 NoPMA
+</td>
+<td style="text-align:left;">
+ARCSR_02_Meso_04
 </td>
 <td style="text-align:left;">
 4
 </td>
 <td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 9/5/2022
+</td>
+<td style="text-align:left;">
+ARCSR_02
+</td>
+<td style="text-align:left;">
+PT_004
 </td>
 </tr>
 <tr>
@@ -587,19 +772,49 @@ PT-05
 1
 </td>
 <td style="text-align:left;">
+ARCSR_02_Meso_05
+</td>
+<td style="text-align:left;">
+ARCSR_02_Meso_05V4_UNoPMA
+</td>
+<td style="text-align:left;">
+ETP5
+</td>
+<td style="text-align:left;">
 ETP5
 </td>
 <td style="text-align:left;">
 Meso
 </td>
 <td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+V4_U
+</td>
+<td style="text-align:left;">
 NoPMA
+</td>
+<td style="text-align:left;">
+ARCSR_02_Meso_05
 </td>
 <td style="text-align:left;">
 5
 </td>
 <td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 9/5/2022
+</td>
+<td style="text-align:left;">
+ARCSR_02
+</td>
+<td style="text-align:left;">
+PT_005
 </td>
 </tr>
 </tbody>
@@ -611,9 +826,9 @@ NoPMA
 </p>
 <p><code>scriptfile.txt</code> - A text file that contains your qiime2 scripts. Example below. Code is compiled here and then only the file itself is executed to run any commands in that text. The hash (#) in front of any line of code stops it from being executed. That means all code is normally ‘hashed’. If one wants to run the code the lines are ‘un-hashed’ and the text file is executed in the command line to run the ‘un-hashed’ code. On the Linux cloud computer the command would be: <code>sh scriptfile.txt</code>.</p>
 <p>Note that a script file is meant to make life easy and the process replicable. But you could run each of the processes directly by adding the commands into the terminal without a script file.</p>
-<div class="figure">
-<img src="img/scriptfile.png" alt="" />
-<p class="caption">“Example of a scriptfile.txt”</p>
+<div class="float">
+<img src="img/scriptfile.png" alt="“Example of a scriptfile.txt”" />
+<div class="figcaption">“Example of a scriptfile.txt”</div>
 </div>
 <p><br />
 </p>
@@ -682,9 +897,9 @@ Here we take the trimmed_demux-paired-end.qza and create a trimmed_demux-paired-
 <p>Now click on the ‘Interactive Quality Plot’ tab. You will see exactly that: Interactive Quality plots that look like this:<br />
 <img src="img/demux.qza1.png" /><br />
 Note the total number of sequences. You want to retain a high percentage of these after quality filtering with DADA2.</p>
-<div class="figure">
-<img src="img/demux.qza.png" alt="" />
-<p class="caption">“Example of a demux.qzv visualisation”</p>
+<div class="float">
+<img src="img/demux.qza.png" alt="“Example of a demux.qzv visualisation”" />
+<div class="figcaption">“Example of a demux.qzv visualisation”</div>
 </div>
 <p><strong>STOP HERE</strong>. Inspect the visualisation and decide on location and maximum expected error.<br />
 From the output decide where to truncate the forward and reverse reads with <code>p-trunc-len-f</code>, <code>p-trunc-len-r</code>,<code>--p-max-ee-f</code> and <code>--p-max-ee-r</code> in DADA2 below.</p>
@@ -716,9 +931,9 @@ From the output decide where to truncate the forward and reverse reads with <cod
   --o-visualization feature_table.qzv \
   --m-sample-metadata-file samplesheet.tsv</code></pre>
 <p><strong>Note:</strong> Look at the feature_table.qzv and record median reads per sample. Compare the total frequency after denoising with the total sequence count from the trimmed_demux-paired-end.qza. You hope to retain a high percentage of total sequences after denoising with DADA2. It is prudent to report that percentage in your methods.</p>
-<div class="figure">
-<img src="img/feature-table.qzv.png" alt="" />
-<p class="caption">“feature_table.qzv output”</p>
+<div class="float">
+<img src="img/feature-table.qzv.png" alt="“feature_table.qzv output”" />
+<div class="figcaption">“feature_table.qzv output”</div>
 </div>
 <p><br />
 </p>

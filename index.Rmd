@@ -35,9 +35,17 @@ Everyone is at a different level in the journey to exploring microbial diversity
 
 **Get in touch**
 
-We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne. Email me or comment on the discussion section of the [GitHub repository](https://github.com/chrismitbiz/ABlab-workflows/discussions/){target="_blank"} for this GitBook. You will need to get a GitHub account to join the discussion. Its free.
-
-More about my PhD research can be found here: <https://clean-dirt-digests.netlify.app>.\
+We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne and are part of the Industry-led [Biosolids Training Centre](https://www.transformingbiosolids.org.au). Email me or comment on the discussion section of the [GitHub repository](https://github.com/chrismitbiz/ABlab-workflows/discussions/){target="_blank"} for this GitBook. You will need to get a GitHub account to join the discussion. Its free.  
+  
+More about me and my PhD research can be found here: <https://clean-dirt-digests.netlify.app>.\
+Follow me on [Twitter](https://twitter.com/CleanDirtChris) or [LinkedIn](https://www.linkedin.com/in/christian-krohn-54904855). \ 
 ![](./img/avatar.jpg){width="150"}
 
+Bio: \
+Dr Chris Krohn is an early career researcher whose interests could be summed up with: “Environmental sequencing, microbial ecology, chlorinated pollutants, organic matter, wastewater, anaerobic digestion, and how everything connects".
+  
+In 2021 I joined the ARC Biosolids Training Centre at RMIT (www.transformingbiosolids.org.au), where we help water utilities to improve circular resource management by getting more renewable biogas and carbon/fertiliser values out of our municipal biosolids (essentially our poo). In project 1C of the Centre I develop metagenomic (DNA-based) methods to monitor the microbiome of anaerobic digestion, an important microbial treatment process for wastewater. I believe DNA-based diagnoses of wastewater sludges will help the water/biosolids sector improve resource recoveries and risk management.  
+  
+Before that, after a career in one of the most fast-cycled and short-sighted manufacturing industries that took me from Germany to Vietnam and Hong Kong/Shenzhen, I decided to hit the switch and start thinking long-term and circular. Ten back-to-uni years later, in 2021 I finished a PhD in Soil Science at La Trobe Uni where I sequenced soil DNA and explored if and how soil biology was involved in the degradation of extremely persistent legacy pesticides that contaminate agricultural surface soils since several decades. \
+    
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.

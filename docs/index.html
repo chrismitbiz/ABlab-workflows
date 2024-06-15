@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Workflows for processing microbial amplicon sequences</title>
   <meta name="description" content="This GitBook contains bioinformatic workflows from raw microbial amplicon-sequence reads generated with a Miseq instrument to pre-processing reads with packages such as Qiime2, followed by applying various packages within the R Environment." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Workflows for processing microbial amplicon sequences" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Christian Krohn, PhD, RMIT University" />
 
 
-<meta name="date" content="2023-01-05" />
+<meta name="date" content="2024-06-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -58,7 +58,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -122,10 +122,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 <style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -327,7 +332,7 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">Workflows for processing microbial amplicon sequences</h1>
 <p class="author"><em><a href="https://www.rmit.edu.au/contact/staff-contacts/academic-staff/k/krohn---christian">Christian Krohn, PhD, RMIT University</a></em></p>
-<p class="date"><em>2023-01-05</em></p>
+<p class="date"><em>2024-06-15</em></p>
 </div>
 <div id="about" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> About this GitBook<a href="index.html#about" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -339,9 +344,15 @@ div.csl-indent {
 <p><strong>Browse to your level</strong></p>
 <p>Everyone is at a different level in the journey to exploring microbial diversity. Some have absolutely no idea where to start and others have created their first phylogentic trees with ggtree or similar. The most important prerequisites are patience and persistence… :). Just explore the different chapters and see where it takes you. In fact you will be amazed how much you can achieve with mininal coding knowledge.</p>
 <p><strong>Get in touch</strong></p>
-<p>We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne. Email me or comment on the discussion section of the <a href="https://github.com/chrismitbiz/ABlab-workflows/discussions/" target="_blank">GitHub repository</a> for this GitBook. You will need to get a GitHub account to join the discussion. Its free.</p>
-<p>More about my PhD research can be found here: <a href="https://clean-dirt-digests.netlify.app" class="uri">https://clean-dirt-digests.netlify.app</a>.<br />
+<p>We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne and are part of the Industry-led <a href="https://www.transformingbiosolids.org.au">Biosolids Training Centre</a>. Email me or comment on the discussion section of the <a href="https://github.com/chrismitbiz/ABlab-workflows/discussions/" target="_blank">GitHub repository</a> for this GitBook. You will need to get a GitHub account to join the discussion. Its free.</p>
+<p>More about me and my PhD research can be found here: <a href="https://clean-dirt-digests.netlify.app" class="uri">https://clean-dirt-digests.netlify.app</a>.<br />
+Follow me on <a href="https://twitter.com/CleanDirtChris">Twitter</a> or <a href="https://www.linkedin.com/in/christian-krohn-54904855">LinkedIn</a>.  
 <img src="img/avatar.jpg" width="150" /></p>
+<p>Bio:<br />
+Dr Chris Krohn is an early career researcher whose interests could be summed up with: “Environmental sequencing, microbial ecology, chlorinated pollutants, organic matter, wastewater, anaerobic digestion, and how everything connects”.</p>
+<p>In 2021 I joined the ARC Biosolids Training Centre at RMIT (www.transformingbiosolids.org.au), where we help water utilities to improve circular resource management by getting more renewable biogas and carbon/fertiliser values out of our municipal biosolids (essentially our poo). In project 1C of the Centre I develop metagenomic (DNA-based) methods to monitor the microbiome of anaerobic digestion, an important microbial treatment process for wastewater. I believe DNA-based diagnoses of wastewater sludges will help the water/biosolids sector improve resource recoveries and risk management.</p>
+<p>Before that, after a career in one of the most fast-cycled and short-sighted manufacturing industries that took me from Germany to Vietnam and Hong Kong/Shenzhen, I decided to hit the switch and start thinking long-term and circular. Ten back-to-uni years later, in 2021 I finished a PhD in Soil Science at La Trobe Uni where I sequenced soil DNA and explored if and how soil biology was involved in the degradation of extremely persistent legacy pesticides that contaminate agricultural surface soils since several decades.<br />
+</p>
 <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
 
 </div>
