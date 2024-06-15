@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.10)  15 JUN 2024 17:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.10)  15 JUN 2024 17:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2527,25 +2527,25 @@ Overfull \hbox (32.9989pt too wide) in paragraph at lines 3086--3086
  []
 
 [110]
-Overfull \hbox (6642.72969pt too wide) in paragraph at lines 3145--3145
-[]\T1/lmtt/m/n/10 ##  1 factor completed in 0.0265 minutes.    Estimated time o
-f completion: 2024-06-15 17:28:13.432745    2 factors completed in 0.0498 minut
-es.     Estimated time of completion: 2024-06-15 17:28:12.162302    3 factors c
-ompleted in 0.0743 minutes.     Estimated time of completion: 2024-06-15 17:28:
-12.061945    4 factors completed in 0.0959 minutes.     Estimated time of compl
-etion: 2024-06-15 17:28:11.458193    5 factors completed in 0.118 minutes.     
-Estimated time of completion: 2024-06-15 17:28:11.118063    6 factors completed
- in 0.14 minutes.     Estimated time of completion: 2024-06-15 17:28:10.896659 
-   7 factors completed in 0.161 minutes.     Estimated time of completion: 2024
--06-15 17:28:10.743209    8 factors completed in 0.183 minutes.     Estimated t
-ime of completion: 2024-06-15 17:28:10.638717    9 factors completed in 0.206 m
-inutes.     Estimated time of completion: 2024-06-15 17:28:10.618049    10 fact
-ors completed in 0.228 minutes.     Estimated time of completion: 2024-06-15 17
-:28:10.522542    11 factors completed in 0.249 minutes.     Estimated time of c
-ompletion: 2024-06-15 17:28:10.441335    12 factors completed in 0.271 minutes.
-     Estimated time of completion: 2024-06-15 17:28:10.379978    13 factors com
-pleted in 0.293 minutes.     Estimated time of completion: 2024-06-15 17:28:10.
-333079[] 
+Overfull \hbox (6647.97968pt too wide) in paragraph at lines 3145--3145
+[]\T1/lmtt/m/n/10 ##  1 factor completed in 0.0264 minutes.    Estimated time o
+f completion: 2024-06-15 17:44:48.737861    2 factors completed in 0.0497 minut
+es.     Estimated time of completion: 2024-06-15 17:44:47.556085    3 factors c
+ompleted in 0.0742 minutes.     Estimated time of completion: 2024-06-15 17:44:
+47.437677    4 factors completed in 0.0958 minutes.     Estimated time of compl
+etion: 2024-06-15 17:44:46.839051    5 factors completed in 0.118 minutes.     
+Estimated time of completion: 2024-06-15 17:44:46.507747    6 factors completed
+ in 0.139 minutes.     Estimated time of completion: 2024-06-15 17:44:46.287649
+    7 factors completed in 0.161 minutes.     Estimated time of completion: 202
+4-06-15 17:44:46.134788    8 factors completed in 0.183 minutes.     Estimated 
+time of completion: 2024-06-15 17:44:46.032815    9 factors completed in 0.206 
+minutes.     Estimated time of completion: 2024-06-15 17:44:46.013301    10 fac
+tors completed in 0.228 minutes.     Estimated time of completion: 2024-06-15 1
+7:44:45.916015    11 factors completed in 0.249 minutes.     Estimated time of 
+completion: 2024-06-15 17:44:45.837251    12 factors completed in 0.271 minutes
+.     Estimated time of completion: 2024-06-15 17:44:45.779834    13 factors co
+mpleted in 0.293 minutes.     Estimated time of completion: 2024-06-15 17:44:45
+.738358[] 
  []
 
 
@@ -3017,7 +3017,7 @@ sed on input line 3959.
 Here is how much of TeX's memory you used:
  16981 strings out of 476025
  276744 string characters out of 5790016
- 1886388 words of memory out of 5000000
+ 1887388 words of memory out of 5000000
  36557 multiletter control sequences out of 15000+600000
  593065 words of font info for 193 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -3035,7 +3035,7 @@ pe1/public/lm/lmri10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public
 /local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></usr/local/te
 xlive/2023/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2023
 /texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on gitbook-demo.pdf (134 pages, 17668479 bytes).
+Output written on gitbook-demo.pdf (134 pages, 17668491 bytes).
 PDF statistics:
  1401 PDF objects out of 1440 (max. 8388607)
  1071 compressed objects within 11 object streams
