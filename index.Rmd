@@ -36,7 +36,9 @@ Everyone is at a different level in the journey to exploring microbial diversity
 We work at the Andy Ball lab, RMIT University, Bundoora, Melbourne and are part of the Industry-led [Biosolids Training Centre](https://www.transformingbiosolids.org.au). Email me or comment on the discussion section of the [GitHub repository](https://github.com/chrismitbiz/ABlab-workflows/discussions/){target="_blank"} for this GitBook. You will need to get a GitHub account to join the discussion. Its free.  
   
 More about me and my PhD research can be found here: <https://clean-dirt-digests.netlify.app>.\
-Follow me on [Twitter](https://twitter.com/CleanDirtChris) or [LinkedIn](https://www.linkedin.com/in/christian-krohn-54904855). \ 
+Follow me on [Twitter](https://twitter.com/CleanDirtChris) or [LinkedIn](https://www.linkedin.com/in/christian-krohn-54904855). 
+
+\ 
 ![](./img/avatar.jpg){width="150"}
 
 Bio: \
